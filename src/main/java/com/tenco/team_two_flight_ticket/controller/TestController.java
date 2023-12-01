@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
-    @GetMapping("/errorTest")
+    @GetMapping("/auth/test")
     public String test(){
-     return null;
+     return "main";
     }
 }
