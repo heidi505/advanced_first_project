@@ -1,9 +1,9 @@
-package com.tenco.team_two_flight_ticket.handler;
+package com.tenco.team_two_flight_ticket._core.handler;
 
-import com.tenco.team_two_flight_ticket.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket.handler.exception.MyForbiddenException;
-import com.tenco.team_two_flight_ticket.handler.exception.MyNotFoundException;
-import com.tenco.team_two_flight_ticket.handler.exception.MyUnAuthorizedException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyForbiddenException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyNotFoundException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyUnAuthorizedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

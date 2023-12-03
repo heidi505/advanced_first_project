@@ -1,6 +1,6 @@
 package com.tenco.team_two_flight_ticket._core.config;
 
-import com.tenco.team_two_flight_ticket.handler.AuthInterceptor;
+import com.tenco.team_two_flight_ticket._core.handler.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -17,4 +17,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/auth/**");
     }
+
 }
