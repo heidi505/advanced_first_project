@@ -1,6 +1,6 @@
 package com.tenco.team_two_flight_ticket._core.advice;
 
-import com.tenco.team_two_flight_ticket.handler.exception.MyBadRequestException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class ValidAdvice {
     public void putMapping() {}
 
     @Before("postMapping() || putMapping()")
-    public void checkValid(JoinPoint jp) throws Throwable{
+    public void checkValid(JoinPoint jp){
         Object[] args = jp.getArgs();
 
         for(Object arg : args) {
@@ -31,9 +30,7 @@ public class ValidAdvice {
 
                 if (errors.hasErrors()){
                     List<FieldError> fieldErrors = errors.getFieldErrors();
-                    throw new MyBadRequestException(
-                            fieldErrors.get(0).getDefaultMessage() + ":" + fieldErrors.get(0).getField()
-                    );
+                    throw new MyBadRequestException(fieldErrors.get(0).getDefaultMessage());
                 }
             }
         }

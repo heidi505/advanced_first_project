@@ -1,4 +1,4 @@
-package com.tenco.team_two_flight_ticket.handler.exception;
+package com.tenco.team_two_flight_ticket._core.handler.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

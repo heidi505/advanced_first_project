@@ -1,7 +1,7 @@
-package com.tenco.team_two_flight_ticket.handler;
+package com.tenco.team_two_flight_ticket._core.handler;
 
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyUnAuthorizedException;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
-import com.tenco.team_two_flight_ticket.handler.exception.MyUnAuthorizedException;
 import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
