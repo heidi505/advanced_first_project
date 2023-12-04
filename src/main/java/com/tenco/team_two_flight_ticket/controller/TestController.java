@@ -12,10 +12,5 @@ public class TestController {
     public String test(){
      return "test";
     }
-    /*
-    @PostMapping("/test")
-    public String validtest(@Valid UserRequest.JoinDTO joinDTO){
-        return "main";
-    }
-    */
+   
 }
