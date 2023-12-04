@@ -1,1 +1,1 @@
-insert into user_tb(`id`, `email`, `password`) values (1, 'aaa@aaa.com', '1111');
+insert into user_tb(`id`, `username`, `password`, `email`) values(1, 'ssar', '1111', '1111@1111.com');
