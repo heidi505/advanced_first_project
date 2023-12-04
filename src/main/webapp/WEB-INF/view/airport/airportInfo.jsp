@@ -32,18 +32,20 @@
 			<h2 class="mb-3 mt-5"><b>주차장 안내</b></h2>
 			<div class="airport_parking_nav_bar mt-5 w-100 mx-auto">
 				<div class="btn-group w-100"  role="group" aria-label="Basic example">
-					<a href="#parking-area" class="parking_btn btn btn-primary w-100 px-5 border" id="parking_area_button">주차장</a>
-					<a href="#parking-current" class="parking_btn btn w-100 px-5 border" id="parking_current_button">주차현황</a>
-					<a href="#parking-fee" class="parking_btn btn w-100 px-5 border" id="parking_fee_button">주차요금</a>
+					<a href="#parking-area" class="parking_btn btn btn-primary w-100 px-5 border" id="1_button">주차장</a>
+					<a href="#parking-current" class="parking_btn btn w-100 px-5 border" id="2_button">주차현황</a>
+					<a href="#parking-fee" class="parking_btn btn w-100 px-5 border" id="3_button">주차요금</a>
 				</div>
 			</div>
 			<!-- nav 끝 -->
 			<!-- parking_area 시작 -->
-			<div class="parking_menu" id="parking_area">
-			<div class="w-100 mt-5" >
+			<div class="parking_menu" id="1">
+			<div class="w-100 mt-5">
 			<h1 class="mb-4"><b>주차장 안내</b></h1>
-			<p>김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등</p>
-			<p>	  총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. </p>
+			<div class="w-100">
+			김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+			</div>
 			</div>
 			<div class="image_box">
 			<img class="my-5 w-100" src="/images/parking_gimhae.png" alt="">
@@ -52,12 +54,12 @@
 			</div>
 			<!-- parking_area 끝 -->
 			<!-- parking_menu 시작 -->
-			<div class="parking_menu" id="parking_current">
+			<div class="parking_menu" id="2">
 			
 			</div>
 			<!-- parking_menu 끝 -->
 			<!-- parking_fee 시작 -->
-			<div class="parking_menu" id="parking_fee">
+			<div class="parking_menu" id="3">
 			
 			</div>
 			<!-- parking_fee 끝 -->
