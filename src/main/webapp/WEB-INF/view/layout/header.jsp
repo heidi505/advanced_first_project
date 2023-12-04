@@ -16,7 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
     <%--    날짜 라이브러리--%>
-    <link rel="stylesheet" href="css/style.css">
+    <%-- <link rel="stylesheet" href="css/style.css"> --%>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -25,7 +26,7 @@
         <div class="container">
             <div class="header_box">
                 <div class="logo">
-                    <img src="images/logo.svg" alt="로고">
+                    <img src="/images/logo.svg" alt="로고">
                 </div>
                 <div class="search">
                     <form class="d-flex">
@@ -35,9 +36,9 @@
                 </div>
                 <ul class="header_menu">
                     <li>
-                        <a class="nav-link" href="#">마이페이지</a>
+                        <a class="nav-link" href="/user/profile">마이페이지</a>
                     </li>
-                    <li><a class="nav-link">로그인</a></li>
+                    <li><a class="nav-link" href="/user/sign-in">로그인</a></li>
                 </ul>
             </div>
             <nav class="navbar navbar-expand-sm">
