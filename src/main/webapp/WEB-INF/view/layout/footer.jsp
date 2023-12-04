@@ -11,7 +11,7 @@
                 <li>Copyright 2023 team2 All ⓒ rights reserved</li>
             </ul>
             <div class="git_icon">
-                <a href="https://github.com/heidi505/advanced_first_project"><img src="images/git_img.png" alt="깃"></a>
+                <a href="https://github.com/heidi505/advanced_first_project"><img src="/images/git_img.png" alt="깃"></a>
             </div>
         </div>
     </div>

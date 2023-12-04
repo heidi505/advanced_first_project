@@ -1,16 +1,21 @@
 package com.tenco.team_two_flight_ticket.controller;
 
-import com.tenco.team_two_flight_ticket.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket.handler.exception.MyNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TestController {
 
-    @GetMapping("/auth/test")
+    @GetMapping("/test")
     public String test(){
-     return "main";
+     return "test";
     }
+    /*
+    @PostMapping("/test")
+    public String validtest(@Valid UserRequest.JoinDTO joinDTO){
+        return "main";
+    }
+    */
 }
