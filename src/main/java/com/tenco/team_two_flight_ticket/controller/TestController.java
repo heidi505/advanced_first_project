@@ -18,14 +18,14 @@ public class TestController {
     // return "main";
     // }
 
-    @GetMapping("/preview")
-    public String test1() {
-        return "preview";
-    }
-
     @GetMapping("/reservation/preview")
     public String test3() {
         return "reservation/preview";
+    }
+
+    @GetMapping("/reservation/detail")
+    public String test4(){
+        return"reservation/detail";
     }
 
     @GetMapping("/main")
