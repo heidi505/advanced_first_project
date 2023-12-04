@@ -1,0 +1,1 @@
+insert into user_tb(`id`, `email`, `password`) values (1, 'aaa@aaa.com', '1111');
