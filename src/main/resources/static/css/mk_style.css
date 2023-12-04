@@ -1,0 +1,144 @@
+/* 프리뷰 페이지 */
+.preview_header {
+    text-align: center;
+}
+
+.preview_title {
+    background-color: var(--primary_01);
+    text-align: center;
+}
+
+.preview_form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.preview_left_form {
+    width: 75%;
+    display: block;
+}
+
+.preview_form_box {
+    display: block;
+}
+
+.preview_form_margint {
+    margin-top: 15px;
+}
+
+.preview_form_marginb {
+    margin-bottom: 15px;
+}
+
+.preview_btn_to_form {
+    padding: 2px;
+    border-radius: 7%;
+}
+
+.preview_form_padding {
+    padding: 10px;
+}
+
+.preview_li_box {
+    border: 1px solid var(--form);
+}
+
+.preview_li_box_top {
+    border-bottom: 1px solid var(--line);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.preview_airport_img {
+    width: 2em;
+    height: 2em;
+    margin-right: 10px;
+}
+
+.preview_baggage {
+    display: flex;
+    margin: 20px;
+}
+
+.preview_baggage_left {
+    width: 25%;
+}
+
+.preview_baggage_bottom {
+    margin-top: 5px;
+}
+
+.prview_baggage_right {
+    width: 10%;
+    text-align: end;
+}
+
+.preview_baggage_line {
+    background: url(../images/ico_from_to.png);
+    block-size: auto 100%;
+    background-repeat: repeat-y;
+    display: inline-block;
+    line-height: 2span;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: transparent;
+    margin-left: 45px;
+}
+
+.prview_baggage_rightm {
+    margin-bottom: 5px;
+}
+
+.preview_price_form{
+    width: 25%;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.preview_price_detail{
+    color: var(--primary_02);
+    font-weight: 800;
+    margin-left: 10px;
+}
+
+.preview_price_img{
+    width: 1em;
+    height: 1em;
+}
+
+.preview_price_line{
+    border-bottom: 1px solid var(--form);
+    padding: 10px;
+}
+
+.preview_price_total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15;
+    margin-top: 10px;
+}
+
+.preview_price_total2{
+    margin-left: 20px;
+}
+.preview_price_tax{
+    margin-left: 20px;
+    font-size: x-small;
+}
+
+.preview_price_marginr{
+    margin-right: 35px;
+}
+
+.preview_price_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.preview_price_btnw{
+    width: 250px;
+}

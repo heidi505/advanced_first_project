@@ -9,8 +9,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class TestController {
 
     @GetMapping("/test")
-    public String test(){
-     return "test";
+    public String test() {
+        return "test";
     }
-   
+
+    // @PostMapping("/test")
+    // public String validtest(@Valid UserRequest.JoinDTO joinDTO){
+    // return "main";
+    // }
+
+    @GetMapping("/preview")
+    public String test1() {
+        return "preview";
+    }
+
+    @GetMapping("/reservation/preview")
+    public String test3() {
+        return "reservation/preview";
+    }
+
+    @GetMapping("/main")
+    public String test2() {
+        return "main";
+    }
 }
