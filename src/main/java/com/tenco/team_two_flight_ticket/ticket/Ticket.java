@@ -31,8 +31,8 @@ public class Ticket {
     private String flightName;
     private String departureCity;
     private String arrivalCity;
-    private String departureTime;
-    private String arrivalTime;
+    private Timestamp departureTime;
+    private Timestamp arrivalTime;
     private String departureAirport;
     private String arrivalAirport;
     @Enumerated(EnumType.STRING)
@@ -44,7 +44,7 @@ public class Ticket {
     private Timestamp createdAt;
 
     @Builder
-    public Ticket(int id, int reservationId, Long airFare, Long fuelSurcharge, Long taxes, Long ticketingFee, Long totalPrice, String airline, String flightName, String departureCity, String arrivalCity, String departureTime, String arrivalTime, String departureAirport, String arrivalAirport, SeatTypeEnum seatType, boolean isOneWay, boolean isNonStop, int baggageAllowance, Timestamp createdAt) {
+    public Ticket(int id, int reservationId, Long airFare, Long fuelSurcharge, Long taxes, Long ticketingFee, Long totalPrice, String airline, String flightName, String departureCity, String arrivalCity, Timestamp departureTime, Timestamp arrivalTime, String departureAirport, String arrivalAirport, SeatTypeEnum seatType, boolean isOneWay, boolean isNonStop, int baggageAllowance, Timestamp createdAt) {
         this.id = id;
         this.reservationId = reservationId;
         this.airFare = airFare;

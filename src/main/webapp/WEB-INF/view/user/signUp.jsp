@@ -9,7 +9,6 @@
 
 <!-- TODO 여기서부터 main영역 -->
 
-<div class="nav_bg"></div>
 	<main class="sign_in_page">
 		<div class="container">
 			<div class="section">
@@ -17,15 +16,20 @@
 					<div class="top_bar p-3 border"><h2>회원가입</h2></div>
 					<form class="d-flex border" action="/user/sign-up" method="post">
 						<div class="flex-column w-100">
-							<div class="form-group w-75 mx-auto pt-2 mt-5">
-								<label for="user_name">이름*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="userName"
-									id="userName" placeholder="이름를 입력해주세요" />
-							</div>
-							<div class="form-group w-75 mx-auto pt-2 mt-2">
-								<label for="user_id">아이디*</label> <input type="text"
+							<div class="form-group w-75 mx-auto pt-2  mt-5">
+								<label for="userId">아이디*</label> <input type="text"
 									class="form-control mt-2 me-2 p-2" name="userId" id="userId"
 									placeholder="아이디를 입력해주세요" />
+							</div>
+							<div class="form-group w-75 mx-auto pt-2 mt-2">
+								<label for="email">이메일*</label> <input type="text"
+									class="form-control mt-2 me-2 p-2" name="email"
+									id="email" placeholder="이메일을 입력해주세요" />
+							</div>
+							<div class="form-group w-75 mx-auto pt-2 mt-2">
+								<label for="userTel">연락처*</label> <input type="text"
+									class="form-control mt-2 me-2 p-2" name="userTel"
+									id="userTel" placeholder="연락처를 입력해주세요" />
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-2">
 								<label for="password">비밀번호*</label> <input type="password"
@@ -33,9 +37,9 @@
 									id="password" placeholder="영문, 숫자, 특수문자 2가지 조합 8~15자" />
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-2">
-								<label for="password_check">비밀번호 확인*</label> <input
+								<label for="passwordCheck">비밀번호 확인*</label> <input
 									type="password" class="form-control mt-2 me-2 p-2"
-									id="password_check" placeholder="비밀번호를 한번 더 입력해주세요" />
+									id="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요" />
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-3 mb-4">
 								<input type="checkbox" class="w-10" name="termsAll" /><label
@@ -73,6 +77,6 @@
 </div>
 </div>
 
-<script src="/js/javascript.js"></script>
+<!-- <script src="/js/javascript.js"></script> -->
 <!-- footer.jsp  -->
 <%@ include file="../layout/footer.jsp"%>

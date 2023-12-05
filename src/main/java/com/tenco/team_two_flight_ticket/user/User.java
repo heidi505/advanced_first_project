@@ -28,16 +28,15 @@ public class User {
     @Column(length = 100,nullable = false, unique = true)
     private String email;
     private String profileImage;
-
     private String realName;
     private String phoneNumber;
     @ColumnDefault("false")
-    private boolean is_admin;
+    private boolean isAdmin;
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean is_admin, Timestamp createdAt) {
+    public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean isAdmin, Timestamp createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -45,7 +44,7 @@ public class User {
         this.profileImage = profileImage;
         this.realName = realName;
         this.phoneNumber = phoneNumber;
-        this.is_admin = is_admin;
+        this.isAdmin = isAdmin;
         this.createdAt = createdAt;
     }
 }

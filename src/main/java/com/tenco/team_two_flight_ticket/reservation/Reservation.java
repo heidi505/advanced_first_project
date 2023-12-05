@@ -23,7 +23,8 @@ public class Reservation {
     @Column(nullable = false)
     private int userId;
     private Long reservationNum;
-    private boolean is_payed;
+    @ColumnDefault("false")
+    private boolean isPayed;
     @Enumerated(EnumType.STRING)
     private StatusEnum statusEnum;
     private int passengerAmount;
@@ -33,11 +34,11 @@ public class Reservation {
     private Timestamp createdAt;
 
     @Builder
-    public Reservation(int id, int userId, Long reservationNum, boolean is_payed, StatusEnum statusEnum, int passengerAmount, Timestamp paymentDeadline, Long reservationPrice, Timestamp createdAt) {
+    public Reservation(int id, int userId, Long reservationNum, boolean isPayed, StatusEnum statusEnum, int passengerAmount, Timestamp paymentDeadline, Long reservationPrice, Timestamp createdAt) {
         this.id = id;
         this.userId = userId;
         this.reservationNum = reservationNum;
-        this.is_payed = is_payed;
+        this.isPayed = isPayed;
         this.statusEnum = statusEnum;
         this.passengerAmount = passengerAmount;
         this.paymentDeadline = paymentDeadline;
