@@ -53,16 +53,10 @@
 								<span class="realName">홍길동</span>
 							</div>
 							<div class="type_name form-group col p-3">
-								<label for="userId">아이디</label>
+								<label for="userName">아이디</label>
 							</div>
 							<div class="form-group col w-75 mb-3 p-3 ms-2">
-								<span class="userId">idid123456</span>
-							</div>
-							<div class="type_name form-group col p-3">
-								<label for="userName">닉네임</label>
-							</div>
-							<div class="form-group col w-75 mb-3 p-3 ms-2">
-								<span class="userName">Example</span>
+								<span class="userName">idid123456</span>
 							</div>
 							<div class="type_name form-group col p-3">
 								<label for="userTel">연락처</label>
