@@ -16,18 +16,8 @@
 					<div class="top_bar p-3 border"><h2>회원가입</h2></div>
 					<form class="d-flex border" action="/user/sign-up" method="post">
 						<div class="flex-column w-100">
-<<<<<<< HEAD
-							<div class="form-group w-75 mx-auto pt-2 mt-5">
-								<label for="user_name">이름*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="username"
-									id="userName" placeholder="이름를 입력해주세요" />
-							</div>
-							<div class="form-group w-75 mx-auto pt-2 mt-2">
-								<label for="user_id">아이디*</label> <input type="text"
-=======
 							<div class="form-group w-75 mx-auto pt-2  mt-5">
 								<label for="userId">아이디*</label> <input type="text"
->>>>>>> 5f77bc237c962a78d90fadaadd86cc856218b3e5
 									class="form-control mt-2 me-2 p-2" name="userId" id="userId"
 									placeholder="아이디를 입력해주세요" />
 							</div>
