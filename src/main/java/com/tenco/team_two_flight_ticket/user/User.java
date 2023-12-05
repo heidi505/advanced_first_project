@@ -20,16 +20,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Column(nullable = false, unique = true)
     private String username;
     @Column(length = 256, nullable = false)
     private String password;
     @Column(length = 100,nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
+    private String phoneNumber;
     private String profileImage;
     private String realName;
-    private String phoneNumber;
     @ColumnDefault("false")
     private boolean isAdmin;
     @CreationTimestamp

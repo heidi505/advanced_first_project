@@ -13,9 +13,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //기능 추가되면 pathpattern 추가하기
         registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/auth/**");
+                .addPathPatterns("/user/**")
+                .addPathPatterns("/admin/**")
+                .addPathPatterns("/coupon/**")
+                .addPathPatterns("/airport/**")
+                .addPathPatterns("/reservation/**")
+                .addPathPatterns("/search/**")
+                .addPathPatterns("/ticket/**");
     }
 
 }

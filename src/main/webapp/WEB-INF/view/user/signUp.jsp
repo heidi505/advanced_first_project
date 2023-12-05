@@ -14,11 +14,11 @@
 			<div class="section">
 				<div class="mx-auto w-35">
 					<div class="top_bar p-3 border"><h2>회원가입</h2></div>
-					<form class="d-flex border" action="/user/sign-up" method="post">
+					<form class="d-flex border" action="sign-up" method="post">
 						<div class="flex-column w-100">
 							<div class="form-group w-75 mx-auto pt-2  mt-5">
 								<label for="userId">아이디*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="userId" id="userId"
+									class="form-control mt-2 me-2 p-2" name="username" id="userId"
 									placeholder="아이디를 입력해주세요" />
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-2">
@@ -28,7 +28,7 @@
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-2">
 								<label for="userTel">연락처*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="userTel"
+									class="form-control mt-2 me-2 p-2" name="phoneNumber"
 									id="userTel" placeholder="연락처를 입력해주세요" />
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-2">
