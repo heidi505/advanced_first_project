@@ -34,45 +34,47 @@
 				<form action="" method="post">
 					<div
 						class="profile_box float-end d-flex flex-column border p-5 w-75">
-						<div class="picture text-center w-100">
+						<div class="picture text-center w-100 p-3">
 							<div class="position-relative">
-								<img src="/images/git_img.png" alt="" name="profileImg"
+								<img src="/images/git_img.png" alt="" name="profileImage"
 									class="input_profile_image mx-auto d-block" /> <span
 									class="bedge_span position-absolute translate-middle border border-light rounded-circle">
 									<span class="visually-hidden">New alerts</span>
 								</span>
 							</div>
-							<!-- 뱃지 추가 필요 -->
-							<label for="form-label" class="my-4">홍길동</label>
+							<label for="userName" class="form-label my-4">홍길동</label>
 						</div>
 						<!-- 프로필 사진 창 끝 -->
 						<div class="row row-cols-2 w-100 mx-auto">
 							<div class="type_name form-group col p-3">
-								<label for="userName">이름</label>
-							</div>
-							<div class="form-group col w-75 mb-3">
-								<input type="text"
-									class="userName form-control m-1 d-inline w-100"
-									name="userName" value="홍길동" />
-							</div>
-							<div class="type_name form-group col p-3">
-								<label for="userId">아이디</label>
+								<label for="realName">이름</label>
 							</div>
 							<div class="form-group col w-75 mb-3 p-3 ms-2">
-								<span class="userId">idid123456</span>
+								<span class="realName">홍길동</span>
+							</div>
+							<div class="type_name form-group col p-3">
+								<label for="userName">아이디</label>
+							</div>
+							<div class="form-group col w-75 mb-3 p-3 ms-2">
+								<span class="userName">idid123456</span>
 							</div>
 							<div class="type_name form-group col p-3">
 								<label for="userTel">연락처</label>
 							</div>
-							<div class="form-group col w-75 mb-3 p-3 ms-2">
-								<span class="userTel">010-1234-5678</span> <a href="#"
-									class="ms-3 color_primary02">연락처 변경하기</a>
+							<div class="form-group col w-75 mb-3 ">
+								<input type="text" class="userTel form-control m-1 d-inline w-100" name="userTel" id="userTel" value="010-1234-5678"> 
+							</div>
+							<div class="type_name form-group col p-3">
+								<label for="email">이메일</label>
+							</div>
+							<div class="form-group col w-75 mb-3 ">
+								<input type="text" class="email form-control m-1 d-inline w-100" name="email" id="email" value="abc1234@naxver.com"> 
 							</div>
 							<div class="type_name col p-3">
 								<label for="snsLink" class="me-5">SNS 연동</label>
 							</div>
 							<div
-								class="form-group col  form-check form-switch w-75 mb-3 p-3 ms-2">
+								class="form-group col form-check form-switch w-75 mb-3 p-3 ms-2">
 								<label for="kakaoLink" class=""><img
 									src="https://dffoxz5he03rp.cloudfront.net/icons/kakaotalk-logo.svg" />
 									카카오 연동</label> <input type="checkbox"
@@ -82,8 +84,8 @@
 							<div class="type_name form-group col p-3">
 								<label for="password" class="me-5">비밀번호</label>
 							</div>
-							<div class="form-group col w-75 mb-3 p-3 ms-2">
-								<a href="#" class="color_primary02">비밀번호 변경하기</a>
+							<div class="form-group col w-75 mb-3 ">
+								<input type="password" class="password form-control m-1 d-inline w-100" name="password" id="password" value="1234***"> 
 							</div>
 						</div>
 						<!-- 프로필 상세 창 끝 -->
