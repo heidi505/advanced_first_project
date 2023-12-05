@@ -1,12 +1,17 @@
 @import url(reset.css);
 @import url(mk_style.css);
 @import url(ss_style.css);
+@import url(ej_style.css);
 
 /* commmon */
 :root {
     --primary_01: #71C1EE;
     --primary_02: #378AD7;
-    --cancle: #EC4937;
+    --cancle: #ED5342;
+    --cancle_bg : #FBF1EF;
+    --before_pay_bg : #FFF8E1;
+    --before_pay : #F78B14;
+    --complete : #F8F9FA;
     --basic_03: #333;
     --basic_05: #555;
     --basic_07: #777;
@@ -17,16 +22,20 @@
     --basic_wh: #fff;
     --basic_bl: #000;
 }
-/*.notosanskr * {*/
-/*    font-family: 'Noto Sans KR', sans-serif;*/
-/*}*/
+
 * {
-    font-family: 'S-CoreDream-3Light';
+    font-family: 'Noto Sans KR', sans-serif;
 }
 /*header*/
 header {
     border-bottom: 1px solid var(--line);
+    position: fixed;
+    width: 100%;
+    background-color: var(--basic_wh);
+    z-index: 111;
+    height: 115px;
 }
+
 header .search {
     width: 40%;
 }
@@ -63,11 +72,8 @@ header .search {
     width: 100%;
 }
 main {
-    display: flex;
-    justify-content: center;
-    padding: 100px 20px 200px;
+    padding: 115px 20px 165px;
     height: 100%;
-    margin: 30px 0;
 }
 
 /*footer*/
@@ -77,6 +83,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: 165px;
 }
 .footer_box {
     display: flex;

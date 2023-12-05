@@ -39,28 +39,28 @@ window.onload = function () {
         altFormat: 'F j, Y', // 추가 입력란의 날짜 및 시간 형식
     });
 
-        flatpickr(datepicker2, {
-        dateFormat: 'Y-m-d', // 날짜 형식 설정 (예: 2023-09-12)
-        enableTime: false,   // 시간 선택 비활성화
-        minDate: 'today',    // 오늘 이전 날짜 선택 비활성화
-        defaultDate: new Date() // 초기 날짜 설정 (현재 날짜로 설정)
-
-    });
-        flatpickr(startDateInput, {
-        dateFormat: 'Y-m-d',
-        enableTime: false,
-        minDate: 'today',
-        defaultDate: 'today',
-        locale: 'ko',
-        onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
-    });
-
-        flatpickr(endDateInput, {
-        dateFormat: 'Y-m-d',
-        enableTime: false,
-        minDate: 'today',
-        defaultDate: 'today',
-        locale: 'ko',
-        onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
-    });
+    //     flatpickr(datepicker2, {
+    //     dateFormat: 'Y-m-d', // 날짜 형식 설정 (예: 2023-09-12)
+    //     enableTime: false,   // 시간 선택 비활성화
+    //     minDate: 'today',    // 오늘 이전 날짜 선택 비활성화
+    //     defaultDate: new Date() // 초기 날짜 설정 (현재 날짜로 설정)
+    //
+    // });
+    //     flatpickr(startDateInput, {
+    //     dateFormat: 'Y-m-d',
+    //     enableTime: false,
+    //     minDate: 'today',
+    //     defaultDate: 'today',
+    //     locale: 'ko',
+    //     onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
+    // });
+    //
+    //     flatpickr(endDateInput, {
+    //     dateFormat: 'Y-m-d',
+    //     enableTime: false,
+    //     minDate: 'today',
+    //     defaultDate: 'today',
+    //     locale: 'ko',
+    //     onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
+    // });
 }

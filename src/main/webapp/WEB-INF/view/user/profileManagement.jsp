@@ -5,8 +5,6 @@
 <!-- header.jsp -->
 <%@ include file="../layout/header.jsp"%>
 
-
-
 <!-- TODO 여기서부터 main영역 -->
 
 	<div class="container">
@@ -18,7 +16,8 @@
 				<div class="left_profile float-start w-25">
 					<div class="picture text-center mb-4 mx-4 p-5 border">
 						<img src="/images/git_img.png" alt="" name=""
-							class="profile_image mx-auto d-block" /> <label for="form-label"
+							class="profile_image mx-auto d-block" />
+						<label for="form-label"
 							class="my-4 fs-5">홍길동</label>
 						<p class="left_profile_text">프로필 관리</p>
 					</div>
@@ -105,4 +104,4 @@
 
 <script src="js/javascript.js"></script>
 <!-- footer.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

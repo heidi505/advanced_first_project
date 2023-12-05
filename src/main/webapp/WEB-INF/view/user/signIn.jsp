@@ -6,7 +6,6 @@
 <%@ include file="../layout/header.jsp"%>
 
 
-
 <!-- TODO 여기서부터 main영역 -->
 	<main class="sign_in_page">
 		<div class="container">
@@ -47,4 +46,4 @@
 
 <script src="js/javascript.js"></script>
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>

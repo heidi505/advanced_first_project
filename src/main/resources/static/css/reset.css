@@ -1,8 +1,7 @@
-@font-face {
-    font-family: 'S-CoreDream-3Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 html,
@@ -92,6 +91,7 @@ video {
     font-size: 100%;
     vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -106,26 +106,35 @@ nav,
 section {
     display: block;
 }
+
 body {
     line-height: 1;
+}
+.nav_container {
+    max-width: 1060px;
+    margin: 0 auto;
 }
 ol,
 ul {
     list-style: none;
     list-style-type: none;
 }
+
 a:hover {
     --bs-link-color-rgb: var(--basic_03);
 }
+
 a {
     color: var(--basic_03);
     text-decoration: none;
     display: inline-block;
 }
+
 blockquote,
 q {
     quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -133,19 +142,23 @@ q:after {
     content: "";
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 img {
     max-width: 100%;
 }
+
 button {
     border: none;
     outline: none;
     background-color: inherit;
     cursor: pointer;
 }
+
 .btn-check:checked + .btn,
 .btn.active,
 .btn.show,
@@ -155,56 +168,69 @@ button {
     background-color: var(--primary_01);
     border-color: var(--primary_01);
 }
+
 .btn {
     width: 100px;
     height: 42px;
 }
+
 .btn:hover {
     color: var(--basic_wh);
     background-color: var(--primary_02);
     border-color: var(--primary_02);
 }
+
 .btn-primary {
     color: var(--basic_wh);
     background-color: var(--primary_01);
     border-color: var(--primary_01);
     transition: all 0.3s;
 }
+
 .tab_menu li a.tab_active {
     background-color: var(--primary_02);
     color: var(--basic_wh);
     width: 100%;
     border-radius: 5px;
 }
+
 .tab_menu li {
     padding: 5px 0;
 }
+
 h1 {
     font-size: 32px;
 }
+
 h2 {
     font-size: 24px;
 }
+
 h3 {
     font-size: 20px;
 }
+
 h4 {
     font-size: 18px;
 }
+
 .form-control:focus {
     color: var(--basic_03);
     border-color: var(--primary_01);
     box-shadow: 0 0 0 0;
 }
+
 select::-ms-expand {
     display: none;
 }
+
 .select {
     -o-appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
+
 ::marker {
     display: none;
 }
@@ -213,6 +239,7 @@ textarea {
     outline: none;
     resize: none;
 }
+
 /*.table > :not(caption) > * > * {*/
 /*    padding: 0.5rem 0.5rem;*/
 /*    !* color: var(--bs-table-color-state,var(--bs-table-color-type,var(--bs-table-color))); *!*/
@@ -224,46 +251,81 @@ textarea {
 .table {
     margin-bottom: 32px;
 }
+
 th,
 td,
 tr {
     text-align: center;
 }
+
 input::placeholder {
     color: var(--form);
     font-size: 14px;
 }
+
 input::-webkit-input-placeholder {
     color: var(--form);
     font-size: 14px;
 }
+
 input:-ms-input-placeholder {
     color: var(--form);
     font-size: 14px;
 }
+
 input {
     height: 42px;
     outline: none;
 }
+
 input[type="checkbox"] {
     height: 20px;
     margin-right: 5px;
 }
+
 .td_width80 {
     width: 80px;
 }
+
 .td_width120 {
     width: 120px;
 }
+
 .td_width160 {
     width: 160px;
 }
+
 .td_width140 {
     width: 140px;
 }
+
 .td_width180 {
     width: 180px;
 }
+
 .td_border {
     border: 0.5px solid gainsboro;
 }
+
+/*초기화*/
+.navbar-nav {
+    flex-direction: row;
+}
+.navbar-nav > li{
+    padding-right: 12px;
+}
+
+/*@media (min-width: 576px) {*/
+
+/*    .navbar-expand-sm .navbar-nav {*/
+/*        flex-direction: row;*/
+/*    }*/
+
+/*    .navbar-expand-sm {*/
+/*        flex-wrap: nowrap;*/
+/*        justify-content: flex-start;*/
+/*    }*/
+
+
+/*}*/
+

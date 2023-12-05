@@ -27,4 +27,4 @@
 
 <script src="js/javascript.js"></script>
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>
