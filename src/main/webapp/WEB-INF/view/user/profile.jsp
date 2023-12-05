@@ -27,7 +27,7 @@
     	<!-- 여기까지 left-profile -->
     	
     	<div class="profile_box float-end d-flex flex-column border p-5 w-75">
-    	<div><button class="border rounded px-4 py-2 float-end me-5">편집</button></div>
+    	<div><button class="go_management border rounded px-4 py-2 float-end me-5">편집</button></div>
     	<div class="picture text-center w-100">
     	<img src="/images/git_img.png" alt="" name="" class="input_profile_image mx-auto d-block"/>
     	<!-- 뱃지 추가 필요 -->
@@ -79,6 +79,6 @@
 </div>
 </div>
 
-<script src="js/javascript.js"></script>
+<script src="/js/profile.js"></script>
 <!-- footer.jsp -->
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>

@@ -65,8 +65,7 @@
 								<label for="userTel">연락처</label>
 							</div>
 							<div class="form-group col w-75 mb-3 p-3 ms-2">
-								<span class="userTel">010-1234-5678</span> <a href="#"
-									class="ms-3 color_primary02">연락처 변경하기</a>
+								<input type="tel" class="userTel" name="userTel" id="userTel" value="010-1234-5678"> 
 							</div>
 							<div class="type_name col p-3">
 								<label for="snsLink" class="me-5">SNS 연동</label>

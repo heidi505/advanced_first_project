@@ -25,5 +25,9 @@ window.onload = function(){
 			openMenu(e, menuNumber);
 		});
 	}
+	//시작 메뉴
+	const startMenu = document.getElementById('3_button');
+	startMenu.click();
+	
 	
 }
