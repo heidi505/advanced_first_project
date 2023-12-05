@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- header.jsp -->
 <%@ include file="../layout/header.jsp" %>
+
 
 
 <!-- TODO 여기서부터 main영역 -->
@@ -19,7 +20,7 @@
                         <b>을<br>
                             시작해보세요</b></h2>
                     <div class="w-75 mx-auto d-flex mb-2 ">
-                        <button type="button" class="p-2 w-100 mb-2">
+                        <button type="button" class="p-2 w-100 mb-2" >
                             <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b3353bee8ecc7f0689a50e62a4cd4ada&redirect_uri=http://localhost:8080/user/kakao-callback">
                                 <img class="kakao_logo" src="/images/kakao_login_medium_wide.png"/></a>
                         </button>
@@ -29,6 +30,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </main>
