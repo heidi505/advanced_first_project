@@ -21,7 +21,8 @@
     	시작해보세요</b></h2>
     	<div class="w-75 mx-auto d-flex mb-2 ">
     	<button type="button" class="p-2 w-100 mb-2" >
-    	<img class="kakao_logo" src="/images/kakao_login_medium_wide.png"/>
+			<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b3353bee8ecc7f0689a50e62a4cd4ada&redirect_uri=http://localhost:8080/user/kakao-callback">
+				<img class="kakao_logo" src="/images/kakao_login_medium_wide.png"/></a>
     	</button>
     	</div>
     	<div class="w-75 mx-auto d-flex mb-5 ">
