@@ -36,10 +36,10 @@
     	<!-- 프로필 사진 창 끝 -->
         <div class="row row-cols-2 w-100 mx-auto">
     	<div class="type_name form-group col p-3">
-    	<label for="userName">이름</label>
+    	<label for="realName">이름</label>
     	</div>
     	<div class="form-group col w-75 mb-3 p-3 ms-2">
-    	<span class="userId">홍길동</span>	
+    	<span class="realName">홍길동</span>	
     	</div>
     	<div class="type_name form-group col p-3">
     	<label for="userId">아이디</label>
@@ -48,11 +48,22 @@
     	<span class="userId">idid123456</span>	
     	</div>
     	<div class="type_name form-group col p-3">
+    	<label for="userName">닉네임</label>
+    	</div>
+    	<div class="form-group col w-75 mb-3 p-3 ms-2">
+    	<span class="userName">Example</span>	
+    	</div>
+    	<div class="type_name form-group col p-3">
     	<label for="userTel">연락처</label>
     	</div>
     	<div class="form-group col w-75 mb-3 p-3 ms-2">
     	<span class="userTel">010-1234-5678</span>
-    	<span class="color_primary02 ms-3">인증완료</span>
+    	</div>
+    	<div class="type_name form-group col p-3">
+    	<label for="email">이메일</label>
+    	</div>
+    	<div class="form-group col w-75 mb-3 p-3 ms-2">
+    	<span class="email">abc1234@naxver.com</span>
     	</div>
     	<div class="type_name col p-3">
     	<label for="snsLink" class="me-5">SNS 연동</label>
