@@ -9,7 +9,6 @@
 
 <!-- TODO 여기서부터 main영역 -->
 
-<div class="nav_bg"></div>
 	<main class="sign_in_page">
 		<div class="container">
 			<div class="section">
@@ -19,7 +18,7 @@
 						<div class="flex-column w-100">
 							<div class="form-group w-75 mx-auto pt-2 mt-5">
 								<label for="user_name">이름*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="userName"
+									class="form-control mt-2 me-2 p-2" name="username"
 									id="userName" placeholder="이름를 입력해주세요" />
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-2">
@@ -75,4 +74,4 @@
 
 <script src="/js/javascript.js"></script>
 <!-- footer.jsp  -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>

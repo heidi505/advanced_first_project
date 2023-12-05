@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -22,13 +23,20 @@ public class UserController {
 
 		return "user/signUp";
 	}
-	
+
+	@PostMapping("/sign-up")
+	public String signUpProc(){
+		return null;
+	}
+
+
 	//로그인
 	//주소:  http://localhost:8080/user/sign-in
 	@GetMapping("/sign-in")
 	public String signIn() {
 		return "user/signIn";
 	}
+
 	
 	//카카오 로그인
 	@GetMapping("/kakao/sign-in")
