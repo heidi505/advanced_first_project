@@ -14,7 +14,7 @@ function openMenu(evt, menuNumber) {
   evt.currentTarget.className += ' btn-primary';
 }
 
-// 모든 주차장의 혼잡도 변화(미완성)
+// 모든 주차장의 혼잡도 변화(미구현)
 function updateStatus(){
 	let i, allStatus;
   	allStatus = document.getElementsByClassName('parking_status');
@@ -50,7 +50,9 @@ window.onload = function(){
 	for(let i=0; i<aButton.length;i++){
 		aButton[i].addEventListener('click', e=>{
 			let menuNumber = aButton[i].id.replace('_button','');
-			if( i == 2) updateStatus();
+			if( i == 2){
+				updateStatus();
+			} 
 			openMenu(e, menuNumber);
 		});
 	}
@@ -64,6 +66,8 @@ window.onload = function(){
 	const startMenu = document.getElementById('2_button');
 	startMenu.click();
 	
-	
-	
+	//api로 받은 데이터 기반으로 색상및 글 변환(미구현)
+	const congestionStatus = document.getElementsByClassName('congestion_status')[0];
+	congestionStatus.style.color = 'var(--cancle)';
+	congestionStatus.innerHTML = '혼잡';	
 }

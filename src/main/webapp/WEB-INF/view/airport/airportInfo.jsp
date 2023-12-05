@@ -27,7 +27,7 @@
 						<span class="p-3">
 							<b class="fs-1 color_primary02 duration_of_time">66</b><b class="ms-2 fs-3 align-text-baseline">분</b><span class="fs-4">
 							&nbsp;<b>-</b>&nbsp;</span>
-							<b class="fs-2 congestion_status">혼잡</b> 
+							<b class="fs-2 congestion_status"></b> 
 						</span>
 					</div>
 				</div>
