@@ -26,6 +26,12 @@ public class ReservationController {
  		return "/reservation/paymentEnd";
  	}
  	
+ 	@GetMapping("/reservation/final-result")
+ 	public String finalResult() {
+ 		return "/reservation/finalResult";
+ 	}
+ 	
+ 	
 
 
 

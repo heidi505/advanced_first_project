@@ -53,7 +53,7 @@
 			</div>
 			</div>
 			<div class="w-100 text-center p-5">
-			<button class="payed_check_btn btn btn-primary w-25">확인</button>
+			<a href="#" class="payed_check_btn btn btn-primary w-25">확인</a>
 			</div>
 			
 			

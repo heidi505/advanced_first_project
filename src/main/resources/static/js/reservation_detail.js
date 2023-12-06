@@ -26,6 +26,7 @@ window.onload = function(){
 	//모달창에서 취소요청버튼 이벤트 연결
 	const cancel_btn  = document.getElementById('cancel_request_btn');
 	cancel_btn.addEventListener('click',(e)=>{
+		alert('예약 취소가 정상적으로 처리되었습니다');
 		//취소 요청한 예약번호를 인자로 전달(미구현)
 		location.href='/reservation/cancel';
 	});
