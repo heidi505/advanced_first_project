@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class TestController {
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
+//    @GetMapping("/test")
+//    public String test() {
+//        return "test";
+//    }
 
     // @PostMapping("/test")
     // public String validtest(@Valid UserRequest.JoinDTO joinDTO){
@@ -23,15 +23,13 @@ public class TestController {
         return "reservation/preview";
     }
 
-    @GetMapping("/main")
-    public String test2() {
-        return "main";
-    }
+//    @GetMapping("/main")
+//    public String test2() {
+//        return "main";
+//    }
 
     @GetMapping("/reservation/detail")
     public String test4(){
         return"reservation/detail";
     }
-
-
 }

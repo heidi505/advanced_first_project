@@ -14,5 +14,4 @@ public class ReservationController {
     public String test4(){
         return"reservation/detail";
     }
-
 }
