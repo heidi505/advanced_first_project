@@ -79,7 +79,7 @@
     block-size: auto 100%;
     background-repeat: repeat-y;
     display: inline-block;
-    line-height: 2span;
+    line-height: 1.87em;
     padding-left: 20px;
     padding-right: 20px;
     color: transparent;
@@ -90,55 +90,204 @@
     margin-bottom: 5px;
 }
 
-.preview_price_form{
+.preview_price_form {
     width: 25%;
     margin-top: 15px;
     margin-left: 50px;
 }
 
-.preview_price_detail{
+.preview_price_detail {
     color: var(--primary_02);
     font-weight: 800;
     margin-left: 10px;
 }
 
-.preview_price_img{
+.preview_price_img {
     width: 1em;
     height: 1em;
 }
 
-.preview_price_line{
+.preview_price_line {
     border-bottom: 1px solid var(--form);
     padding: 10px;
 }
 
-.preview_price_total{
+.preview_price_total {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15;
+    padding: 15px;
     margin-top: 10px;
 }
 
-.preview_price_total2{
+.preview_price_total2 {
     margin-left: 20px;
 }
-.preview_price_tax{
+
+.preview_price_tax {
     margin-left: 20px;
     font-size: x-small;
 }
 
-.preview_price_marginr{
+.preview_price_marginr {
     margin-right: 35px;
 }
 
-.preview_price_btn{
+.preview_price_btn {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
 }
 
-.preview_price_btnw{
+.preview_price_btnw {
     width: 250px;
+}
+
+/* 예약 상세 페이지 */
+
+.detail_info_form {
+    border: 1px solid var(--form);
+    margin-top: 50px;
+}
+
+.detail_info_thead {
+    margin: 0px;
+    border: 0px;
+    vertical-align: baseline;
+}
+
+.detail_info_th {
+    text-align: center;
+    border-bottom: 1px solid var(--form);
+}
+
+.detail_info_span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.detail_info_span2 {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.detail_info_span3 {
+    display: block;
+}
+
+.detail_info_span4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail_info_img {
+    width: 2em;
+    height: 2em;
+}
+
+.detail_war_form {
+    background-color: var(--box_bg);
+    line-height: 1.5;
+}
+
+.detail_res_title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.detail_res_form {
+    border: 1px solid var(--form);
+    padding: 15px;
+}
+
+.detail_group_padding {
+    padding: 15px;
+}
+
+.detail_group_maginb {
+    margin-bottom: 10px;
+}
+
+.detail_input {
+    border: 1px solid var(--form);
+}
+
+.detail_email {
+    margin-left: 1px;
+}
+
+.detail_input_war {
+    font-size: smaller;
+}
+
+.detail_group_padding2 {
+    padding: 15px;
+    display: flex;
+}
+
+.detail_name {
+    display: block;
+    margin-right: 15px;
+}
+
+.detail_name_input {
+    border: 1px solid var(--form);
+    padding: 10px;
+}
+
+.detail_agree_form {
+    max-width: 1000px;
+}
+
+.detail_agree_title {
+    font-weight: bold;
+    color: var(--primary_02);
+}
+
+.detail_agree_form {
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+}
+
+.detail_agree_box {
+    float: left;
+    width: 100%;
+}
+
+.detail_boldb {
+    color: var(--primary_02);
+    font-weight: bold;
+}
+
+.detail_boldr{
+    color: var(--cancle);
+}
+
+.detail_baggage{
+    margin-top: 0px;
+}
+
+.detail_main_form{
+    display: flex;
+}
+
+.detail_left_from{
+    width: 75%;
+}
+
+.detail_right_form{
+    width: 25%;
+}
+
+#reservation_detail_page .preview_price_form {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.detail_hidden_label{
+    display: none;
 }

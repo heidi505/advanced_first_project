@@ -10,6 +10,9 @@ public class ReservationController {
         return "reservation/preview";
     }
 
-
+    @GetMapping("/detail")
+    public String test4(){
+        return"reservation/detail";
+    }
 
 }
