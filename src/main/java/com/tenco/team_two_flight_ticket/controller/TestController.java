@@ -32,4 +32,10 @@ public class TestController {
     public String test2() {
         return "main";
     }
+
+    @GetMapping("/detailtest")
+    public String test5(){
+        return "test";
+    }
+
 }
