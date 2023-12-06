@@ -9,9 +9,8 @@
         values(#{username}, #{email}, #{password}, #{phoneNumber}, now())
     </insert>
 
-    <select id="findByUsernameAndPassword" resultType="com.tenco.team_two_flight_ticket.user.User">
-        select * from user_tb where username = #{username} and
-        password = #{password}
+    <select id="findByUsername" resultType="com.tenco.team_two_flight_ticket.user.User">
+        select * from user_tb where username = #{username}
     </select>
     <update id="updateByUserId">
         update user_tb set password = #{password}, phone_number = #{phoneNumber}, email = #{email}

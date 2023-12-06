@@ -2,15 +2,18 @@ package com.tenco.team_two_flight_ticket.user;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,8 @@ public class UserController {
 
 	@Autowired
 	private HttpSession session;
+
+
 
 	@GetMapping("/profile")
 	public String profile(Model model) {
@@ -48,7 +53,7 @@ public class UserController {
 	}
 
 	@PostMapping("/profile-management")
-	public String updateUser(UserRequest.UserUpdateDTO dto) {
+	public String updateUser(@Valid UserRequest.UserUpdateDTO dto, Errors errors) {
 
 		userService.updateUser(dto);
 

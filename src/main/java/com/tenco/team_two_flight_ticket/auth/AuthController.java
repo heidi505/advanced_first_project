@@ -6,11 +6,14 @@ import com.tenco.team_two_flight_ticket.user.UserRequest;
 import com.tenco.team_two_flight_ticket.user.UserResponse;
 import com.tenco.team_two_flight_ticket.user.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +28,7 @@ public class AuthController {
     @Autowired
     private HttpSession session;
 
+
     @GetMapping("/main")
     public String mainPage(){
         return "main";
@@ -34,7 +38,7 @@ public class AuthController {
         return "user/signUp";
     }
     @PostMapping("/sign-up")
-    public String signUpProc(UserRequest.SignUpDTO dto){
+    public String signUpProc(@Valid UserRequest.SignUpDTO dto, Errors errors){
         userService.signUp(dto);
         return "redirect:/sign-in";
     }
@@ -44,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/sign-in")
-    public String signInProc(UserRequest.SignInDTO dto){
+    public String signInProc(@Valid UserRequest.SignInDTO dto, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
         return "redirect:/main";
