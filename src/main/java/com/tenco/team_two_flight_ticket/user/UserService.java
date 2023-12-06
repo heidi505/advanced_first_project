@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.user;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -83,6 +85,17 @@ public class UserService {
         catch (Exception e){
             throw new MyServerError("서버 에러");
         }
+
+    }
+
+    public String checkUsername(UserRequest.CheckUsernameDTO dto) {
+        User checkUser = userRepository.checkUsername(dto);
+        if (checkUser == null) {
+            return "사용할 수 있는 아이디입니다";
+        }else{
+            return "사용할 수 없는 아이디입니다";
+        }
+
 
     }
 }

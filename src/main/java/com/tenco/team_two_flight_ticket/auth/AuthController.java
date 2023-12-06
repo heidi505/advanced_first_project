@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.auth;
 
+import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.user.User;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
@@ -17,6 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
@@ -29,24 +31,32 @@ public class AuthController {
     private HttpSession session;
 
 
+    //메인 페이지
     @GetMapping("/main")
     public String mainPage(){
         return "main";
     }
+
+    //회원가입
     @GetMapping("/sign-up")
     public String signUp(){
         return "user/signUp";
     }
+
+    //회원 가입
     @PostMapping("/sign-up")
     public String signUpProc(@Valid UserRequest.SignUpDTO dto, Errors errors){
         userService.signUp(dto);
         return "redirect:/sign-in";
     }
+
+    //로그인
     @GetMapping("/sign-in")
     public String signIn() {
         return "user/signIn";
     }
 
+    //로그인
     @PostMapping("/sign-in")
     public String signInProc(@Valid UserRequest.SignInDTO dto, Errors errors){
         User principal = userService.signIn(dto);
@@ -54,11 +64,13 @@ public class AuthController {
         return "redirect:/main";
     }
 
+    //카카오 로그인
     @GetMapping("/kakao/sign-in")
     public String kakaoSignIn() {
         return "user/kakaoSignIn";
     }
 
+    //카카오 로그인
     @GetMapping("/kakao-callback")
     public void kakaoCallback(@RequestParam String code){
         RestTemplate rt1 = new RestTemplate();
@@ -98,6 +110,16 @@ public class AuthController {
         //카카오 로그인으로 받을 수 있는 정보가 닉네임, 프로필 이미지 밖에 없어서 보류
 
 
+
+    }
+
+    //유저 아이디 중복체크
+    @ResponseBody
+    @GetMapping("/check")
+    public ResponseEntity<?> check(UserRequest.CheckUsernameDTO dto){
+       String message = userService.checkUsername(dto);
+
+        return ResponseEntity.ok().body(ApiUtils.success(message));
 
     }
 
