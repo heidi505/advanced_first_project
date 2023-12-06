@@ -1,9 +1,9 @@
 --유저
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(1, 'ssar', '1111', 'ssar@nate.com', '01011112222');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(2, 'cos', '1111', 'cos@nate.com','01011112222');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(3, 'love', '1111', 'love@nate.com','01011112222');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(4, 'tom', '1111', 'tom@nate.com','01011112222');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(5, 'lisa', '1111', 'lisa@nate.com','01011112222');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(1, 'ssar', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'ssar@nate.com', '01011112222');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(2, 'cos', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'cos@nate.com','01011112222');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(3, 'love', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'love@nate.com','01011112222');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(4, 'tom', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'tom@nate.com','01011112222');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(5, 'lisa', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'lisa@nate.com','01011112222');
 
 
 --예약

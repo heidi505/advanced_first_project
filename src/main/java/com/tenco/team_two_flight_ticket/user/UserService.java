@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +23,16 @@ public class UserService {
     private HasCouponRepository hasCouponRepository;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @Transactional
     public void signUp(UserRequest.SignUpDTO dto){
         User user = User.builder()
                 .username(dto.getUsername())
                 .email(dto.getEmail())
-                .password(dto.getPassword())
+                .password(passwordEncoder.encode(dto.getPassword()))
                 .phoneNumber(dto.getPhoneNumber())
                 .build();
 
@@ -40,11 +45,18 @@ public class UserService {
 
     public User signIn(UserRequest.SignInDTO dto) {
 
-        User userEntity = userRepository.findByUsernameAndPassword(dto);
+        User userEntity = userRepository.findByUsername(dto);
 
         if (userEntity == null) {
             throw new MyBadRequestException("아이디 혹은 비번이 틀렸습니다.");
         }
+
+        boolean isPwdMatched = passwordEncoder.matches(dto.getPassword(), userEntity.getPassword());
+
+        if (isPwdMatched == false){
+            throw new MyBadRequestException("비번이 틀렸습니다.");
+        }
+
 
         return userEntity;
 
