@@ -33,9 +33,7 @@ spring:
           auth: true
           starttls:
             enable: true
-  redis:
-    host: localhost
-    port:
+
 
 
   jpa:

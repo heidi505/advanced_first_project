@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.auth;
 
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.user.User;
@@ -33,7 +34,8 @@ public class AuthController {
 
     @Autowired
     private JavaMailSender javaMailSender;
-    
+
+    private String email;
 
 
     //메인 페이지
@@ -119,10 +121,10 @@ public class AuthController {
     }
 
     //유저 아이디 중복체크
-    @ResponseBody
-    @GetMapping("/username-check")
-    public ResponseEntity<?> nameCheck(@Valid UserRequest.CheckUsernameDTO dto, Errors errors){
-        String message = userService.checkUsername(dto);
+    @GetMapping("/check/username")
+    public ResponseEntity<ApiUtils.ApiResult<String>> nameCheck(@RequestParam String username){
+        System.out.println("+++++++++++++++" + username);
+        String message = userService.checkUsername(username);
 
         return ResponseEntity.ok().body(ApiUtils.success(message));
 
@@ -130,10 +132,21 @@ public class AuthController {
 
     //유저 이메일 중복체크ㅠ
     @ResponseBody
-    @PostMapping("/check/email")
-    public String emailCheck(@Valid UserRequest.CheckEmailDTO dto, Errors errors){
-        userService.sendEmail(dto.getEmail());
-        return null;
+    @GetMapping("/check/email")
+    public ResponseEntity<ApiUtils.ApiResult<String>> emailCheck(@RequestParam String email){
+        this.email = email;
+        userService.sendEmail(email);
+
+        return ResponseEntity.ok(ApiUtils.success("인증 메일을 발송했습니다"));
+    }
+
+    @GetMapping("/verify/email")
+    public ResponseEntity<ApiUtils.ApiResult<String>> emailVerify(@RequestParam String email){
+        if(this.email.equals(email)){
+            throw new MyBadRequestException("이메일 인증 완료");
+        }else{
+            throw new MyBadRequestException("이메일 인증에 실패했습니다");
+        }
 
     }
 

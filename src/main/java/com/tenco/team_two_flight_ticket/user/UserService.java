@@ -36,6 +36,8 @@ public class UserService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    private int authNumber;
+
     @Transactional
     public void signUp(UserRequest.SignUpDTO dto){
         User user = User.builder()
@@ -95,8 +97,8 @@ public class UserService {
 
     }
 
-    public String checkUsername(UserRequest.CheckUsernameDTO dto) {
-        User checkUser = userRepository.checkUsername(dto);
+    public String checkUsername(String username) {
+        User checkUser = userRepository.checkUsername(username);
         if (checkUser == null) {
             return "사용할 수 있는 아이디입니다";
         }else{
@@ -106,30 +108,31 @@ public class UserService {
 
     }
 
-    public int makeRandomNumber(){
+    public void makeRandomNumber(){
         Random r = new Random();
         String randomNumber = "";
         for(int i = 0; i < 6; i++) {
             randomNumber += Integer.toString(r.nextInt(10));
         }
+
         int authNumber = Integer.parseInt(randomNumber);
 
-        return authNumber;
+         authNumber = this.authNumber;
     }
 
     public void sendEmail(String email){
-        int authNumber = makeRandomNumber();
+        makeRandomNumber();
         MimeMessage message = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setFrom("xxwhite19@gmail.com");
             helper.setTo(email);
             helper.setSubject("님부스의 인증 메일입니다");
-            helper.setText("님부스를 방문해주셔서 감사합니다." + 	//html 형식으로 작성 !
-                    "<br><br>" +
-                    "인증 번호는 " + authNumber + "입니다." +
-                    "<br>" +
-                    "인증번호를 제대로 입력해주세요", true);
+            helper.setText("<h1>님부스 메일 인증</h1>" +
+                    "<br/>님부스에 가입해주셔서 감사합니다."+
+                    "<br/>아래 [이메일 인증 확인]을 눌러주세요."+
+                    "<br/><a href='http://localhost:8080/verify/email?email=" + email +
+                    "' target='_parent'>이메일 인증 확인</a>", true);
             javaMailSender.send(message);
         }catch (Exception e){
             e.printStackTrace();
@@ -138,6 +141,7 @@ public class UserService {
 
 
     }
+
 
 
 
