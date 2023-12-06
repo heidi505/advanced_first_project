@@ -9,6 +9,13 @@ public class ReservationController {
     public String test1() {
         return "reservation/preview";
     }
+    
+    // http://localhost:8080/reservation/detail
+ 	@GetMapping("/reservation/detail")
+ 	public String detail() {
+ 		return "/reservation/reservationDetail";
+ 	}
+    
 
 
 
