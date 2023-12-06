@@ -217,4 +217,7 @@
 }
 
 /* 운임규정 모달창 */
-
+/* 예약 완료 페이지*/
+.payed_result_mark{
+	border:2px solid var(--primary_02);
+}

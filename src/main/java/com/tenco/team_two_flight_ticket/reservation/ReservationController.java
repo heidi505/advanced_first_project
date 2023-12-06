@@ -21,6 +21,11 @@ public class ReservationController {
  		return "/reservation/cancelReservation";
  	}
     
+ 	@GetMapping("/reservation/payed")
+ 	public String payed() {
+ 		return "/reservation/paymentEnd";
+ 	}
+ 	
 
 
 
