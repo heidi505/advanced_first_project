@@ -291,3 +291,97 @@
 .detail_hidden_label{
     display: none;
 }
+
+/* 예약하기 모달창 */
+
+.res_modal_add{
+    --bs-modal-width: 850px;
+}
+
+.res_modal_form{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    outline: 0;
+    height: 100%;
+}
+
+.res_modal_tb_form{
+    padding: 30px 40px 45px;
+    display: block;
+}
+
+.res_modal_margin{
+    margin-bottom: 2em;
+}
+
+.res_modal_table {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.res_modal_b{
+    color: var(--primary_02);
+}
+
+.res_modal_p{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.res_modal_table th, .res_modal_table td {
+    border-bottom: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    padding: 10px;
+}
+
+.res_modal_table th {
+    border-bottom: 1px solid var(--form);
+    border-top: 1px solid var(--form);
+}
+
+.travel-table caption {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.res_modal_check{
+    margin-bottom: 56px;
+    padding: 16px 40px;
+    border-radius: 4px;
+    background-color: var(--form);
+}
+
+.res_modal_btn{
+    height: 20px;
+    margin-bottom: 32px;
+    line-height: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.res_modal_btn2{
+    border-radius: 20px;
+}
+
+.res_modal_check_btn{
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.res_modal_btn_area{
+    text-align: center;
+}
+

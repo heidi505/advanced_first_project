@@ -15,4 +15,13 @@ public class ReservationController {
         return"reservation/detail";
     }
 
+    @GetMapping("/sample")
+    public String test2(){
+        return"reservation/sample2";
+    }
+
+    @GetMapping("/test")
+    public String test3(){
+        return"reservation/test";
+    }
 }
