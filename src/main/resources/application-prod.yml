@@ -22,7 +22,20 @@ spring:
       mode: always
       data-locations:
         - classpath:db/data.sql
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: xxwhite19@gmail.com
+    password: bwmd uxof njqv vtiy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  redis:
+    host: localhost
+    port:
 
 
   jpa:

@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -29,6 +30,10 @@ public class AuthController {
 
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+    
 
 
     //메인 페이지
@@ -115,13 +120,24 @@ public class AuthController {
 
     //유저 아이디 중복체크
     @ResponseBody
-    @GetMapping("/check")
-    public ResponseEntity<?> check(UserRequest.CheckUsernameDTO dto){
-       String message = userService.checkUsername(dto);
+    @GetMapping("/username-check")
+    public ResponseEntity<?> nameCheck(@Valid UserRequest.CheckUsernameDTO dto, Errors errors){
+        String message = userService.checkUsername(dto);
 
         return ResponseEntity.ok().body(ApiUtils.success(message));
 
     }
+
+    //유저 이메일 중복체크ㅠ
+    @ResponseBody
+    @PostMapping("/check/email")
+    public String emailCheck(@Valid UserRequest.CheckEmailDTO dto, Errors errors){
+        userService.sendEmail(dto.getEmail());
+        return null;
+
+    }
+
+
 
 
 
