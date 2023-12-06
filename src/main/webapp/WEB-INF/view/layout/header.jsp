@@ -49,7 +49,7 @@
                             <a class="nav-link" href="#">항공권 예매</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">공항 정보</a>
+                            <a class="nav-link" href="/airport/airport-info">공항 정보</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">나의 여행</a>

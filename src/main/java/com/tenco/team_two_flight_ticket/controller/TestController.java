@@ -23,19 +23,15 @@ public class TestController {
         return "reservation/preview";
     }
 
-    @GetMapping("/reservation/detail")
-    public String test4(){
-        return"reservation/detail";
-    }
-
     @GetMapping("/main")
     public String test2() {
         return "main";
     }
 
-    @GetMapping("/detailtest")
-    public String test5(){
-        return "test";
+    @GetMapping("/reservation/detail")
+    public String test4(){
+        return"reservation/detail";
     }
+
 
 }

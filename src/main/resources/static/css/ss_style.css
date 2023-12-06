@@ -76,7 +76,7 @@
 .btn_cancel:hover{
 	border-color: var(--form);
 	background-color: var(--form);
-	color:#000;
+	color:var(--basic_bl);
 }
 .w-60{
 	width:60%;
@@ -94,4 +94,47 @@
 .top_bar{
 	background-color: var(--primary_01);
 	color:var(--line);
+}
+/* 공항정보 */
+.color_green{
+	color:cyan;
+}
+.color_orange{
+	color:orange;
+}
+.color_cancle{
+	color:var(--cancle);
+}
+
+
+.parking_fee_table {
+	border-top:2px solid var(--basic_09) ;
+}
+.parking_fee_table td,th{
+	border:1px solid var(--line);
+	font-weight: bold;
+}
+.parking_fee_table th{
+	background-color: var(--box_bg);
+	padding:1.5%;
+}
+.parking_btn{
+	width:100%;
+	font-weight: bold;
+	font-size:19px;
+}
+.hr_margin{
+	margin-top:10%;
+	margin-bottom:10%;	
+}
+.discount_target{
+	width: 20rem!important;
+	padding-left:1rem!important;
+	text-align:start;
+}
+.fee_target_table th,td{
+	font-size:14px;
+}
+.b_pointer{
+	cursor:default;
 }
