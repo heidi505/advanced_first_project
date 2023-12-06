@@ -82,6 +82,115 @@
 			</tbody>
 			</table>
 			
+			<!-- 모달창 부분 -->
+   		   <div id="modal_box" class="modal">
+       	   <div class="modal_cont">
+       	   <!-- 여기부터 모달창 내용 -->
+           
+           <div class="pt-2">
+           <b class="fs-5">운임규정</b><span class="close" id="close_btn">&times;</span>
+           
+           </div>
+           <!-- 규정 내용 박스 -->
+           <div class="regulation_box p-3 mt-5">
+           <ul class="nav nav-underline border-bottom">
+  			<li class="nav-item">
+   				 <a class="rule_btn nav-link active" aria-current="page" href="#" id="button_1">예약규정</a>
+ 			 </li>
+ 			 <li class="nav-item">
+   			 <a class="rule_btn nav-link" href="#" id="button_2">운임규정</a>
+ 			 </li>
+ 			 <li class="nav-item">
+  			  <a class="rule_btn nav-link" href="#" id="button_3">결제규정</a>
+ 			 </li>
+ 			 <li class="nav-item">
+   			 <a class="rule_btn nav-link" href="#" id="button_4">환불/변경</a>
+ 			 </li>
+			</ul>
+			<!-- navbar 끝 -->
+			<!-- 예약규정 창 -->
+			<div class="rule_cont " id="1">  
+            <p class="my-3 fs-5 color_primary02">▶발권 수수료1111</p>
+            <div class="lh-sm">
+           		김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            <p class="my-2 fs-5 color_primary02">▶발권 수수료</p>
+            <div class="lh-sm">
+            김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            
+            
+           </div>
+           <!-- 예약규정 창 끝 -->
+           	<!-- 운임규정 창 -->
+			<div class="rule_cont" id="2">  
+            <p class="my-3 fs-5 color_primary02">▶발권 수수료2222</p>
+            <div class="lh-sm">
+           		김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            <p class="my-2 fs-5 color_primary02">▶발권 수수료</p>
+            <div class="lh-sm">
+            김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            
+            
+           </div>
+           <!-- 운임규정 창 끝 -->
+            	<!-- 결제규정 창 -->
+			<div class="rule_cont" id="3">  
+            <p class="my-3 fs-5 color_primary02">▶발권 수수료3333</p>
+            <div class="lh-sm">
+           		김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            <p class="my-2 fs-5 color_primary02">▶발권 수수료</p>
+            <div class="lh-sm">
+            김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            
+            
+           </div>
+           <!-- 결제규정 창 끝 -->
+            	<!-- 환불/결제 창 -->
+			<div class="rule_cont" id="4">  
+            <p class="my-3 fs-5 color_primary02">▶발권 수수료4444</p>
+            <div class="lh-sm">
+           		김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            <p class="my-2 fs-5 color_primary02">▶발권 수수료</p>
+            <div class="lh-sm">
+            김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+			 <p class="my-2 fs-5 color_primary02">▶발권 수수료</p>
+            김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+            </div>
+            
+            
+           </div>
+           <!-- 환불/결제 창 끝 -->
+          
+           
+           
+           </div>
+            <!-- 규정 내용 박스 끝-->
+           
+           
+            <!-- 모달창 내용 끝 -->
+           </div>
+           </div>
+			
+			
 			
 		</div>
 		<!-- section end -->
@@ -92,6 +201,6 @@
 </div>
 
 
-<!-- <script src="/js/airport_info_javascript.js"></script> -->
+<script src="/js/cancel_reservation.js"></script>
 <!-- footer.jsp -->
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
