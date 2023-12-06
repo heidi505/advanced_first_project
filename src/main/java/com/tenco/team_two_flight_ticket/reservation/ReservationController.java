@@ -15,6 +15,11 @@ public class ReservationController {
  	public String detail() {
  		return "/reservation/reservationDetail";
  	}
+ 	
+ 	@GetMapping("/reservation/cancel")
+ 	public String cancel() {
+ 		return "/reservation/cancelReservation";
+ 	}
     
 
 
