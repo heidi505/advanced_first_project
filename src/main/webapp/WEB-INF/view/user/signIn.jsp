@@ -25,7 +25,7 @@
 									id="password" placeholder="비밀번호를 입력해주세요" />
 							</div>
 							<div class="d-flex flex-row-reverse mt-3">
-								<a href="#" class="pwd_find me-6">비밀번호 찾기</a>
+								<a href="/find-password" class="pwd_find me-6">비밀번호 찾기</a>
 							</div>
 							<div class="form-group w-75 mx-auto d-flex mb-4 mt-3">
 								<button type="submit" class="btn btn-primary p-2 w-100">로그인</button>

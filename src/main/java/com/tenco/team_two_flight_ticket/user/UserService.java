@@ -20,6 +20,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+
+import static io.lettuce.core.pubsub.PubSubOutput.Type.message;
 
 @Service
 public class UserService {
@@ -35,11 +38,10 @@ public class UserService {
 
     @Autowired
     private JavaMailSender javaMailSender;
-
     private int authNumber;
 
     @Transactional
-    public void signUp(UserRequest.SignUpDTO dto){
+    public void signUp(UserRequest.SignUpDTO dto) {
         User user = User.builder()
                 .username(dto.getUsername())
                 .email(dto.getEmail())
@@ -64,7 +66,7 @@ public class UserService {
 
         boolean isPwdMatched = passwordEncoder.matches(dto.getPassword(), userEntity.getPassword());
 
-        if (isPwdMatched == false){
+        if (isPwdMatched == false) {
             throw new MyBadRequestException("비번이 틀렸습니다.");
         }
 
@@ -83,15 +85,14 @@ public class UserService {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         dto.setUserId(principal.getId());
 
-        try{
+        try {
             int update = userRepository.updateByUserId(dto);
             principal.setEmail(dto.getEmail());
             principal.setPassword(dto.getPassword());
             principal.setPhoneNumber(dto.getPhoneNumber());
 
             session.setAttribute(Define.PRINCIPAL, principal);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new MyServerError("서버 에러");
         }
 
@@ -101,30 +102,30 @@ public class UserService {
         User checkUser = userRepository.checkUsername(username);
         if (checkUser == null) {
             return "사용할 수 있는 아이디입니다";
-        }else{
+        } else {
             return "사용할 수 없는 아이디입니다";
         }
 
 
     }
 
-    public void makeRandomNumber(){
+    public void makeRandomNumber() {
         Random r = new Random();
         String randomNumber = "";
-        for(int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++) {
             randomNumber += Integer.toString(r.nextInt(10));
         }
 
         int authNumber = Integer.parseInt(randomNumber);
 
-         this.authNumber = authNumber;
+        this.authNumber = authNumber;
     }
 
-    public void sendEmail(String email){
+    public void sendEmail(String email) {
         makeRandomNumber();
-        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessage verifyMessage = javaMailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            MimeMessageHelper helper = new MimeMessageHelper(verifyMessage, true, "UTF-8");
             helper.setFrom("xxwhite19@gmail.com");
             helper.setTo(email);
             helper.setSubject("님부스의 인증 메일입니다");
@@ -133,19 +134,67 @@ public class UserService {
                     "인증 번호는 " + this.authNumber + "입니다." +
                     "<br>" +
                     "인증번호를 입력해주세요", true);
-            javaMailSender.send(message);
-        }catch (Exception e){
+            javaMailSender.send(verifyMessage);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-
     public String verifyEmail(int key) {
-        if (key == this.authNumber){
+        if (key == this.authNumber) {
             return "인증 완료. 회원 가입을 진행해주세요";
-        }else{
+        } else {
             return "인증 번호가 일치하지 않습니다";
         }
     }
+
+    public String findUserByEmail(String email) {
+        User user = userRepository.findUserByEmail(email);
+
+        if(user == null){
+            return "존재하지 않는 이메일입니다. 회원 가입을 진행해주세요";
+        }else{
+
+            return "있음";
+        }
+    }
+
+
+    @Transactional
+    public String setPassword(String email) {
+
+        // 비번 생성
+        String uuid = "";
+        for (int i = 0; i < 5; i++) {
+            uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다.
+        }
+        uuid = uuid.substring(0, 10); //uuid를 앞에서부터 10자리를 자름
+
+        //비번 변경
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        userRepository.updatePassword(passwordEncoder.encode(uuid), email);
+
+        //이메일 전송
+        MimeMessage setPwdMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(setPwdMessage, true, "UTF-8");
+            helper.setFrom("xxwhite19@gmail.com");
+            helper.setTo(email);
+            helper.setSubject("님부스 - 비밀번호 변경");
+            helper.setText("아래 비밀 번호로 변경되었습니다." +
+                    "<br><br>" +
+                    "새 비밀번호는 " + uuid + "입니다." +
+                    "<br>", true);
+            javaMailSender.send(setPwdMessage);
+
+            return "비밀번호 변경 완료되었습니다";
+        }catch (Exception e){
+            throw new MyServerError("알 수 없는 서버 에러");
+        }
+
+    }
+
+
 }
+
