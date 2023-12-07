@@ -34,21 +34,21 @@
                             <ul class="admin_from_item">
                                 <li class="admin_form_textfield">
                                     <label for="startingPoint" class="form-label">출발지</label>
-                                    <input type="text" id="startingPoint" class="form-control" placeholder="출발지를 입력해주세요" name="startingPoint">
+                                    <input type="text" id="startingPoint" class="datepicker" placeholder="출발지를 입력해주세요" name="startingPoint">
                                 </li>
                                 <li class="admin_form_textfield">
                                     <label for="destination" class="form-label">도착지</label>
-                                    <input type="text" id="destination" class="form-control" placeholder="도착지를 입력해주세요" name="destination">
+                                    <input type="text" id="destination" class="datepicker" placeholder="도착지를 입력해주세요" name="destination">
                                 </li>
                             </ul>
                             <ul class="admin_from_item">
                                 <li class="admin_form_textfield">
                                     <label for="departureDate" class="form-label">출발일</label>
-                                    <input type="text" id="departureDate" class="form-control" placeholder="12월 05일" name="departureDate">
+                                    <input type="text" id="departureDate" class="datepicker" placeholder="출발일을 입력해주세요" name="departureDate">
                                 </li>
                                 <li class="admin_form_textfield">
                                     <label for="arrivalDate" class="form-label">도착일</label>
-                                    <input type="text" id="arrivalDate" class="form-control" placeholder="12월 10일" name="arrivalDate">
+                                    <input type="text" id="arrivalDate" class="datepicker" placeholder="도착일을 입력해주세요" name="arrivalDate">
                                 </li>
                             </ul>
                             <ul class="admin_from_item">
@@ -58,7 +58,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="admin_common_btn"> <a href="#" class="btn btn-primary">등록하기</a></div>
+                        <div class="admin_common_btn"><button type="submit" class="btn btn-primary">등록하기</button></div>
                     </div>
                 </form>
             </div>
@@ -69,7 +69,46 @@
 
 </div>
 </div>
+<script>
+    const datepicker = document.getElementsByClassName("datepicker");
+    const datepicker2 = document.getElementById("datepicker2");
+    const startDateInput = document.getElementById("startDate");
+    const endDateInput = document.getElementById("endDate");
 
-<script src="js/javascript.js"></script>
+    function handleDateChange(selectedDates, dateStr, instance) {
+        console.log("선택된 날짜:", dateStr);
+    }
+
+    flatpickr(datepicker, {
+        mode: "range",
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        disable: [
+            function (date) {
+                // disable every multiple of 8
+                return !(date.getDate() % 8);
+            },
+        ],
+        dateFormat: "Y-m-d", // 날짜 및 시간 형식 설정 (예: 2023-09-12 15:30)// 시간 선택 활성화
+        time_24hr: true, // 24시간 형식 사용
+        minDate: "today", // 오늘 이전 날짜 선택 비활성화
+        maxDate: "2025-12-31", // 특정 날짜까지 선택 가능
+        // defaultDate: "today", // 초기 날짜 설정 (현재 날짜와 시간)
+        disable: ["2023-09-15", "2023-09-20"], // 특정 날짜 비활성화
+        locale: "ko", // 한국어로 지역화
+        onOpen: function (selectedDates, dateStr, instance) {
+            // 위젯이 열릴 때 실행할 코드
+        },
+        onClose: function (selectedDates, dateStr, instance) {
+            // 위젯이 닫힐 때 실행할 코드
+        },
+        onChange: function (selectedDates, dateStr, instance) {
+            // 날짜가 변경될 때 실행할 코드
+        },
+        disableMobile: true, // 모바일 기기에서 위젯 비활성화
+        altInput: true, // 추가 입력란 활성화
+        altFormat: "F j, Y", // 추가 입력란의 날짜 및 시간 형식
+    });
+</script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp" %>

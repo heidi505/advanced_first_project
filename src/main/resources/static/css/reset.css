@@ -273,7 +273,20 @@ input:-ms-input-placeholder {
     color: var(--form);
     font-size: 14px;
 }
+textarea::placeholder {
+    color: var(--form);
+    font-size: 14px;
+}
 
+textarea::-webkit-input-placeholder {
+    color: var(--form);
+    font-size: 14px;
+}
+
+textarea:-ms-input-placeholder {
+    color: var(--form);
+    font-size: 14px;
+}
 input {
     height: 42px;
     outline: none;
