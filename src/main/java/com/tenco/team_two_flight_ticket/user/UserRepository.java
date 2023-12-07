@@ -8,4 +8,6 @@ public interface UserRepository {
     public User findByUsername(UserRequest.SignInDTO dto);
     public int updateByUserId(UserRequest.UserUpdateDTO dto);
     public User checkUsername(String username);
+
+    public int updatePassword(String password, int userId);
 }

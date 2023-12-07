@@ -20,4 +20,8 @@
     <select id="checkUsername" resultType="com.tenco.team_two_flight_ticket.user.User">
         select * from user_tb where username = #{username}
     </select>
+
+    <update id="updatePassword">
+        update user_tb set password = #{password} where id = #{userId}
+    </update>
 </mapper>

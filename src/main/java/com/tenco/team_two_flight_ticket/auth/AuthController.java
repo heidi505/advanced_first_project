@@ -116,6 +116,12 @@ public class AuthController {
         return "/user/findPassword";
     }
 
+    @GetMapping("/find-password/email")
+    public String sendEmailforPwd(@RequestParam String email){
+        userService.setPassword(email);
+        return "redirect:/sign-in";
+    }
+
 
 
 
