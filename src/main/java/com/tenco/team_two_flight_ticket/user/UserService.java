@@ -117,7 +117,7 @@ public class UserService {
 
         int authNumber = Integer.parseInt(randomNumber);
 
-         authNumber = this.authNumber;
+         this.authNumber = authNumber;
     }
 
     public void sendEmail(String email){
@@ -128,21 +128,24 @@ public class UserService {
             helper.setFrom("xxwhite19@gmail.com");
             helper.setTo(email);
             helper.setSubject("님부스의 인증 메일입니다");
-            helper.setText("<h1>님부스 메일 인증</h1>" +
-                    "<br/>님부스에 가입해주셔서 감사합니다."+
-                    "<br/>아래 [이메일 인증 확인]을 눌러주세요."+
-                    "<br/><a href='http://localhost:8080/verify/email?email=" + email +
-                    "' target='_parent'>이메일 인증 확인</a>", true);
+            helper.setText("님부스를 방문해주셔서 감사합니다." +
+                    "<br><br>" +
+                    "인증 번호는 " + this.authNumber + "입니다." +
+                    "<br>" +
+                    "인증번호를 입력해주세요", true);
             javaMailSender.send(message);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-
-
     }
 
 
-
-
+    public String verifyEmail(int key) {
+        if (key == this.authNumber){
+            return "인증 완료. 회원 가입을 진행해주세요";
+        }else{
+            return "인증 번호가 일치하지 않습니다";
+        }
+    }
 }
