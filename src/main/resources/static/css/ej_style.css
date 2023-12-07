@@ -256,3 +256,194 @@ section {
     font-weight: bold;
     border: 1px solid var(--form);
 }
+
+/*admin*/
+
+#admin {
+    height: 100%;
+}
+
+#admin main {
+    padding: 67px 20px 200px 20px;
+}
+
+#admin a.btn-primary {
+    display: inline-block;
+    line-height: 34px;
+}
+
+#admin .btn-primary {
+    background-color: var(--admin_01);
+    width: 150px;
+    height: 48px;
+    font-size: 18px;
+}
+
+#admin_sign_in_page .top_bar {
+    background-color: var(--admin_01);
+    color: var(--basic_wh);
+}
+
+#admin_sign_in_page .pwd_find {
+    text-align: right;
+}
+
+.sign_in_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.admin_header {
+    background-color: var(--admin_01);
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.admin_header .header_menu li a {
+    color: var(--basic_wh);
+}
+
+.admin_header .top_bar {
+    background-color: var(--admin_01);
+}
+
+.admin_menu {
+    display: flex;
+}
+
+.admin_menu li {
+    padding: 0 15px;
+}
+
+.admin_menu > li > a {
+    color: var(--basic_wh);
+
+}
+
+.login_box {
+    width: 50%;
+}
+
+/*배너 목록*/
+
+
+/*공통*/
+.admin_common_tit {
+    font-weight: bold;
+    margin: 16px 0 24px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--form);
+}
+
+.common_table {
+    width: 100%;
+}
+
+.common_table thead {
+    background-color: var(--box_bg);
+}
+
+.common_table th {
+    padding: 16px 0;
+}
+
+.common_table tr, td {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.common_table tbody tr:hover {
+    background-color: var(--admin_02);
+
+}
+
+.admin_form_tit {
+    background-color: var(--box_bg);
+    padding: 16px;
+
+}
+
+.admin_form_tit h4 {
+    color: var(--admin_01);
+    font-weight: bold;
+}
+
+.admin_form_area {
+    padding: 32px;
+    border: 1px solid var(--line);
+}
+
+.admin_from_item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin_form_textfield {
+    width: 100%;
+    margin-right: 24px;
+    margin-bottom: 24px;
+}
+
+.admin_form_textfield:last-child {
+    margin-right: 0;
+}
+
+.admin_common_btn {
+    margin: 24px 0;
+    text-align: right;
+}
+
+.admin_form_textfield p {
+    margin-bottom: 8px;
+}
+
+.admin_form_textfield label {
+    color: var(--basic_05);
+}
+
+/*리셋*/
+#admin input {
+    color: var(--basic_bl);
+    height: 46px;
+}
+
+#admin input::placeholder {
+    color: var(--basic_09);
+}
+
+#admin input::-webkit-input-placeholder {
+    color: var(--basic_09);
+}
+
+#admin input:-ms-input-placeholder {
+    color: var(--basic_09);
+}
+
+.dropdown-item:hover {
+    color: var(--admin_01);
+    background-color: var(--admin_02);
+}
+
+.dropdown-menu show {
+    padding: 0;
+}
+
+#admin a.btn-outline-primary {
+    line-height: 34px;
+    font-size: 18px;
+}
+
+#admin .btn-outline-primary {
+    border: 1px solid var(--admin_01);
+    color: var(--admin_01);
+    width: 150px;
+    height: 48px;
+    display: inline-block;
+}
+.admin_form_detail {
+    margin: 0 auto;
+    width: 50%;
+}

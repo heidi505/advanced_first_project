@@ -88,7 +88,7 @@
 	padding-bottom:6.25rem!important;
 }
 .coupon_btn_design{
-	border-bottom-style:5px solid blue;
+	border-bottom-style:5px solid var(--primary_02);
 	border-bottom-color: var(--primary_02);
 }
 .top_bar{
