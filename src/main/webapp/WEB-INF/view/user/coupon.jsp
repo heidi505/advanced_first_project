@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- header.jsp -->
 <%@ include file="../layout/header.jsp" %>
-
 
 
 <!-- TODO 여기서부터 main영역 -->
@@ -17,8 +16,8 @@
 		<div class="left_profile float-start w-25">
 			<div class="picture text-center mb-4 mx-4 p-5 border">
 				<img src="/images/git_img.png" alt="" name=""
-					class="profile_image mx-auto d-block" /> <label for="form-label"
-					class="my-4 fs-5">홍길동</label>
+					class="profile_image mx-auto d-block" /> <p
+					class="my-4 fs-5">홍길동</p>
 				<p class="left_profile_text">프로필 관리</p>
 			</div>
 			<div class="coupon_profile col ">
@@ -53,11 +52,9 @@
 		</div>
 		<div class="p-2 mt-5">
 			<label for="coupon_insert" class="ms-3 mb-2">쿠폰 등록하기</label><br>
-			<input type="text" name="coupon" class="form-control d-inline w-81 ms-3 me-1"/>
+			<input type="text" name="coupon" id="coupon_insert"  class="form-control d-inline w-81 ms-3 me-1"/>
 			<button type="submit" class="btn btn-primary align-top">등록</button>
 		</div>
-
-
 		</div>
 	</div>
 	</div>
@@ -67,4 +64,4 @@
 
 <script src="js/javascript.js"></script>
 <!-- footer.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp" %>
