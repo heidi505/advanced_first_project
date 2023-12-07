@@ -76,6 +76,55 @@
 </div>
 </div>
 
+<script>
+   // docuumn.reayd*( _
+
+	// const usernameEvent = document.querySelector("#userId").addEventListener('click', function (event) {
+	//
+	// });
+  //
+	async function usernameCheck(event) {
+		event.preventDefault();
+
+		// event.preventDefault();
+		let username = document.querySelector("#userId").value;
+		console.log(document.querySelector("#userId").value);
+		let response = await fetch("/check/username?username="+username, {
+			method: "get",
+			headers: {
+				"Content-Type": "application/json;charset=UTF-8",
+			},
+		});
+
+		let responseBody = await response.json();
+		if (responseBody.success) {
+			alert(responseBody.data);
+		} else {
+			alert(responseBody.data);
+		}
+
+		return false;
+	}
+
+	async function emailCheck(event){
+		event.preventDefault();
+
+
+		let email = document.querySelector("#email").value;
+
+		await fetch("/check/email?email="+email, {
+			method: "get",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		//여기까지 사용자의 이메일을 보내준 코드
+
+		alert('메일 발송 완료');
+
+		return false;
+	}
+</script>
 <!-- <script src="/js/javascript.js"></script> -->
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>
