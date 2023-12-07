@@ -1470,7 +1470,10 @@
     // });
     // 날짜 라이브러리
 
+    function getCities(event) {
+
+    }
 </script>
 <script src="/js/javascript.js"></script>
 <!-- header.jsp -->
-<%@ include file="layout/footer.jsp" %>git 햣
+<%@ include file="layout/footer.jsp" %>
