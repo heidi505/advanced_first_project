@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
         passengerSeatSpans[1].textContent = seatType;
     }
 
-    async function getCities(event) {
+    async function getCities(event, country) {
         event.preventDefault();
 
 
