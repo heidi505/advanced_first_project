@@ -54,8 +54,7 @@
                         <div class="border w-80 mx-auto pt-2 mt-2">
                             <div class="form-group w-85 mx-auto pt-2 mt-2">
                                 <input type="checkbox" class="w-10" name="termsInsert"/><label
-                                    class="terms_font_size lh-sm align-top">[필수] 회원가입 및
-                                운영약관 동의</label>&nbsp; <a href="#" class="term_contents float-end">></a>
+                                    class="terms_font_size lh-sm align-top">[필수] 회원가입 및 운영약관 동의</label>&nbsp; <a href="#" class="term_contents float-end">></a>
                             </div>
                             <div class="form-group w-85 mx-auto pt-2 mt-2">
                                 <input type="checkbox" class="w-10" name="termsPrivacy"/><label
