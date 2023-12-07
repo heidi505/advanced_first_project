@@ -27,6 +27,7 @@
 									placeholder="아이디를 입력해주세요" /><button id="btnJoin" class="btn btn-primary ms-1 align-baseline" onclick="return usernameCheck(event)">중복확인</button>
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
+
 								<label for="email">이메일*</label><br> <input type="text"
 									class="form-control w-70 mt-2 p-2 d-inline" name="email"
 									id="email" placeholder="이메일을 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline" onclick="return emailCheck(event)">인증하기</button>
