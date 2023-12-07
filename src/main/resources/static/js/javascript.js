@@ -1,66 +1,213 @@
-window.onload = function () {
-        const datepicker = document.getElementById('datepicker');
-        const datepicker2 = document.getElementById('datepicker2');
-        const startDateInput = document.getElementById('startDate');
-        const endDateInput = document.getElementById('endDate');
+document.addEventListener("DOMContentLoaded", function () {
 
-        function handleDateChange(selectedDates, dateStr, instance) {
-        console.log('선택된 날짜:', dateStr);
+    function updatePassengerSeat(seatType) {
+        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+        let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
+        passengerSeatSpans[1].textContent = seatType;
     }
 
-        flatpickr(datepicker, {
-            mode: "range",
-            minDate: "today",
-            dateFormat: "Y-m-d",
-            disable: [
-                function(date) {
-                    // disable every multiple of 8
-                    return !(date.getDate() % 8);
+    let flightSearchBg = document.querySelector(".flight_search_bg");
+
+    let flightSearchClose = document.querySelectorAll(".flight_search_close");
+    let flightSearchBox = document.querySelectorAll(".flight_search_box");
+    let flightSearchBoxNum = flightSearchBox.length;
+
+    Array.from(flightSearchClose).forEach((closeButton) => {
+        console.log(closeButton);
+        closeButton.addEventListener("click", () => {
+            if (flightSearchBoxNum > 0) {
+                flightSearchBox[flightSearchBoxNum - 1].style.display = "none";
+
+                if (flightSearchBoxNum === 1) {
+                    flightSearchBg.style.display = "none";
                 }
-            ],
-        dateFormat: 'Y-m-d', // 날짜 및 시간 형식 설정 (예: 2023-09-12 15:30)// 시간 선택 활성화
-        time_24hr: true,         // 24시간 형식 사용
-        minDate: 'today',        // 오늘 이전 날짜 선택 비활성화
-        maxDate: '2025-12-31',   // 특정 날짜까지 선택 가능
-        defaultDate: 'today',    // 초기 날짜 설정 (현재 날짜와 시간)
-        disable: ['2023-09-15', '2023-09-20'], // 특정 날짜 비활성화
-        locale: 'ko',            // 한국어로 지역화
-        onOpen: function(selectedDates, dateStr, instance) {
-        // 위젯이 열릴 때 실행할 코드
-    },
-        onClose: function(selectedDates, dateStr, instance) {
-        // 위젯이 닫힐 때 실행할 코드
-    },
-        onChange: function(selectedDates, dateStr, instance) {
-        // 날짜가 변경될 때 실행할 코드
-    },
-        disableMobile: true,      // 모바일 기기에서 위젯 비활성화
-        altInput: true,           // 추가 입력란 활성화
-        altFormat: 'F j, Y', // 추가 입력란의 날짜 및 시간 형식
+
+                flightSearchBoxNum--;
+            }
+        });
     });
 
-        flatpickr(datepicker2, {
-        dateFormat: 'Y-m-d', // 날짜 형식 설정 (예: 2023-09-12)
-        enableTime: false,   // 시간 선택 비활성화
-        minDate: 'today',    // 오늘 이전 날짜 선택 비활성화
-        defaultDate: new Date() // 초기 날짜 설정 (현재 날짜로 설정)
 
-    });
-        flatpickr(startDateInput, {
-        dateFormat: 'Y-m-d',
-        enableTime: false,
-        minDate: 'today',
-        defaultDate: 'today',
-        locale: 'ko',
-        onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
+
+
+    // 최근 검색 삭제
+
+    let commonModal = document.querySelectorAll(".common_modal");
+    let commonModalBtn = document.querySelectorAll(".common_modal_btn");
+    let closeBtn = document.querySelectorAll(".modal_close");
+    let checkBtn = document.querySelectorAll(".check_btn");
+
+    if (commonModal) {
+        commonModalBtn.forEach(function (button) {
+            button.addEventListener("click", function () {
+                let targetModalId = button.getAttribute("data-target");
+                openModal(targetModalId);
+            });
+        });
+        function openModal(modalId) {
+            let modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        closeBtn.forEach(function (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+                let parentModal = closeBtn.closest(".common_modal");
+                parentModal.style.display = "none";
+            });
+        });
+
+        checkBtn.forEach(function (checkBtn) {
+            checkBtn.addEventListener("click", function () {
+                let parentModal = checkBtn.closest(".common_modal");
+                parentModal.style.display = "none";
+            });
+        });
+    }
+
+    //  공통 모달
+
+
+    const fromTabButtons = document.querySelectorAll("#from_modal .tab_menu li a");
+    const fromTabContents = document.querySelectorAll("#from_modal .tab-content");
+
+    if (fromTabButtons) {
+        fromTabButtons.forEach((button) => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                fromTabContents.forEach((content) => {
+                    content.style.display = "none";
+                });
+
+                fromTabButtons.forEach((btn) => {
+                    btn.classList.remove("tab_active");
+                });
+
+                const tabId = button.getAttribute("data-tab");
+                document.getElementById(tabId).style.display = "block";
+
+                button.classList.add("tab_active");
+            });
+        });
+
+    }
+
+    const toTabButtons = document.querySelectorAll("#to_modal .tab_menu li a");
+    const toTabContents = document.querySelectorAll("#to_modal .tab-content");
+
+    if (toTabButtons) {
+        toTabButtons.forEach((button) => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                toTabContents.forEach((content) => {
+                    content.style.display = "none";
+                });
+
+                toTabButtons.forEach((btn) => {
+                    btn.classList.remove("tab_active");
+                });
+
+                const tabId = button.getAttribute("data-tab");
+                document.getElementById(tabId).style.display = "block";
+
+                button.classList.add("tab_active");
+            });
+        });
+
+    }
+
+
+    //   도시 탭버튼
+
+    let fromButtonIcon = document.querySelectorAll(".from_local_item button");
+    let toButtonIcon = document.querySelectorAll(".to_local_item button");
+
+    if (fromButtonIcon) {
+        function valuesForm(airportCode, airportName) {
+            let fromSelectButtons = document.querySelector("#from_select_btn");
+            console.log("fromselectButton" + fromSelectButtons + " 야");
+            fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
+            fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
+        }
+
+        function valuesTo(airportCode, airportName) {
+            let toSelectButtons = document.querySelector("#to_select_btn");
+            console.log("to" + toSelectButtons + " 호");
+            toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
+            toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
+        }
+
+        fromButtonIcon.forEach(function (button, index) {
+            button.addEventListener("click", function (event) {
+                let fromAirportCode = button.querySelector(".from_local_code").innerText;
+                let fromAirportName = button.querySelector(".from_local_airport").innerText;
+
+                console.log(`Button ${index + 1} clicked: Code - ${fromAirportCode}, Name - ${fromAirportName}`);
+                valuesForm(fromAirportCode, fromAirportName);
+            });
+        });
+
+        toButtonIcon.forEach(function (button, index) {
+            button.addEventListener("click", function (event) {
+                let toAirportCode = button.querySelector(".to_local_code").innerText;
+                let toAirportName = button.querySelector(".to_local_airport").innerText;
+
+                console.log(`Button ${index + 1} clicked: Code - ${toAirportCode}, Name - ${toAirportName}`);
+                valuesTo(toAirportCode, toAirportName);
+            });
+        });
+
+    }
+
+    let minusButtons = document.querySelectorAll(".minus");
+    let plusButtons = document.querySelectorAll(".plus");
+    let passengerCount = document.querySelectorAll(".passenger_count");
+    let totalCount = 0;
+
+    updatePassengerCount();
+
+    minusButtons.forEach(function (minusButton, index) {
+        minusButton.addEventListener("click", function () {
+            let currentCount = parseInt(passengerCount[index].textContent);
+            if (currentCount > 0) {
+                passengerCount[index].textContent = currentCount - 1;
+                updatePassengerCount();
+            }
+        });
     });
 
-        flatpickr(endDateInput, {
-        dateFormat: 'Y-m-d',
-        enableTime: false,
-        minDate: 'today',
-        defaultDate: 'today',
-        locale: 'ko',
-        onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
+    plusButtons.forEach(function (plusButton, index) {
+        plusButton.addEventListener("click", function () {
+            let currentCount = parseInt(passengerCount[index].textContent);
+            passengerCount[index].textContent = currentCount + 1;
+            updatePassengerCount();
+        });
     });
-}
+
+    function updatePassengerCount() {
+        totalCount = Array.from(passengerCount).reduce((sum, countElement) => {
+            return sum + parseInt(countElement.textContent);
+        }, 0);
+
+        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+        let passengerCountSpan = passengerSeatButton.querySelector("span");
+        passengerCountSpan.textContent = "승객 " + totalCount + "명";
+    }
+
+    let seatButtons = document.querySelectorAll(
+        '.seat_radio input[type="radio"]'
+    );
+
+    seatButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            updatePassengerSeat(button.value);
+        });
+    });
+
+    function updatePassengerSeat(seatType) {
+        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+        let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
+        passengerSeatSpans[1].textContent = seatType;
+    }
+});

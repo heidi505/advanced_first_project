@@ -1,0 +1,223 @@
+/* signIn */
+.me-6 {
+	margin-right: 3.5rem!important;
+}
+.pwd_find, .insert_user {
+	color:var(--basic_07);
+	text-decoration:none;
+}
+.w-35 {
+	width:35%;
+}
+/* signUp */
+.w-10 {
+	width:10%;
+}
+.terms_info{
+	margin-top:2%;
+	font-size:13px;
+	width:85%;
+	margin-left: 2.5rem!important;
+}
+.terms_font_size{
+	font-size:14px;
+}
+.term_contents{
+	color:var(--basic_09);
+}
+/* 프로필 관리 */
+.input_profile_image {
+	border-radius: 4em;
+	width: 15%;
+	height: 15%;
+}
+.input_profile_image:hover {
+	cursor: pointer;
+}
+.profile_image {
+	border-radius: 5em;
+	width: 83%;
+	height: 83%;
+}
+.left_profile_text {
+	font-size: 14px;
+}
+.sns_link {
+	height:1.5em!important;
+	width:2.75em!important;
+}
+.type_name {
+	width:20%;
+}
+.bedge_span{
+	right:41%!important;
+	top:87%!important;
+	padding:0.75rem!important;
+	background: url("../images/camera.png") no-repeat;
+	background-size: cover;
+	cursor: pointer;
+}
+
+/* 쿠폰 창*/
+.coupon_box{
+	padding-bottom:6.25rem!important;
+}
+.coupon_btn_design{
+	border-bottom-style:5px solid var(--primary_02);
+	border-bottom-color: var(--primary_02);
+}
+.top_bar{
+	background-color: var(--primary_01);
+	color:var(--line);
+}
+/* 공항정보 */
+.color_green{
+	color:cyan;
+}
+.color_orange{
+	color:orange;
+}
+.color_cancle{
+	color:var(--cancle);
+}
+.parking_fee_table {
+	border-top:2px solid var(--basic_09) ;
+}
+.parking_fee_table td,th{
+	border:1px solid var(--line);
+	font-weight: bold;
+}
+.parking_fee_table th{
+	background-color: var(--box_bg);
+	padding:1.5%;
+}
+.parking_btn{
+	width:100%;
+	font-weight: bold;
+	font-size:19px;
+}
+.hr_margin{
+	margin-top:10%;
+	margin-bottom:10%;	
+}
+.discount_target{
+	width: 20rem!important;
+	padding-left:1rem!important;
+	text-align:start;
+}
+.fee_target_table th,td{
+	font-size:14px;
+}
+.b_pointer{
+	cursor:default;
+}
+/* 예약 상세 페이지  */
+.detail_cont_box p{
+	font-size: 14px;
+}
+.trip_image{
+	background:url('/images/round_trip.png');
+	height:10%;
+}
+.airline_image{
+	background:url('/images/airline_image.png');
+}
+/* 제작중인 요소의 색상 넣기에 사용 중*/
+.color_primary01 {
+	color: var(--primary_01);
+}
+.color_primary02 {
+	color: var(--primary_02);
+}
+.color_basic09{
+	color: var(--basic_09);
+}
+.w-85{
+	width:85%;
+}
+.w-49{
+	width:49%;
+}
+.bg_primary01{
+	background-color: var(--primary_01);
+}
+.btn_cancel{
+	background-color: var(--line);
+}
+.btn_cancel:hover{
+	border-color: var(--form);
+	background-color: var(--form);
+	color:var(--basic_bl);
+}
+.w-60{
+	width:60%;
+}
+.w-81{
+	width:81%;
+}
+.w-80{
+	width:80%;
+}
+.w-70{
+	width:70%;
+}
+.w-5{
+	width:5%;
+}
+.bg_basic09{
+	background-color: var(--basic_09);
+}
+.bg_line{
+	background-color: var(--line);
+}
+/* 취소 페이지*/
+.passenger_info_table td{
+	border-top:1px solid var(--line);
+	border-bottom:1px solid var(--line);
+	padding:1%;
+}
+.fare_regulations_btn{
+	background-color:var(--basic_bl);
+	color:var(--basic_wh);	
+	width:15%;
+}
+.fare_regulations_btn:hover{
+	background-color:var(--basic_bl);
+	color:var(--basic_wh);	
+}
+
+/* 결제 취소,운임규정 modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.modal_cont {
+    background-color: var(--basic_wh);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--line);
+    width: 30%;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 운임규정 모달창 */
+/* 예약 완료 페이지*/
+.payed_result_mark{
+	border:2px solid var(--primary_02);
+}
