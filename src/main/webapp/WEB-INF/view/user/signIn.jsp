@@ -10,7 +10,7 @@
 	<main class="sign_in_page">
 		<div class="container">
 			<div class="section">
-				<div class="mx-auto w-50 border">
+				<div class="mx-auto w-40 border">
 					<div class="top_bar p-3 border"><h2>로그인</h2></div>
 					<div class="d-flex flex-column w-100">
 						<form action="sign-in" method="post">

@@ -28,20 +28,19 @@
     <header class="admin_header header">
         <div class="container">
             <div class="header_box">
+
                 <div class="logo">
-                    <img src="/images/admin_logo.svg" alt="로고">
+                    <a href="/admin/banner-list"><img src="/images/admin_logo.svg" alt="로고"></a>
                 </div>
                 <ul class="admin_menu">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item">
                         <a class="nav-link" href="/admin/banner-list">배너관리</a>
                     </li>
-                    <li><a href="#">쿠폰 관리</a></li>
-                    <li><a href="#">커뮤니티</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/coupon-list">쿠폰 관리</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/notice-list">커뮤니티</a></li>
                 </ul>
                 <ul class="header_menu">
-                    <li>
-                        <a class="nav-link" href="/user/profile">관리자님</a>
-                    </li>
+                    <li>관리자님</li>
                     <li><a class="nav-link" href="/admin/sign-in">로그인</a></li>
                     <li><a class="nav-link" href="/user/logout">로그아웃</a></li>
                 </ul>

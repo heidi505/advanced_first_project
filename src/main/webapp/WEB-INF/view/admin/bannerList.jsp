@@ -63,6 +63,5 @@
 </div>
 </div>
 
-<script src="js/javascript.js"></script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp" %>
