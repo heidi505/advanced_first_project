@@ -809,8 +809,14 @@ section {
     margin: 16px 0 24px 0;
     padding: 16px 0;
     border-bottom: 1px solid var(--form);
+    display: flex;
+    align-items: center;
 }
-
+.admin_common_tit img {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
 .common_table {
     width: 100%;
 }
@@ -823,9 +829,14 @@ section {
     padding: 16px 0;
 }
 
-.common_table tr, td {
-    padding: 16px 0;
+.common_list_cont > tr, .common_list_cont > tr > td {
+    padding: 12px 0;
     border-bottom: 1px solid var(--line);
+}
+
+.common_list_cont tr td a {
+    font-size: 16px;
+    color: var(--basic_05);
 }
 
 .common_table tbody tr:hover {
@@ -839,7 +850,7 @@ section {
 
 }
 
-.admin_form_tit h4 {
+.admin_form_tit h5 {
     color: var(--admin_01);
     font-weight: bold;
 }
@@ -919,4 +930,43 @@ section {
 .admin_form_detail {
     margin: 0 auto;
     width: 50%;
+}
+.admin_img {
+    width: 250px;
+}
+#admin .form-control{
+    line-height: 2;
+}
+#admin .list_pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+#admin .page-link {
+    position: relative;
+    display: block;
+    font-size: 16px;
+    color: var(--admin_01);
+    text-decoration: none;
+    background-color: var(--basic_wh);
+    border: 1px solid var(--admin_02);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    height: 33px;
+}
+#admin .page-link:hover {
+    z-index: 2;
+    color: var(--basic_wh);
+    background-color: var(--admin_01);
+    border-color: var(--line);
+}
+#admin .page-link:focus {
+    z-index: 3;
+    color: var(--basic_wh);
+    background-color: var(--admin_01);
+    outline: 0;
+    box-shadow: var(--admin_02);
+}
+#admin .admin_arrow_icon {
+    display: inline-block;
+    padding: 0 10px;
 }

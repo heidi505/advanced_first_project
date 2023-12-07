@@ -33,10 +33,7 @@
                 </div>
                 <ul class="admin_menu">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">배너관리</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">배너 등록</a></li>
-                        </ul>
+                        <a class="nav-link" href="/admin/banner-list">배너관리</a>
                     </li>
                     <li><a href="#">쿠폰 관리</a></li>
                     <li><a href="#">커뮤니티</a></li>
@@ -45,7 +42,7 @@
                     <li>
                         <a class="nav-link" href="/user/profile">관리자님</a>
                     </li>
-                    <li><a class="nav-link" href="/user/sign-in">로그인</a></li>
+                    <li><a class="nav-link" href="/admin/sign-in">로그인</a></li>
                     <li><a class="nav-link" href="/user/logout">로그아웃</a></li>
                 </ul>
             </div>
