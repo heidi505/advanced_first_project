@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 <div id="reservation_preview_page">
     <div class="container">
@@ -1468,4 +1468,4 @@
 
 </script>
 <!-- footer.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

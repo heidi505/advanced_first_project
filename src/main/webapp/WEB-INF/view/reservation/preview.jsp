@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 <!-- TODO 여기서부터 main영역 -->
 <div id="reservation_preview_page">

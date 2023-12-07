@@ -68,7 +68,11 @@ public class UserController {
 	public String coupon() {
 		return "user/coupon";
 	}
-	
+
+	@GetMapping("/my-travel")
+	public String myPageTravel() {
+		return "user/myTravel";
+	}
 	
 	
 }

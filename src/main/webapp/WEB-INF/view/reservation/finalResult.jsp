@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<%@ include file="../layout/header.jsp"%>
 
 
 <!-- TODO 여기서부터 main영역 -->
@@ -162,10 +162,7 @@
             <!-- 모달창 내용 끝 -->
            </div>
            </div>
-			
-			
-			
-			
+
 		</div>
 		<!-- section end -->
 	</div>
@@ -177,4 +174,4 @@
 
 <script src="/js/final_result.js"></script>
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>
