@@ -211,8 +211,3 @@ document.addEventListener("DOMContentLoaded", function () {
         passengerSeatSpans[1].textContent = seatType;
     }
 });
-
-
-
-
-

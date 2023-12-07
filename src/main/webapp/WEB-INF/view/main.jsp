@@ -1471,6 +1471,6 @@
     // 날짜 라이브러리
 
 </script>
-<script src="js/javascript.js"></script>
+<script src="/js/javascript.js"></script>
 <!-- header.jsp -->
 <%@ include file="layout/footer.jsp" %>
