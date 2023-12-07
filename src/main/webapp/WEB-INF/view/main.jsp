@@ -28,12 +28,12 @@
                                     <div class="from_select">
                                         <button type="button" id="from_select_btn"
                                                 class="common_modal_btn from_to_modal_btn"
-                                                data-target="from_modal">
+                                                data-target="from_modal" onclick="return getCities(event)">
                                             <span class="from_code_value">GMP</span>
                                             <span class="from_airport_value">서울 김포</span>
                                         </button>
                                     </div>
-                                    <button type="button" class="from_to_icon">
+                                    <button type="button" class="from_to_icon" onclick="return getCities(event)">
                                         <img src="images/icons/transform_icon.svg" alt="전환"/>
                                     </button>
                                     <div class="to_select">
@@ -121,7 +121,7 @@
                                         <div class="cities_list">
                                             <ul class="from_local_item">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
+                                                    <button type="button" aria-disabled="false" name="" value="">
                                                         <span class="from_local_code">SEL</span><span
                                                             class="from_local_airport">서울</span>
                                                     </button>

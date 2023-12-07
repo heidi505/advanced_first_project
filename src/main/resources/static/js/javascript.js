@@ -210,4 +210,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
         passengerSeatSpans[1].textContent = seatType;
     }
+
+    async function getCities(event) {
+        event.preventDefault();
+
+
+
+
+    }
+
 });
