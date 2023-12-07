@@ -29,17 +29,23 @@
 			<!-- 쿠폰 창 끝 -->
 		</div>
 		<!-- 여기까지 left-profile -->
-		<ul class="nav nav-tabs w-60">
-  <li class="nav-item">
-    <a class="nav-link active p-3" aria-current="page" href="#">사용가능한 쿠폰</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link p-3"  href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link p-3" href="#">Link</a>
-  </li>
-</ul>
+	<ul class="nav nav-underline w-60">
+	<li class="nav-item">
+    	<a class="nav-link active" aria-current="page" href="#">사용가능한 쿠폰</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Link</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Link</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  	</li>
+		</ul>
+
+
+
 		<div class="coupon_box d-flex flex-column border w-60">
 		<div class="bg_primary01 m-4 p-2">
 		<p class="pt-3"> · 지급 받으신 쿠폰은 중복 사용이 불가능합니다.</p>

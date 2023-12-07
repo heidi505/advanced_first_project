@@ -51,8 +51,8 @@
 			
 
 			<!-- 모달창 부분 -->
-   		   <div id="cancel_modal" class="modal">
-       	   <div class="cancel_box">
+   		   <div id="modal_box" class="modal">
+       	   <div class="modal_cont">
        	   <!-- 여기부터 모달창 내용 -->
            
            <div class="pt-2">
