@@ -26,5 +26,14 @@ public class ReservationController {
     public String test4(){
         return"reservation/detail";
     }
+    
+    @GetMapping("/payed")
+    public String payed(){
+    	return"reservation/paymentEnd";
+    }
+    @GetMapping("/reserved")
+    public String reserved(){
+    	return"reservation/finalResult";
+    }
 
 }

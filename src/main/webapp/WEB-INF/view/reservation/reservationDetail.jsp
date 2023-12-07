@@ -51,19 +51,18 @@
 			
 
 			<!-- 모달창 부분 -->
-   		   <div id="cancel_modal" class="modal">
-       	   <div class="cancel_box">
+   		   <div id="modal_box" class="modal">
+       	   <div class="modal_cont">
        	   <!-- 여기부터 모달창 내용 -->
-           
            <div class="pt-2">
            <b class="fs-5">예약 취소 요청</b><span class="close" id="close_btn">&times;</span>
            <div class="border-top p-1 mt-4 d-flex">
-           <div class="p-2"><input type="checkbox" class="p-5 float-start" ></div>
+           <div class="p-2"><input type="checkbox" class="checkbox_all p-5 float-start" ></div>
            <div class="w-10 text-center p-2">번호</div>
            <div class="p-2 ms-2 w-75">이름</div>
            </div>
            <div class="border-top border-bottom p-1 d-flex mb-4">
-           <div class="p-2 "><input type="checkbox" class="p-5 float-start" ></div>
+           <div class="p-2 "><input type="checkbox" class="checkbox p-5 float-start" ></div>
            <div class="w-10 text-center py-2 ">1</div>
            <div class="p-2 ms-2 w-75">HONG/GILDONG (MS)</div>
            </div>
@@ -87,17 +86,11 @@
            </div>
            <div class="py-4 mb-4">
            <b class="float-start lh-lg">취소 요청 후 철회할 수 없습니다</b><button class="btn w-35 btn-primary float-end" id="cancel_request_btn">탑승객 취소요청</button>
+           </div>       
            </div>
-           
            </div>
-           
-           
+           </div>
             <!-- 모달창 내용 끝 -->
-           </div>
-           </div>
-			
-			
-			
 		</div>
 		<!-- section end -->
 	</div>
