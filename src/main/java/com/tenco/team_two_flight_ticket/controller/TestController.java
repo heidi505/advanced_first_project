@@ -28,8 +28,10 @@ public class TestController {
 //        return "main";
 //    }
 
-//    @GetMapping("/reservation/detail")
-//    public String test4(){
-//        return"reservation/detail";
-//    }
+
+    @GetMapping("/reservation/detail")
+    public String test4(){
+        return"reservation/detail";
+    }
+
 }

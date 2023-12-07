@@ -1864,8 +1864,12 @@
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
                                                     <h2 class="modal-title">예약내역 최종 확인</h2>
+
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
                                                     <button type="button" class="btn-close"
                                                             data-bs-dismiss="modal"></button>
+
                                                 </div>
 
                                                 <!-- Modal body -->
@@ -1967,13 +1971,20 @@
                                                                 onclick="resetForm()">
                                                             다시입력
                                                         </button>
+
+                                                        <button class="btn res_modal_btn2" type="button" id="confirmYn"
+                                                                disabled>
+
                                                         <button class="btn res_modal_btn2" type="button" id="confirmYn" disabled
                                                                 data-bs-toggle="modal" data-bs-target="#additionalModal">
+
                                                             확인
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </div>
                                     <%-- 모달 끝--%>
@@ -1994,6 +2005,7 @@
                                                     <button type="button" class="btn btn-primary res_kko_btn" onclick="sendOption('Y')">보내주세요</button>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -2042,6 +2054,8 @@
         // 예: 입력된 내용 초기화 또는 페이지 새로고침
     }
 
+
+
     // 카카오 모달
     function sendOption(option) {
         if (option === 'N') {
@@ -2053,6 +2067,7 @@
             $('#additionalModal').modal('hide');
         }
     }
+
 </script>
 
 <!-- footer.jsp -->
