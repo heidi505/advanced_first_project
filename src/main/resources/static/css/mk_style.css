@@ -298,6 +298,10 @@
     --bs-modal-width: 850px;
 }
 
+.res_modal_add2{
+    --bs-modal-width: 550px;
+}
+
 .res_modal_form{
     display: flex;
     position: relative;
@@ -311,6 +315,21 @@
     outline: 0;
     height: 100%;
 }
+
+.res_modal_form2{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    outline: 0;
+    height: 100%;
+}
+
 
 .res_modal_tb_form{
     padding: 30px 40px 45px;
@@ -383,5 +402,22 @@
 
 .res_modal_btn_area{
     text-align: center;
+}
+
+.res_kko_header{
+    background-color: var(--primary_01);
+}
+
+.res_kko_title{
+    font-weight: bold;
+}
+
+.res_kko_p{
+    line-height: 1.5;
+    padding: 30px;
+}
+
+.res_kko_btn{
+    width: 180px;
 }
 

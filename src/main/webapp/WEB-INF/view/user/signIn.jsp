@@ -33,7 +33,7 @@
 							</div>
 						</form>
 						<div class="mb-5 mx-auto text-center">
-							<span class="fs-6">아직 회원이 아니신가요?</span><a href="/user/sign-up"
+							<span class="fs-6">아직 회원이 아니신가요?</span><a href="/sign-up"
 								class="insert_user ms-4">회원가입</a>
 						</div>
 					</div>

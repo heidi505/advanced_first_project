@@ -1864,7 +1864,12 @@
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
                                                     <h2 class="modal-title">예약내역 최종 확인</h2>
+
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+                                                    <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+
                                                 </div>
 
                                                 <!-- Modal body -->
@@ -1966,13 +1971,41 @@
                                                                 onclick="resetForm()">
                                                             다시입력
                                                         </button>
+
                                                         <button class="btn res_modal_btn2" type="button" id="confirmYn"
                                                                 disabled>
+
+                                                        <button class="btn res_modal_btn2" type="button" id="confirmYn" disabled
+                                                                data-bs-toggle="modal" data-bs-target="#additionalModal">
+
                                                             확인
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                        </div>
+                                    </div>
+                                    <%-- 모달 끝--%>
+                                    <%-- 카카오 모달--%>
+                                    <div class="modal res_modal_add2" id="additionalModal" tabindex="-1" aria-labelledby="additionalModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="res_modal_form2">
+                                                <div class="modal-header res_kko_header">
+                                                    <h3 class="modal-title res_kko_title" id="additionalModalLabel">항공권 예약 문자</h3>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body res_kko_p">
+                                                    <p>예약하신 항공권을 카카오톡으로 보내드릴까요?</p>
+                                                    <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary res_kko_btn" onclick="sendOption('N')">괜찮아요</button>
+                                                    <button type="button" class="btn btn-primary res_kko_btn" onclick="sendOption('Y')">보내주세요</button>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -2020,6 +2053,21 @@
         // 다시입력 버튼 클릭 시 동작할 내용 추가
         // 예: 입력된 내용 초기화 또는 페이지 새로고침
     }
+
+
+
+    // 카카오 모달
+    function sendOption(option) {
+        if (option === 'N') {
+            // '괜찮아요' 버튼 클릭 시 모달 창 닫기
+            $('#additionalModal').modal('hide');
+        } else if (option === 'Y') {
+            // '보내주세요' 버튼 클릭 시 알림 창 띄우기
+            alert('성공적으로 전송했습니다.');
+            $('#additionalModal').modal('hide');
+        }
+    }
+
 </script>
 
 <!-- footer.jsp -->
