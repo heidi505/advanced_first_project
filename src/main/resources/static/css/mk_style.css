@@ -421,3 +421,100 @@
     width: 180px;
 }
 
+/* 로딩 페이지 */
+
+.loading{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background:#fff;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
+
+.loading_bg{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../images/loading_bg.jpg") no-repeat center;
+    background-size: cover;
+}
+
+.loading_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* 뷰포트 높이 만큼 요소를 확장하여 화면 가로세로 중앙에 배치 */
+    color: var(--basic_wh);
+}
+
+.form2{
+    font-size: large;
+}
+
+.loading_title {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    font-size: xx-large;
+}
+
+.k1_fromto_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dep-arr {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 0 10px; /* 필요에 따라 조절 */
+    line-height: 1.2;
+    width: 6em;
+}
+
+.image-container {
+    position: absolute;
+    top: 50%; /* 상위 요소의 세로 중앙에 맞추기 */
+    left: 50%; /* 상위 요소의 가로 중앙에 맞추기 */
+    transform: translate(-50%, -50%); /* 세로 가로 중앙에 정렬 */
+}
+
+.overlay-image{
+    display: block;
+    margin: auto;
+    position: absolute;
+}
+
+.loading_city{
+    font-weight: 1000;
+}
+
+
+/* 애니메이션 */
+
+@keyframes moveUpDown {
+    0% {
+        transform: translateY(50px);
+    }
+    50% {
+        transform: translateY(100px);
+    }
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+.animated-svg {
+    width: 100px;
+    height: 100px;
+    animation: moveUpDown 1.8s ease-in-out infinite;
+}
+
+.loading_ani {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    line-height: 1.2;
+    width: 6em;
+}
