@@ -2,17 +2,24 @@ package com.tenco.team_two_flight_ticket.user;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserService {
@@ -26,6 +33,10 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    private int authNumber;
 
     @Transactional
     public void signUp(UserRequest.SignUpDTO dto){
@@ -85,4 +96,53 @@ public class UserService {
         }
 
     }
+
+    public String checkUsername(String username) {
+        User checkUser = userRepository.checkUsername(username);
+        if (checkUser == null) {
+            return "사용할 수 있는 아이디입니다";
+        }else{
+            return "사용할 수 없는 아이디입니다";
+        }
+
+
+    }
+
+    public void makeRandomNumber(){
+        Random r = new Random();
+        String randomNumber = "";
+        for(int i = 0; i < 6; i++) {
+            randomNumber += Integer.toString(r.nextInt(10));
+        }
+
+        int authNumber = Integer.parseInt(randomNumber);
+
+         authNumber = this.authNumber;
+    }
+
+    public void sendEmail(String email){
+        makeRandomNumber();
+        MimeMessage message = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            helper.setFrom("xxwhite19@gmail.com");
+            helper.setTo(email);
+            helper.setSubject("님부스의 인증 메일입니다");
+            helper.setText("<h1>님부스 메일 인증</h1>" +
+                    "<br/>님부스에 가입해주셔서 감사합니다."+
+                    "<br/>아래 [이메일 인증 확인]을 눌러주세요."+
+                    "<br/><a href='http://localhost:8080/verify/email?email=" + email +
+                    "' target='_parent'>이메일 인증 확인</a>", true);
+            javaMailSender.send(message);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+
+
+
 }

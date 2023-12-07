@@ -44,5 +44,22 @@ public class UserRequest {
         private String password;
     }
 
+    @Getter
+    @Setter
+    @ToString
+    public static class CheckUsernameDTO{
+        @NotEmpty
+        private String username;
+    }
+    @Getter
+    @Setter
+    @ToString
+    public static class CheckEmailDTO{
+        @NotEmpty
+        @Email
+        private String email;
+    }
+
+
 
 }

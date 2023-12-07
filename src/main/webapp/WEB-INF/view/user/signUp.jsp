@@ -24,12 +24,13 @@
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="userId">아이디*</label><br> <input type="text"
 									class="form-control w-70 mt-2 p-2 d-inline" name="username" id="userId"
-									placeholder="아이디를 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline">중복확인</button>
+									placeholder="아이디를 입력해주세요" /><button id="btnJoin" class="btn btn-primary ms-1 align-baseline" onclick="return usernameCheck(event)">중복확인</button>
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
+
 								<label for="email">이메일*</label><br> <input type="text"
 									class="form-control w-70 mt-2 p-2 d-inline" name="email"
-									id="email" placeholder="이메일을 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline">인증하기</button>
+									id="email" placeholder="이메일을 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline" onclick="return emailCheck(event)">인증하기</button>
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="userTel">연락처*</label> <input type="text"
@@ -70,10 +71,13 @@
 								</div>
 							</div>
 							<div class="form-group w-75 mx-auto mb-5 mt-4">
-								<button type="submit" class="btn btn-primary p-2 w-100">회원가입</button>
+
 							</div>
 						</div>
+
 					</form>
+					<button type="submit" class="btn btn-primary p-2 w-100">회원가입</button>
+
 				</div>
 			</div>
 		</div>
@@ -82,6 +86,55 @@
 </div>
 </div>
 
+<script>
+   // docuumn.reayd*( _
+
+	// const usernameEvent = document.querySelector("#userId").addEventListener('click', function (event) {
+	//
+	// });
+  //
+	async function usernameCheck(event) {
+		event.preventDefault();
+
+		// event.preventDefault();
+		let username = document.querySelector("#userId").value;
+		console.log(document.querySelector("#userId").value);
+		let response = await fetch("/check/username?username="+username, {
+			method: "get",
+			headers: {
+				"Content-Type": "application/json;charset=UTF-8",
+			},
+		});
+
+		let responseBody = await response.json();
+		if (responseBody.success) {
+			alert(responseBody.data);
+		} else {
+			alert(responseBody.data);
+		}
+
+		return false;
+	}
+
+	async function emailCheck(event){
+		event.preventDefault();
+
+		let email = document.querySelector("#email").value;
+
+		let response = await fetch("/check/email?email="+email, {
+			method: "get",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		//여기까지 사용자의 이메일을 보내준 코드
+
+		let responseBody = await response.json();
+			alert(responseBody.data);
+
+		return false;
+	}
+</script>
 <!-- <script src="/js/javascript.js"></script> -->
 <!-- footer.jsp  -->
 <%@ include file="../layout/footer.jsp"%>
