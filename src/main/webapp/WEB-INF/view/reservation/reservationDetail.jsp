@@ -58,12 +58,12 @@
            <div class="pt-2">
            <b class="fs-5">예약 취소 요청</b><span class="close" id="close_btn">&times;</span>
            <div class="border-top p-1 mt-4 d-flex">
-           <div class="p-2"><input type="checkbox" class="p-5 float-start" ></div>
+           <div class="p-2"><input type="checkbox" class="checkbox_all p-5 float-start" ></div>
            <div class="w-10 text-center p-2">번호</div>
            <div class="p-2 ms-2 w-75">이름</div>
            </div>
            <div class="border-top border-bottom p-1 d-flex mb-4">
-           <div class="p-2 "><input type="checkbox" class="p-5 float-start" ></div>
+           <div class="p-2 "><input type="checkbox" class="checkbox p-5 float-start" ></div>
            <div class="w-10 text-center py-2 ">1</div>
            <div class="p-2 ms-2 w-75">HONG/GILDONG (MS)</div>
            </div>

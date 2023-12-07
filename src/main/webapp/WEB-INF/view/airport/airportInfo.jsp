@@ -81,52 +81,65 @@
 			<!-- parking_fee 시작 -->
 			<div class="parking_menu w-85 mx-auto mt-5" id="3">
 			<h1 class="mb-4"><b>주차요금 체계</b></h1>
-			<h3><b class="color_primary02">p1,p2 여객주차장</b></h3>
+			<!-- 현재 리스트 이름 없음 -->
+			
+			<c:forEach var="list" items="${list.data}">
+			<h3><b class="color_primary02">
+			${list.IATA_APCD}
+			<c:choose>
+			<c:when test="${list.IATA_APCD eq 'GMP'} ">
+			  김포
+			</c:when>
+			</c:choose>
+			</b>
+			</h3>
 			<table class="parking_fee_table table w-100 mt-3">
 			<thead>
 			<tr>
 			<th rowspan="2" class="align-middle">구분</th>
-			<th colspan="2">월요일~목요일</th>
-			<th colspan="2">금요일~일요일 및 법정공휴일</th>
-			</tr>
-			<tr>
-			  <th>소형</th>
-			  <th>대형</th>
 			  <th>소형</th>
 			  <th>대형</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
-			<td class="align-middle">1일(24시간)주차시
+			<td class="align-middle">평일 기본 요금
 			</td>
 			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
+			· 소형 기본 기본 매분: 기본요금<br>
+			· 소형 매 평일 매 분:매 요금<br>
+			· 소형 24시간: 평일 24시간 요금
 			</td>
 			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
+			· 대형 기본 기본 매분: 기본요금<br>
+			· 대형 매 평일 매 분:매 요금<br>
+			· 대형 24시간: 평일 24시간 요금
 			</td >
-			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
-			</td>
-			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
-			</td>
 			</tr>
+			<tr>
+			<td class="align-middle">주말 기본 요금
+			</td>
+			<td class="lh-lg py-5 pe-5 text-start">
+			· 소형 주말 주말 매분: 주말요금<br>
+			· 소형 매 주말 매 분:매 요금<br>
+			· 소형 24시간: 주말 24시간 요금
+			</td>
+			<td class="lh-lg py-5 pe-5 text-start">
+			· 대형 주말 주말 매분: 주말요금<br>
+			· 대형 매 주말 매 분:매 요금<br>
+			· 대형 24시간: 주말 24시간 요금
+			</td >
+			</tr>
+			
 			<tr>
 			<td class="py-3">1일 추가 주차시</td>
 			<td colspan="4" class="py-3">상기요금 반복적용</td>
 			</tr>
 			</tbody>
 			</table>
+			</c:forEach>
+			
+			
 			<!-- 주차장 요금 정보 테이블1 끝 -->
 			<!-- 주차장 요금 정보 테이블2 시작 -->
 			<h3><b class="color_primary02">p1,p2 여객주차장</b></h3>
@@ -146,7 +159,7 @@
 			</thead>
 			<tbody>
 			<tr>
-			<td class="align-middle">1일(24시간)주차시
+			<td class="align-middle">평일 기본 주차 시
 			</td>
 			<td class="lh-lg py-5 pe-5 text-start">
 			· 기본30분:900원<br>

@@ -19,12 +19,12 @@
 							<div class="form-group w-80 mx-auto pt-2 mt-2 mt-5">
 								<label for="realname">이름*</label> <input type="text"
 									class="form-control mt-2 me-2 p-2" name="realname"
-									id="realname" placeholder="이름을 입력해주세요" />
+									id="realname" placeholder="이름을 입력해주세요" value="가나다"/>
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="userId">아이디*</label><br> <input type="text"
 									class="form-control w-70 mt-2 p-2 d-inline" name="username" id="userId"
-									placeholder="아이디를 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline">중복확인</button>
+									placeholder="아이디를 입력해주세요" value="asd1234"/><button type="button" class="double_check btn btn-primary ms-1 align-baseline" disabled>중복확인</button>
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="email">이메일*</label><br> <input type="text"
@@ -70,7 +70,7 @@
 								</div>
 							</div>
 							<div class="form-group w-75 mx-auto mb-5 mt-4">
-								<button type="submit" class="btn btn-primary p-2 w-100">회원가입</button>
+								<button type="button" class="submit_btn btn btn-primary p-2 w-100">회원가입</button>
 							</div>
 						</div>
 					</form>
@@ -82,6 +82,6 @@
 </div>
 </div>
 
-<!-- <script src="/js/javascript.js"></script> -->
+<script src="/js/sign_up.js"></script>
 <!-- footer.jsp  -->
 <%@ include file="../layout/footer.jsp"%>
