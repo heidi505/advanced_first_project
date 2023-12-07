@@ -30,8 +30,6 @@ public class ReservationController {
  	public String finalResult() {
  		return "/reservation/finalResult";
  	}
- 	
- 	
 
     @GetMapping("/detail")
     public String test4(){
@@ -44,15 +42,20 @@ public class ReservationController {
         return"reservation/sample2";
     }
 
-
-    public String test3(){
-        return"reservation/test";
-
     // 운임규정 모달 버튼 (위치 잡고 추가만 해주면 됨!)
     // 예약규정, 운임규정, 결제규정, 환불/변경
     @GetMapping("/regulation")
     public String test05(){
         return "reservation/fareRegulation";
+    }
 
+    @GetMapping("/loading")
+    public String loadingTest(){
+        return "reservation/loadingPageSample";
+    }
+
+    @GetMapping("/loading2")
+    public String loadingTest2(){
+        return "reservation/loadingPage";
     }
 }

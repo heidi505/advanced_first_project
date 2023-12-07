@@ -1864,12 +1864,8 @@
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
                                                     <h2 class="modal-title">예약내역 최종 확인</h2>
-
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-
                                                     <button type="button" class="btn-close"
                                                             data-bs-dismiss="modal"></button>
-
                                                 </div>
 
                                                 <!-- Modal body -->
