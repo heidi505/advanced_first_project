@@ -13,10 +13,10 @@
 				<div class="mx-auto w-50 border">
 					<div class="top_bar p-3 border"><h2>로그인</h2></div>
 					<div class="d-flex flex-column w-100">
-						<form action="/user/sign-in" method="post">
+						<form action="sign-in" method="post">
 							<div class="form-group w-75 mx-auto pt-2 mt-5">
 								<label for="userId">아이디*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="userId" id="userId"
+									class="form-control mt-2 me-2 p-2" name="username" id="userId"
 									placeholder="아이디를 입력해주세요" />
 							</div>
 							<div class="form-group w-75 mx-auto pt-2 mt-2">
@@ -32,7 +32,7 @@
 							</div>
 						</form>
 						<div class="mb-5 mx-auto text-center">
-							<span class="fs-6">아직 회원이 아니신가요?</span><a href="/user/sign-up"
+							<span class="fs-6">아직 회원이 아니신가요?</span><a href="/sign-up"
 								class="insert_user ms-4">회원가입</a>
 						</div>
 					</div>

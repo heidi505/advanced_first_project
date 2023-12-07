@@ -5,7 +5,7 @@
 <%@ include file="../layout/header.jsp" %>
 
 <!-- TODO 여기서부터 main영역 -->
-<div class="nav_bg_preview">
+<div id="reservation_preview_page">
     <div class="container">
         <!-- 기본 메세지 -->
         <section>
@@ -14,9 +14,9 @@
                 <h3 class="preview_header">선택한 항공권</h3>
             </div>
             <div class="p-3 text-white preview_title">
-                            <span>
-                                <h2>훌륭한 선택을 하셨습니다! 지금 이 가격을 놓치지 마세요!</h2>
-                            </span>
+                <span>
+                    <h2>훌륭한 선택을 하셨습니다! 지금 이 가격을 놓치지 마세요!</h2>
+                </span>
             </div>
         </section>
 
@@ -32,10 +32,9 @@
                                     <div class="preview_form_marginb">
                                         <h4>
                                             <span class="btn-primary preview_btn_to_form">가는편</span>
-                                            <strong>서울 (ICN)</strong><span class="preview_form_padding">
-                                                            ✈
-                                                        </span><strong>도쿄
-                                            (NRT)</strong>
+                                            <strong>서울 (ICN)</strong>
+                                            <span class="preview_form_padding"> ✈ </span>
+                                            <strong>도쿄 (NRT)</strong>
                                             <span>12월 12일</span>
                                         </h4>
                                     </div>
@@ -44,19 +43,15 @@
                                             <div class="preview_li_box">
                                                 <div>
                                                     <div class=" preview_li_box_top">
-                                                            <span>
-                                                                <img src="../images/RS.png"
-                                                                     class="preview_airport_img"></span>
+                                                        <span>
+                                                            <img src="../images/RS.png" class="preview_airport_img">
+                                                        </span>
                                                         <span>에어서울 →</span>
                                                         <span>
-                                                                <span>16:40
-                                                                    <span>ICN</span>
-                                                                </span>
+                                                            <span>16:40<span>ICN</span></span>
                                                                 <span>02시간 20분</span>
-                                                                <span>19:00
-                                                                    <span>NRT</span>
-                                                                </span>
-                                                            </span>
+                                                                <span>19:00<span>NRT</span></span>
+                                                        </span>
                                                         <span>직항</span>
                                                     </div>
                                                 </div>
@@ -104,8 +99,7 @@
                                                             </span>
                                                             </p>
                                                             <p>
-                                                            <span>22:30<span>코타키나발루 BKI</span>
-                                                                T1</span>
+                                                                <span>22:30<span>코타키나발루 BKI</span>T1</span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -121,8 +115,9 @@
                                     <div class="preview_form_marginb">
                                         <h4>
                                             <span class="btn-primary preview_btn_to_form">오는편</span>
-                                            <strong>도쿄 (NRT)</strong><span
-                                                class="preview_form_padding">✈</span><strong>서울 (ICN)</strong>
+                                            <strong>도쿄 (NRT)</strong>
+                                            <span class="preview_form_padding">✈</span>
+                                            <strong>서울 (ICN)</strong>
                                             <span>12월 15일</span>
                                         </h4>
                                     </div>
@@ -132,18 +127,18 @@
                                                 <div>
                                                     <div class="preview_li_box_top">
                                                             <span>
-                                                                <img src="../images/RS.png"
-                                                                     class="preview_airport_img"></span>
+                                                                <img src="../images/RS.png" class="preview_airport_img">
+                                                            </span>
                                                         <span>에어서울</span>
                                                         <span>
-                                                                <span>13:10
-                                                                    <span>NRT</span>
-                                                                </span>
-                                                                <span>02시간 35분</span>
-                                                                <span>15:45
-                                                                    <span>ICN</span>
-                                                                </span>
+                                                            <span>13:10
+                                                                <span>NRT </span>
                                                             </span>
+                                                            <span>02시간 35분</span>
+                                                            <span>15:45
+                                                                <span>ICN</span>
+                                                            </span>
+                                                        </span>
                                                         <span>직항</span>
                                                     </div>
                                                 </div>
@@ -174,22 +169,19 @@
                                                             <span>12월 1일</span>
                                                         </div>
                                                         <div>
-                                                                <span class="preview_baggage_line">
-                                                                    <p>여</p>
-                                                                    <p>.</p>
-                                                                    <p>.</p>
-                                                                    <p>정</p>
-                                                                </span>
+                                                            <span class="preview_baggage_line">
+                                                                <p>여</p>
+                                                                <p>정</p>
+                                                            </span>
                                                         </div>
                                                         <div>
                                                             <p class="prview_baggage_rightm">
-                                                                    <span>18:00<span>코타키나발루 BKI</span>
-                                                                        T1</span>
+                                                                <span>18:00<span>코타키나발루 BKI</span> T1</span>
                                                             </p>
                                                             <p class="prview_baggage_rightm">
-                                                                    <span>
-                                                                        <span>05시간 30분</span>
-                                                                    </span>
+                                                                <span>
+                                                                    <span>05시간 30분</span>
+                                                                </span>
                                                             </p>
                                                             <p>
                                                                 <span>22:30<span>서울 ICN</span> T2</span>
@@ -212,12 +204,11 @@
                     <div>
                         <div>
                             <div class="preview_price_detail">
-                            <span>서울 <img src="../images/ico_from_to_02.png" class="preview_price_img">
-                            도쿄</span>
+                                <span>서울
+                                    <img src="../images/ico_from_to_02.png" class="preview_price_img">도쿄
+                                </span>
                             </div>
-                            <div class="preview_price_line">12월 12일 - 12월
-                                15일 · 승객 1명
-                            </div>
+                            <div class="preview_price_line">12월 12일 - 12월 15일 · 승객 1명</div>
                             <div>
                                 <!-- 요금표 -->
                                 <div>

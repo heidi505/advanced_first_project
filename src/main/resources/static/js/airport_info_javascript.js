@@ -34,10 +34,14 @@ function updateStatus(){
   let current = '원활';
   switch(current) {
 	  case '원활': allStatus[0].style.color = 'var(--basic_wh)';
-  				   allStatus[0].style.backgroundColor = 'green'; 
+  				  allStatus[0].style.backgroundColor = 'green'; 
   				   break;
-	  case '보통': break;
-	  case '혼잡': break;
+	  case '보통': allStatus[1].style.color = 'var(--basic_wh)';
+  				  allStatus[1].style.backgroundColor = 'var(--primary02)'; 
+	  			  break;
+	  case '혼잡': allStatus[2].style.color = 'var(--basic_wh)';
+  				  allStatus[2].style.backgroundColor = 'var(--cancle)'; 
+	  			  break;
   }
   
 }
@@ -49,21 +53,17 @@ window.onload = function(){
 	const aButton = document.getElementsByClassName('parking_btn');
 	for(let i=0; i<aButton.length;i++){
 		aButton[i].addEventListener('click', e=>{
-			let menuNumber = aButton[i].id.replace('_button','');
-			if( i == 2){
+			let menuNumber = e.target.id.replace('_button','');
+			if( menuNumber == 2){
 				updateStatus();
 			} 
 			openMenu(e, menuNumber);
 		});
 	}
 	
-	const parkingStatusBtn = document.getElementById('2_button');
-	parkingStatusBtn.addEventListener('click',e=>{
-		updateStatus();
-	})
 	
 	//시작 메뉴
-	const startMenu = document.getElementById('2_button');
+	const startMenu = document.getElementById('1_button');
 	startMenu.click();
 	
 	//api로 받은 데이터 기반으로 색상및 글 변환(미구현)

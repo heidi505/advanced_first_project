@@ -1,9 +1,6 @@
 package com.tenco.team_two_flight_ticket._core.handler;
 
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyForbiddenException;
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyNotFoundException;
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyUnAuthorizedException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.*;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -46,6 +43,15 @@ public class RestfulExceptionHandler {
 
     @ExceptionHandler(MyUnAuthorizedException.class)
     public String unAuthorized(MyUnAuthorizedException e){
+        StringBuffer sb = new StringBuffer();
+        sb.append("<script>");
+        sb.append("alert( '" + e.getMessage() + "   에러코드:" + e.getStatus() + "' );");
+        sb.append("history.back();");
+        sb.append("</script>");
+        return sb.toString();
+    }
+    @ExceptionHandler(MyServerError.class)
+    public String internalServerError(MyServerError e){
         StringBuffer sb = new StringBuffer();
         sb.append("<script>");
         sb.append("alert( '" + e.getMessage() + "   에러코드:" + e.getStatus() + "' );");

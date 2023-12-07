@@ -113,3 +113,15 @@ footer .copyright {
     position: relative;
     padding: 50px 0;
 }
+
+/* 운임 규정 모달 */
+.fare_modal_btn{
+    background-color: var(--basic_03);
+    color: var(--basic_wh);
+    width: 120px;
+}
+
+.agreeMenu {
+    max-height: 700px; /* 원하는 높이로 설정하세요 */
+    overflow-y: auto;
+}
