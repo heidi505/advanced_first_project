@@ -96,12 +96,12 @@ main {
 }
 
 #flight_search_page .from_to_modal {
-    top: 22%;
+    top: 25%;
     left: 12%;
 }
 
 #flight_search_page .passenger_seat_modal {
-    top: 22%;
+    top: 25%;
     right: 12%;
 }
 
