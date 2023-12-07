@@ -307,4 +307,4 @@
 </div>
 <script src="js/javascript.js"></script>
 <!-- footer.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>
