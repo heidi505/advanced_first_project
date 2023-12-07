@@ -49,7 +49,7 @@
                 <div>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">항공권 예매</a>
+                            <a class="nav-link" href="/main">항공권 예매</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/airport/airport-info">공항 정보</a>

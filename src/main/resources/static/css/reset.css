@@ -185,6 +185,7 @@ button {
     background-color: var(--primary_01);
     border-color: var(--primary_01);
     transition: all 0.3s;
+    white-space: nowrap;
 }
 
 .tab_menu li a.tab_active {
@@ -329,3 +330,231 @@ input[type="checkbox"] {
 
 /*}*/
 
+
+.modal_title {
+    margin-bottom: 16px;
+}
+
+.modal_close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+}
+
+/* 라디오 버튼 */
+
+/* 이벤트 라디오 버튼 공통 */
+.radio_btn .radio_group:nth-child(1) {
+    margin-right: 32px;
+}
+
+.radio_btn input[type="radio"]:checked+label,
+.radio_btn input[type="radio"]:not(:checked)+label {
+    padding-left: 35px;
+    padding-top: 2px;
+}
+
+.radio_btn input[type="radio"]:checked+label,
+.radio_btn input[type="radio"]:not(:checked)+label {
+    color: var(--basic_05);
+    font-size: 18px;
+}
+
+.radio_btn input[type="radio"]:checked+label {
+    color: var(--primary_02);
+}
+
+.radio_btn input[type="radio"]:checked+label:before,
+.radio_btn input[type="radio"]:not(:checked)+label:before {
+    width: 23px;
+    height: 23px;
+}
+
+.radio_btn input[type="radio"]:checked+label:after,
+.radio_btn input[type="radio"]:not(:checked)+label:after {
+    width: 15px;
+    height: 15px;
+    top: 4px;
+    left: 4px;
+}
+
+.radio_btn input[type="radio"]:checked+label:before,
+.radio_btn input[type="radio"]:not(:checked)+label:before {
+    border: 2px solid var(--primary_02);
+}
+
+/* 라디오 버튼 커스텀 */
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="radio"]:checked+label,
+input[type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+    line-height: 18px;
+    display: inline-block;
+    color: var(--basic_05);
+    font-weight: 400;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+input[type="radio"]:checked+label {
+    color: var(--primary_02);
+}
+
+input[type="radio"]:checked+label:before,
+input[type="radio"]:not(:checked)+label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--primary_02);
+    border-radius: 100%;
+    background: #fff;
+}
+
+input[type="radio"]:checked+label:before {
+    border: 1px solid var(--primary_02);
+    border-radius: 100%;
+}
+
+input[type="radio"]:checked+label:after,
+input[type="radio"]:not(:checked)+label:after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: var(--primary_02);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+input[type="radio"]:checked+label:after {
+    opacity: 1;
+}
+
+.radio_group:nth-child(1) {
+    margin-right: 12px;
+}
+
+/* 체크박스 */
+
+/* 체크박스 */
+.check_box {
+    white-space: nowrap;
+    height: 20px;
+    display: inline-block;
+}
+
+.check_box input {
+    display: none;
+}
+
+.check_box_icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--basic_wh);
+    border: 2px solid var(--primary_02);
+    position: relative;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.check_box_txt {
+    color: var(--basic_03);
+    vertical-align: top;
+    display: inline-block;
+    padding-left: 8px;
+    font-weight: 300;
+}
+
+.check_box_icon::before,
+.check_box_icon::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 0;
+    background-color: var(--primary_02);
+    position: absolute;
+    transform-origin: left top;
+}
+
+.check_box_icon::before {
+    top: 8px;
+    left: 2px;
+    transform: rotate(-45deg);
+}
+
+.check_box_icon::after {
+    top: 13px;
+    left: 8px;
+    transform: rotate(-135deg);
+}
+
+.check_box input:checked+.check_box_icon {
+    border-color: var(--primary_02);
+    background-color: var(--primary_02);
+}
+
+.check_box input:checked~.check_box_txt {
+    font-weight: 400;
+}
+
+.check_box input:checked+.check_box_icon::before {
+    height: 7px;
+    transition: all 0.15s ease;
+    background-color: var(--basic_wh);
+}
+
+.check_box input:checked+.check_box_icon::after {
+    height: 11px;
+    transition: all 0.15s ease 0.15s;
+    background-color: var(--basic_wh);
+}
+
+/* 체크박스 */
+
+/* table */
+
+.common_table table {
+    margin-bottom: 20px;
+}
+
+.common_table {
+    line-height: 2.4;
+}
+
+.common_table tr {
+    border-bottom: 1px solid var(--line);
+}
+
+.common_table td {
+    color: var(--basic_07);
+}
+
+.common_table th {
+    color: var(--basic_03);
+    font-weight: 500;
+}
+
+.common_table thead {
+    border-top: 1px solid var(--line);
+}
