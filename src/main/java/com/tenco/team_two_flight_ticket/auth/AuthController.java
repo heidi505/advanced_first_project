@@ -130,23 +130,20 @@ public class AuthController {
 
     }
 
-    //유저 이메일 중복체크ㅠ
+    //유저에게 인증코드 담긴 이메일 발송
     @ResponseBody
     @GetMapping("/check/email")
-    public ResponseEntity<ApiUtils.ApiResult<String>> emailCheck(@RequestParam String email){
+    public void emailCheck(@RequestParam String email){
         this.email = email;
         userService.sendEmail(email);
-
-        return ResponseEntity.ok(ApiUtils.success("인증 메일을 발송했습니다"));
     }
 
+    //인증코드 받아와서 인증
     @GetMapping("/verify/email")
-    public ResponseEntity<ApiUtils.ApiResult<String>> emailVerify(@RequestParam String email){
-        if(this.email.equals(email)){
-            throw new MyBadRequestException("이메일 인증 완료");
-        }else{
-            throw new MyBadRequestException("이메일 인증에 실패했습니다");
-        }
+    public ResponseEntity<ApiUtils.ApiResult<String>> emailVerify(@RequestParam int key){
+        String message = userService.verifyEmail(key);
+
+        return ResponseEntity.ok().body(ApiUtils.success(message));
 
     }
 
