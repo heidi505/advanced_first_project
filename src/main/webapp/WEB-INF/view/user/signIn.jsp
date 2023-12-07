@@ -6,12 +6,11 @@
 <%@ include file="../layout/header.jsp"%>
 
 
-
 <!-- TODO 여기서부터 main영역 -->
 	<main class="sign_in_page">
 		<div class="container">
 			<div class="section">
-				<div class="mx-auto w-35 border">
+				<div class="mx-auto w-50 border">
 					<div class="top_bar p-3 border"><h2>로그인</h2></div>
 					<div class="d-flex flex-column w-100">
 						<form action="sign-in" method="post">
@@ -26,14 +25,14 @@
 									id="password" placeholder="비밀번호를 입력해주세요" />
 							</div>
 							<div class="d-flex flex-row-reverse mt-3">
-								<a href="#" class="pwd_find me-6">비밀번호 찾기</a>
+								<a href="/find-password" class="pwd_find me-6">비밀번호 찾기</a>
 							</div>
 							<div class="form-group w-75 mx-auto d-flex mb-4 mt-3">
 								<button type="submit" class="btn btn-primary p-2 w-100">로그인</button>
 							</div>
 						</form>
 						<div class="mb-5 mx-auto text-center">
-							<span class="fs-6">아직 회원이 아니신가요?</span><a href="/user/sign-up"
+							<span class="fs-6">아직 회원이 아니신가요?</span><a href="/sign-up"
 								class="insert_user ms-4">회원가입</a>
 						</div>
 					</div>
@@ -47,4 +46,4 @@
 
 <script src="js/javascript.js"></script>
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>

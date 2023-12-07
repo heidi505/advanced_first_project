@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 <!-- TODO 여기서부터 main영역 -->
 <div id="reservation_detail_page">
@@ -704,8 +704,7 @@
                                                     있습니다.(제시 못할경우 탑승이 거부 될수 있음)
                                                 </td>
                                             </tr>
-                                            <input type="hidden" name="contents" class="cont"
-                                                   id="tempContents_23"
+                                            <input type="hidden" name="contents" class="cont" id="tempContents_23"
                                                    value="※ 무료수하물 및 초과수하물 규정은 좌석등급 및 노선에 따라 상이하므로 자세한 내용은 항공사 홈페이지 <a href=&quot;https://www.jinair.com/ready/baggage&quot; style=&quot;color: red&quot; target=&quot;_blank&quot;>[바로가기]</a> 또는 여행사 담당자에게 문의 부탁드립니다.<BR>※ 항공사 요금규정에 무료수하물 내용이 누락된 경우 표기되지 않을 수 있으며, 표기되지 않은 경우, 해당항공사에 문의 부탁드립니다.<BR>※ 공동운항편, 타항공사 연결편, 24시간 이상 체류 일정, 해외출발 일정, 특수 수하물의 경우 운항항공사에 따라 수하물 규정이 상이할 수 있습니다.">
                                             <tr>
                                                 <th scope="row">수하물</th>
@@ -721,8 +720,7 @@
                                                     수하물 규정이 상이할 수 있습니다.
                                                 </td>
                                             </tr>
-                                            <input type="hidden" name="contents" class="cont"
-                                                   id="tempContents_24"
+                                            <input type="hidden" name="contents" class="cont" id="tempContents_24"
                                                    value="※ 항공사 마일리지 적립 여부 및 적립률은 운임별/제휴 회원사별로 상이하오니, 자세한 내용은 항공사 홈페이지 <a href=&quot;https://www.jinair.com/benefit/point&quot; style=&quot;color: red&quot; target=&quot;_blank&quot;>[바로가기]</a> 또는 여행사 담당자에게 구매 전 문의 부탁드립니다.">
                                             <tr>
                                                 <th scope="row">항공사마일리지</th>
@@ -1853,8 +1851,157 @@
                                         </div>
                                     </div>
                                     <div class="preview_price_btn">
-                                        <div class="btn btn-primary preview_price_btnw">
+                                        <button type="button" class="btn btn-primary preview_price_btnw"
+                                                data-bs-toggle="modal" data-bs-target="#myModal">
                                             항공권 예약하기
+                                        </button>
+                                    </div>
+
+                                    <!-- The Modal -->
+                                    <div class="modal res_modal_add" id="myModal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="res_modal_form">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h2 class="modal-title">예약내역 최종 확인</h2>
+                                                    <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+                                                </div>
+
+                                                <!-- Modal body -->
+                                                <div class="res_modal_tb_form">
+                                                    <div class="res_modal_margin">
+                                                        <p>
+                                                        <h3>
+                                                         <span>고객님의 휴대폰 번호는
+                                                             <b class="res_modal_b">
+                                                                 <span id="userphone">010-3001-3108</span>
+                                                            </b> / 이메일은
+                                                            <b class="res_modal_b">
+                                                                <span id="useremail">wildlegion@naver.com</span>
+                                                            </b>입니다.
+                                                        </span>
+                                                        </h3>
+                                                        </p>
+                                                    </div>
+                                                    <p class="res_modal_p">여행일정</p>
+                                                    <div>
+                                                        <table class="res_modal_table">
+                                                            <colgroup>
+                                                                <col style="width:200px;">
+                                                                <col style="width:200px;">
+                                                                <col style="width:200px;">
+                                                                <col style="width:200px;">
+                                                            </colgroup>
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">날짜</th>
+                                                                <th>출발지</th>
+                                                                <th>도착지</th>
+                                                                <th>항공사</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>12월 12일</td>
+                                                                <td>인천 T1</td>
+                                                                <td>도쿄(나리타) T2</td>
+                                                                <td>티웨이항공</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12월 15일</td>
+                                                                <td>도쿄(나리타) T2</td>
+                                                                <td>인천 T1</td>
+                                                                <td>티웨이항공</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <p class="res_modal_p">탑승객 정보</p>
+                                                    <div class="">
+                                                        <table class="res_modal_table">
+                                                            <colgroup>
+                                                                <col style="width:80px;">
+                                                                <col style="width:130px;">
+                                                                <col style="width:130px;">
+                                                                <col style="width:140px;">
+                                                                <col style="width:auto">
+                                                            </colgroup>
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">NO</th>
+                                                                <th>영문 성</th>
+                                                                <th>영문 이름</th>
+                                                                <th scope="col">성별</th>
+                                                                <th scope="col">생년월일</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>SUNG</td>
+                                                                <td>MINKYEONG</td>
+                                                                <td>남자</td>
+                                                                <td>1991-05-22</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="res_modal_check">
+                                                        <strong>예약 후 정보를 변경할 수 없어요. 한번 더 확인해주세요.</strong>
+                                                        <p>여권상의 영문명과 동일한지 꼭 확인해주세요. 잘못된 정보 입력 시 탑승할 수 없습니다.</p>
+                                                    </div>
+                                                    <p class="res_modal_btn">
+                                                        <label for="radioChk0">
+                                                            <input type="checkbox" id="radioChk0"
+                                                                   class="res_modal_check_btn" name="radioChk" value="N"
+                                                                   onclick="enableConfirmButton()">
+                                                            <span class=""></span>위 내용을 확인했습니다.
+                                                        </label>
+                                                    </p>
+
+                                                    <div class="res_modal_btn_area">
+                                                        <button class="btn res_modal_btn2" type="button"
+                                                                onclick="resetForm()">
+                                                            다시입력
+                                                        </button>
+
+                                                        <button class="btn res_modal_btn2" type="button" id="confirmYn"
+                                                                disabled>
+
+                                                        <button class="btn res_modal_btn2" type="button" id="confirmYn" disabled
+                                                                data-bs-toggle="modal" data-bs-target="#additionalModal">
+
+                                                            확인
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <%-- 모달 끝--%>
+                                    <%-- 카카오 모달--%>
+                                    <div class="modal res_modal_add2" id="additionalModal" tabindex="-1" aria-labelledby="additionalModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="res_modal_form2">
+                                                <div class="modal-header res_kko_header">
+                                                    <h3 class="modal-title res_kko_title" id="additionalModalLabel">항공권 예약 문자</h3>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body res_kko_p">
+                                                    <p>예약하신 항공권을 카카오톡으로 보내드릴까요?</p>
+                                                    <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary res_kko_btn" onclick="sendOption('N')">괜찮아요</button>
+                                                    <button type="button" class="btn btn-primary res_kko_btn" onclick="sendOption('Y')">보내주세요</button>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1889,7 +2036,35 @@
     }
 
     document.getElementById("agreeMyLink").click();
+
+    function enableConfirmButton() {
+        var checkbox = document.getElementById("radioChk0");
+        var confirmButton = document.getElementById("confirmYn");
+
+        // 체크박스가 선택되었을 때 버튼 활성화
+        confirmButton.disabled = !checkbox.checked;
+    }
+
+    function resetForm() {
+        // 다시입력 버튼 클릭 시 동작할 내용 추가
+        // 예: 입력된 내용 초기화 또는 페이지 새로고침
+    }
+
+
+
+    // 카카오 모달
+    function sendOption(option) {
+        if (option === 'N') {
+            // '괜찮아요' 버튼 클릭 시 모달 창 닫기
+            $('#additionalModal').modal('hide');
+        } else if (option === 'Y') {
+            // '보내주세요' 버튼 클릭 시 알림 창 띄우기
+            alert('성공적으로 전송했습니다.');
+            $('#additionalModal').modal('hide');
+        }
+    }
+
 </script>
 
 <!-- footer.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

@@ -5,8 +5,6 @@
 <!-- header.jsp -->
 <%@ include file="../layout/header.jsp" %>
 
-
-
 <!-- TODO 여기서부터 main영역 -->
 
 	<main class="sign_in_page">
@@ -18,24 +16,32 @@
 						<div class="flex-column w-100">
 							<div class="form-group w-80 mx-auto pt-2 mt-2 mt-5">
 								<label for="realname">이름*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="realname"
+									class="form-control mt-2 me-2 p-2" name="realName"
 									id="realname" placeholder="이름을 입력해주세요" />
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="userId">아이디*</label><br> <input type="text"
 									class="form-control w-70 mt-2 p-2 d-inline" name="username" id="userId"
-									placeholder="아이디를 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline">중복확인</button>
+									placeholder="아이디를 입력해주세요" /><button type="button" class="double_check btn btn-primary ms-1 align-baseline">중복확인</button>
 							</div>
-							<div class="form-group w-80 mx-auto pt-2 mt-2">
-								<label for="email">이메일*</label><br> <input type="text"
-									class="form-control w-70 mt-2 p-2 d-inline" name="email"
-									id="email" placeholder="이메일을 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline">인증하기</button>
-							</div>
-							<div class="form-group w-80 mx-auto pt-2 mt-2">
-								<label for="userTel">연락처*</label> <input type="text"
-									class="form-control mt-2 me-2 p-2" name="phoneNumber"
-									id="userTel" placeholder="연락처를 입력해주세요" />
-							</div>
+							   <div class="form-group w-80 mx-auto pt-2 mt-2">
+                            <label for="email">이메일*</label><br> <input type="text"
+                                    class="form-control w-70 mt-2 p-2 d-inline"
+                                    name="email"
+                                    id="email" placeholder="이메일을 입력해주세요"/>
+                            <button type="button" class="bring_number_btn btn btn-primary ms-1 align-baseline" >인증하기</button>
+                              <input type="text"
+                                    class="form-control w-70 mt-2 p-2"
+                                    id="verifyNumber" placeholder="인증번호를 입력해주세요"/>
+                            <button type="button" class="verify_btn btn btn-primary ms-1 align-baseline" >인증받기</button>
+                          
+                        	</div>
+                        	<div class="form-group w-80 mx-auto pt-2 mt-2">
+                            <label for="userTel">연락처*</label> <input type="text"
+                                                                     class="form-control mt-2 me-2 p-2"
+                                                                     name="phoneNumber"
+                                                                     id="userTel" placeholder="연락처를 입력해주세요"/>
+                        </div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="password">비밀번호*</label> <input type="password"
 									class="form-control mt-2 me-2 p-2" name="password"
@@ -46,31 +52,20 @@
 									type="password" class="form-control mt-2 me-2 p-2"
 									id="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요" />
 							</div>
-							<div class="form-group w-80 mx-auto pt-2 mt-3 mb-4">
-								<input type="checkbox" class="w-10" name="termsAll" /><label
-									class="terms align-top">전체 약관 동의</label>
-								<p class="terms_info lh-sm">선택 정보에 대한 동의를 포함합니다. 전체 동의하기 선택
-									후 선택정보에 대한 동의를 변경 하실 수 있습니다.</p>
-							</div>
-							<div class="border w-80 mx-auto pt-2 mt-2">
+							<div class="border w-80 mx-auto pt-4 mt-5">
 								<div class="form-group w-85 mx-auto pt-2 mt-2">
 									<input type="checkbox" class="w-10" name="termsInsert" /><label
 										class="terms_font_size lh-sm align-top">[필수] 회원가입 및
 										운영약관 동의</label>&nbsp; <a href="#" class="term_contents float-end">></a>
 								</div>
-								<div class="form-group w-85 mx-auto pt-2 mt-2">
+								<div class="form-group w-85 mx-auto pt-2 mt-2 mb-5">
 									<input type="checkbox" class="w-10" name="termsPrivacy" /><label
 										class="terms_font_size lh-sm align-top">[필수] 개인정보 수집 및
 										이용 동의</label> <a href="#" class="term_contents float-end">></a>
 								</div>
-								<div class="form-group w-85 mx-auto pt-2 mt-2 mb-4">
-									<input type="checkbox" class="w-10" name="termsLocationInfo" /><label
-										class="terms_font_size lh-sm align-top">[필수] 위치 정보
-										이용약관 동의</label>&nbsp; <a href="#" class="term_contents float-end">></a>
-								</div>
 							</div>
-							<div class="form-group w-75 mx-auto mb-5 mt-4">
-								<button type="submit" class="btn btn-primary p-2 w-100">회원가입</button>
+							<div class="form-group w-80 mx-auto mt-4 mb-5">
+								<button type="button" class="submit_btn btn btn-primary p-2 w-100">회원가입</button>
 							</div>
 						</div>
 					</form>
@@ -78,10 +73,9 @@
 			</div>
 		</div>
 </main>
-
 </div>
 </div>
 
-<!-- <script src="/js/javascript.js"></script> -->
+<script src="/js/sign_up.js"></script>
 <!-- footer.jsp  -->
 <%@ include file="../layout/footer.jsp"%>
