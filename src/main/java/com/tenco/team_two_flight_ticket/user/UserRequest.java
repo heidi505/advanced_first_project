@@ -14,6 +14,8 @@ public class UserRequest {
     @ToString
     public static class SignUpDTO{
         @NotEmpty
+        private String realName;
+        @NotEmpty
         private String username;
         @NotEmpty
         @Email(message = "이메일 형식으로 입력해주세요")

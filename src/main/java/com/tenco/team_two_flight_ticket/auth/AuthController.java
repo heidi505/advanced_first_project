@@ -53,6 +53,12 @@ public class AuthController {
     //회원 가입
     @PostMapping("/sign-up")
     public String signUpProc(@Valid UserRequest.SignUpDTO dto, Errors errors){
+        System.out.println("1: 실명" + dto.getRealName());
+        System.out.println("2: 유저아이디" + dto.getUsername());
+        System.out.println("3: 이메일" + dto.getEmail());
+        System.out.println("4: 비번" + dto.getPassword());
+        System.out.println("5: 비번체크" + dto.getPasswordCheck());
+        
         userService.signUp(dto);
         return "redirect:/sign-in";
     }
@@ -116,10 +122,16 @@ public class AuthController {
         return "/user/findPassword";
     }
 
+    @ResponseBody
     @GetMapping("/find-password/email")
-    public String sendEmailforPwd(@RequestParam String email){
-        userService.setPassword(email);
-        return "redirect:/sign-in";
+    public ResponseEntity<ApiUtils.ApiResult<String>> sendEmailforPwd(@RequestParam String email){
+        String message = userService.findUserByEmail(email);
+
+        if (message.equals("있음")){
+            message = userService.setPassword(email);
+        }
+
+        return ResponseEntity.ok().body(ApiUtils.success(message));
     }
 
 

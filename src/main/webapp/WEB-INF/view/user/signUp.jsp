@@ -7,32 +7,31 @@
 
 
 <!-- TODO 여기서부터 main영역 -->
-
 <main class="sign_in_page">
     <div class="container">
         <div class="section">
             <div class="mx-auto w-35">
                 <div class="top_bar p-3 border"><h2>회원가입</h2></div>
-                <form class="d-flex border" action="sign-up" method="post">
+                <form class="d-flex border" action="/sign-up" method="post">
                     <div class="flex-column w-100">
                         <div class="form-group w-80 mx-auto pt-2 mt-2 mt-5">
-                            <label for="realname">이름*</label> <input type="text"
-                                                                     class="form-control mt-2 me-2 p-2" name="realname"
-                                                                     id="realname" placeholder="이름을 입력해주세요"/>
+                            <label for="realName">이름*</label> <input type="text"
+                                                                     class="form-control mt-2 me-2 p-2" name="realName"
+                                                                     id="realName" placeholder="이름을 입력해주세요"/>
                         </div>
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
                             <label for="userId">아이디*</label><br> <input type="text"
                                                                         class="form-control w-70 mt-2 p-2 d-inline"
                                                                         name="username" id="userId"
                                                                         placeholder="아이디를 입력해주세요"/>
-                            <button class="btn btn-primary ms-1 align-baseline">중복확인</button>
+                            <button class="btn btn-primary ms-1 align-baseline" onclick="usernameCheck(event)">중복확인</button>
                         </div>
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
                             <label for="email">이메일*</label><br> <input type="text"
                                                                        class="form-control w-70 mt-2 p-2 d-inline"
                                                                        name="email"
                                                                        id="email" placeholder="이메일을 입력해주세요"/>
-                            <button class="btn btn-primary ms-1 align-baseline">인증하기</button>
+                            <button class="btn btn-primary ms-1 align-baseline" onclick="emailCheck(event)">인증하기</button>
                         </div>
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
                             <label for="userTel">연락처*</label> <input type="text"
@@ -50,7 +49,7 @@
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
                             <label for="passwordCheck">비밀번호 확인*</label> <input
                                 type="password" class="form-control mt-2 me-2 p-2"
-                                id="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요"/>
+                                id="passwordcheck" name="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요"/>
                         </div>
                         <div class="border w-80 mx-auto pt-2 mt-2">
                             <div class="form-group w-85 mx-auto pt-2 mt-2">

@@ -22,6 +22,10 @@
     </select>
 
     <update id="updatePassword">
-        update user_tb set password = #{password} where id = #{userId}
+        update user_tb set password = #{password} where email = #{email}
     </update>
+
+    <select id="findUserByEmail" resultType="com.tenco.team_two_flight_ticket.user.User">
+        select * from user_tb where email = #{email}
+    </select>
 </mapper>
