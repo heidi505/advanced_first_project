@@ -1,0 +1,520 @@
+/* 프리뷰 페이지 */
+.preview_header {
+    text-align: center;
+}
+
+.preview_title {
+    background-color: var(--primary_01);
+    text-align: center;
+}
+
+.preview_form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.preview_left_form {
+    width: 75%;
+    display: block;
+}
+
+.preview_form_box {
+    display: block;
+}
+
+.preview_form_margint {
+    margin-top: 15px;
+}
+
+.preview_form_marginb {
+    margin-bottom: 15px;
+}
+
+.preview_btn_to_form {
+    padding: 2px;
+    border-radius: 7%;
+}
+
+.preview_form_padding {
+    padding: 10px;
+}
+
+.preview_li_box {
+    border: 1px solid var(--form);
+}
+
+.preview_li_box_top {
+    border-bottom: 1px solid var(--line);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.preview_airport_img {
+    width: 2em;
+    height: 2em;
+    margin-right: 10px;
+}
+
+.preview_baggage {
+    display: flex;
+    margin: 20px;
+}
+
+.preview_baggage_left {
+    width: 25%;
+}
+
+.preview_baggage_bottom {
+    margin-top: 5px;
+}
+
+.prview_baggage_right {
+    width: 10%;
+    text-align: end;
+}
+
+.preview_baggage_line {
+    background: url(../images/ico_from_to.png);
+    block-size: auto 100%;
+    background-repeat: repeat-y;
+    display: inline-block;
+    line-height: 1.87em;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: transparent;
+    margin-left: 45px;
+}
+
+.prview_baggage_rightm {
+    margin-bottom: 5px;
+}
+
+.preview_price_form {
+    width: 25%;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.preview_price_detail {
+    color: var(--primary_02);
+    font-weight: 800;
+    margin-left: 10px;
+}
+
+.preview_price_img {
+    width: 1em;
+    height: 1em;
+}
+
+.preview_price_line {
+    border-bottom: 1px solid var(--form);
+    padding: 10px;
+}
+
+.preview_price_total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.preview_price_total2 {
+    margin-left: 20px;
+}
+
+.preview_price_tax {
+    margin-left: 20px;
+    font-size: x-small;
+}
+
+.preview_price_marginr {
+    margin-right: 35px;
+}
+
+.preview_price_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.preview_price_btnw {
+    width: 250px;
+}
+
+/* 예약 상세 페이지 */
+
+.detail_info_form {
+    border: 1px solid var(--form);
+    margin-top: 50px;
+}
+
+.detail_info_thead {
+    margin: 0px;
+    border: 0px;
+    vertical-align: baseline;
+}
+
+.detail_info_th {
+    text-align: center;
+    border-bottom: 1px solid var(--form);
+}
+
+.detail_info_span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.detail_info_span2 {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.detail_info_span3 {
+    display: block;
+}
+
+.detail_info_span4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail_info_img {
+    width: 2em;
+    height: 2em;
+}
+
+.detail_war_form {
+    background-color: var(--box_bg);
+    line-height: 1.5;
+}
+
+.detail_res_title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.detail_res_form {
+    border: 1px solid var(--form);
+    padding: 15px;
+}
+
+.detail_group_padding {
+    padding: 15px;
+}
+
+.detail_group_maginb {
+    margin-bottom: 10px;
+}
+
+.detail_input {
+    border: 1px solid var(--form);
+}
+
+.detail_email {
+    margin-left: 1px;
+}
+
+.detail_input_war {
+    font-size: smaller;
+}
+
+.detail_group_padding2 {
+    padding: 15px;
+    display: flex;
+}
+
+.detail_name {
+    display: block;
+    margin-right: 15px;
+}
+
+.detail_name_input {
+    border: 1px solid var(--form);
+    padding: 10px;
+}
+
+.detail_agree_form {
+    max-width: 1000px;
+}
+
+.detail_agree_title {
+    font-weight: bold;
+    color: var(--primary_02);
+}
+
+.detail_agree_form {
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+}
+
+.detail_agree_box {
+    float: left;
+    width: 100%;
+}
+
+.detail_boldb {
+    color: var(--primary_02);
+    font-weight: bold;
+}
+
+.detail_boldr{
+    color: var(--cancle);
+}
+
+.detail_baggage{
+    margin-top: 0px;
+}
+
+.detail_main_form{
+    display: flex;
+}
+
+.detail_left_from{
+    width: 75%;
+}
+
+.detail_right_form{
+    width: 25%;
+}
+
+#reservation_detail_page .preview_price_form {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.detail_hidden_label{
+    display: none;
+}
+
+/* 예약하기 모달창 */
+
+.res_modal_add{
+    --bs-modal-width: 850px;
+}
+
+.res_modal_add2{
+    --bs-modal-width: 550px;
+}
+
+.res_modal_form{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    outline: 0;
+    height: 100%;
+}
+
+.res_modal_form2{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    outline: 0;
+    height: 100%;
+}
+
+
+.res_modal_tb_form{
+    padding: 30px 40px 45px;
+    display: block;
+}
+
+.res_modal_margin{
+    margin-bottom: 2em;
+}
+
+.res_modal_table {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.res_modal_b{
+    color: var(--primary_02);
+}
+
+.res_modal_p{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.res_modal_table th, .res_modal_table td {
+    border-bottom: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    padding: 10px;
+}
+
+.res_modal_table th {
+    border-bottom: 1px solid var(--form);
+    border-top: 1px solid var(--form);
+}
+
+.travel-table caption {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.res_modal_check{
+    margin-bottom: 56px;
+    padding: 16px 40px;
+    border-radius: 4px;
+    background-color: var(--form);
+}
+
+.res_modal_btn{
+    height: 20px;
+    margin-bottom: 32px;
+    line-height: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.res_modal_btn2{
+    border-radius: 20px;
+}
+
+.res_modal_check_btn{
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.res_modal_btn_area{
+    text-align: center;
+}
+
+.res_kko_header{
+    background-color: var(--primary_01);
+}
+
+.res_kko_title{
+    font-weight: bold;
+}
+
+.res_kko_p{
+    line-height: 1.5;
+    padding: 30px;
+}
+
+.res_kko_btn{
+    width: 180px;
+}
+
+/* 로딩 페이지 */
+
+.loading{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background:#fff;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
+
+.loading_bg{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../images/loading_bg.jpg") no-repeat center;
+    background-size: cover;
+}
+
+.loading_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* 뷰포트 높이 만큼 요소를 확장하여 화면 가로세로 중앙에 배치 */
+    color: var(--basic_wh);
+}
+
+.form2{
+    font-size: large;
+}
+
+.loading_title {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    font-size: xx-large;
+}
+
+.k1_fromto_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dep-arr {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 0 10px; /* 필요에 따라 조절 */
+    line-height: 1.2;
+    width: 6em;
+}
+
+.image-container {
+    position: absolute;
+    top: 50%; /* 상위 요소의 세로 중앙에 맞추기 */
+    left: 50%; /* 상위 요소의 가로 중앙에 맞추기 */
+    transform: translate(-50%, -50%); /* 세로 가로 중앙에 정렬 */
+}
+
+.overlay-image{
+    display: block;
+    margin: auto;
+    position: absolute;
+}
+
+.loading_city{
+    font-weight: 1000;
+}
+
+
+/* 애니메이션 */
+
+@keyframes moveUpDown {
+    0% {
+        transform: translateY(50px);
+    }
+    50% {
+        transform: translateY(100px);
+    }
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+.animated-svg {
+    width: 100px;
+    height: 100px;
+    animation: moveUpDown 1.8s ease-in-out infinite;
+}
+
+.loading_ani {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    line-height: 1.2;
+    width: 6em;
+}
