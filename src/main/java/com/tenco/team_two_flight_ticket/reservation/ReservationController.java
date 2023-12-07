@@ -11,26 +11,26 @@ public class ReservationController {
     }
 
     // http://localhost:8080/reservation/detail
-    @GetMapping("/reservation/detail")
-    public String detail() {
-        return "/reservation/reservationDetail";
-    }
 
-    @GetMapping("/reservation/cancel")
-    public String cancel() {
-        return "/reservation/cancelReservation";
-    }
-
-    @GetMapping("/reservation/payed")
-    public String payed() {
-        return "/reservation/paymentEnd";
-    }
-
-    @GetMapping("/reservation/final-result")
-    public String finalResult() {
-        return "/reservation/finalResult";
-    }
-
+ 	@GetMapping("/reservation/detail")
+ 	public String detail() {
+ 		return "/reservation/reservationDetail";
+ 	}
+ 	
+ 	@GetMapping("/reservation/cancel")
+ 	public String cancel() {
+ 		return "/reservation/cancelReservation";
+ 	}
+    
+ 	@GetMapping("/reservation/payed")
+ 	public String payed() {
+ 		return "/reservation/paymentEnd";
+ 	}
+ 	
+ 	@GetMapping("/reservation/final-result")
+ 	public String finalResult() {
+ 		return "/reservation/finalResult";
+ 	}
 
     @GetMapping("/detail")
     public String test4() {
@@ -48,5 +48,15 @@ public class ReservationController {
     @GetMapping("/regulation")
     public String test05(){
         return "reservation/fareRegulation";
+    }
+
+    @GetMapping("/loading")
+    public String loadingTest(){
+        return "reservation/loadingPageSample";
+    }
+
+    @GetMapping("/loading2")
+    public String loadingTest2(){
+        return "reservation/loadingPage";
     }
 }
