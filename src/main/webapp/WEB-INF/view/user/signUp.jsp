@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header.jsp -->
 <%@ include file="../layout/header.jsp" %>
-
 
 
 <!-- TODO 여기서부터 main영역 -->
@@ -29,7 +28,11 @@
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="email">이메일*</label><br> <input type="text"
 									class="form-control w-70 mt-2 p-2 d-inline" name="email"
-									id="email" placeholder="이메일을 입력해주세요" /><button class="btn btn-primary ms-1 align-baseline">인증하기</button>
+									id="email" placeholder="이메일을 입력해주세요" /><button type="button" class="bring_number_btn btn btn-primary ms-1 align-baseline">인증하기</button>
+							</div>
+							<div class="form-group w-80 mx-auto pt-2 mt-2">
+								<input type="text" class="form-control w-70 mt-2 p-2"
+									id="verify_number" placeholder="인증번호를 입력해주세요" /><button type="button" class="verify_btn btn btn-primary ms-1 align-baseline" >인증받기</button>
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="userTel">연락처*</label> <input type="text"
@@ -39,7 +42,7 @@
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="password">비밀번호*</label> <input type="password"
 									class="form-control mt-2 me-2 p-2" name="password"
-									id="password" placeholder="영문, 숫자, 특수문자 2가지 조합 8~15자" />
+									id="password" placeholder="영문, 숫자, 특수문자 3가지 조합 8~15자" />
 							</div>
 							<div class="form-group w-80 mx-auto pt-2 mt-2">
 								<label for="passwordCheck">비밀번호 확인*</label> <input
@@ -77,10 +80,11 @@
 				</div>
 			</div>
 		</div>
+    </div>
 </main>
+</div>
+</div>
 
-</div>
-</div>
 
 <script src="/js/sign_up.js"></script>
 <!-- footer.jsp  -->

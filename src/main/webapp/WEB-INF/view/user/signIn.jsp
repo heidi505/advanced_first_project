@@ -6,12 +6,11 @@
 <%@ include file="../layout/header.jsp"%>
 
 
-
 <!-- TODO 여기서부터 main영역 -->
 	<main class="sign_in_page">
 		<div class="container">
 			<div class="section">
-				<div class="mx-auto w-35 border">
+				<div class="mx-auto w-50 border">
 					<div class="top_bar p-3 border"><h2>로그인</h2></div>
 					<div class="d-flex flex-column w-100">
 						<form action="sign-in" method="post">
@@ -47,4 +46,4 @@
 
 <script src="js/javascript.js"></script>
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- header.jsp -->
@@ -16,7 +16,7 @@
     	<div class="left_profile float-start w-25">
     	<div class="picture text-center mb-4 mx-4 p-5 border">
     	<img src="/images/git_img.png" alt="" name="" class="profile_image mx-auto d-block"/>
-    	<label for="form-label" class="my-4 fs-5">${principal.username}</label>
+    	<div class="my-4 fs-5">${principal.username}</div>
     	<p class="left_profile_text">프로필 관리</p>
     	 </div>
     	<div class="coupon_profile col ">
@@ -31,43 +31,43 @@
     	<div class="picture text-center w-100">
     	<img src="/images/git_img.png" alt="" name="" class="input_profile_image mx-auto d-block"/>
     	<!-- 뱃지 추가 필요 -->
-    	<label for="form-label" class="my-4">${principal.username}</label>
+    	<div class="my-4">${principal.username}</div>
     	</div>
     	<!-- 프로필 사진 창 끝 -->
         <div class="row row-cols-2 w-100 mx-auto">
     	<div class="type_name form-group col p-3">
-    	<label for="realName">이름</label>
+    	<p for="realName">이름</p>
     	</div>
     	<div class="form-group col w-75 mb-3 p-3 ms-2">
     	<span class="realName">${principal.username}</span>
     	</div>
     	<div class="type_name form-group col p-3">
-    	<label for="userName">아이디</label>
+    	<p for="userName">아이디</p>
     	</div>
     	<div class="form-group col w-75 mb-3 p-3 ms-2">
     	<span class="userName">${principal.username}</span>
     	</div>
     	<div class="type_name form-group col p-3">
-    	<label for="userTel">연락처</label>
+    	<p class="userTel">연락처</p>
     	</div>
     	<div class="form-group col w-75 mb-3 p-3 ms-2">
     	<span class="userTel">${principal.phoneNumber}</span>
     	</div>
     	<div class="type_name form-group col p-3">
-    	<label for="email">이메일</label>
+    	<p class="email">이메일</p>
     	</div>
     	<div class="form-group col w-75 mb-3 p-3 ms-2">
     	<span class="email">${principal.email}</span>
     	</div>
     	<div class="type_name col p-3">
-    	<label for="snsLink" class="me-5">SNS 연동</label>
+    	<p class="snsLink" class="me-5">SNS 연동</p>
     	</div>
     	<div class="form-group col  form-check form-switch w-75 mb-3 p-3 ms-2">
     	<label for="kakaoLink" class="me-5"><img src="https://dffoxz5he03rp.cloudfront.net/icons/kakaotalk-logo.svg"/>     카카오 연동</label>
-    	<input type="checkbox" class=" form-check-input sns_link float-end" role="switch"/>
+    	<input type="checkbox" id="kakaoLink" class=" form-check-input sns_link float-end" role="switch"/>
     	</div>
     	<div class="type_name form-group col p-3">
-    	<label for="password" class="me-5">비밀번호</label>
+    	<p for="password" class="me-5">비밀번호</p>
     	</div>
     	<div class="form-group col w-75 mb-5 p-3 ms-2">
     	<span>*******</span>
@@ -80,7 +80,6 @@
     	<!-- 프로필 관리 창 끝 -->
     	</div>
     	</main>
-    	
 </div>
 </div>
 

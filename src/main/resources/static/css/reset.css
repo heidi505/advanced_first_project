@@ -1,8 +1,7 @@
-@font-face {
-    font-family: 'S-CoreDream-3Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 html,
@@ -92,6 +91,7 @@ video {
     font-size: 100%;
     vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -106,26 +106,35 @@ nav,
 section {
     display: block;
 }
+
 body {
     line-height: 1;
+}
+.nav_container {
+    max-width: 1060px;
+    margin: 0 auto;
 }
 ol,
 ul {
     list-style: none;
     list-style-type: none;
 }
+
 a:hover {
     --bs-link-color-rgb: var(--basic_03);
 }
+
 a {
     color: var(--basic_03);
     text-decoration: none;
     display: inline-block;
 }
+
 blockquote,
 q {
     quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -133,19 +142,23 @@ q:after {
     content: "";
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 img {
     max-width: 100%;
 }
+
 button {
     border: none;
     outline: none;
     background-color: inherit;
     cursor: pointer;
 }
+
 .btn-check:checked + .btn,
 .btn.active,
 .btn.show,
@@ -155,56 +168,70 @@ button {
     background-color: var(--primary_01);
     border-color: var(--primary_01);
 }
+
 .btn {
     width: 100px;
     height: 42px;
 }
+
 .btn:hover {
     color: var(--basic_wh);
     background-color: var(--primary_02);
     border-color: var(--primary_02);
 }
+
 .btn-primary {
     color: var(--basic_wh);
     background-color: var(--primary_01);
     border-color: var(--primary_01);
     transition: all 0.3s;
+    white-space: nowrap;
 }
+
 .tab_menu li a.tab_active {
     background-color: var(--primary_02);
     color: var(--basic_wh);
     width: 100%;
     border-radius: 5px;
 }
+
 .tab_menu li {
     padding: 5px 0;
 }
+
 h1 {
     font-size: 32px;
 }
+
 h2 {
     font-size: 24px;
 }
+
 h3 {
     font-size: 20px;
 }
+
 h4 {
     font-size: 18px;
 }
+
 .form-control:focus {
     color: var(--basic_03);
     border-color: var(--primary_01);
     box-shadow: 0 0 0 0;
 }
+
 select::-ms-expand {
     display: none;
 }
+
 .select {
     -o-appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
+
 ::marker {
     display: none;
 }
@@ -213,6 +240,7 @@ textarea {
     outline: none;
     resize: none;
 }
+
 /*.table > :not(caption) > * > * {*/
 /*    padding: 0.5rem 0.5rem;*/
 /*    !* color: var(--bs-table-color-state,var(--bs-table-color-type,var(--bs-table-color))); *!*/
@@ -224,46 +252,309 @@ textarea {
 .table {
     margin-bottom: 32px;
 }
+
 th,
 td,
 tr {
     text-align: center;
 }
+
 input::placeholder {
     color: var(--form);
     font-size: 14px;
 }
+
 input::-webkit-input-placeholder {
     color: var(--form);
     font-size: 14px;
 }
+
 input:-ms-input-placeholder {
     color: var(--form);
     font-size: 14px;
 }
+
 input {
     height: 42px;
     outline: none;
 }
+
 input[type="checkbox"] {
     height: 20px;
     margin-right: 5px;
 }
+
 .td_width80 {
     width: 80px;
 }
+
 .td_width120 {
     width: 120px;
 }
+
 .td_width160 {
     width: 160px;
 }
+
 .td_width140 {
     width: 140px;
 }
+
 .td_width180 {
     width: 180px;
 }
+
 .td_border {
     border: 0.5px solid gainsboro;
+}
+
+/*초기화*/
+.navbar-nav {
+    flex-direction: row;
+}
+.navbar-nav > li{
+    padding-right: 12px;
+}
+
+/*@media (min-width: 576px) {*/
+
+/*    .navbar-expand-sm .navbar-nav {*/
+/*        flex-direction: row;*/
+/*    }*/
+
+/*    .navbar-expand-sm {*/
+/*        flex-wrap: nowrap;*/
+/*        justify-content: flex-start;*/
+/*    }*/
+
+
+/*}*/
+
+
+.modal_title {
+    margin-bottom: 16px;
+}
+
+.modal_close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+}
+
+/* 라디오 버튼 */
+
+/* 이벤트 라디오 버튼 공통 */
+.radio_btn .radio_group:nth-child(1) {
+    margin-right: 32px;
+}
+
+.radio_btn input[type="radio"]:checked+label,
+.radio_btn input[type="radio"]:not(:checked)+label {
+    padding-left: 35px;
+    padding-top: 2px;
+}
+
+.radio_btn input[type="radio"]:checked+label,
+.radio_btn input[type="radio"]:not(:checked)+label {
+    color: var(--basic_05);
+    font-size: 18px;
+}
+
+.radio_btn input[type="radio"]:checked+label {
+    color: var(--primary_02);
+}
+
+.radio_btn input[type="radio"]:checked+label:before,
+.radio_btn input[type="radio"]:not(:checked)+label:before {
+    width: 23px;
+    height: 23px;
+}
+
+.radio_btn input[type="radio"]:checked+label:after,
+.radio_btn input[type="radio"]:not(:checked)+label:after {
+    width: 15px;
+    height: 15px;
+    top: 4px;
+    left: 4px;
+}
+
+.radio_btn input[type="radio"]:checked+label:before,
+.radio_btn input[type="radio"]:not(:checked)+label:before {
+    border: 2px solid var(--primary_02);
+}
+
+/* 라디오 버튼 커스텀 */
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="radio"]:checked+label,
+input[type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+    line-height: 18px;
+    display: inline-block;
+    color: var(--basic_05);
+    font-weight: 400;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+input[type="radio"]:checked+label {
+    color: var(--primary_02);
+}
+
+input[type="radio"]:checked+label:before,
+input[type="radio"]:not(:checked)+label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--primary_02);
+    border-radius: 100%;
+    background: #fff;
+}
+
+input[type="radio"]:checked+label:before {
+    border: 1px solid var(--primary_02);
+    border-radius: 100%;
+}
+
+input[type="radio"]:checked+label:after,
+input[type="radio"]:not(:checked)+label:after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: var(--primary_02);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+input[type="radio"]:checked+label:after {
+    opacity: 1;
+}
+
+.radio_group:nth-child(1) {
+    margin-right: 12px;
+}
+
+/* 체크박스 */
+
+/* 체크박스 */
+.check_box {
+    white-space: nowrap;
+    height: 20px;
+    display: inline-block;
+}
+
+.check_box input {
+    display: none;
+}
+
+.check_box_icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--basic_wh);
+    border: 2px solid var(--primary_02);
+    position: relative;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.check_box_txt {
+    color: var(--basic_03);
+    vertical-align: top;
+    display: inline-block;
+    padding-left: 8px;
+    font-weight: 300;
+}
+
+.check_box_icon::before,
+.check_box_icon::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 0;
+    background-color: var(--primary_02);
+    position: absolute;
+    transform-origin: left top;
+}
+
+.check_box_icon::before {
+    top: 8px;
+    left: 2px;
+    transform: rotate(-45deg);
+}
+
+.check_box_icon::after {
+    top: 13px;
+    left: 8px;
+    transform: rotate(-135deg);
+}
+
+.check_box input:checked+.check_box_icon {
+    border-color: var(--primary_02);
+    background-color: var(--primary_02);
+}
+
+.check_box input:checked~.check_box_txt {
+    font-weight: 400;
+}
+
+.check_box input:checked+.check_box_icon::before {
+    height: 7px;
+    transition: all 0.15s ease;
+    background-color: var(--basic_wh);
+}
+
+.check_box input:checked+.check_box_icon::after {
+    height: 11px;
+    transition: all 0.15s ease 0.15s;
+    background-color: var(--basic_wh);
+}
+
+/* 체크박스 */
+
+/* table */
+
+.common_table table {
+    margin-bottom: 20px;
+}
+
+.common_table {
+    line-height: 2.4;
+}
+
+.common_table tr {
+    border-bottom: 1px solid var(--line);
+}
+
+.common_table td {
+    color: var(--basic_07);
+}
+
+.common_table th {
+    color: var(--basic_03);
+    font-weight: 500;
+}
+
+.common_table thead {
+    border-top: 1px solid var(--line);
 }
