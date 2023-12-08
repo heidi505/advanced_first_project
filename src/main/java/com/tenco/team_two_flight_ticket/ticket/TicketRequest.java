@@ -8,6 +8,7 @@ public class TicketRequest {
     @Data
     @ToString
     public static class TicketSearchDTO{
+        private String origin;
 
     }
 }

@@ -71,7 +71,7 @@
                                 <div class="regions">
                                     <ul class="regions_menu tab_menu">
                                         <li>
-                                            <a href="#" data-tab="from_korea tab_active">대한민국</a>
+                                            <a href="#" data-tab="from_korea" class="tab_active">대한민국</a>
                                         </li>
                                         <li>
                                             <a href="#" data-tab="from_japan" class="regions_list_item">일본</a>
