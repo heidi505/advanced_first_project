@@ -79,7 +79,7 @@ insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(12,'OK
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(13,'NGO','나고야','일본');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(14,'KMJ','구마모토','일본');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(15,'KKJ','기타큐슈','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(16,'BKK','방콕/수완나품','');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(16,'BKK','방콕/수완나품','아시아');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(17,'DAD','다낭','아시아');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(18,'SGN','호치민','아시아');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(19,'MNL','마닐라','아시아');

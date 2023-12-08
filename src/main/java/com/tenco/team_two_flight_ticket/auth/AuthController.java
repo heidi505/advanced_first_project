@@ -3,6 +3,7 @@ package com.tenco.team_two_flight_ticket.auth;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.User;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
 import com.tenco.team_two_flight_ticket.user.UserResponse;
@@ -14,6 +15,7 @@ import org.springframework.http.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
@@ -35,12 +37,22 @@ public class AuthController {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private TicketService ticketService;
     private String email;
 
 
     //메인 페이지
     @GetMapping("/main")
-    public String mainPage(){
+    public String mainPage(Model model){
+
+        String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
+        String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
+
+        for (int i = 0; i < regions.length; i++) {
+            model.addAttribute(values[i],ticketService.getCities(regions[i]));
+        }
+
         return "main";
     }
 
