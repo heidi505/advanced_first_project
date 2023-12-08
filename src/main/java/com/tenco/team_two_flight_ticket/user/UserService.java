@@ -35,7 +35,6 @@ public class UserService {
     private HttpSession session;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private JavaMailSender javaMailSender;
     private int authNumber;

@@ -971,6 +971,7 @@
         tripRound.style.color="var(--primary_02)";
         tripOneWayDate.style.display="none";
         tripOneWay.style.color="var(--basic_bl)";
+
     })
     tripOneWay.addEventListener("click",()=> {
         tripOneWayDate.style.display="block";
