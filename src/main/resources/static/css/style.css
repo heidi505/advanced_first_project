@@ -107,7 +107,6 @@ main {
 
 .flight_search_cont {
     display: flex;
-    padding-bottom: 197px;
     justify-content: space-evenly;
 }
 
