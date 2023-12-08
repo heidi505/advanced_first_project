@@ -21,11 +21,6 @@ public class ReservationController {
  	public String cancel() {
  		return "/reservation/cancelReservation";
  	}
-    
- 	@GetMapping("/reservation/payed")
- 	public String payed() {
- 		return "/reservation/paymentEnd";
- 	}
  	
  	@GetMapping("/reservation/final-result")
  	public String finalResult() {
@@ -35,6 +30,15 @@ public class ReservationController {
     @GetMapping("/detail")
     public String test4() {
         return "reservation/detail";
+    }
+    
+    @GetMapping("/payed")
+    public String payed(){
+    	return"reservation/paymentEnd";
+    }
+    @GetMapping("/reserved")
+    public String reserved(){
+    	return"reservation/finalResult";
     }
 
 
