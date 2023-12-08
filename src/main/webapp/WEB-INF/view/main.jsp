@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="trip_one_way">
                                     <label for="datepicker2">출발일</label>
-                                    <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택"/>
+                                    <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택" id="departureDate"/>
                                 </div>
                             </div>
                             <div class="passenger_seat_field">
@@ -349,15 +349,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="korea" items="${korea}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${korea.cityCode}">
                                                             <span class="from_local_code">${korea.cityCode}</span><span
                                                                 class="from_local_airport">${korea.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${korea.cityCode}</span><span
-                                                                class="to_local_airport">${korea.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -370,15 +364,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="japan" items="${japan}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${japan.cityCode}">
                                                             <span class="from_local_code">${japan.cityCode}</span><span
                                                                 class="from_local_airport">${japan.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${japan.cityCode}</span><span
-                                                                class="to_local_airport">${japan.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -391,15 +379,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="asia" items="${asia}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${asia.cityCode}">
                                                             <span class="from_local_code">${asia.cityCode}</span><span
                                                                 class="from_local_airport">${asia.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${asia.cityCode}</span><span
-                                                                class="to_local_airport">${asia.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -412,15 +394,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="america" items="${america}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${america.cityCode}">
                                                             <span class="from_local_code">${america.cityCode}</span><span
                                                                 class="from_local_airport">${america.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName">
-                                                            <span class="to_local_code">${america.cityCode}</span><span
-                                                                class="to_local_airport">${america.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -433,15 +409,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="europe" items="${europe}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${europe.cityCode}">
                                                             <span class="from_local_code">${europe.cityCode}</span><span
                                                                 class="from_local_airport">${europe.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${europe.cityCode}</span><span
-                                                                class="to_local_airport">${europe.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -454,15 +424,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="oceania" items="${oceania}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${oceania.cityCode}">
                                                             <span class="from_local_code">${oceania.cityCode}</span><span
                                                                 class="from_local_airport">${oceania.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${oceania.cityCode}</span><span
-                                                                class="to_local_airport">${oceania.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -475,15 +439,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="middleEast" items="${middleEast}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${middleEast.cityCode}">
                                                             <span class="from_local_code">${middleEast.cityCode}</span><span
                                                                 class="from_local_airport">${middleEast.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${middleEast.cityCode}</span><span
-                                                                class="to_local_airport">${middleEast.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -496,15 +454,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="southAmerica" items="${southAmerica}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${southAmerica.cityCode}">
                                                             <span class="from_local_code">${southAmerica.cityCode}</span><span
                                                                 class="from_local_airport">${southAmerica.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${southAmerica.cityCode}</span><span
-                                                                class="to_local_airport">${southAmerica.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>
@@ -517,15 +469,9 @@
                                             <ul class="to_local_item">
                                                 <c:forEach var="africa" items="${africa}">
                                                     <li class="local_item">
-<<<<<<< HEAD
                                                         <button type="button" aria-disabled="false" name="cityName" value="${africa.cityCode}">
                                                             <span class="from_local_code">${africa.cityCode}</span><span
                                                                 class="from_local_airport">${africa.cityName}</span>
-=======
-                                                        <button type="button" aria-disabled="false" name="cityName" value="">
-                                                            <span class="to_local_code">${africa.cityCode}</span><span
-                                                                class="to_local_airport">${africa.cityName}</span>
->>>>>>> master
                                                         </button>
                                                     </li>
                                                 </c:forEach>

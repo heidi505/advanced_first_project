@@ -37,6 +37,7 @@ public class TicketController {
     @PostMapping("/flight-search")
     public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto){
         System.out.println(dto.getOriginLocationCode()+"++++++++++++++++++++");
+        System.out.println(dto.getDestinationLocationCode()+"!!!!!!!!!!!!!!!!");
 
 
         return "null";
