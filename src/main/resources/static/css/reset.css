@@ -342,16 +342,24 @@ input[type="checkbox"] {
 
 
 /*}*/
-
+button, select {
+    text-transform: none;
+    padding: 5px;
+    border-radius: 5px;
+    outline: 0;
+}
 
 .modal_title {
     margin-bottom: 16px;
 }
+.modal_title h4 {
+    font-weight: bold;
+}
 
 .modal_close {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 8px;
+    right: 8px;
     cursor: pointer;
 }
 

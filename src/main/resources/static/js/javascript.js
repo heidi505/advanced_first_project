@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    function updatePassengerSeat(seatType) {
-        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
-        let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
-        passengerSeatSpans[1].textContent = seatType;
-    }
-
     let flightSearchBg = document.querySelector(".flight_search_bg");
 
     let flightSearchClose = document.querySelectorAll(".flight_search_close");
@@ -26,10 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-
-
-
-
     // 최근 검색 삭제
 
     let commonModal = document.querySelectorAll(".common_modal");
@@ -63,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
     //  공통 모달
 
 
@@ -89,8 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.classList.add("tab_active");
             });
         });
-
     }
+    // 출발지 탭
 
     const toTabButtons = document.querySelectorAll("#to_modal .tab_menu li a");
     const toTabContents = document.querySelectorAll("#to_modal .tab-content");
@@ -116,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     }
+
 
 
     //   도시 탭버튼
@@ -197,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let passengerSeatButton = document.querySelector(".passenger_seat_btn");
         let passengerCountSpan = passengerSeatButton.querySelector("span");
-        passengerCountSpan.textContent = "승객 " + totalCount + "명";
+        passengerCountSpan.textContent = "승객 " + totalCount + " 명 ,";
     }
 
     let seatButtons = document.querySelectorAll(
@@ -215,4 +205,28 @@ document.addEventListener("DOMContentLoaded", function () {
         let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
         passengerSeatSpans[1].textContent = seatType;
     }
+
+    // 승객 좌석 선택
+
+    let transFormBtns = document.querySelectorAll(".transform_btn");
+
+    transFormBtns.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Get the values of from_select
+            const fromCode = document.querySelector("#from_select_btn .from_code_value").textContent;
+            const fromAirport = document.querySelector("#from_select_btn .from_airport_value").textContent;
+
+            // Get the values of to_select
+            const toCode = document.querySelector("#to_select_btn .to_code_value").textContent;
+            const toAirport = document.querySelector("#to_select_btn .to_airport_value").textContent;
+
+            // Swap the values
+            document.querySelector("#from_select_btn .from_code_value").textContent = toCode;
+            document.querySelector("#from_select_btn .from_airport_value").textContent = toAirport;
+
+            document.querySelector("#to_select_btn .to_code_value").textContent = fromCode;
+            document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
+        });
+    });
+
 });

@@ -221,3 +221,6 @@
 .payed_result_mark{
 	border:2px solid var(--primary_02);
 }
+.w-40 {
+	width:40%;
+}
