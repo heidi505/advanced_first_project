@@ -836,7 +836,6 @@
 </div>
 </div>
 <script>
-    // 도시 값 넣기
 
     const oneWay = document.querySelector(".one_way");
     const datepicker = document.getElementById("datepicker");
@@ -849,14 +848,23 @@
     }
 
     flatpickr(datepicker, {
+        // mode: "range",
+        // // minDate: "today",
+        // dateFormat: "Y-m-d",
+        // disable: [
+        //     function (date) {
+        //         // disable every multiple of 8
+        //         return !(date.getDate() % 8);
+        //     },
+        // ],
         mode: "range",
-        // minDate: "today",
+        minDate: "today",
         dateFormat: "Y-m-d",
         disable: [
-            function (date) {
+            function(date) {
                 // disable every multiple of 8
                 return !(date.getDate() % 8);
-            },
+            }
         ],
         time_24hr: true, // 24시간 형식 사용
         minDate: "today", // 오늘 이전 날짜 선택 비활성화
@@ -875,7 +883,7 @@
         },
         disableMobile: true, // 모바일 기기에서 위젯 비활성화
         altInput: true, // 추가 입력란 활성화
-        altFormat: "F j, Y", // 추가 입력란의 날짜 및 시간 형식
+        altFormat: "Y-m-d", // 추가 입력란의 날짜 및 시간 형식
     });
 
     flatpickr(datepicker2, {
@@ -885,7 +893,7 @@
         minDate: 'today',    // 오늘 이전 날짜 선택 비활성화
         // defaultDate: new Date(), // 초기 날짜 설정 (현재 날짜로 설정)
         locale: "ko", // 한국어로 지역화
-        altFormat: "F j, Y", // 추가 입력란의 날짜 및 시간 형식
+        altFormat: "Y-m-d", // 추가 입력란의 날짜 및 시간 형식
     });
     // 날짜 라이브러리
     //
