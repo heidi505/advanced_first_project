@@ -45,16 +45,14 @@ public class AuthController {
     //메인 페이지
     @GetMapping("/main")
     public String mainPage(Model model){
-        model.addAttribute("korea",ticketService.getCities("대한민국"));
-        model.addAttribute("japan", ticketService.getCities("일본"));
-        model.addAttribute("asia", ticketService.getCities("아시아"));
-        model.addAttribute("america", ticketService.getCities("미주"));
-        model.addAttribute("europe",ticketService.getCities("유럽"));
-        model.addAttribute("oceania",ticketService.getCities("대양주/괌"));
-        model.addAttribute("middleEast",ticketService.getCities("중동"));
-        model.addAttribute("southAmerica",ticketService.getCities("중남미"));
-        model.addAttribute("africa",ticketService.getCities("아프리카"));
-        model.addAttribute("china",ticketService.getCities("중국"));
+
+        String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
+        String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
+
+        for (int i = 0; i < regions.length; i++) {
+            model.addAttribute(values[i],ticketService.getCities(regions[i]));
+        }
+
         return "main";
     }
 
