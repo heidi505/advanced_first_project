@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
         fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
     }
 
+
+
     function valuesTo(airportCode, airportName) {
         let toSelectButtons = document.querySelector("#to_select_btn");
         console.log("to" + toSelectButtons + " 호");
@@ -31,10 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
     toButtonIcon.forEach(function (button, index) {
         button.addEventListener("click", function (event) {
             let toAirportCode = button.querySelector(".to_local_code").innerText;
-            let toAirportCodeValue = button.querySelector(".to_local_code").value;
             let toAirportName = button.querySelector(".to_local_airport").innerText;
 
-            console.log(toAirportCodeValue + "value값");
             console.log(toAirportCode.valueOf()+ "도착지값");
             console.log(`Button ${index + 1} clicked: Code - ${toAirportCode}, Name - ${toAirportName}`);
             valuesTo(toAirportCode, toAirportName);
@@ -202,25 +202,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 승객 좌석 선택
 
+    let transFormBtns = document.querySelectorAll(".transform_btn");
 
-   let tripRound = document.querySelector(".round");
-   let tripOneWay = document.querySelector(".one_way");
-   let tripRoundDate = document.querySelector(".trip_round");
-   let tripOneWayDate = document.querySelector(".trip_one_way");
+    transFormBtns.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Get the values of from_select
+            const fromCode = document.querySelector("#from_select_btn .from_code_value").textContent;
+            const fromAirport = document.querySelector("#from_select_btn .from_airport_value").textContent;
 
+            // Get the values of to_select
+            const toCode = document.querySelector("#to_select_btn .to_code_value").textContent;
+            const toAirport = document.querySelector("#to_select_btn .to_airport_value").textContent;
 
-   tripRound.addEventListener("click",()=> {
-       tripRoundDate.style.display="block";
-       tripRound.style.color="var(--primary_02)";
-       tripOneWayDate.style.display="none";
-       tripOneWay.style.color="var(--basic_bl)";
-   })
-    tripOneWay.addEventListener("click",()=> {
-        tripOneWayDate.style.display="block";
-        tripRound.style.color="var(--basic_bl)";
-        tripRoundDate.style.display="none";
-        tripOneWay.style.color="var(--primary_02)";
-    })
+            // Swap the values
+            document.querySelector("#from_select_btn .from_code_value").textContent = toCode;
+            document.querySelector("#from_select_btn .from_airport_value").textContent = toAirport;
 
-    // 왕복 편도
+            document.querySelector("#to_select_btn .to_code_value").textContent = fromCode;
+            document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
+        });
+    });
+
 });
