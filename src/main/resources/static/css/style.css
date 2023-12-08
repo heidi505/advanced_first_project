@@ -104,7 +104,12 @@ main {
     top: 25%;
     right: 12%;
 }
-
+.flight_search_cont .count_and_filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
 .flight_search_cont {
     display: flex;
     justify-content: space-evenly;

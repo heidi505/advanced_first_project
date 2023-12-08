@@ -1,10 +1,46 @@
 document.addEventListener("DOMContentLoaded", function () {
+    let fromButtonIcon = document.querySelectorAll(".from_local_item button");
+    let toButtonIcon = document.querySelectorAll(".to_local_item button");
+    console.log(toButtonIcon.values());
 
-    function updatePassengerSeat(seatType) {
-        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
-        let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
-        passengerSeatSpans[1].textContent = seatType;
+    function valuesForm(airportCode, airportName) {
+        let fromSelectButtons = document.querySelector("#from_select_btn");
+        console.log("fromselectButton" + fromSelectButtons + " 야");
+        fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
+        fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
     }
+
+
+
+    function valuesTo(airportCode, airportName) {
+        let toSelectButtons = document.querySelector("#to_select_btn");
+        console.log("to" + toSelectButtons + " 호");
+        toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
+
+        toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
+    }
+
+    fromButtonIcon.forEach(function (button, index) {
+        button.addEventListener("click", function (event) {
+            let fromAirportCode = button.querySelector(".from_local_code").innerText;
+            let fromAirportName = button.querySelector(".from_local_airport").innerText;
+
+            console.log(`Button ${index + 1} clicked: Code - ${fromAirportCode}, Name - ${fromAirportName}`);
+            valuesForm(fromAirportCode, fromAirportName);
+        });
+    });
+
+    toButtonIcon.forEach(function (button, index) {
+        button.addEventListener("click", function (event) {
+            let toAirportCode = button.querySelector(".to_local_code").innerText;
+            let toAirportName = button.querySelector(".to_local_airport").innerText;
+
+            console.log(toAirportCode.valueOf()+ "도착지값");
+            console.log(`Button ${index + 1} clicked: Code - ${toAirportCode}, Name - ${toAirportName}`);
+            valuesTo(toAirportCode, toAirportName);
+        });
+    });
+    // 도시 지역 선택한 값 넣기
 
     let flightSearchBg = document.querySelector(".flight_search_bg");
 
@@ -26,10 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-
-
-
-
     // 최근 검색 삭제
 
     let commonModal = document.querySelectorAll(".common_modal");
@@ -63,7 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
     //  공통 모달
 
 
@@ -89,8 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.classList.add("tab_active");
             });
         });
-
     }
+    // 출발지 탭
 
     const toTabButtons = document.querySelectorAll("#to_modal .tab_menu li a");
     const toTabContents = document.querySelectorAll("#to_modal .tab-content");
@@ -116,49 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     }
-
-
-    //   도시 탭버튼
-
-    let fromButtonIcon = document.querySelectorAll(".from_local_item button");
-    let toButtonIcon = document.querySelectorAll(".to_local_item button");
-
-    if (fromButtonIcon) {
-        function valuesForm(airportCode, airportName) {
-            let fromSelectButtons = document.querySelector("#from_select_btn");
-            console.log("fromselectButton" + fromSelectButtons + " 야");
-            fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
-            fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
-        }
-
-        function valuesTo(airportCode, airportName) {
-            let toSelectButtons = document.querySelector("#to_select_btn");
-            console.log("to" + toSelectButtons + " 호");
-            toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
-            toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
-        }
-
-        fromButtonIcon.forEach(function (button, index) {
-            button.addEventListener("click", function (event) {
-                let fromAirportCode = button.querySelector(".from_local_code").innerText;
-                let fromAirportName = button.querySelector(".from_local_airport").innerText;
-
-                console.log(`Button ${index + 1} clicked: Code - ${fromAirportCode}, Name - ${fromAirportName}`);
-                valuesForm(fromAirportCode, fromAirportName);
-            });
-        });
-
-        toButtonIcon.forEach(function (button, index) {
-            button.addEventListener("click", function (event) {
-                let toAirportCode = button.querySelector(".to_local_code").innerText;
-                let toAirportName = button.querySelector(".to_local_airport").innerText;
-
-                console.log(`Button ${index + 1} clicked: Code - ${toAirportCode}, Name - ${toAirportName}`);
-                valuesTo(toAirportCode, toAirportName);
-            });
-        });
-
-    }
+    // 도착지 탭
 
     let minusButtons = document.querySelectorAll(".minus");
     let plusButtons = document.querySelectorAll(".plus");
@@ -192,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let passengerSeatButton = document.querySelector(".passenger_seat_btn");
         let passengerCountSpan = passengerSeatButton.querySelector("span");
-        passengerCountSpan.textContent = "승객 " + totalCount + "명";
+        passengerCountSpan.textContent = "승객 " + totalCount + " 명 ,";
     }
 
     let seatButtons = document.querySelectorAll(
@@ -210,4 +199,28 @@ document.addEventListener("DOMContentLoaded", function () {
         let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
         passengerSeatSpans[1].textContent = seatType;
     }
+
+    // 승객 좌석 선택
+
+    let transFormBtns = document.querySelectorAll(".transform_btn");
+
+    transFormBtns.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Get the values of from_select
+            const fromCode = document.querySelector("#from_select_btn .from_code_value").textContent;
+            const fromAirport = document.querySelector("#from_select_btn .from_airport_value").textContent;
+
+            // Get the values of to_select
+            const toCode = document.querySelector("#to_select_btn .to_code_value").textContent;
+            const toAirport = document.querySelector("#to_select_btn .to_airport_value").textContent;
+
+            // Swap the values
+            document.querySelector("#from_select_btn .from_code_value").textContent = toCode;
+            document.querySelector("#from_select_btn .from_airport_value").textContent = toAirport;
+
+            document.querySelector("#to_select_btn .to_code_value").textContent = fromCode;
+            document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
+        });
+    });
+
 });
