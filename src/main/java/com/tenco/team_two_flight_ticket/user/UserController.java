@@ -71,6 +71,7 @@ public class UserController {
 
 	@GetMapping("/my-travel")
 	public String myPageTravel() {
+		
 		return "user/myTravel";
 	}
 	
