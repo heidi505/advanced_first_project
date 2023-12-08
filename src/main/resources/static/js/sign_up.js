@@ -15,6 +15,7 @@ function doubleCheck(username){
 	});
 }
 
+//인증번호 받기
 function bringNumber(email){
 	fetch(`/check/email?email=${email}`
 	,{ method: "GET",
@@ -22,13 +23,22 @@ function bringNumber(email){
 			"Content-Type": "application/json",
 			"charset": "UTF-8"
 		},
-    }).then(response => response.json())
-	  .catch(error =>{
-		alert(error.data);
+    }).then(result=>{
+		verifyBtn.style.display = 'inline-block';
+		verifyInput.style.display = 'inline';
+		alert('인증번호를 보냈습니다');
+	}).catch(error =>{
+		alert('인증번호를 보내는데 실패했습니다');
 	});
 }
 
+//인증번호로 인증하기
 function verifyNumber (key){
+	if(key.trim()==''){
+		alert('인증번호를 입력해주세요');
+		return false;
+	}
+
 	fetch(`/verify/email?key=${key}`
 	,{ method: "GET",
 		headers:{ 
@@ -47,13 +57,9 @@ function verifyNumber (key){
 }
 
 
-
-
-
-
 // 유효성 검사
 function validationForm(form) {
-	let name = form.elements["realName"].value;
+	let name = form.elements["realname"].value;
 	let userId = form.elements["username"].value;
 	let tel = form.elements["phoneNumber"].value;
 	let email = form.elements["email"].value;
@@ -147,14 +153,12 @@ window.onload = function(){
 	//이메일에 인증메일 보내기
 	bringNumberBtn.addEventListener('click',(e)=>{
 		bringNumber(email);
-		verifyBtn.style.display = 'inline-block';
-		verifyInput.style.display = 'inline';
+		
 	})
 	
 	//인증 번호 일치여부 확인
 	verifyBtn.addEventListener('click',(e)=>{
 		numberCheck =  verifyNumber(key);
-		
 	})
 	
 	//중복 체크 이벤트
@@ -166,8 +170,14 @@ window.onload = function(){
 	let submitBtn = document.getElementsByClassName('submit_btn')[0];
 	submitBtn.addEventListener('click',(e)=>{
 		if(validationForm(form)){
-			if(idCheck&&numberCheck){
-				form.submit();
+			if(idCheck){
+				if(numberCheck){
+					form.submit();	
+				} else{
+					alert('이메일 인증을 해수제요');
+				}
+			}else {
+				alert('아이디 중복체크를 해주세요');
 			}
 		}
 	});
