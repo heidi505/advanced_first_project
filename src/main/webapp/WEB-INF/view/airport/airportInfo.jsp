@@ -81,13 +81,17 @@
 			<!-- parking_fee 시작 -->
 			<div class="parking_menu w-85 mx-auto mt-5" id="3">
 			<h1 class="mb-4"><b>주차요금 체계</b></h1>
-			<h3><b class="color_primary02">p1,p2 여객주차장</b></h3>
-			<table class="parking_fee_table table w-100 mt-3">
+			
+			<c:set var="parkingFeeData" value="${list}" />
+    		<c:forEach var="item" items="${parkingFeeData.response.body.items}">
+        		<c:forEach var="fList" items="${item.value}">
+				<h3><b class="color_primary02">${fList.parkingParkingName} </b></h3>
+				<table class="parking_fee_table table w-100 mt-3">
 			<thead>
 			<tr>
 			<th rowspan="2" class="align-middle">구분</th>
-			<th colspan="2">월요일~목요일</th>
-			<th colspan="2">금요일~일요일 및 법정공휴일</th>
+			<th colspan="2">평일</th>
+			<th colspan="2">주말</th>
 			</tr>
 			<tr>
 			  <th>소형</th>
@@ -101,25 +105,33 @@
 			<td class="align-middle">1일(24시간)주차시
 			</td>
 			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
+			· 기본${fList.parkingBasicM}분  :  ${fList.parkingBasicAccount }원<br>
+			· 매 ${fList.parkingMinuteM}분  :  ${fList.parkingMinuteAccount}원 추가<br>
+			· 24시간  :  ${fList.parkingMaxAccount}원<br>
+			· 기본 ${fList.parkingFreeM}분 무료주차
 			</td>
 			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
+			· 기본${fList.parkingBasicMd}분  :  ${fList.parkingBasicAccountd }원<br>
+			· 매 ${fList.parkingMinuteMd}분  :  ${fList.parkingMinuteAccountd}원 추가<br>
+			· 24시간  :  ${fList.parkingMaxAccountd}원<br>
+			· 정산 후 ${fList.parkingCalTimeMd}분 무료주차
 			</td >
 			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
+			· 기본${fList.parkingHoliBasicM }분  :  ${fList.parkingHoliBasicAccount }원<br>
+			· 매 ${fList.parkingHoliMinuteM}분  :  ${fList.parkingHoliMinuteAccount}원 추가<br>
+			· 24시간  :  ${fList.parkingHoliMaxAccount}원<br>
+			· 기본 ${fList.parkingHoliBasicM}분 무료주차
 			</td>
 			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
+			· 기본${fList.parkingHoliBasicMd}분  :  ${fList.parkingHoliBasicAccoutd}원<br>
+			· 매 ${fList.parkingHoliMinuteMd}분  :  ${fList.parkingHoliMinuteAccountd}원 추가<br>
+			· 24시간  :  ${fList.parkingHoliMaxAccountd}원<br>
+			· 기본 ${fList.parkingHoliBasicMd}분 무료주차<br>
 			</td>
+			</tr>
+			<tr>
+			<td class="py-3">정산 시</td>
+			<td colspan="4" class="py-3">정산 후 ${fList.parkingCalTimeM}분 무료주차</td>
 			</tr>
 			<tr>
 			<td class="py-3">1일 추가 주차시</td>
@@ -127,55 +139,9 @@
 			</tr>
 			</tbody>
 			</table>
-			<!-- 주차장 요금 정보 테이블1 끝 -->
+        		</c:forEach>
+   		 	</c:forEach>
 			<!-- 주차장 요금 정보 테이블2 시작 -->
-			<h3><b class="color_primary02">p1,p2 여객주차장</b></h3>
-			<table class="parking_fee_table table w-100 mt-3">
-			<thead>
-			<tr>
-			<th rowspan="2" class="align-middle">구분</th>
-			<th colspan="2">월요일~목요일</th>
-			<th colspan="2">금요일~일요일 및 법정공휴일</th>
-			</tr>
-			<tr>
-			  <th>소형</th>
-			  <th>대형</th>
-			  <th>소형</th>
-			  <th>대형</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-			<td class="align-middle">1일(24시간)주차시
-			</td>
-			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
-			</td>
-			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
-			</td >
-			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
-			</td>
-			<td class="lh-lg py-5 pe-5 text-start">
-			· 기본30분:900원<br>
-			· 매 10분:300원 추가<br>
-			· 24시간:10,000원
-			</td>
-			</tr>
-			<tr>
-			<td class="py-3">1일 추가 주차시</td>
-			<td colspan="4" class="py-3">상기요금 반복적용</td>
-			</tr>
-			</tbody>
-			</table>
-			<!-- 주차장 요금 정보 테이블2 끝 -->
 			<!-- 주차장 요금 정보 div 끝 -->
 			<div class="lh-base">
 			<span class="color_primary02">·</span>
