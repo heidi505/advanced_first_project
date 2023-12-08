@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
-import com.tenco.team_two_flight_ticket.reservation.Reservation;
 import com.tenco.team_two_flight_ticket.reservation.ReservationService;
 
 import jakarta.servlet.http.HttpSession;
@@ -70,9 +69,11 @@ public class UserController {
 	}
 
 	@GetMapping("/my-travel")
-	public String myPageTravel(@RequestParam(name = "enums", defaultValue = "예정", required = false)StatusEnum statusEnum) {
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		List<Reservation> myTravelList = reservationService.getMyTravel(principal, statusEnum);
+	public String myPageTravel(@RequestParam(name = "enums", defaultValue = "예정", required = false)StatusEnum statusEnum, Model model ) {
+		//User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		//List<Reservation> myTravelList = reservationService.getMyTravel(principal, statusEnum);
+		
+		//model.addAttribute("myTravelList",myTravelList);
 		
 		return "user/myTravel";
 	}
