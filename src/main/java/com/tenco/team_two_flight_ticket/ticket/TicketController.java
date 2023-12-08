@@ -31,6 +31,8 @@ public class TicketController {
         return "flightTicket/flightSearch";
     }
 
+
+
     //각 버튼 누르면 string 전달되면서 where 절에 넣고 각 데이터 돌려줌
     @GetMapping("/cities-list")
     public ResponseEntity<ApiUtils.ApiResult<List<City>>> citiesList(@RequestParam(defaultValue = "대한민국") String region){

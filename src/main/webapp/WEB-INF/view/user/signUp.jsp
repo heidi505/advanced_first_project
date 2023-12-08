@@ -33,7 +33,7 @@
                                                                        id="email" placeholder="이메일을 입력해주세요"/>
                             <button type="button" class="bring_number_btn btn btn-primary ms-1 align-baseline">인증하기</button>
                         </div>
-                        <div class="form-group w-80 mx-auto pt-2 mt-2">
+                        <div class="form-group w-80 mx-auto pt-2 mt-2 d-inline verify_form">
                            <input type="text"  
                            		class="form-control w-70 mt-2 p-2"
                               id="verifyNumber"   placeholder="인증번호를 입력해주세요"/>

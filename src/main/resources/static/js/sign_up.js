@@ -1,5 +1,5 @@
-function doubleCheck(username){
-	fetch(`/check/username?username=${username}`
+async function doubleCheck(username){
+	await fetch(`/check/username?username=${username}`
 	,{ method: "GET",
 		headers:{ 
 			"Content-Type": "application/json",
@@ -75,7 +75,7 @@ function validationForm(form) {
 		alert("아이디를 입력하세요.");
 			return false;
 	}
-	let emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	let emailCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	if (!email||!emailCheck.test(email)){
 			alert('올바른 이메일을 입력하세요');
 		return false;
@@ -144,6 +144,7 @@ window.onload = function(){
 	})
 	
 	// 처음 인증받기와 인증번호 display 제거
+
 	let verifyBtn = document.getElementsByClassName('verify_btn')[0]; 
 	verifyBtn.style.display = 'none';
 	verifyInput.style.display = 'none';
@@ -174,7 +175,7 @@ window.onload = function(){
 				if(numberCheck){
 					form.submit();	
 				} else{
-					alert('이메일 인증을 해수제요');
+					alert('이메일 인증을 해주세요');
 				}
 			}else {
 				alert('아이디 중복체크를 해주세요');
