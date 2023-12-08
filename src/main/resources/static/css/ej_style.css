@@ -46,9 +46,16 @@
     padding-right: 5px;
     font-weight: bold;
 }
-.round_trip_one_way .distance_form_btn {
+/*.round_trip_one_way .distance_form_btn {*/
+/*    color: var(--primary_02);*/
+/*}*/
+.distance_active {
     color: var(--primary_02);
 }
+.trip_one_way {
+    display: none;
+}
+
 .form_to_area {
     display: flex;
     align-items: end;
@@ -251,7 +258,7 @@
 }
 
 .passenger_seat_field .passenger_seat_title,
-.ticket_date_field>label {
+.ticket_date_field label {
     line-height: 1.7;
     font-size: 14px;
 }
@@ -264,6 +271,9 @@
     text-align: left;
     padding: 0 15px;
     background-color: var(--basic_wh);
+}
+.passenger_seat_btn span {
+    font-size: 15px;
 }
 
 .passenger_seat_btn:active,
