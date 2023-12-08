@@ -36,12 +36,13 @@ public class TicketController {
 
     @PostMapping("/flight-search")
     public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto){
+        System.out.println(dto.getOriginLocationCode()+"++++++++++++++++++++");
 
-        System.out.println(dto.getOrigin()+"!!!!!!!!!!!!!!!!!!!!!!!");
 
-
-        return null;
+        return "null";
     }
+
+
 
     @GetMapping("/cities-list")
     public ResponseEntity<ApiUtils.ApiResult<List<City>>> citiesList(@RequestParam(defaultValue = "대한민국") String region){

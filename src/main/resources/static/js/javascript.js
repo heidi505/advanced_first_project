@@ -129,6 +129,10 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("fromselectButton" + fromSelectButtons + " 야");
             fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
             fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
+            document.getElementById("origin").value = airportCode;
+
+
+
         }
 
         function valuesTo(airportCode, airportName) {
@@ -136,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("to" + toSelectButtons + " 호");
             toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
             toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
+            document.getElementById("destination").value = airportCode;
         }
 
         fromButtonIcon.forEach(function (button, index) {
