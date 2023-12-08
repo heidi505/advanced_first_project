@@ -53,9 +53,9 @@
                             </ul>
                             <div class="admin_common_btn">
                                 <a href="/admin/banner-update" class="btn btn-outline-primary">수정</a>
-                                <a href="#" class="btn btn-primary">확인</a>
+                                <button type="submit" class="btn btn-primary">확인</button>
                             </div>
-                        </ul>
+                        </div>
 
                     </div>
                 </form>
@@ -68,6 +68,5 @@
 </div>
 </div>
 
-<script src="js/javascript.js"></script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp" %>

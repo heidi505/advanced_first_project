@@ -477,9 +477,6 @@
 .my_travel_box {
     display: flex;
 }
-section {
-    margin: 24px 0;
-}
 .my_travel h2 {
     margin-bottom: 12px;
 }
@@ -775,7 +772,7 @@ section {
     top: 0;
 }
 
-.admin_header .header_menu li a {
+.admin_header .header_menu li a,.admin_header .header_menu li {
     color: var(--basic_wh);
 }
 
@@ -797,16 +794,20 @@ section {
 }
 
 .login_box {
-    width: 50%;
+    width: 40%;
 }
 
 /*배너 목록*/
 
 
 /*공통*/
+#admin .nav-link:focus, #admin .nav-link:hover {
+    color: var(--admin_02);
+    font-weight: bold;
+}
 .admin_common_tit {
     font-weight: bold;
-    margin: 16px 0 24px 0;
+    margin: 16px 0;
     padding: 16px 0;
     border-bottom: 1px solid var(--form);
     display: flex;
@@ -826,7 +827,7 @@ section {
 }
 
 .common_table th {
-    padding: 16px 0;
+    padding: 12px 0;
 }
 
 .common_list_cont > tr, .common_list_cont > tr > td {
@@ -876,7 +877,7 @@ section {
 }
 
 .admin_common_btn {
-    margin: 24px 0;
+    margin: 16px 0;
     text-align: right;
 }
 
@@ -969,4 +970,19 @@ section {
 #admin .admin_arrow_icon {
     display: inline-block;
     padding: 0 10px;
+}
+
+/*쿠폰 관리 페이지*/
+#coupon_list_page .coupon_list_cont {
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+}
+.coupon_list_area {
+    margin-bottom: 32px;
+}
+.coupon_list_tit h5{
+    font-weight: bold;
+    margin-bottom: 12px;
+
 }

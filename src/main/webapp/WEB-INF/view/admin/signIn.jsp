@@ -24,17 +24,10 @@
 																	   class="form-control mt-2 me-2 p-2" name="password"
 																	   id="password" placeholder="비밀번호를 입력해주세요" />
 						</div>
-						<div class="d-flex flex-row-reverse mt-3">
-							<a href="#" class="pwd_find w-75 mx-auto">비밀번호 찾기</a>
-						</div>
 						<div class="form-group w-75 mx-auto d-flex mb-4 mt-3">
 							<button type="submit" class="btn btn-primary p-2 w-100">로그인</button>
 						</div>
 					</form>
-					<div class="mb-3 mx-auto text-center">
-						<span class="fs-6">아직 회원이 아니신가요?</span><a href="/user/sign-up"
-																  class="insert_user ms-4">회원가입</a>
-					</div>
 				</div>
 			</div>
 		</div>
