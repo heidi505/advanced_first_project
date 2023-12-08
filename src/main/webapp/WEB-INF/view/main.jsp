@@ -28,7 +28,7 @@
                                     <div class="from_select">
                                         <button type="button" id="from_select_btn"
                                                 class="common_modal_btn from_to_modal_btn"
-                                                data-target="from_modal" onclick="return getCities(event, '대한민국')">
+                                                data-target="from_modal">
                                             <span class="from_code_value">GMP</span>
                                             <span class="from_airport_value">서울 김포</span>
                                         </button>
@@ -329,48 +329,14 @@
                                     <div class="cities tab-content" id="to_korea">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
-                                                        <span class="to_local_code">SEL</span><span
-                                                            class="to_local_airport">서울</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
-                                                        <span class="to_local_code">GMP</span><span
-                                                            class="to_local_airport">김포</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
-                                                        <span class="to_local_code">CJU</span><span
-                                                            class="to_local_airport">제주</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
-                                                        <span class="to_local_code">KWJ</span><span
-                                                            class="to_local_airport">광주</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
-                                                        <span class="to_local_code">TAE</span><span
-                                                            class="to_local_airport">대구</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
-                                                        <span class="to_local_code">CJJ</span><span
-                                                            class="to_local_airport">청주</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false">
-                                                        <span class="to_local_code">RSU</span><span
-                                                            class="to_local_airport">여수</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="korea" items="${korea}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${korea.cityCode}</span><span
+                                                                class="from_local_airport">${korea.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -378,54 +344,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_japan">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="TYO">
-                                                        <span class="to_local_code">TYO</span><span
-                                                            class="to_local_airport">도쿄</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="OSA">
-                                                        <span class="to_local_code">OSA</span><span
-                                                            class="to_local_airport">오사카</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="FUK">
-                                                        <span class="to_local_code">FUK</span><span
-                                                            class="to_local_airport">후쿠오카</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SPK">
-                                                        <span class="to_local_code">SPK</span><span
-                                                            class="to_local_airport">삿포로</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="OKA">
-                                                        <span class="to_local_code">OKA</span><span
-                                                            class="to_local_airport">오키나와</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="NGO">
-                                                        <span class="to_local_code">NGO</span><span
-                                                            class="to_local_airport">나고야</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="KMJ">
-                                                        <span class="to_local_code">KMJ</span><span
-                                                            class="to_local_airport">구마모토</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="KKJ">
-                                                        <span class="to_local_code">KKJ</span><span
-                                                            class="to_local_airport">기타큐슈</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="japan" items="${japan}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${japan.cityCode}</span><span
+                                                                class="from_local_airport">${japan.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -433,72 +359,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_asia">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="BKK">
-                                                        <span class="to_local_code">BKK</span><span
-                                                            class="to_local_airport">방콕/수완나품</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="DAD">
-                                                        <span class="to_local_code">DAD</span><span
-                                                            class="to_local_airport">다낭</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SGN">
-                                                        <span class="to_local_code">SGN</span><span
-                                                            class="to_local_airport">호치민</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="MNL">
-                                                        <span class="to_local_code">MNL</span><span
-                                                            class="to_local_airport">마닐라</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="CXR">
-                                                        <span class="to_local_code">CXR</span><span
-                                                            class="to_local_airport">나트랑</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="CEB">
-                                                        <span class="to_local_code">CEB</span><span
-                                                            class="to_local_airport">세부</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SIN">
-                                                        <span class="to_local_code">SIN</span><span
-                                                            class="to_local_airport">싱가포르</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="CNX">
-                                                        <span class="to_local_code">CNX</span><span
-                                                            class="to_local_airport">치앙마이</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="BKI">
-                                                        <span class="to_local_code">BKI</span><span
-                                                            class="to_local_airport">코타키나발루</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="HKT">
-                                                        <span class="to_local_code">HKT</span><span
-                                                            class="to_local_airport">푸껫</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="HAN">
-                                                        <span class="to_local_code">HAN</span><span
-                                                            class="to_local_airport">하노이</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="asia" items="${asia}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${asia.cityCode}</span><span
+                                                                class="from_local_airport">${asia.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -506,54 +374,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_americas">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="NYC">
-                                                        <span class="to_local_code">NYC</span><span
-                                                            class="to_local_airport">뉴욕</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="DFW">
-                                                        <span class="to_local_code">DFW</span><span
-                                                            class="to_local_airport">댈러스</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="LAS">
-                                                        <span class="to_local_code">LAS</span><span
-                                                            class="to_local_airport">라스베이거스</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="LAX">
-                                                        <span class="to_local_code">LAX</span><span
-                                                            class="to_local_airport">로스엔젤레스</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="YVR">
-                                                        <span class="to_local_code">YVR</span><span
-                                                            class="to_local_airport">밴쿠버</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SFO">
-                                                        <span class="to_local_code">SFO</span><span
-                                                            class="to_local_airport">샌프란시스코</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="YTO">
-                                                        <span class="to_local_code">YTO</span><span
-                                                            class="to_local_airport">토론토</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="HNL">
-                                                        <span class="to_local_code">HNL</span><span
-                                                            class="to_local_airport">호놀룰루(하와이)</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="america" items="${america}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName">
+                                                            <span class="from_local_code">${america.cityCode}</span><span
+                                                                class="from_local_airport">${america.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -561,54 +389,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_europe">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="LON">
-                                                        <span class="to_local_code">LON</span><span
-                                                            class="to_local_airport">런던</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="ROM">
-                                                        <span class="to_local_code">ROM</span><span
-                                                            class="to_local_airport">로마</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="BCN">
-                                                        <span class="to_local_code">BCN</span><span
-                                                            class="to_local_airport">바르셀로나</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="AMS">
-                                                        <span class="to_local_code">AMS</span><span
-                                                            class="to_local_airport">암스테르담</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="BUD">
-                                                        <span class="to_local_code">BUD</span><span
-                                                            class="to_local_airport">부다페스트</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="IST">
-                                                        <span class="to_local_code">IST</span><span
-                                                            class="to_local_airport">이스탄불</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="PAR">
-                                                        <span class="to_local_code">PAR</span><span
-                                                            class="to_local_airport">파리</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="PRG">
-                                                        <span class="to_local_code">PRG</span><span
-                                                            class="to_local_airport">프라하</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="europe" items="${europe}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${europe.cityCode}</span><span
+                                                                class="from_local_airport">${europe.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -616,30 +404,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_oceania_guam">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="GUM">
-                                                        <span class="to_local_code">GUM</span><span
-                                                            class="to_local_airport">괌</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="MEL">
-                                                        <span class="to_local_code">MEL</span><span
-                                                            class="to_local_airport">멜버른</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SYD">
-                                                        <span class="to_local_code">SYD</span><span
-                                                            class="to_local_airport">시드니</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SPN">
-                                                        <span class="to_local_code">SPN</span><span
-                                                            class="to_local_airport">사이판</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="oceania" items="${oceania}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${oceania.cityCode}</span><span
+                                                                class="from_local_airport">${oceania.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -647,30 +419,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_middle_east">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="AUH">
-                                                        <span class="to_local_code">AUH</span><span
-                                                            class="to_local_airport">아부다비</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="TLV">
-                                                        <span class="to_local_code">TLV</span><span
-                                                            class="to_local_airport">텔아비브</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="DOH">
-                                                        <span class="to_local_code">DOH</span><span
-                                                            class="to_local_airport">도하</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="DXB">
-                                                        <span class="to_local_code">DXB</span><span
-                                                            class="to_local_airport">두바이</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="middleEast" items="${middleEast}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${middleEast.cityCode}</span><span
+                                                                class="from_local_airport">${middleEast.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -678,30 +434,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_latin_america">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SAO">
-                                                        <span class="to_local_code">SAO</span><span
-                                                            class="to_local_airport">상파울로</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="CUN">
-                                                        <span class="to_local_code">CUN</span><span
-                                                            class="to_local_airport">칸쿤</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="SCL">
-                                                        <span class="to_local_code">SCL</span><span
-                                                            class="to_local_airport">산티아고</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="HAV">
-                                                        <span class="to_local_code">HAV</span><span
-                                                            class="to_local_airport">하바나</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="southAmerica" items="${southAmerica}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${southAmerica.cityCode}</span><span
+                                                                class="from_local_airport">${southAmerica.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -709,30 +449,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_africa">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="NBO">
-                                                        <span class="to_local_code">NBO</span><span
-                                                            class="to_local_airport">나이로비</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="CPT">
-                                                        <span class="to_local_code">CPT</span><span
-                                                            class="to_local_airport">케이프타운</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="CAI">
-                                                        <span class="to_local_code">CAI</span><span
-                                                            class="to_local_airport">카이로</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="MRU">
-                                                        <span class="to_local_code">MRU</span><span
-                                                            class="to_local_airport">모리셔스</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="africa" items="${africa}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${africa.cityCode}</span><span
+                                                                class="from_local_airport">${africa.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -740,30 +464,14 @@
                                     <div class="cities tab-content regions_list_item" id="to_china">
                                         <div class="cities_list">
                                             <ul class="to_local_item">
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="BJS">
-                                                        <span class="to_local_code">BJS</span><span
-                                                            class="to_local_airport">북경</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="PVG">
-                                                        <span class="to_local_code">PVG</span><span
-                                                            class="to_local_airport">상해/푸동</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="TAO">
-                                                        <span class="to_local_code">TAO</span><span
-                                                            class="to_local_airport">청도</span>
-                                                    </button>
-                                                </li>
-                                                <li class="local_item">
-                                                    <button type="button" aria-disabled="false" value="CTU">
-                                                        <span class="to_local_code">CTU</span><span
-                                                            class="to_local_airport">성도/솽류</span>
-                                                    </button>
-                                                </li>
+                                                <c:forEach var="china" items="${china}">
+                                                    <li class="local_item">
+                                                        <button type="button" aria-disabled="false" name="cityName" value="">
+                                                            <span class="from_local_code">${china.cityCode}</span><span
+                                                                class="from_local_airport">${china.cityName}</span>
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
