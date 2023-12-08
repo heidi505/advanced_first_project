@@ -1,12 +1,5 @@
-let originBtn = document.getElementById("originReal");
-let input = document.getElementById("origin");
-originBtn.addEventListener("change", function () {
-    let origin = originBtn.value;
-    console.log(origin);
-    input.value = origin;
 
 
-});
 
 // document.getElementById("addBtn").addEventListener("click", function () {
 //     count++;

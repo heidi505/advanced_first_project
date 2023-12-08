@@ -162,11 +162,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updatePassengerCount();
 
+    let category = ["adults", "children", "infants"];
+
     minusButtons.forEach(function (minusButton, index) {
         minusButton.addEventListener("click", function () {
             let currentCount = parseInt(passengerCount[index].textContent);
             if (currentCount > 0) {
                 passengerCount[index].textContent = currentCount - 1;
+                document.getElementById(category[index]).value = parseInt(passengerCount[index].textContent);
+
                 updatePassengerCount();
             }
         });
@@ -176,6 +180,8 @@ document.addEventListener("DOMContentLoaded", function () {
         plusButton.addEventListener("click", function () {
             let currentCount = parseInt(passengerCount[index].textContent);
             passengerCount[index].textContent = currentCount + 1;
+            document.getElementById(category[index]).value = parseInt(passengerCount[index].textContent);
+
             updatePassengerCount();
         });
     });
@@ -204,6 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let passengerSeatButton = document.querySelector(".passenger_seat_btn");
         let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
         passengerSeatSpans[1].textContent = seatType;
+        document.getElementById("travelClass").value = seatType;
     }
 
     // 승객 좌석 선택
@@ -229,4 +236,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-});
+
+    let children = document.querySelector("#childrenNum").textContent;
+    document.getElementById("children").value = children;
+
+
+    });
