@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- header.jsp -->
 <%@ include file="../layout/header.jsp" %>
@@ -35,15 +36,19 @@
                             <div class="trip_year">2023년</div>
                             <div class="my_trip_list">
                             <c:forEach var="list" items="${tripList}">
+                            ${list.departureTime}
+                            <c:set var="yourDate" value="${list.departureTime}" />
+							<c:set var="year" value='<c:out value="${fn:substring(yourDate, 0, 4)}"/>' />
+                            	
                                 <div class="my_trip_box">
-                                    <span class="trip_day">12월 05일 ( 화 )</span>
+                                    <span class="trip_day">${year} 12월 05일 ( 화 )</span>
                                     <ul class="my_trip_item">
                                         <li class="my_trip_content">
                                             <ul class="my_trip_content_top">
                                                 <li><span class="before_payment_label">
                                                 <c:choose>
                                                 <c:when test="${list.isPayed eq true}">
-                                                결제됨
+                                                결제완료
                                                 </c:when>
                                                 <c:otherwise>
                                                 결제전
@@ -60,6 +65,7 @@
                                                         <img src="/images/icons/airline_icon_02.png" alt="제주항공">
                                                     </div>
                                                     <div>
+                                                    <!-- choose문 3개는 써야 할듯 -->
                                                         <p> [제주항공] 부산 - 도쿄/나리타</p>
                                                         <p>예약번호 ${list.reservationNum}</p>
                                                     </div>
@@ -67,8 +73,8 @@
                                                 <li>
                                                     <div class="my_trip_ticket_img">
                                                         <div class="my_trip_ticket_bg">
-                                                            <span class="trip_left">PUS</span>
-                                                            <span class="trip_right">NRT</span>
+                                                            <span class="trip_left">${list.departureCity}</span>
+                                                            <span class="trip_right">${list.arrivalCity}</span>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -76,18 +82,18 @@
                                             <ul class="my_trip_content_btm">
                                                 <li>
                                                     <p>제주항공</p>
-                                                    <p>7C1154</p>
+                                                    <p>${list.flightName}</p>
                                                 </li>
                                                 <li>
                                                     <p>11:05</p>
-                                                    <p>PUS</p>
+                                                    <p>${list.departureCity}</p>
                                                 </li>
                                                 <li>
                                                     <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
                                                 </li>
                                                 <li>
                                                     <p>13:10</p>
-                                                    <p>NRT</p>
+                                                    <p>${list.arrivalCity}</p>
                                                 </li>
                                             </ul>
 
@@ -312,6 +318,6 @@
         });
     });
 </script>
-<script src="/js/javascript.js"></script>
+<script src="/js/my_travel.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>
