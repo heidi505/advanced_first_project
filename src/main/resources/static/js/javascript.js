@@ -149,55 +149,61 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // 도착지 탭
 
-    let minusButtons = document.querySelectorAll(".minus");
-    let plusButtons = document.querySelectorAll(".plus");
-    let passengerCount = document.querySelectorAll(".passenger_count");
-    let totalCount = 0;
+    let fromToForm =  document.querySelector(".from_to_form");
 
-    updatePassengerCount();
+    if(fromToForm) {
 
-    minusButtons.forEach(function (minusButton, index) {
-        minusButton.addEventListener("click", function () {
-            let currentCount = parseInt(passengerCount[index].textContent);
-            if (currentCount > 0) {
-                passengerCount[index].textContent = currentCount - 1;
+        let minusButtons = document.querySelectorAll(".minus");
+        let plusButtons = document.querySelectorAll(".plus");
+        let passengerCount = document.querySelectorAll(".passenger_count");
+        let totalCount = 0;
+
+        updatePassengerCount();
+
+        minusButtons.forEach(function (minusButton, index) {
+            minusButton.addEventListener("click", function () {
+                let currentCount = parseInt(passengerCount[index].textContent);
+                if (currentCount > 0) {
+                    passengerCount[index].textContent = currentCount - 1;
+                    updatePassengerCount();
+                }
+            });
+        });
+
+        plusButtons.forEach(function (plusButton, index) {
+            plusButton.addEventListener("click", function () {
+                let currentCount = parseInt(passengerCount[index].textContent);
+                passengerCount[index].textContent = currentCount + 1;
                 updatePassengerCount();
-            }
+            });
         });
-    });
 
-    plusButtons.forEach(function (plusButton, index) {
-        plusButton.addEventListener("click", function () {
-            let currentCount = parseInt(passengerCount[index].textContent);
-            passengerCount[index].textContent = currentCount + 1;
-            updatePassengerCount();
+        function updatePassengerCount() {
+            totalCount = Array.from(passengerCount).reduce((sum, countElement) => {
+                return sum + parseInt(countElement.textContent);
+            }, 0);
+
+            let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+            let passengerCountSpan = passengerSeatButton.querySelector("span");
+            passengerCountSpan.textContent = "승객 " + totalCount + " 명 ,";
+        }
+
+        let seatButtons = document.querySelectorAll(
+            '.seat_radio input[type="radio"]'
+        );
+
+        seatButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                updatePassengerSeat(button.value);
+            });
         });
-    });
 
-    function updatePassengerCount() {
-        totalCount = Array.from(passengerCount).reduce((sum, countElement) => {
-            return sum + parseInt(countElement.textContent);
-        }, 0);
+        function updatePassengerSeat(seatType) {
+            let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+            let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
+            passengerSeatSpans[1].textContent = seatType;
+        }
 
-        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
-        let passengerCountSpan = passengerSeatButton.querySelector("span");
-        passengerCountSpan.textContent = "승객 " + totalCount + " 명 ,";
-    }
-
-    let seatButtons = document.querySelectorAll(
-        '.seat_radio input[type="radio"]'
-    );
-
-    seatButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            updatePassengerSeat(button.value);
-        });
-    });
-
-    function updatePassengerSeat(seatType) {
-        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
-        let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
-        passengerSeatSpans[1].textContent = seatType;
     }
 
     // 승객 좌석 선택
@@ -222,5 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
         });
     });
+
+    // 출발지 & 도착지 전환
 
 });
