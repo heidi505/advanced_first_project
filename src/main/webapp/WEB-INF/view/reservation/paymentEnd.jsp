@@ -7,7 +7,7 @@
 
 
 <!-- TODO 여기서부터 main영역 -->
-<main class="airport_info_page pt-0 mt-0">
+<main class="airport_info_page">
 	<div class="container">
 		<div class="section">
 			<div class=" w-85 pt-5 mx-auto">
