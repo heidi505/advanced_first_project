@@ -63,4 +63,9 @@ public class ReservationController {
     public String loadingTest2(){
         return "reservation/loadingPage";
     }
+
+    @GetMapping("/mk")
+    public String checkjsp(){
+        return "flightTicket/flightSearch";
+    }
 }
