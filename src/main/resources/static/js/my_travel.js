@@ -11,14 +11,12 @@ async function getMyTravel(tabId){
 	
 	 try {
         const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&userId=1`);
-        result = await response.json(); 
-        result.forEach((data)=>{
+        dataList = await response.json(); 
 			switch(tabId){
-				case 'planned_trip': insertPElement(data); break;
+				case 'planned_trip': insertPElement(dataList); break;
 				case 'last_trip':  break;
 				case 'canceled_trip':  break;
 			}
-		});
     } catch (error) {
     }
 }
@@ -39,7 +37,7 @@ function makeElement(elementType, classString){
 
 
 
-function insertPElement(data){
+function insertPElement(dataList){
 	const plannedTrip =  document.getElementById('planned_trip');
     plannedTrip.innerHTML = '';
 	let myTripCountLabel = '';
@@ -67,7 +65,10 @@ function insertPElement(data){
     	plannedTrip.appendChild(myTripCountLabel);
 	}
     //결제 여부 버튼 끝
-	//날짜 자르기 필요
+    console.log(dataList[0]);
+    
+    // 연도를 어떻게 처리할 지 답이 없음
+    /*
     	let createdAt = data.createdAt;
     	let date = createdAt.split('T')[0].split('-');
     	let year = 0;
@@ -83,6 +84,10 @@ function insertPElement(data){
 			}
 			num++;
 		});
+		let yearDiv = makeElement('div','trip_year');
+    	text = document.createTextNode(`${year}년`);
+    	yearDiv.appendChild(text);
+    	plannedTrip.appendChild(yearDiv);
 		let createdAtDate = new Date(year,month,day);
 		let weekNumber = createdAtDate.getDay();
 		switch(weekNumber){
@@ -94,15 +99,14 @@ function insertPElement(data){
 			case 5: week='금'; break;
 			case 6: week='토'; break;
 		}
-		let yearDiv = makeElement('div','trip_year');
-    	text = document.createTextNode(`${year}년`);
-    	yearDiv.appendChild(text);
-    	plannedTrip.appendChild(yearDiv);
+	*/
+    // 여기부터 반복문 
+    dataList.forEach((data)=>{
     	let myTripList = makeElement('div', 'my_trip_list');
-    	let myTripBox = makeElement('div', 'my_trip_box');
+   		let myTripBox = makeElement('div', 'my_trip_box');
     	let tripDay = makeElement('span','trip_day');
-    	text = document.createTextNode(`${month}월 ${day}일 ( ${week} )`);
-    	tripDay.appendChild(text);
+    	//text = document.createTextNode(`${month}월 ${day}일 ( ${week} )`);
+    	//tripDay.appendChild(text);
     	myTripBox.appendChild(tripDay);
     	let myTripItem = makeElement('ul','my_trip_item');
     	myTripBox.appendChild(myTripItem);
@@ -111,7 +115,7 @@ function insertPElement(data){
     	let myTripContentTop = makeElement('ul','my_trip_content_top');
     	let li = makeElement('li');
     	let beforePaymentLabel = '';
-    	if(data.payed){
+    	if(data.isPayed){
     		beforePaymentLabel = makeElement('span','complete_label');
     		text = document.createTextNode('결제완료');	
 		} else {
@@ -132,43 +136,116 @@ function insertPElement(data){
     	a.appendChild(img);
     	li.appendChild(a);
     	myTripContentTop.appendChild(li);
-    	// my_trip_content_top 끝
-    	// my_trip_content_mid 끝
+    	// my_trip_content_top 끝(검사 끝)
+    	// my_trip_content_mid 시작
     	let myTripContentMid = makeElement('ul','my_trip_content_mid');
     	let myTripContentTit = makeElement('li','my_trip_content_tit');
+    	let airlineIconImg = makeElement('div','airline_icon_img');
+    	let koreanName = '';
+    	// 나머지도 작성 필요
+    	switch(data.airline){
+			case 'KAL': koreanName = '대한항공';
+			 break;
+		}
+    	// 이거 2개는 데이터에 따라 매치시켜야 함
+    	img = makeElement('img');
+    	img.src = '/images/icons/airline_icon_02.png';
+    	img.alt = koreanName;
+    	airlineIconImg.appendChild(img);
+    	div = makeElement('div');
     	
-  /*  	
- <ul class="my_trip_content_mid">
-       <li class="my_trip_content_tit">
-         <div class="airline_icon_img">
-               <img src="/images/icons/airline_icon_02.png" alt="제주항공">
-       </div>
-          <div>
-               <p> [제주항공] 부산 - 도쿄/나리타</p>
-               <p>예약번호 3018-4609</p>
-                  </div>
-            </li>
-             <li>
-             <div class="my_trip_ticket_img">
-          <div class="my_trip_ticket_bg">
-             <span class="trip_left">PUS</span>
-         <span class="trip_right">NRT</span>
-               </div>
-         </div>
-          </li>
-             </ul>
-*/
-
+    	let p = makeElement('p');
+    	// 이것도 데이터에 따라 값을 가공할 필요
+    	text = document.createTextNode(` [${koreanName}] 부산 - 도쿄/나리타`);
+    	p.appendChild(text);
+    	div.appendChild(p);
+    	p = makeElement('p');
+    	text = document.createTextNode('예약번호 3018-4609');
+    	p.appendChild(text);
+    	div.appendChild(p);
+    	myTripContentTit.appendChild(airlineIconImg);
+    	myTripContentTit.appendChild(div);
+    	li = makeElement('li');
 		myTripContentMid.appendChild(myTripContentTit);
-		myTripContent.appendChild(myTripContentMid);
+    	myTripContentMid.appendChild(li);
+    	let myTripTicketImg = makeElement('div','my_trip_ticket_img');
+    	li.appendChild(myTripTicketImg);
+    	let myTripTicketBg = makeElement('div','my_trip_ticket_bg');
+    	myTripTicketImg.appendChild(myTripTicketBg);
+    	let tripLeft = makeElement('span','trip_left');
+    	text = document.createTextNode(data.departureAirport);
+    	tripLeft.appendChild(text);
+    	myTripTicketBg.appendChild(tripLeft);
+    	let tripRight = makeElement('span','trip_right');
+    	text = document.createTextNode(data.arrivalCity);
+    	tripRight.appendChild(text);
+    	myTripTicketBg.appendChild(tripRight);
+    	// my_trip_content_mid 끝
+    	// my_trip_content_btm 시작
+    	let myTripContentBtm = makeElement('ul','my_trip_content_btm');
+    	li = makeElement('li');
+    	myTripContentBtm.appendChild(li);
+    	p = makeElement('p');
+    	
+    	text = document.createTextNode(koreanName);
+    	p.appendChild(text);
+    	li.appendChild(p);
+    	p = makeElement('p');
+    	
+    	text = document.createTextNode(data.flightName);
+    	p.appendChild(text);
+    	li.appendChild(p);
+    	li = makeElement('li');
+    	myTripContentBtm.appendChild(li);
+    	p = makeElement('p');
+    	let departureTime = data.departureTime.split('T')[1].substring(0,5);
+    	text = document.createTextNode(departureTime);
+		p.appendChild(text);
+		li.appendChild(p);
+    	p = makeElement('p');
+    	text = document.createTextNode(data.departureCity);
+		p.appendChild(text);
+		li.appendChild(p);
+		
+		li = makeElement('li');
+		myTripContentBtm.appendChild(li);
+		img = makeElement('img');
+		img.src = '/images/icons/my_trip_arrow.svg';
+		img.alt = '화살표';
+		li.appendChild(img);
+		
+		li = makeElement('li');
+		myTripContentBtm.appendChild(li);
+		p = makeElement('p');
+    	let arrivalTime = data.arrivalTime.split('T')[1].substring(0,5);
+    	text = document.createTextNode(arrivalTime);
+		p.appendChild(text);
+		li.appendChild(p);
+    	p = makeElement('p');
+    	text = document.createTextNode(data.arrivalCity);
+		p.appendChild(text);
+		li.appendChild(p);
+		
+		li = makeElement('li');
+		myTripContentBtm.appendChild(li);
+		let reservationCancle = makeElement('li','reservation_cancle');
+		// my_trip_content_btm 끝
+		a = makeElement('a');
+		reservationCancle.appendChild(a);
+		a.href = '#';
+		text = document.createTextNode('예약 취소하기');
+		a.appendChild(text);
+		
     	myTripContent.appendChild(myTripContentTop);
+		myTripContent.appendChild(myTripContentMid);
+		myTripContent.appendChild(myTripContentBtm);
     	myTripItem.appendChild(myTripContent);
+    	myTripItem.appendChild(reservationCancle);
     	myTripBox.appendChild(myTripItem);
     	myTripList.appendChild(myTripBox);
     	plannedTrip.appendChild(myTripList);
-                               
-                                  
-
+    });	
+    //반복문 끝
 }
 
 

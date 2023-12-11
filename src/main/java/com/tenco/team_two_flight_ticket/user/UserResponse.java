@@ -27,7 +27,8 @@ public class UserResponse {
     	private Timestamp paymentDeadline;
     	private int reservationNum;
     	private StatusEnum statusEnum;
-    	private String airrivalCity;
+    	private String airline;
+    	private String arrivalCity;
     	private String departureAirport;
     	private String departureCity;
     	private String flightName;
