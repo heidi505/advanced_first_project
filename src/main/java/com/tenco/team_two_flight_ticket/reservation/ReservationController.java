@@ -64,8 +64,10 @@ public class ReservationController {
         return "reservation/loadingPage";
     }
 
+    // 항공권 검색 - 카카오톡 문자까지 한페이지로 된 jsp
     @GetMapping("/mk")
     public String checkjsp(){
-        return "flightTicket/flightSearch";
+        return "reservation/bindtest";
     }
+
 }
