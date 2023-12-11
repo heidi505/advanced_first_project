@@ -5,10 +5,11 @@
 
 window.onload = function(){
 	
-	//취소 버튼을 통해 온경우 값을 받아 모달창 열기(미구현)
-	const cancelRequest = true;
-	if(cancelRequest)
+	//예약 취소 버튼을 통해 온경우 값을 받아 모달창 열기
+	let cancelRequest = document.querySelector('.cancelRequest').value;
+	if(cancelRequest){
 		document.getElementById('modal_box').style.display = 'block';
+	}
 	
 	// 모달창 닫기
 	document.getElementById('close_btn').addEventListener('click', function () {
