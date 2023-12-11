@@ -34,12 +34,22 @@
                             </div>
                             <div class="trip_year">2023년</div>
                             <div class="my_trip_list">
+                            <c:forEach var="list" items="${tripList}">
                                 <div class="my_trip_box">
                                     <span class="trip_day">12월 05일 ( 화 )</span>
                                     <ul class="my_trip_item">
                                         <li class="my_trip_content">
                                             <ul class="my_trip_content_top">
-                                                <li><span class="before_payment_label">결제전</span></li>
+                                                <li><span class="before_payment_label">
+                                                <c:choose>
+                                                <c:when test="${list.isPayed eq true}">
+                                                결제됨
+                                                </c:when>
+                                                <c:otherwise>
+                                                결제전
+                                                </c:otherwise>
+                                                </c:choose>
+                                                </span></li>
                                                 <li><a href="#">예약 상세 보기 <img src="/images/icons/detail_arrow.svg"
                                                                               alt="예약 상세보기"> </a>
                                                 </li>
@@ -51,7 +61,7 @@
                                                     </div>
                                                     <div>
                                                         <p> [제주항공] 부산 - 도쿄/나리타</p>
-                                                        <p>예약번호 3018-4609</p>
+                                                        <p>예약번호 ${list.reservationNum}</p>
                                                     </div>
                                                 </li>
                                                 <li>
@@ -87,6 +97,8 @@
                                         </li>
                                     </ul>
                                 </div>
+                                </c:forEach>
+                                <!-- forEach 끝 -->
                                 <div>
                                     <span class="trip_day">12월 08일 ( 화 )</span>
                                     <ul class="my_trip_item">

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+    namespace="com.tenco.team_two_flight_ticket.reservation.ReservationRepository">
+   	<select id="getMyTravel" resultType="com.tenco.team_two_flight_ticket.user.UserResponse$GetMyTravelDto">
+   		select r.id as id, is_payed, user_id, r.created_at as created_at, payment_deadline
+   		, reservation_num, status_enum, airline, arrival_city, departure_airport, departure_city
+   		, flight_name, departure_time, arrival_time  
+   		from reservation_tb as r
+		join ticket_tb as t
+		on r.id = t.reservation_id
+   		where user_id = #{userId}
+   		and status_enum = #{statusEnum}
+   		<if test="sort == 'true'">
+   		and is_payed = 'true'
+   		</if>
+   		<if test="sort == 'false'">
+   		and is_payed = 'false'
+   		</if>
+   		order by departure_time
+   	</select>
+</mapper>
