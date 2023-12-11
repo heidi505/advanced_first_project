@@ -17,7 +17,7 @@ public class ReservationService {
 
 	public List<GetMyTravelDTO> getMyTravel(int userId, UserRequest.GetMyTravelListDTO dto) {
 		//dto에서 id도 가져와야 함
-		StatusEnum statusEnum = dto.getSatusEnum();
+		StatusEnum statusEnum = dto.getStatusEnum();
 		String sort = dto.getSort();
 		List<GetMyTravelDTO> tripList = reservationRepository.getMyTravel(userId, statusEnum, sort);
 		return tripList;
