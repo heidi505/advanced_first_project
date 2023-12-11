@@ -1,24 +1,21 @@
 package com.tenco.team_two_flight_ticket.user;
 
-import com.tenco.team_two_flight_ticket._core.utils.Define;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
+
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationService;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDto;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @RequestMapping("/user")
 @Controller
@@ -29,7 +26,8 @@ public class UserController {
 	@Autowired
 	private HttpSession session;
 
-
+	@Autowired
+	private ReservationService reservationService;
 
 	@GetMapping("/profile")
 	public String profile(Model model) {
@@ -70,7 +68,11 @@ public class UserController {
 	}
 
 	@GetMapping("/my-travel")
-	public String myPageTravel() {
+	public String myPageTravel(@Valid UserRequest.GetMyTravelListDTO dto , Model model ) {
+		//User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		List<GetMyTravelDto> tripList = reservationService.getMyTravel(1, dto);
+		System.out.println(tripList);
+		model.addAttribute("tripList",tripList);
 		
 		return "user/myTravel";
 	}
