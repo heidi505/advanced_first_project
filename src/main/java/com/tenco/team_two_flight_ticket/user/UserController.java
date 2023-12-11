@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationService;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -67,9 +72,20 @@ public class UserController {
 
 	@GetMapping("/my-travel")
 	public String myPageTravel(@Valid UserRequest.GetMyTravelListDTO dto , Model model ) {
-		
+		//User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
+		System.out.println(tripList);
+		model.addAttribute("tripList",tripList);
 		return "user/myTravel";
 	}
+	
+	@ResponseBody
+	@GetMapping("/get-my-travel")
+	public List<UserResponse.GetMyTravelDTO> myPageTravelProc(@Valid UserRequest.GetMyTravelListDTO dto, Errors errors) {
+		List<UserResponse.GetMyTravelDTO> tripList = reservationService.getMyTravel(1,dto);
+		return tripList;
+	}
+	
 	
 	
 }
