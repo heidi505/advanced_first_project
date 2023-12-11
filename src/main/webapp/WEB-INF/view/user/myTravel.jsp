@@ -315,11 +315,14 @@
 
             const tabId = button.getAttribute("data-tab");
             document.getElementById(tabId).style.display = "block";
+            
+            //데이터를 가져와 출력하는 함수
+            getMyTravel(tabId);
 
             button.classList.add("tab_active");
         });
     });
 </script>
-<script src="/js/javascript.js"></script>
+<script src="/js/my_travel.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

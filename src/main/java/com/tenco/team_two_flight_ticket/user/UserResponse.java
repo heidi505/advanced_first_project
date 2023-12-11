@@ -20,7 +20,7 @@ public class UserResponse {
     }
     
     @Data
-    public static class GetMyTravelDto {
+    public static class GetMyTravelDTO {
     	private int id;
     	private Boolean isPayed;
     	private Timestamp createdAt;

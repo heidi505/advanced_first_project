@@ -4,7 +4,7 @@
 
 <mapper
     namespace="com.tenco.team_two_flight_ticket.reservation.ReservationRepository">
-   	<select id="getMyTravel" resultType="com.tenco.team_two_flight_ticket.user.UserResponse$GetMyTravelDto">
+   	<select id="getMyTravel" resultType="com.tenco.team_two_flight_ticket.user.UserResponse$GetMyTravelDTO">
    		select r.id as id, is_payed, user_id, r.created_at as created_at, payment_deadline
    		, reservation_num, status_enum, airline, arrival_city, departure_airport, departure_city
    		, flight_name, departure_time, arrival_time  
