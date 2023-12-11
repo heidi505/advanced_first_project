@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import com.tenco.team_two_flight_ticket.reservation.ReservationService;
+import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDto;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -69,11 +71,11 @@ public class UserController {
 	}
 
 	@GetMapping("/my-travel")
-	public String myPageTravel(@RequestParam(name = "enums", defaultValue = "예정", required = false)StatusEnum statusEnum, Model model ) {
+	public String myPageTravel(@Valid UserRequest.GetMyTravelListDTO dto , Model model ) {
 		//User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		//List<Reservation> myTravelList = reservationService.getMyTravel(principal, statusEnum);
-		
-		//model.addAttribute("myTravelList",myTravelList);
+		List<GetMyTravelDto> tripList = reservationService.getMyTravel(1, dto);
+		System.out.println(tripList);
+		model.addAttribute("tripList",tripList);
 		
 		return "user/myTravel";
 	}

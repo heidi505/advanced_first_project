@@ -34,7 +34,7 @@
                             </div>
                             <div class="trip_year">2023년</div>
                             <div class="my_trip_list">
-                            <c:forEach var="list" items="${myTravelList}">
+                            <c:forEach var="list" items="${tripList}">
                                 <div class="my_trip_box">
                                     <span class="trip_day">12월 05일 ( 화 )</span>
                                     <ul class="my_trip_item">
