@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="cities tab-content regions_list_item" id="last_trip">
+                        <div class="tab-content regions_list_item" id="last_trip">
                             <div class="my_trip_count_label">
                                 전체 <span class="my_trip_num">2</span>
                             </div>
@@ -252,14 +252,6 @@
                                                     <div>
                                                         <p> [진에어] 도쿄/나리타 - 부산</p>
                                                         <p>예약번호 3018-4609</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="my_trip_ticket_img">
-                                                        <div class="my_trip_ticket_bg">
-                                                            <span class="trip_left">PUS</span>
-                                                            <span class="trip_right">NRT</span>
-                                                        </div>
                                                     </div>
                                                 </li>
                                             </ul>

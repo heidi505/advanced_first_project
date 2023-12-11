@@ -71,6 +71,9 @@
 	color:var(--line);
 }
 /* 공항정보 */
+.airport_info_box {
+	margin: 32px 0;
+}
 .color_green{
 	color:cyan;
 }
@@ -122,6 +125,7 @@
 .airline_image{
 	background:url('/images/airline_image.png');
 }
+
 /* 제작중인 요소의 색상 넣기에 사용 중*/
 .color_primary01 {
 	color: var(--primary_01);

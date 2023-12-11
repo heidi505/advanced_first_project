@@ -2,6 +2,8 @@ package com.tenco.team_two_flight_ticket.user;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
@@ -73,7 +76,6 @@ public class UserController {
 		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
 		System.out.println(tripList);
 		model.addAttribute("tripList",tripList);
-		
 		return "user/myTravel";
 	}
 	

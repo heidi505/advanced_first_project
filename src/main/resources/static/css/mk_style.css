@@ -1,4 +1,7 @@
 /* 프리뷰 페이지 */
+.reservation_preview_box {
+    margin: 32px 0;
+}
 .preview_header {
     text-align: center;
 }
@@ -110,6 +113,7 @@
 .preview_price_line {
     border-bottom: 1px solid var(--form);
     padding: 10px;
+    line-height: 1.4;
 }
 
 .preview_price_total {
@@ -146,6 +150,9 @@
 
 /* 예약 상세 페이지 */
 
+.reservation_detail_box {
+    margin: 32px 0;
+}
 .detail_info_form {
     border: 1px solid var(--form);
     margin-top: 50px;
@@ -220,6 +227,9 @@
 
 .detail_input_war {
     font-size: smaller;
+    line-height: 1.4;
+    padding-top: 4px;
+    display: inline-block;
 }
 
 .detail_group_padding2 {
@@ -287,11 +297,59 @@
     margin-top: 15px;
     margin-left: 50px;
 }
-
+.reservation_detail_area {
+    margin: 32px 0;
+}
 .detail_hidden_label{
     display: none;
 }
+.gender_select input[type=radio]{
+    display: none;
+}
+.gender_select input[type=radio]+label {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid var(--form);
+    width: 90px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    /* font-weight: bold; */
+    font-size: 14px;
+    padding-left: 0;
+}
+.gender_select input[type=radio]+label{
+    background-color: var(--basic_wh);
+    color: var(--basic_03);
+}
 
+.gender_select input[type=radio]:checked+label{
+    background-color: var(--primary_02);
+    color: #fff;
+}
+.detail_gender_form input[type="radio"]:checked+label:before {
+    border: 0;
+}
+.detail_gender_form input[type="radio"]:checked+label:before, .detail_gender_form input[type="radio"]:not(:checked)+label:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0;
+}
+.detail_gender_form input[type="radio"]:checked+label:after, .detail_gender_form input[type="radio"]:not(:checked)+label:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0;
+    padding-left: 0;
+}
+.detail_gender_form input[type="radio"]:checked+label:before, .detail_gender_form input[type="radio"]:not(:checked)+label:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0;
+    padding-left: 0;
+}
 /* 예약하기 모달창 */
 
 .res_modal_add{
