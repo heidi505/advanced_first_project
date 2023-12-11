@@ -59,6 +59,8 @@ public class AirportController {
 		@ResponseBody
 		@GetMapping("/api-test")
 		public Map apiTest(Model model) {
+
+
 			URI uri = null;
 			String url = "http://openapi.airport.co.kr/service/rest/AirportParkingFee/parkingfee?serviceKey=rrf%2Bmnq9ofBCLMm6ehZUvWu%2FZljoJtXJZKSVOIkz61hIbsnmpY3s3aeMuC3VfTlt9MVM8aSL1J3M%2Bzm3ad2%2BXg%3D%3D&schAirportCode=GMP&type=json";
 			try {

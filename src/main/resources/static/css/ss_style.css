@@ -13,6 +13,13 @@
 .w-10 {
 	width:10%;
 }
+.form_box {
+	display: flex;
+	margin-top: 8px;
+}
+/*.authentication_form {*/
+/*	display: none;*/
+/*}*/
 .terms_info{
 	margin-top:2%;
 	font-size:13px;
