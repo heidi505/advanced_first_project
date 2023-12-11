@@ -34,6 +34,13 @@ function makeElement(elementType, classString){
 	return element;
 };
 
+// 연도가 입력된 div를 반환하는 함수
+function makeYearTag(year){
+	let yearDiv = makeElement('div','trip_year');
+    text = document.createTextNode(`${year}년`);
+    yearDiv.appendChild(text);
+    return yearDiv;
+}
 
 
 
@@ -45,6 +52,7 @@ function insertPElement(dataList){
 	let isPayed = '';
 	let aTag = '';
 	let span = '';
+	let lastYear = '0000'; // 지난 여행 연도와 비교하여 변동 시 연도 표기
 	let tripCount = 0;
 	for(let i=0; i<3; i++){
 		// 결제여부 버튼 삽입
@@ -65,29 +73,34 @@ function insertPElement(dataList){
     	plannedTrip.appendChild(myTripCountLabel);
 	}
     //결제 여부 버튼 끝
-    console.log(dataList[0]);
-    
-    // 연도를 어떻게 처리할 지 답이 없음
-    /*
-    	let createdAt = data.createdAt;
+    // 여기부터 반복문 
+    dataList.forEach((data)=>{
+		let createdAt = data.createdAt;
     	let date = createdAt.split('T')[0].split('-');
     	let year = 0;
-    	let month = 0;
+   		let month = 0;
     	let day = 0;
     	let week = '';
     	let num = 0;
     	date.forEach((splitDate)=>{
 			switch(num){
-			case 0: year = splitDate; break;
-			case 1: month = splitDate; break;
-			case 2: day = splitDate; break;
+				case 0: year = splitDate; break;
+				case 1: month = splitDate; break;
+				case 2: day = splitDate; break;
 			}
 			num++;
 		});
-		let yearDiv = makeElement('div','trip_year');
-    	text = document.createTextNode(`${year}년`);
-    	yearDiv.appendChild(text);
-    	plannedTrip.appendChild(yearDiv);
+		// 연도는 매번 삽입하는 것이 아니니 조건문 처리
+		let yearDiv = '';
+		if(lastYear == '0000'){
+			lastYear = year;
+    		yearDiv = makeYearTag(year);
+    		plannedTrip.appendChild(yearDiv);
+		} 
+		if(year != lastYear){
+			yearDiv = makeYearTag(year);
+    		plannedTrip.appendChild(yearDiv);
+    	}
 		let createdAtDate = new Date(year,month,day);
 		let weekNumber = createdAtDate.getDay();
 		switch(weekNumber){
@@ -99,14 +112,12 @@ function insertPElement(dataList){
 			case 5: week='금'; break;
 			case 6: week='토'; break;
 		}
-	*/
-    // 여기부터 반복문 
-    dataList.forEach((data)=>{
+		
     	let myTripList = makeElement('div', 'my_trip_list');
    		let myTripBox = makeElement('div', 'my_trip_box');
     	let tripDay = makeElement('span','trip_day');
-    	//text = document.createTextNode(`${month}월 ${day}일 ( ${week} )`);
-    	//tripDay.appendChild(text);
+    	text = document.createTextNode(`${month}월 ${day}일 ( ${week} )`);
+    	tripDay.appendChild(text);
     	myTripBox.appendChild(tripDay);
     	let myTripItem = makeElement('ul','my_trip_item');
     	myTripBox.appendChild(myTripItem);
@@ -142,7 +153,7 @@ function insertPElement(dataList){
     	let myTripContentTit = makeElement('li','my_trip_content_tit');
     	let airlineIconImg = makeElement('div','airline_icon_img');
     	let koreanName = '';
-    	// 나머지도 작성 필요
+    	// 항공사별 데이터 상 이름을 한국어로 변경. 나머지도 작성 필요
     	switch(data.airline){
 			case 'KAL': koreanName = '대한항공';
 			 break;
@@ -155,7 +166,7 @@ function insertPElement(dataList){
     	div = makeElement('div');
     	
     	let p = makeElement('p');
-    	// 이것도 데이터에 따라 값을 가공할 필요
+    	// 이것도 영문 데이터를 한글 데이터로 바꿔 text안에 넣어줘야 함
     	text = document.createTextNode(` [${koreanName}] 부산 - 도쿄/나리타`);
     	p.appendChild(text);
     	div.appendChild(p);

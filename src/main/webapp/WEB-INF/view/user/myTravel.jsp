@@ -93,7 +93,7 @@
 
                                         </li>
                                         <li class="reservation_cancle">
-                                            <a href="#">예약 취소하기</a>
+                                            <a href="/reservation/cancel-modal/153">예약 취소하기</a>
                                         </li>
                                     </ul>
                                 </div>

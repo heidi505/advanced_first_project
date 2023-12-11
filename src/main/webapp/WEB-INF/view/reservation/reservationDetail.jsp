@@ -51,6 +51,7 @@
 			
 
 			<!-- 모달창 부분 -->
+		   <input type="hidden" class="cancelRequest" value="${cancelRequest}">
    		   <div id="modal_box" class="modal">
        	   <div class="modal_cont">
        	   <!-- 여기부터 모달창 내용 -->
@@ -105,7 +106,6 @@
 
 </div>
 </div>
-
 
 <script src="/js/reservation_detail.js"></script>
 <!-- footer.jsp -->
