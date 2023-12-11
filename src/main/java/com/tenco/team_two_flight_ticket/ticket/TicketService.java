@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 @Service
@@ -22,7 +26,7 @@ public class TicketService {
         return cities;
     }
 
-    public void getTickets(TicketRequest.TicketSearchDTO dto) {
+    public ResponseEntity<String> getTickets(TicketRequest.TicketSearchDTO dto) throws URISyntaxException {
         String date = dto.getStartDate();
         //날짜 파싱
         if (date.contains("~")){
@@ -33,6 +37,9 @@ public class TicketService {
             dto.setStartDate(startDate);
             dto.setEndDate(endDate);
         }
+
+        System.out.println(dto.getStartDate()+"++++++++++++++++++++++");
+
         //좌석 등급 바꾸기
         if(dto.getTravelClass().equals("일반석")){
             dto.setTravelClass("ECONOMY");
@@ -42,6 +49,7 @@ public class TicketService {
             dto.setTravelClass("FIRST");
         }
 
+        //api 요청 - access token 받기
         RestTemplate rt1 = new RestTemplate();
 
         //헤더
@@ -58,28 +66,42 @@ public class TicketService {
 
         ResponseEntity<TicketRequest.AccessToken> response1 = rt1.exchange("https://test.api.amadeus.com/v1/security/oauth2/token", HttpMethod.POST, requestMsg1, TicketRequest.AccessToken.class);
 
+        //api 요청 - 데이터 받기
         RestTemplate rt2 = new RestTemplate();
 
         HttpHeaders headers2 = new HttpHeaders();
         headers2.add("Authorization", "Bearer "+response1.getBody().getAccessToken());
 
-        MultiValueMap<String, String> params2 = new LinkedMultiValueMap<>();
-        params2.add("originLocationCode", dto.getOriginLocationCode());
-        params2.add("destinationLocationCode", dto.getDestinationLocationCode());
-        params2.add("departureDate", dto.getStartDate());
-        params2.add("returnDate", dto.getEndDate());
-        params2.add("adults", String.valueOf(dto.getAdults()));
-        params2.add("children", String.valueOf(dto.getChildren()));
-        params2.add("infants", String.valueOf(dto.getInfants()));
-        params2.add("travelClass", dto.getTravelClass());
-        params2.add("currencyCode", dto.getCurrencyCode());
+        URI uri = new URI(UriComponentsBuilder
+                .fromUriString("https://test.api.amadeus.com/v2/shopping/flight-offers")
+                .queryParam("originLocationCode", dto.getOriginLocationCode())
+                .queryParam("destinationLocationCode", dto.getOriginLocationCode())
+                .queryParam("departureDate", dto.getStartDate())
+                .queryParam("returnDate", dto.getEndDate())
+                .queryParam("adults", dto.getAdults())
+                .queryParam("children", dto.getChildren())
+                .queryParam("infants", dto.getInfants())
+                .queryParam("travelClass", dto.getTravelClass())
+                .queryParam("currencyCode", dto.getCurrencyCode())
+                .build()
+                .toUriString());
+
+//        MultiValueMap<String, String> params2 = new LinkedMultiValueMap<>();
+//        params2.add("originLocationCode", dto.getOriginLocationCode());
+//        params2.add("destinationLocationCode", dto.getDestinationLocationCode());
+//        params2.add("departureDate", dto.getStartDate());
+//        params2.add("returnDate", dto.getEndDate());
+//        params2.add("adults", String.valueOf(dto.getAdults()));
+//        params2.add("children", String.valueOf(dto.getChildren()));
+//        params2.add("infants", String.valueOf(dto.getInfants()));
+//        params2.add("travelClass", dto.getTravelClass());
+//        params2.add("currencyCode", dto.getCurrencyCode());
 
         HttpEntity<MultiValueMap<String, String>> requestMsg2 = new HttpEntity<>(headers2);
 
-        ResponseEntity<String> response2 = rt2.exchange("https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2023-12-25&adults=3", HttpMethod.GET, requestMsg2, String.class);
+        ResponseEntity<String> response2 = rt2.exchange(uri, HttpMethod.GET, requestMsg2, String.class);
 
-
-
+        return response2;
 
 
         //api 요청..

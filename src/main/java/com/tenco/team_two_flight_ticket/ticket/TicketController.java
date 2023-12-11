@@ -5,15 +5,14 @@ import com.tenco.team_two_flight_ticket._middle._entity.City;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RequestMapping("/ticket")
@@ -34,10 +33,12 @@ public class TicketController {
         return "flightTicket/flightSearch";
     }
 
+    @ResponseBody
     @PostMapping("/flight-search")
-    public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto){
-        ticketService.getTickets(dto);
-        return "redirect:/";
+    public ResponseEntity<ApiUtils.ApiResult<HttpEntity<String>>> flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto) throws URISyntaxException {
+        System.out.println("+++++++++++++++++++++"+dto.getStartDate());
+        HttpEntity<String> response = ticketService.getTickets(dto);
+        return ResponseEntity.ok().body(ApiUtils.success(response));
     }
 
 
