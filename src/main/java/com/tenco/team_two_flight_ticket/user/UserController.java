@@ -2,6 +2,8 @@ package com.tenco.team_two_flight_ticket.user;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
