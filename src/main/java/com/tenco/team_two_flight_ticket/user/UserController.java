@@ -2,8 +2,6 @@ package com.tenco.team_two_flight_ticket.user;
 
 import java.util.List;
 
-import com.tenco.team_two_flight_ticket._core.utils.Define;
-import com.tenco.team_two_flight_ticket.reservation.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationService;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -69,10 +71,17 @@ public class UserController {
 	@GetMapping("/my-travel")
 	public String myPageTravel(@Valid UserRequest.GetMyTravelListDTO dto , Model model ) {
 		//User principal = (User) session.getAttribute(Define.PRINCIPAL);
-
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
+		model.addAttribute("tripList",tripList);
 		
-
 		return "user/myTravel";
+	}
+	
+	@ResponseBody
+	@GetMapping("/get-my-travel")
+	public List<GetMyTravelDTO> myPageTravelProc(@Valid UserRequest.GetMyTravelListDTO dto, Errors errors) {
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
+		return tripList;
 	}
 	
 
