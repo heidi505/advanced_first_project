@@ -17,13 +17,10 @@ public class ReservationService {
 
 
 	public List<GetMyTravelDto> getMyTravel(int userId, UserRequest.GetMyTravelListDTO dto) {
-		
+		//dto에서 id도 가져와야 함
 		StatusEnum statusEnum = dto.getSatusEnum();
 		String sort = dto.getSort();
 		List<GetMyTravelDto> tripList = reservationRepository.getMyTravel(userId, statusEnum, sort);
-		
-		
-		
 		return tripList;
 	}
 	
