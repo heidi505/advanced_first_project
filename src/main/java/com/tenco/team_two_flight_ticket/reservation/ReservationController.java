@@ -1,7 +1,9 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class ReservationController {
@@ -68,6 +70,14 @@ public class ReservationController {
     @GetMapping("/mk")
     public String checkjsp(){
         return "reservation/bindtest";
+    }
+
+    // 취소 시 상세 정보 들고 가야함
+    @GetMapping("/reservation/cancel-modal/{reservationNumber}")
+    public String cancelModal(@PathVariable Long reservationNumber, Model model) {
+        model.addAttribute("cancelRequest", true);
+
+        return "reservation/reservationDetail";
     }
 
 }

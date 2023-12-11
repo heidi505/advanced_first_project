@@ -20,14 +20,15 @@ public class UserResponse {
     }
     
     @Data
-    public static class GetMyTravelDto {
+    public static class GetMyTravelDTO {
     	private int id;
     	private Boolean isPayed;
     	private Timestamp createdAt;
     	private Timestamp paymentDeadline;
     	private int reservationNum;
     	private StatusEnum statusEnum;
-    	private String airrivalCity;
+    	private String airline;
+    	private String arrivalCity;
     	private String departureAirport;
     	private String departureCity;
     	private String flightName;

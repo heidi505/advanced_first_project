@@ -21,6 +21,33 @@
                     <div class="float-start ms-5"><b class="lh-lg">부산<br><span class="color_basic09">PUS</span></b>
                     </div>
 
+			<!-- 모달창 부분 -->
+		   <input type="hidden" class="cancelRequest" value="${cancelRequest}">
+   		   <div id="modal_box" class="modal">
+       	   <div class="modal_cont">
+       	   <!-- 여기부터 모달창 내용 -->
+           
+           <div class="pt-2">
+           <b class="fs-5">예약 취소 요청</b><span class="close" id="close_btn">&times;</span>
+           <div class="border-top p-1 mt-4 d-flex">
+           <div class="p-2"><input type="checkbox" class="p-5 float-start" ></div>
+           <div class="w-10 text-center p-2">번호</div>
+           <div class="p-2 ms-2 w-75">이름</div>
+           </div>
+           <div class="border-top border-bottom p-1 d-flex mb-4">
+           <div class="p-2 "><input type="checkbox" class="p-5 float-start" ></div>
+           <div class="w-10 text-center py-2 ">1</div>
+           <div class="p-2 ms-2 w-75">HONG/GILDONG (MS)</div>
+           </div>
+           
+           <div class="p-3 bg_line">
+            <p class="my-2 fs-5">재예약을 위한 취소인가요?</p>
+            <div class="lh-sm">
+           		김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+			김해국제공항은 P1여객주차장 2,345여 대, P2 여객주차장 2,123여 대의 여객청사 주차장,P3 여객(화물)주차장 984여 대, 1,506대의 월정주차장 등
+			총 7,118여 대를 동시에 주차할 수 있는 넓은 유료주차장이 마련되어 있습니다. 
+			
                     <div class="trip_image w-10 border p-4 my-2 mx-auto d-inline"></div>
                     <div class="float-end me-5"><b class="lh-lg">김포<br><span class="color_basic09">GMP</span></b></div>
                 </div>
@@ -48,6 +75,7 @@
                 <p>항공권은 이메일을 통해 전자항공권(E-TICKET)으로 발송됩니다.</p>
                 <p>탑승시간 최소 2시간 전에 체크인 당부드립니다.</p>
                 <p>여권 만료일이 출발일로부터 6개월 미만인 경우 탑승이 불가합니다.</p>
+
             </div>
 
 
@@ -105,7 +133,6 @@
 
 </div>
 </div>
-
 
 <script src="/js/reservation_detail.js"></script>
 <!-- footer.jsp -->
