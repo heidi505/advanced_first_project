@@ -8,7 +8,7 @@
 <main id="reservation_detail_page">
     <section class="reservation_detail_box">
         <div class="container">
-            <form action="/action_page.php" class="was-validated">
+            <form id="reservationp" action="/reservation/save" method="post">
                 <div class="detail_main_form">
                     <div class="detail_left_from">
                         <section>
@@ -84,7 +84,8 @@
                                 </table>
                             </div>
                             <div class="container p-3 my-3 detail_war_form">
-                                <p> · 공동운항편 탑승수속은 실제 운항항공사 카운터를 이용해 주시기 바라며, 규정에 따라 탑승 수속 마감시간이 상이할 수 있으니 반드시 확인 바랍니다. </p>
+                                <p> · 공동운항편 탑승수속은 실제 운항항공사 카운터를 이용해 주시기 바라며, 규정에 따라 탑승 수속 마감시간이 상이할 수 있으니 반드시 확인
+                                    바랍니다. </p>
                                 <p> · 대기예약시 모든 여정이 확약되어야만, 항공권 구매가 가능합니다. 미확약시 이용이 불가능합니다. </p>
                             </div>
                         </section>
@@ -95,36 +96,39 @@
                             <div class="detail_res_form">
                                 <div class="form-group detail_group_padding">
                                     <p>
-                                        <label for="resname" class="detail_group_maginb">예약자 이름</label>
+                                        <label for="resName" class="detail_group_maginb">예약자 이름</label>
                                     </p>
-                                    <input type="text" class="detail_input" id="resname" placeholder=""
-                                           name="uname" required>
+                                    <input type="text" class="detail_input" id="resName" placeholder=""
+                                           name="resName" value="성민경" required>
                                 </div>
                                 <div class="form-group detail_group_padding">
                                     <p>
                                         <label for="email" class="detail_group_maginb"> 이메일 주소 </label>
                                     </p>
-                                    <input type="text" class="detail_input" id="email"
-                                           placeholder="" name="email" required>
+                                    <input type="text" class="detail_input" id="emailn"
+                                           placeholder="" name="emailn" value="wildlegion" required>
                                     <span class="detail_email">@</span>
                                     <input type="text" class="detail_input" id="emailsite"
-                                           placeholder="" name="emailsite" required>
+                                           placeholder="" name="emailsite" value="naver.com" required>
+                                    <input type="hidden" name="email" id="email" value="">
                                 </div>
 
                                 <div class="form-group detail_group_padding">
                                     <p><label for="phoneInput1" class="detail_group_maginb">휴대전화 번호</label></p>
                                     <input type="tel" class="detail_input" id="phoneInput1"
-                                           placeholder="" name="phonef" required>
+                                           placeholder="" name="phonef" value="010" required>
                                     <label for="phoneInput2" class="detail_hidden_label">중간자리</label>
                                     <input type="tel" class="detail_input" id="phoneInput2"
-                                           placeholder="" name="phonem" required>
+                                           placeholder="" name="phonem" value="3001" required>
                                     <label for="phoneInput3" class="detail_hidden_label">뒷자리</label>
                                     <input type="tel" class="detail_input" id="phoneInput3"
-                                           placeholder="" name="phoneb" required>
+                                           placeholder="" name="phoneb" value="3108" required>
+                                    <input type="hidden" name="phoneNum" id="combinedPhoneNum" value="">
+
                                     <span class="detail_input_war">
                                 <p> 예약자 정보는 항공사 스케줄 변동 등의 사유로 기재되오니 즉시 연락이 가능한 연락처 기재 부탁드립니다.</p>
                                 <p> 연락처 오기재로 발생되는 불이익에 대해 당사는 책임지지 않사오니 이점 유의하시기 바랍니다.</p>
-                            </span>
+                                      </span>
                                 </div>
                             </div>
                         </section>
@@ -156,27 +160,33 @@
                                     <div class="detail_name">
                                         <p><label for="familyname" class="detail_group_maginb">영문 성</label></p>
                                         <input type="text" class="detail_name_input" id="familyname"
-                                               placeholder="예: ) HONG" name="familyname" required>
+                                               placeholder="예: ) HONG" name="familyname" value="SUNG" required>
                                     </div>
                                     <div class="detail_name">
                                         <p><label for="firstname" class="detail_group_maginb">영문 이름</label></p>
                                         <input type="text" class="detail_name_input" id="firstname"
-                                               placeholder="예: ) GILDONG" name="firstname" required>
+                                               placeholder="예: ) GILDONG" name="firstname" value="MINKYEONG" required>
                                     </div>
                                 </div>
-
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">성별</p>
                                     <div class="gender_select detail_gender_form">
-                                        <input type="radio" class="form-control" id="select" name="gender" value="male"><label for="select">남자</label>
-                                        <input type="radio" class="form-control" id="select2" name="gender" value="female"><label for="select2">여자</label>
+                                        <input type="radio" class="form-control" id="select" name="gender" value="male"><label
+                                            for="select">남자</label>
+                                        <input type="radio" class="form-control" id="select2" name="gender"
+                                               value="female"><label for="select2">여자</label>
                                     </div>
                                 </div>
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">생년월일</p>
-                                    <input type="text" class="detail_input" id="year" placeholder="" name="year" required>
-                                    <input type="text" class="detail_input" id="month" placeholder="" name="month" required>
-                                    <input type="text" class="detail_input" id="day" placeholder="" name="day" required>
+                                    <input type="text" class="detail_input" id="year" placeholder="" name="year"
+                                           value="1991"
+                                           required>
+                                    <input type="text" class="detail_input" id="month" placeholder="" name="month"
+                                           value="05"
+                                           required>
+                                    <input type="text" class="detail_input" id="day" placeholder="" name="day"
+                                           value="22" required>
                                 </div>
                             </div>
 
@@ -416,7 +426,8 @@
                                                         </a>
                                                         <div style="display:none">BASE FARE
                                                             <br>FOR ROUND TRIP FARES
-                                                            <br> <br> TRAVEL FROM LAST STOPOVER MUST COMMENCE NO LATER THAN
+                                                            <br> <br> TRAVEL FROM LAST STOPOVER MUST COMMENCE NO LATER
+                                                            THAN
                                                             12
                                                             <br> MONTHS AFTER DEPARTURE FROM FARE ORIGIN.
                                                         </div>
@@ -460,7 +471,8 @@
                                                             <br> NOTE -
                                                             <br> FOR UNACCOMPANIED MINORS SERVICE
                                                             <br> PLEASE SEE WWW.JINAIR.COM
-                                                            <br> OR - 1ST INFANT UNDER 2 WITHOUT A SEAT - CHARGE 10 PERCENT
+                                                            <br> OR - 1ST INFANT UNDER 2 WITHOUT A SEAT - CHARGE 10
+                                                            PERCENT
                                                             <br> OF THE FARE.
                                                             <br> TICKET DESIGNATOR - IN AND PERCENT OF DISCOUNT
                                                             <br> OR - INFANT UNDER 2 WITH A SEAT - CHARGE 100 PERCENT OF
@@ -549,7 +561,8 @@
                                                         <br>[예약 변경]
                                                         <br>&nbsp;- 수수료: <span class="detail_boldb">구간 당 60,000 원</span>
                                                         <br><br>[환불]
-                                                        <br>&nbsp;- 취소/환불 수수료:<span class="detail_boldb"> 100,000 원 </span>(구간
+                                                        <br>&nbsp;- 취소/환불 수수료:<span
+                                                            class="detail_boldb"> 100,000 원 </span>(구간
                                                         당)
                                                         <br>&nbsp;* 출발전 취소 시점별 환불 수수료 *
                                                         <br>&nbsp;&nbsp;&nbsp;- 출발전 7일 이내:
@@ -567,7 +580,8 @@
                                                         <br>- 모든 수수료는 전체 여정기준이 아닌 <span
                                                             class="detail_boldb">탑승구간 별로 합산하여 징수</span>
                                                         <br>- 시점별 수수료는 각 여정의 출발일을 기준으로 환불시점과 비교하여 적용
-                                                        <br>- 이름 변경(SPELL CHANGE) 및 예약 변경은 항공사에서 처리 불가하오니, 발권하신 대리점에 문의하시기
+                                                        <br>- 이름 변경(SPELL CHANGE) 및 예약 변경은 항공사에서 처리 불가하오니, 발권하신 대리점에
+                                                        문의하시기
                                                         바랍니다.
                                                         <br><br>[예약변경]
                                                         <br>- 운임규정 상 변경이 허용되는 경우에 한해 동일 또는 상위 단계 운임으로만
@@ -575,7 +589,8 @@
                                                         <br>- 전체 미사용 항공권의 출발편 변경 유효기간은 항공사 규정 및 운임에 따라 상이하므로 문의바랍니다.
                                                         <br><br>[환불]
                                                         <br>- 항공권 유효기간 만료 후 최대 30일 이내 가능
-                                                        <br>- 출발이 임박하여 환불/변경이 있는 경우 바로 환불 접수가 불가할 수 있으며 노쇼,환불,변경 수수료 등 추가
+                                                        <br>- 출발이 임박하여 환불/변경이 있는 경우 바로 환불 접수가 불가할 수 있으며 노쇼,환불,변경 수수료 등
+                                                        추가
                                                         금액이 발생할 수 있으니 영업일기준 최소 3일전(주말,공휴일제외)까지는 접수 바랍니다.
                                                         <br>- 사용구간 편도 운임 및 환불수수료 공제 후 환불금이 발생되지 않을 수 있습니다.
                                                         <br>- 상기 환불규정은 항공운임에 적용되는 내용이며, 유류할증료 및 TAX(제세공과금)의
@@ -713,7 +728,8 @@
                                                     <td class="last" id="contents_23">※ 무료수하물 및 초과수하물 규정은 좌석등급 및 노선에
                                                         따라 상이하므로 자세한
                                                         내용은 항공사 홈페이지 <a href="https://www.jinair.com/ready/baggage"
-                                                                        style="color: red" target="_blank">[바로가기]</a> 또는 여행사
+                                                                        style="color: red" target="_blank">[바로가기]</a> 또는
+                                                        여행사
                                                         담당자에게 문의
                                                         부탁드립니다.<br>※ 항공사 요금규정에 무료수하물 내용이 누락된 경우 표기되지 않을 수 있으며, 표기되지
                                                         않은 경우, 해당항공사에 문의
@@ -920,9 +936,11 @@
                                                             구간 당 40,000 원</span>(재발행)<br><br>[환불]<br>&nbsp;- 취소/환불
                                                             수수료:<span class="detail_boldb">
                                                     80,000 원</span>(구간 당)<br>&nbsp;* 출발전 취소 시점별 환불 수수료
-                                                            *<br>&nbsp;&nbsp;&nbsp;- 출발전 7일 이내: <span class="detail_boldb">
+                                                            *<br>&nbsp;&nbsp;&nbsp;- 출발전 7일 이내: <span
+                                                                class="detail_boldb">
                                                     80,000 원</span>
-                                                            <br>&nbsp;&nbsp;&nbsp;- 출발 30일-8일 전: <span class="detail_boldb">
+                                                            <br>&nbsp;&nbsp;&nbsp;- 출발 30일-8일 전: <span
+                                                                class="detail_boldb">
                                                     60,000 원</span>
                                                             <br>&nbsp;&nbsp;&nbsp;- 출발 60일-31일 전: <span
                                                                 class="detail_boldb">
@@ -1023,6 +1041,7 @@
                                                                 PENALTY PER
                                                                 COUPON<br> PER CHANGE/REFUND TRANSACTION
                                                             </div>
+                                                        </font>
                                                     </td>
                                                 </tr>
                                                 <input type="hidden" name="contents" class="cont"
@@ -1088,7 +1107,8 @@
                                                     <td class="last" id="contents_23">※ 무료수하물 및 초과수하물 규정은 좌석등급 및 노선에
                                                         따라 상이하므로 자세한
                                                         내용은 항공사 홈페이지 <a href="https://www.jinair.com/ready/baggage"
-                                                                        style="color: red" target="_blank">[바로가기]</a> 또는 여행사
+                                                                        style="color: red" target="_blank">[바로가기]</a> 또는
+                                                        여행사
                                                         담당자에게 문의
                                                         부탁드립니다.<br>※ 항공사 요금규정에 무료수하물 내용이 누락된 경우 표기되지 않을 수 있으며, 표기되지
                                                         않은 경우, 해당항공사에 문의
@@ -1198,7 +1218,8 @@
                                                 <input type="hidden" name="rulegrpnos" value="1">
                                                 <input type="hidden" name="ruletitles" value="여행가능일">
                                                 <input type="hidden" name="rulemultitypes" value="">
-                                                <input type="hidden" name="rulecontents" value="2023.03.26 이후 출발 조건<BR> ">
+                                                <input type="hidden" name="rulecontents"
+                                                       value="2023.03.26 이후 출발 조건<BR> ">
                                                 <input type="hidden" name="ruleengcontents"
                                                        value="BASE FARE<BR> <BR>  VALID FOR TRAVEL COMMENCING ON/AFTER 26MAR 23.">
                                                 <input type="hidden" name="rulegrpnos" value="1">
@@ -1368,7 +1389,8 @@
                                                 <input type="hidden" name="rulegrpnos" value="2">
                                                 <input type="hidden" name="ruletitles" value="여행가능일">
                                                 <input type="hidden" name="rulemultitypes" value="">
-                                                <input type="hidden" name="rulecontents" value="2023.03.26 이후 출발 조건<BR> ">
+                                                <input type="hidden" name="rulecontents"
+                                                       value="2023.03.26 이후 출발 조건<BR> ">
                                                 <input type="hidden" name="ruleengcontents"
                                                        value="BASE FARE<BR> <BR>  VALID FOR TRAVEL COMMENCING ON/AFTER 26MAR 23.">
                                                 <input type="hidden" name="rulegrpnos" value="2">
@@ -1610,7 +1632,8 @@
                                         전까지만 가능(영업시간 이내)<br><br>- <b>환불 : 09:00 ~ 17:00 (월-금) </b> <br> * 유선 또는
                                         발권완료 페이지 &gt;
                                         "환불요청" 버튼을 통해 요청이 가능합니다.</span><br><br><b>
-                                            <span class="detail_boldb">▶환불/변경 접수 가능시간 외</span>에 접수된 환불/변경 요청은 익일 영업시간에 처리
+                                            <span class="detail_boldb">▶환불/변경 접수 가능시간 외</span>에 접수된 환불/변경 요청은 익일 영업시간에
+                                            처리
                                             되며, 항공사
                                             (취소)수수료는 접수일이 아닌 처리일 기준으로 적용됩니다. 접수 가능시간 외에 결제요청시 유의 바랍니다.
                                         </b><br>단, 다음 사항은 예외적으로 각 항목에서 정한 내용에 따릅니다.<br><br>1) 결제 당일 23:50(한국시간)까지 취소
@@ -1958,7 +1981,8 @@
                                                         <p class="res_modal_btn">
                                                             <label for="radioChk0">
                                                                 <input type="checkbox" id="radioChk0"
-                                                                       class="res_modal_check_btn" name="radioChk" value="N"
+                                                                       class="res_modal_check_btn" name="radioChk"
+                                                                       value="N"
                                                                        onclick="enableConfirmButton()">
                                                                 <span class=""></span>위 내용을 확인했습니다.
                                                             </label>
@@ -1969,13 +1993,10 @@
                                                                     onclick="resetForm()">
                                                                 다시입력
                                                             </button>
-
-                                                            <button class="btn res_modal_btn2" type="button" id="confirmYn"
-                                                                    disabled>
-
-                                                            <button class="btn res_modal_btn2" type="button" id="confirmYn" disabled
-                                                                    data-bs-toggle="modal" data-bs-target="#additionalModal">
-
+                                                            <button class="btn res_modal_btn2" type="submit"
+                                                                    id="confirmYn" disabled
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#additionalModal">
                                                                 확인
                                                             </button>
                                                         </div>
@@ -1987,20 +2008,28 @@
                                         </div>
                                         <%-- 모달 끝--%>
                                         <%-- 카카오 모달--%>
-                                        <div class="modal res_modal_add2" id="additionalModal" tabindex="-1" aria-labelledby="additionalModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                                        <div class="modal res_modal_add2" id="additionalModal" tabindex="-1"
+                                             aria-labelledby="additionalModalLabel" aria-hidden="true"
+                                             data-bs-backdrop="static" data-bs-keyboard="false">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="res_modal_form2">
                                                     <div class="modal-header res_kko_header">
-                                                        <h3 class="modal-title res_kko_title" id="additionalModalLabel">항공권 예약 문자</h3>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h3 class="modal-title res_kko_title" id="additionalModalLabel">
+                                                            항공권 예약 문자</h3>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body res_kko_p">
                                                         <p>예약하신 항공권을 카카오톡으로 보내드릴까요?</p>
                                                         <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary res_kko_btn" onclick="sendOption('N')">괜찮아요</button>
-                                                        <button type="button" class="btn btn-primary res_kko_btn" onclick="sendOption('Y')">보내주세요</button>
+                                                        <button type="button" class="btn btn-secondary res_kko_btn"
+                                                                onclick="sendOption('N')">괜찮아요
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary res_kko_btn"
+                                                                onclick="sendOption('Y')">보내주세요
+                                                        </button>
                                                     </div>
                                                 </div>
 
@@ -2054,7 +2083,6 @@
     }
 
 
-
     // 카카오 모달
     function sendOption(option) {
         if (option === 'N') {
@@ -2067,6 +2095,37 @@
         }
     }
 
+    // post
+    // 이메일 조합
+    function combineEmail() {
+        var emailn = document.getElementById("emailn").value;
+        var emailsite = document.getElementById("emailsite").value;
+        var email = emailn + "@" + emailsite;
+
+        // hidden 필드에 값 설정
+        document.getElementById("email").value = email;
+    }
+
+    // 휴대전화 번호 조합 및 hidden 필드에 설정
+    function combinePhoneNum() {
+        var phonef = document.getElementById("phoneInput1").value;
+        var phonem = document.getElementById("phoneInput2").value;
+        var phoneb = document.getElementById("phoneInput3").value;
+        var combinedPhoneNum = phonef + phonem + phoneb;
+
+        // hidden 필드에 값 설정
+        document.getElementById("combinedPhoneNum").value = combinedPhoneNum;
+    }
+
+    // form submit 시에 조합 함수 호출
+    document.getElementById("reservationp").addEventListener("submit", combinePhoneNum);
+    document.getElementById("reservationp").addEventListener("submit", combineEmail);
+
+    // 생년월일 조합
+    var year = document.getElementById("year").value;
+    var month = document.getElementById("month").value;
+    var day = document.getElementById("day").value;
+    var combinedBirthDate = day + "/" + month + "/" + year;
 </script>
 
 <!-- footer.jsp -->
