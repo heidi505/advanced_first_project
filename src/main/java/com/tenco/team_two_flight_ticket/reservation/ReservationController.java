@@ -25,10 +25,8 @@ public class ReservationController {
     }
 
     // http://localhost:8080/reservation/detail
-
-<<<<<<< HEAD
-    @GetMapping("/reservation/detail")
-    public String detail() {
+    @GetMapping("/reservation/detail/{reservationNum}")
+    public String detail(@PathVariable int reservationNum) {
         return "/reservation/reservationDetail";
     }
 
@@ -41,24 +39,9 @@ public class ReservationController {
     public String finalResult() {
         return "/reservation/finalResult";
     }
-=======
- 	@GetMapping("/reservation/detail/{reservationNum}")
- 	public String detail(@PathVariable int reservationNum) {
- 		return "/reservation/reservationDetail";
- 	}
- 	
- 	@GetMapping("/reservation/cancel")
- 	public String cancel() {
- 		return "/reservation/cancelReservation";
- 	}
- 	
- 	@GetMapping("/reservation/final-result")
- 	public String finalResult() {
- 		return "/reservation/finalResult";
- 	}
->>>>>>> master
 
     @GetMapping("/detail")
+
     public String test4() {
         return "reservation/detail";
     }
@@ -96,24 +79,21 @@ public class ReservationController {
         return "reservation/loadingPage";
     }
 
-<<<<<<< HEAD
-=======
     // 항공권 검색 - 카카오톡 문자까지 한페이지로 된 jsp
     @GetMapping("/mk")
-    public String checkjsp(){
+    public String checkjsp() {
         return "reservation/bindtest";
     }
 
->>>>>>> master
     // 취소 시 상세 정보 들고 가야함
     @GetMapping("/reservation/cancel-modal/{reservationNumber}")
+
     public String cancelModal(@PathVariable Long reservationNumber, Model model) {
         model.addAttribute("cancelRequest", true);
 
         return "reservation/reservationDetail";
     }
 
-<<<<<<< HEAD
     @PostMapping("reservation/save")
     public String save(ReservationRequest.SaveFormDto dto) {
         // 1. 인증검사
@@ -125,6 +105,4 @@ public class ReservationController {
         return null;
     }
 
-=======
->>>>>>> master
 }
