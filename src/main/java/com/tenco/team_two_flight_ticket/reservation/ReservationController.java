@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,15 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class ReservationController {
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	
     @GetMapping("/preview")
     public String test1() {
         return "reservation/preview";
     }
 
     // http://localhost:8080/reservation/detail
-
+    // 현재 작업 위치
  	@GetMapping("/reservation/detail/{reservationNum}")
  	public String detail(@PathVariable int reservationNum) {
+ 		DTO detailTrip  =  reservationService.getMyTripDetail(reservationNum);
  		return "/reservation/reservationDetail";
  	}
  	
