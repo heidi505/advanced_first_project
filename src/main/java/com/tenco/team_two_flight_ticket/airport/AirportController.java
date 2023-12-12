@@ -80,7 +80,7 @@ public class AirportController {
         //		한국 공항
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
-        AirportTravelTimeDTO airportTravelTimes = airPortService.koAirportTime(principal.getId());
+        AirportTravelTimeDTO airportTravelTimes = airPortService.koAirportTime(1);
 
         List<AirportTravelTimeDTO.Item> airportItems = airportTravelTimes.getItems();
 

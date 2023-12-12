@@ -6,6 +6,12 @@
 	align-items: center;
 	height: 100%;
 }
+.kakao_sign_in_page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
 .me-6 {
 	margin-right: 3.5rem!important;
 }
