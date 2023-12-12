@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 
 <!-- TODO 여기서부터 main영역 -->
@@ -116,24 +116,28 @@
         <div class="section">
             <div class="pt-5">
                 <h2>
-                    <b>나의 공항정보 - <span class="color_primary02">인천공항</span></b><span
-                        class="fs-6 float-end me-3">
+                    <b>나의 공항정보 - <span class="color_primary02">${airPortName}</span></b>
+                    <span
+                            class="fs-6 float-end me-3">
 						<span class="color_green">원활</span>
-						<span class="color_primary02">보통</span>
-						<span class="color_orange">혼잡</span>  
-						<span class="color_cancle">매우혼잡</span></span>
+						<span class="color_cancle">혼잡</span>
+					</span>
                 </h2>
                 <div class="p-5 mx-auto text-center">
                     <p class="color_primary02">BOARDING PROCESS TIME</p>
                     <p class="fs-1 my-2"><b>국내선 탑승수속 소요시간 안내</b></p>
                     <p class="mt-3"><b>셀프 체크인부터 항공기 탑승까지 평균 체류시간</b></p>
-                    <div class="mt-5">
-						<span class="p-3">
-							<b class="fs-1 color_primary02 duration_of_time">66</b><b
-                                class="ms-2 fs-3 align-text-baseline">분</b><span class="fs-4">
-							&nbsp;<b>-</b>&nbsp;</span>
-							<b class="fs-2 congestion_status"></b> 
+                    <div class="mt-4 congestion_status_item">
+						<span class="p-2">
+							<b class="color_primary02 duration_of_time">${onePersonTime}<span class="ms-2 fs-2 airline_minute">분 ㅡ </span> </b>
 						</span>
+                        <c:set var="congestion" value="원활"></c:set>
+                        <c:if test="${airportItems[0].congestYn eq 'N'}">
+                            <span class="smooth_status">${congestion}</span>
+                        </c:if>
+                        <c:if test="${airportItems[0].congestYn eq 'Y'}">
+                            <span class="confusion_status">${congestion}</span>
+                        </c:if>
                     </div>
                 </div>
                 <hr>
@@ -200,4 +204,4 @@
 </div>
 <script src="/js/airport_info_javascript.js"></script>
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

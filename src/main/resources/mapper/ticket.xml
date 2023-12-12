@@ -8,4 +8,14 @@
     <select id="getCities" resultType="com.tenco.team_two_flight_ticket._middle._entity.City">
         select * from city_tb where country_name = #{region}
     </select>
+    <select id="findByTicketJoinReservation" resultType="com.tenco.team_two_flight_ticket.ticket.Ticket">
+        SELECT departure_airport
+        FROM TICKET_TB as tb
+                 left join reservation_tb as rb
+                           on tb.id = rb.id
+                 left join user_tb as ub
+                           on ub.id = tb.id
+        where ub.id = #{userId};
+    </select>
+
 </mapper>

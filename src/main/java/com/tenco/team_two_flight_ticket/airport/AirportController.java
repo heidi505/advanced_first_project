@@ -2,10 +2,20 @@ package com.tenco.team_two_flight_ticket.airport;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Map;
 
+import com.tenco.team_two_flight_ticket._core.handler.AuthInterceptor;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyUnAuthorizedException;
+import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse;
+import com.tenco.team_two_flight_ticket.user.User;
+import com.tenco.team_two_flight_ticket.user.UserRepository;
+import com.tenco.team_two_flight_ticket.user.UserRequest;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,6 +30,15 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/airport")
 @Controller
 public class AirportController {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private HttpSession session;
+
+    @Autowired
+    private AirPortService airPortService;
+
     public static final String SERVICEKEY = Define.SERVICEKEY;
 
     // http://localhost:8080/airport/airport-info
@@ -27,7 +46,7 @@ public class AirportController {
     // 주차요금 api
     // 탑승 수속 대기시간 api x
     @GetMapping("/airport-info")
-    public String parkingArea(Model model) {
+    public String parkingArea(Model model, UserRequest.SignInDTO dto) {
 
         // 주차요금 api
         URI uri = null;
@@ -81,6 +100,50 @@ public class AirportController {
         // Model에 DTO를 추가하여 JSP로 전달
         model.addAttribute("parkingStatusResponse", parkingStatusResponse);
 
+//        ------------- 한국 공항
+
+        //		한국 공항
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+        AirportTravelTimeDTO airportTravelTimes = airPortService.koAirportTime(principal.getId());
+
+        List<AirportTravelTimeDTO.Item> airportItems = airportTravelTimes.getItems();
+
+        String airPortName = "";
+        for (AirportTravelTimeDTO.Item airportItem : airportItems) {
+            airPortName = airportItem.getArp();
+            if (airportItem.getArp().equals("GMP")) {
+                airPortName = "김포공항";
+            }
+            if (airportItem.getArp().equals("CJU")) {
+                airPortName = "제주공항";
+            }
+            if (airportItem.getArp().equals("PUS")) {
+                airPortName = "김해공항";
+            }
+            System.out.println(airPortName + "도착지 공항");
+        }
+        System.out.println(airPortName);
+
+        int totalPct = 0;
+        String nowTime = DateFormat.formatTime();
+
+        for (AirportTravelTimeDTO.Item airportItem : airportItems) {
+            String hh = airportItem.getHh(); // 시간대
+            int pct = airportItem.getPct();  // 각 시간대의 총 승객 수
+
+            if (nowTime.equals(hh)) {
+                totalPct += pct;  // 총 승객 수
+            }
+            System.out.println("시간대: " + hh + ", 총 승객수: " + pct);
+        }
+
+        int onePersonTime = totalPct / 60;
+
+        System.out.println(onePersonTime + "총 소요시간");
+        model.addAttribute("airportItems", airportItems);
+        model.addAttribute("onePersonTime", onePersonTime);
+        model.addAttribute("airPortName", airPortName);
         return "airport/airportInfo";
     }
 

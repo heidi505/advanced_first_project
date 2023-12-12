@@ -7,7 +7,7 @@
 
 
 <!-- TODO 여기서부터 main영역 -->
-<main class="sign_in_page">
+<main class="sign_up_page">
     <div class="container">
         <div class="section">
             <div class="mx-auto w-35 my-5">

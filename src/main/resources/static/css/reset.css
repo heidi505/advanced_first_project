@@ -328,20 +328,6 @@ input[type="checkbox"] {
 .navbar-nav > li{
     padding-right: 12px;
 }
-
-/*@media (min-width: 576px) {*/
-
-/*    .navbar-expand-sm .navbar-nav {*/
-/*        flex-direction: row;*/
-/*    }*/
-
-/*    .navbar-expand-sm {*/
-/*        flex-wrap: nowrap;*/
-/*        justify-content: flex-start;*/
-/*    }*/
-
-
-/*}*/
 button, select {
     text-transform: none;
     padding: 5px;
