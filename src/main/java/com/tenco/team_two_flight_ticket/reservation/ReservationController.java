@@ -1,12 +1,26 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.user.User;
+
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ReservationController {
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	@Autowired
+	private HttpSession httpSession;
+	
     @GetMapping("/preview")
     public String test1() {
         return "reservation/preview";
@@ -15,12 +29,20 @@ public class ReservationController {
     // http://localhost:8080/reservation/detail
 
  	@GetMapping("/reservation/detail/{reservationNum}")
- 	public String detail(@PathVariable int reservationNum) {
- 		return "/reservation/reservationDetail";
+ 	public String detail(@PathVariable Long reservationNum, Model model) {
+ 		User principal = (User) httpSession.getAttribute(Define.PRINCIPAL);
+ 		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+ 		GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+ 		System.out.println(detailTrip);
+ 		model.addAttribute("detailTrip", detailTrip);
+ 		return "reservation/reservationDetail";
  	}
  	
- 	@GetMapping("/reservation/cancel")
- 	public String cancel() {
+ 	@GetMapping("/reservation/cancel/{reservationNum}")
+ 	public String cancel(@PathVariable Long reservationNum, Model model) {
+ 		
+ 		
+ 		
  		return "/reservation/cancelReservation";
  	}
  	
@@ -73,10 +95,14 @@ public class ReservationController {
     }
 
     // 취소 시 상세 정보 들고 가야함
-    @GetMapping("/reservation/cancel-modal/{reservationNumber}")
-    public String cancelModal(@PathVariable Long reservationNumber, Model model) {
+    @GetMapping("/reservation/cancel-modal/{reservationNum}")
+    public String cancelModal(@PathVariable Long reservationNum, Model model) {
         model.addAttribute("cancelRequest", true);
-
+        User principal = (User) httpSession.getAttribute(Define.PRINCIPAL);
+ 		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+ 		GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+ 		System.out.println(detailTrip);
+ 		model.addAttribute("detailTrip", detailTrip);
         return "reservation/reservationDetail";
     }
 
