@@ -14,8 +14,8 @@ public class ReservationController {
 
     // http://localhost:8080/reservation/detail
 
- 	@GetMapping("/reservation/detail")
- 	public String detail() {
+ 	@GetMapping("/reservation/detail/{reservationNum}")
+ 	public String detail(@PathVariable int reservationNum) {
  		return "/reservation/reservationDetail";
  	}
  	

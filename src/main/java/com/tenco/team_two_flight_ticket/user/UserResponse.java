@@ -1,6 +1,7 @@
 package com.tenco.team_two_flight_ticket.user;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -34,7 +35,19 @@ public class UserResponse {
     	private String flightName;
         private Timestamp departureTime;
         private Timestamp arrivalTime;
-    	
+    }
+    
+    @Data
+    public static class GetMyTripCountDTO {
+    	private int allTripCount;
+    	private int payedTripCount;
+    	private int notPayedTripCount;
+    }
+    
+    @Data
+    public static class GetMyTripCntAndListDTO {
+    	private List<GetMyTravelDTO> tripList;
+    	private GetMyTripCountDTO tripCount;
     }
     	
 

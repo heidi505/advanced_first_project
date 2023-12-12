@@ -67,10 +67,11 @@ public class UserRequest {
     @Setter
     @ToString
     public static class GetMyTravelListDTO{
-    	private StatusEnum satusEnum = StatusEnum.예정;
+    	private StatusEnum statusEnum;
     	private int userId;
-    	private String sort = "all";
+    	private String sort;
     }
+ 
 
 
 }
