@@ -14,8 +14,8 @@ public class ReservationController {
 
     // http://localhost:8080/reservation/detail
 
- 	@GetMapping("/reservation/detail")
- 	public String detail() {
+ 	@GetMapping("/reservation/detail/{reservationNum}")
+ 	public String detail(@PathVariable int reservationNum) {
  		return "/reservation/reservationDetail";
  	}
  	
@@ -65,15 +65,19 @@ public class ReservationController {
     public String loadingTest2(){
         return "reservation/loadingPage";
     }
-    
+
+    // 항공권 검색 - 카카오톡 문자까지 한페이지로 된 jsp
+    @GetMapping("/mk")
+    public String checkjsp(){
+        return "reservation/bindtest";
+    }
+
     // 취소 시 상세 정보 들고 가야함
     @GetMapping("/reservation/cancel-modal/{reservationNumber}")
-    public String cancelModal(@PathVariable Long reservationNumber , Model model) {
-    	model.addAttribute("cancelRequest",true);
-    	
-    	return "reservation/reservationDetail";
+    public String cancelModal(@PathVariable Long reservationNumber, Model model) {
+        model.addAttribute("cancelRequest", true);
+
+        return "reservation/reservationDetail";
     }
-    
-    
-    
+
 }

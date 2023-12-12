@@ -5,8 +5,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
-import com.tenco.team_two_flight_ticket._core.handler.AuthInterceptor;
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyUnAuthorizedException;
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
@@ -41,12 +39,15 @@ public class AirportController {
 
     public static final String SERVICEKEY = Define.SERVICEKEY;
 
+    @Autowired
+    private AirPortService airportService;
+
     // http://localhost:8080/airport/airport-info
     // 인천공항 주차정보 api
     // 주차요금 api
     // 탑승 수속 대기시간 api x
     @GetMapping("/airport-info")
-    public String parkingArea(Model model, UserRequest.SignInDTO dto) {
+    public String parkingArea(Model model) {
 
         // 주차요금 api
         URI uri = null;
@@ -69,34 +70,8 @@ public class AirportController {
         model.addAttribute("list", response.getBody());
         System.out.println(response.getBody());
 
-
         // 인청공항 주차정보 api
-        URI uri2 = null;
-        String baseUrl = "https://apis.data.go.kr/B551177/StatusOfParking/getTrackingParking?";
-        String serviceKey = SERVICEKEY;
-        int numOfRows = 10;
-        int pageNo = 1;
-        String type = "json";
-
-        String url2 = baseUrl + "serviceKey=" + serviceKey + "&numOfRows=" + numOfRows + "&pageNo=" + pageNo + "&type=" + type;
-        try {
-            uri2 = new URI(url2);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("uri 주소 : ");
-        System.out.println(uri2.toString());
-
-        RestTemplate restTemplate2 = new RestTemplate();
-
-        HttpHeaders headers2 = new HttpHeaders();
-
-        HttpEntity<MultiValueMap<String, String>> request2 = new HttpEntity<>(headers2);
-
-        ResponseEntity<ParkingStatusResponse> responseEntity = restTemplate2.exchange(uri2, HttpMethod.GET, request2, ParkingStatusResponse.class);
-        ParkingStatusResponse parkingStatusResponse = responseEntity.getBody();
-
+        ParkingStatusResponse parkingStatusResponse = airportService.getParkingAreaInfoAPI();
         // Model에 DTO를 추가하여 JSP로 전달
         model.addAttribute("parkingStatusResponse", parkingStatusResponse);
 
@@ -146,5 +121,4 @@ public class AirportController {
         model.addAttribute("airPortName", airPortName);
         return "airport/airportInfo";
     }
-
 }
