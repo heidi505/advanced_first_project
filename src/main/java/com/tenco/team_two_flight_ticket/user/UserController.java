@@ -74,7 +74,6 @@ public class UserController {
 	public String myPageTravel(@Valid UserRequest.GetMyTravelListDTO dto , Model model ) {
 		//User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
-		System.out.println(tripList);
 		model.addAttribute("tripList",tripList);
 		return "user/myTravel";
 	}
@@ -82,6 +81,7 @@ public class UserController {
 	@ResponseBody
 	@GetMapping("/get-my-travel")
 	public List<UserResponse.GetMyTravelDTO> myPageTravelProc(@Valid UserRequest.GetMyTravelListDTO dto, Errors errors) {
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		List<UserResponse.GetMyTravelDTO> tripList = reservationService.getMyTravel(1,dto);
 		return tripList;
 	}
