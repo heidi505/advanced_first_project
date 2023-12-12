@@ -22,6 +22,21 @@
         order by departure_time
     </select>
 
+    <select id="getMyTripCount" resultType="int">
+        select count(*)
+        from reservation_tb as r
+        join ticket_tb as t
+        on r.id = t.reservation_id
+        where user_id = #{userId}
+        and status_enum = #{statusEnum}
+        <if test="sort == 'true'">
+            and is_payed = true
+        </if>
+        <if test="sort == 'false'">
+            and is_payed = false
+        </if>
+    </select>
+
     <insert id="insertR">
         insert into reservation_tb(user_id, res_name, email, phone_num, reservation_num, status_enum, passenger_amount,
                                    payment_deadline, reservation_price, created_at)

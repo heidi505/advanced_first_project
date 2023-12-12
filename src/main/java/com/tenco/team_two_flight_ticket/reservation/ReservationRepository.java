@@ -9,16 +9,26 @@ import org.apache.ibatis.annotations.Param;
 
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
 @Mapper
 public interface ReservationRepository {
 	
 	// 내 여행 목록 가져오기
 	List<GetMyTravelDTO> getMyTravel(@Param("userId") int userId,@Param("statusEnum") StatusEnum statusEnum, @Param("sort") String sort);
+<<<<<<< HEAD
 
 	// 예약하기
 	public int insertT(Ticket ticket);
 	public int insertR(Reservation reservationR);
 	public int insertP(Passenger passenger);
 
+=======
+	// 내 여행 목록 개수 가져오기
+	int getMyTripCount(@Param("userId") int userId,@Param("statusEnum") StatusEnum statusEnum, @Param("sort") String sort);
+	
+		
+		
+	
+>>>>>>> master
 }
