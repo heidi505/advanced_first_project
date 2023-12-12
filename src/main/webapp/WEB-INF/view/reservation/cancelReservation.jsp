@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- header.jsp -->
-<%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<%@ include file="../layout/header.jsp"%>
 
 
 <!-- TODO 여기서부터 main영역 -->
-<main class="reservation_detail_page pt-0 mt-0">
-	<div class="container">
+<main class="reservation_detail_page">
+	<section class="reservation_detail_area">
+		<div class="container">
 		<div class="section">
 			<h1 class="text-center my-5 color_cancle"><b>X 취소된 예약입니다.</b></h1>
 			<hr class="my-5">
@@ -188,6 +189,7 @@
 		</div>
 		<!-- section end -->
 	</div>
+	</section>
 </main>
 
 </div>

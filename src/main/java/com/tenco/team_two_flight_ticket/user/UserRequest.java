@@ -1,8 +1,9 @@
 package com.tenco.team_two_flight_ticket.user;
 
+import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -61,7 +62,16 @@ public class UserRequest {
         @Email
         private String email;
     }
-
+    
+    @Getter
+    @Setter
+    @ToString
+    public static class GetMyTravelListDTO{
+    	private StatusEnum statusEnum;
+    	private int userId;
+    	private String sort;
+    }
+ 
 
 
 }

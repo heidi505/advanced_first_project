@@ -5,8 +5,9 @@
 <%@ include file="../layout/header.jsp" %>
 
 <!-- TODO 여기서부터 main영역 -->
-<div id="reservation_preview_page">
-    <div class="container">
+<main id="reservation_preview_page">
+    <section class="reservation_preview_box">
+        <div class="container">
         <!-- 기본 메세지 -->
         <section>
             <div class="p-1 border">
@@ -298,9 +299,9 @@
             </div>
         </section>
     </div>
+    </section>
 
-
-</div>
+</main>
 
 </div>
 </div>
