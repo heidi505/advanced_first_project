@@ -1,7 +1,6 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDictionariesDTO.DictionariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketMetaDTO.MetaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;

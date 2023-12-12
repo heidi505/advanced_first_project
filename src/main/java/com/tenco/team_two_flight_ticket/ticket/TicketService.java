@@ -87,6 +87,7 @@ public class TicketService {
                 .queryParam("travelClass", dto.getTravelClass())
                 .queryParam("currencyCode", dto.getCurrencyCode())
                 .queryParam("nonStop", true)
+                .queryParam("max", 10)
                 .build()
                 .toUriString());
 
@@ -95,6 +96,8 @@ public class TicketService {
         ResponseEntity<TicketResponse.FlightSearchDTO> response2 = rt2.exchange(uri, HttpMethod.GET, requestMsg2, TicketResponse.FlightSearchDTO.class);
 
         TicketResponse.FlightSearchDTO responseDTO = response2.getBody();
+
+//        responseDTO.getData().stream().map(e->e.getItineraries().stream().filter(e->e.getSegments().ge))
 
         return responseDTO;
     }

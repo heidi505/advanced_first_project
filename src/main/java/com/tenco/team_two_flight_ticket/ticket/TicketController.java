@@ -2,6 +2,9 @@ package com.tenco.team_two_flight_ticket.ticket;
 
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._middle._entity.City;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,20 +45,17 @@ public class TicketController {
         }
 
 
+
         TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
         model.addAttribute("count", responseBody.getMeta().getCount());
-        model.addAttribute("ticketList", responseBody.getData());
-        model.addAttribute("segments", responseBody.getData().stream().flatMap(e->e.getItineraries().stream()).flatMap(e->e.getSegments().stream()).collect(Collectors.toList()));
-        model.addAttribute("price", responseBody.getData().stream().map(e->e.getPrice()).collect(Collectors.toList()));
-        model.addAttribute("priceOptions", responseBody.getData().stream().map(e->e.getTravelerPricings()).collect(Collectors.toList()));
 
-        System.out.println("==========================================================================================");
-
-        System.out.println(responseBody.getData().stream().flatMap(e->e.getItineraries().stream()).map(e->e.getSegments().get(0).getDeparture().getAt()).collect(Collectors.toList()));
-        System.out.println(responseBody.getData().stream().flatMap(e->e.getItineraries().stream()).map(e->e.getSegments().get(0).getDeparture().getIataCode()).collect(Collectors.toList()));
-        System.out.println(responseBody.getData().stream().flatMap(e->e.getItineraries().stream()).map(e->e.getSegments().get(0).getDeparture().getTerminal()).collect(Collectors.toList()));
-
-        System.out.println("========================================================================================");
+        List<DataDTO> dataDTOList = responseBody.getData();
+        model.addAttribute("ticketList", dataDTOList);
+        // 싼 10뽑기
+//        model.addAttribute("itinerary", responseBody.getData().stream().map(e->e.getItineraries().stream()).collect(Collectors.toList()));
+//        model.addAttribute("segments", responseBody.getData().stream().flatMap(e->e.getItineraries().stream()).flatMap(e->e.getSegments().stream()).collect(Collectors.toList()));
+//        model.addAttribute("price", responseBody.getData().stream().map(e->e.getPrice()).collect(Collectors.toList()));
+//        model.addAttribute("priceOptions", responseBody.getData().stream().map(e->e.getTravelerPricings()).collect(Collectors.toList()));
 
 
         return "flightTicket/flightSearch";
