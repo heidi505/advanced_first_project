@@ -781,7 +781,7 @@
             <section class="flight_search_right">
                 <ul class="count_and_filter">
                     <li>
-                        검색결과 총 <span>61</span>개
+                        검색결과 총 <span>${count}</span>개
                     </li>
                     <li>
                         <form action="#">
@@ -797,28 +797,32 @@
                         </form>
                     </li>
                 </ul>
+                <c:forEach var="ticketList" items="${ticketList}">
+                    <c:forEach var="segments" items="${segments}">
                 <div class="flight_detail_wrap">
                     <div class="flight_detail_area">
+
                         <div class="flight_detail_cont">
                             <div class="flight_search_result active">
+
                                 <ul class="flight_result_top">
                                     <li class="airline_icon">
                                                 <span class="airline_icon_img"><img
                                                         src="/images/icons/airline_icon_05.png" alt="에어프랑스"></span>
-                                        <span>에어프랑스</span>
+                                        <span>${segments.departure.iataCode}</span>
                                     </li>
                                     <li>
                                         <div>
-                                            <span class="airline_time">11:45</span>
+                                            <span class="airline_time"></span>
                                             <span class="airline_arrow_icon">
                                                         <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
                                                     </span>
-                                            <span class="airline_time">22:25</span>
+                                            <span class="airline_time"></span>
                                         </div>
                                         <div class="airline_txt">
-                                            <span>ICN</span>
+                                            <span></span>
                                             <span class="airline_time_taken">19시간 10분</span>
-                                            <span>BCN</span>
+                                            <span></span>
                                         </div>
                                     </li>
                                     <li>
@@ -826,11 +830,12 @@
                                         <div class="airline_txt">02시간 40분 CDG</div>
                                     </li>
                                 </ul>
+
                                 <ul class="flight_result_btm">
                                     <li class="airline_icon">
                                                 <span class="airline_icon_img"><img
                                                         src="/images/icons/airline_icon_05.png" alt="에어프랑스"></span>
-                                        <span>에어프랑스</span>
+                                        <span>${segments.arrival.iataCode}</span>
                                     </li>
                                     <li>
                                         <div>
@@ -841,9 +846,9 @@
                                             <span class="airline_time">22:25</span>
                                         </div>
                                         <div class="airline_txt">
-                                            <span>ICN</span>
+                                            <span></span>
                                             <span class="airline_time_taken">19시간 10분</span>
-                                            <span>BCN</span>
+                                            <span></span>
                                         </div>
                                     </li>
                                     <li>
@@ -851,6 +856,7 @@
                                         <div class="airline_txt">02시간 40분 CDG</div>
                                     </li>
                                 </ul>
+
                                 <div class="detail_more_btn">
                                     <span>상세보기</span>
                                     <div class="detail_arrow"><img src="/images/icons/icon_down.svg">
@@ -859,24 +865,25 @@
                             </div>
                             <ul class="flight_detail_price">
                                 <li>
-                                    <span class="remaining_seats">9석 남음</span>
+                                    <span class="remaining_seats">${ticketList.numberOfBookableSeats}석 남음</span>
                                 </li>
                                 <li>
-                                    <a href="http://www.naver.com" class="reservation_price">1,001,200원
+                                    <a href="http://www.naver.com" class="reservation_price">${ticketList.price.grandTotal}
                                         <!-- <img src="/images/icons/detail_arrow.svg" alt="예약 상세보기">/ -->
                                     </a>
                                 </li>
                             </ul>
                         </div>
+
                     </div>
                     <ul class="detail_more">
                         <div class="detail_more_area">
                             <div class="detail_more_tit">
                                 <div>
                                     <span class="go_label">가는 편</span>
-                                    <span class="">서울 (ICN)</span>
+                                    <span class="">서울 (${segments.depature.iataCode})</span>
                                     <span class="">ㅡ></span>
-                                    <span class="">바르셀로나 (BCN)</span>
+                                    <span class="">바르셀로나 (${segments.arrival.iataCode})</span>
                                 </div>
                                 <span class="total_time"></span>
                             </div>
@@ -951,6 +958,8 @@
                         </div>
                     </ul>
                 </div>
+                    </c:forEach>
+                </c:forEach>
                 <div class="flight_detail_wrap">
                     <div class="flight_detail_area">
                         <div class="flight_detail_cont">

@@ -59,7 +59,7 @@
                             <div class="ticket_date_field">
                                 <div class="trip_round">
                                 <label for="datepicker">출발일 & 도착일</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택"/>
+                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택" name="startDate"/>
                                 </div>
                                 <div class="trip_one_way">
                                     <label for="datepicker2">출발일</label>

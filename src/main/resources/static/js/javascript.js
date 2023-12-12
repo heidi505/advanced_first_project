@@ -170,7 +170,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (currentCount > 0) {
                 passengerCount[index].textContent = currentCount - 1;
                 document.getElementById(category[index]).value = parseInt(passengerCount[index].textContent);
-
                 updatePassengerCount();
             }
         });

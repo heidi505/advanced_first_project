@@ -26,8 +26,9 @@ public class TicketService {
         return cities;
     }
 
-    public ResponseEntity<String> getTickets(TicketRequest.TicketSearchDTO dto) throws URISyntaxException {
-        String date = dto.getStartDate();
+    public TicketResponse.FlightSearchDTO getTickets(TicketRequest.TicketSearchDTO dto) throws URISyntaxException {
+        String date = dto.getStartDate().replace(",","");
+        dto.setStartDate(date);
         //날짜 파싱
         if (date.contains("~")){
             String[] parsedDate = date.split(" ~ ");
@@ -37,8 +38,9 @@ public class TicketService {
             dto.setStartDate(startDate);
             dto.setEndDate(endDate);
         }
+        System.out.println("출발일:" + dto.getStartDate());
+        System.out.println("도착일:" + dto.getEndDate());
 
-        System.out.println(dto.getStartDate()+"++++++++++++++++++++++");
 
         //좌석 등급 바꾸기
         if(dto.getTravelClass().equals("일반석")){
@@ -72,10 +74,11 @@ public class TicketService {
         HttpHeaders headers2 = new HttpHeaders();
         headers2.add("Authorization", "Bearer "+response1.getBody().getAccessToken());
 
+        System.out.println("+++++++++++++++++++++++++"+dto.getStartDate());
         URI uri = new URI(UriComponentsBuilder
                 .fromUriString("https://test.api.amadeus.com/v2/shopping/flight-offers")
                 .queryParam("originLocationCode", dto.getOriginLocationCode())
-                .queryParam("destinationLocationCode", dto.getOriginLocationCode())
+                .queryParam("destinationLocationCode", dto.getDestinationLocationCode())
                 .queryParam("departureDate", dto.getStartDate())
                 .queryParam("returnDate", dto.getEndDate())
                 .queryParam("adults", dto.getAdults())
@@ -83,27 +86,16 @@ public class TicketService {
                 .queryParam("infants", dto.getInfants())
                 .queryParam("travelClass", dto.getTravelClass())
                 .queryParam("currencyCode", dto.getCurrencyCode())
+                .queryParam("nonStop", true)
                 .build()
                 .toUriString());
 
-//        MultiValueMap<String, String> params2 = new LinkedMultiValueMap<>();
-//        params2.add("originLocationCode", dto.getOriginLocationCode());
-//        params2.add("destinationLocationCode", dto.getDestinationLocationCode());
-//        params2.add("departureDate", dto.getStartDate());
-//        params2.add("returnDate", dto.getEndDate());
-//        params2.add("adults", String.valueOf(dto.getAdults()));
-//        params2.add("children", String.valueOf(dto.getChildren()));
-//        params2.add("infants", String.valueOf(dto.getInfants()));
-//        params2.add("travelClass", dto.getTravelClass());
-//        params2.add("currencyCode", dto.getCurrencyCode());
-
         HttpEntity<MultiValueMap<String, String>> requestMsg2 = new HttpEntity<>(headers2);
 
-        ResponseEntity<String> response2 = rt2.exchange(uri, HttpMethod.GET, requestMsg2, String.class);
+        ResponseEntity<TicketResponse.FlightSearchDTO> response2 = rt2.exchange(uri, HttpMethod.GET, requestMsg2, TicketResponse.FlightSearchDTO.class);
 
-        return response2;
+        TicketResponse.FlightSearchDTO responseDTO = response2.getBody();
 
-
-        //api 요청..
+        return responseDTO;
     }
 }
