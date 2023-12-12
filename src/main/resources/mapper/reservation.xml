@@ -19,6 +19,6 @@
    		<if test="sort == 'false'">
    		and is_payed = 'false'
    		</if>
-   		order by departure_time
+   		order by departure_time desc
    	</select>
 </mapper>

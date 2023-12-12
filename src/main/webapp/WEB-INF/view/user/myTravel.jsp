@@ -82,7 +82,7 @@
                                                         <img src="/images/icons/airline_icon_02.png" alt="제주항공">
                                                     </div>
                                                     <div>
-                                                    <!-- choose문 3개는 써야 할듯 -->
+                                                    <!-- choose문 많이 필요 -->
                                                         <p> [제주항공] 부산 - 도쿄/나리타</p>
                                                         <p>예약번호 ${list.reservationNum}</p>
                                                     </div>
@@ -287,7 +287,6 @@
             document.getElementById(tabId).style.display = "block";
             
             //데이터를 가져와 출력하는 함수
-            console.log(tabId);
             getMyTravel(tabId);
 
             button.classList.add("tab_active");
