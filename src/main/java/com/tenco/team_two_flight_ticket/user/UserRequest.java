@@ -69,8 +69,9 @@ public class UserRequest {
     public static class GetMyTravelListDTO{
     	private StatusEnum statusEnum;
     	private int userId;
-    	private String sort = "all";
+    	private String sort;
     }
+ 
 
 
 }
