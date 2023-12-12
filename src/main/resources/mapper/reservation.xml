@@ -14,11 +14,28 @@
    		where user_id = #{userId}
    		and status_enum = #{statusEnum}
    		<if test="sort == 'true'">
-   		and is_payed = 'true'
+   		and is_payed = true
    		</if>
    		<if test="sort == 'false'">
-   		and is_payed = 'false'
+   		and is_payed = false
    		</if>
    		order by departure_time desc
    	</select>
+   	
+   	<select id="getMyTripCount" resultType="int">
+   		select count(*)
+   		from reservation_tb as r
+   		join ticket_tb as t
+   		on r.id = t.reservation_id
+   		where user_id = #{userId}
+   		and status_enum = #{statusEnum}
+   		<if test="sort == 'true'">
+   		and is_payed = true
+   		</if>
+   		<if test="sort == 'false'">
+   		and is_payed = false
+   		</if>
+   	</select>
+   	
+   	
 </mapper>

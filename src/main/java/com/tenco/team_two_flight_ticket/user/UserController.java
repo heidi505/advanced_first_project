@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
-import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import com.tenco.team_two_flight_ticket.reservation.ReservationService;
+import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCntAndListDTO;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -70,21 +72,26 @@ public class UserController {
 	}
 
 	@GetMapping("/my-travel")
-	public String myPageTravel(@Valid UserRequest.GetMyTravelListDTO dto , Model model ) {
-		//User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		dto.setStatusEnum(StatusEnum.예정);
-		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
+	public String myPageTravel(@Valid GetMyTravelListDTO dto , Model model ) {
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
+		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
+		model.addAttribute("tripCount", tripCount);
 		model.addAttribute("tripList",tripList);
-		
 		return "user/myTravel";
 	}
 	
 	@ResponseBody
 	@GetMapping("/get-my-travel")
-	public List<GetMyTravelDTO> myPageTravelProc(@Valid UserRequest.GetMyTravelListDTO dto, Errors errors) {
-		System.out.println(dto);
-		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
-		return tripList;
+	public GetMyTripCntAndListDTO myPageTravelProc(@Valid GetMyTravelListDTO dto, Errors errors) {
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
+		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
+		GetMyTripCntAndListDTO myTrip = new GetMyTripCntAndListDTO();
+		myTrip.setTripCount(tripCount);
+		myTrip.setTripList(tripList);
+		
+		return myTrip;
 	}
 	
 

@@ -32,7 +32,13 @@
                     <div class="my_travel_tab_content">
                         <div class="tab-content" id="planned_trip">
                             <div class="my_trip_count_label">
-                                전체 <span class="my_trip_num">2</span>
+                                전체 <span class="my_trip_num">${tripCount.allTripCount}</span>
+                            </div>
+                            <div class="my_trip_count_label">
+                                결제전 <span class="my_trip_num">${tripCount.notPayedTripCount}</span>
+                            </div>
+                            <div class="my_trip_count_label">
+                                결제완료 <span class="my_trip_num">${tripCount.payedTripCount}</span>
                             </div>
                             <c:set var="i" value="${0}" />
                              <c:set var="lastYear" value="${0000}" />
@@ -72,7 +78,7 @@
                                                 </c:otherwise>
                                                 </c:choose>
                                                 </span></li>
-                                                <li><a href="#">예약 상세 보기 <img src="/images/icons/detail_arrow.svg"
+                                                <li><a href="/reservation/detail/${list.reservationNum}">예약 상세 보기 <img src="/images/icons/detail_arrow.svg"
                                                                               alt="예약 상세보기"> </a>
                                                 </li>
                                             </ul>
@@ -287,11 +293,31 @@
             document.getElementById(tabId).style.display = "block";
             
             //데이터를 가져와 출력하는 함수
-            getMyTravel(tabId);
-
+            getMyTravel(tabId , "전체");
             button.classList.add("tab_active");
         });
     });
+    
+    tabContents.forEach((button)=>{
+    	button.addEventListener('click',(e)=>{
+    		let tabId = button.id;
+    		if(e.target.classList.contains('my_trip_count_label')||
+    				e.target.classList.contains('my_trip_num')){
+    			let sort = '';
+    			if(e.target.classList.contains('my_trip_num')){
+    				let myTripCountLabel = e.target.parentElement;
+    				sort = myTripCountLabel.innerText.split(e.target.innerText)[0];
+    			} else{
+    				sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
+    			}
+    			getMyTravel(tabId, sort);
+    		}
+
+    	})
+    	
+    	
+    });
+    
 </script>
 <script src="/js/my_travel.js"></script>
 <!-- footer.jsp -->

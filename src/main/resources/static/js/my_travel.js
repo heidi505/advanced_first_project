@@ -1,8 +1,8 @@
-async function getMyTravel(tabId){
+async function getMyTravel(tabId, sort){
 	let statusEnum = '';
 	let result = '';
 	let reservedTrip = '';
-	
+	console.log(sort);
 	switch(tabId){
 		case 'planned_trip': statusEnum = '예정'; break;
 		case 'last_trip': statusEnum = '지난'; break;
@@ -10,9 +10,10 @@ async function getMyTravel(tabId){
 	}
 	
 	 try {
-        const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&userId=1`);
-        dataList = await response.json(); 
-        insertElement(dataList , tabId);
+		 //여기 아이디 처리 필요
+        const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&userId=1&sort=${sort}`);
+        data = await response.json(); 
+        insertElement(data.tripList, data.tripCount, tabId, );
     } catch (error) {
     }
 }
@@ -42,7 +43,7 @@ function makeYearTag(year){
 
 
 // 예정된 여행 목록 삽입하기
-function insertElement(dataList, tabId){
+function insertElement(tripList, tripCnt , tabId){
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = '';
 	let myTripCountLabel = '';
@@ -52,22 +53,22 @@ function insertElement(dataList, tabId){
 	let span = '';
 	let lastYear = '0000'; // 지난 여행 연도와 비교하여 변동 시 연도 표기
 	let tripCount = 0;
-	
-	for(let i=0; i<3; i++){
+	let num = tabId == 'last_trip' ? 1 : 3 ;
+	for(let i=0; i<num; i++){
 		// 결제여부 버튼 삽입
 		myTripCountLabel = makeElement('div','my_trip_count_label me-2');
 
     	switch(i){
 			case 0: isPayed = '전체'; 
-					tripCount = 111; 
+					tripCount = tripCnt.allTripCount; 
 					myTripCountLabel.classList.add('all_payment');
 			        break;
 			case 1: isPayed = '결제전'; 
-					tripCount = 56;
+					tripCount = tripCnt.notPayedTripCount;
 					myTripCountLabel.classList.add('before_payment');   
 					break;
 			case 2: isPayed = '결제완료';
-					tripCount = 55;
+					tripCount = tripCnt.payedTripCount;
 					myTripCountLabel.classList.add('payed_complete');     
 					 break;
 		}	
@@ -82,7 +83,7 @@ function insertElement(dataList, tabId){
 	}
     //결제 여부 버튼 끝
     // 여기부터 반복문 
-    dataList.forEach((data)=>{
+    tripList.forEach((data)=>{
 		let departureTime = data.departureTime;
     	let date = departureTime.split('T')[0].split('-');
     	let year, month, day = 0;
@@ -155,7 +156,7 @@ function insertElement(dataList, tabId){
     	let myTripContentTit = makeElement('li','my_trip_content_tit');
     	let airlineIconImg = makeElement('div','airline_icon_img');
     	let koreanName = '';
-    	// 항공사별 데이터 상 이름을 한국어로 변경. 나머지도 작성 필요
+    	// 항공사별 IATA 이름을 한국어로 변경. 나머지도 작성 필요
     	switch(data.airline){
 			case 'KAL': koreanName = '대한항공';
 			 break;
@@ -168,7 +169,7 @@ function insertElement(dataList, tabId){
     	div = makeElement('div');
     	
     	let p = makeElement('p');
-    	// 이것도 영문 데이터를 한글 데이터로 바꿔 text안에 넣어줘야 함
+    	// 이것도 IATA 데이터를 한글 데이터로 바꿔 text안에 넣어줘야 함
     	text = document.createTextNode(` [${koreanName}] 부산 - 도쿄/나리타`);
     	p.appendChild(text);
     	div.appendChild(p);
@@ -266,7 +267,17 @@ function insertElement(dataList, tabId){
     	myTripList.appendChild(myTripBox);
     	myTrip.appendChild(myTripList);
     });	
+    if(tripList.length == 0){
+		let noResult = makeElement('p','no_result_page text-center mt-5 pt-5 fs-3');
+		text = document.createTextNode('조회된 목록이 없습니다');
+		noResult.appendChild(text);
+		myTrip.appendChild(noResult);
+	}
     //반복문 끝
 }
+
+
+
+
 
 
