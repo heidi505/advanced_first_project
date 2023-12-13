@@ -17,16 +17,8 @@ function openMenu(event, ruleNumber) {
 
 
 
-
-
-
-
 window.onload = function(){
-	
-	
-	
-	
-	
+
 	
 	// 모달창 닫기
 	document.getElementById('close_btn').addEventListener('click', function () {

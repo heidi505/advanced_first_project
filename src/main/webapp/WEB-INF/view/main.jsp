@@ -44,7 +44,7 @@
                                         </button>
                                     </div>
                                     <button type="button" class="from_to_icon transform_btn">
-                                        <img src="images/icons/transform_icon.svg" alt="전환"/>
+                                        <img src="/images/icons/transform_icon.svg" alt="전환"/>
                                     </button>
                                     <div class="to_select">
                                         <button type="button" id="to_select_btn"
@@ -83,7 +83,7 @@
                 <!-- 출발지 모달 -->
                 <div class="common_modal from_to_modal" id="from_modal">
               <span class="modal_close">
-                <img src="images/icons/close.png" alt="닫기"/>
+                <img src="/images/icons/close.png" alt="닫기"/>
               </span>
                     <div class="modal_title">
                         <h4>주요 도시 바로 선택</h4>
@@ -294,7 +294,7 @@
                 <!-- 도착지 모달 -->
                 <div class="common_modal from_to_modal" id="to_modal">
               <span class="modal_close">
-                <img src="images/icons/close.png" alt="닫기"/>
+                <img src="/images/icons/close.png" alt="닫기"/>
               </span>
                     <div class="modal_title">
                         <h4>주요 도시 바로 선택</h4>
@@ -846,7 +846,6 @@
 </div>
 </div>
 <script>
-    // 도시 값 넣기
 
     const oneWay = document.querySelector(".one_way");
     const datepicker = document.getElementById("datepicker");
@@ -860,14 +859,23 @@
     }
 
     flatpickr(datepicker, {
+        // mode: "range",
+        // // minDate: "today",
+        // dateFormat: "Y-m-d",
+        // disable: [
+        //     function (date) {
+        //         // disable every multiple of 8
+        //         return !(date.getDate() % 8);
+        //     },
+        // ],
         mode: "range",
-        // minDate: "today",
+        minDate: "today",
         dateFormat: "Y-m-d",
         disable: [
-            function (date) {
+            function(date) {
                 // disable every multiple of 8
                 return !(date.getDate() % 8);
-            },
+            }
         ],
         time_24hr: true, // 24시간 형식 사용
         minDate: "today", // 오늘 이전 날짜 선택 비활성화

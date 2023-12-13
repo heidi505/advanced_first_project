@@ -54,8 +54,8 @@ public class TicketController {
 
         System.out.println("=================================");
         System.out.println(dataDTOList.get(0).getItineraries().get(0).getDuration());
-        System.out.println(dataDTOList.get(0).getItineraries().get(0).getSegments().get(0).getArrival().getAt());
-        System.out.println(dataDTOList.get(0).getPrice().getGrandTotal());
+        System.out.println(dataDTOList.get(3).getItineraries().get(0).getSegments().get(0).getArrival().time());
+        System.out.println(dataDTOList.get(1).getTravelerPricings().get(0).getFareDetailsBySegment().get(0).getIncludedCheckedBags());
         System.out.println("=================================");
 
 

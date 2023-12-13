@@ -3,6 +3,8 @@ package com.tenco.team_two_flight_ticket.auth;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
+import com.tenco.team_two_flight_ticket.auth.authresponse.OAuthToken;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.User;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
@@ -96,10 +98,55 @@ public class AuthController {
     }
 
     //카카오 로그인
-    @GetMapping("/kakao-callback")
-    public void kakaoCallback(@RequestParam String code){
+    @GetMapping("/user/kakao-redirect")
+    public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
+        System.out.println("메서드 동작 확인");
 
+        RestTemplate r1 = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        MultiValueMap<String, String> bodies = new LinkedMultiValueMap<>();
+        bodies.add("grant_type","authorization_code");
+        bodies.add("client_id",Define.KAKAOKEY);
+        bodies.add("redirect_uri","http://localhost:8080/user/kakao-redirect");
+        bodies.add("code",code);
+
+        HttpEntity<MultiValueMap<String,String>> requestMsg = new HttpEntity<>(bodies,headers);
+        ResponseEntity<OAuthToken> response = r1.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, requestMsg,OAuthToken.class);
+        System.out.println("-----------------");
+        System.out.println(response.getHeaders());
+        System.out.println(response.getBody());
+        System.out.println(response.getBody().getAccess_token());
+        System.out.println("-----------------");
+        // 여기까지 토큰 받기 위함 //
+
+
+        RestTemplate r2 = new RestTemplate();
+        HttpHeaders headers2 = new HttpHeaders();
+        headers2.add("Authorization","Bearer " + response.getBody().getAccess_token());
+        headers2.add("Content-type", "Content-type: application/x-www-form-urlencoded;charset=utf-8");
+
+        // 헤더 바디 결합
+        HttpEntity<MultiValueMap<String, String>> requestMsg2 = new HttpEntity<>(headers2);
+
+        // 요청
+        ResponseEntity<KakaoProfile> response2 = r2.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, requestMsg2, KakaoProfile.class);
+        System.out.println("---------------------");
+        System.out.println(response2.getBody());
+        System.out.println(response2.getBody().getProperties().getNickname());
+        System.out.println("-----카카오 서버 정보 받기 완료------");
+
+        KakaoProfile kakaoProfile = response2.getBody();
+        System.out.println(kakaoProfile);
+
+        userService.kakaoSignUp(dto);
+
+
+        return "redirect:/main";
     }
+
 
     //유저 아이디 중복체크
     @GetMapping("/check/username")
@@ -145,10 +192,4 @@ public class AuthController {
 
         return ResponseEntity.ok().body(ApiUtils.success(message));
     }
-
-
-
-
-
-
 }

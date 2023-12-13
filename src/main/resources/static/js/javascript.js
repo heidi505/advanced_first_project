@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 openModal(targetModalId);
             });
         });
+
         function openModal(modalId) {
             let modal = document.getElementById(modalId);
             modal.style.display = "block";
@@ -107,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     //   도시 탭버튼
 
     let fromButtonIcon = document.querySelectorAll(".from_local_item button");
@@ -120,7 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
             fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
             fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
             document.getElementById("origin").value = airportCode;
-
 
 
         }
@@ -155,89 +154,119 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    let minusButtons = document.querySelectorAll(".minus");
-    let plusButtons = document.querySelectorAll(".plus");
-    let passengerCount = document.querySelectorAll(".passenger_count");
-    let totalCount = 0;
+    let fromToForm = document.querySelector(".from_to_form");
 
-    updatePassengerCount();
+    if (fromToForm) {
 
-    let category = ["adults", "children", "infants"];
+        let minusButtons = document.querySelectorAll(".minus");
+        let plusButtons = document.querySelectorAll(".plus");
+        let passengerCount = document.querySelectorAll(".passenger_count");
+        let totalCount = 0;
 
-    minusButtons.forEach(function (minusButton, index) {
-        minusButton.addEventListener("click", function () {
-            let currentCount = parseInt(passengerCount[index].textContent);
-            if (currentCount > 0) {
-                passengerCount[index].textContent = currentCount - 1;
+        updatePassengerCount();
+
+        let category = ["adults", "children", "infants"];
+
+        minusButtons.forEach(function (minusButton, index) {
+            minusButton.addEventListener("click", function () {
+                let currentCount = parseInt(passengerCount[index].textContent);
+                if (currentCount > 0) {
+                    passengerCount[index].textContent = currentCount - 1;
+                    document.getElementById(category[index]).value = parseInt(passengerCount[index].textContent);
+                    updatePassengerCount();
+                }
+            });
+        });
+
+
+        plusButtons.forEach(function (plusButton, index) {
+            plusButton.addEventListener("click", function () {
+                let currentCount = parseInt(passengerCount[index].textContent);
+                passengerCount[index].textContent = currentCount + 1;
                 document.getElementById(category[index]).value = parseInt(passengerCount[index].textContent);
+
                 updatePassengerCount();
+            });
+        });
+
+        function updatePassengerCount() {
+            totalCount = Array.from(passengerCount).reduce((sum, countElement) => {
+                return sum + parseInt(countElement.textContent);
+            }, 0);
+
+            let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+            let passengerCountSpan = passengerSeatButton.querySelector("span");
+            passengerCountSpan.textContent = "승객 " + totalCount + " 명 ,";
+        }
+
+        let seatButtons = document.querySelectorAll(
+            '.seat_radio input[type="radio"]'
+        );
+
+        seatButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                updatePassengerSeat(button.value);
+            });
+
+
+            let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+            let passengerCountSpan = passengerSeatButton.querySelector("span");
+            passengerCountSpan.textContent = "승객 " + totalCount + " 명 ,";
+
+
+            let seatButtons = document.querySelectorAll(
+                '.seat_radio input[type="radio"]'
+            );
+
+            seatButtons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    updatePassengerSeat(button.value);
+                });
+            });
+
+            function updatePassengerSeat(seatType) {
+                let passengerSeatButton = document.querySelector(".passenger_seat_btn");
+                let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
+                passengerSeatSpans[1].textContent = seatType;
+                document.getElementById("travelClass").value = seatType;
             }
-        });
-    });
 
-    plusButtons.forEach(function (plusButton, index) {
-        plusButton.addEventListener("click", function () {
-            let currentCount = parseInt(passengerCount[index].textContent);
-            passengerCount[index].textContent = currentCount + 1;
-            document.getElementById(category[index]).value = parseInt(passengerCount[index].textContent);
+            // 승객 좌석 선택
 
-            updatePassengerCount();
-        });
-    });
+            let transFormBtns = document.querySelectorAll(".transform_btn");
 
-    function updatePassengerCount() {
-        totalCount = Array.from(passengerCount).reduce((sum, countElement) => {
-            return sum + parseInt(countElement.textContent);
-        }, 0);
+            transFormBtns.forEach((button) => {
+                button.addEventListener("click", () => {
+                    // Get the values of from_select
+                    const fromCode = document.querySelector("#from_select_btn .from_code_value").textContent;
+                    const fromAirport = document.querySelector("#from_select_btn .from_airport_value").textContent;
 
-        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
-        let passengerCountSpan = passengerSeatButton.querySelector("span");
-        passengerCountSpan.textContent = "승객 " + totalCount + " 명 ,";
+                    // Get the values of to_select
+                    const toCode = document.querySelector("#to_select_btn .to_code_value").textContent;
+                    const toAirport = document.querySelector("#to_select_btn .to_airport_value").textContent;
+
+                    // Swap the values
+                    document.querySelector("#from_select_btn .from_code_value").textContent = toCode;
+                    document.querySelector("#from_select_btn .from_airport_value").textContent = toAirport;
+
+                    document.querySelector("#to_select_btn .to_code_value").textContent = fromCode;
+                    document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
+                });
+            });
+
+
+            let children = document.querySelector("#childrenNum").textContent;
+            document.getElementById("children").value = children;
+
+
+        })
     }
 
-    let seatButtons = document.querySelectorAll(
-        '.seat_radio input[type="radio"]'
-    );
-
-    seatButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            updatePassengerSeat(button.value);
-        });
-    });
-
-    function updatePassengerSeat(seatType) {
-        let passengerSeatButton = document.querySelector(".passenger_seat_btn");
-        let passengerSeatSpans = passengerSeatButton.querySelectorAll("span");
-        passengerSeatSpans[1].textContent = seatType;
-        document.getElementById("travelClass").value = seatType;
-    }
-
-    // 승객 좌석 선택
-
-    let transFormBtns = document.querySelectorAll(".transform_btn");
-
-    transFormBtns.forEach((button) => {
-        button.addEventListener("click", () => {
-            // Get the values of from_select
-            const fromCode = document.querySelector("#from_select_btn .from_code_value").textContent;
-            const fromAirport = document.querySelector("#from_select_btn .from_airport_value").textContent;
-
-            // Get the values of to_select
-            const toCode = document.querySelector("#to_select_btn .to_code_value").textContent;
-            const toAirport = document.querySelector("#to_select_btn .to_airport_value").textContent;
-
-            // Swap the values
-            document.querySelector("#from_select_btn .from_code_value").textContent = toCode;
-            document.querySelector("#from_select_btn .from_airport_value").textContent = toAirport;
-
-            document.querySelector("#to_select_btn .to_code_value").textContent = fromCode;
-            document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
-        });
-    });
+});
 
 
-    let children = document.querySelector("#childrenNum").textContent;
-    document.getElementById("children").value = children;
 
 
-    });
+    // 출발지 & 도착지 전환
+
+

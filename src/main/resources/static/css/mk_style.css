@@ -1,4 +1,8 @@
 /* 프리뷰 페이지 */
+.reservation_preview_box {
+    margin: 32px 0;
+}
+
 .preview_header {
     text-align: center;
 }
@@ -91,7 +95,6 @@
 }
 
 .preview_price_form {
-    width: 25%;
     margin-top: 15px;
     margin-left: 50px;
 }
@@ -110,6 +113,7 @@
 .preview_price_line {
     border-bottom: 1px solid var(--form);
     padding: 10px;
+    line-height: 1.4;
 }
 
 .preview_price_total {
@@ -145,6 +149,10 @@
 }
 
 /* 예약 상세 페이지 */
+
+.reservation_detail_box {
+    margin: 32px 0;
+}
 
 .detail_info_form {
     border: 1px solid var(--form);
@@ -220,6 +228,9 @@
 
 .detail_input_war {
     font-size: smaller;
+    line-height: 1.4;
+    padding-top: 4px;
+    display: inline-block;
 }
 
 .detail_group_padding2 {
@@ -262,23 +273,23 @@
     font-weight: bold;
 }
 
-.detail_boldr{
+.detail_boldr {
     color: var(--cancle);
 }
 
-.detail_baggage{
+.detail_baggage {
     margin-top: 0px;
 }
 
-.detail_main_form{
+.detail_main_form {
     display: flex;
 }
 
-.detail_left_from{
+.detail_left_from {
     width: 75%;
 }
 
-.detail_right_form{
+.detail_right_form {
     width: 25%;
 }
 
@@ -288,21 +299,79 @@
     margin-left: 50px;
 }
 
-.detail_hidden_label{
+.reservation_detail_area {
+    margin: 32px 0;
+}
+
+.detail_hidden_label {
     display: none;
+}
+
+.gender_select input[type=radio] {
+    display: none;
+}
+
+.gender_select input[type=radio] + label {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid var(--form);
+    width: 90px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    /* font-weight: bold; */
+    font-size: 14px;
+    padding-left: 0;
+}
+
+.gender_select input[type=radio] + label {
+    background-color: var(--basic_wh);
+    color: var(--basic_03);
+}
+
+.gender_select input[type=radio]:checked + label {
+    background-color: var(--primary_02);
+    color: #fff;
+}
+
+.detail_gender_form input[type="radio"]:checked + label:before {
+    border: 0;
+}
+
+.detail_gender_form input[type="radio"]:checked + label:before, .detail_gender_form input[type="radio"]:not(:checked) + label:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0;
+}
+
+.detail_gender_form input[type="radio"]:checked + label:after, .detail_gender_form input[type="radio"]:not(:checked) + label:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0;
+    padding-left: 0;
+}
+
+.detail_gender_form input[type="radio"]:checked + label:before, .detail_gender_form input[type="radio"]:not(:checked) + label:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0;
+    padding-left: 0;
 }
 
 /* 예약하기 모달창 */
 
-.res_modal_add{
+.res_modal_add {
     --bs-modal-width: 850px;
 }
 
-.res_modal_add2{
+.res_modal_add2 {
     --bs-modal-width: 550px;
 }
 
-.res_modal_form{
+.res_modal_form {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -316,7 +385,7 @@
     height: 100%;
 }
 
-.res_modal_form2{
+.res_modal_form2 {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -331,12 +400,12 @@
 }
 
 
-.res_modal_tb_form{
+.res_modal_tb_form {
     padding: 30px 40px 45px;
     display: block;
 }
 
-.res_modal_margin{
+.res_modal_margin {
     margin-bottom: 2em;
 }
 
@@ -346,11 +415,11 @@
     margin-bottom: 30px;
 }
 
-.res_modal_b{
+.res_modal_b {
     color: var(--primary_02);
 }
 
-.res_modal_p{
+.res_modal_p {
     margin-top: 30px;
     margin-bottom: 20px;
     font-weight: 600;
@@ -374,14 +443,14 @@
     margin-bottom: 10px;
 }
 
-.res_modal_check{
+.res_modal_check {
     margin-bottom: 56px;
     padding: 16px 40px;
     border-radius: 4px;
     background-color: var(--form);
 }
 
-.res_modal_btn{
+.res_modal_btn {
     height: 20px;
     margin-bottom: 32px;
     line-height: 20px;
@@ -389,51 +458,51 @@
     text-align: center;
 }
 
-.res_modal_btn2{
+.res_modal_btn2 {
     border-radius: 20px;
 }
 
-.res_modal_check_btn{
+.res_modal_check_btn {
     padding: 0;
     width: 20px;
     height: 20px;
     vertical-align: middle;
 }
 
-.res_modal_btn_area{
+.res_modal_btn_area {
     text-align: center;
 }
 
-.res_kko_header{
+.res_kko_header {
     background-color: var(--primary_01);
 }
 
-.res_kko_title{
+.res_kko_title {
     font-weight: bold;
 }
 
-.res_kko_p{
+.res_kko_p {
     line-height: 1.5;
     padding: 30px;
 }
 
-.res_kko_btn{
+.res_kko_btn {
     width: 180px;
 }
 
 /* 로딩 페이지 */
 
-.loading{
-    width:100%;
-    height:100%;
-    position:fixed;
-    left:0px;
-    top:0px;
-    background:#fff;
-    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+.loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background: #fff;
+    z-index: 1000; /* 이 값으로 레이어의 위치를 조정합니다. */
 }
 
-.loading_bg{
+.loading_bg {
     content: '';
     position: absolute;
     top: 0;
@@ -453,7 +522,7 @@
     color: var(--basic_wh);
 }
 
-.form2{
+.form2 {
     font-size: large;
 }
 
@@ -482,13 +551,13 @@
     transform: translate(-50%, -50%); /* 세로 가로 중앙에 정렬 */
 }
 
-.overlay-image{
+.overlay-image {
     display: block;
     margin: auto;
     position: absolute;
 }
 
-.loading_city{
+.loading_city {
     font-weight: 1000;
 }
 

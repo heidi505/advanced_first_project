@@ -13,4 +13,11 @@ public class IncludedCheckedBagsDTO {
     private Integer quantity;
     private Integer weight;
     private String weightUnit;
+
+    public String choose(){
+        if (this.weight==null){
+            return this.quantity + "개";
+        }
+        return this.weight + "KG";
+    }
 }

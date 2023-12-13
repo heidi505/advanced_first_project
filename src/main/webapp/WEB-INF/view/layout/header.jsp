@@ -55,7 +55,7 @@
                             <a class="nav-link" href="/airport/airport-info">공항 정보</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/my-travel">나의 여행</a>
+                            <a class="nav-link" href="/user/my-travel?statusEnum=예정&sort=전체">나의 여행</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">나의 예약</a>

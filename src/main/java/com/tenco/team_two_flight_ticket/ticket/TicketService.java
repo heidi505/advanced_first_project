@@ -103,6 +103,7 @@ public class TicketService {
 
         TicketResponse.FlightSearchDTO responseDTO = new TicketResponse.FlightSearchDTO(response2.getBody());
 
+
 //        dataDTOList.stream()
 //                .collect(Collectors.groupingBy(dataDTO -> dataDTO.getPrice().getGrandTotal()));
 //

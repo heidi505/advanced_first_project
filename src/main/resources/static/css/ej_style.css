@@ -702,6 +702,7 @@
     padding: 5px 10px;
     border-radius: 15px;
     font-size: 14px;
+    cursor:pointer;
 }
 .cancle_payment_label {
     margin-bottom: 16px;
@@ -737,6 +738,379 @@
     border: 1px solid var(--form);
 }
 
+/*내 여행 페이지*/
+
+/* 항공권 검색 페이지 */
+.my_travel {
+    margin-top: 24px;
+}
+#flight_search_page .search_from_to_box {
+    background-color: var(--box_bg);
+    box-shadow: 0px 1px 6px 5px var(--form);
+    margin-bottom: 32px;
+}
+
+#flight_search_page .from_to_modal {
+    top: 25%;
+    left: 12%;
+}
+
+#flight_search_page .passenger_seat_modal {
+    top: 25%;
+    right: 12%;
+}
+.flight_search_cont .count_and_filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.flight_search_cont {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flight_search_left {
+    width: 200px;
+    padding: 0 16px;
+    height: 100%;
+}
+
+.flight_search_right {
+    width: 70%;
+}
+
+.flight_detail_box {
+    padding-bottom: 12px;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid var(--form);
+    margin-bottom: 12px;
+}
+
+.flight_detail_wrap {
+    position: relative;
+    padding: 12px 0;
+}
+
+.flight_detail_box li {
+    letter-spacing: -0.07em;
+    line-height: 21px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.flight_detail_box li:nth-child(3) {
+    color: var(--basic_05);
+    font-size: 14px;
+}
+
+.detail_more {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.flight_detail_box.active .detail_arrow {
+    transform: rotate(180deg);
+}
+
+.flight_search_result.active .detail_arrow {
+    transform: rotate(180deg);
+}
+
+.flight_search_result.active .detail_more {
+    max-height: 100%;
+}
+
+.flight_detail_wrap .detail_arrow {
+    display: inline-block;
+    position: absolute;
+    height: 24px;
+    bottom: 0;
+    right: 0;
+    top: -2px;
+}
+
+.filter_item {
+    margin-bottom: 24px;
+}
+
+.filter_item li {
+    display: flex;
+    align-items: center;
+    line-height: 2;
+}
+
+.filter_item .check_box {
+    margin-right: 5px;
+}
+
+.flight_search_right .flight_detail_wrap {
+    background-color: var(--basic_wh);
+    box-shadow: 0 1px 10px 2px var(--form);
+    border-radius: 30px;
+    padding: 20px 20px 10px 20px;
+    margin-bottom: 32px;
+}
+
+.flight_search_right .flight_detail_box {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.flight_search_right .flight_detail_wrap .detail_arrow {
+    right: 40%;
+    top: 2px;
+}
+
+.flight_search_right .flight_detail_price {
+    padding-left: 20px;
+    border-left: 1px solid var(--form);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.flight_search_right .flight_search_result {
+    width: 80%;
+    padding-right: 20px;
+}
+
+.flight_detail_wrap .detail_arrow {
+    display: inline-block;
+    position: absolute;
+    height: 24px;
+    bottom: 0;
+    right: 0;
+    top: -2px;
+}
+
+.flight_result_top,
+.flight_result_btm {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+}
+
+.flight_result_top>li,
+.flight_result_btm>li {
+    text-align: center;
+    padding: 0 5px;
+}
+
+.flight_detail_cont {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.airline_icon {
+    display: flex;
+    align-items: center;
+}
+
+.airline_icon_img {
+    padding: 7px;
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.airline_arrow_icon {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.airline_time_taken {
+    padding: 0 25px;
+}
+
+.airline_time {
+    font-weight: 500;
+}
+
+.airline_time>span {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.airline_txt {
+    font-size: 14px;
+    color: var(--basic_09);
+    padding-top: 4px;
+}
+
+.remaining_seats {
+    font-size: 12px;
+    letter-spacing: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--cancle);
+}
+
+.reservation_price {
+    padding: 12px;
+    border: 1px solid var(--primary_02);
+    border-radius: 5px;
+    display: inline-block;
+    color: var(--primary_02);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+/* 항공권 검색 더보기 */
+
+.detail_more_area {
+    border-top: 1px solid var(--line);
+    padding: 16px 0;
+    margin-top: 16px;
+}
+
+.detail_more_btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px 0;
+}
+
+.detail_more_btn>span {
+    color: var(--primary_02);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.detail_more_tit {
+    background-color: var(--box_bg);
+    padding: 12px;
+}
+
+.detail_more_tit span {
+    font-weight: 500;
+}
+
+.detail_more_cont {
+    padding: 12px;
+    padding-top: 20px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 24px;
+}
+
+.go_label {
+    color: var(--basic_wh);
+    padding: 4px;
+    background-color: var(--primary_02);
+    font-size: 14px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.detail_distance,
+.detail_distance>ul {
+    display: flex;
+}
+
+.detail_country_name {
+    padding-right: 50px;
+}
+
+.detail_country_name>span {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.detail_trip_area {
+    display: flex;
+}
+
+.detail_trip_date {
+    padding-right: 20px;
+}
+
+.detail_trip_cont {
+    position: relative;
+    padding-left: 20px;
+    border-left: 1px solid var(--form);
+    line-height: 1.5;
+}
+
+.detail_trip_cont>p:nth-child(2) {
+    font-size: 14px;
+    color: var(--basic_09);
+}
+
+.detail_trip_cont>p:nth-child(3) {
+    font-size: 14px;
+    color: var(--basic_07);
+    font-weight: 500;
+}
+
+.detail_trip_cont::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 30px;
+    top: 0;
+    left: -5px;
+    border: 1px solid var(--form);
+    background-color: var(--basic_wh);
+}
+
+.detail_trip_cont::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 30px;
+    bottom: 0;
+    left: -5px;
+    border: 1px solid var(--form);
+    background-color: var(--basic_wh);
+}
+
+.trip_waiting_time {
+    padding: 16px 0;
+    text-align: left;
+    color: var(--primary_01);
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 162px;
+}
+
+.detail_fee .detail_fee_tit {
+    margin-bottom: 8px;
+}
+
+.detail_fee_tit {
+    font-weight: bold;
+}
+
+.detail_total_fee {
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail_total_fee>li:nth-child(2) {
+    font-size: 24px;
+    font-weight: bold;
+}
+
 /*admin*/
 
 #admin {
@@ -768,7 +1142,7 @@
     text-align: right;
 }
 
-.sign_in_page {
+#admin .sign_in_page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -808,6 +1182,8 @@
 }
 
 /*배너 목록*/
+
+
 
 
 /*공통*/
@@ -996,3 +1372,4 @@
     margin-bottom: 12px;
 
 }
+

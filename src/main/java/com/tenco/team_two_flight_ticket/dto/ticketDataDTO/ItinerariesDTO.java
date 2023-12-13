@@ -18,9 +18,12 @@ public class ItinerariesDTO {
 
     public ItinerariesDTO(ItinerariesDTO dto) {
         String time = dto.getDuration().substring(2);
-        if(time.length() > 2){
-            String hour = time.substring(0, 1);
-            String minute = time.substring(2, 4);
+        int indexOfH = time.indexOf("H");
+        if(time.contains("M")){
+            int indexOfM = time.indexOf("M");
+
+            String hour = time.substring(0, indexOfH);
+            String minute = time.substring(indexOfH+1, indexOfM);
             this.duration = hour+"시간 "+minute+"분";
         }else{
             String hour = time.substring(0,1);

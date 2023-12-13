@@ -59,7 +59,7 @@
             <!-- 출발지 모달 -->
             <div class="common_modal from_to_modal" id="from_modal">
                         <span class="modal_close">
-                            <img src="/images/icons/close.png" alt="닫기" />
+                            <img src="/images/icons/close.png" alt="닫기"/>
                         </span>
                 <div class="modal_title">
                     <h4>주요 도시 바로 선택</h4>
@@ -67,7 +67,7 @@
                 <div class="modal-content">
                     <div class="from_to_search">
                         <form class="d-flex">
-                            <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요" />
+                            <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
                             <button class="btn btn-primary" type="submit">검색</button>
                         </form>
                     </div>
@@ -117,7 +117,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="korea" items="${korea}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${korea.cityCode}</span><span
                                                             class="from_local_airport">${korea.cityName}</span>
                                                     </button>
@@ -132,7 +133,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="japan" items="${japan}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${japan.cityCode}</span><span
                                                             class="from_local_airport">${japan.cityName}</span>
                                                     </button>
@@ -147,7 +149,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="asia" items="${asia}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${asia.cityCode}</span><span
                                                             class="from_local_airport">${asia.cityName}</span>
                                                     </button>
@@ -162,7 +165,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="america" items="${america}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${america.cityCode}</span><span
                                                             class="from_local_airport">${america.cityName}</span>
                                                     </button>
@@ -177,7 +181,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="europe" items="${europe}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${europe.cityCode}</span><span
                                                             class="from_local_airport">${europe.cityName}</span>
                                                     </button>
@@ -192,7 +197,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="oceania" items="${oceania}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${oceania.cityCode}</span><span
                                                             class="from_local_airport">${oceania.cityName}</span>
                                                     </button>
@@ -207,7 +213,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="middleEast" items="${middleEast}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${middleEast.cityCode}</span><span
                                                             class="from_local_airport">${middleEast.cityName}</span>
                                                     </button>
@@ -222,7 +229,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="southAmerica" items="${southAmerica}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${southAmerica.cityCode}</span><span
                                                             class="from_local_airport">${southAmerica.cityName}</span>
                                                     </button>
@@ -237,7 +245,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="africa" items="${africa}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${africa.cityCode}</span><span
                                                             class="from_local_airport">${africa.cityName}</span>
                                                     </button>
@@ -252,7 +261,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="china" items="${china}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="from_local_code">${china.cityCode}</span><span
                                                             class="from_local_airport">${china.cityName}</span>
                                                     </button>
@@ -272,7 +282,7 @@
             <!-- 도착지 모달 -->
             <div class="common_modal from_to_modal" id="to_modal">
                         <span class="modal_close">
-                            <img src="/images/icons/close.png" alt="닫기" />
+                            <img src="/images/icons/close.png" alt="닫기"/>
                         </span>
                 <div class="modal_title">
                     <h4>주요 도시 바로 선택</h4>
@@ -280,7 +290,7 @@
                 <div class="modal-content">
                     <div class="from_to_search">
                         <form class="d-flex">
-                            <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요" />
+                            <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
                             <button class="btn btn-primary" type="submit">검색</button>
                         </form>
                     </div>
@@ -329,7 +339,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="korea" items="${korea}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${korea.cityCode}</span><span
                                                             class="to_local_airport">${korea.cityName}</span>
                                                     </button>
@@ -344,7 +355,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="japan" items="${japan}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${japan.cityCode}</span><span
                                                             class="to_local_airport">${japan.cityName}</span>
                                                     </button>
@@ -359,7 +371,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="asia" items="${asia}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${asia.cityCode}</span><span
                                                             class="to_local_airport">${asia.cityName}</span>
                                                     </button>
@@ -389,7 +402,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="europe" items="${europe}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${europe.cityCode}</span><span
                                                             class="to_local_airport">${europe.cityName}</span>
                                                     </button>
@@ -404,7 +418,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="oceania" items="${oceania}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${oceania.cityCode}</span><span
                                                             class="to_local_airport">${oceania.cityName}</span>
                                                     </button>
@@ -419,7 +434,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="middleEast" items="${middleEast}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${middleEast.cityCode}</span><span
                                                             class="to_local_airport">${middleEast.cityName}</span>
                                                     </button>
@@ -434,7 +450,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="southAmerica" items="${southAmerica}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${southAmerica.cityCode}</span><span
                                                             class="to_local_airport">${southAmerica.cityName}</span>
                                                     </button>
@@ -449,7 +466,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="africa" items="${africa}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${africa.cityCode}</span><span
                                                             class="to_local_airport">${africa.cityName}</span>
                                                     </button>
@@ -464,7 +482,8 @@
                                         <ul class="to_local_item">
                                             <c:forEach var="china" items="${china}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName" value="">
+                                                    <button type="button" aria-disabled="false" name="cityName"
+                                                            value="">
                                                         <span class="to_local_code">${china.cityCode}</span><span
                                                             class="to_local_airport">${china.cityName}</span>
                                                     </button>
@@ -484,7 +503,7 @@
             <div class="common_modal passenger_seat_modal" id="passenger_seat_modal">
                 <form action="">
                             <span class="modal_close">
-                                <img src="/images/icons/close.png" alt="닫기" />
+                                <img src="/images/icons/close.png" alt="닫기"/>
                             </span>
                     <div class="modal_title">
                         <h4>인원 선택</h4>
@@ -496,10 +515,12 @@
                             </div>
                             <div class="passenger_count_btn">
                                 <button type="button" class="minus"><img class="minus_img"
-                                                                         src="/images/icons/minus_icon.svg" alt="빼기"></button>
+                                                                         src="/images/icons/minus_icon.svg" alt="빼기">
+                                </button>
                                 <span class="passenger_count count_num">2</span>
                                 <button type="button" class="plus"><img class="plus_img"
-                                                                        src="/images/icons/plus_icon.svg" alt="더하기"></button>
+                                                                        src="/images/icons/plus_icon.svg" alt="더하기">
+                                </button>
                             </div>
                         </div>
                         <div class="passenger_item">
@@ -508,10 +529,12 @@
                             </div>
                             <div class="passenger_count_btn">
                                 <button type="button" class="minus"><img class="minus_img"
-                                                                         src="/images/icons/minus_icon.svg" alt="빼기"></button>
+                                                                         src="/images/icons/minus_icon.svg" alt="빼기">
+                                </button>
                                 <span class="passenger_count count_num">0</span>
                                 <button type="button" class="plus"><img class="plus_img"
-                                                                        src="/images/icons/plus_icon.svg" alt="더하기"></button>
+                                                                        src="/images/icons/plus_icon.svg" alt="더하기">
+                                </button>
                             </div>
                         </div>
                         <div class="passenger_item">
@@ -520,10 +543,12 @@
                             </div>
                             <div class="passenger_count_btn">
                                 <button type="button" class="minus"><img class="minus_img"
-                                                                         src="/images/icons/minus_icon.svg" alt="빼기"></button>
+                                                                         src="/images/icons/minus_icon.svg" alt="빼기">
+                                </button>
                                 <span class="passenger_count count_num">0</span>
                                 <button type="button" class="plus"><img class="plus_img"
-                                                                        src="/images/icons/plus_icon.svg" alt="더하기"></button>
+                                                                        src="/images/icons/plus_icon.svg" alt="더하기">
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -793,7 +818,7 @@
                                 <option value='4'>가는 날 도착시간 빠른 순</option>
                                 <option value='5'>오는 날 도착시간 빠른 순</option>
                             </select>
-                            <input type="hidden" value="Submit" />
+                            <input type="hidden" value="Submit"/>
                         </form>
                     </li>
                 </ul>
@@ -812,11 +837,11 @@
                                     </li>
                                     <li>
                                         <div>
-                                            <span class="airline_time">${segment.departure.at}</span>
+                                            <span class="airline_time">${segment.departure.time()}</span>
                                             <span class="airline_arrow_icon">
                                                         <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
                                                     </span>
-                                            <span class="airline_time">${segment.arrival.at}</span>
+                                            <span class="airline_time">${segment.arrival.time()}</span>
                                         </div>
                                         <div class="airline_txt">
                                             <span>${segment.departure.iataCode}</span>
@@ -878,17 +903,17 @@
                                     </div>
                                     <ul>
                                         <li class="detail_trip_date">
-                                            <span>2월 13일</span>
+                                            <span>${segment.departure.date()}</span>
                                         </li>
                                         <li class="detail_trip_cont">
-                                            <p class="airline_time">${segment.departure.at} <span>서울 ${segment.departure.iataCode}</span></p>
+                                            <p class="airline_time">${segment.departure.time()} <span>서울 ${segment.departure.iataCode}</span></p>
                                             <p>${itinerary.duration}</p>
-                                            <p>${ticket.travelerPricings[status.index].fareDetailsBySegment[status.index].cabin} / 무료수하물 ${ticket.travelerPricings[status.index].fareDetailsBySegment[status.index].includedCheckedBags.quantity}개</p>
-                                            <p class="airline_time">${segment.arrival.at} <span>파리 ${segment.arrival.iataCode}</span></p>
+                                            <p>${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin} / 무료수하물 ${ticket.travelerPricings[status.index].fareDetailsBySegment[status.index].includedCheckedBags.choose()}</p>
+                                            <p class="airline_time">${segment.arrival.time()} <span>파리 ${segment.arrival.iataCode}</span></p>
                                         </li>
                                     </ul>
                                 </li>
-                                </c:forEach>
+
 <%--                                <li class="trip_waiting_time">--%>
 <%--                                    ㅡ 23시간 40분 대기 브로츠와프 WRO ㅡ--%>
 <%--                                </li>--%>
@@ -909,6 +934,7 @@
 <%--                                    </ul>--%>
 <%--                                </li>--%>
                             </ul>
+                        </c:forEach>
                             <div class="common_table detail_fee">
                                 <h5 class="detail_fee_tit">상세요금</h5>
                                 <table class="table table-bordered">
@@ -994,6 +1020,7 @@
     // 상세 슬라이드
 
 
+    const oneWay = document.querySelector(".one_way");
     const datepicker = document.getElementById("datepicker");
     const datepicker2 = document.getElementById("datepicker2");
     const startDateInput = document.getElementById("startDate");
@@ -1004,6 +1031,15 @@
     }
 
     flatpickr(datepicker, {
+        // mode: "range",
+        // // minDate: "today",
+        // dateFormat: "Y-m-d",
+        // disable: [
+        //     function (date) {
+        //         // disable every multiple of 8
+        //         return !(date.getDate() % 8);
+        //     },
+        // ],
         mode: "range",
         minDate: "today",
         dateFormat: "Y-m-d",
@@ -1011,13 +1047,12 @@
             function (date) {
                 // disable every multiple of 8
                 return !(date.getDate() % 8);
-            },
+            }
         ],
-        dateFormat: "Y-m-d", // 날짜 및 시간 형식 설정 (예: 2023-09-12 15:30)// 시간 선택 활성화
         time_24hr: true, // 24시간 형식 사용
         minDate: "today", // 오늘 이전 날짜 선택 비활성화
         maxDate: "2025-12-31", // 특정 날짜까지 선택 가능
-        defaultDate: "today", // 초기 날짜 설정 (현재 날짜와 시간)
+        // defaultDate: "today", // 초기 날짜 설정 (현재 날짜와 시간)
         disable: ["2023-09-15", "2023-09-20"], // 특정 날짜 비활성화
         locale: "ko", // 한국어로 지역화
         onOpen: function (selectedDates, dateStr, instance) {
@@ -1031,24 +1066,18 @@
         },
         disableMobile: true, // 모바일 기기에서 위젯 비활성화
         altInput: true, // 추가 입력란 활성화
-        altFormat: "F j, Y", // 추가 입력란의 날짜 및 시간 형식
+        altFormat: "Y-m-d", // 추가 입력란의 날짜 및 시간 형식
     });
-    // flatpickr(startDateInput, {
-    //   dateFormat: "Y-m-d",
-    //   enableTime: false,
-    //   minDate: "today",
-    //   defaultDate: "today",
-    //   locale: "ko",
-    //   onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
-    // });
-    // flatpickr(endDateInput, {
-    //   dateFormat: "Y-m-d",
-    //   enableTime: false,
-    //   minDate: "today",
-    //   defaultDate: "today",
-    //   locale: "ko",
-    //   onChange: handleDateChange, // 날짜 선택 이벤트 핸들러 등록
-    // });
+
+    flatpickr(datepicker2, {
+        altInput: true,
+        dateFormat: "YYYY-MM-DD", // 날짜 형식 설정 (예: 2023-09-12)
+        enableTime: false,   // 시간 선택 비활성화
+        minDate: 'today',    // 오늘 이전 날짜 선택 비활성화
+        // defaultDate: new Date(), // 초기 날짜 설정 (현재 날짜로 설정)
+        locale: "ko", // 한국어로 지역화
+        altFormat: "Y-m-d", // 추가 입력란의 날짜 및 시간 형식
+    });
     // 날짜 라이브러리
 
 </script>
