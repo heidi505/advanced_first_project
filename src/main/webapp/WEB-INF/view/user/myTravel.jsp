@@ -310,6 +310,8 @@
     			} else{
     				sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
     			}
+    			console.log(sort);
+    			console.log(tabId);
     			getMyTravel(tabId, sort);
     		}
 
