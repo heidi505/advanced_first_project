@@ -37,19 +37,16 @@ public class ReservationResponse {
 		void cutDepartureDate() {
 			Date date = new Date(departureTime.getTime());
 	        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd ( E )",Locale.KOREA);
-	        System.out.println(sdf.format(date));
 	        this.departureDate =  sdf.format(date);
 		}
 		void cutArrivalDate() {
 			Date date = new Date(arrivalTime.getTime());
 	        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd ( E )",Locale.KOREA);
-	        System.out.println(sdf.format(date));
 	        this.arrivalDate =  sdf.format(date);
 		}
 		void cutPaymentDeadline() {
 			Date date = new Date(paymentDeadline.getTime());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd(E) HH:mm",Locale.KOREA);
-			System.out.println(sdf.format(date));
 			this.cuttedPaymentDeadline =  sdf.format(date);
 		}
 		void makePhoneNumber() {

@@ -1,12 +1,19 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationRequest.TestDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.user.User;
 
@@ -31,19 +38,21 @@ public class ReservationController {
  	@GetMapping("/reservation/detail/{reservationNum}")
  	public String detail(@PathVariable Long reservationNum, Model model) {
  		User principal = (User) httpSession.getAttribute(Define.PRINCIPAL);
- 		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
- 		GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
- 		System.out.println(detailTrip);
+ 		GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+ 		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
  		model.addAttribute("detailTrip", detailTrip);
  		return "reservation/reservationDetail";
  	}
  	
- 	@GetMapping("/reservation/cancel/{reservationNum}")
- 	public String cancel(@PathVariable Long reservationNum, Model model) {
+ 	@ResponseBody
+ 	@PostMapping("/reservation/cancel")
+ 	public int cancel(
+ 			@RequestBody TestDTO dto
+ 			) {
  		
+ 		System.out.println(dto.getList());
  		
- 		
- 		return "/reservation/cancelReservation";
+ 		return dto.getList().get(0);
  	}
  	
  	@GetMapping("/reservation/final-result")

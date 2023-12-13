@@ -40,7 +40,7 @@ function makeYearTag(year){
 
 
 
-// 예정된 여행 목록 삽입하기
+// 여행 목록 삽입하기
 function insertElement(tripList, tripCnt , tabId){
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = '';

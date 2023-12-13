@@ -37,5 +37,19 @@
    		</if>
    	</select>
    	
+   	<select id="getMyTripDetail" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripDetailDTO">
+   		select reservation_num, is_payed, status_enum ,payment_deadline ,first_name, last_name, u.phone_number , airline, departure_city, arrival_city
+   		,departure_time, arrival_time, seat_type, is_one_way
+		from reservation_tb as r
+		join ticket_tb as t
+		on r.id = t.reservation_id
+		join passenger_tb p
+		on t.id = p.id
+		join user_tb u
+		on u.id = r.user_id
+		where reservation_num = #{reservationNum}
+		and r.user_id = #{userId}   	
+   	</select>
+   	
    	
 </mapper>
