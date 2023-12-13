@@ -74,8 +74,9 @@ public class UserController {
 	@GetMapping("/my-travel")
 	public String myPageTravel(@Valid GetMyTravelListDTO dto , Model model ) {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
-		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
+		//principal.getId()
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
+		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(1,dto);
 		model.addAttribute("tripCount", tripCount);
 		model.addAttribute("tripList",tripList);
 		return "user/myTravel";
