@@ -20,7 +20,7 @@ function openMenu(evt, menuNumber) {
 function changeStatus(allStatus, current){
 	switch(current) {
 		case '원활': allStatus[0].style.color = 'var(--basic_wh)';
-			allStatus[0].style.backgroundColor = 'green';
+			allStatus[0].style.backgroundColor = 'var(--smooth)';
 			break;
 		case '보통': allStatus[1].style.color = 'var(--basic_wh)';
 			allStatus[1].style.backgroundColor = 'var(--primary02)';

@@ -56,6 +56,22 @@ public class UserService {
         }
     }
 
+    @Transactional
+    public void kakaoSignUp(UserRequest.SignUpDTO dto) {
+        User user = User.builder()
+                .username("kakao")
+                .email("")
+                .password("")
+                .phoneNumber("")
+                .build();
+
+        int resultRowCount = userRepository.insert(user);
+
+        if (resultRowCount != 1) {
+            throw new MyBadRequestException("회원 가입 실패");
+        }
+    }
+
     public User signIn(UserRequest.SignInDTO dto) {
 
         User userEntity = userRepository.findByUsername(dto);

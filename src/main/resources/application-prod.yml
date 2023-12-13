@@ -53,6 +53,7 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+    property-naming-strategy: SNAKE_CASE
   h2:
     console:
       enabled: true

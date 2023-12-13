@@ -7,7 +7,7 @@
 
 
 <!-- TODO 여기서부터 main영역 -->
-<main class="sign_in_page">
+<main class="sign_up_page">
     <div class="container">
         <div class="section">
             <div class="mx-auto w-35 my-5">
@@ -20,24 +20,33 @@
                                                                      id="realname" placeholder="이름을 입력해주세요"/>
                         </div>
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
-                            <label for="userId">아이디*</label><br> <input type="text"
-                                                                        class="form-control w-70 mt-2 p-2 d-inline"
-                                                                        name="username" id="userId"
-                                                                        placeholder="아이디를 입력해주세요"/>
-                            <button type="button" class="double_check btn btn-primary ms-1 align-baseline">중복확인</button>
+                            <label for="userId">아이디*</label>
+                            <div class="form_box">
+                                <input type="text"
+                                       class="form-control w-70 p-2 d-inline"
+                                       name="username" id="userId"
+                                       placeholder="아이디를 입력해주세요"/>
+                                <button type="button" class="double_check btn btn-primary ms-1 align-baseline">중복확인</button>
+                            </div>
                         </div>
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
-                            <label for="email">이메일*</label><br> <input type="text"
-                                                                       class="form-control w-70 mt-2 p-2 d-inline"
-                                                                       name="email"
-                                                                       id="email" placeholder="이메일을 입력해주세요"/>
-                            <button type="button" class="bring_number_btn btn btn-primary ms-1 align-baseline">인증하기</button>
+                            <label for="email">이메일*</label>
+                            <div class="form_box">
+                                <input type="text"
+                                       class="form-control w-70 p-2 d-inline"
+                                       name="email"
+                                       id="email" placeholder="이메일을 입력해주세요"/>
+                                <button type="button" class="bring_number_btn btn btn-primary ms-1 align-baseline">인증하기
+                                </button>
+                            </div>
                         </div>
-                        <div class="form-group w-80 mx-auto pt-2 mt-2">
-                           <input type="text"  
-                           		class="form-control w-70 mt-2 p-2"
-                              id="verifyNumber"   placeholder="인증번호를 입력해주세요"/>
-                            <button type="button" class="verify_btn btn btn-primary ms-1 align-baseline">번호인증</button>
+                        <div class="form-group w-80 mx-auto mt-2">
+                            <div class="form_box authentication_form">
+                                <input type="text"
+                                       class="form-control w-70 p-2"
+                                       id="verifyNumber" placeholder="인증번호를 입력해주세요"/>
+                                <button type="button" class="verify_btn btn btn-primary ms-1 align-baseline">번호인증</button>
+                            </div>
                         </div>
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
                             <label for="userTel">연락처*</label> <input type="text"
@@ -60,7 +69,8 @@
                         <div class="border w-80 mx-auto pt-2 mt-2">
                             <div class="form-group w-85 mx-auto pt-2 mt-2">
                                 <input type="checkbox" class="w-10" name="termsInsert"/><label
-                                    class="terms_font_size lh-sm align-top">[필수] 회원가입 및 운영약관 동의</label>&nbsp; <a href="#" class="term_contents float-end">></a>
+                                    class="terms_font_size lh-sm align-top">[필수] 회원가입 및 운영약관 동의</label>&nbsp; <a
+                                    href="#" class="term_contents float-end">></a>
                             </div>
                             <div class="form-group w-85 mx-auto pt-2 mt-2 mb-3">
                                 <input type="checkbox" class="w-10" name="termsPrivacy"/><label
@@ -79,7 +89,6 @@
 </main>
 </div>
 </div>
-
 
 <script src="/js/sign_up.js"></script>
 <!-- footer.jsp -->
