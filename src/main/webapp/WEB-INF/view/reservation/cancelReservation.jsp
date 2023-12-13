@@ -13,7 +13,7 @@
 		<div class="section">
 			<h1 class="text-center my-5 color_cancle"><b>X 취소된 예약입니다.</b></h1>
 			<hr class="my-5">
-			<div><b class="mt-5 fs-5">${cancelTrip.firstName}${cancelTrip.lastName}님의 예약번호는 ${detailTrip.reservationNum}입니다. 해당 예약은 <span class="color_cancle">취소</span>되었습니다.</b>
+			<div><b class="mt-5 fs-5">${cancelTrip.realName}님의 예약번호는 ${detailTrip.reservationNum}입니다. 해당 예약은 <span class="color_cancle">취소</span>되었습니다.</b>
 			<hr class="border-2 border-primary">
 			</div>
 			<p class="text-end me-5">예약상태<span class="color_basic09 mx-2">|</span><span class="color_cancle">예약취소</span></p>
@@ -21,7 +21,7 @@
 			<div class="col-3 air_info border-end text-center pt-4">
 			<div class="float-start ms-5"><b class="lh-lg">부산<br><span class="color_basic09">${cancelTrip.departureCity}</span></b></div>
 			
-			 <div class="trip_image w-10 border p-4 my-2 mx-auto d-inline"></div> 
+			 <div class="trip_image p-4 my-2 mx-auto"></div>
 			 <div class="float-end me-5"><b class="lh-lg">김포<br><span class="color_basic09">${cancelTrip.arrivalCity}</span></b></div>
 			</div>
 			<div class="col py-3 border-end text-center align-middle">
@@ -49,8 +49,9 @@
 			<p>도착일 ${cancelTrip.arrivalDate}</p>
 			</div>
 			<div class="col py-3  w-25">
-			<p class="mt-3 mb-3">예약자명: ${detailTrip.firstName}${detailTrip.lastName}</p>
-			<p>연락처명: ${cancelTrip.phoneNum}</p>
+			  <p class="mt-3 mb-4">예약자명 : ${cancelTrip.realName}</p>
+              <p>연락처 : ${cancelTrip.phoneNumber}</p>
+              <p class="mt-4">아이디 : ${cancelTrip.resName}</p>
 			</div>
 			</div>
 			<div class="reservation_notice w-100 border p-3 mt-5 lh-lg" >
@@ -77,16 +78,28 @@
 			</thead>
 			<tbody>
 			<tr>
-			<td class="w-10">홍길동</td>
-			<td class="w-10">성인</td>
-			<td>남</td>
-			<td>19990101</td>
-			<td>159,000</td>
-			<td>73,800</td>
-			<td>48,900</td>
-			<td>10,000</td>
-			<td>300,000</td>
+			<td class="w-10">${payedInfo.lastName}${payedInfo.firstName}</td>
+			<td class="w-10">${payedInfo.passengerType}</td>
+			<td>${payedInfo.gender}</td>
+			<td>${payedInfo.birthdate}</td>
+			<td>${payedInfo.sAirFare}</td>
+			<td>${payedInfo.sFuelSurcharge}</td>
+			<td>${payedInfo.sTaxes}</td>
+			<td>${payedInfo.sTicketingFee}</td>
+			<td>${payedInfo.sTotalPrice}</td>
+			<c:choose>
+			<c:when test="${payedInfo.isPayed eq true}">
+			
+			<td>결제완료됨</td>
+				
+			</c:when>
+			<c:otherwise>
+			
 			<td>결제요청전</td>
+			</c:otherwise>
+			</c:choose>
+			
+			
 			</tr>
 			</tbody>
 			</table>

@@ -11,7 +11,7 @@
     <div class="container">
         <div class="section">
             <hr class="my-5">
-            <div><b class="mt-5">${detailTrip.firstName}${detailTrip.lastName}님의 예약번호는 ${detailTrip.reservationNum} 입니다</b>
+            <div><b class="mt-5">${detailTrip.realName}님의 예약번호는 ${detailTrip.reservationNum} 입니다</b>
                 <b class="float-end color_primary02">결제마감시한 ${detailTrip.cuttedPaymentDeadline}</b>
                 <hr class="border-2 border-primary">
             </div>
@@ -64,8 +64,9 @@
                     <p>도착일 ${detailTrip.arrivalDate}</p>
                 </div>
                 <div class="col py-3  w-25">
-                    <p class="mt-3 mb-4">예약자명: ${detailTrip.firstName}${detailTrip.lastName}</p>
-                    <p>연락처명: ${detailTrip.phoneNum}</p>
+                    <p class="mt-3 mb-4">예약자명 : ${detailTrip.realName}</p>
+                    <p>연락처 : ${detailTrip.phoneNumber}</p>
+                    <p class="mt-4">아이디 : ${detailTrip.resName}</p>
                 </div>
             </div>
             <div class="reservation_notice w-100 border p-3 mt-5 lh-lg">
