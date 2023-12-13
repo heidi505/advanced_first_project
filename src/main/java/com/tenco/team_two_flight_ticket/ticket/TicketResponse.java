@@ -8,16 +8,23 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TicketResponse {
 
     @Data
     @ToString
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class FlightSearchDTO{
         private MetaDTO meta;
         private List<DataDTO> data;
+
+        public FlightSearchDTO(FlightSearchDTO dto) {
+            this.meta = dto.getMeta();
+            this.data = dto.getData().stream()
+                    .map(e->new DataDTO(e))
+                    .collect(Collectors.toList());
+        }
     }
 
 

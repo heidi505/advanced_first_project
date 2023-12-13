@@ -8,13 +8,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @Data
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class SegmentDTO {
     private DepartureDTO departure;
     private ArrivalDTO arrival;
     private String carrierCode;
     private AirCraftDTO aircraft;
+    private List<StopDTO> stops;
+
+    public SegmentDTO(SegmentDTO dto) {
+        this.departure = new DepartureDTO(dto.getDeparture());
+        this.arrival = new ArrivalDTO(dto.getArrival());
+        this.carrierCode = dto.getCarrierCode();
+        this.aircraft = dto.getAircraft();
+    }
 }

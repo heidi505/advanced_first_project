@@ -7,12 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Data
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class PriceDTO {
     //택스 포함
     private String grandTotal;
@@ -21,4 +21,12 @@ public class PriceDTO {
     private List<FeesDTO> fees;
     private List<TaxesDTO> taxes;
 
+    public PriceDTO(PriceDTO dto) {
+
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        this.grandTotal = decimalFormat.format(Double.parseDouble(dto.getGrandTotal())) + "원";
+        this.base = decimalFormat.format(Double.parseDouble(dto.getBase()));
+        this.fees = dto.getFees();
+        this.taxes = dto.getTaxes();
+    }
 }

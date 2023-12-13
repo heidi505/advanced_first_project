@@ -51,11 +51,12 @@ public class TicketController {
 
         List<DataDTO> dataDTOList = responseBody.getData();
         model.addAttribute("ticketList", dataDTOList);
-        // 싼 10뽑기
-//        model.addAttribute("itinerary", responseBody.getData().stream().map(e->e.getItineraries().stream()).collect(Collectors.toList()));
-//        model.addAttribute("segments", responseBody.getData().stream().flatMap(e->e.getItineraries().stream()).flatMap(e->e.getSegments().stream()).collect(Collectors.toList()));
-//        model.addAttribute("price", responseBody.getData().stream().map(e->e.getPrice()).collect(Collectors.toList()));
-//        model.addAttribute("priceOptions", responseBody.getData().stream().map(e->e.getTravelerPricings()).collect(Collectors.toList()));
+
+        System.out.println("=================================");
+        System.out.println(dataDTOList.get(0).getItineraries().get(0).getDuration());
+        System.out.println(dataDTOList.get(0).getItineraries().get(0).getSegments().get(0).getArrival().getAt());
+        System.out.println(dataDTOList.get(0).getPrice().getGrandTotal());
+        System.out.println("=================================");
 
 
         return "flightTicket/flightSearch";

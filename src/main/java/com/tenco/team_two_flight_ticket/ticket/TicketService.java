@@ -1,6 +1,8 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
 import com.tenco.team_two_flight_ticket._middle._entity.City;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.PriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class TicketService {
@@ -38,8 +43,6 @@ public class TicketService {
             dto.setStartDate(startDate);
             dto.setEndDate(endDate);
         }
-        System.out.println("출발일:" + dto.getStartDate());
-        System.out.println("도착일:" + dto.getEndDate());
 
 
         //좌석 등급 바꾸기
@@ -50,6 +53,10 @@ public class TicketService {
         }else if(dto.getTravelClass().equals("일등석")){
             dto.setTravelClass("FIRST");
         }
+
+        //요청할 랜덤 숫자 생성
+        Random random = new Random();
+        int max = random.nextInt(11) + 10;
 
         //api 요청 - access token 받기
         RestTemplate rt1 = new RestTemplate();
@@ -74,7 +81,6 @@ public class TicketService {
         HttpHeaders headers2 = new HttpHeaders();
         headers2.add("Authorization", "Bearer "+response1.getBody().getAccessToken());
 
-        System.out.println("+++++++++++++++++++++++++"+dto.getStartDate());
         URI uri = new URI(UriComponentsBuilder
                 .fromUriString("https://test.api.amadeus.com/v2/shopping/flight-offers")
                 .queryParam("originLocationCode", dto.getOriginLocationCode())
@@ -87,7 +93,7 @@ public class TicketService {
                 .queryParam("travelClass", dto.getTravelClass())
                 .queryParam("currencyCode", dto.getCurrencyCode())
                 .queryParam("nonStop", true)
-                .queryParam("max", 10)
+                .queryParam("max", max)
                 .build()
                 .toUriString());
 
@@ -95,9 +101,23 @@ public class TicketService {
 
         ResponseEntity<TicketResponse.FlightSearchDTO> response2 = rt2.exchange(uri, HttpMethod.GET, requestMsg2, TicketResponse.FlightSearchDTO.class);
 
-        TicketResponse.FlightSearchDTO responseDTO = response2.getBody();
+        TicketResponse.FlightSearchDTO responseDTO = new TicketResponse.FlightSearchDTO(response2.getBody());
 
-//        responseDTO.getData().stream().map(e->e.getItineraries().stream().filter(e->e.getSegments().ge))
+//        dataDTOList.stream()
+//                .collect(Collectors.groupingBy(dataDTO -> dataDTO.getPrice().getGrandTotal()));
+//
+//
+//
+//        ListIterator<DataDTO> dataDTOListIterator = dataDTOList.listIterator();
+////
+////
+//        for (int i = 0; i < dataDTOList.size(); i++) {
+//            if(dataDTOList.get(i).getPrice().getGrandTotal() == list.get(i)){
+//                dataDTOList.remove(i);
+//            }
+//        }
+//
+//        responseDTO.setData(dataDTOList);
 
         return responseDTO;
     }
