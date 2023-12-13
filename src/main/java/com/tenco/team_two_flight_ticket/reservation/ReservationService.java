@@ -2,8 +2,6 @@ package com.tenco.team_two_flight_ticket.reservation;
 
 import java.util.List;
 
-
-
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

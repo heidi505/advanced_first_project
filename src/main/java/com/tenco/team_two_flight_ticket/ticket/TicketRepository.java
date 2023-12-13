@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface TicketRepository {
     public List<City> getCities(String region);
+    public List<Ticket> findByTicketJoinReservation(Integer userId);
 }
