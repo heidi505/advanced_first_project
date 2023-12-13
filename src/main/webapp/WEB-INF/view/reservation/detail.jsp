@@ -8,7 +8,7 @@
 <main id="reservation_detail_page">
     <section class="reservation_detail_box">
         <div class="container">
-            <form action="/action_page.php" class="was-validated">
+            <form id="reservationp" action="/reservation/save" method="post">
                 <div class="detail_main_form">
                     <div class="detail_left_from">
                         <section>
@@ -96,36 +96,39 @@
                             <div class="detail_res_form">
                                 <div class="form-group detail_group_padding">
                                     <p>
-                                        <label for="resname" class="detail_group_maginb">예약자 이름</label>
+                                        <label for="resName" class="detail_group_maginb">예약자 이름</label>
                                     </p>
-                                    <input type="text" class="detail_input" id="resname" placeholder=""
-                                           name="uname" required>
+                                    <input type="text" class="detail_input" id="resName" placeholder=""
+                                           name="resName" value="성민경" required>
                                 </div>
                                 <div class="form-group detail_group_padding">
                                     <p>
                                         <label for="email" class="detail_group_maginb"> 이메일 주소 </label>
                                     </p>
-                                    <input type="text" class="detail_input" id="email"
-                                           placeholder="" name="email" required>
+                                    <input type="text" class="detail_input" id="emailn"
+                                           placeholder="" name="emailn" value="wildlegion" required>
                                     <span class="detail_email">@</span>
                                     <input type="text" class="detail_input" id="emailsite"
-                                           placeholder="" name="emailsite" required>
+                                           placeholder="" name="emailsite" value="naver.com" required>
+                                    <input type="hidden" name="email" id="email" value="">
                                 </div>
 
                                 <div class="form-group detail_group_padding">
                                     <p><label for="phoneInput1" class="detail_group_maginb">휴대전화 번호</label></p>
                                     <input type="tel" class="detail_input" id="phoneInput1"
-                                           placeholder="" name="phonef" required>
+                                           placeholder="" name="phonef" value="010" required>
                                     <label for="phoneInput2" class="detail_hidden_label">중간자리</label>
                                     <input type="tel" class="detail_input" id="phoneInput2"
-                                           placeholder="" name="phonem" required>
+                                           placeholder="" name="phonem" value="3001" required>
                                     <label for="phoneInput3" class="detail_hidden_label">뒷자리</label>
                                     <input type="tel" class="detail_input" id="phoneInput3"
-                                           placeholder="" name="phoneb" required>
+                                           placeholder="" name="phoneb" value="3108" required>
+                                    <input type="hidden" name="phoneNum" id="combinedPhoneNum" value="">
+
                                     <span class="detail_input_war">
                                 <p> 예약자 정보는 항공사 스케줄 변동 등의 사유로 기재되오니 즉시 연락이 가능한 연락처 기재 부탁드립니다.</p>
                                 <p> 연락처 오기재로 발생되는 불이익에 대해 당사는 책임지지 않사오니 이점 유의하시기 바랍니다.</p>
-                            </span>
+                                      </span>
                                 </div>
                             </div>
                         </section>
@@ -157,15 +160,14 @@
                                     <div class="detail_name">
                                         <p><label for="familyname" class="detail_group_maginb">영문 성</label></p>
                                         <input type="text" class="detail_name_input" id="familyname"
-                                               placeholder="예: ) HONG" name="familyname" required>
+                                               placeholder="예: ) HONG" name="familyname" value="SUNG" required>
                                     </div>
                                     <div class="detail_name">
                                         <p><label for="firstname" class="detail_group_maginb">영문 이름</label></p>
                                         <input type="text" class="detail_name_input" id="firstname"
-                                               placeholder="예: ) GILDONG" name="firstname" required>
+                                               placeholder="예: ) GILDONG" name="firstname" value="MINKYEONG" required>
                                     </div>
                                 </div>
-
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">성별</p>
                                     <div class="gender_select detail_gender_form">
@@ -178,10 +180,14 @@
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">생년월일</p>
                                     <input type="text" class="detail_input" id="year" placeholder="" name="year"
+                                           value="1991"
                                            required>
                                     <input type="text" class="detail_input" id="month" placeholder="" name="month"
+                                           value="05"
                                            required>
-                                    <input type="text" class="detail_input" id="day" placeholder="" name="day" required>
+                                    <input type="text" class="detail_input" id="day" placeholder="" name="day"
+                                           value="22" required>
+
                                 </div>
                             </div>
 
@@ -1036,6 +1042,7 @@
                                                                 PENALTY PER
                                                                 COUPON<br> PER CHANGE/REFUND TRANSACTION
                                                             </div>
+                                                        </font>
                                                     </td>
                                                 </tr>
                                                 <input type="hidden" name="contents" class="cont"
@@ -1973,9 +1980,11 @@
                                                             <p>여권상의 영문명과 동일한지 꼭 확인해주세요. 잘못된 정보 입력 시 탑승할 수 없습니다.</p>
                                                         </div>
                                                         <p class="res_modal_btn">
-                                                            <label for="agreeRadioChk0">
-                                                                <input type="checkbox" id="agreeRadioChk0"
-                                                                       class="res_modal_check_btn" name="agreeRadioChk"
+
+                                                            <label for="radioChk0">
+                                                                <input type="checkbox" id="radioChk0"
+                                                                       class="res_modal_check_btn" name="radioChk"
+
                                                                        value="N"
                                                                        onclick="enableConfirmButton()">
                                                                 <span class=""></span>위 내용을 확인했습니다.
@@ -1987,10 +1996,12 @@
                                                                     onclick="resetForm()">
                                                                 다시입력
                                                             </button>
-                                                            <button class="btn res_modal_btn2" type="button"
+
+                                                            <button class="btn res_modal_btn2" type="submit"
                                                                     id="confirmYn" disabled
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#additionalModal"> 확인
+                                                                    data-bs-target="#additionalModal">
+                                                                확인
                                                             </button>
                                                         </div>
                                                     </div>
@@ -2017,11 +2028,11 @@
                                                         <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary res_kko_btn"
-                                                                onclick="sendKOption('N')">괜찮아요
+                                                        <button type="button" class="btn btn-secondary res_kko_btn" onclick="sendOption('N')">괜찮아요
                                                         </button>
                                                         <button type="button" class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
+
                                                         </button>
                                                     </div>
                                                 </div>
@@ -2088,6 +2099,37 @@
         }
     }
 
+    // post
+    // 이메일 조합
+    function combineEmail() {
+        var emailn = document.getElementById("emailn").value;
+        var emailsite = document.getElementById("emailsite").value;
+        var email = emailn + "@" + emailsite;
+
+        // hidden 필드에 값 설정
+        document.getElementById("email").value = email;
+    }
+
+    // 휴대전화 번호 조합 및 hidden 필드에 설정
+    function combinePhoneNum() {
+        var phonef = document.getElementById("phoneInput1").value;
+        var phonem = document.getElementById("phoneInput2").value;
+        var phoneb = document.getElementById("phoneInput3").value;
+        var combinedPhoneNum = phonef + phonem + phoneb;
+
+        // hidden 필드에 값 설정
+        document.getElementById("combinedPhoneNum").value = combinedPhoneNum;
+    }
+
+    // form submit 시에 조합 함수 호출
+    document.getElementById("reservationp").addEventListener("submit", combinePhoneNum);
+    document.getElementById("reservationp").addEventListener("submit", combineEmail);
+
+    // 생년월일 조합
+    var year = document.getElementById("year").value;
+    var month = document.getElementById("month").value;
+    var day = document.getElementById("day").value;
+    var combinedBirthDate = day + "/" + month + "/" + year;
 </script>
 
 <!-- footer.jsp -->

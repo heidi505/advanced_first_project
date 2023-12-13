@@ -1,4 +1,17 @@
 /* signIn */
+
+.sign_in_page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+.kakao_sign_in_page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
 .me-6 {
 	margin-right: 3.5rem!important;
 }
@@ -13,6 +26,13 @@
 .w-10 {
 	width:10%;
 }
+.form_box {
+	display: flex;
+	margin-top: 8px;
+}
+/*.authentication_form {*/
+/*	display: none;*/
+/*}*/
 .terms_info{
 	margin-top:2%;
 	font-size:13px;
@@ -71,17 +91,43 @@
 	color:var(--line);
 }
 /* 공항정보 */
-.airport_info_box {
-	margin: 32px 0;
+.duration_of_time {
+	display: flex;
+	align-items: center;
+	font-size: 50px;
+}
+.airline_minute {
+	color: var(--basic_03);
+	display: inline-block;
+	font-size: 32px;
+}
+.confusion_status, .smooth_status {
+	display: inline-block;
+	font-size: 28px;
+	font-weight: bold;
+}
+.congestion_status_item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.confusion_status {
+	color: var(--cancle);
+}
+.smooth_status {
+	color: var(--smooth);
 }
 .color_green{
-	color:cyan;
+	color: var(--smooth);
 }
 .color_orange{
 	color:orange;
 }
 .color_cancle{
 	color:var(--cancle);
+}
+.airport_info_box {
+	margin: 32px 0;
 }
 .parking_fee_table {
 	border-top:2px solid var(--basic_09) ;

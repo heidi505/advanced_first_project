@@ -1142,7 +1142,7 @@
     text-align: right;
 }
 
-.sign_in_page {
+#admin .sign_in_page {
     display: flex;
     justify-content: center;
     align-items: center;
