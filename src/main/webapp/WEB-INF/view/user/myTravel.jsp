@@ -13,7 +13,7 @@
 <main id="my_travel_page">
     <section class="my_travel">
         <div class="nav_container">
-            <article>
+            <!-- <article> -->
                 <div class="my_travel_box">
                     <div class="my_travel_tab">
                         <h2><b>내 여행</b></h2>
@@ -264,7 +264,7 @@
                         </div>
                     </div>
                 </div>
-            </article>
+            <!--  </article> -->
         </div>
     </section>
 </main>
