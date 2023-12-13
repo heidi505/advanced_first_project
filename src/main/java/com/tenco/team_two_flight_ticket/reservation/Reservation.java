@@ -22,7 +22,14 @@ public class Reservation {
     private int id;
     @Column(nullable = false)
     private int userId;
-    private Long reservationNum;
+    @Column(nullable = false)
+    private String resName;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String phoneNum;
+    @Column(nullable = false)
+    private String reservationNum;
     @ColumnDefault("false")
     private boolean isPayed;
     @Enumerated(EnumType.STRING)
@@ -34,9 +41,12 @@ public class Reservation {
     private Timestamp createdAt;
 
     @Builder
-    public Reservation(int id, int userId, Long reservationNum, boolean isPayed, StatusEnum statusEnum, int passengerAmount, Timestamp paymentDeadline, Long reservationPrice, Timestamp createdAt) {
+    public Reservation(int id, int userId, String resName, String email, String phoneNum, String reservationNum, boolean isPayed, StatusEnum statusEnum, int passengerAmount, Timestamp paymentDeadline, Long reservationPrice, Timestamp createdAt) {
         this.id = id;
         this.userId = userId;
+        this.resName = resName;
+        this.email = email;
+        this.phoneNum = phoneNum;
         this.reservationNum = reservationNum;
         this.isPayed = isPayed;
         this.statusEnum = statusEnum;
