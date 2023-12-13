@@ -6,7 +6,6 @@ import java.util.List;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
