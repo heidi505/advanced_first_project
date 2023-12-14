@@ -131,3 +131,77 @@ insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(61,'TA
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(62,'CTU','성도/솽류','중국');
 
 
+-- iata 도시 코드
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(1,'SEL','서울','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(2,'PUS','부산','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(3,'CJU','제주','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(4,'TAE','대구','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(5,'CJJ','청주','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(6,'KWJ','광주','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(7,'RSU','여수','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(8,'USN','울산','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(9,'TYO','도쿄','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(10,'OSA','오사카','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(11,'NGO','나고야','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(12,'KIJ','니가타','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(13,'SDJ','나토리','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(14,'FUK','후쿠오카','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(15,'SPK','삿포로','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(16,'HKD','하코다테','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(17,'KMJ','마시키','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(18,'KKJ','기타큐슈','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(19,'KOJ','가고시마','일본');
+--iata 공항 코드
+
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(1,'ICN','인천','서울','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(2,'GMP','김포','서울','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(3,'PUS','김해','부산','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(4,'CJU','제주','제주','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(5,'CJJ','청주','청주','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(6,'KWJ','광주','광주','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(7,'RSU','여수','여수','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(8,'TAE','대구','대구','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(9,'HND','하네다','도쿄','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(10,'NRT','나리타','도쿄','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(11,'KIX','간사이','오사카','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(12,'ITM','이타미','오사카','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(13,'NGO','나고야','나고야','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(14,'NKM','고마키','나고야','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(15,'KIJ','니가타','니가타','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(16,'SDJ','센다이','센다이','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(17,'UKB','고베','고베','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(18,'FUK','후쿠오카','후쿠오카','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(19,'IBR','이바라키','이바라키','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(20,'MYJ','마쓰야마','마쓰야마','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(21,'FSZ','시즈오카','시즈오카','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(22,'CTS','신치토세','신치토세','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(23,'OKD','오카다마','삿포로','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(24,'AKJ','아사히카와','아사히카와','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(25,'HKD','하코다테','하코다테','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(26,'KMJ','구마모토','구마모토','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(27,'KKJ','키타큐슈','키타큐슈','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(28,'KOJ','가고시마공항','가고시마','일본');
+
+
+
+--iata 항공사 코드
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(1,'7C','제주항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(2,'H1','한에어');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(3,'KE','대한항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(4,'OZ','아시아나');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(5,'NH','ANA항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(6,'VJ','비엣젯항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(7,'JL','일본항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(8,'VN','베트남항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(9,'MU','중국동방항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(10,'SQ','싱가폴항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(11,'7G','스타플라이어');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(12,'TG','타이항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(13,'UO','홍콩 익스프레스');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(14,'TW','티웨이항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(15,'PR','필리핀항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(16,'CI','중화항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(17,'CX','케세이퍼시픽 항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(18,'MF','샤먼항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(19,'MH','말레이시아 항공');
+insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(20,'CZ','중국남방항공');
