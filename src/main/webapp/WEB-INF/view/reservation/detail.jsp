@@ -180,7 +180,6 @@
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">생년월일</p>
                                     <input type="text" class="detail_input" id="year" placeholder="" name="year"
-<<<<<<< HEAD
                                            value="1991"
                                            required>
                                     <input type="text" class="detail_input" id="month" placeholder="" name="month"
@@ -188,12 +187,6 @@
                                            required>
                                     <input type="text" class="detail_input" id="day" placeholder="" name="day"
                                            value="22" required>
-=======
-                                           required>
-                                    <input type="text" class="detail_input" id="month" placeholder="" name="month"
-                                           required>
-                                    <input type="text" class="detail_input" id="day" placeholder="" name="day" required>
->>>>>>> master
                                 </div>
                             </div>
 
@@ -1986,15 +1979,9 @@
                                                             <p>여권상의 영문명과 동일한지 꼭 확인해주세요. 잘못된 정보 입력 시 탑승할 수 없습니다.</p>
                                                         </div>
                                                         <p class="res_modal_btn">
-<<<<<<< HEAD
-                                                            <label for="radioChk0">
-                                                                <input type="checkbox" id="radioChk0"
-                                                                       class="res_modal_check_btn" name="radioChk"
-=======
                                                             <label for="agreeRadioChk0">
                                                                 <input type="checkbox" id="agreeRadioChk0"
                                                                        class="res_modal_check_btn" name="agreeRadioChk"
->>>>>>> master
                                                                        value="N"
                                                                        onclick="enableConfirmButton()">
                                                                 <span class=""></span>위 내용을 확인했습니다.
@@ -2006,18 +1993,11 @@
                                                                     onclick="resetForm()">
                                                                 다시입력
                                                             </button>
-<<<<<<< HEAD
                                                             <button class="btn res_modal_btn2" type="submit"
                                                                     id="confirmYn" disabled
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#additionalModal">
                                                                 확인
-=======
-                                                            <button class="btn res_modal_btn2" type="button"
-                                                                    id="confirmYn" disabled
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#additionalModal"> 확인
->>>>>>> master
                                                             </button>
                                                         </div>
                                                     </div>
@@ -2045,17 +2025,13 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary res_kko_btn"
-<<<<<<< HEAD
+
                                                                 onclick="sendOption('N')">괜찮아요
                                                         </button>
-                                                        <button type="button" class="btn btn-primary res_kko_btn"
-                                                                onclick="sendOption('Y')">보내주세요
-=======
-                                                                onclick="sendKOption('N')">괜찮아요
-                                                        </button>
+
                                                         <button type="button" class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
->>>>>>> master
+
                                                         </button>
                                                     </div>
                                                 </div>
