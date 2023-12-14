@@ -5,12 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateFormat {
-    // yyyy-mm-dd 날짜 포맷 메소드
-//    public static String formatDate(Date date) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        return sdf.format(date);
-//    }
-
     public static String formatTime() {
         LocalDateTime dateTime = LocalDateTime.now();
 
@@ -25,13 +19,10 @@ public class DateFormat {
     public static String formatYear() {
         String schDate = "20231210";
 
-        // Define the formatter for the given pattern
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-        // Parse the string into a LocalDate object
         LocalDate parsedDate = LocalDate.parse(schDate, formatter);
 
-        // Output the parsed date
         System.out.println("Parsed Date: " + parsedDate);
         return null;
 

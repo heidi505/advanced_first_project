@@ -1,12 +1,19 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayApprovalDTO;
+import com.tenco.team_two_flight_ticket.kakaopay.service.KakaoPayService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ReservationController {
+    @Autowired
+    private KakaoPayService kakaoPayService;
+
     @GetMapping("/preview")
     public String test1() {
         return "reservation/preview";
@@ -35,7 +42,15 @@ public class ReservationController {
     }
     
     @GetMapping("/payed")
-    public String payed(){
+    public String payed(@RequestParam("pg_token") String pg_token, Model model, Integer id){
+
+
+        KakaoPayApprovalDTO paymentInfo =  kakaoPayService.kakaoPayInfo(pg_token, 2);
+        ReservationResponse.ReservationPaymentDTO reservationInfo = kakaoPayService.reservationInfo(2);
+
+        model.addAttribute("paymentInfo", paymentInfo);
+        model.addAttribute("reservationInfo", reservationInfo);
+
     	return"reservation/paymentEnd";
     }
     @GetMapping("/reserved")
