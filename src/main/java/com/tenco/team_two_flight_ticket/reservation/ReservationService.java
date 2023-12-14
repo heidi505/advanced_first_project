@@ -3,25 +3,24 @@ package com.tenco.team_two_flight_ticket.reservation;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import java.util.concurrent.ThreadLocalRandom;
-
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
-import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
-import com.tenco.team_two_flight_ticket.ticket.Ticket;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
-import com.tenco.team_two_flight_ticket.user.UserRequest;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
-
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket.reservation.ReservationRequest.CancelReservationDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.ticket.Ticket;
+import com.tenco.team_two_flight_ticket.user.UserRequest;
+import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
@@ -104,8 +103,6 @@ public class ReservationService {
 
     public List<GetMyTravelDTO> getMyTravel(int userId, UserRequest.GetMyTravelListDTO dto) {
 
-        //dto에서 id도 가져와야 함
-
         StatusEnum statusEnum = dto.getStatusEnum();
 
         String stringSort = dto.getSort();
@@ -161,4 +158,44 @@ public class ReservationService {
         return tripCnt;
     }
 
+    public GetMyTripDetailDTO getMyTripDetail(int userId , Long reservationNum) {
+		GetMyTripDetailDTO dto = null;
+		if(reservationNum == null) {
+			throw new MyBadRequestException("잘못된 예약번호입니다");
+		}
+		try {
+			dto = reservationRepository.getMyTripDetail(userId ,reservationNum);
+			dto.makePhoneNumber();
+			dto.cutDepartureDate();
+			dto.cutArrivalDate();
+			dto.cutPaymentDeadline();
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		return dto;
+	}
+
+	@Transactional
+	public void cancelReservation(CancelReservationDTO dto) {
+		List<Integer> numList = dto.getNumList();
+		if(numList == null) {
+			throw new MyBadRequestException("취소할 예약 번호가 없습니다");
+		}
+		try {
+			int updateResult =  reservationRepository.cancelReservation(numList);
+			if(updateResult == 0) {
+				throw new MyBadRequestException("잘못된 예약 번호가 입력되었습니다");
+			}
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		
+		
+	}
+    
+    
+    
+    
+    
+    
 }

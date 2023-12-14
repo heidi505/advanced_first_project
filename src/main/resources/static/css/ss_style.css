@@ -1,5 +1,4 @@
 /* signIn */
-
 .sign_in_page {
 	display: flex;
 	justify-content: center;
@@ -116,7 +115,7 @@
 }
 .smooth_status {
 	color: var(--smooth);
-}
+}	
 .color_green{
 	color: var(--smooth);
 }
@@ -167,6 +166,9 @@
 .trip_image{
 	background:url('/images/round_trip.png');
 	height:10%;
+	padding-left:2rem!important;
+	padding-right:2rem!important;
+	display: inline-block;
 }
 .airline_image{
 	background:url('/images/airline_image.png');

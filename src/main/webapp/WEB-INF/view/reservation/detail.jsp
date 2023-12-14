@@ -179,6 +179,7 @@
                                 </div>
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">생년월일</p>
+
                                     <input type="text" class="detail_input" id="year" placeholder="" name="year"
                                            value="1991"
                                            required>
@@ -2028,7 +2029,6 @@
 
                                                                 onclick="sendOption('N')">괜찮아요
                                                         </button>
-
                                                         <button type="button" class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
 
