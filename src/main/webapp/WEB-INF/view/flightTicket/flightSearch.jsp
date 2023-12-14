@@ -893,7 +893,6 @@
                                     <span class="">ㅡ></span>
                                     <span class="">${segment.arrival.cityName} (${segment.arrival.iataCode})</span>
                                 </div>
-
                                 <span class="total_time"></span>
                             </div>
                             <ul class="detail_more_cont">

@@ -35,7 +35,7 @@ public class ReservationController {
     public String cancel(CancelReservationDTO dto, Model model) {
         //GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
         //model.addAttribute("cancelTrip", cancelTrip);
-        ReservationResponse.GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
+//        ReservationResponse.GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
         //ticket테이블에서 정보 가져와야 함
         return "reservation/cancelReservation";
     }
