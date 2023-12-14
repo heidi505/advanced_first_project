@@ -179,14 +179,15 @@
                                 </div>
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">생년월일</p>
-                                    <input type="text" class="detail_input" id="year" placeholder="" name="year" value="1991"
- 											required>
-                            
 
-                                    <input type="text" class="detail_input" id="month" placeholder="" name="month"
+                                    <input type="text" class="detail_input" id="year" placeholder="" name="year"
+                                           value="1991"
                                            required>
-                                    <input type="text" class="detail_input" id="day" placeholder="" name="day" required>
-
+                                    <input type="text" class="detail_input" id="month" placeholder="" name="month"
+                                           value="05"
+                                           required>
+                                    <input type="text" class="detail_input" id="day" placeholder="" name="day"
+                                           value="22" required>
                                 </div>
                             </div>
 
@@ -1979,11 +1980,6 @@
                                                             <p>여권상의 영문명과 동일한지 꼭 확인해주세요. 잘못된 정보 입력 시 탑승할 수 없습니다.</p>
                                                         </div>
                                                         <p class="res_modal_btn">
-
-                                                            <label for="radioChk0">
-                                                                <input type="checkbox" id="radioChk0"
-                                                                       class="res_modal_check_btn" name="radioChk">
-
                                                             <label for="agreeRadioChk0">
                                                                 <input type="checkbox" id="agreeRadioChk0"
                                                                        class="res_modal_check_btn" name="agreeRadioChk"
@@ -1998,11 +1994,11 @@
                                                                     onclick="resetForm()">
                                                                 다시입력
                                                             </button>
-
-                                                            <button class="btn res_modal_btn2" type="button"
+                                                            <button class="btn res_modal_btn2" type="submit"
                                                                     id="confirmYn" disabled
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#additionalModal"> 확인
+                                                                    data-bs-target="#additionalModal">
+                                                                확인
                                                             </button>
                                                         </div>
                                                     </div>
@@ -2029,12 +2025,10 @@
                                                         <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
                                                     </div>
                                                     <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary res_kko_btn"
 
-                    
-														<button type="button" class="btn btn-secondary res_kko_btn"	onclick="sendOption('N')">
-                                						괜찮아요
+                                                                onclick="sendOption('N')">괜찮아요
                                                         </button>
-           
                                                         <button type="button" class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
 
