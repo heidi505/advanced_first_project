@@ -1,39 +1,40 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
-import com.tenco.team_two_flight_ticket._core.utils.Define;
-import com.tenco.team_two_flight_ticket.user.User;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.reservation.ReservationRequest.CancelReservationDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.user.User;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ReservationController {
 
-    @Autowired
-    private HttpSession session;
-
-    @Autowired
-    ReservationService reservationService;
-
-    @GetMapping("/preview")
-    public String test1() {
-        return "reservation/preview";
-    }
-
-    // http://localhost:8080/reservation/detail
-    @GetMapping("/reservation/detail/{reservationNum}")
-    public String detail(@PathVariable int reservationNum) {
-        return "/reservation/reservationDetail";
-    }
-
-    @GetMapping("/reservation/cancel")
-    public String cancel() {
-        return "/reservation/cancelReservation";
-    }
+ 	
+ 	@ResponseBody
+ 	@PostMapping("/reservation/cancel")
+ 	public void cancelProc(@RequestBody CancelReservationDTO dto) {
+ 		reservationService.cancelReservation(dto);
+ 	}
+ 	
+ 	// 복수 취소 여부에 따라 달라짐
+ 	@GetMapping("/reservation/cancel")
+ 	public String cancel(CancelReservationDTO dto, Model model) {
+		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+ 		//model.addAttribute("cancelTrip", cancelTrip);
+ 		GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
+ 		//ticket테이블에서 정보 가져와야 함
+ 		return "reservation/cancelReservation";	
+ 	}
 
     @GetMapping("/reservation/final-result")
     public String finalResult() {
@@ -86,11 +87,13 @@ public class ReservationController {
     }
 
     // 취소 시 상세 정보 들고 가야함
-    @GetMapping("/reservation/cancel-modal/{reservationNumber}")
-
-    public String cancelModal(@PathVariable Long reservationNumber, Model model) {
+    @GetMapping("/reservation/cancel-modal/{reservationNum}")
+    public String cancelModal(@PathVariable Long reservationNum, Model model) {
         model.addAttribute("cancelRequest", true);
-
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+ 		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+ 		GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+ 		model.addAttribute("detailTrip", detailTrip);
         return "reservation/reservationDetail";
     }
 

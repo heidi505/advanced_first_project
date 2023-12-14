@@ -2,14 +2,14 @@ package com.tenco.team_two_flight_ticket.reservation;
 
 import java.util.List;
 
-import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
-import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
 @Mapper
 public interface ReservationRepository {
@@ -27,5 +27,10 @@ public interface ReservationRepository {
 
     public int insertP(Passenger passenger);
 
+    // 내 여행 상세 정보 가져오기
+ 	GetMyTripDetailDTO getMyTripDetail(@Param("userId") int userId,@Param("reservationNum") Long reservationNum);
+ 	// 내 여행 예약 취소하기
+ 	int cancelReservation(List<Integer> numList);
+    
 
 }
