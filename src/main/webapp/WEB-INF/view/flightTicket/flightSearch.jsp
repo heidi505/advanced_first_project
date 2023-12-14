@@ -908,7 +908,6 @@
                                         <li class="detail_trip_cont">
                                             <p class="airline_time">${segment.departure.time()} <span>${segment.departure.cityName} ${segment.departure.iataCode}</span></p>
                                             <p>${itinerary.duration}</p>
-                                            <p>${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin} / 무료수하물 ${ticket.travelerPricings[status.index].fareDetailsBySegment[status.index].includedCheckedBags.choose()}</p>
                                             <p class="airline_time">${segment.arrival.time()} <span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span></p>
                                         </li>
                                     </ul>
@@ -956,7 +955,7 @@
                                         <td>${traveler.value.tax} 원</td>
                                         <td>${traveler.value.fee} 원</td>
                                         <td>${traveler.value.peopleCount} 명</td>
-                                        <td>${traveler.value.grandTotal}</td>
+                                        <td>${traveler.value.grandTotal} 원</td>
                                     </tr>
                                     </tbody>
                                     </c:forEach>
