@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+    namespace="com.tenco.team_two_flight_ticket.search.SearchedRepository">
+   	
+   	<select id="getRecentSearch" resultType="com.tenco.team_two_flight_ticket.search.SearchedResponse$GetRecentSearchDTO">
+   		select s.*, dc.city_name as korean_departure_city, ac.city_name as korean_arrival_city
+   		from searched_tb as s
+   		join city_tb as dc
+   		on s.departure_city = dc.city_code
+   		join city_tb as ac
+   		on s.arrival_city = ac.city_code
+   		where user_id = #{id}
+   		order by created_at desc limit 5
+   	</select>
+</mapper>

@@ -1,12 +1,11 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
-import com.tenco.team_two_flight_ticket._middle._entity.City;
-import com.tenco.team_two_flight_ticket._middle._repository.AirlineRepository;
-import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.PriceDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,14 +17,14 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.xml.crypto.Data;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Random;
-import java.util.stream.Collectors;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket._middle._entity.City;
+import com.tenco.team_two_flight_ticket._middle._repository.AirlineRepository;
+import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
+import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
 @Service
 public class TicketService {
@@ -168,4 +167,21 @@ public class TicketService {
 
         return responseDTO;
     }
+    
+    
+	public GetTicketDateDTO getTicketDate(int userId) {
+		GetTicketDateDTO dto = null;
+		try {
+			dto = ticketRepository.getTicketDate(userId);
+			dto.timeCheck();
+			dto.cutDepartureTime();
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		return dto;
+	}
+    
+    
+    
+    
 }

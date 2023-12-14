@@ -30,7 +30,7 @@ public interface ReservationRepository {
     // 내 여행 상세 정보 가져오기
  	GetMyTripDetailDTO getMyTripDetail(@Param("userId") int userId,@Param("reservationNum") Long reservationNum);
  	// 내 여행 예약 취소하기
- 	int cancelReservation(List<Integer> numList);
+ 	int cancelReservation(Long reservationNum);
  	// 내 결제 정보 가져오기
  	GetPayedInfoDTO getPayedInfo(Long reservationNum);
  	

@@ -12,7 +12,6 @@ import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestExce
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
-import com.tenco.team_two_flight_ticket.reservation.ReservationRequest.CancelReservationDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
@@ -175,13 +174,12 @@ public class ReservationService {
 
 
 	@Transactional
-	public void cancelReservation(CancelReservationDTO dto) {
-		List<Integer> numList = dto.getNumList();
-		if(numList == null) {
+	public void cancelReservation(Long reservationNum) {
+		if(reservationNum == null) {
 			throw new MyBadRequestException("취소할 예약 번호가 없습니다");
 		}
 		try {
-			int updateResult =  reservationRepository.cancelReservation(numList);
+			int updateResult =  reservationRepository.cancelReservation(reservationNum);
 			if(updateResult == 0) {
 				throw new MyBadRequestException("잘못된 예약 번호가 입력되었습니다");
 			}

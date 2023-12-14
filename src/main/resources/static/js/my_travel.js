@@ -10,12 +10,7 @@ async function getMyTravel(tabId, sort){
 	
 	 try {
         const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&sort=${sort}`);
-<<<<<<< HEAD
-        data = await response.json();
-        console.log(data); 
-=======
         data = await response.json(); 
->>>>>>> 0244cd24ea1af2862743aea431a140122ee8a5fc
         insertElement(data.tripList, data.tripCount, tabId, );
     } catch (error) {
 		alert('목록을 불러오는데 실패했습니다');
