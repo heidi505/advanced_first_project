@@ -19,7 +19,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ReservationController {
 
- 	
+    @Autowired
+    private HttpSession session;
+
+    @Autowired
+ 	private ReservationService reservationService;
  	@ResponseBody
  	@PostMapping("/reservation/cancel")
  	public void cancelProc(@RequestBody CancelReservationDTO dto) {
@@ -27,14 +31,14 @@ public class ReservationController {
  	}
  	
  	// 복수 취소 여부에 따라 달라짐
- 	@GetMapping("/reservation/cancel")
- 	public String cancel(CancelReservationDTO dto, Model model) {
-		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
- 		//model.addAttribute("cancelTrip", cancelTrip);
- 		GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
- 		//ticket테이블에서 정보 가져와야 함
- 		return "reservation/cancelReservation";	
- 	}
+    @GetMapping("/reservation/cancel")
+    public String cancel(CancelReservationDTO dto, Model model) {
+        //GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+        //model.addAttribute("cancelTrip", cancelTrip);
+        ReservationResponse.GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
+        //ticket테이블에서 정보 가져와야 함
+        return "reservation/cancelReservation";
+    }
 
     @GetMapping("/reservation/final-result")
     public String finalResult() {
