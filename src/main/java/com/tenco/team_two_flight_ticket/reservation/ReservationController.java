@@ -44,7 +44,7 @@ public class ReservationController {
  	@ResponseBody
  	@PostMapping("/reservation/cancel")
  	public void cancel( @RequestBody Long reservationNum ) {
-
+ 		reservationService.cancelReservation(reservationNum);
  	}
  	
  	@GetMapping("/reservation/final-result")

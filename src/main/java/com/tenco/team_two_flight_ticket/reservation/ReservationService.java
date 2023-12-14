@@ -172,4 +172,9 @@ public class ReservationService {
 		return dto;
 	}
 
+	public void cancelReservation(Long reservationNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

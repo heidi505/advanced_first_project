@@ -1,4 +1,4 @@
-async function cancelReservation(reservationNumArray){
+async function cancelReservation(reservationNum){
 	try {
         const response = await fetch(`/reservation/cancel`, {
             method: 'POST',
@@ -6,7 +6,7 @@ async function cancelReservation(reservationNumArray){
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-				list:reservationNumArray,
+				reservationNum : reservationNum,
             }),
         });
         const result = await response.json();     

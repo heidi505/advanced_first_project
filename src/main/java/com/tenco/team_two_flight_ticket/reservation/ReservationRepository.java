@@ -27,6 +27,6 @@ public interface ReservationRepository {
 
     public int insertP(Passenger passenger);
 
-	GetMyTripDetailDTO getMyTripDetail(@Param("userId") int userId,@Param("statusEnum") Long reservationNum);
+	GetMyTripDetailDTO getMyTripDetail(@Param("userId") int userId,@Param("reservationNum") Long reservationNum);
     
 }
