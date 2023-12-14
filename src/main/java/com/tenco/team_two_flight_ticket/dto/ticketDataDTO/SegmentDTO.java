@@ -13,10 +13,13 @@ import java.util.List;
 @Data
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class SegmentDTO {
+    private String id;
     private DepartureDTO departure;
     private ArrivalDTO arrival;
     private String carrierCode;
+    private String airlineName;
     private AirCraftDTO aircraft;
     private List<StopDTO> stops;
 

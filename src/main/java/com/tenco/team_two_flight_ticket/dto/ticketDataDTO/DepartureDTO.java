@@ -20,6 +20,7 @@ public class DepartureDTO {
     private String iataCode;
     private String terminal;
     private String at;
+    private String cityName;
 
     public DepartureDTO(DepartureDTO dto) {
         this.iataCode = dto.getIataCode();
@@ -30,7 +31,6 @@ public class DepartureDTO {
 
     public String date(){
         String date = LocalDateTime.parse(this.at).toLocalDate().toString();
-        System.out.println(date + "여기다!!!!!!!!!!!!!!");
         String[] dateArr = date.split("-");
 
         return dateArr[1] + "월 " + dateArr[2] + "일";

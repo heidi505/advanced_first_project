@@ -44,20 +44,11 @@ public class TicketController {
             model.addAttribute(values[i],ticketService.getCities(regions[i]));
         }
 
-
-
         TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
         model.addAttribute("count", responseBody.getMeta().getCount());
 
         List<DataDTO> dataDTOList = responseBody.getData();
         model.addAttribute("ticketList", dataDTOList);
-
-        System.out.println("=================================");
-        System.out.println(dataDTOList.get(0).getItineraries().get(0).getDuration());
-        System.out.println(dataDTOList.get(3).getItineraries().get(0).getSegments().get(0).getArrival().time());
-        System.out.println(dataDTOList.get(1).getTravelerPricings().get(0).getFareDetailsBySegment().get(0).getIncludedCheckedBags());
-        System.out.println("=================================");
-
 
         return "flightTicket/flightSearch";
     }

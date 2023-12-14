@@ -832,8 +832,8 @@
                                 <ul class="flight_result_top">
                                     <li class="airline_icon">
                                                 <span class="airline_icon_img"><img
-                                                        src="/images/icons/airline_icon_05.png" alt="에어프랑스"></span>
-                                        <span>${segment.carrierCode}</span>
+                                                        src="/images/airline_images/${segment.carrierCode}.png"></span>
+                                        <span>${segment.airlineName}</span>
                                     </li>
                                     <li>
                                         <div>
@@ -889,9 +889,9 @@
                             <div class="detail_more_tit">
                                 <div>
                                     <span class="go_label">가는 편</span>
-                                    <span class="">서울 (${segment.departure.iataCode})</span>
+                                    <span class="">${segment.departure.cityName} (${segment.departure.iataCode})</span>
                                     <span class="">ㅡ></span>
-                                    <span class="">바르셀로나 (${segment.arrival.iataCode})</span>
+                                    <span class="">${segment.arrival.cityName} (${segment.arrival.iataCode})</span>
                                 </div>
 
                                 <span class="total_time"></span>
@@ -899,17 +899,17 @@
                             <ul class="detail_more_cont">
                                 <li class="detail_distance">
                                     <div class="detail_country_name">
-                                        <span>${segment.carrierCode}</span>
+                                        <span>${segment.airlineName}</span>
                                     </div>
                                     <ul>
                                         <li class="detail_trip_date">
                                             <span>${segment.departure.date()}</span>
                                         </li>
                                         <li class="detail_trip_cont">
-                                            <p class="airline_time">${segment.departure.time()} <span>서울 ${segment.departure.iataCode}</span></p>
+                                            <p class="airline_time">${segment.departure.time()} <span>${segment.departure.cityName} ${segment.departure.iataCode}</span></p>
                                             <p>${itinerary.duration}</p>
                                             <p>${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin} / 무료수하물 ${ticket.travelerPricings[status.index].fareDetailsBySegment[status.index].includedCheckedBags.choose()}</p>
-                                            <p class="airline_time">${segment.arrival.time()} <span>파리 ${segment.arrival.iataCode}</span></p>
+                                            <p class="airline_time">${segment.arrival.time()} <span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span></p>
                                         </li>
                                     </ul>
                                 </li>
@@ -947,24 +947,26 @@
                                     <th>인원</th>
                                     <th>총요금</th>
                                     </thead>
+                                    <c:forEach var="traveler" items="${ticket.newTraveler()}">
                                     <tbody>
                                     <tr>
-                                        <td>성인</td>
-                                        <td>670,200원</td>
-                                        <td>73,800원</td>
-                                        <td>48,900원</td>
-                                        <td>10,000원</td>
-                                        <td>1명</td>
-                                        <td>802,900원</td>
+                                        <td>${traveler.key}</td>
+                                        <td>${traveler.value.base} 원</td>
+                                        <td>${traveler.value.oilPrice} 원</td>
+                                        <td>${traveler.value.tax} 원</td>
+                                        <td>${traveler.value.fee} 원</td>
+                                        <td>${traveler.value.peopleCount} 명</td>
+                                        <td>${traveler.value.grandTotal}</td>
                                     </tr>
                                     </tbody>
+                                    </c:forEach>
                                 </table>
                             </div>
                             <ul class="detail_total_fee">
                                 <li>
                                     <h4 class="detail_fee_tit">총 예상요금</h4>
                                 </li>
-                                <li>802,900원</li>
+                                <li>${ticket.price.grandTotal}</li>
 
                             </ul>
                         </div>

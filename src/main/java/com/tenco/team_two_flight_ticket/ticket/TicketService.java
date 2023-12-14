@@ -1,8 +1,12 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
 import com.tenco.team_two_flight_ticket._middle._entity.City;
+import com.tenco.team_two_flight_ticket._middle._repository.AirlineRepository;
+import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.PriceDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.xml.crypto.Data;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -26,12 +31,19 @@ import java.util.stream.Collectors;
 public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private AirlineRepository airlineRepository;
+    @Autowired
+    private AirportRepository airportRepository;
     public List<City> getCities(String region) {
         List<City> cities = ticketRepository.getCities(region);
         return cities;
     }
 
+    //티켓 검색 누르면 나오는 서비스 로직
     public TicketResponse.FlightSearchDTO getTickets(TicketRequest.TicketSearchDTO dto) throws URISyntaxException {
+
         String date = dto.getStartDate().replace(",","");
         dto.setStartDate(date);
         //날짜 파싱
@@ -94,6 +106,7 @@ public class TicketService {
                 .queryParam("currencyCode", dto.getCurrencyCode())
                 .queryParam("nonStop", true)
                 .queryParam("max", max)
+                .queryParam("includedAirlineCodes", "7C,H1,KE,OZ,NH,ANA,VJ,JL,VN,MU,SQ,7G,TG,UO,TW,PR,CI,CS,MF,MH,CZ")
                 .build()
                 .toUriString());
 
@@ -103,22 +116,55 @@ public class TicketService {
 
         TicketResponse.FlightSearchDTO responseDTO = new TicketResponse.FlightSearchDTO(response2.getBody());
 
+        //응답 DTO 항공사 코드를 이름으로 파싱
 
-//        dataDTOList.stream()
-//                .collect(Collectors.groupingBy(dataDTO -> dataDTO.getPrice().getGrandTotal()));
-//
-//
-//
-//        ListIterator<DataDTO> dataDTOListIterator = dataDTOList.listIterator();
-////
-////
-//        for (int i = 0; i < dataDTOList.size(); i++) {
-//            if(dataDTOList.get(i).getPrice().getGrandTotal() == list.get(i)){
-//                dataDTOList.remove(i);
-//            }
-//        }
-//
-//        responseDTO.setData(dataDTOList);
+        List<String> newAirline = responseDTO.getData().stream()
+                .flatMap(e->e.getItineraries().stream())
+                .flatMap(e->e.getSegments().stream())
+                .map(e->airlineRepository.findAirlineName(e.getCarrierCode()))
+                .collect(Collectors.toList());
+
+        //목적지, 도착지의 공항을 국가 이름으로 파싱
+
+        List<String> newDeparture = responseDTO.getData().stream()
+                .flatMap(e->e.getItineraries().stream())
+                .flatMap(e->e.getSegments().stream())
+                .map(e->airportRepository.findCityName(e.getDeparture().getIataCode()))
+                .collect(Collectors.toList());
+
+        List<String> newArrival = responseDTO.getData().stream()
+                .flatMap(e->e.getItineraries().stream())
+                .flatMap(e->e.getSegments().stream())
+                .map(e->airportRepository.findCityName(e.getArrival().getIataCode()))
+                .collect(Collectors.toList());
+
+        List<SegmentDTO> newSeg = responseDTO.getData().stream()
+                .flatMap(e->e.getItineraries().stream())
+                .flatMap(e->e.getSegments().stream())
+                .collect(Collectors.toList());
+
+        List<ItinerariesDTO> newIt = responseDTO.getData().stream()
+                .flatMap(e->e.getItineraries().stream())
+                .toList();
+
+
+        List<DataDTO> newData = responseDTO.getData().stream().toList();
+
+        for (int i = 0; i < newData.size(); i++) {
+            for (int j = 0; j < newIt.size(); j++) {
+                for (int k = 0; k < newSeg.size(); k++) {
+                    newSeg.get(k).setAirlineName(newAirline.get(k));
+                    newSeg.get(k).getDeparture().setCityName(newDeparture.get(k));
+                    newSeg.get(k).getArrival().setCityName(newArrival.get(k));
+
+                }
+            }
+        }
+
+
+
+
+        responseDTO.setData(newData);
 
         return responseDTO;
     }

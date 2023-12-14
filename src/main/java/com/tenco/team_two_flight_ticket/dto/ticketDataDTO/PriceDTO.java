@@ -18,15 +18,19 @@ public class PriceDTO {
     private String grandTotal;
     //택스 미포함
     private String base;
-    private List<FeesDTO> fees;
-    private List<TaxesDTO> taxes;
+    private String oilPrice;
+    private String tax;
+    private String fee;
+    private int peopleCount;
+
 
     public PriceDTO(PriceDTO dto) {
 
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        this.grandTotal = decimalFormat.format(Double.parseDouble(dto.getGrandTotal())) + "원";
+        this.grandTotal = decimalFormat.format(Double.parseDouble(dto.getGrandTotal()));
         this.base = decimalFormat.format(Double.parseDouble(dto.getBase()));
-        this.fees = dto.getFees();
-        this.taxes = dto.getTaxes();
+        this.oilPrice = decimalFormat.format(((Double.parseDouble(dto.getGrandTotal()) - Double.parseDouble(dto.getBase())) * 0.7));
+        this.tax = decimalFormat.format(((Double.parseDouble(dto.getGrandTotal()) - Double.parseDouble(dto.getBase())) * 0.2));
+        this.fee = decimalFormat.format(((Double.parseDouble(dto.getGrandTotal()) - Double.parseDouble(dto.getBase())) * 0.1));
     }
 }

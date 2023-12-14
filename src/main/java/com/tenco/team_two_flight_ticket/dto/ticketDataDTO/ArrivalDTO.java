@@ -17,6 +17,7 @@ public class ArrivalDTO {
     private String iataCode;
     private String terminal;
     private String at;
+    private String cityName;
 
 
     public ArrivalDTO(ArrivalDTO dto) {
