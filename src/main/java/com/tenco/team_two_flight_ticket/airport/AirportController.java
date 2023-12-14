@@ -9,6 +9,7 @@ import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse;
+import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse2;
 import com.tenco.team_two_flight_ticket.user.User;
 import com.tenco.team_two_flight_ticket.user.UserRepository;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
@@ -119,6 +120,94 @@ public class AirportController {
         model.addAttribute("airportItems", airportItems);
         model.addAttribute("onePersonTime", onePersonTime);
         model.addAttribute("airPortName", airPortName);
+
+        // 전국공항 주차정보 api
+        String airportCode = "";
+        for (AirportTravelTimeDTO.Item airportItem : airportItems) {
+            airportCode = airportItem.getArp();
+            if (airportItem.getArp().equals("GMP")) {
+                airportCode = "GMP";
+            }
+            if (airportItem.getArp().equals("CJU")) {
+                airportCode = "CJU";
+            }
+            if (airportItem.getArp().equals("PUS")) {
+                airportCode = "PUS";
+            }
+            System.out.println(airportCode + "도착지 공항코드");
+        }
+        System.out.println(airportCode);
+        ParkingStatusResponse2 parkingStatusResponse2 = airportService.getParkingAreaInfoAPI2(airportCode);
+        model.addAttribute("parkingStatusResponse2", parkingStatusResponse2);
         return "airport/airportInfo";
+    }
+
+    @GetMapping("/asdtest")
+    public String asdtese(Model model) {
+
+//        ------------- 한국 공항
+
+        //		한국 공항
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+        AirportTravelTimeDTO airportTravelTimes = airPortService.koAirportTime(1);
+
+        List<AirportTravelTimeDTO.Item> airportItems = airportTravelTimes.getItems();
+
+        String airPortName = "";
+        for (AirportTravelTimeDTO.Item airportItem : airportItems) {
+            airPortName = airportItem.getArp();
+            if (airportItem.getArp().equals("GMP")) {
+                airPortName = "김포공항";
+            }
+            if (airportItem.getArp().equals("CJU")) {
+                airPortName = "제주공항";
+            }
+            if (airportItem.getArp().equals("PUS")) {
+                airPortName = "김해공항";
+            }
+            System.out.println(airPortName + "도착지 공항");
+        }
+        System.out.println(airPortName);
+
+        int totalPct = 0;
+        String nowTime = DateFormat.formatTime();
+
+        for (AirportTravelTimeDTO.Item airportItem : airportItems) {
+            String hh = airportItem.getHh(); // 시간대
+            int pct = airportItem.getPct();  // 각 시간대의 총 승객 수
+
+            if (nowTime.equals(hh)) {
+                totalPct += pct;  // 총 승객 수
+            }
+            System.out.println("시간대: " + hh + ", 총 승객수: " + pct);
+        }
+
+        int onePersonTime = totalPct / 60;
+
+        System.out.println(onePersonTime + "총 소요시간");
+        model.addAttribute("airportItems", airportItems);
+        model.addAttribute("onePersonTime", onePersonTime);
+        model.addAttribute("airPortName", airPortName);
+
+        // 전국공항 주차정보 api
+        String airportCode = "";
+        for (AirportTravelTimeDTO.Item airportItem : airportItems) {
+            airportCode = airportItem.getArp();
+            if (airportItem.getArp().equals("GMP")) {
+                airportCode = "GMP";
+            }
+            if (airportItem.getArp().equals("CJU")) {
+                airportCode = "CJU";
+            }
+            if (airportItem.getArp().equals("PUS")) {
+                airportCode = "PUS";
+            }
+            System.out.println(airportCode + "도착지 공항코드");
+        }
+        System.out.println(airportCode);
+        ParkingStatusResponse2 parkingStatusResponse2 = airportService.getParkingAreaInfoAPI2(airportCode);
+        model.addAttribute("parkingStatusResponse2", parkingStatusResponse2);
+        return "airport/asdtest";
     }
 }

@@ -1981,9 +1981,9 @@
                                                         </div>
                                                         <p class="res_modal_btn">
 
-                                                            <label for="radioChk0">
-                                                                <input type="checkbox" id="radioChk0"
-                                                                       class="res_modal_check_btn" name="radioChk"
+                                                            <label for="agreeRadioChk0">
+                                                                <input type="checkbox" id="agreeRadioChk0"
+                                                                       class="res_modal_check_btn" name="agreeRadioChk"
 
                                                                        value="N"
                                                                        onclick="enableConfirmButton()">
@@ -2002,6 +2002,7 @@
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#additionalModal">
                                                                 확인
+
                                                             </button>
                                                         </div>
                                                     </div>
@@ -2028,8 +2029,11 @@
                                                         <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary res_kko_btn" onclick="sendOption('N')">괜찮아요
+                                                        <button type="button" class="btn btn-secondary res_kko_btn"
+
+                                                                onclick="sendOption('N')">괜찮아요
                                                         </button>
+                                                       
                                                         <button type="button" class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
 

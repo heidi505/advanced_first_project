@@ -3,15 +3,16 @@ async function cancelReservation(reservationNum){
         const response = await fetch(`/reservation/cancel`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-            },
+    			'Content-Type': 'application/json'
+  			},
             body: JSON.stringify({
-				reservationNum : reservationNum,
+				resNum : reservationNum,
             }),
         });
-        const result = await response.json();     
-		console.log(result);
+        alert('성공적으로 예약이 취소되었습니다');
+        location.href = `/reservation/cancel/${reservationNum}`;
     } catch (error) {
+		console.error('Error during reservation cancellation:', error);
 		alert('예약 취소에 실패했습니다');
         return false; 
     }
@@ -54,13 +55,8 @@ window.onload = function(){
 	const cancel_btn  = document.getElementById('cancel_request_btn');
 	cancel_btn.addEventListener('click',(e)=>{
 		let checkboxes = document.querySelectorAll('.checkbox:checked');
-		//let reservationNumArray = [];
-		let reservationNumArray = new Array();
-		checkboxes.forEach((checkbox)=>{
-			reservationNumArray.push(checkbox.parentElement.nextElementSibling.innerText);
-		});
-		cancelReservation(reservationNumArray);
-		//location.href=`/reservation/cancel/${reservationNum}`;
+		let reservationNum =  checkboxes[0].parentElement.nextElementSibling.innerText;
+		cancelReservation(reservationNum);
 	});
 	
 	
