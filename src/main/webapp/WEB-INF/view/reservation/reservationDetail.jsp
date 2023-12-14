@@ -11,36 +11,62 @@
     <div class="container">
         <div class="section">
             <hr class="my-5">
-            <div><b class="mt-5">홍길동님의 예약번호는 1111-2222입니다</b>
-                <b class="float-end color_primary02">결제마감시한 2023-12-01(금) 17:00</b>
+            <div><b class="mt-5">${detailTrip.realName}님의 예약번호는 ${detailTrip.reservationNum} 입니다</b>
+                <b class="float-end color_primary02">결제마감시한 ${detailTrip.cuttedPaymentDeadline}</b>
                 <hr class="border-2 border-primary">
             </div>
-            <p class="text-end me-5">예약상태<span class="color_basic09 mx-2">|</span> 결제 전</p>
+            <p class="text-end me-5">예약상태<span class="color_basic09 mx-2">|</span>
+            <c:choose>
+            <c:when test="${detailTrip.statusEnum eq '취소'}">
+            <span class="color_cancle">예약취소</span>
+            </c:when>
+            <c:otherwise>
+            	<c:choose>
+            	<c:when test="${detailTrip.isPayed ne true}">
+            	결제 전
+            	</c:when>
+            	<c:otherwise>
+            	결제완료
+           	 	</c:otherwise>
+            	</c:choose>
+            </c:otherwise>
+            </c:choose>
+            </p>
             <div class="detail_cont_box row mx-auto align-middle mt-3">
                 <div class="col-3 air_info border-end text-center pt-4">
-                    <div class="float-start ms-5"><b class="lh-lg">부산<br><span class="color_basic09">PUS</span></b>
+                    <div class="float-start ms-5"><b class="lh-lg">부산<br><span class="color_basic09">${detailTrip.departureCity}</span></b>
                     </div>
-                    <div class="trip_image w-10 border p-4 my-2 mx-auto d-inline"></div>
-                    <div class="float-end me-5"><b class="lh-lg">김포<br><span class="color_basic09">GMP</span></b></div>
+                    <div class="trip_image p-4 my-2 mx-auto"></div>
+                    <div class="float-end me-5"><b class="lh-lg">김포<br><span class="color_basic09">${detailTrip.arrivalCity}</span></b></div>
                 </div>
                 <div class="col py-3 border-end text-center align-middle">
                     <div class="airline_image w-10 p-4 mx-auto mb-2"></div>
-                    <p><b>진에어</b></p></div>
+                    <p><b>${detailTrip.airline}</b></p></div>
                 <div class="col py-3 border-end text-center align-middle">
                     <p class="mt-3 mb-4 color_basic09">운향종류</p>
-                    <p>왕복</p>
+                    <p>
+                    <c:choose>
+                    <c:when test="${detailTrip.isOneWay eq true}">
+                    편도
+                    </c:when>
+                    <c:otherwise>
+                    왕복
+                    </c:otherwise>
+                    </c:choose>
+                    </p>
                 </div>
                 <div class="col py-3 border-end w-25 text-center">
                     <p class="mt-3 mb-4 color_basic09">좌석등급</p>
-                    <p>일반석</p>
+                    <p>${detailTrip.seatType}</p>
                 </div>
                 <div class="col py-3  w-25 text-center">
-                    <p class="mt-3 mb-4">출발일 01.09(화)</p>
-                    <p>도착일 01.11(목)</p>
+                    <p class="mt-3 mb-4">출발일 ${detailTrip.departureDate}</p>
+                    <p>도착일 ${detailTrip.arrivalDate}</p>
                 </div>
                 <div class="col py-3  w-25">
-                    <p class="mt-3 mb-3">예약자명: 홍길동</p>
-                    <p>연락처명: 010-0000-0000</p>
+                    <p class="mt-3 mb-4">예약자명 : ${detailTrip.realName}</p>
+                    <p>연락처 : ${detailTrip.phoneNumber}</p>
+                    <p class="mt-4">아이디 : ${detailTrip.resName}</p>
                 </div>
             </div>
             <div class="reservation_notice w-100 border p-3 mt-5 lh-lg">
@@ -50,9 +76,10 @@
 
             </div>
 
-
+			
             <!-- 모달창 부분 -->
-            <input type="hidden" class="cancelRequest" value="${cancelRequest}">
+            <input type="hidden" class="cancel_request" value="${cancelRequest}">
+            <input type="hidden" class="reservation_num" value="${detailTrip.reservationNum}">
             <div id="modal_box" class="modal">
                 <div class="modal_cont">
                     <!-- 여기부터 모달창 내용 -->
@@ -60,14 +87,14 @@
                     <div class="pt-2">
                         <b class="fs-5">예약 취소 요청</b><span class="close" id="close_btn">&times;</span>
                         <div class="border-top p-1 mt-4 d-flex">
-                            <div class="p-2"><input type="checkbox" class="p-5 float-start"></div>
+                            <div class="p-2"><input type="checkbox" class="all_checkbox p-5 float-start"></div>
                             <div class="w-10 text-center p-2">번호</div>
                             <div class="p-2 ms-2 w-75">이름</div>
                         </div>
                         <div class="border-top border-bottom p-1 d-flex mb-4">
-                            <div class="p-2 "><input type="checkbox" class="p-5 float-start"></div>
-                            <div class="w-10 text-center py-2 ">1</div>
-                            <div class="p-2 ms-2 w-75">HONG/GILDONG (MS)</div>
+                            <div class="p-2 "><input type="checkbox" class="cancel_checkbox checkbox p-5 float-start"></div>
+                            <div class="w-10 text-center py-2 ">${reservationNum}</div>
+                            <div class="p-2 ms-2 w-75">${detailTrip.firstName}/${detailTrip.lastName} (MS)</div>
                         </div>
 
                         <div class="p-3 bg_line">

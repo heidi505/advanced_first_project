@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
+import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse2;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,10 @@ public class AirPortService {
 
         ResponseEntity<ParkingStatusResponse> responseEntity = restTemplate2.exchange(uri2, HttpMethod.GET, request2, ParkingStatusResponse.class);
         ParkingStatusResponse parkingStatusResponse = responseEntity.getBody();
+        // 응답 데이터를 콘솔에 출력
+        System.out.println("응답 데이터 : ");
+        System.out.println(parkingStatusResponse);
+
 
         return parkingStatusResponse;
     }
@@ -134,5 +139,52 @@ public class AirPortService {
         return airportTravelTimes;
     }
 
+    public ParkingStatusResponse2 getParkingAreaInfoAPI2(String airportCode) {
+        // 전국 공항 주차정보 api
 
+        String baseUrl = "http://openapi.airport.co.kr/service/rest/AirportParkingCongestion/airportParkingCongestionRT";
+        String serviceKey = Define.SERVICEKEY;
+        System.out.println("어디겡 : " + airportCode);
+        int numOfRows = 10;
+        int pageNo = 1;
+
+        URI uri3 = null;
+        try {
+            uri3 = new URI(UriComponentsBuilder
+                    .fromUriString("http://openapi.airport.co.kr/service/rest/AirportParkingCongestion/airportParkingCongestionRT")
+                    .queryParam("schAirportCode", airportCode)
+//                    .queryParam("schAirportCode", "PUS") // 테스트용
+                    .queryParam("serviceKey", serviceKey)
+                    .queryParam("numOfRows", numOfRows)
+                    .queryParam("pageNo", pageNo)
+                    .build()
+                    .toUriString());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("전국 URI: " + uri3.toString());
+
+        RestTemplate restTemplate3 = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.add("Content-type", "application/json; charset=UTF-8");
+        HttpEntity<MultiValueMap<String, String>> request3 = new HttpEntity<>(headers);
+
+        ResponseEntity<ParkingStatusResponse2> responseEntity = restTemplate3.exchange(
+                uri3,
+                HttpMethod.GET,
+                request3,
+                ParkingStatusResponse2.class
+        );
+        ParkingStatusResponse2 parkingStatusResponse2 = responseEntity.getBody();
+
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            System.out.println(responseEntity.getBody());
+            return parkingStatusResponse2;
+        } else {
+            System.out.println("HTTP 요청 실패: " + responseEntity.getStatusCodeValue());
+            return null;
+        }
+    }
 }

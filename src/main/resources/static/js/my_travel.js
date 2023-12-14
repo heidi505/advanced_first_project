@@ -2,7 +2,6 @@ async function getMyTravel(tabId, sort){
 	let statusEnum = '';
 	let result = '';
 	let reservedTrip = '';
-	console.log(sort);
 	switch(tabId){
 		case 'planned_trip': statusEnum = '예정'; break;
 		case 'last_trip': statusEnum = '지난'; break;
@@ -10,8 +9,7 @@ async function getMyTravel(tabId, sort){
 	}
 	
 	 try {
-		 //여기 아이디 처리 필요
-        const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&userId=1&sort=${sort}`);
+        const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&sort=${sort}`);
         data = await response.json(); 
         insertElement(data.tripList, data.tripCount, tabId, );
     } catch (error) {
