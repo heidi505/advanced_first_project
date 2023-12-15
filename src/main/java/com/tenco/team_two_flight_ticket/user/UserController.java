@@ -86,11 +86,13 @@ public class UserController {
 	@GetMapping("/get-my-travel")
 	public GetMyTripCntAndListDTO myPageTravelProc(@Valid GetMyTravelListDTO dto, Errors errors) {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
-		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
+		System.out.println(dto);
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
+		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(1,dto);
 		GetMyTripCntAndListDTO myTrip = new GetMyTripCntAndListDTO();
 		myTrip.setTripCount(tripCount);
 		myTrip.setTripList(tripList);
+		System.out.println(myTrip);
 		
 		return myTrip;
 	}

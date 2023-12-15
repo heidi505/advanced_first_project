@@ -11,7 +11,8 @@ async function getMyTravel(tabId, sort){
 	 try {
         const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&sort=${sort}`);
         data = await response.json(); 
-        insertElement(data.tripList, data.tripCount, tabId, );
+        console.log(data);
+        insertElement(data.tripList, data.tripCount, tabId );
     } catch (error) {
     }
 }

@@ -231,4 +231,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 출발지 & 도착지 전환
 
+
+
 });
+
+
+
+	// 최근 검색한 항공권 검색 연결(미완성)
+	const recentFlight = document.querySelectorAll('.flight_search_box');
+	recentFlight.forEach((flight)=>{
+		flight.addEventListener('click',(e)=>{
+			if(e.target.className != 'flight_search_close'){
+				console.log('search flight');
+				//location.href='/search?keyword='아직 검색기능이 없음
+			}
+		})	
+	});
+	
+	// bootstrap을 이용한 popover 
+	const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+	const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    
+    
+    
+    
+    
+	

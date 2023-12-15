@@ -570,46 +570,39 @@
         <div class="container">
             <div class="flight_search_tit">
                 <h5>최근 검색한 항공권</h5>
+                <!-- 여기부터 -->
+                <c:forEach var="list" items="${searchedList}">
                 <div class="flight_search_box">
               <span class="flight_search_close">
                 <img src="images/icons/close.png" alt="닫기"/>
               </span>
                     <ul class="flight_search_list">
                         <li>
-                            <span class="transfer_label">왕복</span>
+                            <span class="transfer_label">
+                            <c:choose>
+                            <c:when test="${list.oneWayBoolean eq true }">
+                            편도
+                            </c:when>
+                            <c:otherwise>
+                            왕복
+                            </c:otherwise>
+                            </c:choose>
+                            </span>
                         </li>
                         <li class="flight_search_sub_tit">
-                            <span class="from_search_txt">부산(PUS)</span>
+                            <span class="from_search_txt">${list.koreanDepartureCity}(${list.departureCity})</span>
                             <span class="flight_search_icon"><img src="/images/icons/transform_small_icon.svg"
                                                                   alt=""></span>
-                            <span class="to_search_txt">도쿄(TYO)</span>
+                            <span class="to_search_txt">${list.koreanArrivalCity}(${list.arrivalCity})</span>
                         </li>
                         <li class="flight_search_sub_txt">
-                            <span class="flight_search_date">12월 5일 ~ 12월 7일</span>
-                            <span class="flight_search_item">성인 1 - 일반석</span>
+                            <span class="flight_search_date">${list.departureTime} ~ ${list.arrivalTime}</span>
+                            <span class="flight_search_item">${list.passengerType} ${list.passengerAmount} - ${list.seatType}</span>
                         </li>
                     </ul>
                 </div>
-                <div class="flight_search_box">
-              <span class="flight_search_close">
-                <img src="images/icons/close.png" alt="닫기"/>
-              </span>
-                    <ul class="flight_search_list">
-                        <li>
-                            <span class="transfer_label">왕복</span>
-                        </li>
-                        <li class="flight_search_sub_tit">
-                            <span class="from_search_txt">부산(PUS)</span>
-                            <span class="flight_search_icon"><img src="/images/icons/transform_small_icon.svg"
-                                                                  alt=""></span>
-                            <span class="to_search_txt">도쿄(TYO)</span>
-                        </li>
-                        <li class="flight_search_sub_txt">
-                            <span class="flight_search_date">12월 5일 ~ 12월 7일</span>
-                            <span class="flight_search_item">성인 1 - 일반석</span>
-                        </li>
-                    </ul>
-                </div>
+                </c:forEach>
+                <!-- 여기까지 -->
             </div>
         </div>
     </section>
