@@ -45,27 +45,21 @@ public class KaKaoController {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         log.info("kakaoPay post............................................");
 
-        return "redirect:" + kakaoPayService.kakaoPayReady(2);
+        return "redirect:" + kakaoPayService.kakaoPayReady(principal.getId());
 
     }
-    @ResponseBody
+
     @PostMapping("/kakaoPay/cancel")
-    public ResponseEntity<ApiUtils.ApiResult<KaKaoCancelDTO>> kakaoCancel() {
-        KaKaoCancelDTO cancelDTO = kakaoPayService.kakaoPayCancel();
-        return ResponseEntity.ok().body(ApiUtils.success(cancelDTO));
-    }
+    public ResponseEntity<ApiUtils.ApiResult<String>> kakaoCancel() {
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        String message = kakaoPayService.kakaoPayCancel(principal.getId());
 
-    @GetMapping("/cities-list")
-    public ResponseEntity<ApiUtils.ApiResult<List<City>>> citiesList(@RequestParam(defaultValue = "대한민국") String region){
-        List<City> cities = ticketService.getCities(region);
-        return ResponseEntity.ok().body(ApiUtils.success(cities));
+        return ResponseEntity.ok().body(ApiUtils.success(message));
     }
 
     @ResponseBody
     @PostMapping("/kakaoPay/fail")
     public String kakaoFail() {
-        kakaoPayService.kakaoPayCancel();
-        System.out.println(kakaoPayService.kakaoPayCancel());
         return "";
     }
 }
