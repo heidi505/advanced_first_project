@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
-
-import com.tenco.team_two_flight_ticket.reservation.ReservationRequest.CancelReservationDTO;
-
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 
@@ -37,20 +34,19 @@ public class ReservationController {
 
 
  	@ResponseBody
- 	@PostMapping("/reservation/cancel")
- 	public void cancelProc(@RequestBody CancelReservationDTO dto) {
- 		reservationService.cancelReservation(dto);
- 	}
- 	
+    @PostMapping("/reservation/cancel")
+        public void cancelProc(@RequestBody Long reservationNum ) {
+            reservationService.cancelReservation(reservationNum);
+        }
  	// 복수 취소 여부에 따라 달라짐
-    @GetMapping("/reservation/cancel")
-    public String cancel(CancelReservationDTO dto, Model model) {
-        //GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
-        //model.addAttribute("cancelTrip", cancelTrip);
+//    @GetMapping("/reservation/cancel")
+//    public String cancel(CancelReservationDTO dto, Model model) {
+//        GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+//        model.addAttribute("cancelTrip", cancelTrip);
 //        ReservationResponse.GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
-        //ticket테이블에서 정보 가져와야 함
-        return "reservation/cancelReservation";
-    }
+//        //ticket테이블에서 정보 가져와야 함
+//        return "reservation/cancelReservation";
+//    }
 
 
     @GetMapping("/reservation/final-result")

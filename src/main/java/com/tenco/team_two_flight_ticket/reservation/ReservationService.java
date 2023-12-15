@@ -188,19 +188,19 @@ public class ReservationService {
 		}
 	}
     
-	public GetPayedInfoDTO getPayedInfo(Long reservationNum) {
-		GetPayedInfoDTO payedInfo = null;
-		if(reservationNum == null) {
-			throw new MyBadRequestException("예약 번호가 없습니다");
-		}
-		try {
-			payedInfo = reservationRepository.getPayedInfo(reservationNum);
-			payedInfo.changePrice();
-		} catch (Exception e) {
-			throw new MyServerError("서버 에러가 발생했습니다");
-		}
-		return payedInfo;
-	}
+//	public GetPayedInfoDTO getPayedInfo(Long reservationNum) {
+//		GetPayedInfoDTO payedInfo = null;
+//		if(reservationNum == null) {
+//			throw new MyBadRequestException("예약 번호가 없습니다");
+//		}
+//		try {
+//			payedInfo = reservationRepository.getPayedInfo(reservationNum);
+//			payedInfo.changePrice();
+//		} catch (Exception e) {
+//			throw new MyServerError("서버 에러가 발생했습니다");
+//		}
+//		return payedInfo;
+//	}
     
     
     
