@@ -1,11 +1,12 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+
 import java.util.List;
 
 import lombok.Data;
 
 public class ReservationRequest {
-
+	
     @Data
     public static class SaveFormDto{
         private String resName;
@@ -18,11 +19,4 @@ public class ReservationRequest {
         private String reservationNum;
         private Long reservationPrice;
     }
-    
-    @Data
-	public static class CancelReservationDTO{
-		private List<Integer> numList;
-	}
-    
-
 }

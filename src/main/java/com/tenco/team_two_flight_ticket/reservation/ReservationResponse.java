@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -44,9 +45,10 @@ public class ReservationResponse {
 		private Boolean isPayed;
 		private StatusEnum statusEnum;
 		private Timestamp paymentDeadline;
+		private String resName;
 		private String firstName;
 		private String lastName;
-		private String phoneNumber; 
+		private String phoneNum; 
 		private String airline;      
 		private String departureCity; 
 		private String arrivalCity;   
@@ -54,11 +56,12 @@ public class ReservationResponse {
 		private Timestamp arrivalTime;  
 		private SeatTypeEnum seatType;
 		private Boolean isOneWay;
+		private String realName;
 		// 편집한 값들
 		private String departureDate;
 		private String arrivalDate;
 		private String cuttedPaymentDeadline;
-		private String phoneNum;
+		private String phoneNumber;
 		
 		void cutDepartureDate() {
 			Date date = new Date(departureTime.getTime());
@@ -76,11 +79,11 @@ public class ReservationResponse {
 			this.cuttedPaymentDeadline =  sdf.format(date);
 		}
 		void makePhoneNumber() {
-		  String fNum = phoneNumber.substring(0,3);
-		  String mNum = phoneNumber.substring(3,7);
-		  String lNum = phoneNumber.substring(7);
+		  String fNum = phoneNum.substring(0,3);
+		  String mNum = phoneNum.substring(3,7);
+		  String lNum = phoneNum.substring(7);
 		  String fullNumber = fNum + "-" + mNum + "-" + lNum;
-		  this.phoneNum = fullNumber;
+		  this.phoneNumber = fullNumber;
 		}
 		
 	}
@@ -88,7 +91,8 @@ public class ReservationResponse {
 	@Data
 	public static class GetPayedInfoDTO{
 		private String firstName;
-		private PassengerTypeEnum passengerTypeEnum;
+		private String lastName;
+		private PassengerTypeEnum passengerType;
 		private String gender;
 		private DateFormat birthdate;
 		private Long airFare;
@@ -97,5 +101,25 @@ public class ReservationResponse {
 		private Long ticketingFee;
 		private Long totalPrice;
 		private Boolean isPayed;
+    
+		private String sAirFare;
+		private String sFuelSurcharge;
+		private String sTaxes;
+		private String sTicketingFee;
+		private String sTotalPrice;
+		
+		String changeFormat(Long price) {
+			NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+			String formattedNumber = numberFormat.format(price);
+			return formattedNumber;
+		}
+		void changePrice() {
+			 this.sAirFare = changeFormat(this.airFare);
+			 this.sFuelSurcharge = changeFormat(this.fuelSurcharge);
+			 this.sTaxes = changeFormat(this.taxes);
+			 this.sTicketingFee = changeFormat(this.ticketingFee);
+			 this.sTotalPrice = changeFormat(this.totalPrice);
+		}
+
 	}
 }
