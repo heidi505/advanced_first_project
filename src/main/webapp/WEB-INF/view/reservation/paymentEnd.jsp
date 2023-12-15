@@ -24,14 +24,14 @@
 			<table class="w-100 parking_fee_table table mt-3 mx-auto">
 			<thead>
 			<tr>
-			<th class="align-middle">예약번호</th>
-			<td class="text-start ps-3">1234-5678</td>
+			<th class="align-middle">여행번호</th>
+			<td class="text-start ps-3">${reservationInfo.reservationNum}</td>
 			<th>여행일</th>
-			<td class="text-start ps-3">2019.10.22</td>
+			<td class="text-start ps-3">${reservationInfo.departureTime()}</td>
 			</tr>
 			<tr>
 			  <th class="py-3">여행자</th>
-			  <td colspan="3" class="text-start ps-3">홍길동 포함 2명</td>
+			  <td colspan="3" class="text-start ps-3">${paymentInfo.item_name}</td>
 			</tr>
 			</thead>
 			<tbody>
@@ -40,28 +40,23 @@
 			<h2 class="my-4"><b>결제금액</b></h2>
 			<div class="w-100  d-flex mx-auto">
 			<div class="w-50 border p-5 lh-lg bg_line">
-			<span class="me-5">결제일</span><span class="float-end">2019-09-16 10:18</span>
-			<br><span class="me-5">결제수단</span><span class="float-end"><b>카카오페이</b></span>
+			<span class="me-5">결제일</span><span class="float-end">${paymentInfo.date()}</span>
+				<br><span class="me-5">결제수단</span><span class="float-end"><b>카카오페이</b></span>
 			</div>
-			<div class="w-50 border p-5 lh-lg">
-			<span class="me-5">총 금액</span><span class="float-end">30,000</span>
-			<br><span class="me-5">총 할인금액</span><span class="float-end">-9,000</span>
-			<br><span class="me-5">└ 적용된 쿠폰</span><span class="float-end">-2,000</span>
-			<hr class="my-2">
-			<br><span class="me-5">결제금액</span><span class="float-end">29,000</span>
-			</div>
+				<div class="w-50 border p-5 lh-lg">
+					<span class="me-5">총 금액</span><span class="float-end">${reservationInfo.totalPrice} 원</span>
+					<br><span class="me-5">총 할인금액</span><span
+						class="float-end">${reservationInfo.couponDiscountingPrice} 원</span>
+					<br><span class="me-5">└ 적용된 쿠폰</span><span
+						class="float-end">${reservationInfo.couponDiscountingPrice} 원</span>
+					<hr class="my-2">
+					<br><span class="me-5">결제금액</span><span class="float-end">${paymentInfo.amount.total} 원</span>
+				</div>
 			</div>
 			</div>
 			<div class="w-100 text-center p-5">
-			<a href="#" class="payed_check_btn btn btn-primary w-25">확인</a>
+				<a href="/main" class=" btn btn-primary w-25">확인</a>
 			</div>
-			
-			
-			
-			
-			
-			
-			
 		</div>
 		<!-- section end -->
 	</div>

@@ -69,7 +69,36 @@
 		where reservation_num = #{reservationNum}
 		and r.user_id = #{userId}   	
    	</select>
-   	
+
+
+	<select id="reservationPayment" resultMap="reservationPaymentResultMap">
+
+		SELECT ub.username, rb.reservation_num, rb.passenger_amount, tb.taxes, cb.discounting_price, pb.first_name, pb.last_name, tb.total_price, tb.departure_time
+		FROM ticket_tb as tb
+				 left join reservation_tb as rb
+						   on tb.id = rb.id
+				 left join passenger_tb as pb
+						   on rb.id = pb.id
+				 left join user_tb as ub
+						   on ub.id = rb.id
+				 left join hascoupon_tb as hb
+						   on hb.user_id = ub.id
+				 left join coupon_tb as cb
+						   on cb.id = hb.coupon_id
+		where ub.id = #{userId}
+    </select>
+
+	<resultMap id="reservationPaymentResultMap" type="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$ReservationPaymentDTO">
+		<result property="username" column="username"/>
+		<result property="reservationNum" column="reservation_num"/>
+		<result property="passengerAmount" column="passenger_amount"/>
+		<result property="taxes" column="taxes"/>
+		<result property="couponDiscountingPrice" column="discounting_price"/>
+		<result property="passengerFirstName" column="first_name"/>
+		<result property="passengerLastName" column="last_name"/>
+		<result property="totalPrice" column="total_price"/>
+		<result property="departureTime" column="departure_time"/>
+	</resultMap>
    	<update id="cancelReservation">
    		update reservation_tb
    		set status_enum = '취소'

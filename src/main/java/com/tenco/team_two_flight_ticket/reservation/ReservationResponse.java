@@ -1,9 +1,14 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
@@ -14,7 +19,26 @@ import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import lombok.Data;
 
 public class ReservationResponse {
-	
+
+	@Data
+	public static class ReservationPaymentDTO {
+		private String username;
+		private Long reservationNum;
+		private int passengerAmount;
+		private Long taxes;
+		private Long couponDiscountingPrice;
+		private String passengerFirstName;
+		private String passengerLastName;
+		private Long totalPrice;
+		@CreationTimestamp
+		private Timestamp departureTime;
+
+		public String departureTime() {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String formattedDate = sdf.format(new Date(this.departureTime.getTime()));
+			return formattedDate;
+		};
+	}
 	@Data
 	public static class GetMyTripDetailDTO{
 		private Long reservationNum;  
@@ -77,7 +101,7 @@ public class ReservationResponse {
 		private Long ticketingFee;
 		private Long totalPrice;
 		private Boolean isPayed;
-		
+    
 		private String sAirFare;
 		private String sFuelSurcharge;
 		private String sTaxes;
@@ -96,7 +120,6 @@ public class ReservationResponse {
 			 this.sTicketingFee = changeFormat(this.ticketingFee);
 			 this.sTotalPrice = changeFormat(this.totalPrice);
 		}
-	}
-	
 
+	}
 }
