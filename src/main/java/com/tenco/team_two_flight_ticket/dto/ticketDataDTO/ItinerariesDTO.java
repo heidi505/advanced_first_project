@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Data
@@ -33,5 +34,10 @@ public class ItinerariesDTO {
         this.segments = dto.getSegments().stream()
                 .map(e->new SegmentDTO(e))
                 .collect(Collectors.toList());
+    }
+
+    public Map<String, SegmentDTO> roundTrip(){
+        List<DepartureDTO> departure = this.getSegments().stream().map(e->e.getDeparture()).collect(Collectors.toList());
+
     }
 }
