@@ -1058,34 +1058,6 @@
                                         </div>
                                             </c:forEach>
                                         </c:forEach>
-<%--                                        <div class="flight_detail_info">--%>
-<%--                                            <div class="detail_more_tit">--%>
-<%--                                                <div>--%>
-<%--                                                    <span class="from_label">오는 편</span>--%>
-<%--                                                    <span class="">${segment.departure.cityName} (${segment.departure.iataCode})</span>--%>
-<%--                                                    <span class="">ㅡ></span>--%>
-<%--                                                    <span class="">${segment.arrival.cityName} (${segment.arrival.iataCode})</span>--%>
-<%--                                                </div>--%>
-<%--                                                <span class="total_time"></span>--%>
-<%--                                            </div>--%>
-<%--                                            <ul class="detail_more_cont">--%>
-<%--                                                <li class="detail_distance">--%>
-<%--                                                    <div class="detail_country_name">--%>
-<%--                                                        <span>${segment.airlineName}</span>--%>
-<%--                                                    </div>--%>
-<%--                                                    <ul>--%>
-<%--                                                        <li class="detail_trip_date">--%>
-<%--                                                            <span>${segment.departure.date()}</span>--%>
-<%--                                                        </li>--%>
-<%--                                                        <li class="detail_trip_cont">--%>
-<%--                                                            <p class="airline_time">${segment.departure.time()} <span>${segment.departure.cityName} ${segment.departure.iataCode}</span></p>--%>
-<%--                                                            <p>${itinerary.duration}</p>--%>
-<%--                                                            <p class="airline_time">${segment.arrival.time()} <span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span></p>--%>
-<%--                                                        </li>--%>
-<%--                                                    </ul>--%>
-<%--                                                </li>--%>
-<%--                                            </ul>--%>
-<%--                                        </div>--%>
                                         <div class="common_table detail_fee">
                                             <h5 class="detail_fee_tit">상세요금</h5>
                                             <table class="table table-bordered">
