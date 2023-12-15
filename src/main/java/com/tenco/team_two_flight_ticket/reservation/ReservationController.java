@@ -10,35 +10,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
-import com.tenco.team_two_flight_ticket.reservation.ReservationRequest.CancelReservationDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.user.User;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ReservationController {
-
-    @Autowired
-    private HttpSession session;
-
-    @Autowired
- 	private ReservationService reservationService;
- 	@ResponseBody
- 	@PostMapping("/reservation/cancel")
- 	public void cancelProc(@RequestBody CancelReservationDTO dto) {
- 		reservationService.cancelReservation(dto);
- 	}
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	@Autowired
+	private HttpSession session;
  	
- 	// 복수 취소 여부에 따라 달라짐
-    @GetMapping("/reservation/cancel")
-    public String cancel(CancelReservationDTO dto, Model model) {
-        //GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
-        //model.addAttribute("cancelTrip", cancelTrip);
-        ReservationResponse.GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
-        //ticket테이블에서 정보 가져와야 함
-        return "reservation/cancelReservation";
-    }
+	 @GetMapping("/preview")
+	    public String test1() {
+	        return "reservation/preview";
+	    }
+
+	 // http://localhost:8080/reservation/detail
+
+	@GetMapping("/reservation/detail/{reservationNum}")
+	public String detail(@PathVariable Long reservationNum, Model model) {
+	 	User principal = (User) session.getAttribute(Define.PRINCIPAL);
+	 	GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+	 	model.addAttribute("detailTrip", detailTrip);
+	 	return "reservation/reservationDetail";
+	 }
+	 	
+	 @ResponseBody
+	 @PostMapping("/reservation/cancel")
+	 public void cancelProc(@RequestBody Long reservationNum ) {
+	 	reservationService.cancelReservation(reservationNum);
+	 }
+ 	
+
+ 	@GetMapping("/reservation/cancel/{reservationNum}")
+ 	public String cancel(@PathVariable Long reservationNum, Model model) {
+ 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		GetMyTripDetailDTO cancelTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+ 		model.addAttribute("cancelTrip", cancelTrip);
+ 		GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(reservationNum);
+ 		model.addAttribute("payedInfo",payedInfo);
+ 		return "reservation/cancelReservation";	
+ 	}
 
     @GetMapping("/reservation/final-result")
     public String finalResult() {
@@ -95,7 +112,6 @@ public class ReservationController {
     public String cancelModal(@PathVariable Long reservationNum, Model model) {
         model.addAttribute("cancelRequest", true);
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
- 		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
  		GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
  		model.addAttribute("detailTrip", detailTrip);
         return "reservation/reservationDetail";

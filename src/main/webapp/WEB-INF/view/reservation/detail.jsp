@@ -179,7 +179,6 @@
                                 </div>
                                 <div class="form-group detail_group_padding">
                                     <p class="detail_group_maginb">생년월일</p>
-
                                     <input type="text" class="detail_input" id="year" placeholder="" name="year"
                                            value="1991"
                                            required>
@@ -188,6 +187,7 @@
                                            required>
                                     <input type="text" class="detail_input" id="day" placeholder="" name="day"
                                            value="22" required>
+
                                 </div>
                             </div>
 
@@ -1980,9 +1980,11 @@
                                                             <p>여권상의 영문명과 동일한지 꼭 확인해주세요. 잘못된 정보 입력 시 탑승할 수 없습니다.</p>
                                                         </div>
                                                         <p class="res_modal_btn">
+
                                                             <label for="agreeRadioChk0">
                                                                 <input type="checkbox" id="agreeRadioChk0"
                                                                        class="res_modal_check_btn" name="agreeRadioChk"
+
                                                                        value="N"
                                                                        onclick="enableConfirmButton()">
                                                                 <span class=""></span>위 내용을 확인했습니다.
@@ -1994,11 +1996,13 @@
                                                                     onclick="resetForm()">
                                                                 다시입력
                                                             </button>
+
                                                             <button class="btn res_modal_btn2" type="submit"
                                                                     id="confirmYn" disabled
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#additionalModal">
                                                                 확인
+
                                                             </button>
                                                         </div>
                                                     </div>
@@ -2029,6 +2033,7 @@
 
                                                                 onclick="sendOption('N')">괜찮아요
                                                         </button>
+                                                       
                                                         <button type="button" class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
 
