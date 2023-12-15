@@ -1,6 +1,7 @@
 package com.tenco.team_two_flight_ticket.search;
 
-import com.tenco.team_two_flight_ticket.user.User;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.PassengerTypeEnum;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,9 +29,13 @@ public class Searched {
     private Long price;
     @CreationTimestamp
     private Timestamp createdAt;
+    @Enumerated(EnumType.STRING)
+    private SeatTypeEnum seatType;
+    @Enumerated(EnumType.STRING)
+    private PassengerTypeEnum passengerType;
 
     @Builder
-    public Searched(int id, int userId, String keyword, boolean isOneWay, String departureCity, String arrivalCity, Timestamp departureDate, Timestamp arrivalDate, int passengerAmount, Long price, Timestamp createdAt) {
+    public Searched(int id, int userId, String keyword, boolean isOneWay, String departureCity, String arrivalCity, Timestamp departureDate, Timestamp arrivalDate, int passengerAmount, Long price, Timestamp createdAt, SeatTypeEnum seatType, PassengerTypeEnum passengerType) {
         this.id = id;
         this.userId = userId;
         this.keyword = keyword;
@@ -42,5 +47,7 @@ public class Searched {
         this.passengerAmount = passengerAmount;
         this.price = price;
         this.createdAt = createdAt;
+        this.seatType = seatType;
+        this.passengerType = passengerType;
     }
 }

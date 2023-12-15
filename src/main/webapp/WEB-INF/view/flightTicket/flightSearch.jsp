@@ -897,6 +897,7 @@
                                     </div>
                                     <span class="total_time"></span>
                                 </div>
+                                <span class="total_time"></span>
                                 <ul class="detail_more_cont">
                                 <li class="detail_distance">
                                     <div class="detail_country_name">
@@ -913,26 +914,6 @@
                                         </li>
                                     </ul>
                                 </li>
-
-<%--                                <li class="trip_waiting_time">--%>
-<%--                                    ㅡ 23시간 40분 대기 브로츠와프 WRO ㅡ--%>
-<%--                                </li>--%>
-<%--                                <li class="detail_distance">--%>
-<%--                                    <div class="detail_country_name">--%>
-<%--                                        <span>에어프랑스 0267</span>--%>
-<%--                                    </div>--%>
-<%--                                    <ul>--%>
-<%--                                        <li class="detail_trip_date">--%>
-<%--                                            <span>2월 13일</span>--%>
-<%--                                        </li>--%>
-<%--                                        <li class="detail_trip_cont">--%>
-<%--                                            <p class="airline_time">11:45 <span>서울 ICN</span></p>--%>
-<%--                                            <p>14시간 40분</p>--%>
-<%--                                            <p>일반석 / 무료수하물 0개</p>--%>
-<%--                                            <p class="airline_time">18:25 <span>파리 CDG</span></p>--%>
-<%--                                        </li>--%>
-<%--                                    </ul>--%>
-<%--                                </li>--%>
                             </ul>
                             </div>
                             <div class="flight_detail_info">
@@ -984,7 +965,6 @@
                                 </ul>
                             </div>
                         </c:forEach>
-
                             <div class="common_table detail_fee">
                                 <h5 class="detail_fee_tit">상세요금</h5>
                                 <table class="table table-bordered">
@@ -1024,6 +1004,7 @@
                     </c:forEach>
                 </div>
                 </c:forEach>
+            </section>
         </div>
     </div>
 </main>

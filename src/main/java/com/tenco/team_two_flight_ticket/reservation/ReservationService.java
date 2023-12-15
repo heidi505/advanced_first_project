@@ -8,13 +8,12 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
-import com.tenco.team_two_flight_ticket.reservation.ReservationRequest.CancelReservationDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
@@ -34,7 +33,6 @@ public class ReservationService {
     public void save(ReservationRequest.SaveFormDto dto) {
 
         /*  (추후 api에 따라 수정 필요) */
-
         // reservation_tb
         String datePrefix = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
         String randomSuffix = String.format("%03d", ThreadLocalRandom.current().nextInt(1000));
@@ -102,11 +100,9 @@ public class ReservationService {
     }
 
     public List<GetMyTravelDTO> getMyTravel(int userId, UserRequest.GetMyTravelListDTO dto) {
-
         StatusEnum statusEnum = dto.getStatusEnum();
 
         String stringSort = dto.getSort();
-        System.out.println(stringSort);
         String sort = "전체";
 
         switch (stringSort) {
@@ -141,22 +137,23 @@ public class ReservationService {
     }
 
     public GetMyTripCountDTO getMyTripCount(int userId, UserRequest.GetMyTravelListDTO dto) {
-        StatusEnum statusEnum = dto.getStatusEnum();
-        // 개수를 담을 객체
-        GetMyTripCountDTO tripCnt = new GetMyTripCountDTO();
-        try {
-            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all");
-            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true");
-            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "falut");
-            tripCnt.setAllTripCount(allTripCnt);
-            tripCnt.setPayedTripCount(payedTripCnt);
-            tripCnt.setNotPayedTripCount(notPayedTripCnt);
-        } catch (Exception e) {
-            throw new MyServerError("서버 에러가 발생했습니다");
-        }
-
-        return tripCnt;
+    	StatusEnum statusEnum = dto.getStatusEnum();
+    	// 개수를 담을 객체
+    	GetMyTripCountDTO tripCnt = new GetMyTripCountDTO();
+    	try {
+    		int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all");
+    		int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true");
+    		int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false");
+    		tripCnt.setAllTripCount(allTripCnt);
+    		tripCnt.setPayedTripCount(payedTripCnt);
+    		tripCnt.setNotPayedTripCount(notPayedTripCnt);
+    	} catch (Exception e) {
+    		throw new MyServerError("서버 에러가 발생했습니다");
+    	}
+    	
+    	return tripCnt;
     }
+
 
     public GetMyTripDetailDTO getMyTripDetail(int userId , Long reservationNum) {
 		GetMyTripDetailDTO dto = null;
@@ -175,25 +172,35 @@ public class ReservationService {
 		return dto;
 	}
 
+
 	@Transactional
-	public void cancelReservation(CancelReservationDTO dto) {
-		List<Integer> numList = dto.getNumList();
-		if(numList == null) {
+	public void cancelReservation(Long reservationNum) {
+		if(reservationNum == null) {
 			throw new MyBadRequestException("취소할 예약 번호가 없습니다");
 		}
 		try {
-			int updateResult =  reservationRepository.cancelReservation(numList);
+			int updateResult =  reservationRepository.cancelReservation(reservationNum);
 			if(updateResult == 0) {
 				throw new MyBadRequestException("잘못된 예약 번호가 입력되었습니다");
 			}
 		} catch (Exception e) {
 			throw new MyServerError("서버 에러가 발생했습니다");
 		}
-		
-		
 	}
     
-    
+//	public GetPayedInfoDTO getPayedInfo(Long reservationNum) {
+//		GetPayedInfoDTO payedInfo = null;
+//		if(reservationNum == null) {
+//			throw new MyBadRequestException("예약 번호가 없습니다");
+//		}
+//		try {
+//			payedInfo = reservationRepository.getPayedInfo(reservationNum);
+//			payedInfo.changePrice();
+//		} catch (Exception e) {
+//			throw new MyServerError("서버 에러가 발생했습니다");
+//		}
+//		return payedInfo;
+//	}
     
     
     

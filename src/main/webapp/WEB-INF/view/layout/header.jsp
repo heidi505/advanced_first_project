@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>님부스</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -42,6 +42,12 @@
                     <li>
                         <a class="nav-link" href="/user/profile">마이페이지</a>
                     </li>
+                     <c:if test="${ticketDate.alertCheck eq false}">
+                    <li><a class="nav-link" href="#" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" 
+                    title="알림"  data-bs-custom-class="custom-popover" data-bs-content="당신이 예약한 ${ticketDate.departureCity}발 ${ticketDate.arrivalCity}행 비행기가 ${ticketDate.cuttedDepartureTime}에 출발합니다.">
+  					알림
+  					</a></li>
+  					</c:if>
                     <li><a class="nav-link" href="/sign-in">로그인</a></li>
                 </ul>
             </div>
