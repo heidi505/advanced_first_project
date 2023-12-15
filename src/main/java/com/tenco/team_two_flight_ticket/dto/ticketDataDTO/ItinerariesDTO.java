@@ -39,7 +39,6 @@ public class ItinerariesDTO {
 
     public List<SegmentDTO> segments(){
 
-
         List<SegmentDTO> segment = this.getSegments();
 
         return segment;

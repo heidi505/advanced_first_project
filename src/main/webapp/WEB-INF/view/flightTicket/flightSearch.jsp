@@ -887,6 +887,7 @@
                                     </c:forEach>
                                     <ul class="detail_more">
                                         <li class="detail_more_area">
+                                            <c:forEach var="itinerary" items="${ticket.itineraries}">
                                             <c:forEach var="segment" items="${itinerary.segments}">
                                                 <div class="flight_detail_info">
                                                     <div class="detail_more_tit">
@@ -922,6 +923,8 @@
                                                     </ul>
                                                 </div>
                                             </c:forEach>
+                                            </c:forEach>
+                                        </li>
                                             <div class="common_table detail_fee">
                                                 <h5 class="detail_fee_tit">상세요금</h5>
                                                 <table class="table table-bordered">
