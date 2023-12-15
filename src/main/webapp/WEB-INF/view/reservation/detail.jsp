@@ -19,6 +19,9 @@
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">부산</span>
                                             <span class="detail_info_span2">PUS</span>
+                                            <input type="hidden" name="departureCity" id="departureCity" value="부산">
+                                            <input type="hidden" name="departureAirport" id="departureAirport"
+                                                   value="PUS">
                                         </th>
                                         <th class="detail_info_th">
                                     <span class="detail_info_span3">
@@ -31,12 +34,15 @@
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">도쿄</span>
                                             <span>NRT</span>
+                                            <input type="hidden" name="arrivalCity" id="arrivalCity" value="도쿄">
+                                            <input type="hidden" name="arrivalAirport" id="arrivalAirport" value="NRT">
                                         </th>
                                         <th class="detail_info_th">
                                     <span class="detail_info_span4">
                                         <img src="../images/RS.png" class="detail_info_img">
                                     </span>
                                             <span class="detail_info_span2">진에어</span>
+                                            <input type="hidden" name="airline" id="airline" value="진에어">
                                         </th>
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">운항종류</span>
@@ -45,11 +51,17 @@
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">좌석등급</span>
                                             <span class="detail_info_span2">일반석</span>
+                                            <input type="hidden" name="seatType" id="seatType" value="일반석">
                                         </th>
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">승객</span>
                                             <span class="detail_info_span2">1명</span>
                                         </th>
+                                        <div style="display: none">
+                                            <%-- 직항, 경유체크부분 화면에 없네용! --%>
+                                            <span>직항</span>
+                                            <input type="hidden" name="flightType" id="flightType" value="직항">
+                                        </div>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -65,11 +77,13 @@
                                     <tr>
                                         <td>가는날</td>
                                         <td>LJ 227편 <a class="btn">상세</a></td>
+                                        <input type="hidden" name="flight_name" id="flight_name" value="LJ227">
                                         <td>부산 - 도쿄(나리타)</td>
                                         <td>01월 09일 (화) 09:30</td>
                                         <td>01월 09일 (화) 11:30</td>
                                         <td>일반석 1석</td>
                                         <td>15kg</td>
+                                        <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="15">
                                     </tr>
                                     <tr>
                                         <td>오는날</td>
@@ -158,14 +172,14 @@
                                 </div>
                                 <div class="form-group detail_group_padding2">
                                     <div class="detail_name">
-                                        <p><label for="familyname" class="detail_group_maginb">영문 성</label></p>
-                                        <input type="text" class="detail_name_input" id="familyname"
-                                               placeholder="예: ) HONG" name="familyname" value="SUNG" required>
+                                        <p><label for="lastName" class="detail_group_maginb">영문 성</label></p>
+                                        <input type="text" class="detail_name_input" id="lastName"
+                                               placeholder="예: ) HONG" name="lastName" value="SUNG" required>
                                     </div>
                                     <div class="detail_name">
-                                        <p><label for="firstname" class="detail_group_maginb">영문 이름</label></p>
-                                        <input type="text" class="detail_name_input" id="firstname"
-                                               placeholder="예: ) GILDONG" name="firstname" value="MINKYEONG" required>
+                                        <p><label for="firstName" class="detail_group_maginb">영문 이름</label></p>
+                                        <input type="text" class="detail_name_input" id="firstName"
+                                               placeholder="예: ) GILDONG" name="firstName" value="MINKYEONG" required>
                                     </div>
                                 </div>
                                 <div class="form-group detail_group_padding">
@@ -187,7 +201,7 @@
                                            required>
                                     <input type="text" class="detail_input" id="day" placeholder="" name="day"
                                            value="22" required>
-
+                                    <input type="hidden" name="birthDate" id="birthDate" value="">
                                 </div>
                             </div>
 
@@ -1803,8 +1817,14 @@
                                         <!-- 요금표 -->
                                         <div>
                                             <h2 class="preview_price_line">
-                                                <a>성인
-                                                    <string>1명</string>
+                                                <a>
+                                                    <span>성인</span>
+                                                    <input type="hidden" name="passengerType" id="passengerType"
+                                                           value="성인">
+                                                    <span>1</span>
+                                                    <input type="hidden" name="passengerAmount" id="passengerAmount"
+                                                           value="1">
+                                                    <span>명</span>
                                                 </a>
                                             </h2>
                                             <div class="preview_price_line">
@@ -1819,21 +1839,27 @@
                                                         <td>항공요금</td>
                                                         <td>1명</td>
                                                         <td>231,600원</td>
+                                                        <input type="hidden" name="airFare" id="airFare" value="231600">
                                                     </tr>
                                                     <tr>
                                                         <td>유류할증료</td>
                                                         <td>1명</td>
                                                         <td>62,400원</td>
+                                                        <input type="hidden" name="fuelSurcharge" id="fuelSurcharge"
+                                                               value="62400">
                                                     </tr>
                                                     <tr>
                                                         <td>제세공과금</td>
                                                         <td>1명</td>
                                                         <td>63,400원</td>
+                                                        <input type="hidden" name="taxes" id="taxes" value="63400">
                                                     </tr>
                                                     <tr>
                                                         <td>발권수수료</td>
                                                         <td>1명</td>
                                                         <td>10,000원</td>
+                                                        <input type="hidden" name="ticketingFee" id="ticketingFee"
+                                                               value="10000">
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1874,6 +1900,7 @@
                                             </div>
                                             <div>
                                                 <b class="preview_price_marginr">367,400<span>원</span></b>
+                                                <input type="hidden" name="totalPrice" id="totalPrice" value="367400">
                                             </div>
                                         </div>
                                         <div class="preview_price_btn">
@@ -1980,11 +2007,9 @@
                                                             <p>여권상의 영문명과 동일한지 꼭 확인해주세요. 잘못된 정보 입력 시 탑승할 수 없습니다.</p>
                                                         </div>
                                                         <p class="res_modal_btn">
-
                                                             <label for="agreeRadioChk0">
                                                                 <input type="checkbox" id="agreeRadioChk0"
                                                                        class="res_modal_check_btn" name="agreeRadioChk"
-
                                                                        value="N"
                                                                        onclick="enableConfirmButton()">
                                                                 <span class=""></span>위 내용을 확인했습니다.
@@ -1996,19 +2021,15 @@
                                                                     onclick="resetForm()">
                                                                 다시입력
                                                             </button>
-
                                                             <button class="btn res_modal_btn2" type="submit"
                                                                     id="confirmYn" disabled
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#additionalModal">
                                                                 확인
-
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                         <%-- 모달 끝--%>
@@ -2033,7 +2054,7 @@
 
                                                                 onclick="sendOption('N')">괜찮아요
                                                         </button>
-                                                       
+
                                                         <button type="button" class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
 
@@ -2125,15 +2146,46 @@
         document.getElementById("combinedPhoneNum").value = combinedPhoneNum;
     }
 
-    // form submit 시에 조합 함수 호출
-    document.getElementById("reservationp").addEventListener("submit", combinePhoneNum);
-    document.getElementById("reservationp").addEventListener("submit", combineEmail);
-
     // 생년월일 조합
-    var year = document.getElementById("year").value;
-    var month = document.getElementById("month").value;
-    var day = document.getElementById("day").value;
-    var combinedBirthDate = day + "/" + month + "/" + year;
+    function combineBirthDate() {
+        var year = document.getElementById("year").value;
+        var month = document.getElementById("month").value;
+        var day = document.getElementById("day").value;
+        var birthDate = day + "/" + month + "/" + year;
+
+        document.getElementById("birthDate").value = birthDate;
+    }
+
+    // 성별 조합
+    function combineGender() {
+        var selectedGender = document.querySelector('input[name="gender"]:checked').value;
+
+        // hidden 필드에 값 설정
+        document.getElementById("combinedGender").value = selectedGender;
+    }
+
+    // 좌석 타입
+    function setFlightType() {
+        var flightType = document.getElementById("flightType").value;
+        if (flightType === "직항") {
+            document.getElementById('isOneWay').value = 'true';
+            document.getElementById('isNonStop').value = 'false';
+        } else {
+            document.getElementById('isOneWay').value = 'false';
+            document.getElementById('isNonStop').value = 'true';
+        }
+
+    }
+
+    // 폼 제출 시에 조합 함수 호출 및 폼 submit
+    document.getElementById("confirmYn").addEventListener("click", function () {
+        combinePhoneNum();
+        combineEmail();
+        combineBirthDate();
+        combineGender();
+        setFlightType();
+        document.getElementById("reservationp").submit();
+    });
 </script>
 
 <!-- footer.jsp -->

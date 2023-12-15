@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+        namespace="com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository">
+    <select id="findByReservationId" resultType="com.tenco.team_two_flight_ticket._middle._entity.Passenger">
+        select *
+        from passenger_tb
+        where reservation_id = #{reservationDTO.getId()}
+    </select>
+
+    <insert id="insertP">
+        insert into passenger_tb(reservation_id, first_name, last_name, birth_date, gender, passenger_type, created_at)
+        values (#{reservationId}, #{firstName}, #{lastName}, #{birthDate}, #{gender}, #{passengerType}, now())
+    </insert>
+</mapper>
