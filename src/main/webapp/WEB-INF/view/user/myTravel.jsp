@@ -122,13 +122,15 @@
 
                                         </li>
                                         <li class="reservation_cancle">
-                                            <a href="/reservation/cancel-modal/${list.reservationNum}">예약 취소하기</a>
+                                            <div class="reservation_cancle_btn">
+                                                <a href="/reservation/cancel-modal/${list.reservationNum}">예약 취소하기</a>
+                                            </div>
+                                            <div class="reservation_cancle_btn">
                                             <form action="/kakaoPay/cancel" method="post">
-                                                <button type="submit">결제 취소하기</button>
+                                                <button type="button" id="kakaoPayCancel">결제 취소하기</button>
                                             </form>
-
+                                            </div>
                                         </li>
-
                                     </ul>
                                 </div>
                                 </c:forEach>
@@ -319,11 +321,29 @@
     			console.log(tabId);
     			getMyTravel(tabId, sort);
     		}
-
     	})
-    	
-    	
     });
+
+
+    let kakaoPayCancelBtn = document.querySelector("#kakaoPayCancel");
+    console.log(kakaoPayCancelBtn);
+    function kakaoCancel(){
+        fetch(`/kakaoPay/cancel`
+            ,{ method: "POST",
+                headers:{
+                    "Content-Type": "application/json",
+                    "charset": "UTF-8"
+                },
+            }).then(response=>response.json())
+            .then(result=>{
+                alert(result.data);
+            })
+            .catch(result=> {
+                alert(result.data);
+            })
+    }
+    kakaoPayCancelBtn.addEventListener("click",kakaoCancel);
+
     
 </script>
 <script src="/js/my_travel.js"></script>

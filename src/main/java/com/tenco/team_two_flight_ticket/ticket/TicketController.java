@@ -24,9 +24,21 @@ public class TicketController {
     private TicketService ticketService;
 
 
+
     @GetMapping("/preview")
     public String preview(){
-        return "/reservation/preview";
+        return "/reservation/preview";}
+
+    @GetMapping("/flight-search")
+    public String flightSearch(Model model) {
+        String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
+        String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
+
+        for (int i = 0; i < regions.length; i++) {
+            model.addAttribute(values[i],ticketService.getCities(regions[i]));
+        }
+
+        return "flightTicket/flightSearch";
     }
 
     @PostMapping("/flight-search")

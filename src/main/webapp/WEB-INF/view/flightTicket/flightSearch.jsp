@@ -834,7 +834,7 @@
                                                     <ul class="flight_result_top">
                                                         <li class="airline_icon">
                                                             <span class="airline_icon_img"><img
-                                                        src="/images/airline_images/${segment.carrierCode}.png"></span>
+                                                                    src="/images/airline_images/${segment.carrierCode}.png"></span>
                                                             <span>${segment.airlineName}</span>
                                                         </li>
                                                         <li>
@@ -967,41 +967,41 @@
                                         <div class="flight_search_result active">
                                             <c:forEach var="itinerary" items="${ticket.roundTrip()}" varStatus="status">
                                                 <c:forEach var="segment" items="${itinerary.value.segments()}">
-                                            <ul class="flight_result_top">
-                                                <li class="airline_icon">
+                                                    <ul class="flight_result_top">
+                                                        <li class="airline_icon">
                                                 <span class="airline_icon_img"><img
                                                         src="/images/airline_images/${segment.carrierCode}.png" alt="에어프랑스"></span>
-                                                    <span>${segment.airlineName}</span>
-                                                </li>
-                                                <li>
-                                                    <div>
-                                                        <span class="airline_time">${segment.departure.time()}</span>
-                                                        <span class="airline_arrow_icon">
+                                                            <span>${segment.airlineName}</span>
+                                                        </li>
+                                                        <li>
+                                                            <div>
+                                                                <span class="airline_time">${segment.departure.time()}</span>
+                                                                <span class="airline_arrow_icon">
                                                         <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
                                                     </span>
-                                                        <span class="airline_time">${segment.arrival.time()}</span>
-                                                    </div>
-                                                    <div class="airline_txt">
-                                                        <span>${segment.departure.iataCode}</span>
-                                                        <span class="airline_time_taken">${itinerary.value.duration}</span>
-                                                        <span>${segment.arrival.iataCode}</span>
-                                                    </div>
-                                                </li>
-                                                <c:choose>
-                                                    <c:when test="${segment.stops == null}">
-                                                        <li>
-                                                            <div>직항</div>
-                                                            <div class="airline_txt">${itinerary.value.duration}</div>
+                                                                <span class="airline_time">${segment.arrival.time()}</span>
+                                                            </div>
+                                                            <div class="airline_txt">
+                                                                <span>${segment.departure.iataCode}</span>
+                                                                <span class="airline_time_taken">${itinerary.value.duration}</span>
+                                                                <span>${segment.arrival.iataCode}</span>
+                                                            </div>
                                                         </li>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <li>
-                                                            <div>경유</div>
-                                                            <div class="airline_txt">${itinerary.value.duration}</div>
-                                                        </li>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </ul>
+                                                        <c:choose>
+                                                            <c:when test="${segment.stops == null}">
+                                                                <li>
+                                                                    <div>직항</div>
+                                                                    <div class="airline_txt">${itinerary.value.duration}</div>
+                                                                </li>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <li>
+                                                                    <div>경유</div>
+                                                                    <div class="airline_txt">${itinerary.value.duration}</div>
+                                                                </li>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </ul>
                                                 </c:forEach>
                                             </c:forEach>
                                             <div class="detail_more_btn">
@@ -1027,35 +1027,35 @@
                                     <div class="detail_more_area">
                                         <c:forEach var="round" items="${ticket.roundTrip()}">
                                             <c:forEach var="segment" items="${round.value.segments()}">
-                                        <div class="flight_detail_info">
-                                            <div class="detail_more_tit">
-                                                <div>
-                                                    <span class="go_label">${round.key}</span>
-                                                    <span class="">${segment.departure.cityName} (${segment.departure.iataCode})</span>
-                                                    <span class="">ㅡ></span>
-                                                    <span class="">${segment.arrival.cityName} (${segment.arrival.iataCode})</span>
-                                                </div>
-                                                <span class="total_time"></span>
-                                            </div>
-                                            <span class="total_time"></span>
-                                            <ul class="detail_more_cont">
-                                                <li class="detail_distance">
-                                                    <div class="detail_country_name">
-                                                        <span>${segment.airlineName}</span>
+                                                <div class="flight_detail_info">
+                                                    <div class="detail_more_tit">
+                                                        <div>
+                                                            <span class="go_label">${round.key}</span>
+                                                            <span class="">${segment.departure.cityName} (${segment.departure.iataCode})</span>
+                                                            <span class="">ㅡ></span>
+                                                            <span class="">${segment.arrival.cityName} (${segment.arrival.iataCode})</span>
+                                                        </div>
+                                                        <span class="total_time"></span>
                                                     </div>
-                                                    <ul>
-                                                        <li class="detail_trip_date">
-                                                            <span>${segment.departure.date()}</span>
-                                                        </li>
-                                                        <li class="detail_trip_cont">
-                                                            <p class="airline_time">${segment.departure.time()} <span>${segment.departure.cityName} ${segment.departure.iataCode}</span></p>
-                                                            <p>${round.value.duration}</p>
-                                                            <p class="airline_time">${segment.arrival.time()} <span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span></p>
+                                                    <span class="total_time"></span>
+                                                    <ul class="detail_more_cont">
+                                                        <li class="detail_distance">
+                                                            <div class="detail_country_name">
+                                                                <span>${segment.airlineName}</span>
+                                                            </div>
+                                                            <ul>
+                                                                <li class="detail_trip_date">
+                                                                    <span>${segment.departure.date()}</span>
+                                                                </li>
+                                                                <li class="detail_trip_cont">
+                                                                    <p class="airline_time">${segment.departure.time()} <span>${segment.departure.cityName} ${segment.departure.iataCode}</span></p>
+                                                                    <p>${round.value.duration}</p>
+                                                                    <p class="airline_time">${segment.arrival.time()} <span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span></p>
+                                                                </li>
+                                                            </ul>
                                                         </li>
                                                     </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                </div>
                                             </c:forEach>
                                         </c:forEach>
                                         <div class="common_table detail_fee">
@@ -1071,17 +1071,17 @@
                                                 <th>총요금</th>
                                                 </thead>
                                                 <c:forEach var="traveler" items="${ticket.newTraveler()}">
-                                                <tbody>
-                                                <tr>
-                                                    <td>${traveler.key}</td>
-                                                    <td>${traveler.value.base} 원</td>
-                                                    <td>${traveler.value.oilPrice} 원</td>
-                                                    <td>${traveler.value.tax} 원</td>
-                                                    <td>${traveler.value.fee} 원</td>
-                                                    <td>${traveler.value.peopleCount} 명</td>
-                                                    <td>${traveler.value.grandTotal} 원</td>
-                                                </tr>
-                                                </tbody>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>${traveler.key}</td>
+                                                        <td>${traveler.value.base} 원</td>
+                                                        <td>${traveler.value.oilPrice} 원</td>
+                                                        <td>${traveler.value.tax} 원</td>
+                                                        <td>${traveler.value.fee} 원</td>
+                                                        <td>${traveler.value.peopleCount} 명</td>
+                                                        <td>${traveler.value.grandTotal} 원</td>
+                                                    </tr>
+                                                    </tbody>
                                                 </c:forEach>
                                             </table>
                                         </div>

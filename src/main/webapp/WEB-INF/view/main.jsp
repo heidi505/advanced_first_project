@@ -40,7 +40,7 @@
                                                 class="common_modal_btn from_to_modal_btn"
                                                 data-target="from_modal">
                                             <span class="from_code_value">GMP</span>
-                                            <span class="from_airport_value">서울 김포</span>
+                                            <span class="from_airport_value">서울</span>
                                         </button>
                                     </div>
                                     <button type="button" class="from_to_icon transform_btn">
