@@ -150,19 +150,27 @@ public class KakaoPayService {
             reservationPaymentLists = reservationPayment;
         }
 
-////        날짜 포맷 데이터
-//        java.sql.Timestamp departureTime = reservationPaymentLists.getDepartureTime();
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String formattedDate = sdf.format(new Date(departureTime.getTime()));
-//        System.out.println("Timestamp as String: " + formattedDate);
-
         return reservationPaymentLists;
     }
 
 
-    public KaKaoCancelDTO kakaoPayCancel() {
+    public String kakaoPayCancel(Integer userId) {
+        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(userId);
+
+        ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
+        for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
+            reservationPaymentLists = reservationPayment;
+        }
 
         RestTemplate restTemplate = new RestTemplate();
+
+        Long couponPrice = reservationPaymentLists.getCouponDiscountingPrice();
+        Long totalPrice = reservationPaymentLists.getTotalPrice();
+
+        Long finalPriceLong = totalPrice - couponPrice;
+        String finalPrice = Long.toString(finalPriceLong);
+        System.out.println(finalPrice + "할인 된 금액 ");
+
 
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
@@ -183,17 +191,20 @@ public class KakaoPayService {
 
         try {
             kaKaoCancelDTO = restTemplate.postForObject(new URI("https://kapi.kakao.com/v1/payment/cancel"), body, KaKaoCancelDTO.class);
+
             kaKaoCancelDTO.setStatus("SUCCESS_PAYMENT");
             String status = kaKaoCancelDTO.getStatus();
+
             System.out.println("Cancel Status: " + status);
-            return kaKaoCancelDTO;
+
+            return "결제 취소가 완료되었습니다";
 
         } catch (RestClientException e) {
-            e.printStackTrace();
+            return "오류";
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+
         }
-        return null;
+        return "결제 취소가 실패했습니다.";
     }
 
 }

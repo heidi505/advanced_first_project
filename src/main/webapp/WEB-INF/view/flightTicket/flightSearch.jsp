@@ -864,13 +864,14 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </ul>
-                                </c:forEach>
+
                                 <div class="detail_more_btn">
                                     <span>상세보기</span>
                                     <div class="detail_arrow"><img src="/images/icons/icon_down.svg">
                                     </div>
                                 </div>
                             </div>
+                            </c:forEach>
                             <ul class="flight_detail_price">
                                 <li>
                                     <span class="remaining_seats">${ticket.numberOfBookableSeats}석 남음</span>
@@ -983,6 +984,7 @@
                     </c:forEach>
                 </div>
                 </c:forEach>
+            </section>
         </div>
     </div>
 </main>
