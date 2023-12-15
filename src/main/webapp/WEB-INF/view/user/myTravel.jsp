@@ -123,7 +123,12 @@
                                         </li>
                                         <li class="reservation_cancle">
                                             <a href="/reservation/cancel-modal/${list.reservationNum}">예약 취소하기</a>
+                                            <form action="/kakaoPay/cancel" method="post">
+                                                <button type="submit">결제 취소하기</button>
+                                            </form>
+
                                         </li>
+
                                     </ul>
                                 </div>
                                 </c:forEach>

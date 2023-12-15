@@ -376,65 +376,58 @@
                 <h3 class="mt-5 mb-4"><b class="color_primary02">할인대상 및 조건</b></h3>
                 <span class="lh-base">행정안전부 행정정보 공동이용 DB 자동화인이 안될 경우, 주차지원센터(012-345-6789)로 연락바랍니다.
 			</span>
-                <table class="parking_fee_table fee_target_table w-85">
-                    <thead>
-                    <tr>
-                        <th>할인대상</th>
-                        <th>대상별 할인조건</th>
-                        <th>할인율</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="lh-lg py-3 pe-5 align-middle discount_target">①경차</td>
-                        <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
-                            ※필요서류:없음(행정정보 조회 후 실시간 할인)
-                        </td>
-                        <td class="lh-lg px-4 align-middle">50%</td>
-                    </tr>
-                    <tr>
-                        <td class="lh-lg py-3 pe-5 align-middle discount_target">②저공해 자동차</td>
-                        <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「수도권 대기 환경개선에 관한 특별법」 제2조 제6호 및
-                            동법 시행령 제3조에 따른 저공해자동차로서 한국환경공단(친환경 자동차 종합 정보지원 시스템)
-                            으로부터 저공해자동차임이 확인된 차량
-                            <br>
-                            ※ 필요서류:없음(행정정보 조회 후 실시간 할인)<br>
-                            ※ 2020.04.03 부터 법개정으로 인하여 경유를 연료로 하는 자동차는 저공해차에서 제외 되었습니다.
-                        </td>
-                        <td class="lh-lg px-4 align-middle">50%</td>
-                    </tr>
-                    <tr>
-                        <td class="lh-lg py-3 align-middle discount_target">①장해등급 판정을 받은 고엽제 후유의증 환자 등록차량<br>
-                            ①장해등급 판정을 받은 고엽제 후유의증 환자 등록차량
-                        </td>
-                        <td class="lh-lg py-3 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
-                            ※필요서류:없음(행정정보 조회 후 실시간 할인)
-                        </td>
-                        <td class="lh-lg px-4 align-middle">50%</td>
-                    </tr>
-                    <tr>
-                        <td class="lh-lg py-3 pe-5 align-middle discount_target">①경차</td>
-                        <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
-                            ※필요서류:없음(행정정보 조회 후 실시간 할인)
-                        </td>
-                        <td class="lh-lg px-4 align-middle">50%</td>
-                    </tr>
-                    <tr>
-                        <td class="lh-lg py-3 pe-5 align-middle discount_target">①경차</td>
-                        <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
-                            ※필요서류:없음(행정정보 조회 후 실시간 할인)
-                        </td>
-                        <td class="lh-lg px-4 align-middle">50%</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-- 주차요금할인안내 테이블 끝 -->
-                <p class="my-3">*(다자녀가구 기준)2자녀 이상 막내나이가 만 15세 이하인 가구</p>
-                <p>**(제출서류)주민등록등본 사본, 가족관계증명서 사본, 건강보험증 사본 중 택1</p>
-            </div>
-            <!-- parking_fee 끝 -->
-
-
+			<table class="parking_fee_table fee_target_table w-85">
+			<thead>
+			  <tr>
+			    <th>할인대상</th>
+			    <th>대상별 할인조건</th>
+			    <th>할인율</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+			    <td class="lh-lg py-3 pe-5 align-middle discount_target">①경차</td>
+			    <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
+			    ※필요서류:없음(행정정보 조회 후 실시간 할인)</td>
+			    <td class="lh-lg px-4 align-middle">50%</td>
+			  </tr>
+			  <tr>
+			    <td class="lh-lg py-3 pe-5 align-middle discount_target">②저공해 자동차</td>
+			    <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「수도권 대기 환경개선에 관한 특별법」 제2조 제6호 및
+			     동법 시행령 제3조에 따른 저공해자동차로서 한국환경공단(친환경 자동차 종합 정보지원 시스템)
+			     으로부터 저공해자동차임이 확인된 차량
+			     <br>
+			    ※ 필요서류:없음(행정정보 조회 후 실시간 할인)<br>
+			    ※ 2020.04.03 부터 법개정으로 인하여 경유를 연료로 하는 자동차는 저공해차에서 제외 되었습니다.
+			    </td>
+			    <td class="lh-lg px-4 align-middle">50%</td>
+			  </tr>
+			  <tr>
+			    <td class="lh-lg py-3 align-middle discount_target">①장해등급 판정을 받은 고엽제 후유의증 환자 등록차량<br>
+			    ①장해등급 판정을 받은 고엽제 후유의증 환자 등록차량</td>
+			    <td class="lh-lg py-3 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
+			    ※필요서류:없음(행정정보 조회 후 실시간 할인)</td>
+			    <td class="lh-lg px-4 align-middle">50%</td>
+			  </tr>
+			  <tr>
+			    <td class="lh-lg py-3 pe-5 align-middle discount_target">①경차</td>
+			    <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
+			    ※필요서류:없음(행정정보 조회 후 실시간 할인)</td>
+			    <td class="lh-lg px-4 align-middle">50%</td>
+			  </tr>
+			  <tr>
+			    <td class="lh-lg py-3 pe-5 align-middle discount_target">①경차</td>
+			    <td class="lh-lg py-3 pe-5 ps-4 align-middle text-start">「자동차관리법 시행규칙」 제2조별표1에 따론 경형자동차<br>
+			    ※필요서류:없음(행정정보 조회 후 실시간 할인)</td>
+			    <td class="lh-lg px-4 align-middle">50%</td>
+			  </tr>
+			</tbody>
+			</table>
+			<!-- 주차요금할인안내 테이블 끝 -->
+			<p class="my-3">*(다자녀가구 기준)2자녀 이상 막내나이가 만 15세 이하인 가구</p>
+			<p>**(제출서류)주민등록등본 사본, 가족관계증명서 사본, 건강보험증 사본 중 택1</p>
+			</div>
+			<!-- parking_fee 끝 -->
         </div>
     </div>
 </main>

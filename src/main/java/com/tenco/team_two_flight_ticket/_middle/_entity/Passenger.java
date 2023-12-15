@@ -22,14 +22,14 @@ public class Passenger {
     private int reservationId;
     private String firstName;
     private String lastName;
-    private DateFormat birthDate;
+    private String birthDate;
     private String gender;
     @Enumerated(EnumType.STRING)
     private PassengerTypeEnum passengerType;
     private Timestamp createdAt;
 
     @Builder
-    public Passenger(int id, int reservationId, String firstName, String lastName, DateFormat birthDate, String gender, PassengerTypeEnum passengerType, Timestamp createdAt) {
+    public Passenger(int id, int reservationId, String firstName, String lastName, String birthDate, String gender, PassengerTypeEnum passengerType, Timestamp createdAt) {
         this.id = id;
         this.reservationId = reservationId;
         this.firstName = firstName;

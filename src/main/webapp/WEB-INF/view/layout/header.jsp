@@ -42,6 +42,12 @@
                     <li>
                         <a class="nav-link" href="/user/profile">마이페이지</a>
                     </li>
+                     <c:if test="${ticketDate.alertCheck eq false}">
+                    <li><a class="nav-link" href="#" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" 
+                    title="알림"  data-bs-custom-class="custom-popover" data-bs-content="당신이 예약한 ${ticketDate.departureCity}발 ${ticketDate.arrivalCity}행 비행기가 ${ticketDate.cuttedDepartureTime}에 출발합니다.">
+  					알림
+  					</a></li>
+  					</c:if>
                     <li><a class="nav-link" href="/sign-in">로그인</a></li>
                 </ul>
             </div>
