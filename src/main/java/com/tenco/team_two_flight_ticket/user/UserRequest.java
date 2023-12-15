@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 public class UserRequest {
 
@@ -45,8 +46,8 @@ public class UserRequest {
         private String phoneNumber;
         private String email;
         private String password;
+        private MultipartFile pic;
     }
-
     @Getter
     @Setter
     @ToString

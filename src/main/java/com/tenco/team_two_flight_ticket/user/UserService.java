@@ -4,6 +4,7 @@ import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestExce
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
 import jakarta.mail.internet.MimeMessage;
@@ -100,11 +101,19 @@ public class UserService {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         dto.setUserId(principal.getId());
 
+        String picUrl = "";
+        String originalFilename = dto.getPic().getOriginalFilename();
+
+        picUrl = PicUrl.save(dto.getPic(), originalFilename);
+
+        dto.getPic().getOriginalFilename();
+
         try {
             int update = userRepository.updateByUserId(dto);
             principal.setEmail(dto.getEmail());
             principal.setPassword(dto.getPassword());
             principal.setPhoneNumber(dto.getPhoneNumber());
+            principal.setProfileImage(picUrl);
 
             session.setAttribute(Define.PRINCIPAL, principal);
         } catch (Exception e) {

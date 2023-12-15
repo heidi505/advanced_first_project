@@ -45,18 +45,63 @@
 	color:var(--basic_09);
 }
 /* 프로필 관리 */
-.input_profile_image {
-	border-radius: 4em;
-	width: 15%;
-	height: 15%;
+.profile_page, .profile_management_page {
+	height: 100%;
 }
-.input_profile_image:hover {
-	cursor: pointer;
+.profile_box_area {
+	height: 100vh;
+}
+.input_profile_image {
+	position: relative;
+	width: 200px;
+	margin: 0 auto;
+	border-radius: 50%;
 }
 .profile_image {
-	border-radius: 5em;
-	width: 83%;
-	height: 83%;
+	background: url(../images/basic_img.svg) no-repeat;
+	width: 120px;
+	height: 120px;
+	background-size: cover;
+	background-position: center;
+	margin: 0 auto;
+	margin-top: 24px;
+}
+.profile_image_item {
+	border-radius: 50%;
+}
+.profile_file_box {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	background-color: var(--basic_wh);
+	border-radius: 47px;
+	border: 1px solid var(--line);
+	cursor: pointer;
+	bottom: 0;
+	right: 0;
+}
+.picture {
+	margin: 0 auto;
+}
+#inputFile {
+	display: none;
+}
+.input_file_custom {
+	background-size: cover;
+	position: absolute;
+	display: inline-block;
+	background: url(../images/icons/camera.svg) no-repeat;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%,-50%);
+	background-size: cover;
+	width: 40px;
+	height: 40px;
+	cursor:pointer;
+	bottom: 0;
+}
+.profile_info > div > p{
+	font-weight: bold;
 }
 .left_profile_text {
 	font-size: 14px;
@@ -67,14 +112,6 @@
 }
 .type_name {
 	width:20%;
-}
-.bedge_span{
-	right:41%!important;
-	top:87%!important;
-	padding:0.75rem!important;
-	background: url("../images/camera.png") no-repeat;
-	background-size: cover;
-	cursor: pointer;
 }
 
 /* 쿠폰 창*/

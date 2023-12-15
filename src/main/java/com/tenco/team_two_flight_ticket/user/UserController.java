@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.user;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/user")
 @Controller
