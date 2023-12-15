@@ -52,6 +52,27 @@ public class TicketController {
 
         return "flightTicket/flightSearch";
     }
+    
+    @PostMapping("/ticket/flight-light-search")
+    public String flightLightSearchProc(@Valid TicketRequest.TicketLightSearchDTO dto, Model model) throws URISyntaxException {
+    	String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
+    	String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
+    	
+    	for (int i = 0; i < regions.length; i++) {
+    		model.addAttribute(values[i],ticketService.getCities(regions[i]));
+    	}
+    	//키워드로 city_tb를 조회해 검색용 dto를 완성시켜 반환
+    	
+    	
+    	// 이 부분은 자동으로 채워질 예정
+    	//TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
+    	//model.addAttribute("count", responseBody.getMeta().getCount());
+    	
+    	//List<DataDTO> dataDTOList = responseBody.getData();
+    	//model.addAttribute("ticketList", dataDTOList);
+    	
+    	return "flightTicket/flightSearch";
+    }
 
 
 

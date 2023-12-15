@@ -45,5 +45,13 @@ public class TicketRequest {
         private String expiresIn;
         private String state;
     }
+    
+    @Data
+    @ToString
+    public static class TicketLightSearchDTO{
+    	private String keyword;
+    }
+    
+    
 
 }

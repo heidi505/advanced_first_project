@@ -275,7 +275,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		flight.addEventListener('click',(e)=>{
 			if(e.target.className != 'flight_search_close'){
 				console.log('search flight');
-				//location.href='/search?keyword='아직 검색기능이 없음
+				//location.href='/ticket/flight-search?'/
+				//post라 쿼리스트링으로 값을 넣을 수 없을 때 어찌한다...
+				
 			}
 		})	
 	});

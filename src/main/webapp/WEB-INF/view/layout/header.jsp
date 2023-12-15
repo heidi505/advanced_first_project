@@ -33,7 +33,7 @@
                     <img src="/images/logo.svg" alt="로고">
                 </div>
                 <div class="search">
-                    <form class="d-flex">
+                    <form class="d-flex" action="/ticket/flight-light-search" method="POST">
                         <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요">
                         <button class="btn btn-primary" type="submit">검색</button>
                     </form>

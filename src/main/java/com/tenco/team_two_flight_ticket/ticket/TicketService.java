@@ -1,7 +1,6 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,32 +8,25 @@ import org.springframework.stereotype.Service;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.City;
-=======
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
-import com.tenco.team_two_flight_ticket._middle._entity.City;
 import com.tenco.team_two_flight_ticket._middle._repository.AirlineRepository;
 import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
->>>>>>> 184be2e4834dcbd706d22c873e5b3d6d500da170
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
 @Service

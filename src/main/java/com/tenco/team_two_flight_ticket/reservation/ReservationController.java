@@ -1,22 +1,21 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
-import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayApprovalDTO;
-import com.tenco.team_two_flight_ticket.kakaopay.service.KakaoPayService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayApprovalDTO;
+import com.tenco.team_two_flight_ticket.kakaopay.service.KakaoPayService;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
-import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
-
 import com.tenco.team_two_flight_ticket.user.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,15 +37,16 @@ public class ReservationController {
         public void cancelProc(@RequestBody Long reservationNum ) {
             reservationService.cancelReservation(reservationNum);
         }
- 	// 복수 취소 여부에 따라 달라짐
-//    @GetMapping("/reservation/cancel")
-//    public String cancel(CancelReservationDTO dto, Model model) {
-//        GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
-//        model.addAttribute("cancelTrip", cancelTrip);
-//        ReservationResponse.GetPayedInfoDTO payedInfo = reservationService.getPayedInfo(dto.getNumList());
-//        //ticket테이블에서 정보 가져와야 함
-//        return "reservation/cancelReservation";
-//    }
+ 	
+
+    @GetMapping("/reservation/cancel/{reservationNum}")
+    public String cancel(@PathVariable Long reservationNum, Model model) {
+        GetMyTripDetailDTO cancelTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+        model.addAttribute("cancelTrip", cancelTrip);
+        List<ReservationResponse.GetPayedInfoDTO> payedInfoList = reservationService.getPayedInfo(reservationNum);
+        model.addAttribute("payedInfoList", payedInfoList);
+        return "reservation/cancelReservation";
+    }
 
 
     @GetMapping("/reservation/final-result")

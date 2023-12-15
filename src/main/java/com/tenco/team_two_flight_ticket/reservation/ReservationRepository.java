@@ -40,4 +40,6 @@ public interface ReservationRepository {
  	// 내 여행 예약 취소하기
     int cancelReservation(Long reservationNum);
 
+	List<GetPayedInfoDTO> getPayedInfo(Long reservationNum);
+
 }
