@@ -1,5 +1,7 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
+import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -9,7 +11,9 @@ import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.PassengerTypeEnum;
@@ -121,5 +125,67 @@ public class ReservationResponse {
 			 this.sTotalPrice = changeFormat(this.totalPrice);
 		}
 
+	}
+
+	@Data
+	public static class SaveResultDTO {
+		private Reservation reservation;
+		private Passenger passenger;
+		private List<TicketDTO> ticket;
+
+		public SaveResultDTO(Reservation reservations, Passenger passenger, List<Ticket> ticket) {
+			this.reservation = reservations;
+			this.passenger = passenger;
+			this.ticket = ticket.stream()
+					.map(TicketDTO::new)
+					.collect(Collectors.toList());
+		}
+
+		@Data
+		public static class ReservationDTO {
+			private Integer id;
+			private StatusEnum statusEnum;
+
+			public ReservationDTO(Reservation reservation) {
+				this.id = reservation.getId();
+				this.statusEnum = reservation.getStatusEnum();
+			}
+		}
+
+		@Data
+		public static class PassengerDTO {
+			private Integer id;
+			private String firstName;
+			private String lastName;
+			private PassengerTypeEnum passengerType;
+			private String birthDate;
+
+			public PassengerDTO(Passenger passenger) {
+				this.id = passenger.getId();
+				this.firstName = passenger.getFirstName();
+				this.lastName = passenger.getLastName();
+				this.passengerType = passenger.getPassengerType();
+				this.birthDate = passenger.getBirthDate();
+			}
+		}
+
+		@Data
+		public static class TicketDTO {
+			private Integer id;
+			private Long airFare;
+			private Long fuelSurcharge;
+			private Long taxes;
+			private Long ticketingFee;
+			private Long totalPrice;
+
+			public TicketDTO(Ticket ticket) {
+				this.id = ticket.getId();
+				this.airFare = ticket.getAirFare();
+				this.fuelSurcharge = ticket.getFuelSurcharge();
+				this.taxes = ticket.getTaxes();
+				this.ticketingFee = ticket.getTicketingFee();
+				this.totalPrice = ticket.getTotalPrice();
+			}
+		}
 	}
 }
