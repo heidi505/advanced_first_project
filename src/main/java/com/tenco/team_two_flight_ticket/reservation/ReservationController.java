@@ -59,11 +59,12 @@ public class ReservationController {
     }
 
     @GetMapping("/payed")
-    public String payed(@RequestParam("pg_token") String pg_token, Model model, Integer id) {
+    public String payed(@RequestParam("pg_token") String pg_token, Model model) {
 
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
-        KakaoPayApprovalDTO paymentInfo = kakaoPayService.kakaoPayInfo(pg_token, 2);
-        ReservationResponse.ReservationPaymentDTO reservationInfo = kakaoPayService.reservationInfo(2);
+        KakaoPayApprovalDTO paymentInfo = kakaoPayService.kakaoPayInfo(pg_token, principal.getId());
+        ReservationResponse.ReservationPaymentDTO reservationInfo = kakaoPayService.reservationInfo(principal.getId());
 
         model.addAttribute("paymentInfo", paymentInfo);
         model.addAttribute("reservationInfo", reservationInfo);
