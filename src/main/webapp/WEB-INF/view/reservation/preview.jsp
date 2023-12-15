@@ -11,8 +11,8 @@
         <!-- 기본 메세지 -->
         <section>
             <div class="p-1 border">
-                <sapn><a href="">👈검색 결과로 돌아가기</a></sapn>
-                <h3 class="preview_header">선택한 항공권</h3>
+                <span><a href="">👈검색 결과로 돌아가기</a></span>
+                <h3 class="preview_header"></h3>
             </div>
             <div class="p-3 text-white preview_title">
                 <span>

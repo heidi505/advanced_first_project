@@ -10,6 +10,12 @@ import java.util.List;
 @Mapper
 public interface TicketRepository {
     public List<City> getCities(String region);
+
     public List<Ticket> findByTicketJoinReservation(Integer userId);
-	public GetTicketDateDTO getTicketDate(int userId);
+
+    public GetTicketDateDTO getTicketDate(int userId);
+
+    List<Ticket> findByReservationId(int id);
+
+    public int insertT(Ticket ticket);
 }

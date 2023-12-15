@@ -23,6 +23,12 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+
+
+    @GetMapping("/preview")
+    public String preview(){
+        return "/reservation/preview";}
+
     @GetMapping("/flight-search")
     public String flightSearch(Model model) {
         String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
@@ -49,6 +55,12 @@ public class TicketController {
 
         List<DataDTO> dataDTOList = responseBody.getData();
         model.addAttribute("ticketList", dataDTOList);
+
+
+        int isRound = dataDTOList.get(0).getItineraries().size();
+        model.addAttribute("isRound", isRound);
+
+
 
         return "flightTicket/flightSearch";
     }
