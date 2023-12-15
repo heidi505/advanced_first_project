@@ -13,7 +13,7 @@
 <main id="my_travel_page">
     <section class="my_travel">
         <div class="nav_container">
-            <article>
+            <!-- <article> -->
                 <div class="my_travel_box">
                     <div class="my_travel_tab">
                         <h2><b>내 여행</b></h2>
@@ -123,7 +123,12 @@
                                         </li>
                                         <li class="reservation_cancle">
                                             <a href="/reservation/cancel-modal/${list.reservationNum}">예약 취소하기</a>
+                                            <form action="/kakaoPay/cancel" method="post">
+                                                <button type="submit">결제 취소하기</button>
+                                            </form>
+
                                         </li>
+
                                     </ul>
                                 </div>
                                 </c:forEach>
@@ -264,7 +269,7 @@
                         </div>
                     </div>
                 </div>
-            </article>
+            <!--  </article> -->
         </div>
     </section>
 </main>
@@ -310,6 +315,8 @@
     			} else{
     				sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
     			}
+    			console.log(sort);
+    			console.log(tabId);
     			getMyTravel(tabId, sort);
     		}
 

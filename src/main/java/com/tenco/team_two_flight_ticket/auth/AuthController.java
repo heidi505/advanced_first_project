@@ -1,21 +1,13 @@
 package com.tenco.team_two_flight_ticket.auth;
 
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
-import com.tenco.team_two_flight_ticket._core.utils.Define;
-import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
-import com.tenco.team_two_flight_ticket.auth.authresponse.OAuthToken;
-import com.tenco.team_two_flight_ticket.ticket.TicketService;
-import com.tenco.team_two_flight_ticket.user.User;
-import com.tenco.team_two_flight_ticket.user.UserRequest;
-import com.tenco.team_two_flight_ticket.user.UserResponse;
-import com.tenco.team_two_flight_ticket.user.UserService;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -26,6 +18,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+
+import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
+import com.tenco.team_two_flight_ticket.auth.authresponse.OAuthToken;
+import com.tenco.team_two_flight_ticket.search.SearchedResponse;
+import com.tenco.team_two_flight_ticket.search.SearchedService;
+import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
+import com.tenco.team_two_flight_ticket.ticket.TicketService;
+import com.tenco.team_two_flight_ticket.user.User;
+import com.tenco.team_two_flight_ticket.user.UserRequest;
+import com.tenco.team_two_flight_ticket.user.UserService;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class AuthController {
@@ -43,6 +50,8 @@ public class AuthController {
     private TicketService ticketService;
     private String email;
 
+    @Autowired
+    private SearchedService searchService;
 
     //메인 페이지
     @GetMapping("/main")
@@ -54,7 +63,13 @@ public class AuthController {
         for (int i = 0; i < regions.length; i++) {
             model.addAttribute(values[i],ticketService.getCities(regions[i]));
         }
-
+        
+        //최근 검색한 항공권 목록을 가지고 와야 함(searched DB)
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(1);
+        model.addAttribute("searchedList", searchedList);
+        System.out.println(searchedList);
+        
         return "main";
     }
 
@@ -85,9 +100,13 @@ public class AuthController {
 
     //로그인
     @PostMapping("/sign-in")
-    public String signInProc(@Valid UserRequest.SignInDTO dto, Errors errors){
+    public String signInProc(@Valid UserRequest.SignInDTO dto, Model model, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
+        // 로그인 시 예약한 티켓 날짜를 가져와 보냄
+        GetTicketDateDTO ticketDate  = ticketService.getTicketDate(1);
+        System.out.println(ticketDate);
+        model.addAttribute("ticketDate", ticketDate);
         return "redirect:/main";
     }
 

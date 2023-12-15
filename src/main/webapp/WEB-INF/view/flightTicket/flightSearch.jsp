@@ -806,7 +806,7 @@
             <section class="flight_search_right">
                 <ul class="count_and_filter">
                     <li>
-                        검색결과 총 <span>61</span>개
+                        검색결과 총 <span>${count}</span>개
                     </li>
                     <li>
                         <form action="#">
@@ -822,60 +822,49 @@
                         </form>
                     </li>
                 </ul>
+                <c:forEach var="ticket" items="${ticketList}" varStatus="status">
                 <div class="flight_detail_wrap">
+                    <c:forEach var="itinerary" items="${ticket.itineraries}">
                     <div class="flight_detail_area">
                         <div class="flight_detail_cont">
                             <div class="flight_search_result active">
+                                <c:forEach var="segment" items="${itinerary.segments}">
                                 <ul class="flight_result_top">
                                     <li class="airline_icon">
                                                 <span class="airline_icon_img"><img
-                                                        src="/images/icons/airline_icon_05.png" alt="에어프랑스"></span>
-                                        <span>에어프랑스</span>
+                                                        src="/images/airline_images/${segment.carrierCode}.png"></span>
+                                        <span>${segment.airlineName}</span>
                                     </li>
                                     <li>
                                         <div>
-                                            <span class="airline_time">11:45</span>
+                                            <span class="airline_time">${segment.departure.time()}</span>
                                             <span class="airline_arrow_icon">
                                                         <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
                                                     </span>
-                                            <span class="airline_time">22:25</span>
+                                            <span class="airline_time">${segment.arrival.time()}</span>
                                         </div>
                                         <div class="airline_txt">
-                                            <span>ICN</span>
-                                            <span class="airline_time_taken">19시간 10분</span>
-                                            <span>BCN</span>
+                                            <span>${segment.departure.iataCode}</span>
+                                            <span class="airline_time_taken">${itinerary.duration}</span>
+                                            <span>${segment.arrival.iataCode}</span>
                                         </div>
                                     </li>
+                                    <c:choose>
+                                        <c:when test="${segment.stops == null}">
                                     <li>
-                                        <div>1번 경유</div>
-                                        <div class="airline_txt">02시간 40분 CDG</div>
+                                        <div>직항</div>
+                                        <div class="airline_txt">${itinerary.duration}</div>
                                     </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li>
+                                                <div>경유</div>
+                                                <div class="airline_txt">${itinerary.duration}</div>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
-                                <ul class="flight_result_btm">
-                                    <li class="airline_icon">
-                                                <span class="airline_icon_img"><img
-                                                        src="/images/icons/airline_icon_05.png" alt="에어프랑스"></span>
-                                        <span>에어프랑스</span>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <span class="airline_time">11:45</span>
-                                            <span class="airline_arrow_icon">
-                                                        <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
-                                                    </span>
-                                            <span class="airline_time">22:25</span>
-                                        </div>
-                                        <div class="airline_txt">
-                                            <span>ICN</span>
-                                            <span class="airline_time_taken">19시간 10분</span>
-                                            <span>BCN</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>1번 경유</div>
-                                        <div class="airline_txt">02시간 40분 CDG</div>
-                                    </li>
-                                </ul>
+                                </c:forEach>
                                 <div class="detail_more_btn">
                                     <span>상세보기</span>
                                     <div class="detail_arrow"><img src="/images/icons/icon_down.svg">
@@ -884,10 +873,10 @@
                             </div>
                             <ul class="flight_detail_price">
                                 <li>
-                                    <span class="remaining_seats">9석 남음</span>
+                                    <span class="remaining_seats">${ticket.numberOfBookableSeats}석 남음</span>
                                 </li>
                                 <li>
-                                    <a href="http://www.naver.com" class="reservation_price">1,001,200원
+                                    <a href="http://www.naver.com" class="reservation_price">${ticket.price.grandTotal}
                                         <!-- <img src="/images/icons/detail_arrow.svg" alt="예약 상세보기">/ -->
                                     </a>
                                 </li>
@@ -896,52 +885,85 @@
                     </div>
                     <ul class="detail_more">
                         <div class="detail_more_area">
-                            <div class="detail_more_tit">
-                                <div>
-                                    <span class="go_label">가는 편</span>
-                                    <span class="">서울 (ICN)</span>
-                                    <span class="">ㅡ></span>
-                                    <span class="">바르셀로나 (BCN)</span>
+                        <c:forEach var="segment" items="${itinerary.segments}">
+                            <div class="flight_detail_info">
+                                <div class="detail_more_tit">
+                                    <div>
+                                        <span class="go_label">가는 편</span>
+                                        <span class="">${segment.departure.cityName} (${segment.departure.iataCode})</span>
+                                        <span class="">ㅡ></span>
+                                        <span class="">${segment.arrival.cityName} (${segment.arrival.iataCode})</span>
+                                    </div>
+                                    <span class="total_time"></span>
                                 </div>
                                 <span class="total_time"></span>
+                                <ul class="detail_more_cont">
+                                    <li class="detail_distance">
+                                        <div class="detail_country_name">
+                                            <span>${segment.airlineName}</span>
+                                        </div>
+                                        <ul>
+                                            <li class="detail_trip_date">
+                                                <span>${segment.departure.date()}</span>
+                                            </li>
+                                            <li class="detail_trip_cont">
+                                                <p class="airline_time">${segment.departure.time()} <span>${segment.departure.cityName} ${segment.departure.iataCode}</span></p>
+                                                <p>${itinerary.duration}</p>
+                                                <p class="airline_time">${segment.arrival.time()} <span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span></p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="detail_more_cont">
-                                <li class="detail_distance">
-                                    <div class="detail_country_name">
-                                        <span>에어프랑스 0267</span>
+                            <div class="flight_detail_info">
+                                <div class="detail_more_tit">
+                                    <div>
+                                        <span class="from_label">오는 편</span>
+                                        <span class="">${segment.departure.cityName} (${segment.departure.iataCode})</span>
+                                        <span class="">ㅡ></span>
+                                        <span class="">${segment.arrival.cityName} (${segment.arrival.iataCode})</span>
                                     </div>
-                                    <ul>
-                                        <li class="detail_trip_date">
-                                            <span>2월 13일</span>
-                                        </li>
-                                        <li class="detail_trip_cont">
-                                            <p class="airline_time">11:45 <span>서울 ICN</span></p>
-                                            <p>14시간 40분</p>
-                                            <p>일반석 / 무료수하물 0개</p>
-                                            <p class="airline_time">18:25 <span>파리 CDG</span></p>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="trip_waiting_time">
-                                    ㅡ 23시간 40분 대기 브로츠와프 WRO ㅡ
-                                </li>
-                                <li class="detail_distance">
-                                    <div class="detail_country_name">
-                                        <span>에어프랑스 0267</span>
-                                    </div>
-                                    <ul>
-                                        <li class="detail_trip_date">
-                                            <span>2월 13일</span>
-                                        </li>
-                                        <li class="detail_trip_cont">
-                                            <p class="airline_time">11:45 <span>서울 ICN</span></p>
-                                            <p>14시간 40분</p>
-                                            <p>일반석 / 무료수하물 0개</p>
-                                            <p class="airline_time">18:25 <span>파리 CDG</span></p>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                    <span class="total_time"></span>
+                                </div>
+                                <ul class="detail_more_cont">
+                                    <li class="detail_distance">
+                                        <div class="detail_country_name">
+                                            <span>${segment.airlineName}</span>
+                                        </div>
+                                        <ul>
+                                            <li class="detail_trip_date">
+                                                <span>${segment.departure.date()}</span>
+                                            </li>
+                                            <li class="detail_trip_cont">
+                                                <p class="airline_time">${segment.departure.time()} <span>${segment.departure.cityName} ${segment.departure.iataCode}</span></p>
+                                                <p>${itinerary.duration}</p>
+                                                <p class="airline_time">${segment.arrival.time()} <span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span></p>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                        <%--                                <li class="trip_waiting_time">--%>
+                                        <%--                                    ㅡ 23시간 40분 대기 브로츠와프 WRO ㅡ--%>
+                                        <%--                                </li>--%>
+                                        <%--                                <li class="detail_distance">--%>
+                                        <%--                                    <div class="detail_country_name">--%>
+                                        <%--                                        <span>에어프랑스 0267</span>--%>
+                                        <%--                                    </div>--%>
+                                        <%--                                    <ul>--%>
+                                        <%--                                        <li class="detail_trip_date">--%>
+                                        <%--                                            <span>2월 13일</span>--%>
+                                        <%--                                        </li>--%>
+                                        <%--                                        <li class="detail_trip_cont">--%>
+                                        <%--                                            <p class="airline_time">11:45 <span>서울 ICN</span></p>--%>
+                                        <%--                                            <p>14시간 40분</p>--%>
+                                        <%--                                            <p>일반석 / 무료수하물 0개</p>--%>
+                                        <%--                                            <p class="airline_time">18:25 <span>파리 CDG</span></p>--%>
+                                        <%--                                        </li>--%>
+                                        <%--                                    </ul>--%>
+                                        <%--                                </li>--%>
+                                </ul>
+                            </div>
+                        </c:forEach>
                             <div class="common_table detail_fee">
                                 <h5 class="detail_fee_tit">상세요금</h5>
                                 <table class="table table-bordered">
@@ -954,183 +976,33 @@
                                     <th>인원</th>
                                     <th>총요금</th>
                                     </thead>
+                                    <c:forEach var="traveler" items="${ticket.newTraveler()}">
                                     <tbody>
                                     <tr>
-                                        <td>성인</td>
-                                        <td>670,200원</td>
-                                        <td>73,800원</td>
-                                        <td>48,900원</td>
-                                        <td>10,000원</td>
-                                        <td>1명</td>
-                                        <td>802,900원</td>
+                                        <td>${traveler.key}</td>
+                                        <td>${traveler.value.base} 원</td>
+                                        <td>${traveler.value.oilPrice} 원</td>
+                                        <td>${traveler.value.tax} 원</td>
+                                        <td>${traveler.value.fee} 원</td>
+                                        <td>${traveler.value.peopleCount} 명</td>
+                                        <td>${traveler.value.grandTotal} 원</td>
                                     </tr>
                                     </tbody>
+                                    </c:forEach>
                                 </table>
                             </div>
                             <ul class="detail_total_fee">
                                 <li>
                                     <h4 class="detail_fee_tit">총 예상요금</h4>
                                 </li>
-                                <li>802,900원</li>
+                                <li>${ticket.price.grandTotal}</li>
+
                             </ul>
                         </div>
                     </ul>
+                    </c:forEach>
                 </div>
-                <div class="flight_detail_wrap">
-                    <div class="flight_detail_area">
-                        <div class="flight_detail_cont">
-                            <div class="flight_search_result active">
-                                <ul class="flight_result_top">
-                                    <li class="airline_icon">
-                                                <span class="airline_icon_img"><img
-                                                        src="/images/icons/airline_icon_05.png" alt="에어프랑스"></span>
-                                        <span>에어프랑스</span>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <span class="airline_time">11:45</span>
-                                            <span class="airline_arrow_icon">
-                                                        <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
-                                                    </span>
-                                            <span class="airline_time">22:25</span>
-                                        </div>
-                                        <div class="airline_txt">
-                                            <span>ICN</span>
-                                            <span class="airline_time_taken">19시간 10분</span>
-                                            <span>BCN</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>1번 경유</div>
-                                        <div class="airline_txt">02시간 40분 CDG</div>
-                                    </li>
-                                </ul>
-                                <ul class="flight_result_btm">
-                                    <li class="airline_icon">
-                                                <span class="airline_icon_img"><img
-                                                        src="/images/icons/airline_icon_05.png" alt="에어프랑스"></span>
-                                        <span>에어프랑스</span>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <span class="airline_time">11:45</span>
-                                            <span class="airline_arrow_icon">
-                                                        <img src="/images/icons/my_trip_arrow.svg" alt="화살표">
-                                                    </span>
-                                            <span class="airline_time">22:25</span>
-                                        </div>
-                                        <div class="airline_txt">
-                                            <span>ICN</span>
-                                            <span class="airline_time_taken">19시간 10분</span>
-                                            <span>BCN</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>1번 경유</div>
-                                        <div class="airline_txt">02시간 40분 CDG</div>
-                                    </li>
-                                </ul>
-                                <div class="detail_more_btn">
-                                    <span>상세보기</span>
-                                    <div class="detail_arrow"><img src="/images/icons/icon_down.svg">
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="flight_detail_price">
-                                <li>
-                                    <span class="remaining_seats">9석 남음</span>
-                                </li>
-                                <li>
-                                    <a href="http://www.naver.com" class="reservation_price">1,001,200원
-                                        <!-- <img src="/images/icons/detail_arrow.svg" alt="예약 상세보기">/ -->
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <ul class="detail_more">
-                        <div class="detail_more_area">
-                            <div class="detail_more_tit">
-                                <div>
-                                    <span class="go_label">가는 편</span>
-                                    <span class="">서울 (ICN)</span>
-                                    <span class="">ㅡ></span>
-                                    <span class="">바르셀로나 (BCN)</span>
-                                </div>
-                                <span class="total_time"></span>
-                            </div>
-                            <ul class="detail_more_cont">
-                                <li class="detail_distance">
-                                    <div class="detail_country_name">
-                                        <span>에어프랑스 0267</span>
-                                    </div>
-                                    <ul>
-                                        <li class="detail_trip_date">
-                                            <span>2월 13일</span>
-                                        </li>
-                                        <li class="detail_trip_cont">
-                                            <p class="airline_time">11:45 <span>서울 ICN</span></p>
-                                            <p>14시간 40분</p>
-                                            <p>일반석 / 무료수하물 0개</p>
-                                            <p class="airline_time">18:25 <span>파리 CDG</span></p>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="trip_waiting_time">
-                                    ㅡ 23시간 40분 대기 브로츠와프 WRO ㅡ
-                                </li>
-                                <li class="detail_distance">
-                                    <div class="detail_country_name">
-                                        <span>에어프랑스 0267</span>
-                                    </div>
-                                    <ul>
-                                        <li class="detail_trip_date">
-                                            <span>2월 13일</span>
-                                        </li>
-                                        <li class="detail_trip_cont">
-                                            <p class="airline_time">11:45 <span>서울 ICN</span></p>
-                                            <p>14시간 40분</p>
-                                            <p>일반석 / 무료수하물 0개</p>
-                                            <p class="airline_time">18:25 <span>파리 CDG</span></p>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div class="common_table detail_fee">
-                                <h5 class="detail_fee_tit">상세요금</h5>
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <th>항목</th>
-                                    <th>항공요금</th>
-                                    <th>유류할증료</th>
-                                    <th>제세공과금</th>
-                                    <th>발권수수료</th>
-                                    <th>인원</th>
-                                    <th>총요금</th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>성인</td>
-                                        <td>670,200원</td>
-                                        <td>73,800원</td>
-                                        <td>48,900원</td>
-                                        <td>10,000원</td>
-                                        <td>1명</td>
-                                        <td>802,900원</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <ul class="detail_total_fee">
-                                <li>
-                                    <h4 class="detail_fee_tit">총 예상요금</h4>
-                                </li>
-                                <li>802,900원</li>
-                            </ul>
-                        </div>
-                    </ul>
-                </div>
-            </section>
+                </c:forEach>
         </div>
     </div>
 </main>

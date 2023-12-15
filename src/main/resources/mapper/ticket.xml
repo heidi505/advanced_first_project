@@ -17,8 +17,8 @@
                            on ub.id = tb.id
         where ub.id = #{userId};
     </select>
-	
-	<select id="getTicketDate" resultType="com.tenco.team_two_flight_ticket.ticket.TicketResponse$GetTicketDateDTO">
+
+    <select id="getTicketDate" resultType="com.tenco.team_two_flight_ticket.ticket.TicketResponse$GetTicketDateDTO">
 		select departure_time, dc.city_name as departure_city, ac.city_name as arrival_city, reservation_num
 		from ticket_tb as t
 		join reservation_tb as r
@@ -28,8 +28,8 @@
         join city_tb as ac
         on t.arrival_city = ac.city_code
 		where status_enum = '예정'
-		and r.user_id = 1
+		and r.user_id = #{userId}
         order by departure_time limit 1;
 	</select>
-	
+    
 </mapper>

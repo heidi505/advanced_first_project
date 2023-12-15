@@ -1019,6 +1019,16 @@
     display: inline-block;
     margin-right: 8px;
 }
+.from_label {
+    color: var(--primary_02);
+    padding: 4px;
+    background-color: var(--basic_wh);
+    font-size: 14px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-right: 8px;
+    border: 1px solid var(--primary_02);
+}
 
 .detail_distance,
 .detail_distance>ul {

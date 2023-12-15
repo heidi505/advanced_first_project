@@ -14,6 +14,7 @@ async function getMyTravel(tabId, sort){
         console.log(data);
         insertElement(data.tripList, data.tripCount, tabId );
     } catch (error) {
+		alert('목록을 불러오는데 실패했습니다');
     }
 }
 
@@ -41,7 +42,7 @@ function makeYearTag(year){
 
 
 
-// 예정된 여행 목록 삽입하기
+// 여행 목록 삽입하기
 function insertElement(tripList, tripCnt , tabId){
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = '';

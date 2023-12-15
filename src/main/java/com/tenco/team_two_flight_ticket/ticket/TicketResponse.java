@@ -1,17 +1,50 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
+
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketMetaDTO.MetaDTO;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 public class TicketResponse {
-	
-	@Data
+
+    @Data
+    @ToString
+    @NoArgsConstructor
+    public static class FlightSearchDTO{
+        private MetaDTO meta;
+        private List<DataDTO> data;
+
+        public FlightSearchDTO(FlightSearchDTO dto) {
+            this.meta = dto.getMeta();
+            this.data = dto.getData().stream()
+                    .map(e->new DataDTO(e))
+                    .collect(Collectors.toList());
+        }
+    }
+
+
+    //airline
+    //time
+    //nonstop
+    //arrival departure time/date
+    //소요시간
+    //totalprice(자세한 요금)
+    //bookableseats
+    //seattype / baggageallowance
+    
+    @Data
 	public static class GetTicketDateDTO{
 		private Timestamp departureTime;
 		private String departureCity;
@@ -21,7 +54,7 @@ public class TicketResponse {
 		String cuttedDepartureTime;
 		private Boolean alertCheck;
 		
-		
+
 		void timeCheck() {
 			LocalDateTime targetDateTime = departureTime.toLocalDateTime();
 	        LocalDateTime currentDateTime = LocalDateTime.now();
@@ -37,11 +70,9 @@ public class TicketResponse {
 				Date date = new Date(departureTime.getTime());
 				SimpleDateFormat sdf = new SimpleDateFormat("MM-dd ( E ) HH:mm",Locale.KOREA);
 				this.cuttedDepartureTime =  sdf.format(date);
-				System.out.println(cuttedDepartureTime);
 		}
-		
-		
 	}
-	
-	
+    
+
+
 }
