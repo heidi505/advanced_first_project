@@ -35,6 +35,7 @@ public class TicketService {
     private AirlineRepository airlineRepository;
     @Autowired
     private AirportRepository airportRepository;
+    private TicketResponse.FlightSearchDTO responseDTO;
     public List<City> getCities(String region) {
         List<City> cities = ticketRepository.getCities(region);
         return cities;
@@ -164,6 +165,8 @@ public class TicketService {
 
 
         responseDTO.setData(newData);
+
+
 
         return responseDTO;
     }

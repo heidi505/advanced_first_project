@@ -116,4 +116,16 @@ public class DataDTO{
 
         return newMap;
     }
+
+    public Map<String, ItinerariesDTO> roundTrip(){
+        Map<String, ItinerariesDTO> newMap = new HashMap<>();
+
+        ItinerariesDTO first = this.getItineraries().get(0);
+        ItinerariesDTO last = this.getItineraries().get(1);
+
+        newMap.put("가는 편", first);
+        newMap.put("오는 편", last);
+
+        return newMap;
+    }
 }
