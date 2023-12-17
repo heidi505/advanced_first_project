@@ -44,6 +44,6 @@
 </div>
 </div>
 
-<script src="js/javascript.js"></script>
+<script type="module" src="js/firebase.js"></script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp"%>

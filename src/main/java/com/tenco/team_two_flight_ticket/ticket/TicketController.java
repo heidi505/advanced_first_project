@@ -1,20 +1,26 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
-import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
-import com.tenco.team_two_flight_ticket._middle._entity.City;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
-import jakarta.validation.Valid;
+import java.net.URISyntaxException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket._middle._entity.City;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.search.SearchedService;
+import com.tenco.team_two_flight_ticket.user.User;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @RequestMapping("/ticket")
 @Controller
@@ -22,6 +28,10 @@ public class TicketController {
 
     @Autowired
     private TicketService ticketService;
+    @Autowired
+    private HttpSession session;
+    @Autowired
+    private SearchedService searchedService;
 
 //    @GetMapping("/flight-search")
 //    public String flightSearch(Model model) {
@@ -43,7 +53,9 @@ public class TicketController {
         for (int i = 0; i < regions.length; i++) {
             model.addAttribute(values[i],ticketService.getCities(regions[i]));
         }
-
+        
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        searchedService.saveRecentSearch(1 ,dto);
         TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
         model.addAttribute("count", responseBody.getMeta().getCount());
 
@@ -53,23 +65,20 @@ public class TicketController {
         return "flightTicket/flightSearch";
     }
     
-    @PostMapping("/ticket/flight-light-search")
-    public String flightLightSearchProc(@Valid TicketRequest.TicketLightSearchDTO dto, Model model) throws URISyntaxException {
+    @GetMapping("/flight-recent-search")
+    public String flightRecentSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
     	String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
     	String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
     	
     	for (int i = 0; i < regions.length; i++) {
     		model.addAttribute(values[i],ticketService.getCities(regions[i]));
     	}
-    	//키워드로 city_tb를 조회해 검색용 dto를 완성시켜 반환
+
+    	TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
+    	model.addAttribute("count", responseBody.getMeta().getCount());
+    	List<DataDTO> dataDTOList = responseBody.getData();
+    	model.addAttribute("ticketList", dataDTOList);
     	
-    	
-    	// 이 부분은 자동으로 채워질 예정
-    	//TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
-    	//model.addAttribute("count", responseBody.getMeta().getCount());
-    	
-    	//List<DataDTO> dataDTOList = responseBody.getData();
-    	//model.addAttribute("ticketList", dataDTOList);
     	
     	return "flightTicket/flightSearch";
     }

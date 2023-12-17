@@ -580,9 +580,11 @@
         <div class="container">
             <div class="flight_search_tit">
                 <h5>최근 검색한 항공권</h5>
-                <!-- 여기부터 -->
+                 <!-- 여기부터 -->
                 <c:forEach var="list" items="${searchedList}">
                 <div class="flight_search_box">
+                <a class="flight_search_a" href="/ticket/flight-recent-search?originLocationCode=${list.departureCity}&destinationLocationCode=${list.arrivalCity}&startDate=${list.startDate}&endDate=${list.endDate}&adults=${list.adults}&children=${list.children}&infants=${list.infants}&travelClass=${list.travelClass}"></a>
+              	<input type="hidden" value="${list.id}">
               <span class="flight_search_close">
                 <img src="images/icons/close.png" alt="닫기"/>
               </span>
@@ -607,7 +609,17 @@
                         </li>
                         <li class="flight_search_sub_txt">
                             <span class="flight_search_date">${list.departureTime} ~ ${list.arrivalTime}</span>
-                            <span class="flight_search_item">${list.passengerType} ${list.passengerAmount} - ${list.seatType}</span>
+                            <span class="flight_search_item">
+                            <c:if test="${list.adults > 0 }">
+                            어른 ${list.adults}명
+                            </c:if>
+                            <c:if test="${list.children > 0 }">
+                            소아 ${list.children}명
+                            </c:if>
+                            <c:if test="${list.infants > 0 }">
+                            유아 ${list.infants}명
+                            </c:if>
+							 - ${list.travelClass}</span>
                         </li>
                     </ul>
                 </div>

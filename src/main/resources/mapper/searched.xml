@@ -13,6 +13,18 @@
    		join city_tb as ac
    		on s.arrival_city = ac.city_code
    		where user_id = #{id}
-   		order by created_at desc limit 5
+   		order by created_at desc limit 4
    	</select>
+   	
+   	<insert id="saveRecentSearch">
+   		insert into searched_tb (is_one_way, user_id, departure_city, arrival_city, start_date, end_date, travel_class, adults, children, infants, created_at)
+   		values (#{isOneWay},#{userId}, #{departureCity}, #{arrivalCity}, #{startDate}, #{endDate}, #{travelClass}, #{adults}, #{children}, #{infants}, now())
+   	</insert>
+   	
+   	<delete id="deleteSearchLog">
+   		delete from searched_tb
+   		where id = #{searchId}
+   	</delete>
+   	
+   	
 </mapper>
