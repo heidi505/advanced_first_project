@@ -155,10 +155,12 @@ img {
 button {
     border: none;
     outline: none;
+    padding: 0;
     background-color: inherit;
     cursor: pointer;
+    border-radius: 5px;
+    text-transform: none;
 }
-
 .btn-check:checked + .btn,
 .btn.active,
 .btn.show,
@@ -230,6 +232,9 @@ select::-ms-expand {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    border-radius: 5px;
+    text-transform: none;
+    padding: 5px;
 }
 
 ::marker {
@@ -328,12 +333,7 @@ input[type="checkbox"] {
 .navbar-nav > li{
     padding-right: 12px;
 }
-button, select {
-    text-transform: none;
-    padding: 5px;
-    border-radius: 5px;
-    outline: 0;
-}
+
 
 .modal_title {
     margin-bottom: 16px;

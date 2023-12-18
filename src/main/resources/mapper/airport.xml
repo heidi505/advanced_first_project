@@ -5,6 +5,6 @@
 <mapper
         namespace="com.tenco.team_two_flight_ticket._middle._repository.AirportRepository">
     <select id="findCityName" resultType="string">
-        select a.country_name from iata_airport_tb as a where code = #{code}
+        select a.city_name from iata_airport_tb as a where code = #{code}
     </select>
 </mapper>

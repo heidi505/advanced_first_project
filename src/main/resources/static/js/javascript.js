@@ -149,6 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
             fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
             fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
             document.getElementById("origin").value = airportCode;
+            //로딩 페이지 데이터 바인딩
+            document.getElementById("loadingOrigin1").innerText = airportName;
+            document.getElementById("loadingOrigin2").innerText = airportCode;
+            document.getElementById("loadingOrigin3").innerText = airportName;
 
 
         }
@@ -159,6 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
             toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
             toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
             document.getElementById("destination").value = airportCode;
+            //로딩페이지 데이터 바인딩
+            document.getElementById("loadingDestination1").innerText = airportName;
+            document.getElementById("loadingDestination2").innerText = airportCode;
+            document.getElementById("loadingDestination3").innerText = airportName;
         }
 
         fromButtonIcon.forEach(function (button, index) {

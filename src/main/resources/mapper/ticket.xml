@@ -31,5 +31,21 @@
 		and r.user_id = #{userId}
         order by departure_time limit 1;
 	</select>
+
+    <select id="findByReservationId" resultType="com.tenco.team_two_flight_ticket.ticket.Ticket">
+        select *
+        from ticket_tb
+        where reservation_id = #{reservationDTO.getId()}
+    </select>
+
+    <insert id="insertT">
+        insert into ticket_tb(reservation_id, air_fare, fuel_surcharge, taxes, ticketing_fee, total_price, airline,
+                              flight_name, departure_city, arrival_city, departure_time, arrival_time,
+                              departure_airport, arrival_airport, seat_type, is_one_way, is_non_stop, baggage_allowance,
+                              created_at)
+        values (#{reservationId}, #{airFare}, #{fuelSurcharge}, #{taxes}, #{ticketingFee}, #{totalPrice}, #{airline}, #{flightName},
+                #{departureCity}, #{arrivalCity}, null, null, #{departureAirport}, #{arrivalAirport}, #{seatType}, #{isOneWay}, #{isNonStop},
+                #{baggageAllowance}, now())
+    </insert>
     
 </mapper>
