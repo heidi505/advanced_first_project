@@ -1008,5 +1008,6 @@
 </script>
 <script src="/js/javascript.js"></script>
 <script src="/js/ticket_search.js"></script>
+<script type="module" src="js/messaging_receive_message.js"></script>
 <!-- header.jsp -->
 <%@ include file="layout/footer.jsp" %>
