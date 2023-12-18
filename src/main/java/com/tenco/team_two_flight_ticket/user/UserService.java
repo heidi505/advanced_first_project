@@ -4,6 +4,7 @@ import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestExce
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
 import jakarta.mail.internet.MimeMessage;
@@ -17,6 +18,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Random;
@@ -96,21 +98,40 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(UserRequest.UserUpdateDTO dto) {
+    public int updateUser(UserRequest.UserUpdateDTO dto) {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         dto.setUserId(principal.getId());
 
+        String picUrl = "";
+        MultipartFile file = dto.getProfileImage();
+
+        // 파일이 업로드되었는지 확인
+        if (file != null && !file.isEmpty()) {
+            if (file.getSize() > Define.MAX_FILE_SIZE) {
+                throw new MyBadRequestException("파일 크기는 20MB 이상 클 수 없습니다");
+            } else {
+                String originalFilename = file.getOriginalFilename();
+                picUrl = PicUrl.save(file, originalFilename);
+            }
+        } else {
+            // 파일이 업로드되지 않은 경우 기본 이미지 사용
+            picUrl = "basic_img.svg";
+        }
+
         try {
+            dto.setOriginalPicName(picUrl);
             int update = userRepository.updateByUserId(dto);
             principal.setEmail(dto.getEmail());
             principal.setPassword(dto.getPassword());
             principal.setPhoneNumber(dto.getPhoneNumber());
+            principal.setProfileImage(picUrl);
 
             session.setAttribute(Define.PRINCIPAL, principal);
+
+            return update;
         } catch (Exception e) {
             throw new MyServerError("서버 에러");
         }
-
     }
 
     public String checkUsername(String username) {
