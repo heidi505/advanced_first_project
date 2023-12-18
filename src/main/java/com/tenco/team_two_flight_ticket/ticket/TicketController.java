@@ -52,9 +52,6 @@ public class TicketController {
     @PostMapping("/flight-search")
     public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
 
-        System.out.println(dto.getStartDate());
-
-
         String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
         String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
 
