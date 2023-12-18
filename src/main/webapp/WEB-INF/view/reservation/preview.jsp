@@ -28,175 +28,182 @@
                     <div>
                         <div class="preview_form_box">
                             <!-- 가는편 -->
-                            <div class="preview_form_margint">
-                                <div>
-                                    <div class="preview_form_marginb">
-                                        <h4>
-                                            <span class="btn-primary preview_btn_to_form">가는편</span>
-                                            <strong>서울 (ICN)</strong>
-                                            <span class="preview_form_padding"> ✈ </span>
-                                            <strong>도쿄 (NRT)</strong>
-                                            <span>12월 12일</span>
-                                        </h4>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <div class="preview_li_box">
-                                                <div>
-                                                    <div class="preview_li_box_top">
-                                                        <span>
-                                                            <img src="../images/RS.png" class="preview_airport_img">
-                                                        </span>
-                                                        <span>에어서울 →</span>
-                                                        <span>
-                                                            <span>16:40<span>ICN</span></span>
-                                                                <span>02시간 20분</span>
-                                                                <span>19:00<span>NRT</span></span>
-                                                        </span>
-                                                        <span>직항</span>
-                                                    </div>
-                                                </div>
-                                                <!-- 수하물 정보 -->
-                                                <div>
-                                                    <!-- 내용담길 박스 -->
-                                                    <div class="preview_baggage">
-                                                        <!-- 왼쪽 화면 -->
-                                                        <div class="preview_baggage_left">
-                                                            <div>
-                                                                <p>
-                                                                    <span>진에어 0103</span>
-                                                                </p>
-                                                            </div>
-                                                            <div class="preview_form_margint">
-                                                                <p class="preview_baggage_bottom">
-                                                                    <span>🧳</span>
-                                                                    <span>무료수화물 15kg</span>
-                                                                </p>
-                                                                <p>
-                                                                    <span>🪑</span>
-                                                                    <span>일반석</span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- 오른쪽 화면 -->
-                                                        <div class="prview_baggage_right">
-                                                            <span>1월 4일</span>
-                                                        </div>
+                            <c:choose>
+                                <c:when test="${isRound == 1}">
+                                    <div class="preview_form_margint">
+                                        <div>
+                                            <div class="preview_form_marginb">
+                                                <h4>
+                                                    <span class="btn-primary preview_btn_to_form">가는편</span>
+                                                    <strong>${ticket.itineraries[0].segments[0].departure.cityName} (${ticket.itineraries[0].segments[0].departure.iataCode})</strong>
+                                                    <span class="preview_form_padding"> ✈ </span>
+                                                    <strong>${ticket.itineraries[0].segments[0].arrival.cityName} (${ticket.itineraries[0].segments[0].arrival.iataCode})</strong>
+                                                    <span>${ticket.itineraries[0].segments[0].departure.date()}</span>
+                                                </h4>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="preview_li_box">
                                                         <div>
+                                                            <div class=" preview_li_box_top">
+                                                        <span>
+                                                            <img src="/images/airline_images/${ticket.itineraries[0].segments[0].carrierCode}.png" class="preview_airport_img">
+                                                        </span>
+                                                                <span>${ticket.itineraries[0].segments[0].airlineName} →</span>
+                                                                <span>
+                                                            <span>${ticket.itineraries[0].segments[0].departure.time()}<span>${ticket.itineraries[0].segments[0].departure.iataCode}</span></span>
+                                                                <span>${ticket.itineraries[0].duration}</span>
+                                                                <span>${ticket.itineraries[0].segments[0].arrival.time()}<span>${ticket.itineraries[0].segments[0].arrival.iataCode}</span></span>
+                                                        </span>
+                                                                <span>직항</span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- 수하물 정보 -->
+                                                        <div>
+                                                            <!-- 내용담길 박스 -->
+                                                            <div class="preview_baggage">
+                                                                <!-- 왼쪽 화면 -->
+                                                                <div class="preview_baggage_left">
+                                                                    <div>
+                                                                        <p>
+                                                                            <span>${ticket.itineraries[0].segments[0].airlineName} ${ticket.itineraries[0].segments[0].number}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="preview_form_margint">
+                                                                        <p class="preview_baggage_bottom">
+                                                                            <span>🧳</span>
+                                                                            <span>무료수화물 ${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.choose()}</span>
+                                                                        </p>
+                                                                        <p>
+                                                                            <span>🪑</span>
+                                                                            <span>${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- 오른쪽 화면 -->
+                                                                <div class="prview_baggage_right">
+                                                                    <span>${ticket.itineraries[0].segments[0].departure.date()}</span>
+                                                                </div>
+                                                                <div>
                                                         <span class="preview_baggage_line">
                                                             <p>여</p>
                                                             <p>.</p>
                                                             <p>.</p>
                                                             <p>정</p>
                                                         </span>
-                                                        </div>
-                                                        <div>
-                                                            <p class="prview_baggage_rightm">
-                                                                <span class="">18:00<span>서울 ICN</span> T2</span>
-                                                            </p>
-                                                            <p class="prview_baggage_rightm">
+                                                                </div>
+                                                                <div>
+                                                                    <p class="prview_baggage_rightm">
+                                                                        <span class="">${ticket.itineraries[0].segments[0].departure.time()}<span>${ticket.itineraries[0].segments[0].departure.cityName} ${ticket.itineraries[0].segments[0].departure.iataCode}</span> T${ticket.itineraries[0].segments[0].departure.terminal}</span>
+                                                                    </p>
+                                                                    <p class="prview_baggage_rightm">
                                                             <span>
-                                                                <span>05시간 30분</span>
+                                                                <span>${ticket.itineraries[0].duration}</span>
                                                             </span>
-                                                            </p>
-                                                            <p>
-                                                                <span>22:30<span>코타키나발루 BKI</span>T1</span>
-                                                            </p>
+                                                                    </p>
+                                                                    <p>
+                                                                        <span>${ticket.itineraries[0].segments[0].arrival.time()}<span>${ticket.itineraries[0].segments[0].arrival.cityName} ${ticket.itineraries[0].segments[0].arrival.iataCode}</span>  T${ticket.itineraries[0].segments[0].arrival.terminal}</span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 오는편 -->
-                            <div class="preview_form_margint">
-                                <div>
-                                    <div class="preview_form_marginb">
-                                        <h4>
-                                            <span class="btn-primary preview_btn_to_form">오는편</span>
-                                            <strong>도쿄 (NRT)</strong>
-                                            <span class="preview_form_padding">✈</span>
-                                            <strong>서울 (ICN)</strong>
-                                            <span>12월 15일</span>
-                                        </h4>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <ul>
-                                        <li>
-                                            <div class="preview_li_box">
-                                                <div>
-                                                    <div class="preview_li_box_top">
-                                                            <span>
-                                                                <img src="../images/RS.png" class="preview_airport_img">
-                                                            </span>
-                                                        <span>에어서울</span>
-                                                        <span>
-                                                            <span>13:10
-                                                                <span>NRT </span>
-                                                            </span>
-                                                            <span>02시간 35분</span>
-                                                            <span>15:45
-                                                                <span>ICN</span>
-                                                            </span>
-                                                        </span>
-                                                        <span>직항</span>
-                                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="round" items="${ticket.roundTrip()}" varStatus="status">
+                                    <c:forEach var="segment" items="${round.value.segments()}">
+                                        <div class="preview_form_margint">
+                                            <div>
+                                                <div class="preview_form_marginb">
+                                                    <h4>
+                                                        <span class="btn-primary preview_btn_to_form">${round.key}</span>
+                                                        <strong>${segment.departure.cityName} (${segment.departure.iataCode})</strong>
+                                                        <span class="preview_form_padding"> ✈ </span>
+                                                        <strong>${segment.arrival.cityName}(${segment.arrival.iataCode})</strong>
+                                                        <span>${segment.departure.date()}</span>
+                                                    </h4>
                                                 </div>
-                                                <!-- 수하물 정보 -->
-                                                <div>
-                                                    <!-- 내용담길 박스 -->
-                                                    <div class="preview_baggage">
-                                                        <!-- 왼쪽 화면 -->
-                                                        <div class="preview_baggage_left">
+                                                <ul>
+                                                    <li>
+                                                        <div class="preview_li_box">
                                                             <div>
-                                                                <p>
-                                                                    <span>에어서울 0103</span>
-                                                                </p>
+                                                                <div class=" preview_li_box_top">
+                                                        <span>
+                                                            <img src="/images/airline_images/${segment.carrierCode}.png" class="preview_airport_img">
+                                                        </span>
+                                                                    <span>${segment.airlineName} →</span>
+                                                                    <span>
+                                                            <span>${segment.departure.time()}<span>${segment.departure.iataCode}</span></span>
+                                                                <span>${round.value.duration}</span>
+                                                                <span>${segment.arrival.time()}<span>${segment.arrival.iataCode}</span></span>
+                                                        </span>
+                                                                    <span>직항</span>
+                                                                </div>
                                                             </div>
-                                                            <div class="preview_form_margint">
-                                                                <p class="preview_baggage_bottom">
-                                                                    <span>🧳</span>
-                                                                    <span>무료수화물 15kg</span>
-                                                                </p>
-                                                                <p>
-                                                                    <span>🪑</span>
-                                                                    <span>일반석</span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- 오른쪽 화면 -->
-                                                        <div class="prview_baggage_right">
-                                                            <span>12월 1일</span>
-                                                        </div>
-                                                        <div>
-                                                            <span class="preview_baggage_line">
-                                                                <p>여</p>
-                                                                <p>.</p>
-                                                                <p>.</p>
-                                                                <p>정</p>
+                                                            <!-- 수하물 정보 -->
+                                                            <div>
+                                                                <!-- 내용담길 박스 -->
+                                                                <div class="preview_baggage">
+                                                                    <!-- 왼쪽 화면 -->
+                                                                    <div class="preview_baggage_left">
+                                                                        <div>
+                                                                            <p>
+                                                                                <span>${segment.airlineName} ${segment.number}</span>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="preview_form_margint">
+                                                                            <p class="preview_baggage_bottom">
+                                                                                <span>🧳</span>
+                                                                                <span>무료수화물 ${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.choose()}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span>🪑</span>
+                                                                                <span>${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin}</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- 오른쪽 화면 -->
+                                                                    <div class="prview_baggage_right">
+                                                                        <span>${segment.departure.date()}</span>
+                                                                    </div>
+                                                                    <div>
+                                                        <span class="preview_baggage_line">
+                                                            <p>여</p>
+                                                            <p>.</p>
+                                                            <p>.</p>
+                                                            <p>정</p>
+                                                        </span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="prview_baggage_rightm">
+                                                                            <span class="">${segment.departure.time()}<span>${segment.departure.cityName} ${segment.departure.iataCode}</span> T${segment.departure.terminal}</span>
+
+                                                                        </p>
+                                                                        <p class="prview_baggage_rightm">
+                                                            <span>
+                                                                <span>${round.value.duration}</span>
                                                             </span>
+                                                                        </p>
+                                                                        <p>
+                                                                            <span>${segment.arrival.time()}<span>${segment.arrival.cityName} ${segment.arrival.iataCode}</span>  T${segment.arrival.terminal}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <p class="prview_baggage_rightm">
-                                                                <span>18:00<span>코타키나발루 BKI</span> T1</span>
-                                                            </p>
-                                                            <p class="prview_baggage_rightm">
-                                                                <span>
-                                                                    <span>05시간 30분</span>
-                                                                </span>
-                                                            </p>
-                                                            <p>
-                                                                <span>22:30<span>서울 ICN</span> T2</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    </c:forEach>
+                                </c:otherwise>
+
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -207,17 +214,18 @@
                     <div>
                         <div>
                             <div class="preview_price_detail">
-                                <span>서울
-                                    <img src="../images/ico_from_to_02.png" class="preview_price_img">도쿄
+                                <span>${ticket.itineraries[0].segments[0].departure.cityName}
+                                    <img src="../images/ico_from_to_02.png" class="preview_price_img">${ticket.itineraries[0].segments[0].arrival.cityName}
                                 </span>
                             </div>
-                            <div class="preview_price_line">12월 12일 - 12월 15일 · 승객 1명</div>
+                            <div class="preview_price_line">${ticket.itineraries[0].segments[0].departure.date()} - ${ticket.itineraries[0].segments[0].arrival.date()} · 승객 ${ticket.travelerPricings.size()}명</div>
                             <div>
                                 <!-- 요금표 -->
+
                                 <div>
                                     <h2 class="preview_price_line">
-                                        <a>성인
-                                            <string>1명</string>
+                                        <a>
+                                            <string>${ticket.adultAnd()}</string>
                                         </a>
                                     </h2>
                                     <div class="preview_price_line">
@@ -230,23 +238,23 @@
                                             <tbody>
                                             <tr>
                                                 <td>항공요금</td>
-                                                <td>1명</td>
-                                                <td>231,600원</td>
+                                                <td>${ticket.travelerPricings.size()}</td>
+                                                <td>${ticket.price.base}</td>
                                             </tr>
                                             <tr>
                                                 <td>유류할증료</td>
-                                                <td>1명</td>
-                                                <td>62,400원</td>
+                                                <td>${ticket.travelerPricings.size()}</td>
+                                                <td>${ticket.price.oilPrice}</td>
                                             </tr>
                                             <tr>
                                                 <td>제세공과금</td>
-                                                <td>1명</td>
-                                                <td>63,400원</td>
+                                                <td>${ticket.travelerPricings.size()}</td>
+                                                <td>${ticket.price.oilPrice}</td>
                                             </tr>
                                             <tr>
                                                 <td>발권수수료</td>
-                                                <td>1명</td>
-                                                <td>10,000원</td>
+                                                <td>${ticket.travelerPricings.size()}</td>
+                                                <td>${ticket.price.fee}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -262,7 +270,7 @@
                                             <tr>
                                                 <td>성인 총 요금</td>
                                                 <td></td>
-                                                <td>367,400원</td>
+                                                <td>${ticket.price.grandTotal}</td>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -286,7 +294,7 @@
                                         </tbody>
                                     </div>
                                     <div>
-                                        <b class="preview_price_marginr">367,400<span>원</span></b>
+                                        <b class="preview_price_marginr">${ticket.price.grandTotal}<span>원</span></b>
                                     </div>
                                 </div>
                                 <div class="preview_price_btn">

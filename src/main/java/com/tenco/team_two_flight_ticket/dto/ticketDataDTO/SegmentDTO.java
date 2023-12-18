@@ -19,6 +19,7 @@ public class SegmentDTO {
     private DepartureDTO departure;
     private ArrivalDTO arrival;
     private String carrierCode;
+    private String number;
     private String airlineName;
     private AirCraftDTO aircraft;
     private List<StopDTO> stops;
@@ -28,5 +29,6 @@ public class SegmentDTO {
         this.arrival = new ArrivalDTO(dto.getArrival());
         this.carrierCode = dto.getCarrierCode();
         this.aircraft = dto.getAircraft();
+        this.number = dto.getNumber();
     }
 }

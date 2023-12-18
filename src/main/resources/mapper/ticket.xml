@@ -8,6 +8,11 @@
     <select id="getCities" resultType="com.tenco.team_two_flight_ticket._middle._entity.City">
         select * from city_tb where country_name = #{region}
     </select>
+
+    <select id="getCountryName" resultType="string">
+        select distinct(country_name) from city_tb
+    </select>
+
     <select id="findByTicketJoinReservation" resultType="com.tenco.team_two_flight_ticket.ticket.Ticket">
         SELECT departure_airport
         FROM TICKET_TB as tb
