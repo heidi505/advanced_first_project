@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._middle._entity.City;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
@@ -46,6 +47,10 @@ public class TicketController {
 
     @PostMapping("/flight-search")
     public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
+
+        System.out.println(dto.getStartDate());
+
+
         String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
         String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
 
@@ -59,9 +64,14 @@ public class TicketController {
         List<DataDTO> dataDTOList = responseBody.getData();
         model.addAttribute("ticketList", dataDTOList);
 
+        if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
+            throw new MyBadRequestException("해당하는 항공권이 없습니다");
+        }
 
         int isRound = dataDTOList.get(0).getItineraries().size();
         model.addAttribute("isRound", isRound);
+
+
 
 
 
