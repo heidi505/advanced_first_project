@@ -1,5 +1,8 @@
 server:
   servlet:
+    multipart:
+      max-file-size: 10GB
+      max-request-size: 10GB
     encoding:
       charset: utf-8
       force: true
@@ -69,3 +72,4 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations:
     - classpath:mapper/**.xml
+

@@ -52,7 +52,7 @@
   					알림
   					</a></li>
   					</c:if>
-                    <li><a class="nav-link" href="/sign-in">로그인</a></li>
+                    <li><a class="nav-link" href="/kakao/sign-in">로그인</a></li>
                 </ul>
                     </c:when>
                     <c:otherwise>
