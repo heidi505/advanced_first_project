@@ -123,7 +123,7 @@
                                                         <span class="btn-primary preview_btn_to_form">${round.key}</span>
                                                         <strong>${segment.departure.cityName} (${segment.departure.iataCode})</strong>
                                                         <span class="preview_form_padding"> ✈ </span>
-                                                        <strong>${segment.arrival.cityName}(${segment.departure.iataCode})</strong>
+                                                        <strong>${segment.arrival.cityName}(${segment.arrival.iataCode})</strong>
                                                         <span>${segment.departure.date()}</span>
                                                     </h4>
                                                 </div>
