@@ -27,8 +27,7 @@ const firebaseConfig = {
     // 푸시 알림 수신 처리
     onMessage(messaging, (payload) => {
     console.log('Message received:', payload);
-      // 푸시 알림 메시지 처리 로직 추가
-       // 실제로 알림을 표시하는 부분
+
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
