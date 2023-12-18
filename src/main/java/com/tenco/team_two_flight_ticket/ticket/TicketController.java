@@ -46,10 +46,14 @@ public class TicketController {
 
 
     @GetMapping("/preview/{ticketId}")
-    public String preview(@PathVariable("ticketId") int ticketId, Model model){
-        DataDTO dataDTO = ticketService.ticketDetail(ticketId);
+    public String preview(@PathVariable int ticketId, Model model){
 
-        model.addAttribute("ticket", dataDTO);
+        DataDTO dto = ticketService.ticketDetail(ticketId);
+        int isRound = dto.getItineraries().size();
+
+        model.addAttribute("ticket", dto);
+        model.addAttribute("isRound", isRound);
+
         return "/reservation/preview";}
 
     @GetMapping("/flight-search")
@@ -66,9 +70,6 @@ public class TicketController {
 
     @PostMapping("/flight-search")
     public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
-
-        System.out.println(dto.getStartDate());
-
 
         String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
         String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};

@@ -128,4 +128,16 @@ public class DataDTO{
 
         return newMap;
     }
+
+    public String adultAnd(){
+        List<TravelerPricingDTO> adultList = this.getTravelerPricings().stream().filter(e->e.getTravelerType().equals("ADULT")).collect(Collectors.toList());
+        List<TravelerPricingDTO> childList = this.getTravelerPricings().stream().filter(e->!e.getTravelerType().equals("ADULT")).collect(Collectors.toList());
+
+        if (childList.size() == 0){
+            return "성인 " + adultList.size() + " 명";
+        }else{
+            return "성인 " + adultList.size() + " 외 " + childList.size() + " 명";
+        }
+
+    }
 }
