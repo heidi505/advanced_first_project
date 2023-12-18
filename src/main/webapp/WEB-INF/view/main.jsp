@@ -40,7 +40,7 @@
                                                 class="common_modal_btn from_to_modal_btn"
                                                 data-target="from_modal">
                                             <span class="from_code_value">GMP</span>
-                                            <span class="from_airport_value">서울 김포</span>
+                                            <span class="from_airport_value">서울</span>
                                         </button>
                                     </div>
                                     <button type="button" class="from_to_icon transform_btn">
@@ -59,11 +59,11 @@
                             <div class="ticket_date_field">
                                 <div class="trip_round">
                                 <label for="datepicker">출발일 & 도착일</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택" name="startDate"/>
+                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택" name="startDate" value="" data-input/>
                                 </div>
                                 <div class="trip_one_way">
                                     <label for="datepicker2">출발일</label>
-                                    <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택" name="startDate"/>
+                                    <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택" name="startDate" value="" data-input/>
                                 </div>
                             </div>
                             <div class="passenger_seat_field">
@@ -835,6 +835,39 @@
         </div>
     </section>
     <!-- flight_banner -->
+    <%-- 로딩페이지--%>
+    <div class="loading">
+        <div class="loading_bg">
+            <div class="loading_form">
+                <div class="loading_title">
+                    <span class="loading_city" id="loadingOrigin1">서울</span>에서
+                    <span class="loading_city" id="loadingDestination1">나리타</span>까지
+                    <br><span id="roundOrOneway"></span>항공권을 찾고 있습니다.
+                </div>
+                <div style="border-top: 1px solid var(--basic_wh); border-bottom: 1px solid var(--basic_wh); margin-top: 2em;">
+                    <div class="k1_fromto_wrap"
+                         style="padding: 2em; display: flex; justify-content: space-between; font-size: x-large; width: auto;">
+                        <div class="dep-arr dep" style="text-align: center; flex: 1;">
+                            <p class="loading_city" id="loadingOrigin2">SEL</p>
+                            <p class="city" id="loadingOrigin3">서울</p>
+                            <p class="date"><h4 id="loadingDepartureDate">2023년 12월 12일</h4></p>
+                        </div>
+                        <div class="dep-arr" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+                            <img src="../images/ico_from_to2.png" alt="이미지 설명" class="overlay-image">
+                        </div>
+                        <div class="dep-arr arr" style="text-align: center; flex: 1;">
+                            <p class="loading_city" id="loadingDestination2">NRT</p>
+                            <p class="city" id="loadingDestination3">나리타</p>
+                            <p class="date"><h4 id="loadingArrivalDate">2023년 12월 15일</h4></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="loading_ani">
+                    <img src="../images/logo2.svg" class="animated-svg overlay-image" alt="이미지 설명">
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 </div>
 </div>
@@ -848,7 +881,8 @@
     console.log(datepicker.value);
 
     function handleDateChange(selectedDates, dateStr, instance) {
-        console.log("선택된 날짜:", dateStr);
+        //로딩페이지 데이터 바인딩
+
     }
 
     flatpickr(datepicker, {
@@ -883,7 +917,14 @@
             // 위젯이 닫힐 때 실행할 코드
         },
         onChange: function (selectedDates, dateStr, instance) {
-            // 날짜가 변경될 때 실행할 코드
+            document.getElementById("roundOrOneway").textContent = "왕복 ";
+            let originDate = document.getElementById("datepicker").value;
+            let parsedDate = originDate.split(" ~ ");
+            let depDate = parsedDate[0].split("-");
+            let arrDate = parsedDate[1].split("-");
+
+            document.getElementById("loadingDepartureDate").textContent = depDate[0] + '년 '+ depDate[1] + '월 ' + depDate[2] + '일';
+            document.getElementById("loadingArrivalDate").textContent = arrDate[0] + '년 '+ arrDate[1] + '월 ' + arrDate[2] + '일';
         },
         disableMobile: true, // 모바일 기기에서 위젯 비활성화
         altInput: true, // 추가 입력란 활성화
@@ -898,6 +939,13 @@
         // defaultDate: new Date(), // 초기 날짜 설정 (현재 날짜로 설정)
         locale: "ko", // 한국어로 지역화
         altFormat: "Y-m-d", // 추가 입력란의 날짜 및 시간 형식
+        onChange: function (selectedDates, dateStr, instance) {
+            document.getElementById("roundOrOneway").textContent = "편도 ";
+            let originDate = document.getElementById("datepicker2").value;
+            let parsedDate = originDate.split("-");
+            document.getElementById("loadingDepartureDate").textContent = parsedDate[0] + '년 '+ parsedDate[1] + '월 ' + parsedDate[2] + '일';
+            document.getElementById("loadingArrivalDate").textContent = parsedDate[0] + '년 '+ parsedDate[1] + '월 ' + parsedDate[2] + '일';
+        },
     });
     // 날짜 라이브러리
     //
@@ -905,6 +953,10 @@
     let tripOneWay = document.querySelector(".one_way");
     let tripRoundDate = document.querySelector(".trip_round");
     let tripOneWayDate = document.querySelector(".trip_one_way");
+
+
+
+
 
 
     tripRound.addEventListener("click",()=> {
@@ -924,6 +976,23 @@
 
     function getCities(event) {
     }
+
+    // 로딩페이지 뒤로가기 눌리면 안됨ㅠㅠ
+    $(document).ready(function() {
+        // 초기에는 로딩 페이지를 숨깁니다.
+        $(".loading").hide();
+
+        // 폼이 제출될 때 로딩 페이지를 표시합니다.
+        $("form").submit(function() {
+            $(".loading").show();
+        });
+
+    });
+
+    // 비동기 요청이 완료되면 로딩 페이지를 숨깁니다.
+    $(document).ajaxStop(function() {
+        $(".loading").hide();
+    });
 </script>
 <script src="/js/javascript.js"></script>
 <script src="/js/ticket_search.js"></script>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.City;
-=======
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -34,7 +34,7 @@ import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
->>>>>>> 184be2e4834dcbd706d22c873e5b3d6d500da170
+
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
 @Service
@@ -46,6 +46,7 @@ public class TicketService {
     private AirlineRepository airlineRepository;
     @Autowired
     private AirportRepository airportRepository;
+    private TicketResponse.FlightSearchDTO responseDTO;
     public List<City> getCities(String region) {
         List<City> cities = ticketRepository.getCities(region);
         return cities;
@@ -175,6 +176,8 @@ public class TicketService {
 
 
         responseDTO.setData(newData);
+        this.responseDTO = responseDTO;
+
 
         return responseDTO;
     }
@@ -191,5 +194,10 @@ public class TicketService {
 		}
 		return dto;
 	}
+
+    public DataDTO ticketDetail(int ticketId) {
+        DataDTO dataDTO = this.responseDTO.getData().get(ticketId);
+        return dataDTO;
+    }
 
 }
