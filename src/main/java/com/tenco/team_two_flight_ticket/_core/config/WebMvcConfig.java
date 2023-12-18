@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Properties;
@@ -28,6 +29,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/reservation/**")
                 .addPathPatterns("/search/**")
                 .addPathPatterns("/ticket/**");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        WebMvcConfigurer.super.addResourceHandlers(registry);
+
+        registry.addResourceHandler("/image/**")
+                .addResourceLocations("file:" + "./image/")
+                .setCachePeriod(10)
+                .resourceChain(true);
+
     }
 
     @Bean
@@ -54,9 +66,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         javaMailProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");//사용할 ssl 프로토콜 버젼
 
         mailSender.setJavaMailProperties(javaMailProperties);//mailSender에 우리가 만든 properties 넣고
-
         return mailSender;//빈으로 등록한다.
-
     }
+
 
 }

@@ -25,6 +25,7 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+**/src/main/java/com/tenco/team_two_flight_ticket/_core/utils/Define.java
 
 ### NetBeans ###
 /nbproject/private/
