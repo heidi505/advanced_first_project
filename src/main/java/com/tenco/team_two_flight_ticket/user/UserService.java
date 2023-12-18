@@ -1,8 +1,27 @@
 package com.tenco.team_two_flight_ticket.user;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
-import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
@@ -13,32 +32,6 @@ import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushUser;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
-
-import org.springframework.web.multipart.MultipartFile;
-
-
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
-import static io.lettuce.core.pubsub.PubSubOutput.Type.message;
 
 @Service
 public class UserService {
@@ -270,12 +263,38 @@ public class UserService {
     	ResponseEntity<KakaoPushTokenResponse> response = rt.exchange("https://kapi.kakao.com/v2/push/register" , HttpMethod.POST,
     			requestMsg, KakaoPushTokenResponse.class);
     	KakaoPushTokenResponse result = response.getBody();
+    	System.out.println("----------------");
+    	System.out.println(result.toString());
+    	System.out.println("----------------");
     	
 	}
 
 	public void KakaoPushFindUser(UserRequest.SignInDTO dto) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(dto);
+		RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+ 
+    		params.add("uuid", dto.getUuid());
+    	
+    	
+    			
+    	// 헤더 + body 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg
+    		= new HttpEntity<>(params, headers);
+    			
+    	// 요청 처리
+    	//ResponseEntity<KakaoPushUser> response = rt.exchange("https://kapi.kakao.com/v2/push/tokens" , HttpMethod.POST,
+    	//		requestMsg, KakaoPushUser.class);
+    	ResponseEntity<List<KakaoPushUser>> response = rt.exchange("https://kapi.kakao.com/v2/push/tokens" , HttpMethod.POST,
+    			requestMsg, new ParameterizedTypeReference<List<KakaoPushUser>>() {});
+    	System.out.println("-------------------");
+		List<KakaoPushUser> result = response.getBody();
+		System.out.println(result.toString());
 	}
 
 
