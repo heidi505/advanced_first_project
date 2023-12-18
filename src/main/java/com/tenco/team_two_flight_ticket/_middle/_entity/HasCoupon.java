@@ -22,20 +22,11 @@ public class HasCoupon {
     private int userId;
     @Column(nullable = false)
     private int couponId;
-    private boolean isUsed;
-    private Long couponNumber;
-    @CreationTimestamp
-    private Timestamp createdAt;
-    private Timestamp expiredAt;
 
     @Builder
-    public HasCoupon(int id, int userId, int couponId, boolean isUsed, Long couponNumber, Timestamp createdAt, Timestamp expiredAt) {
+    public HasCoupon(int id, int userId, int couponId) {
         this.id = id;
         this.userId = userId;
         this.couponId = couponId;
-        this.isUsed = isUsed;
-        this.couponNumber = couponNumber;
-        this.createdAt = createdAt;
-        this.expiredAt = expiredAt;
     }
 }
