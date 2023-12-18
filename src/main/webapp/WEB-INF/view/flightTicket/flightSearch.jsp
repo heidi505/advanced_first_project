@@ -878,7 +878,7 @@
                                                     <span class="remaining_seats">${ticket.numberOfBookableSeats}석 남음</span>
                                                 </li>
                                                 <li>
-                                                    <a href="http://www.naver.com"
+                                                    <a href="/ticket/preview/${ticket.id}"
                                                        class="reservation_price">${ticket.price.grandTotal}원
                                                     </a>
                                                 </li>
@@ -887,6 +887,7 @@
                                     </c:forEach>
                                     <ul class="detail_more">
                                         <li class="detail_more_area">
+                                            <c:forEach var="itinerary" items="${ticket.itineraries}">
                                             <c:forEach var="segment" items="${itinerary.segments}">
                                                 <div class="flight_detail_info">
                                                     <div class="detail_more_tit">
@@ -922,6 +923,8 @@
                                                     </ul>
                                                 </div>
                                             </c:forEach>
+                                            </c:forEach>
+                                        </li>
                                             <div class="common_table detail_fee">
                                                 <h5 class="detail_fee_tit">상세요금</h5>
                                                 <table class="table table-bordered">
@@ -1016,7 +1019,7 @@
                                                 <span class="remaining_seats">${ticket.numberOfBookableSeats}석 남음</span>
                                             </li>
                                             <li>
-                                                <a href="http://www.naver.com" class="reservation_price">${ticket.price.grandTotal}원
+                                                <a href="/ticket/preview/${ticket.id}" class="reservation_price">${ticket.price.grandTotal}원
                                                     <!-- <img src="/images/icons/detail_arrow.svg" alt="예약 상세보기">/ -->
                                                 </a>
                                             </li>

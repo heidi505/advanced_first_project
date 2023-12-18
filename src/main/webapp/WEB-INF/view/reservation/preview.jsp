@@ -43,7 +43,7 @@
                                         <li>
                                             <div class="preview_li_box">
                                                 <div>
-                                                    <div class=" preview_li_box_top">
+                                                    <div class="preview_li_box_top">
                                                         <span>
                                                             <img src="../images/RS.png" class="preview_airport_img">
                                                         </span>
@@ -172,6 +172,8 @@
                                                         <div>
                                                             <span class="preview_baggage_line">
                                                                 <p>여</p>
+                                                                <p>.</p>
+                                                                <p>.</p>
                                                                 <p>정</p>
                                                             </span>
                                                         </div>

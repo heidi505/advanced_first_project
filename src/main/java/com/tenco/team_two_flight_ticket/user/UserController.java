@@ -66,7 +66,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout() {
 		session.invalidate();
-		return "redirect:/user/sign-in";
+		return "redirect:/sign-in";
 	}
 	@GetMapping("/coupon")
 	public String coupon() {
