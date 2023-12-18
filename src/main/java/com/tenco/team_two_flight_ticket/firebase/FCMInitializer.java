@@ -18,11 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FCMInitializer {
 
-
+	 private String firebaseKey = "two-flight-ticket-82cd2-firebase-adminsdk-ygapj-adba0ac22a.json";
 
     @PostConstruct
     public void initialize(){
-        ClassPathResource resource = new ClassPathResource(Define.FIREBASEKEY);
+        ClassPathResource resource = new ClassPathResource(firebaseKey);
 
         try (InputStream stream = resource.getInputStream()) {
             FirebaseOptions options = FirebaseOptions.builder()

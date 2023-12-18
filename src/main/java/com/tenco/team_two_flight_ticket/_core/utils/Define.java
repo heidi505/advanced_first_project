@@ -12,8 +12,7 @@ public class Define {
     // 카카오 페이 키
     public static final String ADMINKEY= "5cb5fb179917c9ba229a589636e1fc2f";
 
-    // 파이어베이스 키
-    public static final String FIREBASEKEY = "two-flight-ticket-82cd2-firebase-adminsdk-ygapj-adba0ac22a.json";
+    
     
     //    사진 사이즈
     public static final int MAX_FILE_SIZE = 1024 * 1024 * 20;
