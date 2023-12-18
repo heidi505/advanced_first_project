@@ -187,5 +187,9 @@ public class TicketService {
 
 
     public DataDTO ticketDetail(int ticketId) {
+        DataDTO dto = responseDTO.getData().get(ticketId);
+        
+
+        return dto;
     }
 }
