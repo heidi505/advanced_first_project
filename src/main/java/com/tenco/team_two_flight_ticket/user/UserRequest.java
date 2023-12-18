@@ -14,7 +14,7 @@ public class UserRequest {
     @Getter
     @Setter
     @ToString
-    public static class SignUpDTO{
+    public static class SignUpDTO {
         @NotEmpty
         private String realName;
         @NotEmpty
@@ -29,50 +29,54 @@ public class UserRequest {
         @NotEmpty
         private String passwordCheck;
     }
+
     @Getter
     @Setter
     @ToString
-    public static class SignInDTO{
+    public static class SignInDTO {
         @NotEmpty
         private String username;
         @NotEmpty
         private String password;
     }
+
     @Getter
     @Setter
     @ToString
-    public static class UserUpdateDTO{
+    public static class UserUpdateDTO {
         private int userId;
         private String phoneNumber;
         private String email;
         private String password;
-        private MultipartFile pic;
+        private MultipartFile profileImage;
+        private String originalPicName;
     }
+
     @Getter
     @Setter
     @ToString
-    public static class CheckUsernameDTO{
+    public static class CheckUsernameDTO {
         @NotEmpty
         private String username;
     }
+
     @Getter
     @Setter
     @ToString
-    public static class CheckEmailDTO{
+    public static class CheckEmailDTO {
         @NotEmpty
         @Email
         private String email;
     }
-    
+
     @Getter
     @Setter
     @ToString
-    public static class GetMyTravelListDTO{
-    	private StatusEnum statusEnum;
-    	private int userId;
-    	private String sort;
+    public static class GetMyTravelListDTO {
+        private StatusEnum statusEnum;
+        private int userId;
+        private String sort;
     }
- 
 
 
 }

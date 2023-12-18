@@ -13,7 +13,11 @@
         select * from user_tb where username = #{username}
     </select>
     <update id="updateByUserId">
-        update user_tb set password = #{password}, phone_number = #{phoneNumber}, email = #{email}
+        update user_tb set
+                           password = #{password},
+                           phone_number = #{phoneNumber},
+                           profile_image = #{originalPicName},
+                           email = #{email}
         where id = #{userId}
     </update>
 

@@ -53,18 +53,17 @@
 }
 .input_profile_image {
 	position: relative;
-	width: 200px;
+	width: 160px;
+	padding: 0 12px;
 	margin: 0 auto;
 	border-radius: 50%;
 }
 .profile_image {
-	background: url(../images/basic_img.svg) no-repeat;
-	width: 120px;
-	height: 120px;
-	background-size: cover;
-	background-position: center;
+	width: 200px;
+	height: 200px;
+	padding: 12px;
 	margin: 0 auto;
-	margin-top: 24px;
+	position: relative;
 }
 .profile_image_item {
 	border-radius: 50%;
@@ -80,8 +79,17 @@
 	bottom: 0;
 	right: 0;
 }
+.principal_username {
+	font-weight: bold;
+	font-size: 24px;
+	color: var(--admin_01);
+}
+
 .picture {
 	margin: 0 auto;
+}
+.picture_box {
+	position: relative;
 }
 #inputFile {
 	display: none;

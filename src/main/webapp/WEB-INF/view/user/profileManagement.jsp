@@ -14,12 +14,22 @@
                 <b>프로필 관리</b>
             </h1>
             <div class="left_profile float-start w-25">
-                <div class="picture  text-center mb-4 mx-4 border">
-                    <div class="profile_image">
-                        <img src="/images/basic_img.svg" alt="기본 이미지">
-<%--                        <img class="preview" src="/image/${principal.profileImage}" alt="기본 이미지">--%>
+                <div class="picture text-center mb-4 mx-4 border">
+                    <div class="input_profile_image">
+                        <c:choose>
+                            <c:when test="${not empty principal and not empty principal.profileImage}">
+                                <div class="mt-4">
+                                    <img class="preview" src="<c:url value='/image/${principal.profileImage}'/>" alt="프로필 이미지">
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="mt-4">
+                                    <img class="preview" src="<c:url value='/image/basic_img.svg'/>" alt="기본 이미지">
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
-                    <p class="my-4 fs-5">${principal.username}</p>
+                    <p class="my-4 principal_username">${principal.username}</p>
                 </div>
                 <div class="coupon_profile col ">
                     <div class="coupon_count border mx-auto m-2 p-4 w-85 ">
@@ -33,15 +43,31 @@
             <form action="/user/profile-management" method="post" enctype="multipart/form-data">
                 <div class="profile_box float-end d-flex flex-column border p-5 w-75">
                     <div class="picture text-center w-100 p-3">
-                        <div class="mb-3 input_profile_image">
-                            <img class="profile_image_item" src="/images/basic_img.svg" alt="기본 이미지" id="preview">
-                            <div class="profile_file_box">
-                                <label class="input_file_custom" for="inputFile"/>
-                                <input type="file" class="form-control picture_select" id="inputFile"
-                                       accept="image/*" name="profileImage">
-                            </div>
+                        <div class="mb-3 picture_box">
+                            <c:choose>
+                                <c:when test="${not empty principal and not empty principal.profileImage}">
+                                    <div class="profile_image">
+                                        <img class="preview" src="<c:url value='/image/${principal.profileImage}'/>" alt="프로필 이미지">
+                                        <div class="profile_file_box">
+                                            <label class="input_file_custom" for="inputFile"/>
+                                            <input type="file" class="form-control picture_select" id="inputFile"
+                                                   accept="image/*" name="profileImage">
+                                        </div>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="profile_image">
+                                        <img class="preview" src="<c:url value='/image/basic_img.svg'/>" alt="기본 이미지">
+                                        <div class="profile_file_box">
+                                            <label class="input_file_custom" for="inputFile"/>
+                                            <input type="file" class="form-control picture_select" id="inputFile"
+                                                   accept="image/*" name="profileImage">
+                                        </div>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
-                        <p class="userName" class="form-label my-4">${principal.username}</p>
+                        <p class="principal_username form-label my-4">${principal.username}</p>
                     </div>
                     <!-- 프로필 사진 창 끝 -->
                     <div class="profile_info row row-cols-2 w-100 mx-auto">
@@ -108,10 +134,8 @@
 </div>
 <script>
     let profileImage = document.querySelector("#inputFile");
-    let imagePreview = document.querySelector("#preview");
+    let imagePreviews = document.querySelectorAll(".preview");
 
-    console.log(imagePreview);
-    console.log(profileImage);
     profileImage.addEventListener("change", (e) => {
         let file = e.currentTarget.files[0];
 
@@ -123,7 +147,10 @@
         let reader = new FileReader();
 
         reader.onload = function (e2) {
-            imagePreview.src = e2.target.result;
+            // 모든 프리뷰 이미지에 대해 변경
+            imagePreviews.forEach((preview) => {
+                preview.src = e2.target.result;
+            });
         };
 
         reader.readAsDataURL(file);
