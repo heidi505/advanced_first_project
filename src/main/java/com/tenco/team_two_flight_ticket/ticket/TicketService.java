@@ -165,6 +165,7 @@ public class TicketService {
 
 
         responseDTO.setData(newData);
+        this.responseDTO = responseDTO;
 
 
 
@@ -183,8 +184,8 @@ public class TicketService {
 		}
 		return dto;
 	}
-    
-    
-    
-    
+
+
+    public DataDTO ticketDetail(int ticketId) {
+    }
 }

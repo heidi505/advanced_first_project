@@ -25,8 +25,11 @@ public class TicketController {
 
 
 
-    @GetMapping("/preview")
-    public String preview(){
+    @GetMapping("/preview/{ticketId}")
+    public String preview(@PathVariable int ticketId){
+
+        DataDTO dto = ticketService.ticketDetail(ticketId);
+
         return "/reservation/preview";}
 
     @GetMapping("/flight-search")

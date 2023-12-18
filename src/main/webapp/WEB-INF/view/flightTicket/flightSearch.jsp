@@ -878,7 +878,7 @@
                                                     <span class="remaining_seats">${ticket.numberOfBookableSeats}석 남음</span>
                                                 </li>
                                                 <li>
-                                                    <a href="http://www.naver.com"
+                                                    <a href="/ticket/preview/${ticket.id}"
                                                        class="reservation_price">${ticket.price.grandTotal}원
                                                     </a>
                                                 </li>
@@ -1019,7 +1019,7 @@
                                                 <span class="remaining_seats">${ticket.numberOfBookableSeats}석 남음</span>
                                             </li>
                                             <li>
-                                                <a href="http://www.naver.com" class="reservation_price">${ticket.price.grandTotal}원
+                                                <a href="/ticket/preview/${ticket.id}" class="reservation_price">${ticket.price.grandTotal}원
                                                     <!-- <img src="/images/icons/detail_arrow.svg" alt="예약 상세보기">/ -->
                                                 </a>
                                             </li>
