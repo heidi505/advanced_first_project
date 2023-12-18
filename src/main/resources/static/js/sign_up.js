@@ -41,7 +41,7 @@ async function verifyNumber(key) {
 
 // 유효성 검사
 function validationForm(form) {
-	let name = form.elements["realname"].value;
+	let name = form.elements["realName"].value;
 	let userId = form.elements["username"].value;
 	let tel = form.elements["phoneNumber"].value;
 	let email = form.elements["email"].value;

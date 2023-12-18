@@ -39,7 +39,7 @@
                     </form>
                 </div>
                 <ul class="header_menu">
-                    <li>
+                    <li class="me-2">
                         <a class="nav-link" href="/user/profile">마이페이지</a>
                     </li>
                      <c:if test="${ticketDate.alertCheck eq false}">
@@ -48,7 +48,16 @@
   					알림
   					</a></li>
   					</c:if>
-                    <li><a class="nav-link" href="/sign-in">로그인</a></li>
+  					<c:choose>
+					<c:when test="${principal != null}">
+						<li>${principal.username} 님</li>
+						<li><a class="nav-link" href="/user/logout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+                    	<li><a class="nav-link" href="/sign-in">로그인</a></li>
+					</c:otherwise>
+					</c:choose>
+  					
                 </ul>
             </div>
             <nav class="navbar navbar-expand-sm">

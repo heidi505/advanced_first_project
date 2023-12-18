@@ -176,8 +176,10 @@ public class TicketService {
 		GetTicketDateDTO dto = null;
 		try {
 			dto = ticketRepository.getTicketDate(userId);
-			dto.timeCheck();
-			dto.cutDepartureTime();
+			if(dto != null) {
+				dto.timeCheck();
+				dto.cutDepartureTime();
+			}
 		} catch (Exception e) {
 			throw new MyServerError("서버 에러가 발생했습니다");
 		}

@@ -73,7 +73,7 @@ public class AuthController {
         
         //최근 검색한 항공권 목록을 가지고 와야 함(searched DB)
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(1);
+        List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(principal.getId());
         model.addAttribute("searchedList", searchedList);
         System.out.println(searchedList);
         
@@ -110,9 +110,11 @@ public class AuthController {
     public String signInProc(@Valid UserRequest.SignInDTO dto, Model model, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
+        // 로그인 시 푸시 알림 등록
+        userService.KakaoPushInsertUser(dto);
+        userService.KakaoPushFindUser(dto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
-        GetTicketDateDTO ticketDate  = ticketService.getTicketDate(1);
-        System.out.println(ticketDate);
+        GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);
         return "redirect:/main";
     }
@@ -259,7 +261,7 @@ public class AuthController {
     	if(dto.getUuids().size() == 1) {
     		params.add("uuid", dto.getUuids().get(0));
     	} else {
-    		String uuids = "";
+    		String uuids = "{";
     		int i = 1;
     		for (String uuid : dto.getUuids()) {
     			uuids += uuid;
@@ -268,6 +270,7 @@ public class AuthController {
     			}
     			i++;
 			}
+    		uuids += "}";
     		params.add("uuids", uuids);
     	}
     	

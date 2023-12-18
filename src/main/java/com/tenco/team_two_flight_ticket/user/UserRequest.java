@@ -36,6 +36,12 @@ public class UserRequest {
         private String username;
         @NotEmpty
         private String password;
+        @NotEmpty
+        private String installationId;
+        @NotEmpty
+        private String fcmToken;
+        private String uuid;
+        
     }
     @Getter
     @Setter

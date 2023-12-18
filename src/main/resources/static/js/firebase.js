@@ -27,7 +27,10 @@
   const installation = getInstallations(app);
   // Firebase Installation ID 가져오기
   const installationId = await getId(installation);
-  console.log(installationId);
+  // 클라이언트 식별자를 히든 타입에 저장
+  const installationIdInput = document.getElementById('installationId');
+  installationIdInput.value = installationId;
+  // 서비스 워커 경로 지정
   navigator.serviceWorker.register('/firebase-messaging-sw.js')
   .then((registration) => {
     console.log('Service Worker registered with scope:', registration.scope);
@@ -42,7 +45,9 @@
     // 사용자가 알림 허용한 경우
     getToken(messaging, { vapidKey: 'BCPIpN8VnNsSCtJlN2-YpFOcqfJqKdf7sy5DC_kTpk1yN8KrMxZc9yB1Mn0yKDN8_wPKRPh3x77t3T6fG2_bGB8' })
       .then((currentToken) => {
-        console.log(currentToken);
+		// fcm 토큰을 hidden 타입에 저장
+        const fcmTokenInput = document.getElementById('fcmToken');
+        fcmTokenInput.value = currentToken;
       })
       .catch((err) => {
         console.log('An error occurred while retrieving token. ', err);

@@ -63,7 +63,6 @@ public class SearchedService {
 							.infants(dto.getInfants())
 							.travelClass(dto.getTravelClass())
 							.build();
-		System.out.println(searched.getArrivalCity());
 		try {
 			searchedRepository.saveRecentSearch(searched);
 		} catch (Exception e) {

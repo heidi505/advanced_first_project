@@ -55,7 +55,7 @@ public class TicketController {
         }
         
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        searchedService.saveRecentSearch(1 ,dto);
+        searchedService.saveRecentSearch(principal.getId() ,dto);
         TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
         model.addAttribute("count", responseBody.getMeta().getCount());
 

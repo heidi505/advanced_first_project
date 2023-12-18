@@ -6,10 +6,18 @@ import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushTokenResponse;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushUser;
+
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -17,6 +25,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Random;
@@ -209,6 +220,41 @@ public class UserService {
         }
 
     }
+
+    // 로그인 시 푸시 알림 기기 등록
+	public void KakaoPushInsertUser(UserRequest.SignInDTO dto) {
+		// uuid 가져오기
+		User principal = userRepository.findByUsername(dto);
+		String uuid = String.valueOf(principal.getId());
+		dto.setUuid(uuid);
+		// 푸시 알림을 받을 대상 등록
+    	RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	params.add("uuid", dto.getUuid());
+    	params.add("device_id", dto.getInstallationId());
+    	params.add("push_type", "fcm");
+    	params.add("push_token", dto.getFcmToken());
+    		
+    	// 헤더 + body 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg
+    		= new HttpEntity<>(params, headers);
+    			
+    	// 요청 처리(응답은 토큰의 유효기간)
+    	ResponseEntity<KakaoPushTokenResponse> response = rt.exchange("https://kapi.kakao.com/v2/push/register" , HttpMethod.POST,
+    			requestMsg, KakaoPushTokenResponse.class);
+    	KakaoPushTokenResponse result = response.getBody();
+    	
+	}
+
+	public void KakaoPushFindUser(UserRequest.SignInDTO dto) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }
