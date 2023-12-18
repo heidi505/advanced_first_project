@@ -27,10 +27,14 @@ public class TicketController {
 
 
     @GetMapping("/preview/{ticketId}")
-    public String preview(@PathVariable("ticketId") int ticketId, Model model){
-        DataDTO dataDTO = ticketService.ticketDetail(ticketId);
+    public String preview(@PathVariable int ticketId, Model model){
 
-        model.addAttribute("ticket", dataDTO);
+        DataDTO dto = ticketService.ticketDetail(ticketId);
+        int isRound = dto.getItineraries().size();
+
+        model.addAttribute("ticket", dto);
+        model.addAttribute("isRound", isRound);
+
         return "/reservation/preview";}
 
     @GetMapping("/flight-search")
