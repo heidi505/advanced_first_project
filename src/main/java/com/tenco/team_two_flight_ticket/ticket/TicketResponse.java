@@ -22,7 +22,9 @@ public class TicketResponse {
     @ToString
     @NoArgsConstructor
     public static class FlightSearchDTO{
+		//검색 후 나온 총 항공권 갯수
         private MetaDTO meta;
+		//검색 후 나온 항공권들의 정보가 담겨있음. 즉 리스트의 요소 1개가 하나의 항공권
         private List<DataDTO> data;
 
         public FlightSearchDTO(FlightSearchDTO dto) {

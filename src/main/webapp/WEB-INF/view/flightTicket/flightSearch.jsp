@@ -741,7 +741,7 @@
                                     <input type="checkbox">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>네덜란드항공</span>
+                                <span>아시아나항공</span>
                             </li>
                             <li>
                                 <label class="check_box">

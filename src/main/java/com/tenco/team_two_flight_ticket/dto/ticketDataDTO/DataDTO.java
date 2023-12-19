@@ -16,12 +16,19 @@ import java.util.stream.Collectors;
 @ToString
 @NoArgsConstructor
 public class DataDTO{
+    //이거 3개는 무시
     private String type;
     private String id;
     private boolean oneWay;
+    //예약할 수 있는 좌석 수(최대 9개)
     private int numberOfBookableSeats;
+    //여정. 왕복이면 itinerary의 size가 2, 편도면 1.
+    //경유일 경우 더 늘어날 수도 있는데, 우리 프로젝트에서는 경유 고려 X
     private List<ItinerariesDTO> itineraries;
+    //항공권 가격에 대한 정보
     private PriceDTO price;
+    //한명이 여러개의 항공권을 검색할 수 있음 ex 아빠가 애기 2 데리고 탈 항공권 총 3개 검색
+    //이 리스트의 요소 1개가 탑승객 1명에 대한 정보. ex 위의 경우, 이 리스트의 size는 3.
     private List<TravelerPricingDTO> travelerPricings;
 
     public DataDTO(DataDTO dto) {
@@ -36,6 +43,7 @@ public class DataDTO{
         this.travelerPricings = dto.getTravelerPricings().stream().map(e->new TravelerPricingDTO(e)).collect(Collectors.toList());
     }
 
+    //성인, 아동, 유아가 각각 섞여있을 경우 각각의 정보를 map에 담는 메소드
     public Map<String, PriceDTO> newTraveler(){
 
         Map<String, PriceDTO> newMap = new HashMap<>();
@@ -117,6 +125,7 @@ public class DataDTO{
         return newMap;
     }
 
+    //왕복일 경우 각각의 비행편 정보를 map에 담은 메소드
     public Map<String, ItinerariesDTO> roundTrip(){
         Map<String, ItinerariesDTO> newMap = new HashMap<>();
 
@@ -129,6 +138,7 @@ public class DataDTO{
         return newMap;
     }
 
+    //성인, 아동, 유아가 섞여있을 경우 각각의 인원 수가 필요해서 만든 메소드
     public String adultAnd(){
         List<TravelerPricingDTO> adultList = this.getTravelerPricings().stream().filter(e->e.getTravelerType().equals("ADULT")).collect(Collectors.toList());
         List<TravelerPricingDTO> childList = this.getTravelerPricings().stream().filter(e->!e.getTravelerType().equals("ADULT")).collect(Collectors.toList());

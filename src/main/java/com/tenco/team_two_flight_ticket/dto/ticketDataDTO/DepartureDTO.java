@@ -17,9 +17,13 @@ import java.time.format.DateTimeFormatter;
 @ToString
 @NoArgsConstructor
 public class DepartureDTO {
+    //출발지 공항의 iata code ex 인천 - ICN
     private String iataCode;
+    //출발하는 터미널 번호
     private String terminal;
+    //출발하는 시간
     private String at;
+    //출발지 이름 필요해서 만든 필드. 응답 dto에는 없음
     private String cityName;
 
     public DepartureDTO(DepartureDTO dto) {
@@ -29,6 +33,7 @@ public class DepartureDTO {
 
     }
 
+    //출발하는 시간 날짜랑 시간 파싱하려고 만든 메소드들
     public String date(){
         String date = LocalDateTime.parse(this.at).toLocalDate().toString();
         String[] dateArr = date.split("-");
