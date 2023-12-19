@@ -46,12 +46,23 @@ public class ReservationController {
 
     // 디테일 페이지에서 예약하기 버튼 클릭시 수행
     @PostMapping("reservation/save")
-    public String save(ReservationRequest.SaveFormDto dto, Model model) {
+    public String save(ReservationRequest.SaveFormDto dto, HttpSession session) {
         // 1. 인증검사
         // User principal = (User) session.getAttribute(Define.PRINCIPAL);
         // 2. 유효성 검사
         // 로직
         ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto);
+        // 카카오 메시지 보내기
+        String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");
+        System.out.println("옵션 체크체크 : ");
+        System.out.println(dto.getOptionMessage());
+        if ("Y".equals(dto.getOptionMessage())){
+
+            String message = reservationService.kakaoMessage(1, kakaoAccessToken, saveResultDTO);
+            session.setAttribute("reservationResult", saveResultDTO);
+
+            return "redirect:/reservation/final-result";
+        }
 
         session.setAttribute("reservationResult", saveResultDTO);
 
