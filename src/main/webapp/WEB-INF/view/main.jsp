@@ -623,57 +623,69 @@
                     <h3>검색이 가장 많은 도시</h3>
                 </div>
                 <div class="flight_banner_list">
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_img_01.jpg" alt="항공 이미지_01"></li>
                             <li class="flight_content">
                                 <h5 class="flight_content_tit">방콕</h5>
                                 <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <div class="flight_data_txt">
+                                    <span class="startDate">2월 6일</span>
+                                    ~
+                                    2월 10일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">483,900원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_img_02.jpg" alt="항공 이미지_02"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">도쿄</h5>
+                                <div class="from_to_txt">서울 → 도쿄</div>
+                                <div class="flight_data_txt">
+                                    <span class="startDate">2월 6일</span>
+                                    ~
+                                    2월 9일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">429,400원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_img_03.jpg" alt="항공 이미지_03"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">다낭</h5>
+                                <div class="from_to_txt">서울 → 다낭</div>
+                                <div class="flight_data_txt">
+                                    <span class="startDate">2월 6일</span>
+                                    ~
+                                    2월 10일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">494,500원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_img_04.jpg" alt="항공 이미지_04"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">대만(타오위안)</h5>
+                                <div class="from_to_txt">서울 → 대만</div>
+                                <div class="flight_data_txt">
+                                    <span class="startDate">2월 5일</span>
+                                    ~
+                                    2월 8일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">460,000원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
@@ -686,57 +698,66 @@
                     <h3>초특가 상품으로 알뜰한 여행</h3>
                 </div>
                 <div class="flight_banner_list">
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_sale_img_01.jpg" alt="항공 이미지_01"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">제주</h5>
+                                <div class="from_to_txt">서울 → 제주</div>
+                                <div class="flight_data_txt"><span class="startDate">1월 9일</span>
+                                    ~
+                                    1월 9일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">25,900원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_sale_img_02.jpg" alt="항공 이미지_02"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">제주</h5>
+                                <div class="from_to_txt">서울 → 제주</div>
+                                <div class="flight_data_txt"><span class="startDate">1월 16일</span>
+                                    ~
+                                    1월 16일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">23,720원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_sale_img_03.jpg" alt="항공 이미지_03"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">제주</h5>
+                                <div class="from_to_txt">서울 → 제주</div>
+                                <div class="flight_data_txt"><span class="startDate">1월 23일
+                                    ~
+                                    1월 23일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">23,720원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_sale_img_04.jpg" alt="항공 이미지_04"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">제주</h5>
+                                <div class="from_to_txt">서울 → 제주</div>
+                                <div class="flight_data_txt">
+                                    <span class="startDate">1월 30일</span>
+                                    ~
+                                    1월 30일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">23,720원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
@@ -749,13 +770,15 @@
                     <h3>시간 임박! 땡처리 항공권</h3>
                 </div>
                 <div class="flight_banner_list">
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_special_img_01.jpg" alt="항공 이미지_01"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">베트남</h5>
+                                <div class="from_to_txt">서울 → 베트남</div>
+                                <div class="flight_data_txt"><span class="startDate">12월 12일</span>
+                                    ~
+                                    12월 15일</div>
                                 <div class="price_transfer">
                                     <p class="flight_price">445,200원~</p>
                                     <span>직항,경유 포함</span>
@@ -763,43 +786,50 @@
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_special_img_02.jpg" alt="항공 이미지_02"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">베트남</h5>
+                                <div class="from_to_txt">서울 → 베트남</div>
+                                <div class="flight_data_txt"><span class="startDate">12월 12일</span>
+                                    ~
+                                    12월 15일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">354,000원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_special_img_03.jpg" alt="항공 이미지_03"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">베트남</h5>
+                                <div class="from_to_txt">서울 → 베트남</div>
+                                <div class="flight_data_txt"><<span class="startDate">12월 12일</span>
+                                    ~
+                                    12월 15일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">345,700원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
                         </ul>
                     </a>
-                    <a href="#">
+                    <a href="#" class="bbanner-link">
                         <ul class="w3-white">
                             <li><img src="/images/flight_images/flight_special_img_04.jpg" alt="항공 이미지_04"></li>
                             <li class="flight_content">
-                                <h5 class="flight_content_tit">방콕</h5>
-                                <div class="from_to_txt">서울 → 방콕</div>
-                                <div class="flight_data_txt">12월 12일 ~ 12월 15일</div>
+                                <h5 class="flight_content_tit">베트남</h5>
+                                <div class="from_to_txt">서울 → 베트남</div>
+                                <div class="flight_data_txt">
+                                    <span class="startDate">12월 12일</span>
+                                    ~
+                                    12월 15일</div>
                                 <div class="price_transfer">
-                                    <p class="flight_price">445,200원~</p>
+                                    <p class="flight_price">345,700원~</p>
                                     <span>직항,경유 포함</span>
                                 </div>
                             </li>
@@ -992,6 +1022,91 @@
     // 비동기 요청이 완료되면 로딩 페이지를 숨깁니다.
     $(document).ajaxStop(function() {
         $(".loading").hide();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // a 태그를 찾아 클릭 이벤트를 추가
+        var flightLinks = document.querySelectorAll('.bbanner-link');
+
+        flightLinks.forEach(function(flightLink) {
+            flightLink.addEventListener('click', function(event) {
+                // 클릭 이벤트가 발생했을 때 실행될 코드
+                event.preventDefault(); // 기본 동작 방지
+                console.log("이벤트 리스너가 추가되었습니다.");
+
+                // 가져올 값들을 클릭된 a 태그에서 찾아옴
+                var origin = 'ICN';
+                var destinationName = flightLink.querySelector('.flight_content_tit');
+
+                // 확인: destinationName이 null이 아닌지 체크
+                if (destinationName) {
+                    destinationName = destinationName.innerText;
+                } else {
+                    console.error('Destination name element not found.');
+                    return;
+                }
+
+                if (destinationName === '방콕') {
+                    destination = 'BKK';
+                } else if (destinationName === '도쿄') {
+                    destination = 'NRT';
+                } else if (destinationName === '다낭') {
+                    destination = 'DAD';
+                } else if (destinationName === '대만') {
+                    destination = 'TPE';
+                } else if (destinationName === '제주') {
+                    destination = 'CJU';
+                } else if (destinationName === '베트남') {
+                    destination = 'DAD';
+                } else {
+                    // 기본값 설정
+                    destination = 'BKK';
+                }
+
+                console.log("목적지 : " + destination);
+
+                var adults = '1';
+                var children = '0';
+                var infants = '0';
+                var travelClass = '일반석';
+                var nonStop = 'false';
+                // 날짜 포맷 변경 함수
+                // var datepicker = '2024-02-06';
+
+                var startDateElement = flightLink.querySelector('.startDate');
+                var datepicker = formatDate(startDateElement.innerText);
+
+                function formatDate(dateString) {
+                    // '2월 6일' 형식의 문자열을 '2024-02-06' 형식으로 변환
+                    var match = dateString.match(/(\d{1,2})월 (\d{1,2})일/);
+
+                    if (!match || match.length !== 3) {
+                        console.error('Invalid date format:', dateString);
+                        return null;
+                    }
+
+                    var month = match[1].padStart(2, '0');
+                    var day = match[2].padStart(2, '0');
+
+                    return '2024-' + month + '-' + day;
+                }
+
+                console.log('변환된 날짜:', datepicker);
+
+                // form의 각 input에 값을 할당
+                document.getElementById('origin').value = origin;
+                document.getElementById('destination').value = destination;
+                document.getElementById('adults').value = adults;
+                document.getElementById('children').value = children;
+                document.getElementById('infants').value = infants;
+                document.getElementById('travelClass').value = travelClass;
+                document.getElementById('nonStop').value = nonStop;
+                document.getElementById('datepicker').value = datepicker;
+                console.log("날짜 : " + datepicker);
+                // form submit
+                document.querySelector('.from_to_form').submit();
+            });
+        });
     });
 </script>
 <script src="/js/javascript.js"></script>
