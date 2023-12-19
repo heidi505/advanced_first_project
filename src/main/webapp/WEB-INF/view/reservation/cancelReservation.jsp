@@ -77,30 +77,27 @@
 			</tr>
 			</thead>
 			<tbody>
+			<c:forEach var="payedInfo" items="${payedInfoList}">
 			<tr>
 			<td class="w-10">${payedInfo.lastName}${payedInfo.firstName}</td>
 			<td class="w-10">${payedInfo.passengerType}</td>
 			<td>${payedInfo.gender}</td>
 			<td>${payedInfo.birthdate}</td>
-			<td>${payedInfo.sAirFare}</td>
-			<td>${payedInfo.sFuelSurcharge}</td>
-			<td>${payedInfo.sTaxes}</td>
-			<td>${payedInfo.sTicketingFee}</td>
-			<td>${payedInfo.sTotalPrice}</td>
+			<td>${payedInfo.SAirFare}</td>
+			<td>${payedInfo.SFuelSurcharge}</td>
+			<td>${payedInfo.STaxes}</td>
+			<td>${payedInfo.STicketingFee}</td>
+			<td>${payedInfo.STotalPrice}</td>
 			<c:choose>
 			<c:when test="${payedInfo.isPayed eq true}">
-			
 			<td>결제완료됨</td>
-				
 			</c:when>
 			<c:otherwise>
-			
 			<td>결제요청전</td>
 			</c:otherwise>
 			</c:choose>
-			
-			
 			</tr>
+			</c:forEach>
 			</tbody>
 			</table>
 			

@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.user;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/user")
 @Controller
@@ -64,7 +66,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout() {
 		session.invalidate();
-		return "redirect:/user/sign-in";
+		return "redirect:/sign-in";
 	}
 	@GetMapping("/coupon")
 	public String coupon() {
@@ -90,8 +92,7 @@ public class UserController {
 		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(1,dto);
 		GetMyTripCntAndListDTO myTrip = new GetMyTripCntAndListDTO();
 		myTrip.setTripCount(tripCount);
-		myTrip.setTripList(tripList);
-		
+		myTrip.setTripList(tripList);	
 		return myTrip;
 	}
 	

@@ -30,26 +30,40 @@
         <div class="container">
             <div class="header_box">
                 <div class="logo">
+                    <a href="/main">
                     <img src="/images/logo.svg" alt="로고">
+                    </a>
                 </div>
                 <div class="search">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요">
+                    <form class="d-flex" action="/ticket/flight-light-search" method="GET">
+                        <input class="form-control me-2" name="keyword" type="text" placeholder="검색어를 입력해주세요">
                         <button class="btn btn-primary" type="submit">검색</button>
                     </form>
                 </div>
+                <c:choose>
+                    <c:when test="${principal == null}">
                 <ul class="header_menu">
-                    <li>
+                    <li class="me-2">
                         <a class="nav-link" href="/user/profile">마이페이지</a>
-                    </li>
-                     <c:if test="${ticketDate.alertCheck eq false}">
-                    <li><a class="nav-link" href="#" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" 
-                    title="알림"  data-bs-custom-class="custom-popover" data-bs-content="당신이 예약한 ${ticketDate.departureCity}발 ${ticketDate.arrivalCity}행 비행기가 ${ticketDate.cuttedDepartureTime}에 출발합니다.">
-  					알림
-  					</a></li>
-  					</c:if>
+                    </li>                    
                     <li><a class="nav-link" href="/sign-in">로그인</a></li>
                 </ul>
+                    </c:when>
+                    <c:otherwise>
+                        <ul class="header_menu">
+                            <li>
+                                <a class="nav-link" href="/user/profile">마이페이지</a>
+                            </li>
+                            <c:if test="${ticketDate.alertCheck eq false}">
+                                <li><a class="nav-link" href="#" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
+                                       title="알림"  data-bs-custom-class="custom-popover" data-bs-content="당신이 예약한 ${ticketDate.departureCity}발 ${ticketDate.arrivalCity}행 비행기가 ${ticketDate.cuttedDepartureTime}에 출발합니다.">
+                                    알림
+                                </a></li>
+                            </c:if>
+                            <li><a class="nav-link" href="/user/logout">로그아웃</a></li>
+                        </ul>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <nav class="navbar navbar-expand-sm">
                 <div>

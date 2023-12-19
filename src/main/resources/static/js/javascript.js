@@ -7,11 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let flightSearchBoxNum = flightSearchBox.length;
 
     Array.from(flightSearchClose).forEach((closeButton) => {
-        console.log(closeButton);
-        closeButton.addEventListener("click", () => {
-            if (flightSearchBoxNum > 0) {
-                flightSearchBox[flightSearchBoxNum - 1].style.display = "none";
 
+        closeButton.addEventListener("click", (e) => {
+            
+            
+            if (flightSearchBoxNum > 0) {
+                //flightSearchBox[flightSearchBoxNum - 1].style.display = "none";
+                closeButton.parentElement.style.display = "none";
+                let searchId = closeButton.previousElementSibling.value;
+				deleteSearchLog(searchId);
                 if (flightSearchBoxNum === 1) {
                     flightSearchBg.style.display = "none";
                 }
@@ -21,6 +25,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     // 최근 검색 삭제
+    
+    
+    async function deleteSearchLog(searchId){
+		console.log(searchId);
+		try{
+			const response = await fetch(`/searched/delete-search-log`, {
+            	method: 'POST',
+            	headers: {
+    			'Content-Type': 'application/json'
+  				},
+            	body: JSON.stringify({
+					searchId : parseInt(searchId)
+            	}),
+            });
+			//const result = await response.json();
+			
+		} catch(e){
+			alert('목록 제거에 실패했습니다');
+		}
+	}  
+		 
+		
+		
+		
+	
 
     let commonModal = document.querySelectorAll(".common_modal");
     let commonModalBtn = document.querySelectorAll(".common_modal_btn");
@@ -120,6 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
             fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
             fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
             document.getElementById("origin").value = airportCode;
+            //로딩 페이지 데이터 바인딩
+            document.getElementById("loadingOrigin1").innerText = airportName;
+            document.getElementById("loadingOrigin2").innerText = airportCode;
+            document.getElementById("loadingOrigin3").innerText = airportName;
 
 
         }
@@ -130,6 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
             toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
             toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
             document.getElementById("destination").value = airportCode;
+            //로딩페이지 데이터 바인딩
+            document.getElementById("loadingDestination1").innerText = airportName;
+            document.getElementById("loadingDestination2").innerText = airportCode;
+            document.getElementById("loadingDestination3").innerText = airportName;
         }
 
         fromButtonIcon.forEach(function (button, index) {
@@ -270,13 +307,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // 출발지 & 도착지 전환
 
 
-	// 최근 검색한 항공권 검색 연결(미완성)
+	// 최근 검색한 항공권 이동 이벤트
 	const recentFlight = document.querySelectorAll('.flight_search_box');
 	recentFlight.forEach((flight)=>{
-		flight.addEventListener('click',(e)=>{
-			if(e.target.className != 'flight_search_close'){
-				console.log('search flight');
-				//location.href='/search?keyword='아직 검색기능이 없음
+		flight.addEventListener('click',(e)=>{			
+			if(e.target.tagName != 'IMG'){
+				flight.children[0].click();
 			}
 		})	
 	});

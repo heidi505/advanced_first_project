@@ -416,6 +416,7 @@
     padding: 12px;
     position: relative;
     margin-right: 8px;
+    cursor:pointer;
 }
 
 .flight_search_close {
@@ -631,13 +632,18 @@
     line-height: 1.2;
 }
 .reservation_cancle {
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
     padding-left: 30px;
     border-left: 1px solid var(--line);
+    margin-bottom: 8px;
 }
-.reservation_cancle a {
+.reservation_cancle > a {
+    display: block;
+}
+.reservation_cancle .reservation_cancle_btn {
     padding: 12px;
     background-color: var(--box_bg);
     border-radius: 5px;
@@ -917,9 +923,8 @@
 }
 
 .airline_icon_img {
-    padding: 7px;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border: 1px solid var(--line);
     border-radius: 5px;
     margin-right: 8px;
@@ -1319,7 +1324,6 @@
 
 #admin .btn-outline-primary {
     border: 1px solid var(--admin_01);
-    color: var(--admin_01);
     width: 150px;
     height: 48px;
     display: inline-block;

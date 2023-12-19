@@ -5,6 +5,10 @@ insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) value
 insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(4, 'tom', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'tom@nate.com','01011112222');
 insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(5, 'lisa', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'lisa@nate.com','01011112222');
 
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_admin`) values(6, 'admin1', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'admin1@nate.com','01033334444','true');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_admin`) values(7, 'admin2', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'admin2@nate.com','01033334444','true');
+
+
 
 --예약
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (1,1,153,'예정',1,'2024-08-28 00:13:24',220270,'2023-11-12 06:51:24');
@@ -34,30 +38,36 @@ INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birt
 INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birth_date`,`gender`,`passenger_type`,`created_at`)VALUES (5,3,'hayan','Kim','12/05/1995','여성','성인','2023-11-12 18:34:31');
 
 -- 검색
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(1,1,'시드니',true,'SYD','BKK','2024-09-14 15:20:02','2024-09-15 00:50:39',1,176430,'2024-09-14 15:20:02');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(2,1,'방콕',true,'ICN','BKK','2023-12-24 01:25:56','2023-12-05 19:42:02',2,159400,'2024-02-29 13:24:00');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(3,2,'아시아나',true,'ICN','BUS','2024-11-30 21:27:33','2023-12-06 05:36:46',2,170520,'2024-02-23 11:07:42');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(4,3,'캘리포니아',false,'ICN','BKK','2024-01-21 09:18:11','2023-12-05 11:34:08',1,25470,'2023-02-02 16:26:54');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(5,4,'서울',false,'BUS','ICN','2024-01-29 20:32:43','2023-12-05 12:36:31',7,22990,'2023-05-26 04:49:11');
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(1,1,true,'SYD','BKK','2024-09-14','2024-09-15','일반석','2024-09-14 15:20:02',1,0,0);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(2,1,true,'ICN','BKK','2023-12-24','2023-12-05','일반석','2024-02-29 13:24:00',2,0,0);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(3,2,true,'ICN','BUS','2024-11-30','2023-12-06','일반석','2024-02-23 11:07:42',2,1,1);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(4,3,false,'ICN','BKK','2024-01-21','2023-12-05','일반석','2023-02-02 16:26:54',7,0,0);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(5,4,false,'BUS','ICN','2024-01-29','2023-12-05','일반석','2023-05-26 04:49:11',1,1,0);
 
 -- 쿠폰
-INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (1,'가입 축하 쿠폰',30,10000);
-INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (2,'연말 감사 쿠폰',30,20000);
-INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (3,'직원 할인 쿠폰',30,50000);
+-- INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (1,'가입 축하 쿠폰',30,10000);
+-- INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (2,'연말 감사 쿠폰',30,20000);
+-- INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (3,'직원 할인 쿠폰',30,50000);
+--
 
-
+INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`, `coupon_content`,`coupon_number`, `is_used`,`created_at` , expired_at)VALUES (1,'가입 축하 쿠폰', 30, 10000, '신규 가입 회원님께 가입 축하 쿠폰을 증정해드리겠습니다', 2134126, 'true', '2023-09-01','2024-01-23');
+INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`, `coupon_content`,`coupon_number`, `is_used`,`created_at` , expired_at)VALUES (2,'연말 감사 쿠폰', 30, 20000, '신규 가입 회원님께 가입 축하 쿠폰을 증정해드리겠습니다', 2280777, 'false', '2023-08-01','2024-12-23');
+INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`, `coupon_content`,`coupon_number`, `is_used`,`created_at` , expired_at)VALUES (3,'직원 할인 쿠폰', 30, 50000, '신규 가입 회원님께 가입 축하 쿠폰을 증정해드리겠습니다', 5389211, 'true', '2023-11-01','2024-01-23');
 -- hasCoupon
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (1,1,1,true,21341,'2023-09-01 14:44:37','2024-01-23 06:15:22');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (2,1,2,false,22807,'2023-10-07 09:58:22','2024-06-28 21:19:03');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (3,1,3,false,24717,'2023-08-21 00:54:04','2023-12-22 15:25:37');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (4,2,2,true,10901,'2023-08-14 09:49:34','2024-03-22 13:23:33');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (5,3,1,false,15576,'2023-08-01 12:10:14','2024-12-01 23:44:38');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (1,1,1,true,21341,'2023-09-01 14:44:37','2024-01-23 06:15:22');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (2,1,2,false,22807,'2023-10-07 09:58:22','2024-06-28 21:19:03');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (3,1,3,false,24717,'2023-08-21 00:54:04','2023-12-22 15:25:37');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (4,2,2,true,10901,'2023-08-14 09:49:34','2024-03-22 13:23:33');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (5,3,1,false,15576,'2023-08-01 12:10:14','2024-12-01 23:44:38');
 
+INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (1,1,1);
+INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (2,2,2);
+INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (3,3,3);
 
 -- 공지
 
@@ -67,71 +77,72 @@ INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,
 -- 도시 서울, 김포, 제주, 광주, 대구, 청주, 여수
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(1,'SEL','서울','대한민국');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(2,'GMP','김포','대한민국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(3,'CJU','제주','대한민국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(4,'KWJ','광주','대한민국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(5,'TAE','대구','대한민국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(6,'CJJ','청주','대한민국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(7,'RSU','여수','대한민국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(8,'TYO','도쿄','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(9,'OSA','오사카','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(10,'FUK','후쿠오카','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(11,'SPK','삿포로','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(12,'OKA','오키나와','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(13,'NGO','나고야','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(14,'KMJ','구마모토','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(15,'KKJ','기타큐슈','일본');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(16,'BKK','방콕/수완나품','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(17,'DAD','다낭','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(18,'SGN','호치민','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(19,'MNL','마닐라','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(20,'CXR','나트랑','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(21,'CEB','세부','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(22,'SIN','싱가포르','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(23,'CNX','치앙마이','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(24,'BKI','코타키나발루','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(25,'HKT','푸켓','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(26,'HAN','하노이','아시아');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(27,'DFW','댈러스','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(28,'LAS','라스베이거스','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(29,'LAX','로스앤젤레스','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(30,'YVR','밴쿠버','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(31,'SFO','샌프란시스코','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(32,'NYC','뉴욕','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(33,'YTO','토론토','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(34,'HNL','호놀룰루(하와이)','미주');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(35,'LON','런던','유럽');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(36,'ROM','로마','유럽');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(37,'BCN','바르셀로나','유럽');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(38,'AMS','암스테르담','유럽');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(39,'BUD','부다페스트','유럽');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(40,'IST','이스탄불','유럽');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(41,'PAR','파리','유럽');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(42,'PGR','프라하','유럽');--대양주/괌 & 중동 &중남미 & 아프리카 & 중국
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(43,'GUM','괌','대양주/괌');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(44,'MEL','멜버른','대양주/괌');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(45,'SYD','시드니','대양주/괌');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(46,'SPN','사이판','대양주/괌');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(47,'AUH','아부다비','중동');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(48,'TLV','텔아비브','중동');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(49,'DOH','도하','중동');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(50,'DXB','두바이','중동');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(51,'SAO','상파울로','중남미');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(52,'CUN','칸쿤','중남미');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(53,'SCL','산티아고','중남미');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(54,'HAV','하바나','중남미');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(55,'NBO','나이로비','아프리카');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(56,'CPT','케이프타운','아프리카');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(57,'CAI','카이로','아프리카');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(58,'MRU','모리셔스','아프리카');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(59,'BJS','북경','중국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(60,'PVG','상해/푸동','중국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(61,'TAO','청도','중국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(62,'CTU','성도/솽류','중국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(3,'BUS','부산','대한민국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(4,'CJU','제주','대한민국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(5,'KWJ','광주','대한민국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(6,'TAE','대구','대한민국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(7,'CJJ','청주','대한민국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(8,'RSU','여수','대한민국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(9,'TYO','도쿄','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(10,'OSA','오사카','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(11,'FUK','후쿠오카','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(12,'SPK','삿포로','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(13,'OKA','오키나와','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(14,'NGO','나고야','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(15,'KMJ','구마모토','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(16,'KKJ','기타큐슈','일본');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(17,'BKK','방콕/수완나품','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(18,'DAD','다낭','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(19,'SGN','호치민','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(20,'MNL','마닐라','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(21,'CXR','나트랑','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(22,'CEB','세부','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(23,'SIN','싱가포르','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(24,'CNX','치앙마이','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(25,'BKI','코타키나발루','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(26,'HKT','푸켓','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(27,'HAN','하노이','아시아');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(28,'DFW','댈러스','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(29,'LAS','라스베이거스','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(30,'LAX','로스앤젤레스','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(31,'YVR','밴쿠버','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(32,'SFO','샌프란시스코','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(33,'NYC','뉴욕','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(34,'YTO','토론토','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(35,'HNL','호놀룰루(하와이)','미주');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(36,'LON','런던','유럽');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(37,'ROM','로마','유럽');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(38,'BCN','바르셀로나','유럽');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(39,'AMS','암스테르담','유럽');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(40,'BUD','부다페스트','유럽');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(41,'IST','이스탄불','유럽');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(42,'PAR','파리','유럽');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(43,'PGR','프라하','유럽');--대양주/괌 & 중동 &중남미 & 아프리카 & 중국
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(44,'GUM','괌','대양주/괌');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(45,'MEL','멜버른','대양주/괌');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(46,'SYD','시드니','대양주/괌');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(47,'SPN','사이판','대양주/괌');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(48,'AUH','아부다비','중동');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(49,'TLV','텔아비브','중동');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(50,'DOH','도하','중동');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(51,'DXB','두바이','중동');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(52,'SAO','상파울로','중남미');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(53,'CUN','칸쿤','중남미');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(54,'SCL','산티아고','중남미');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(55,'HAV','하바나','중남미');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(56,'NBO','나이로비','아프리카');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(57,'CPT','케이프타운','아프리카');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(58,'CAI','카이로','아프리카');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(59,'MRU','모리셔스','아프리카');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(60,'BJS','북경','중국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(61,'PVG','상해/푸동','중국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(62,'TAO','청도','중국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(63,'CTU','성도/솽류','중국');
 
 
 -- iata 도시 코드
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(1,'SEL','서울','한국');
-insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(2,'PUS','부산','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(2,'BUS','부산','한국');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(3,'CJU','제주','한국');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(4,'TAE','대구','한국');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(5,'CJJ','청주','한국');
@@ -153,7 +164,7 @@ insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(19,'KOJ','�
 
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(1,'ICN','인천','서울','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(2,'GMP','김포','서울','한국');
-insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(3,'PUS','김해','부산','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(3,'BUS','김해','부산','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(4,'CJU','제주','제주','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(5,'CJJ','청주','청주','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(6,'KWJ','광주','광주','한국');

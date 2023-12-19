@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
+import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,11 +30,16 @@ public class ReservationService {
 
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private TicketRepository ticketRepository;
+    @Autowired
+    private PassengerRepository passengerRepository;
 
     @Transactional
-    public void save(ReservationRequest.SaveFormDto dto) {
+    public ReservationResponse.SaveResultDTO save(ReservationRequest.SaveFormDto dto) {
 
         /*  (추후 api에 따라 수정 필요) */
+
         // reservation_tb
         String datePrefix = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
         String randomSuffix = String.format("%03d", ThreadLocalRandom.current().nextInt(1000));
@@ -45,7 +52,7 @@ public class ReservationService {
                 .phoneNum(dto.getPhoneNum())
                 .reservationNum(reservationNum)
                 .statusEnum(StatusEnum.valueOf("예정"))
-                .passengerAmount(1)
+                .passengerAmount(dto.getPassengerAmount())
                 .paymentDeadline(null)
                 .reservationPrice(dto.getReservationPrice())
                 .build();
@@ -57,17 +64,24 @@ public class ReservationService {
             throw new MyBadRequestException("실패");
         }
 
+        // 예약 결제상태
+        Reservation reservationDTO = reservationRepository.findByReservationNum(reservationNum);
+        System.out.println("테스트 00 : ");
+        System.out.println(reservationDTO.getReservationNum());
+        System.out.println(reservationDTO.getId());
+        System.out.println("제에에발");
+
         //`birth_date`,`gender`,`passenger_type`,`created_at`)
         // passenger_tb
         Passenger passenger = Passenger.builder()
-                .reservationId(1)
+                .reservationId(reservationDTO.getId())
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
-                .birthDate(null)
+                .birthDate(dto.getBirthDate())
                 .gender(dto.getGender())
-                .passengerType(null)
+                .passengerType(dto.getPassengerType())
                 .build();
-        int resultRowPassenger = reservationRepository.insertP(passenger);
+        int resultRowPassenger = passengerRepository.insertP(passenger);
         System.out.println("승객!");
         if (resultRowPassenger != 1) {
             throw new MyBadRequestException("실패");
@@ -75,28 +89,47 @@ public class ReservationService {
 
         // ticket_tb
         Ticket ticket = Ticket.builder()
-                .reservationId(1)
-                .airFare(null)
-                .fuelSurcharge(null)
-                .taxes(null)
-                .ticketingFee(null)
-                .totalPrice(null)
-                .airline(null)
-                .flightName(null)
-                .departureCity(null)
-                .arrivalCity(null)
-                .departureAirport(null)
-                .arrivalAirport(null)
-                .seatType(null)
-                .isOneWay(true)
-                .isNonStop(false)
-                .baggageAllowance(15)
+                .reservationId(reservationDTO.getId())
+                .airFare(dto.getAirFare())
+                .fuelSurcharge(dto.getFuelSurcharge())
+                .taxes(dto.getTaxes())
+                .ticketingFee(dto.getTicketingFee())
+                .totalPrice(dto.getTotalPrice())
+                .airline(dto.getAirline())
+                .flightName(dto.getFlightName())
+                .departureCity(dto.getDepartureCity())
+                .arrivalCity(dto.getArrivalCity())
+                .departureAirport(dto.getDepartureAirport())
+                .arrivalAirport(dto.getArrivalAirport())
+                .seatType(dto.getSeatType())
+                .isOneWay(dto.isOneWay())
+                .isNonStop(dto.isNonStop())
+                .baggageAllowance(dto.getBaggageAllowance())
                 .build();
-        int resultRowTicket = reservationRepository.insertT(ticket);
+        int resultRowTicket = ticketRepository.insertT(ticket);
         System.out.println("티켓!");
         if (resultRowTicket != 1) {
             throw new MyBadRequestException("실패");
         }
+
+        // 방금 저장된 값 찾아서 담는 쿼리.
+        // 승객 영문이름 타입 성별 생년월일
+        Passenger passengerDTO = passengerRepository.findByReservationId(reservationDTO.getId());
+        System.out.println("테스트 01 : ");
+        System.out.println(passengerDTO.getId());
+        System.out.println(passengerDTO.getReservationId());
+        System.out.println("살려줘");
+        // 티켓 항공요금 유류할증료 제세공과금 발권수수료 총액운임
+        List<Ticket> ticketDTO = ticketRepository.findByReservationId(reservationDTO.getId());
+
+        ReservationResponse.SaveResultDTO response =
+                new ReservationResponse.SaveResultDTO(reservationDTO, passengerDTO, ticketDTO);
+
+        System.out.println("----안담김?----");
+        System.out.println(response.getReservation().getReservationNum());
+        System.out.println(response.getPassenger().getReservationId());
+        System.out.println("--------");
+        return response;
     }
 
     public List<GetMyTravelDTO> getMyTravel(int userId, UserRequest.GetMyTravelListDTO dto) {
@@ -188,19 +221,21 @@ public class ReservationService {
 		}
 	}
     
-//	public GetPayedInfoDTO getPayedInfo(Long reservationNum) {
-//		GetPayedInfoDTO payedInfo = null;
-//		if(reservationNum == null) {
-//			throw new MyBadRequestException("예약 번호가 없습니다");
-//		}
-//		try {
-//			payedInfo = reservationRepository.getPayedInfo(reservationNum);
-//			payedInfo.changePrice();
-//		} catch (Exception e) {
-//			throw new MyServerError("서버 에러가 발생했습니다");
-//		}
-//		return payedInfo;
-//	}
+	public List<GetPayedInfoDTO> getPayedInfo(Long reservationNum) {
+		List<GetPayedInfoDTO> payedInfoList = null;
+		if(reservationNum == null) {
+			throw new MyBadRequestException("예약 번호가 없습니다");
+		}
+		try {
+			payedInfoList = reservationRepository.getPayedInfo(reservationNum);
+			for (GetPayedInfoDTO dto : payedInfoList) {
+				dto.changePrice();
+			}
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		return payedInfoList;
+	}
     
     
     

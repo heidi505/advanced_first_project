@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Data
@@ -33,5 +35,12 @@ public class ItinerariesDTO {
         this.segments = dto.getSegments().stream()
                 .map(e->new SegmentDTO(e))
                 .collect(Collectors.toList());
+    }
+
+    public List<SegmentDTO> segments(){
+
+        List<SegmentDTO> segment = this.getSegments();
+
+        return segment;
     }
 }

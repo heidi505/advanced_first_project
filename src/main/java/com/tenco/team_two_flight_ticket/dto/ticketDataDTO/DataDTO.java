@@ -116,4 +116,28 @@ public class DataDTO{
 
         return newMap;
     }
+
+    public Map<String, ItinerariesDTO> roundTrip(){
+        Map<String, ItinerariesDTO> newMap = new HashMap<>();
+
+        ItinerariesDTO first = this.getItineraries().get(0);
+        ItinerariesDTO last = this.getItineraries().get(1);
+
+        newMap.put("가는 편", first);
+        newMap.put("오는 편", last);
+
+        return newMap;
+    }
+
+    public String adultAnd(){
+        List<TravelerPricingDTO> adultList = this.getTravelerPricings().stream().filter(e->e.getTravelerType().equals("ADULT")).collect(Collectors.toList());
+        List<TravelerPricingDTO> childList = this.getTravelerPricings().stream().filter(e->!e.getTravelerType().equals("ADULT")).collect(Collectors.toList());
+
+        if (childList.size() == 0){
+            return "성인 " + adultList.size() + " 명";
+        }else{
+            return "성인 " + adultList.size() + " 외 " + childList.size() + " 명";
+        }
+
+    }
 }

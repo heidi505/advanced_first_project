@@ -34,28 +34,14 @@
         <if test="sort == 'false'">
             and is_payed = false
         </if>
-    </select>    
+    </select>
 
     <insert id="insertR">
         insert into reservation_tb(user_id, res_name, email, phone_num, reservation_num, status_enum, passenger_amount,
                                    payment_deadline, reservation_price, created_at)
-        values (1, #{resName}, #{email}, #{phoneNum}, #{reservationNum}, '예정', 1, null, null, now())
+        values (1, #{resName}, #{email}, #{phoneNum}, #{reservationNum}, '예정', #{passengerAmount}, null, null, now())
     </insert>
 
-    <insert id="insertP">
-        insert into passenger_tb(reservation_id, first_name, last_name, birth_date, gender, passenger_type, created_at)
-        values (#{reservationId}, #{firstName}, #{lastName}, #{birthDate}, #{gender}, null, now())
-    </insert>
-
-    <insert id="insertT">
-        insert into ticket_tb(reservation_id, air_fare, fuel_surcharge, taxes, ticketing_fee, total_price, airline,
-                              flight_name, departure_city, arrival_city, departure_time, arrival_time,
-                              departure_airport, arrival_airport, seat_type, is_one_way, is_non_stop, baggage_allowance,
-                              created_at)
-        values (#{reservationId}, null, null, null, null, null, null, null, null, null, null, null, null, null, null, #{isOneWay}, #{isNonStop},
-                #{baggageAllowance}, now())
-    </insert>
-       	
     <select id="getMyTripDetail" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripDetailDTO">
    		select reservation_num, is_payed, status_enum ,payment_deadline ,res_name, real_name , first_name, last_name , r.phone_num , airline, departure_city, arrival_city
    		,departure_time, arrival_time, seat_type, is_one_way
@@ -67,7 +53,7 @@
 		join user_tb u
 		on u.id = r.user_id
 		where reservation_num = #{reservationNum}
-		and r.user_id = #{userId}   	
+		and r.user_id = #{userId}
    	</select>
 
 
@@ -104,7 +90,7 @@
    		set status_enum = '취소'
    		where reservation_num = #{reservationNum}
    	</update>
-    
+
     <select id="getPayedInfo"
     resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetPayedInfoDTO">
     	select first_name, last_name, passenger_type, gender, birth_date, air_fare
@@ -114,12 +100,13 @@
     	on r.id = t.reservation_id
     	join passenger_tb as p
     	on r.id = p.reservation_id
-    	where reservation_num = #{reservationNum} 
+    	where reservation_num = #{reservationNum}
     </select>
-    
-    
-    
-    
-    
-    
+
+    <select id="findByReservationNum" resultType="com.tenco.team_two_flight_ticket.reservation.Reservation">
+        select *
+        from reservation_tb
+        where reservation_num = #{reservationNum}
+    </select>
+
 </mapper>
