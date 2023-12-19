@@ -2021,8 +2021,8 @@
                                                                     onclick="resetForm()">
                                                                 다시입력
                                                             </button>
-                                                            <button class="btn res_modal_btn2" type="submit"
-                                                                    id="confirmYn" disabled
+                                                            <button class="btn res_modal_btn2" type="button"
+                                                                    id="confirmYnn" disabled
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#additionalModal">
                                                                 확인
@@ -2050,12 +2050,13 @@
                                                         <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary res_kko_btn"
+                                                        <input type="hidden" name="OptionMessage" id="OptionMessage" value="Y">
+                                                        <button type="submit" id="confirmYn" class="btn btn-secondary res_kko_btn"
 
-                                                                onclick="sendOption('N')">괜찮아요
+                                                                onclick="sendKOption('N')">괜찮아요
                                                         </button>
 
-                                                        <button type="button" class="btn btn-primary res_kko_btn"
+                                                        <button type="submit" id="confirmYn"  class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
 
                                                         </button>
@@ -2100,7 +2101,7 @@
 
     function enableConfirmButton() {
         var checkbox = document.getElementById("agreeRadioChk0");
-        var confirmButton = document.getElementById("confirmYn");
+        var confirmButton = document.getElementById("confirmYnn");
 
         // 체크박스가 선택되었을 때 버튼 활성화
         confirmButton.disabled = !checkbox.checked;
@@ -2113,12 +2114,17 @@
 
 
     // 카카오 모달
+    function sendMessage(option) {
+        document.getElementById("OptionMessage").value = option;
+    }
     function sendKOption(option) {
         if (option === 'N') {
             // '괜찮아요' 버튼 클릭 시 모달 창 닫기
+            sendMessage('N');
             $('#additionalModal').modal('hide');
         } else if (option === 'Y') {
             // '보내주세요' 버튼 클릭 시 알림 창 띄우기
+            sendMessage('Y');
             alert('성공적으로 전송했습니다.');
             $('#additionalModal').modal('hide');
         }
@@ -2184,6 +2190,7 @@
         combineBirthDate();
         combineGender();
         setFlightType();
+        sendMessage();
         document.getElementById("reservationp").submit();
     });
 </script>
