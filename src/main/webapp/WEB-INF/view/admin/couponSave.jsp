@@ -15,7 +15,7 @@
                 쿠폰 등록
             </h3>
             <div class="admin_common_form">
-                <form>
+                <form action="/admin/coupon-save" method="post">
                     <div class="admin_form_box">
                         <div class="admin_form_tit">
                             <h5>쿠폰 등록</h5>
@@ -28,30 +28,33 @@
                                 </li>
                                 <li class="admin_form_textfield">
                                     <label for="departureDate" class="form-label">쿠폰 발급 번호 </label>
-                                    <input type="text" id="departureDate" class="form-control" placeholder="쿠폰 발급번호 8자리를 입력해주세요" name="departureDate">
+                                    <input type="text" id="departureDate" class="form-control" placeholder="쿠폰 랜덤으로 8자리 생성됩니다." disabled name="couponNumber">
                                 </li>
 
                             </ul>
                             <ul class="admin_from_item">
                                 <li class="admin_form_textfield">
                                     <label for="issueDate" class="form-label">발급일</label>
-                                    <input type="text" id="issueDate" class="datepicker" placeholder="발급일을 입력해주세요" name="issueDate">
+                                    <input type="text" id="issueDate" class="datepicker" placeholder="발급일을 입력해주세요" name="createdAt">
                                 </li>
                                 <li class="admin_form_textfield">
                                     <label for="expirationDate" class="form-label">만료일</label>
-                                    <input type="text" id="expirationDate" class="datepicker" placeholder="만료일을 입력해주세요" name="expirationDate">
+                                    <input type="text" id="expirationDate" class="datepicker" placeholder="만료일을 입력해주세요" name="expiredAt">
                                 </li>
                             </ul>
                             <ul class="admin_from_item">
                                 <li class="admin_form_textfield">
                                     <label for="couponPrice" class="form-label">쿠폰 금액</label>
-                                    <input type="number" id="couponPrice" class="form-control" placeholder="쿠폰 금액을 입력해주세요" name="couponPrice">
+                                    <input type="number" id="couponPrice" class="form-control" placeholder="쿠폰 금액을 입력해주세요" name="discountingPrice">
                                 </li>
                                 <li class="admin_form_textfield">
                                     <label for="couponCont" class="form-label">쿠폰 내용</label>
-                                    <textarea cols="30" rows="5" id="couponCont" class="form-control" placeholder="쿠폰 내용을 입력해주세요" name="couponCont"></textarea>
+                                    <textarea cols="30" rows="5" id="couponCont" class="form-control" placeholder="쿠폰 내용을 입력해주세요" name="couponContent"></textarea>
                                 </li>
                             </ul>
+                            <div>
+                                <input type="hidden" value="false" name="isUsed">
+                            </div>
                         </div>
                         <div class="admin_common_btn"><button type="submit" class="btn btn-primary">등록하기</button></div>
                     </div>
@@ -75,7 +78,6 @@
     }
 
     flatpickr(datepicker, {
-        mode: "range",
         minDate: "today",
         dateFormat: "Y-m-d",
         disable: [
@@ -102,7 +104,7 @@
         },
         disableMobile: true, // 모바일 기기에서 위젯 비활성화
         altInput: true, // 추가 입력란 활성화
-        altFormat: "F j, Y", // 추가 입력란의 날짜 및 시간 형식
+        altFormat: "Y-m-d", // 추가 입력란의 날짜 및 시간 형식
     });
 </script>
 <!-- header.jsp -->

@@ -42,7 +42,7 @@
                 <ul class="header_menu">
                     <li>관리자님</li>
                     <li><a class="nav-link" href="/admin/sign-in">로그인</a></li>
-                    <li><a class="nav-link" href="/user/logout">로그아웃</a></li>
+                    <li><a class="nav-link" href="/admin/logout">로그아웃</a></li>
                 </ul>
             </div>
         </div>

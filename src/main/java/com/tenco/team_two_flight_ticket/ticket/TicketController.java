@@ -78,11 +78,13 @@ public class TicketController {
         for (int i = 0; i < regions.length; i++) {
             model.addAttribute(values[i],ticketService.getCities(regions[i]));
         }
+
         
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         if(principal != null) {
         	searchedService.saveRecentSearch(principal.getId() ,dto);       	
         }
+
         TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
         model.addAttribute("count", responseBody.getMeta().getCount());
 
@@ -158,5 +160,33 @@ public class TicketController {
     public ResponseEntity<ApiUtils.ApiResult<List<City>>> citiesList(@RequestParam(defaultValue = "대한민국") String region){
         List<City> cities = ticketService.getCities(region);
         return ResponseEntity.ok().body(ApiUtils.success(cities));
+    }
+
+    @PostMapping("/tmk")
+    public String flightSearchProc2(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
+        String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
+        String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
+
+        for (int i = 0; i < regions.length; i++) {
+            model.addAttribute(values[i],ticketService.getCities(regions[i]));
+        }
+
+        TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
+        model.addAttribute("count", responseBody.getMeta().getCount());
+
+        List<DataDTO> dataDTOList = responseBody.getData();
+        model.addAttribute("ticketList", dataDTOList);
+
+        int isRound = dataDTOList.get(0).getItineraries().size();
+        model.addAttribute("isRound", isRound);
+
+
+
+        return "flightTicket/flightSearch";
+    }
+
+    @GetMapping("/tmk")
+    public String tmk(){
+        return "flightTicket/test";
     }
 }
