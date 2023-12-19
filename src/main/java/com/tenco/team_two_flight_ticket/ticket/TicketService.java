@@ -126,18 +126,22 @@ public class TicketService {
 
         //목적지, 도착지의 공항을 국가 이름으로 파싱
 
+        //도착지의 공항을 국가 이름으로 파싱한 list
+
         List<String> newDeparture = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
                 .map(e->airportRepository.findCityName(e.getDeparture().getIataCode()))
                 .collect(Collectors.toList());
 
+        //목적지의 공항을 국가 이름으로 파싱한 list
         List<String> newArrival = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
                 .map(e->airportRepository.findCityName(e.getArrival().getIataCode()))
                 .collect(Collectors.toList());
 
+        //
         List<SegmentDTO> newSeg = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
@@ -200,6 +204,12 @@ public class TicketService {
                 .flatMap(e->e.getSegments().stream())
                 .filter(e->!e.getAirlineName().equals(option))
                 .collect(Collectors.toList());
+
+//        List<DataDTO> dto = this.responseDTO.getData().stream()
+//                .map(e->e.getItineraries().stream()
+//                        .map(i->i.getSegments().stream()
+//                                .filter(s->!s.getAirlineName().equals(option)))).collect(Collectors.toList());
+//
 
 
     }
