@@ -91,8 +91,8 @@
                     <div class="modal-content">
                         <div class="from_to_search">
                             <form class="d-flex">
-                                <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
-                                <button class="btn btn-primary" type="submit">검색</button>
+                                <input class="search_city_input form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
+                                <button class="search_city_button btn btn-primary" type="button">검색</button>
                             </form>
                         </div>
                         <form action="">
@@ -1114,6 +1114,10 @@
             });
         });
     });
+    
+   
+    
+    
 </script>
 <script src="/js/javascript.js"></script>
 <script src="/js/ticket_search.js"></script>

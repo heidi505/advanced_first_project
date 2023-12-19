@@ -11,7 +11,7 @@
         <!-- 기본 메세지 -->
         <section>
             <div class="p-1 border">
-                <span><a href="">👈검색 결과로 돌아가기</a></span>
+                <span><a class="back_button" href="">👈검색 결과로 돌아가기</a></span>
                 <h3 class="preview_header"></h3>
             </div>
             <div class="p-3 text-white preview_title">
@@ -316,6 +316,16 @@
 </div>
 </div>
 </div>
+<script>
+const backButton = document.getElementsByClassName('back_button')[0];
+backButton.addEventListener('click',(e)=>{
+	e.preventDefault();
+	console.log('back');
+	history.go(-1);
+});
+
+
+</script>
 <script src="js/javascript.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

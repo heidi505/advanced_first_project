@@ -321,6 +321,19 @@ document.addEventListener("DOMContentLoaded", function () {
 	const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 	const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
-
-
+	// 도시 명들 중에 원하는 것만 찾기
+ 	const fromLocalAirport = document.querySelectorAll('.from_local_airport');
+ 	const searchCityInput = document.querySelector('.search_city_input');
+ 	searchCityInput.addEventListener('keyup',e=>{
+		 console.log('일치');
+		 fromLocalAirport.forEach((cityName)=>{
+			if(cityName.textContent == e.target.value){
+				console.log('일치');
+			}
+		 });
+		 
+	 });
+ 	
+	 
+    
 

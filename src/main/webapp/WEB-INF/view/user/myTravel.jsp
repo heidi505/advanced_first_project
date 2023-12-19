@@ -87,8 +87,7 @@
                                                     <div class="airline_icon_img">
                                                         <img src="/images/icons/airline_icon_02.png" alt="제주항공">
                                                     </div>
-                                                    <div>
-                                                    <!-- choose문 많이 필요 -->
+                                                    <div>  
                                                         <p> [제주항공] 부산 - 도쿄/나리타</p>
                                                         <p>예약번호 ${list.reservationNum}</p>
                                                     </div>

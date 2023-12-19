@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.City;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -180,7 +181,11 @@ public class TicketService {
         return responseDTO;
     }
     
-    
+    /**
+     * 
+     * @param userId
+     * @return GetTicketDateDTO dto
+     */
 	public GetTicketDateDTO getTicketDate(int userId) {
 		GetTicketDateDTO dto = null;
 		try {
@@ -220,8 +225,7 @@ public class TicketService {
 		// 출발지는 한국의 랜덤한 공항
 		List<City> KoreanCity = ticketRepository.getKoreanCity();
 		int r2 = random.nextInt(7)+ 1;
-		//searchDto.setOriginLocationCode(KoreanCity.get(r2).getCityCode());
-		searchDto.setOriginLocationCode("GMP");
+		searchDto.setOriginLocationCode(KoreanCity.get(r2).getCityCode());
 		
 		// 인원은 어른 1명으로 고정
 		searchDto.setAdults(1);
