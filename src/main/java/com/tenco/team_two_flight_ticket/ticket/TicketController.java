@@ -25,6 +25,11 @@ public class TicketController {
     private TicketService ticketService;
 
 
+    @GetMapping("/api/search/{option}")
+    public ResponseEntity<ApiUtils.ApiResult<String>> optionSearch(@PathVariable String option){
+        ticketService.optionSearch(option);
+        return ResponseEntity.ok(ApiUtils.success(option));
+    }
 
     @GetMapping("/preview/{ticketId}")
     public String preview(@PathVariable int ticketId, Model model){

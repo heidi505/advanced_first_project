@@ -193,4 +193,14 @@ public class TicketService {
         return dto;
 
     }
+
+    public TicketResponse.FlightSearchDTO optionSearch(String option) {
+        this.responseDTO.getData().stream()
+                .flatMap(e->e.getItineraries().stream())
+                .flatMap(e->e.getSegments().stream())
+                .filter(e->!e.getAirlineName().equals(option))
+                .collect(Collectors.toList());
+
+
+    }
 }

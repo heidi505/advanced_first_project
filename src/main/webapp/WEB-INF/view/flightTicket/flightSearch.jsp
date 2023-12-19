@@ -731,52 +731,52 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" value="대한항공" name="option">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>대한항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="아시아나항공">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>아시아나항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option"  value="제주 항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>에티하드 항공</span>
+                                <span>제주 항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="티웨이항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>핀에어</span>
+                                <span>티웨이항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="중국남방항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>터키항공</span>
+                                <span>중국남방항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="싱가폴항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>폴란드항공</span>
+                                <span>싱가폴항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="말레이시아항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>에어프랑스</span>
+                                <span>말레이시아 항공</span>
                             </li>
                         </ul>
                     </div>
@@ -1105,6 +1105,24 @@
     </div>
 </main>
 <script>
+
+    let option = document.getElementsByName("option");
+
+    for (let i = 0; i < option.length; i++) {
+        option[i].addEventListener("click", async function () {
+            console.log("여기:" + option[i].value);
+            let response = await fetch("/ticket/api/search/"+option[i].value,{
+                method:"get",
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            });
+            let responseBody = await response.json();
+            console.log("여기:"+responseBody.data);
+        });
+    }
+
+
     let flgithDetailBox = document.getElementsByClassName("flight_detail_box");
     let i;
 
@@ -1208,6 +1226,8 @@
         altFormat: "Y-m-d", // 추가 입력란의 날짜 및 시간 형식
     });
     // 날짜 라이브러리
+
+
 
 </script>
 <script src="/js/javascript.js"></script>
