@@ -18,27 +18,34 @@
                 </div>
                 <div class="coupon_list_cont">
                     <table class="common_table">
-                    <thead>
-                    <tr>
-                        <th>순번</th>
-                        <th>쿠폰 이름</th>
-                        <th>쿠폰 발급 번호</th>
-                        <th>쿠폰 발급일 & 만료일</th>
-                        <th>쿠폰 금액</th>
-                        <th>쿠폰 만료 여부</th>
-                    </tr>
-                    </thead>
-                    <tbody class="common_list_cont">
-                    <tr>
-                        <td>1</td>
-                        <td><a href="/admin/coupon-detail">가입 축하 쿠폰</a></td>
-                        <td><a href="/admin/coupon-detail">1928303952357</a></td>
-                        <td><a href="/admin/coupon-detail">12월 12월 ~ 12월 15일</a></td>
-                        <td><a href="/admin/coupon-detail">2000원</a></td>
-                        <td><a href="/admin/coupon-detail">만료됨</a></td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <thead>
+                        <tr>
+                            <th>순번</th>
+                            <th>쿠폰 이름</th>
+                            <th>쿠폰 발급 번호</th>
+                            <th>쿠폰 발급일 & 만료일</th>
+                            <th>쿠폰 금액</th>
+                            <th>쿠폰 만료 여부</th>
+                        </tr>
+                        </thead>
+                        <tbody class="common_list_cont">
+                        <c:forEach var="coupons" items="${couponExpiredList}">
+                            <tr>
+                                <td><a href="/admin/coupon-detail">${coupons.id}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.couponName}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.couponNumber}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.discountingPrice}</a></td>
+                                <c:if test="${coupons.isUsed == true}">
+                                    <td><a href="/admin/coupon-detail">${coupons.createdValue}</a></td>
+                                </c:if>
+                                <c:if test="${coupons.isUsed == false}">
+                                    <td><a href="/admin/coupon-detail">${coupons.expiredValue}</a></td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="coupon_list_area">
@@ -57,13 +64,15 @@
                         </tr>
                         </thead>
                         <tbody class="common_list_cont">
-                        <tr>
-                            <td>1</td>
-                            <td><a href="/admin/coupon-detail">가입 축하 쿠폰</a></td>
-                            <td><a href="/admin/coupon-detail">1928303952357</a></td>
-                            <td><a href="/admin/coupon-detail">12월 12월 ~ 12월 15일</a></td>
-                            <td><a href="/admin/coupon-detail">2000원</a></td>
-                        </tr>
+                        <c:forEach var="coupons" items="${couponList}">
+                            <tr>
+                                <td><a href="/admin/coupon-detail">${coupons.id}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.couponName}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.couponNumber}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
+                                <td><a href="/admin/coupon-detail">${coupons.discountingPrice}</a></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

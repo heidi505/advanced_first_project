@@ -983,12 +983,6 @@
     let tripOneWay = document.querySelector(".one_way");
     let tripRoundDate = document.querySelector(".trip_round");
     let tripOneWayDate = document.querySelector(".trip_one_way");
-
-
-
-
-
-
     tripRound.addEventListener("click",()=> {
         tripRoundDate.style.display="block";
         tripRound.style.color="var(--primary_02)";

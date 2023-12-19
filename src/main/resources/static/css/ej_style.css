@@ -1323,7 +1323,6 @@
 
 #admin .btn-outline-primary {
     border: 1px solid var(--admin_01);
-    color: var(--admin_01);
     width: 150px;
     height: 48px;
     display: inline-block;
