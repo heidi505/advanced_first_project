@@ -49,6 +49,7 @@ public class TicketRequest {
     @Data
     @ToString
     public static class TicketLightSearchDTO{
+    	@NotEmpty
     	private String keyword;
     }
     

@@ -17,8 +17,6 @@ public class SearchedController {
 	@PostMapping("/searched/delete-search-log")
 	public void deleteSearchLog(@RequestBody DeleteSearchLogDTO dto) {
 		searchedService.deleteSearchLog(dto);
-		
-		
 	}
 	
 }

@@ -73,9 +73,10 @@ public class AuthController {
         
         //최근 검색한 항공권 목록을 가지고 와야 함(searched DB)
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(principal.getId());
-        model.addAttribute("searchedList", searchedList);
-        System.out.println(searchedList);
+        if(principal != null) {
+        	List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(principal.getId());
+        	model.addAttribute("searchedList", searchedList);        	
+        }
         
         return "main";
     }

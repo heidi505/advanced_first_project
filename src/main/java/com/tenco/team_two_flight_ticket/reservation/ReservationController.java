@@ -86,7 +86,8 @@ public class ReservationController {
 
     @GetMapping("/reservation/cancel/{reservationNum}")
     public String cancel(@PathVariable Long reservationNum, Model model) {
-        GetMyTripDetailDTO cancelTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+    	User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        GetMyTripDetailDTO cancelTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
         model.addAttribute("cancelTrip", cancelTrip);
         List<ReservationResponse.GetPayedInfoDTO> payedInfoList = reservationService.getPayedInfo(reservationNum);
         model.addAttribute("payedInfoList", payedInfoList);
@@ -148,8 +149,7 @@ public class ReservationController {
     public String cancelModal(@PathVariable Long reservationNum, Model model) {
         model.addAttribute("cancelRequest", true);
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
- 		//GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
- 		ReservationResponse.GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(1, reservationNum);
+ 		ReservationResponse.GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
 
  		model.addAttribute("detailTrip", detailTrip);
         return "reservation/reservationDetail";
