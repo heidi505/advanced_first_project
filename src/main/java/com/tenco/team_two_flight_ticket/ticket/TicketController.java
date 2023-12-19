@@ -24,11 +24,11 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+    @PostMapping("/flight-search/option")
+    public String optionSearch(TicketRequest.OptionDTO dto){
+        ticketService.optionSearch(dto);
 
-    @GetMapping("/api/search/{option}")
-    public ResponseEntity<ApiUtils.ApiResult<String>> optionSearch(@PathVariable String option){
-        ticketService.optionSearch(option);
-        return ResponseEntity.ok(ApiUtils.success(option));
+        return null;
     }
 
     @GetMapping("/preview/{ticketId}")
@@ -40,19 +40,9 @@ public class TicketController {
         model.addAttribute("ticket", dto);
         model.addAttribute("isRound", isRound);
 
-        return "/reservation/preview";}
+        return "/reservation/preview";
+    }
 
-//    @GetMapping("/flight-search")
-//    public String flightSearch(Model model) {
-//        String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
-//        String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
-//
-//        for (int i = 0; i < regions.length; i++) {
-//            model.addAttribute(values[i],ticketService.getCities(regions[i]));
-//        }
-//
-//        return "flightTicket/flightSearch";
-//    }
 
     @PostMapping("/flight-search")
     public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
@@ -63,6 +53,9 @@ public class TicketController {
         for (int i = 0; i < regions.length; i++) {
             model.addAttribute(values[i],ticketService.getCities(regions[i]));
         }
+
+        TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(dto);
+        model.addAttribute("req", newReqDto);
 
         TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
         model.addAttribute("count", responseBody.getMeta().getCount());
@@ -77,18 +70,10 @@ public class TicketController {
         int isRound = dataDTOList.get(0).getItineraries().size();
         model.addAttribute("isRound", isRound);
 
-
-
-
-
         return "flightTicket/flightSearch";
     }
 
 
 
-    @GetMapping("/cities-list")
-    public ResponseEntity<ApiUtils.ApiResult<List<City>>> citiesList(@RequestParam(defaultValue = "대한민국") String region){
-        List<City> cities = ticketService.getCities(region);
-        return ResponseEntity.ok().body(ApiUtils.success(cities));
-    }
+
 }

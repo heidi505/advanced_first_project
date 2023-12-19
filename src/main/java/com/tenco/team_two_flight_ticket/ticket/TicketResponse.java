@@ -12,11 +12,14 @@ import java.util.stream.Collectors;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketMetaDTO.MetaDTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 public class TicketResponse {
+
+
 
     @Data
     @ToString

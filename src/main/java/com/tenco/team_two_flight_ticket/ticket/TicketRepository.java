@@ -11,6 +11,8 @@ import java.util.List;
 public interface TicketRepository {
     public List<City> getCities(String region);
 
+    public String getCity(String code);
+
     public List<Ticket> findByTicketJoinReservation(Integer userId);
 
     public GetTicketDateDTO getTicketDate(int userId);

@@ -9,15 +9,25 @@
     <section class="flight_search_from_to">
         <div class="search_from_to_box">
             <div class="container">
-                <form class="from_to_form">
+                <form class="from_to_form" action="/ticket/flight-search/option" method="post">
+
+<%--                    <input type="hidden" name="originLocationCode" id="origin" value="GMP"/>--%>
+<%--                    <input type="hidden" name="destinationLocationCode" id="destination" value="BUS"/>--%>
+<%--                    <input type="hidden" name="adults" id="adults" value="0"/>--%>
+<%--                    <input type="hidden" name="children" id="children" value="0"/>--%>
+<%--                    <input type="hidden" name="infants" id="infants" value="0">--%>
+<%--                    <input type="hidden" name="travelClass" id="travelClass" value="일반석"/>--%>
+<%--                    <input type="hidden" name="nonStop" id="nonStop" value="false"/>--%>
+                    <input type="hidden" name="airlineOption" id="airlineOption" value=""/>
+
                     <div class="form_to_area">
                         <div class="from_to_box">
                             <div class="from_to_select">
                                 <div class="from_select">
                                     <button type="button" id="from_select_btn"
                                             class="common_modal_btn from_to_modal_btn" data-target="from_modal">
-                                        <span class="from_code_value">GMP</span>
-                                        <span class="from_airport_value">서울 김포</span>
+                                        <span class="from_code_value">${req.originLocationCode}</span>
+                                        <span class="from_airport_value">${req.originLocationName}</span>
                                     </button>
                                 </div>
                                 <button type="button" class="from_to_icon transform_btn">
@@ -26,8 +36,8 @@
                                 <div class="to_select">
                                     <button type="button" id="to_select_btn"
                                             class="common_modal_btn from_to_modal_btn" data-target="to_modal">
-                                        <span class="to_code_value">BUS</span>
-                                        <span class="to_airport_value">부산</span>
+                                        <span class="to_code_value">${req.destinationLocationCode}</span>
+                                        <span class="to_airport_value">${req.destinationLocationName}</span>
                                     </button>
                                 </div>
                             </div>
@@ -35,11 +45,11 @@
                         <div class="ticket_date_field">
                             <div class="trip_round">
                                 <label for="datepicker">출발일 & 도착일</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택"/>
+                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택" name="startDate" value="${req.startDate}" data-input/>
                             </div>
                             <div class="trip_one_way">
                                 <label for="datepicker2">출발일</label>
-                                <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택"/>
+                                <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택" name="startDate" value="${req.startDate}" data-input/>
                             </div>
                         </div>
                         <div class="passenger_seat_field">
@@ -47,8 +57,8 @@
                             <div>
                                 <button type="button" class="common_modal_btn passenger_seat_btn"
                                         data-target="passenger_seat_modal">
-                                    <span>승객1명</span>
-                                    <span>일반석</span>
+                                    <span>승객 ${req.allPassengers} 명</span>
+                                    <span id="seatClass">${req.seatType()}</span>
                                 </button>
                             </div>
                         </div>
@@ -117,8 +127,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="korea" items="${korea}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                    <button type="button" aria-disabled="false" id="originReal" name="origin"
+                                                            value="${korea.cityCode}">
                                                         <span class="from_local_code">${korea.cityCode}</span><span
                                                             class="from_local_airport">${korea.cityName}</span>
                                                     </button>
@@ -134,7 +144,7 @@
                                             <c:forEach var="japan" items="${japan}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${japan.cityCode}">
                                                         <span class="from_local_code">${japan.cityCode}</span><span
                                                             class="from_local_airport">${japan.cityName}</span>
                                                     </button>
@@ -150,7 +160,7 @@
                                             <c:forEach var="asia" items="${asia}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${asia.cityCode}">
                                                         <span class="from_local_code">${asia.cityCode}</span><span
                                                             class="from_local_airport">${asia.cityName}</span>
                                                     </button>
@@ -166,7 +176,7 @@
                                             <c:forEach var="america" items="${america}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${america.cityCode}">
                                                         <span class="from_local_code">${america.cityCode}</span><span
                                                             class="from_local_airport">${america.cityName}</span>
                                                     </button>
@@ -182,7 +192,7 @@
                                             <c:forEach var="europe" items="${europe}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${europe.cityCode}">
                                                         <span class="from_local_code">${europe.cityCode}</span><span
                                                             class="from_local_airport">${europe.cityName}</span>
                                                     </button>
@@ -198,7 +208,7 @@
                                             <c:forEach var="oceania" items="${oceania}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${oceania.cityCode}">
                                                         <span class="from_local_code">${oceania.cityCode}</span><span
                                                             class="from_local_airport">${oceania.cityName}</span>
                                                     </button>
@@ -214,7 +224,7 @@
                                             <c:forEach var="middleEast" items="${middleEast}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${middleEast.cityCode}">
                                                         <span class="from_local_code">${middleEast.cityCode}</span><span
                                                             class="from_local_airport">${middleEast.cityName}</span>
                                                     </button>
@@ -230,7 +240,7 @@
                                             <c:forEach var="southAmerica" items="${southAmerica}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${southAmerica.cityCode}">
                                                         <span class="from_local_code">${southAmerica.cityCode}</span><span
                                                             class="from_local_airport">${southAmerica.cityName}</span>
                                                     </button>
@@ -246,7 +256,7 @@
                                             <c:forEach var="africa" items="${africa}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${africa.cityCode}">
                                                         <span class="from_local_code">${africa.cityCode}</span><span
                                                             class="from_local_airport">${africa.cityName}</span>
                                                     </button>
@@ -262,7 +272,7 @@
                                             <c:forEach var="china" items="${china}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${china.cityCode}">
                                                         <span class="from_local_code">${china.cityCode}</span><span
                                                             class="from_local_airport">${china.cityName}</span>
                                                     </button>
@@ -517,7 +527,7 @@
                                 <button type="button" class="minus"><img class="minus_img"
                                                                          src="/images/icons/minus_icon.svg" alt="빼기">
                                 </button>
-                                <span class="passenger_count count_num">2</span>
+                                <span class="passenger_count count_num">${req.adults}</span>
                                 <button type="button" class="plus"><img class="plus_img"
                                                                         src="/images/icons/plus_icon.svg" alt="더하기">
                                 </button>
@@ -531,7 +541,7 @@
                                 <button type="button" class="minus"><img class="minus_img"
                                                                          src="/images/icons/minus_icon.svg" alt="빼기">
                                 </button>
-                                <span class="passenger_count count_num">0</span>
+                                <span class="passenger_count count_num">${req.children}</span>
                                 <button type="button" class="plus"><img class="plus_img"
                                                                         src="/images/icons/plus_icon.svg" alt="더하기">
                                 </button>
@@ -545,7 +555,7 @@
                                 <button type="button" class="minus"><img class="minus_img"
                                                                          src="/images/icons/minus_icon.svg" alt="빼기">
                                 </button>
-                                <span class="passenger_count count_num">0</span>
+                                <span class="passenger_count count_num">${req.infants}</span>
                                 <button type="button" class="plus"><img class="plus_img"
                                                                         src="/images/icons/plus_icon.svg" alt="더하기">
                                 </button>
@@ -1106,21 +1116,6 @@
 </main>
 <script>
 
-    let option = document.getElementsByName("option");
-
-    for (let i = 0; i < option.length; i++) {
-        option[i].addEventListener("click", async function () {
-            console.log("여기:" + option[i].value);
-            let response = await fetch("/ticket/api/search/"+option[i].value,{
-                method:"get",
-                headers:{
-                    "Content-Type":"application/json"
-                }
-            });
-            let responseBody = await response.json();
-            console.log("여기:"+responseBody.data);
-        });
-    }
 
 
     let flgithDetailBox = document.getElementsByClassName("flight_detail_box");
@@ -1231,5 +1226,6 @@
 
 </script>
 <script src="/js/javascript.js"></script>
+<script src="/js/option_search.js"></script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp" %>

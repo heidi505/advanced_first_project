@@ -26,6 +26,8 @@ import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
+import javax.xml.crypto.Data;
+
 @Service
 public class TicketService {
     @Autowired
@@ -35,6 +37,7 @@ public class TicketService {
     private AirlineRepository airlineRepository;
     @Autowired
     private AirportRepository airportRepository;
+
     private TicketResponse.FlightSearchDTO responseDTO;
     public List<City> getCities(String region) {
         List<City> cities = ticketRepository.getCities(region);
@@ -198,19 +201,40 @@ public class TicketService {
 
     }
 
-    public TicketResponse.FlightSearchDTO optionSearch(String option) {
-        this.responseDTO.getData().stream()
-                .flatMap(e->e.getItineraries().stream())
-                .flatMap(e->e.getSegments().stream())
-                .filter(e->!e.getAirlineName().equals(option))
+    //새로운 객체 생성해서 채우는 방법..
+    public List<DataDTO> optionSearch(TicketRequest.OptionDTO optionDTO) {
+
+
+        List<DataDTO> respDto = responseDTO.getData().stream()
+                .filter(e -> e.getItineraries().stream()
+                        .anyMatch(itinerary -> itinerary.getSegments().stream()
+                                .anyMatch(segment -> segment.getAirlineName().equals(optionDTO.getAirlineOption().get(0)))
+                        )
+                )
                 .collect(Collectors.toList());
 
-//        List<DataDTO> dto = this.responseDTO.getData().stream()
-//                .map(e->e.getItineraries().stream()
-//                        .map(i->i.getSegments().stream()
-//                                .filter(s->!s.getAirlineName().equals(option)))).collect(Collectors.toList());
-//
+        responseDTO.setData(respDto);
 
 
+
+        return null;
+
+    }
+
+    public TicketRequest.TicketSearchDTO parsingReq(TicketRequest.TicketSearchDTO dto) {
+
+        TicketRequest.TicketSearchDTO newDto = dto;
+
+        String originName = ticketRepository.getCity(dto.getOriginLocationCode());
+        String destinationName = ticketRepository.getCity(dto.getDestinationLocationCode());
+        int added = dto.getAdults() + dto.getChildren() + dto.getInfants();
+
+        newDto.setOriginLocationName(originName);
+        newDto.setDestinationLocationName(destinationName);
+        newDto.setAllPassengers(String.valueOf(added));
+
+
+        System.out.println("================" + added);
+        return newDto;
     }
 }

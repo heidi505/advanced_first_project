@@ -9,6 +9,10 @@
         select * from city_tb where country_name = #{region}
     </select>
 
+    <select id="getCity" resultType="string">
+        select city_name from city_tb where city_code = #{code}
+    </select>
+
     <select id="getCountryName" resultType="string">
         select distinct(country_name) from city_tb
     </select>
