@@ -1,30 +1,38 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket._middle._entity.City;
+
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
-import com.tenco.team_two_flight_ticket._middle._entity.City;
 import com.tenco.team_two_flight_ticket._middle._repository.AirlineRepository;
 import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
+import com.tenco.team_two_flight_ticket.ticket.TicketRequest.TicketSearchDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
+
+import jakarta.validation.Valid;
 
 @Service
 public class TicketService {
@@ -43,9 +51,10 @@ public class TicketService {
 
     //티켓 검색 누르면 나오는 서비스 로직
     public TicketResponse.FlightSearchDTO getTickets(TicketRequest.TicketSearchDTO dto) throws URISyntaxException {
-
+    	
         String date = dto.getStartDate().replace(",","");
         dto.setStartDate(date);
+        
         //날짜 파싱
         if (date.contains("~")){
             String[] parsedDate = date.split(" ~ ");
@@ -176,14 +185,15 @@ public class TicketService {
 		GetTicketDateDTO dto = null;
 		try {
 			dto = ticketRepository.getTicketDate(userId);
-			dto.timeCheck();
-			dto.cutDepartureTime();
+			if(dto != null) {
+				dto.timeCheck();
+				dto.cutDepartureTime();
+			}
 		} catch (Exception e) {
 			throw new MyServerError("서버 에러가 발생했습니다");
 		}
 		return dto;
 	}
-
 
     public DataDTO ticketDetail(int ticketId) {
 
@@ -193,4 +203,38 @@ public class TicketService {
         return dto;
 
     }
+
+    // 간편 항공권 검색 조건 채우기
+	public TicketSearchDTO getSearchDTO(@Valid TicketRequest.TicketLightSearchDTO dto) {
+		// 검색 조건 dto
+		TicketSearchDTO searchDto = new TicketSearchDTO();
+				
+		String keyword = dto.getKeyword();
+		List<City> cities = ticketRepository.getCitiesFromKeyword(keyword);
+		Random random = new Random();
+		// 나라 이름이나 유사명으로 검색된 경우 랜덤하게 도시 선택
+		int r = random.nextInt(cities.size() == 0 ? cities.size()-1 : cities.size());
+		if(cities.size() >= 1) {
+			searchDto.setDestinationLocationCode(cities.get(r).getCityCode());
+		}
+		// 출발지는 한국의 랜덤한 공항
+		List<City> KoreanCity = ticketRepository.getKoreanCity();
+		int r2 = random.nextInt(7)+ 1;
+		//searchDto.setOriginLocationCode(KoreanCity.get(r2).getCityCode());
+		searchDto.setOriginLocationCode("GMP");
+		
+		// 인원은 어른 1명으로 고정
+		searchDto.setAdults(1);
+		
+		// 현재 날짜 + 30일
+		LocalDate departureDate = LocalDate.now().plusDays(30);
+		String startDate = String.valueOf(departureDate);
+		searchDto.setStartDate(startDate);
+
+		// 좌석은 일반석
+		searchDto.setTravelClass("일반석");
+		
+		return searchDto;
+	}
+
 }

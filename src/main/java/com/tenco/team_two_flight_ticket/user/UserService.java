@@ -1,30 +1,44 @@
 package com.tenco.team_two_flight_ticket.user;
 
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
-import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
-import com.tenco.team_two_flight_ticket._core.utils.Define;
-import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
-import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
-import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import static io.lettuce.core.pubsub.PubSubOutput.Type.message;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
+import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
+import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushTokenResponse;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushUser;
+import com.tenco.team_two_flight_ticket.auth.authresponse.PushAlertFail;
+import com.tenco.team_two_flight_ticket.firebase.FCMInitializer;
+
+import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class UserService {
@@ -40,6 +54,9 @@ public class UserService {
     @Autowired
     private JavaMailSender javaMailSender;
     private int authNumber;
+    @Autowired
+    private ResourceLoader resourceLoader;
+
 
     @Transactional
     public void signUp(UserRequest.SignUpDTO dto) {
@@ -228,6 +245,132 @@ public class UserService {
         }
 
     }
+
+    // 로그인 시 푸시 알림 기기 등록
+	public void KakaoPushInsertUser(UserRequest.SignInDTO dto) {
+		// uuid 가져오기
+		User principal = userRepository.findByUsername(dto);
+		String uuid = String.valueOf(principal.getId());
+		dto.setUuid(uuid);
+		// 푸시 알림을 받을 대상 등록
+    	RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	params.add("uuid", dto.getUuid());
+    	params.add("device_id", dto.getInstallationId());
+    	params.add("push_type", "fcm");
+    	params.add("push_token", dto.getFcmToken());
+    		
+    	// 헤더 + body 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg
+    		= new HttpEntity<>(params, headers);
+    			
+    	// 요청 처리(응답은 토큰의 유효기간)
+    	ResponseEntity<KakaoPushTokenResponse> response = rt.exchange("https://kapi.kakao.com/v2/push/register" , HttpMethod.POST,
+    			requestMsg, KakaoPushTokenResponse.class);
+    	KakaoPushTokenResponse result = response.getBody();
+    	System.out.println("----------------");
+    	System.out.println(result.toString());
+    	System.out.println("----------------");
+    	
+	}
+
+	//푸시 알림 대상자 찾기
+	public void KakaoPushFindUser(UserRequest.SignInDTO dto) {
+		System.out.println(dto);
+		RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>(); 
+    	params.add("uuid", dto.getUuid());
+
+    	// 헤더 + body 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg
+    		= new HttpEntity<>(params, headers);
+    			
+    	// 요청 처리
+    	//ResponseEntity<KakaoPushUser> response = rt.exchange("https://kapi.kakao.com/v2/push/tokens" , HttpMethod.POST,
+    	//		requestMsg, KakaoPushUser.class);
+    	ResponseEntity<List<KakaoPushUser>> response = rt.exchange("https://kapi.kakao.com/v2/push/tokens" , HttpMethod.POST,
+    			requestMsg, new ParameterizedTypeReference<List<KakaoPushUser>>() {});
+    	System.out.println("-------------------");
+		List<KakaoPushUser> result = response.getBody();
+		System.out.println(result.toString());
+	}
+
+	//카카오 푸시 보내기
+	public void KakaoPushAlert(@Valid UserRequest.SignInDTO dto) {
+
+    	RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	
+    	String pushMsgJson = "{  \"for_fcm\":{"
+    			+ "    \"collapse\": \"articleId123\","
+    			+ "    \"delay_while_idle\":false,"
+    			+ "    \"custom_field\": {"
+    			+ "      \"article_id\": 111,"
+    			+ "      \"comment_id\": 222,"
+    			+ "      \"comment_preview\": \""+"테스트"+"\" }}}";
+
+    	String uuids = "[\"" +dto.getUuid() +"\"]";
+    	System.out.println("------------"+uuids);
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	params.add("uuids", uuids);
+    	params.add("push_message", pushMsgJson);
+    	//params2.add("bypass", ""); 
+    	//서비스 자체 관리 여부. 
+    	//boolean값 기본 false
+    	//사용 시 message에 푸시 토큰 포함
+
+    	// 헤더 바디 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg 
+    								= new HttpEntity<>(params, headers);
+    	System.out.println(requestMsg.toString());
+    	//요청
+    	ResponseEntity<PushAlertFail> response = rt.exchange("https://kapi.kakao.com/v2/push/send", HttpMethod.POST,
+    			requestMsg, PushAlertFail.class);
+    	PushAlertFail result = response.getBody();
+		
+	}
+
+	
+	public void FireBasePushAlert(@Valid UserRequest.SignInDTO dto) {
+		//firebase 초기화
+		FCMInitializer fcmInitializer = new FCMInitializer();
+		fcmInitializer.initialize();
+        		
+        // 클라이언트에게 푸시 알림 보내기
+        String registrationToken = dto.getFcmToken();
+
+        Message message = Message.builder()
+                .setNotification(Notification.builder()
+                        .setTitle("푸시 알림 제목")
+                        .setBody("푸시 알림 본문")
+                        .build())
+                .setToken(registrationToken)
+                .build();
+
+        String response = "";
+		try {
+			response = FirebaseMessaging.getInstance().send(message);
+			System.out.println("Successfully sent message: " + response);
+		} catch (FirebaseMessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 
 }
