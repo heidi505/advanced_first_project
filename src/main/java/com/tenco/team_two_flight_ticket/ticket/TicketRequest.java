@@ -21,6 +21,14 @@ public class TicketRequest {
     @AllArgsConstructor
     public static class OptionDTO{
         List<String> airlineOption;
+        //가는날 출발 시간
+        List<String> onewayDepTimeOption;
+        //오는 날 출발 시간 - 왕복에만 있음
+        List<String> roundDepTimeOption;
+        //가는 날 도착 시간
+        List<String> onewayArrTimeOption;
+        //오는 날 도착 시간 - 왕복에만 있음
+        List<String> roundArrTimeOption;
     }
 
     @Data

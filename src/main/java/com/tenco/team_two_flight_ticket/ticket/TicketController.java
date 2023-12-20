@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
@@ -24,9 +25,39 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @PostMapping("/flight-search/option")
-    public String optionSearch(TicketRequest.OptionDTO dto){
-        ticketService.optionSearch(dto);
+    @PostMapping("/flight-search/option/{isRound}")
+    public String optionSearch(@PathVariable int isRound, TicketRequest.OptionDTO optionDTO, TicketRequest.TicketSearchDTO reqDto, Model model){
+
+        String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
+        String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
+
+        for (int i = 0; i < regions.length; i++) {
+            model.addAttribute(values[i],ticketService.getCities(regions[i]));
+        }
+
+        TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(reqDto);
+        model.addAttribute("req", newReqDto);
+
+        if (isRound == 1){
+            TicketResponse.FlightSearchDTO respDTO = ticketService.onewayOptionSearch(optionDTO);
+            model.addAttribute("count", respDTO.getMeta().getCount());
+
+            List<DataDTO> dataDTOList = respDTO.getData();
+            model.addAttribute("ticketList", dataDTOList);
+
+            if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
+                throw new MyBadRequestException("해당하는 항공권이 없습니다");
+            }
+
+            model.addAttribute("isRound", isRound);
+
+            return "flightTicket/flightSearch";
+
+        }
+
+//        ticketService.optionSearch(optionDTO);
+
+
 
         return null;
     }
@@ -45,7 +76,7 @@ public class TicketController {
 
 
     @PostMapping("/flight-search")
-    public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
+    public String flightSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model, Errors errors) throws URISyntaxException {
 
         String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
         String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};

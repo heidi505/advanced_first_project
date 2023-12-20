@@ -9,16 +9,20 @@
     <section class="flight_search_from_to">
         <div class="search_from_to_box">
             <div class="container">
-                <form class="from_to_form" action="/ticket/flight-search/option" method="post">
-
-<%--                    <input type="hidden" name="originLocationCode" id="origin" value="GMP"/>--%>
-<%--                    <input type="hidden" name="destinationLocationCode" id="destination" value="BUS"/>--%>
-<%--                    <input type="hidden" name="adults" id="adults" value="0"/>--%>
-<%--                    <input type="hidden" name="children" id="children" value="0"/>--%>
-<%--                    <input type="hidden" name="infants" id="infants" value="0">--%>
-<%--                    <input type="hidden" name="travelClass" id="travelClass" value="일반석"/>--%>
-<%--                    <input type="hidden" name="nonStop" id="nonStop" value="false"/>--%>
+                <form class="from_to_form" action="/ticket/flight-search/option/${isRound}" method="post">
                     <input type="hidden" name="airlineOption" id="airlineOption" value=""/>
+                    <input type="hidden" name="onewayDepTimeOption" id="onewayDepTimeOption" value=""/>
+                    <input type="hidden" name="roundDepTimeOption" id="roundDepTimeOption" value=""/>
+                    <input type="hidden" name="onewayArrTimeOption" id="onewayArrTimeOption" value=""/>
+                    <input type="hidden" name="roundArrTimeOption" id="roundArrTimeOption" value=""/>
+
+                    <input type="hidden" name="originLocationCode" id="origin" value="${req.originLocationCode}"/>
+                    <input type="hidden" name="destinationLocationCode" id="destination" value="${req.destinationLocationName}"/>
+                    <input type="hidden" name="adults" id="adults" value="${req.adults}"/>
+                    <input type="hidden" name="children" id="children" value="${req.children}"/>
+                    <input type="hidden" name="infants" id="infants" value="${req.infants}">
+                    <input type="hidden" name="travelClass" id="travelClass" value="${req.seatType()}"/>
+
 
                     <div class="form_to_area">
                         <div class="from_to_box">
@@ -599,66 +603,71 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="00~06">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>새벽 00:00 ~ 06:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="06~12">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오전 06:00 ~ 12:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="12~18">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오후 12:00 ~ 18:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="18~24">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>야간 18:00 ~ 24:00</span>
                             </li>
                         </ul>
-                        <ul class="filter_item">
-                            <li>
-                                <p class="filter_tit">오는 날</p>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>새벽 00:00 ~ 06:00</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>오전 06:00 ~ 12:00</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>오후 12:00 ~ 18:00</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>야간 18:00 ~ 24:00</span>
-                            </li>
-                        </ul>
+                        <c:choose>
+                            <c:when test="${isRound == 2}">
+                                <ul class="filter_item">
+                                    <li>
+                                        <p class="filter_tit">오는 날</p>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="00~06">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>새벽 00:00 ~ 06:00</span>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="06~12">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>오전 06:00 ~ 12:00</span>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="12~18">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>오후 12:00 ~ 18:00</span>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="18~24">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>야간 18:00 ~ 24:00</span>
+                                    </li>
+                                </ul>
+                            </c:when>
+                        </c:choose>
+
                     </div>
                     <div class="flight_detail_box active departure_time">도착시간
                         <a class="detail_arrow" href="#"><img src="/images/icons/icon_down.svg" alt="내리기"></a>
@@ -670,66 +679,70 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="00~06">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>새벽 00:00 ~ 06:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="06~12">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오전 06:00 ~ 12:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="12~18">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오후 12:00 ~ 18:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="18~24">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>야간 18:00 ~ 24:00</span>
                             </li>
                         </ul>
+                        <c:choose>
+                        <c:when test="${isRound == 2}">
                         <ul class="filter_item">
                             <li>
                                 <p class="filter_tit">오는 날</p>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>새벽 00:00 ~ 06:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오전 06:00 ~ 12:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오후 12:00 ~ 18:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>야간 18:00 ~ 24:00</span>
                             </li>
                         </ul>
+                        </c:when>
+                        </c:choose>
                     </div>
                     <div class="flight_detail_box active departure_time">항공사
                         <a class="detail_arrow" href="#"><img src="/images/icons/icon_down.svg" alt="내리기"></a>
@@ -748,7 +761,7 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox" name="option" value="아시아나항공">
+                                    <input type="checkbox" name="option" value="아시아나">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>아시아나항공</span>
@@ -787,27 +800,6 @@
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>말레이시아 항공</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flight_detail_box active departure_time">탑승객 조건
-                        <a class="detail_arrow" href="#"><img src="/images/icons/icon_down.svg" alt="내리기"></a>
-                    </div>
-                    <div class="detail_more">
-                        <ul class="filter_item">
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>성인</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>학생</span>
                             </li>
                         </ul>
                     </div>

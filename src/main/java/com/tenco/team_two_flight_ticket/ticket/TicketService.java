@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -201,20 +202,23 @@ public class TicketService {
 
     }
 
-    //새로운 객체 생성해서 채우는 방법..
+
     public List<DataDTO> optionSearch(TicketRequest.OptionDTO optionDTO) {
+//        if (optionDTO.getAirlineOption() && optionDTO.){
+//
+//        }
 
-
-        List<DataDTO> respDto = responseDTO.getData().stream()
-                .filter(e -> e.getItineraries().stream()
-                        .anyMatch(itinerary -> itinerary.getSegments().stream()
-                                .anyMatch(segment -> segment.getAirlineName().equals(optionDTO.getAirlineOption().get(0)))
-                        )
-                )
-                .collect(Collectors.toList());
-
-        responseDTO.setData(respDto);
-
+//
+//        List<DataDTO> respDto = responseDTO.getData().stream()
+//                .filter(e -> e.getItineraries().stream()
+//                        .anyMatch(itinerary -> itinerary.getSegments().stream()
+//                                .anyMatch(segment -> segment.getAirlineName().equals(optionDTO.getAirlineOption().get(0)))
+//                        )
+//                )
+//                .collect(Collectors.toList());
+//
+//        responseDTO.setData(respDto);
+//
 
 
         return null;
@@ -236,5 +240,31 @@ public class TicketService {
 
         System.out.println("================" + added);
         return newDto;
+    }
+
+    public TicketResponse.FlightSearchDTO onewayOptionSearch(TicketRequest.OptionDTO optionDTO) {
+
+        if(optionDTO.getAirlineOption().isEmpty() && optionDTO.getOnewayDepTimeOption().isEmpty() && optionDTO.getOnewayArrTimeOption().isEmpty()){
+            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
+        }
+
+        List<DataDTO> respDto = responseDTO.getData().stream()
+                .filter(e -> e.getItineraries().stream()
+                        .anyMatch(itinerary -> itinerary.getSegments().stream()
+                                .anyMatch(segment ->
+                                        optionDTO.getAirlineOption().stream()
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption))
+                                )
+                        )
+                )
+                .collect(Collectors.toList());
+
+
+
+        responseDTO.setData(respDto);
+        responseDTO.getMeta().setCount(respDto.size());
+
+        return responseDTO;
+
     }
 }
