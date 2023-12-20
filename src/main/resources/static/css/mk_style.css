@@ -1,4 +1,8 @@
 /* 프리뷰 페이지 */
+.m15{
+    margin-right: 15px;
+}
+
 .reservation_preview_box {
     margin: 32px 0;
 }
@@ -45,6 +49,7 @@
 
 .preview_li_box {
     border: 1px solid var(--form);
+    align-items: center;
 }
 
 .preview_li_box_top {
@@ -52,6 +57,22 @@
     padding: 15px;
     display: flex;
     align-items: center;
+}
+
+.preview_li_box_form{
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.preview_li_box_div{
+    display: inline-block;
+    margin-right: 50px;
+}
+
+.preview_li_box_span{
+    display: block;
+    text-align: center;
 }
 
 .preview_airport_img {
@@ -67,6 +88,13 @@
 
 .preview_baggage_left {
     width: 25%;
+}
+
+.preview_baggage_set{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
 }
 
 .preview_baggage_bottom {
@@ -94,6 +122,14 @@
     margin-bottom: 5px;
 }
 
+.preview_baggage_bold{
+    font-weight: bold;
+}
+
+.preview_baggage_du{
+    color: var(--basic_07);
+}
+
 .preview_price_form {
     margin-top: 15px;
     margin-left: 50px;
@@ -103,6 +139,11 @@
     color: var(--primary_02);
     font-weight: 800;
     margin-left: 10px;
+    display: flex;
+}
+
+.preview_price_detailm{
+    margin-right: 5px;
 }
 
 .preview_price_img {
