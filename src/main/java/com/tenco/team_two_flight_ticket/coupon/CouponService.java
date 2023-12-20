@@ -43,12 +43,12 @@ public class CouponService {
     }
 
     public List<CouponListDTO> couponList() {
-        return couponRepository.findAll();
+        return couponRepository.findCouponAll();
     }
 
-    public List<CouponDetailDTO> couponDetailList(Integer userId) {
+    public List<CouponDetailDTO> couponDetailList(Integer id) {
 
-        List<CouponDetailDTO> coupons = couponRepository.findByUserId(userId);
+        List<CouponDetailDTO> coupons = couponRepository.findByCouponUserId(id);
         for (CouponDetailDTO coupon : coupons) {
             if (coupon.getIsUsed()) {
                 coupon.setCreatedValue("만료됨");
@@ -63,4 +63,9 @@ public class CouponService {
         List<CouponExpiredListDTO> coupons = couponRepository.findCouponExpiredAll();
         return coupons;
     }
+
+    public void couponDelete(Integer id, Integer userid) {
+        couponRepository.deleteByCouponUserId(id);
+    }
+
 }

@@ -11,4 +11,11 @@ public class CouponListDTO {
     private String couponNumber;
     private String createdAt;
     private String expiredAt;
+    private boolean isUsed;
+    private String createdValue;
+    private String expiredValue;
+
+    public boolean getIsUsed() {
+        return isUsed;
+    }
 }

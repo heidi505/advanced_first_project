@@ -12,6 +12,7 @@ function doubleCheck(username){
 		}).catch(error =>{
 		alert(error.data);
 		return error.success;
+
 	});
 }
 
