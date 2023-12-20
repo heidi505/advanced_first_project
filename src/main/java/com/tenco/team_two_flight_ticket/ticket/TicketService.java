@@ -218,10 +218,9 @@ public class TicketService {
 			searchDto.setDestinationLocationCode(cities.get(r).getCityCode());
 		}
 		// 출발지는 한국의 랜덤한 공항
-		List<City> KoreanCity = ticketRepository.getKoreanCity();
-		int r2 = random.nextInt(7)+ 1;
-		//searchDto.setOriginLocationCode(KoreanCity.get(r2).getCityCode());
-		searchDto.setOriginLocationCode("GMP");
+		List<City> koreanCity = ticketRepository.getKoreanCity();
+		int r2 = random.nextInt(koreanCity.size() == 0 ? koreanCity.size()-1 : koreanCity.size());
+		searchDto.setOriginLocationCode(koreanCity.get(r2).getCityCode());
 		
 		// 인원은 어른 1명으로 고정
 		searchDto.setAdults(1);
