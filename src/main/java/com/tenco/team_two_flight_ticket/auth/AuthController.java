@@ -174,6 +174,7 @@ public class AuthController {
 
         userService.kakaoSignUp(dto);
 
+        session.setAttribute("kakaoAccessToken", response.getBody().getAccess_token());
 
         return "redirect:/main";
     }

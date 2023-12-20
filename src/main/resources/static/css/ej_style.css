@@ -1139,6 +1139,7 @@
 #admin a.btn-primary {
     display: inline-block;
     line-height: 34px;
+    margin-left: 8px;
 }
 
 #admin .btn-primary {
@@ -1280,6 +1281,8 @@
 .admin_common_btn {
     margin: 16px 0;
     text-align: right;
+    display: flex;
+    justify-content: end;
 }
 
 .admin_form_textfield p {

@@ -22,12 +22,11 @@ import java.util.Date;
 @Table(name = "coupon_tb")
 public class Coupon {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int userId;
+    private int hasCouponId;
     private String couponName;
     private int couponPeriod;
     private Long discountingPrice;
