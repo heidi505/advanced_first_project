@@ -17,7 +17,7 @@
                     <input type="hidden" name="roundArrTimeOption" id="roundArrTimeOption" value=""/>
 
                     <input type="hidden" name="originLocationCode" id="origin" value="${req.originLocationCode}"/>
-                    <input type="hidden" name="destinationLocationCode" id="destination" value="${req.destinationLocationName}"/>
+                    <input type="hidden" name="destinationLocationCode" id="destination" value="${req.destinationLocationCode}"/>
                     <input type="hidden" name="adults" id="adults" value="${req.adults}"/>
                     <input type="hidden" name="children" id="children" value="${req.children}"/>
                     <input type="hidden" name="infants" id="infants" value="${req.infants}">
@@ -714,28 +714,28 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox" name="roundArrOption">
+                                    <input type="checkbox" name="roundArrOption" value="00~06">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>새벽 00:00 ~ 06:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox" name="roundArrOption">
+                                    <input type="checkbox" name="roundArrOption" value="06~12">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오전 06:00 ~ 12:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox" name="roundArrOption">
+                                    <input type="checkbox" name="roundArrOption" value="12~18">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오후 12:00 ~ 18:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox" name="roundArrOption">
+                                    <input type="checkbox" name="roundArrOption" value="18~24">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>야간 18:00 ~ 24:00</span>

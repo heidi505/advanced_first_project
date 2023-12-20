@@ -193,44 +193,16 @@ public class TicketService {
 	}
 
 
-    public DataDTO ticketDetail(int ticketId) {
+    public List<DataDTO> ticketDetail(int ticketId) {
 
-        DataDTO dto = responseDTO.getData().get(ticketId);
-        
+        List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId() == String.valueOf(ticketId)).collect(Collectors.toList());
+
 
         return dto;
 
     }
 
 
-    public TicketResponse.FlightSearchDTO optionSearch(TicketRequest.OptionDTO optionDTO) {
-        if(optionDTO.roundOptionsAreEmpty(optionDTO)){
-            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
-        }
-
-
-        List<DataDTO> respDto = responseDTO.getData().stream()
-                .filter(e -> e.getItineraries().stream()
-                        .anyMatch(itinerary -> itinerary.getSegments().stream()
-                                .anyMatch(segment ->
-                                        optionDTO.getAirlineOption().stream()
-                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption)
-                                                )
-                                )
-                        )
-                )
-                .collect(Collectors.toList());
-
-
-
-
-        responseDTO.setData(respDto);
-        responseDTO.getMeta().setCount(respDto.size());
-
-        return responseDTO;
-
-
-    }
 
     public TicketRequest.TicketSearchDTO parsingReq(TicketRequest.TicketSearchDTO dto) {
 
@@ -279,6 +251,21 @@ public class TicketService {
         responseDTO.getMeta().setCount(respDto.size());
 
         return responseDTO;
+
+    }
+
+    public TicketResponse.FlightSearchDTO optionSearch(TicketRequest.OptionDTO optionDTO) {
+        if(optionDTO.roundOptionsAreEmpty(optionDTO)){
+            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
+        }
+
+//        responseDTO.getData().stream().filter(e->e.getItineraries().get(0).equals())
+//
+//        responseDTO.setData(dataDto2);
+//        responseDTO.getMeta().setCount(dataDto2.size());
+
+        return responseDTO;
+
 
     }
 }

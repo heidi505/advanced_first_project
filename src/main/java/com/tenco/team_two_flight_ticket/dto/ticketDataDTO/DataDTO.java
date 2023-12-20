@@ -144,4 +144,11 @@ public class DataDTO{
         }
 
     }
+
+    public ItinerariesDTO onewayOrRound(String value){
+        if(value.equals("oneway")){
+            return  this.getItineraries().get(0);
+        }
+        return this.getItineraries().get(1);
+    }
 }

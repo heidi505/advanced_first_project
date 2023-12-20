@@ -28,12 +28,14 @@ public class TicketController {
     @PostMapping("/flight-search/option/{isRound}")
     public String optionSearch(@PathVariable int isRound, TicketRequest.OptionDTO optionDTO, TicketRequest.TicketSearchDTO reqDto, Model model){
 
+
         String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
         String[] values = {"korea","japan" ,"asia","america","europe","oceania","middleEast","southAmerica","africa","china"};
 
         for (int i = 0; i < regions.length; i++) {
             model.addAttribute(values[i],ticketService.getCities(regions[i]));
         }
+
 
         TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(reqDto);
         model.addAttribute("req", newReqDto);
@@ -74,10 +76,10 @@ public class TicketController {
     @GetMapping("/preview/{ticketId}")
     public String preview(@PathVariable int ticketId, Model model){
 
-        DataDTO dto = ticketService.ticketDetail(ticketId);
-        int isRound = dto.getItineraries().size();
+        List<DataDTO> dto = ticketService.ticketDetail(ticketId);
+        int isRound = dto.stream().map(e->e.getItineraries()).toList().size();
 
-        model.addAttribute("ticket", dto);
+        model.addAttribute("ticket", dto.get(0));
         model.addAttribute("isRound", isRound);
 
         return "/reservation/preview";
