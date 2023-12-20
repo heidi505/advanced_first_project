@@ -29,7 +29,7 @@ public class ReservationController {
     private HttpSession session;
 
     @Autowired
- 	private ReservationService reservationService;
+    private ReservationService reservationService;
 
     /* 페이지 별로 분리 된 시나리오 */
     // 선택한 항공권 보기 페이지 (검색 후 나오는 항공권 목록에서 클릭시 나오는 화면)
@@ -56,7 +56,7 @@ public class ReservationController {
         String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");
         System.out.println("옵션 체크체크 : ");
         System.out.println(dto.getOptionMessage());
-        if ("Y".equals(dto.getOptionMessage())){
+        if ("Y".equals(dto.getOptionMessage())) {
 
             String message = reservationService.kakaoMessage(1, kakaoAccessToken, saveResultDTO);
             session.setAttribute("reservationResult", saveResultDTO);
@@ -70,7 +70,7 @@ public class ReservationController {
     }
 
     @GetMapping("/mk3")
-    public String mk4(){
+    public String mk4() {
         return "reservation/help2";
     }
 
@@ -88,17 +88,17 @@ public class ReservationController {
     }
     // 예약 시나리오 끝!!
 
- 	@ResponseBody
+    @ResponseBody
     @PostMapping("/reservation/cancel")
-        public void cancelProc(@RequestBody Long reservationNum ) {
-            reservationService.cancelReservation(reservationNum);
-        }
- 	
+    public void cancelProc(@RequestBody Long reservationNum) {
+        reservationService.cancelReservation(reservationNum);
+    }
+
 
     @GetMapping("/reservation/cancel/{reservationNum}")
     public String cancel(@PathVariable Long reservationNum, Model model) {
-    	User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        GetMyTripDetailDTO cancelTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        GetMyTripDetailDTO cancelTrip = reservationService.getMyTripDetail(principal.getId(), reservationNum);
         model.addAttribute("cancelTrip", cancelTrip);
         List<ReservationResponse.GetPayedInfoDTO> payedInfoList = reservationService.getPayedInfo(reservationNum);
         model.addAttribute("payedInfoList", payedInfoList);
@@ -160,10 +160,15 @@ public class ReservationController {
     public String cancelModal(@PathVariable Long reservationNum, Model model) {
         model.addAttribute("cancelRequest", true);
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
- 		ReservationResponse.GetMyTripDetailDTO detailTrip  =  reservationService.getMyTripDetail(principal.getId(), reservationNum);
+        ReservationResponse.GetMyTripDetailDTO detailTrip = reservationService.getMyTripDetail(principal.getId(), reservationNum);
 
- 		model.addAttribute("detailTrip", detailTrip);
+        model.addAttribute("detailTrip", detailTrip);
         return "reservation/reservationDetail";
+    }
+
+    @GetMapping("/fix")
+    public String fix() {
+        return "reservation/preview2";
     }
 
 }
