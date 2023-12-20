@@ -31,16 +31,16 @@
                         <tbody class="common_list_cont">
                         <c:forEach var="coupons" items="${couponExpiredList}">
                             <tr>
-                                <td><a href="/admin/coupon-detail">${coupons.id}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.couponName}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.couponNumber}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.discountingPrice}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.id}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponName}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponNumber}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.discountingPrice}</a></td>
                                 <c:if test="${coupons.isUsed == true}">
-                                    <td><a href="/admin/coupon-detail">${coupons.createdValue}</a></td>
+                                    <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.createdValue}</a></td>
                                 </c:if>
                                 <c:if test="${coupons.isUsed == false}">
-                                    <td><a href="/admin/coupon-detail">${coupons.expiredValue}</a></td>
+                                    <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.expiredValue}</a></td>
                                 </c:if>
                             </tr>
                         </c:forEach>
@@ -66,11 +66,11 @@
                         <tbody class="common_list_cont">
                         <c:forEach var="coupons" items="${couponList}">
                             <tr>
-                                <td><a href="/admin/coupon-detail">${coupons.id}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.couponName}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.couponNumber}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
-                                <td><a href="/admin/coupon-detail">${coupons.discountingPrice}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.id}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponName}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponNumber}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.discountingPrice}</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -11,12 +11,21 @@
                 #{expiredAt})
     </insert>
 
-    <select id="findAll" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO">
-        SELECT * FROM COUPON_TB as ct order by ct.id desc
+    <select id="findCouponAll" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO">
+        SELECT *,
+               CASE
+                   WHEN is_used = true THEN '만료됨'
+                   ELSE '만료안됨'
+                   END AS expired
+        FROM hascoupon_TB as ht
+                 left join coupon_tb as ct on
+            ht.id = ct.id
+        where is_used = false
+        order by ht.id desc
     </select>
 
-    <select id="findByUserId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO">
-        SELECT *,
+    <select id="findByCouponUserId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO">
+        SELECT ht.id, ct.coupon_name, ct.is_used, ct.created_at, ct.expired_at, ct.coupon_content, ct.discounting_price,
                CASE
                    WHEN is_used = true THEN '만료됨'
                    ELSE '만료안됨'
@@ -24,10 +33,8 @@
         FROM HASCOUPON_TB as ht
                  LEFT JOIN coupon_tb as ct ON ht.id = ct.id
                  LEFT JOIN user_tb as ut ON ht.id = ut.id
-        WHERE user_id = #{userId}
-        order by ct.id desc
+        WHERE user_id = #{userId} order by ct.id desc
     </select>
-
 
     <select id="findCouponExpiredAll" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO">
         SELECT *,
@@ -35,8 +42,15 @@
                    WHEN is_used = true THEN '만료됨'
                    ELSE '만료안됨'
                    END AS expired
-        FROM COUPON_TB as ct
+        FROM hascoupon_TB as ht
+                 left join coupon_tb as ct on
+            ht.id = ct.id
         where is_used = true
-        order by ct.id desc
+        order by ht.id desc
     </select>
+
+    <delete id="deleteByCouponUserId">
+        DELETE FROM HASCOUPON_TB WHERE id = #{id}
+    </delete>
+
 </mapper>
