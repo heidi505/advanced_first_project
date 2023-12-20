@@ -8,5 +8,9 @@
         select * from hascoupon_tb where user_id = #{id}
     </select>
 
+    <insert id="insert">
+        insert into hascoupon_tb(user_id, coupon_id, is_used, coupon_number, created_at, expired_at)
+        values (#{userId}, #{couponId}, #{isUsed}, #{couponNumber}, #{createdAt}, #{expiredAt})
+    </insert>
 
 </mapper>
