@@ -345,6 +345,7 @@
 
     
 </script>
+<script src="/js/make_element.js"></script>
 <script src="/js/my_travel.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>
