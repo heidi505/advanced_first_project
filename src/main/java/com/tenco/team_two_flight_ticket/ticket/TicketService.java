@@ -261,8 +261,12 @@ public class TicketService {
                         .anyMatch(itinerary -> itinerary.getSegments().stream()
                                 .anyMatch(segment ->
                                         optionDTO.getAirlineOption().stream()
-                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption)
-                                                )
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption))
+                                                && optionDTO.getOnewayDepTimeOption().stream()
+                                                .anyMatch(d -> segment.getDeparture().depSearch(d))
+                                                && optionDTO.getOnewayArrTimeOption().stream()
+                                                .anyMatch(a -> segment.getArrival().arrSearch(a))
+
                                 )
                         )
                 )

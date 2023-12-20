@@ -49,8 +49,16 @@ public class DepartureDTO {
         return timeArr[0] + ":" + timeArr[1];
     }
 
-    public int optionSearch(){
-        LocalTime time = LocalDateTime.parse(this.at).toLocalTime();
-        return time.getHour();
+    public boolean depSearch(String value){
+        System.out.println("value:" + value);
+        int time = LocalDateTime.parse(this.at).toLocalTime().getHour();
+        System.out.println("time:"+time);
+
+        String[] valueArr = value.split("~");
+
+        int startValue = Integer.parseInt(valueArr[0]);
+        int endValue = Integer.parseInt(valueArr[1]);
+
+        return time >= startValue && time <= endValue;
     }
 }
