@@ -235,5 +235,24 @@ public class TicketService {
 		
 		return searchDto;
 	}
+	
+	/**
+	 * 
+	 * @param dto
+	 * @return cities
+	 */
+	//검색어로 도시 조회
+	public List<City> getCitiesFromKeyword(SearchCityDTO dto) {
+		List<City> cities = null;
+		try {
+			cities = ticketRepository.getCitiesFromKeyword(dto.getKeyword());
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		return cities;
+	}
+
+	
+	
 
 }
