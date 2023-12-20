@@ -416,6 +416,7 @@
     padding: 12px;
     position: relative;
     margin-right: 8px;
+    cursor:pointer;
 }
 
 .flight_search_close {

@@ -42,5 +42,8 @@ public class ReservationRequest {
         private boolean isOneWay; //oa
         private boolean isNonStop; //oa
         private int baggageAllowance; //oa
+
+        //kakaomessage
+        private String optionMessage;
     }
 }

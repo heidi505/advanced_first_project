@@ -109,7 +109,4 @@
         where reservation_num = #{reservationNum}
     </select>
 
-
-
-
 </mapper>

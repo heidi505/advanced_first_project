@@ -92,8 +92,7 @@ public class UserController {
 		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(1,dto);
 		GetMyTripCntAndListDTO myTrip = new GetMyTripCntAndListDTO();
 		myTrip.setTripCount(tripCount);
-		myTrip.setTripList(tripList);
-		
+		myTrip.setTripList(tripList);	
 		return myTrip;
 	}
 	

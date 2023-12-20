@@ -18,4 +18,10 @@ public interface TicketRepository {
     List<Ticket> findByReservationId(int id);
 
     public int insertT(Ticket ticket);
+
+	public List<City> getCitiesFromKeyword(String keyword);
+
+	public List<City> getKoreanCity();
+
+
 }

@@ -8,6 +8,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
@@ -22,6 +25,9 @@ import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 
 @Slf4j
@@ -170,72 +176,120 @@ public class ReservationService {
     }
 
     public GetMyTripCountDTO getMyTripCount(int userId, UserRequest.GetMyTravelListDTO dto) {
-    	StatusEnum statusEnum = dto.getStatusEnum();
-    	// 개수를 담을 객체
-    	GetMyTripCountDTO tripCnt = new GetMyTripCountDTO();
-    	try {
-    		int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all");
-    		int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true");
-    		int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false");
-    		tripCnt.setAllTripCount(allTripCnt);
-    		tripCnt.setPayedTripCount(payedTripCnt);
-    		tripCnt.setNotPayedTripCount(notPayedTripCnt);
-    	} catch (Exception e) {
-    		throw new MyServerError("서버 에러가 발생했습니다");
-    	}
-    	
-    	return tripCnt;
+        StatusEnum statusEnum = dto.getStatusEnum();
+        // 개수를 담을 객체
+        GetMyTripCountDTO tripCnt = new GetMyTripCountDTO();
+        try {
+            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all");
+            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true");
+            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false");
+            tripCnt.setAllTripCount(allTripCnt);
+            tripCnt.setPayedTripCount(payedTripCnt);
+            tripCnt.setNotPayedTripCount(notPayedTripCnt);
+        } catch (Exception e) {
+            throw new MyServerError("서버 에러가 발생했습니다");
+        }
+
+        return tripCnt;
     }
 
 
-    public GetMyTripDetailDTO getMyTripDetail(int userId , Long reservationNum) {
-		GetMyTripDetailDTO dto = null;
-		if(reservationNum == null) {
-			throw new MyBadRequestException("잘못된 예약번호입니다");
-		}
-		try {
-			dto = reservationRepository.getMyTripDetail(userId ,reservationNum);
-			dto.makePhoneNumber();
-			dto.cutDepartureDate();
-			dto.cutArrivalDate();
-			dto.cutPaymentDeadline();
-		} catch (Exception e) {
-			throw new MyServerError("서버 에러가 발생했습니다");
-		}
-		return dto;
-	}
+    public GetMyTripDetailDTO getMyTripDetail(int userId, Long reservationNum) {
+        GetMyTripDetailDTO dto = null;
+        if (reservationNum == null) {
+            throw new MyBadRequestException("잘못된 예약번호입니다");
+        }
+        try {
+            dto = reservationRepository.getMyTripDetail(userId, reservationNum);
+            dto.makePhoneNumber();
+            dto.cutDepartureDate();
+            dto.cutArrivalDate();
+            dto.cutPaymentDeadline();
+        } catch (Exception e) {
+            throw new MyServerError("서버 에러가 발생했습니다");
+        }
+        return dto;
+    }
 
 
-	@Transactional
-	public void cancelReservation(Long reservationNum) {
-		if(reservationNum == null) {
-			throw new MyBadRequestException("취소할 예약 번호가 없습니다");
-		}
-		try {
-			int updateResult =  reservationRepository.cancelReservation(reservationNum);
-			if(updateResult == 0) {
-				throw new MyBadRequestException("잘못된 예약 번호가 입력되었습니다");
-			}
-		} catch (Exception e) {
-			throw new MyServerError("서버 에러가 발생했습니다");
-		}
-	}
-    
-//	public GetPayedInfoDTO getPayedInfo(Long reservationNum) {
-//		GetPayedInfoDTO payedInfo = null;
-//		if(reservationNum == null) {
-//			throw new MyBadRequestException("예약 번호가 없습니다");
-//		}
-//		try {
-//			payedInfo = reservationRepository.getPayedInfo(reservationNum);
-//			payedInfo.changePrice();
-//		} catch (Exception e) {
-//			throw new MyServerError("서버 에러가 발생했습니다");
-//		}
-//		return payedInfo;
-//	}
-    
-    
-    
-    
+    @Transactional
+    public void cancelReservation(Long reservationNum) {
+        if (reservationNum == null) {
+            throw new MyBadRequestException("취소할 예약 번호가 없습니다");
+        }
+        try {
+            int updateResult = reservationRepository.cancelReservation(reservationNum);
+            if (updateResult == 0) {
+                throw new MyBadRequestException("잘못된 예약 번호가 입력되었습니다");
+            }
+        } catch (Exception e) {
+            throw new MyServerError("서버 에러가 발생했습니다");
+        }
+    }
+
+    public List<GetPayedInfoDTO> getPayedInfo(Long reservationNum) {
+        List<GetPayedInfoDTO> payedInfoList = null;
+        if (reservationNum == null) {
+            throw new MyBadRequestException("예약 번호가 없습니다");
+        }
+        try {
+            payedInfoList = reservationRepository.getPayedInfo(reservationNum);
+            for (GetPayedInfoDTO dto : payedInfoList) {
+                dto.changePrice();
+            }
+        } catch (Exception e) {
+            throw new MyServerError("서버 에러가 발생했습니다");
+        }
+        return payedInfoList;
+    }
+
+    @Transactional
+    public String kakaoMessage(int i, String kakaoAccessToken, ReservationResponse.SaveResultDTO saveResultDTO) {
+        // https://kapi.kakao.com/v2/api/talk/memo/default/send
+
+        String access_token = kakaoAccessToken;
+
+        RestTemplate rt1 = new RestTemplate();
+        HttpHeaders headers1 = new HttpHeaders();
+        headers1.add("Content-type", "application/x-www-form-urlencoded");
+        headers1.add("Authorization", "Bearer " + access_token);
+
+        // body 구성
+        String reservationMessage =
+                "안녕하세요 여행자님,\n" +
+                        "나다운 진짜 여행 님부스에어라인입니다.\n\n" +
+                        "예약이 완료되었어요!\n" +
+                        "항공권 요금의 확정 여부를 확인 후 안내해 드릴게요. 감사합니다.\n\n" +
+                        "예약번호 : " + saveResultDTO.getReservation().getReservationNum() + "\n\n" +
+                        "*여권 정보 미 입력 시 발권 진행이 불가하며\n" +
+                        "결제금액이 인상 또는 예약이 취소될 수 있어요.\n" +
+                        "*결제 마감 시한까지 미결제 시 예약이 취소될 수 있어요.";
+
+        MultiValueMap<String, String> params1 = new LinkedMultiValueMap<>();
+        String templateObject = "{" +
+                "\"object_type\":\"text\"," +
+                "\"text\":\"[님부스에어라인]\\n" + reservationMessage.replace("\n", "\\n") + "\"," +
+                "\"link\":{" +
+                "\"web_url\":\"http://localhost:8080/main\"," +
+                "\"mobile_web_url\":\"http://localhost:8080/main\"" +
+                "}" +
+                "}";
+        params1.add("template_object", templateObject);
+
+        HttpEntity<MultiValueMap<String, String>> requestMsg1 = new HttpEntity<>(params1, headers1);
+        System.out.println("메시지 테스트 : " + requestMsg1);
+
+        // 카카오톡 메시지 보내기 요청
+        String sendMessageUrl = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(sendMessageUrl, requestMsg1, String.class);
+
+        // 응답 확인
+        System.out.println("Response: " + responseEntity.getBody());
+        System.out.println("카카오톡 메세지 보내기 성공");
+        return null;
+    }
+
+
 }

@@ -16,7 +16,7 @@
                     <div class="flex-column w-100">
                         <div class="form-group w-80 mx-auto pt-2 mt-2 mt-5">
                             <label for="realName">이름*</label> <input type="text"
-                                                                     class="form-control mt-2 me-2 p-2" name="realname"
+                                                                     class="form-control mt-2 me-2 p-2" name="realName"
                                                                      id="realname" placeholder="이름을 입력해주세요"/>
                         </div>
                         <div class="form-group w-80 mx-auto pt-2 mt-2">
