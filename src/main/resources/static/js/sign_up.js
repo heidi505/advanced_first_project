@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-function doubleCheck(username){
-	fetch(`/check/username?username=${username}`
-		,{ method: "GET",
-			headers:{
-				"Content-Type": "application/json",
-				"charset": "UTF-8"
-			},
-		}).then(response => response.json())
-		.then(result=>{
-			alert(result.data);
-			return result.success;
-		}).catch(error =>{
-		alert(error.data);
-		return error.success;
-
-	});
-=======
 //아이디 중복 체크
 async function doubleCheck(username) {
     try {
@@ -27,7 +9,6 @@ async function doubleCheck(username) {
         alert(error.data);
         return false; 
     }
->>>>>>> master
 }
 //인증번호로 인증하기
 async function bringNumber(email) {
