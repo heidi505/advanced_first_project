@@ -203,25 +203,32 @@ public class TicketService {
     }
 
 
-    public List<DataDTO> optionSearch(TicketRequest.OptionDTO optionDTO) {
-//        if (optionDTO.getAirlineOption() && optionDTO.){
-//
-//        }
-
-//
-//        List<DataDTO> respDto = responseDTO.getData().stream()
-//                .filter(e -> e.getItineraries().stream()
-//                        .anyMatch(itinerary -> itinerary.getSegments().stream()
-//                                .anyMatch(segment -> segment.getAirlineName().equals(optionDTO.getAirlineOption().get(0)))
-//                        )
-//                )
-//                .collect(Collectors.toList());
-//
-//        responseDTO.setData(respDto);
-//
+    public TicketResponse.FlightSearchDTO optionSearch(TicketRequest.OptionDTO optionDTO) {
+        if(optionDTO.roundOptionsAreEmpty(optionDTO)){
+            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
+        }
 
 
-        return null;
+        List<DataDTO> respDto = responseDTO.getData().stream()
+                .filter(e -> e.getItineraries().stream()
+                        .anyMatch(itinerary -> itinerary.getSegments().stream()
+                                .anyMatch(segment ->
+                                        optionDTO.getAirlineOption().stream()
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption)
+                                                )
+                                )
+                        )
+                )
+                .collect(Collectors.toList());
+
+
+
+
+        responseDTO.setData(respDto);
+        responseDTO.getMeta().setCount(respDto.size());
+
+        return responseDTO;
+
 
     }
 
@@ -248,16 +255,20 @@ public class TicketService {
             throw new MyBadRequestException("검색할 옵션을 선택해주세요");
         }
 
+
         List<DataDTO> respDto = responseDTO.getData().stream()
                 .filter(e -> e.getItineraries().stream()
                         .anyMatch(itinerary -> itinerary.getSegments().stream()
                                 .anyMatch(segment ->
                                         optionDTO.getAirlineOption().stream()
-                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption) )
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption)
+                                                )
                                 )
                         )
                 )
                 .collect(Collectors.toList());
+
+
 
 
         responseDTO.setData(respDto);

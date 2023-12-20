@@ -55,11 +55,20 @@ public class TicketController {
 
         }
 
-//        ticketService.optionSearch(optionDTO);
+       TicketResponse.FlightSearchDTO roundRespDTO = ticketService.optionSearch(optionDTO);
+        model.addAttribute("count", roundRespDTO.getMeta().getCount());
 
+        List<DataDTO> dataDTOList = roundRespDTO.getData();
+        model.addAttribute("ticketList", dataDTOList);
 
+        if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
+            throw new MyBadRequestException("해당하는 항공권이 없습니다");
+        }
 
-        return null;
+        model.addAttribute("isRound", isRound);
+
+        return "flightTicket/flightSearch";
+
     }
 
     @GetMapping("/preview/{ticketId}")

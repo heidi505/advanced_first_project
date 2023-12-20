@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
@@ -46,5 +47,10 @@ public class DepartureDTO {
         String[] timeArr = time.split(":");
 
         return timeArr[0] + ":" + timeArr[1];
+    }
+
+    public int optionSearch(){
+        LocalTime time = LocalDateTime.parse(this.at).toLocalTime();
+        return time.getHour();
     }
 }

@@ -29,6 +29,16 @@ public class TicketRequest {
         List<String> onewayArrTimeOption;
         //오는 날 도착 시간 - 왕복에만 있음
         List<String> roundArrTimeOption;
+
+        public boolean roundOptionsAreEmpty(OptionDTO optionDTO) {
+            return optionDTO.getAirlineOption().isEmpty() &&
+                    optionDTO.getOnewayDepTimeOption().isEmpty() &&
+                    optionDTO.getOnewayArrTimeOption().isEmpty() &&
+                    optionDTO.getRoundArrTimeOption().isEmpty() &&
+                    optionDTO.getRoundDepTimeOption().isEmpty();
+        }
+
+
     }
 
     @Data
