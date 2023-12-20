@@ -116,12 +116,6 @@ public class DataDTO{
             newMap.put("유아", infantDto);
         }
 
-
-
-
-
-
-
         return newMap;
     }
 

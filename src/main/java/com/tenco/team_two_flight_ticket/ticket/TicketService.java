@@ -253,12 +253,11 @@ public class TicketService {
                         .anyMatch(itinerary -> itinerary.getSegments().stream()
                                 .anyMatch(segment ->
                                         optionDTO.getAirlineOption().stream()
-                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption))
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption) )
                                 )
                         )
                 )
                 .collect(Collectors.toList());
-
 
 
         responseDTO.setData(respDto);
