@@ -68,4 +68,10 @@ public class CouponService {
         couponRepository.deleteByCouponUserId(id);
     }
 
+    // 특정 회원의 유효 쿠폰 조회
+	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id) {
+		List<CouponExpiredListDTO> couponList = couponRepository.findCouponExpiredAllByUserId(id);
+		return couponList;
+	}
+
 }

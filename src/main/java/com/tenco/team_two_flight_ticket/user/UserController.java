@@ -3,6 +3,10 @@ package com.tenco.team_two_flight_ticket.user;
 import java.util.List;
 
 import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
+import com.tenco.team_two_flight_ticket.coupon.CouponService;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +38,9 @@ public class UserController {
 
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private CouponService couponService;
 
 	@GetMapping("/profile")
 	public String profile(Model model) {
@@ -69,15 +76,24 @@ public class UserController {
 		return "redirect:/sign-in";
 	}
 	@GetMapping("/coupon")
-	public String coupon() {
+	public String coupon(Model model) {
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		// coupon 목록 조회
+		List<CouponExpiredListDTO> couponList = couponService.findCouponExpiredAllByUserId(principal.getId());
+		// coupon 수 조회
+		int couponNum = userService.getProfile(principal);
+		
+		model.addAttribute("couponList",couponList);
+		model.addAttribute("couponNum",couponNum);
+		model.addAttribute("principal",principal);		
 		return "user/coupon";
 	}
 
 	@GetMapping("/my-travel")
 	public String myPageTravel(@Valid GetMyTravelListDTO dto , Model model ) {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
-		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(1,dto);
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
+		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
 		model.addAttribute("tripCount", tripCount);
 		model.addAttribute("tripList",tripList);
 		return "user/myTravel";
@@ -87,9 +103,8 @@ public class UserController {
 	@GetMapping("/get-my-travel")
 	public GetMyTripCntAndListDTO myPageTravelProc(@Valid GetMyTravelListDTO dto, Errors errors) {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		//principal.getId()
-		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(1, dto);
-		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(1,dto);
+		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
+		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
 		GetMyTripCntAndListDTO myTrip = new GetMyTripCntAndListDTO();
 		myTrip.setTripCount(tripCount);
 		myTrip.setTripList(tripList);	

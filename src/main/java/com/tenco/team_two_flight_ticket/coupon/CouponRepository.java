@@ -18,4 +18,6 @@ public interface CouponRepository {
 
     public int deleteByCouponUserId(Integer id);
 //    public List<CouponExpiredListDTO> findCouponExpiredUserId(Integer id);
+
+	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id);
 }
