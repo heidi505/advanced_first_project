@@ -5,43 +5,55 @@
 <mapper
         namespace="com.tenco.team_two_flight_ticket.coupon.CouponRepository">
     <insert id="insert">
-        insert into coupon_tb(coupon_name, coupon_period, discounting_price, coupon_content, coupon_number, is_used, created_at,
-                              expired_at)
-        values (#{couponName}, #{couponPeriod}, #{discountingPrice}, #{couponContent}, #{couponNumber}, #{isUsed}, #{createdAt},
-                #{expiredAt})
+        insert into coupon_tb(user_id, username, coupon_name, coupon_period, discounting_price, coupon_content, coupon_number, is_used, created_at, expired_at)
+        values (#{userId}, #{username}, #{couponName}, #{couponPeriod}, #{discountingPrice}, #{couponContent}, #{couponNumber}, #{isUsed}, #{createdAt}, #{expiredAt})
     </insert>
 
     <select id="findCouponAll" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO">
         SELECT *,
-               CASE
-                   WHEN is_used = true THEN '만료됨'
-                   ELSE '만료안됨'
-                   END AS expired
-        FROM hascoupon_TB as ht
-                 left join coupon_tb as ct on
-            ht.id = ct.id
+        FROM coupon_tb as ct
+                 left join user_tb as ut
+                           on ct.id = ut.id
         where is_used = false
-        order by ht.id desc
+        order by ct.id desc
     </select>
 
-    <select id="findByCouponUserId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO">
+    <select id="findCouponId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO">
+        SELECT *,
+        FROM coupon_tb as ct
+                 left join user_tb as ut
+                           on ct.id = ut.id
+        where is_used = false and ut.id = #{id}
+        order by ct.id desc
+    </select>
+
+    <select id="findCouponUserId" resultType="com.tenco.team_two_flight_ticket.coupon.CouponRepository">
+        SELECT *,
+        FROM coupon_tb as ct
+                 left join user_tb as ut
+                           on ct.id = ut.id
+        where is_used = false and ut.id = #{id}
+    </select>
+
+    <select id="findCouponSMS" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponSMSDTO">
+        SELECT ut.id, ut.username, ut.phone_number, ct.coupon_number, ct.expired_at, ct.discounting_price, ct.coupon_name FROM coupon_tb as ct
+                 left JOIN user_tb as ut
+                           ON ct.id = ut.id
+        WHERE ct.is_used = false and ct.user_id = ${userId}
+        ORDER BY ct.id DESC
+    </select>
+
+    <select id="findByExpiredCouponId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO">
         SELECT ht.id, ct.coupon_name, ct.is_used, ct.created_at, ct.expired_at, ct.coupon_content, ct.discounting_price,
-               CASE
-                   WHEN is_used = true THEN '만료됨'
-                   ELSE '만료안됨'
-                   END AS expired
         FROM HASCOUPON_TB as ht
                  LEFT JOIN coupon_tb as ct ON ht.id = ct.id
                  LEFT JOIN user_tb as ut ON ht.id = ut.id
-        WHERE user_id = #{userId} order by ct.id desc
+        WHERE user_id = #{userId} and is_used = true
+        order by ct.id desc
     </select>
 
     <select id="findCouponExpiredAll" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO">
         SELECT *,
-               CASE
-                   WHEN is_used = true THEN '만료됨'
-                   ELSE '만료안됨'
-                   END AS expired
         FROM hascoupon_TB as ht
                  left join coupon_tb as ct on
             ht.id = ct.id

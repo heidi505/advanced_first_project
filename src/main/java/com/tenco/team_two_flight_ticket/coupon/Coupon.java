@@ -26,7 +26,7 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userId;
-    private int hasCouponId;
+    private String username;
     private String couponName;
     private int couponPeriod;
     private Long discountingPrice;
@@ -40,9 +40,12 @@ public class Coupon {
     @Temporal(TemporalType.DATE)
     private Date expiredAt;
 
+
     @Builder
-    public Coupon(int id, String couponName, int couponPeriod, Long discountingPrice, String couponContent, String couponNumber, boolean isUsed, Date createdAt, Date expiredAt) {
+    public Coupon(int id, int userId, String username, String couponName, int couponPeriod, Long discountingPrice, String couponContent, String couponNumber, boolean isUsed, Date createdAt, Date expiredAt) {
         this.id = id;
+        this.userId = userId;
+        this.username = username;
         this.couponName = couponName;
         this.couponPeriod = couponPeriod;
         this.discountingPrice = discountingPrice;
