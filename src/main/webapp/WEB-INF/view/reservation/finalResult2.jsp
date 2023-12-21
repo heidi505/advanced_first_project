@@ -93,6 +93,17 @@
                     <td style="display: flex; align-items: center; justify-content: center;">
                         <button type="button" class="btn btn-primary" style="height: 100%; width: 100%;" onclick="applyCoupon()">적용하기</button>
                     </td>
+                <tr>
+                    <td style="font-weight: bold;">쿠폰이름</td>
+                    <td style="border-right: 1px solid var(--line);">가입 쿠폰</td>
+                    <td style="font-weight: bold">쿠폰 만료일</td>
+                    <td style="border-right: 1px solid var(--line)">2023-12-20일까지</td>
+                    <td style="font-weight: bold">쿠폰 금액</td>
+                    <td style="border-right: 1px solid var(--line)">13000</td>
+                    <td style="display: flex; align-items: center; justify-content: center;">
+                        <button type="button" class="btn btn-primary" style="height: 100%; width: 100%;" onclick="applyCoupon()">적용하기</button>
+                    </td>
+                </tr>
                 </tr>
                 </thead>
             </table>

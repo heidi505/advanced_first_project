@@ -82,6 +82,7 @@
             <div class="mt-5 fs-4"><b>나의 쿠폰 목록</b>
             </div>
             <table class="passenger_info_table w-100" style="margin-top: 30px">
+
                 <thead>
                 <tr>
                     <td style="font-weight: bold;">쿠폰이름</td>

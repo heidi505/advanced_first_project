@@ -5,8 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
+import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
 import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
+import com.tenco.team_two_flight_ticket.coupon.Coupon;
+import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
+import com.tenco.team_two_flight_ticket.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -40,6 +45,10 @@ public class ReservationService {
     private TicketRepository ticketRepository;
     @Autowired
     private PassengerRepository passengerRepository;
+    @Autowired
+    private HasCouponRepository hasCouponRepository;
+    @Autowired
+    private CouponRepository couponRepository;
 
     @Transactional
     public ReservationResponse.SaveResultDTO save(ReservationRequest.SaveFormDto dto) {
@@ -291,4 +300,11 @@ public class ReservationService {
     }
 
 
+    public List<Coupon> getCouponList(User principal) {
+        // 1. 유저 아이디로 보유 쿠폰 검색 (hascoupon)
+        List<HasCoupon> hasCouponList = hasCouponRepository.findByUserId(principal.getId());
+        // 2. 보유 쿠폰 번호를 통해 쿠폰 검색 (coupon)
+        List<Coupon> couponList = couponRepository.findByCouponUserId()
+        return null;
+    }
 }

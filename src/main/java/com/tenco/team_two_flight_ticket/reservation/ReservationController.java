@@ -3,6 +3,8 @@ package com.tenco.team_two_flight_ticket.reservation;
 import java.security.Principal;
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
+import com.tenco.team_two_flight_ticket.coupon.Coupon;
 import com.tenco.team_two_flight_ticket.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,10 +87,18 @@ public class ReservationController {
         ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
 
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        int couponNum = userService.getProfile(principal);
 
-        model.addAttribute("principal", principal);
-        model.addAttribute("couponNum", couponNum);
+//        int couponNum = userService.getProfile(principal);
+//
+//        model.addAttribute("principal", principal);
+//        model.addAttribute("couponNum", couponNum);
+//        System.out.println("-----티켓 체크-----");
+//        System.out.println(couponNum);
+        // 쿠폰 받아오기.
+        List<Coupon> coupons = reservationService.getCouponList(principal);
+
+        // 3. 쿠폰 정보 모델에 추가.
+
 
         model.addAttribute("Result", resultDTO);
         System.out.println("잘 담겼나 안담겼나~~");
