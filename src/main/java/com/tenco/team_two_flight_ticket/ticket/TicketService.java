@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.ticket;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -259,10 +260,57 @@ public class TicketService {
             throw new MyBadRequestException("검색할 옵션을 선택해주세요");
         }
 
-//        responseDTO.getData().stream().filter(e->e.getItineraries().get(0).equals())
-//
-//        responseDTO.setData(dataDto2);
-//        responseDTO.getMeta().setCount(dataDto2.size());
+        List<DataDTO> dataDTO = responseDTO.getData();
+
+        List<DataDTO> removedDto = new ArrayList<>();
+
+        for (int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+            for (int j = 0; j < optionDTO.getOnewayDepTimeOption().size(); j++) {
+                if(!segDto.getDeparture().depSearch(optionDTO.getOnewayDepTimeOption().get(j))){
+                    removedDto.add(dataDTO.get(i));
+                }
+            }
+        }
+
+        for (int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+            for (int j = 0; j < optionDTO.getOnewayArrTimeOption().size(); j++) {
+                if(!segDto.getArrival().arrSearch(optionDTO.getOnewayArrTimeOption().get(j))){
+                    if(!removedDto.contains(dataDTO.get(i))){
+                        removedDto.add(dataDTO.get(i));
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+            for (int j = 0; j < optionDTO.getRoundDepTimeOption().size(); j++) {
+                if(!segDto.getDeparture().depSearch(optionDTO.getRoundDepTimeOption().get(j))){
+                    if(!removedDto.contains(dataDTO.get(i))){
+                        removedDto.add(dataDTO.get(i));
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+            for (int j = 0; j < optionDTO.getRoundArrTimeOption().size(); j++) {
+                if(!segDto.getArrival().arrSearch(optionDTO.getRoundArrTimeOption().get(j))){
+                    if(!removedDto.contains(dataDTO.get(i))){
+                        removedDto.add(dataDTO.get(i));
+                    }
+
+                }
+            }
+        }
+
+        dataDTO = responseDTO.getData().stream().filter(e->!e.getId().equals(removedDto.stream().map(i->i.getId()))).collect(Collectors.toList());
+
+        responseDTO.setData(dataDTO);
+        responseDTO.getMeta().setCount(dataDTO.size());
 
         return responseDTO;
 
