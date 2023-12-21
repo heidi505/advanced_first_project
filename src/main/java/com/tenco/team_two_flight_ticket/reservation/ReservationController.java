@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket.coupon.Coupon;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,18 +89,18 @@ public class ReservationController {
 
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
-//        int couponNum = userService.getProfile(principal);
-//
-//        model.addAttribute("principal", principal);
-//        model.addAttribute("couponNum", couponNum);
-//        System.out.println("-----티켓 체크-----");
-//        System.out.println(couponNum);
         // 쿠폰 받아오기.
-        List<Coupon> coupons = reservationService.getCouponList(principal);
-
+        List<CouponListDTO> coupons = reservationService.getCouponList(principal);
+        System.out.println("쿠폰체크 쿠폰체크 쿠폰체크으으");
+        for (CouponListDTO coupon : coupons) {
+            System.out.println("쿠폰 ID: " + coupon.getId());
+            System.out.println("쿠폰 이름: " + coupon.getCouponName());
+            System.out.println("쿠폰 이름: " + coupon.getExpiredAt());
+            System.out.println("쿠폰 이름: " + coupon.getDiscountingPrice());
+        }
         // 3. 쿠폰 정보 모델에 추가.
 
-
+        model.addAttribute("Coupon", coupons);
         model.addAttribute("Result", resultDTO);
         System.out.println("잘 담겼나 안담겼나~~");
         System.out.println("Reservation Result:");
