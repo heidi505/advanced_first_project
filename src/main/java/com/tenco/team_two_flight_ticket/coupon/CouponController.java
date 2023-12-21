@@ -49,8 +49,9 @@ public class CouponController {
 
     @ResponseBody
     @PostMapping("/api/admin/couponSMS")
-    public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(Integer id) {
-        SingleMessageSentResponse messageResponse = couponService.couponSMS(id);
+    public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(@RequestBody CouponListDTO couponData) {
+        System.out.println("-------------------- 값 확인 " + couponData.getCouponNumber());
+        SingleMessageSentResponse messageResponse = couponService.couponSMS(couponData);
         String message = messageResponse.toString();
         System.out.println(message + "확인");
         return ResponseEntity.ok().body(ApiUtils.success(message));
@@ -84,8 +85,8 @@ public class CouponController {
     @GetMapping("/admin/coupon-expired-detail/{id}")
     public String adminCouponExpiredDetail(@PathVariable Integer id, Model model) {
 
-        List<CouponDetailDTO> couponDetailList = couponService.couponExpiredDetailList(id);
-        model.addAttribute("couponDetailList", couponDetailList);
+        List<CouponExpiredListDTO> couponExpiredList = couponService.couponExpiredDetailList(id);
+        model.addAttribute("couponExpiredList", couponExpiredList);
         return "admin/couponExpiredDetail";
     }
 
