@@ -39,9 +39,7 @@ public class UserRequest {
         @NotEmpty
         private String password;
 
-
         private String installationId;
-
         private String fcmToken;
         private String uuid;
         
