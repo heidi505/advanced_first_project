@@ -13,17 +13,22 @@ import java.util.stream.Collectors;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketMetaDTO.MetaDTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 public class TicketResponse {
 
+
+
     @Data
     @ToString
     @NoArgsConstructor
     public static class FlightSearchDTO{
+		//검색 후 나온 총 항공권 갯수
         private MetaDTO meta;
+		//검색 후 나온 항공권들의 정보가 담겨있음. 즉 리스트의 요소 1개가 하나의 항공권
         private List<DataDTO> data;
 
         public FlightSearchDTO(FlightSearchDTO dto) {

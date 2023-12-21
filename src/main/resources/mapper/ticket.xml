@@ -9,6 +9,10 @@
         select * from city_tb where country_name = #{region}
     </select>
 
+    <select id="getCity" resultType="string">
+        select city_name from city_tb where city_code = #{code}
+    </select>
+
     <select id="getCountryName" resultType="string">
         select distinct(country_name) from city_tb
     </select>
@@ -57,6 +61,7 @@
     	select * from city_tb
     	where country_name like concat('%',#{keyword},'%')
     	or city_name like concat('%',#{keyword},'%')
+    	or city_code like concat('%',#{keyword},'%')
     </select>
     
 	<select id="getKoreanCity" resultType="com.tenco.team_two_flight_ticket._middle._entity.City">

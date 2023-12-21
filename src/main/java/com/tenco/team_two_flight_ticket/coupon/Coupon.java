@@ -21,7 +21,6 @@ import java.util.Date;
 @Entity
 @Table(name = "coupon_tb")
 public class Coupon {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -55,6 +54,7 @@ public class Coupon {
         this.createdAt = createdAt;
         this.expiredAt = expiredAt;
     }
+
 
     public static String dayDate(String start, String end) {
 
