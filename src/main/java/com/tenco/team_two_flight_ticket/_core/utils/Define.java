@@ -14,4 +14,6 @@ public class Define {
 
     //    사진 사이즈
     public static final int MAX_FILE_SIZE = 1024 * 1024 * 20;
+    public static final String SMSKEY = "NCSLOSU4JATTVDTE";
+    public static final String SMSSECRETKEY = "AQARVU04YUQDQFYVCS1HCMMHDS4NSZJH";
 }
