@@ -8,19 +8,18 @@
 <main id="reservation_preview_page">
     <section class="reservation_preview_box">
         <div class="container">
-            <!-- 기본 메세지 -->
-            <section>
-                <div class="p-1 border">
-                    <span><a href="">👈검색 결과로 돌아가기</a></span>
-                    <h3 class="preview_header"></h3>
-                </div>
-                <div class="p-3 text-white preview_title">
+        <!-- 기본 메세지 -->
+        <section>
+            <div class="p-1 border">
+                <span><a class="back_button" href="">👈검색 결과로 돌아가기</a></span>
+                <h3 class="preview_header"></h3>
+            </div>
+            <div class="p-3 text-white preview_title">
                 <span>
                     <h2>훌륭한 선택을 하셨습니다! 지금 이 가격을 놓치지 마세요!</h2>
                 </span>
                 </div>
             </section>
-
             <!-- 왼쪽 항공편 정보 -->
             <section>
                 <div class="preview_form">
@@ -341,6 +340,16 @@
 </div>
 </div>
 </div>
+<script>
+const backButton = document.getElementsByClassName('back_button')[0];
+backButton.addEventListener('click',(e)=>{
+	e.preventDefault();
+	console.log('back');
+	history.go(-1);
+});
+
+
+</script>
 <script src="js/javascript.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

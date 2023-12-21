@@ -6,10 +6,40 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 public class TicketRequest {
+
+    @Data
+    @ToString
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class OptionDTO{
+        List<String> airlineOption;
+        //가는날 출발 시간
+        List<String> onewayDepTimeOption;
+        //오는 날 출발 시간 - 왕복에만 있음
+        List<String> roundDepTimeOption;
+        //가는 날 도착 시간
+        List<String> onewayArrTimeOption;
+        //오는 날 도착 시간 - 왕복에만 있음
+        List<String> roundArrTimeOption;
+
+        public boolean roundOptionsAreEmpty(OptionDTO optionDTO) {
+            return optionDTO.getAirlineOption().isEmpty() &&
+                    optionDTO.getOnewayDepTimeOption().isEmpty() &&
+                    optionDTO.getOnewayArrTimeOption().isEmpty() &&
+                    optionDTO.getRoundArrTimeOption().isEmpty() &&
+                    optionDTO.getRoundDepTimeOption().isEmpty();
+        }
+
+
+    }
 
     @Data
     @ToString
@@ -29,6 +59,22 @@ public class TicketRequest {
         private String travelClass;
         private String currencyCode = "KRW";
 
+        private String originLocationName;
+        private String destinationLocationName;
+        private String allPassengers;
+
+        public String seatType(){
+            if(travelClass.equals("ECONOMY")){
+                return "일반석";
+            }
+
+            if(travelClass.equals("BUSINESS")){
+                return "비즈니스";
+            }
+
+            return "일등석";
+        }
+
 
     }
 
@@ -47,12 +93,16 @@ public class TicketRequest {
     }
     
     @Data
-    @ToString
     public static class TicketLightSearchDTO{
     	@NotEmpty
     	private String keyword;
     }
     
+    @Data
+    public static class SearchCityDTO{
+    	@NotEmpty
+    	private String keyword;
+    }
     
 
 }

@@ -16,12 +16,19 @@ import java.util.List;
 @AllArgsConstructor
 public class SegmentDTO {
     private String id;
+    //항공편 중 출발에 대한 정보
     private DepartureDTO departure;
+    //항공편 중 도착에 대한 정보
     private ArrivalDTO arrival;
+    //항공사 코드
     private String carrierCode;
+    //항공사에서 제공해주는 무슨 비행편 넘버인듯
     private String number;
+    //항공사 이름 - 코드를 이름으로 파싱하려고 만든 필드. 응답 dto에는 없음
     private String airlineName;
+    //비행편에 대한 정보
     private AirCraftDTO aircraft;
+    //경유 있을시 경유에 대한 정보. 우리 프로젝트는 고려 x
     private List<StopDTO> stops;
 
     public SegmentDTO(SegmentDTO dto) {

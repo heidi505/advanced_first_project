@@ -46,7 +46,7 @@
                     <li class="me-2">
                         <a class="nav-link" href="/user/profile">마이페이지</a>
                     </li>                    
-                    <li><a class="nav-link" href="/sign-in">로그인</a></li>
+                    <li><a class="nav-link" href="/kakao/sign-in">로그인</a></li>
                 </ul>
                     </c:when>
                     <c:otherwise>
