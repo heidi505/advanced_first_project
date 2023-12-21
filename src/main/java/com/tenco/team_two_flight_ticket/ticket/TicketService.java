@@ -224,7 +224,7 @@ public class TicketService {
 
     public List<DataDTO> ticketDetail(int ticketId) {
 
-        List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId() == String.valueOf(ticketId)).collect(Collectors.toList());
+        List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId().equals(String.valueOf(ticketId))).collect(Collectors.toList());
 
 
 

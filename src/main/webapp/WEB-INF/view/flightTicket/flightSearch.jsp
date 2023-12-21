@@ -768,7 +768,7 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox" name="option"  value="제주 항공">
+                                    <input type="checkbox" name="option"  value="제주항공">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>제주항공</span>
