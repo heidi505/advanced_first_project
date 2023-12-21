@@ -91,9 +91,23 @@
                     <div class="modal-content">
                         <div class="from_to_search">
                             <form class="d-flex">
-                                <input class="search_city_input form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
-                                <button class="search_city_button btn btn-primary" type="button">검색</button>
+                                <input class="search_city_input from_modal form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
+                                <button class="search_city_button from_modal btn btn-primary" type="button">검색</button>
                             </form>
+                        </div>
+                         <div class="city_search_box from_modal my-2 border" >
+                        <table class="city_search_table from_modal">
+                        	<thead>
+                        	<tr>
+                        	<td class="p-2">IATA 코드</td>
+                        	<td class="p-2">도시</td>
+                        	<td class="p-2">국가</td>
+                        	</tr>
+                        	</thead>
+                        	<tbody class="city_search_result">
+                        	<!-- 검색 결과 창 -->
+                        	</tbody>
+                        </table>	
                         </div>
                         <form action="">
                             <div class="regions_cities_box">
@@ -302,9 +316,23 @@
                     <div class="modal-content">
                         <div class="from_to_search">
                             <form class="d-flex">
-                                <input class="form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
-                                <button class="btn btn-primary" type="submit">검색</button>
+                                <input class="search_city_input to_modal form-control me-2" type="text" placeholder="검색어를 입력해주세요"/>
+                                <button class="search_city_button to_modal btn btn-primary" type="button">검색</button>
                             </form>
+                        </div>
+                        <div class="city_search_box to_modal my-2 border" >
+                        <table class="city_search_table to_modal">
+                        	<thead>
+                        	<tr>
+                        	<td class="p-2">IATA 코드</td>
+                        	<td class="p-2">도시</td>
+                        	<td class="p-2">국가</td>
+                        	</tr>
+                        	</thead>
+                        	<tbody class="city_search_result">
+                        	<!-- 검색 결과 창 -->
+                        	</tbody>
+                        </table>	
                         </div>
                         <form action="">
                             <div class="regions_cities_box">
@@ -1119,6 +1147,7 @@
     
     
 </script>
+<script src="/js/make_element.js"></script>
 <script src="/js/javascript.js"></script>
 <script src="/js/ticket_search.js"></script>
 <script type="module" src="js/messaging_receive_message.js"></script>
