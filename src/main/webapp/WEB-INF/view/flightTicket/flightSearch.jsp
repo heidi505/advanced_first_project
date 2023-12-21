@@ -9,15 +9,29 @@
     <section class="flight_search_from_to">
         <div class="search_from_to_box">
             <div class="container">
-                <form class="from_to_form">
+                <form class="from_to_form" action="/ticket/flight-search/option/${isRound}" method="post">
+                    <input type="hidden" name="airlineOption" id="airlineOption" value=""/>
+                    <input type="hidden" name="onewayDepTimeOption" id="onewayDepTimeOption" value=""/>
+                    <input type="hidden" name="roundDepTimeOption" id="roundDepTimeOption" value=""/>
+                    <input type="hidden" name="onewayArrTimeOption" id="onewayArrTimeOption" value=""/>
+                    <input type="hidden" name="roundArrTimeOption" id="roundArrTimeOption" value=""/>
+
+                    <input type="hidden" name="originLocationCode" id="origin" value="${req.originLocationCode}"/>
+                    <input type="hidden" name="destinationLocationCode" id="destination" value="${req.destinationLocationCode}"/>
+                    <input type="hidden" name="adults" id="adults" value="${req.adults}"/>
+                    <input type="hidden" name="children" id="children" value="${req.children}"/>
+                    <input type="hidden" name="infants" id="infants" value="${req.infants}">
+                    <input type="hidden" name="travelClass" id="travelClass" value="${req.seatType()}"/>
+
+
                     <div class="form_to_area">
                         <div class="from_to_box">
                             <div class="from_to_select">
                                 <div class="from_select">
                                     <button type="button" id="from_select_btn"
                                             class="common_modal_btn from_to_modal_btn" data-target="from_modal">
-                                        <span class="from_code_value">GMP</span>
-                                        <span class="from_airport_value">서울 김포</span>
+                                        <span class="from_code_value">${req.originLocationCode}</span>
+                                        <span class="from_airport_value">${req.originLocationName}</span>
                                     </button>
                                 </div>
                                 <button type="button" class="from_to_icon transform_btn">
@@ -26,8 +40,8 @@
                                 <div class="to_select">
                                     <button type="button" id="to_select_btn"
                                             class="common_modal_btn from_to_modal_btn" data-target="to_modal">
-                                        <span class="to_code_value">BUS</span>
-                                        <span class="to_airport_value">부산</span>
+                                        <span class="to_code_value">${req.destinationLocationCode}</span>
+                                        <span class="to_airport_value">${req.destinationLocationName}</span>
                                     </button>
                                 </div>
                             </div>
@@ -35,11 +49,11 @@
                         <div class="ticket_date_field">
                             <div class="trip_round">
                                 <label for="datepicker">출발일 & 도착일</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택"/>
+                                <input type="text" class="form-control" id="datepicker" placeholder="출발일 및 도착일 선택" name="startDate" value="${req.startDate}" data-input/>
                             </div>
                             <div class="trip_one_way">
                                 <label for="datepicker2">출발일</label>
-                                <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택"/>
+                                <input type="text" class="form-control" id="datepicker2" placeholder="출발일 선택" name="startDate" value="${req.startDate}" data-input/>
                             </div>
                         </div>
                         <div class="passenger_seat_field">
@@ -47,8 +61,8 @@
                             <div>
                                 <button type="button" class="common_modal_btn passenger_seat_btn"
                                         data-target="passenger_seat_modal">
-                                    <span>승객1명</span>
-                                    <span>일반석</span>
+                                    <span>승객 ${req.allPassengers} 명</span>
+                                    <span id="seatClass">${req.seatType()}</span>
                                 </button>
                             </div>
                         </div>
@@ -117,8 +131,8 @@
                                         <ul class="from_local_item">
                                             <c:forEach var="korea" items="${korea}">
                                                 <li class="local_item">
-                                                    <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                    <button type="button" aria-disabled="false" id="originReal" name="origin"
+                                                            value="${korea.cityCode}">
                                                         <span class="from_local_code">${korea.cityCode}</span><span
                                                             class="from_local_airport">${korea.cityName}</span>
                                                     </button>
@@ -134,7 +148,7 @@
                                             <c:forEach var="japan" items="${japan}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${japan.cityCode}">
                                                         <span class="from_local_code">${japan.cityCode}</span><span
                                                             class="from_local_airport">${japan.cityName}</span>
                                                     </button>
@@ -150,7 +164,7 @@
                                             <c:forEach var="asia" items="${asia}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${asia.cityCode}">
                                                         <span class="from_local_code">${asia.cityCode}</span><span
                                                             class="from_local_airport">${asia.cityName}</span>
                                                     </button>
@@ -166,7 +180,7 @@
                                             <c:forEach var="america" items="${america}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${america.cityCode}">
                                                         <span class="from_local_code">${america.cityCode}</span><span
                                                             class="from_local_airport">${america.cityName}</span>
                                                     </button>
@@ -182,7 +196,7 @@
                                             <c:forEach var="europe" items="${europe}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${europe.cityCode}">
                                                         <span class="from_local_code">${europe.cityCode}</span><span
                                                             class="from_local_airport">${europe.cityName}</span>
                                                     </button>
@@ -198,7 +212,7 @@
                                             <c:forEach var="oceania" items="${oceania}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${oceania.cityCode}">
                                                         <span class="from_local_code">${oceania.cityCode}</span><span
                                                             class="from_local_airport">${oceania.cityName}</span>
                                                     </button>
@@ -214,7 +228,7 @@
                                             <c:forEach var="middleEast" items="${middleEast}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${middleEast.cityCode}">
                                                         <span class="from_local_code">${middleEast.cityCode}</span><span
                                                             class="from_local_airport">${middleEast.cityName}</span>
                                                     </button>
@@ -230,7 +244,7 @@
                                             <c:forEach var="southAmerica" items="${southAmerica}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${southAmerica.cityCode}">
                                                         <span class="from_local_code">${southAmerica.cityCode}</span><span
                                                             class="from_local_airport">${southAmerica.cityName}</span>
                                                     </button>
@@ -246,7 +260,7 @@
                                             <c:forEach var="africa" items="${africa}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${africa.cityCode}">
                                                         <span class="from_local_code">${africa.cityCode}</span><span
                                                             class="from_local_airport">${africa.cityName}</span>
                                                     </button>
@@ -262,7 +276,7 @@
                                             <c:forEach var="china" items="${china}">
                                                 <li class="local_item">
                                                     <button type="button" aria-disabled="false" name="cityName"
-                                                            value="">
+                                                            value="${china.cityCode}">
                                                         <span class="from_local_code">${china.cityCode}</span><span
                                                             class="from_local_airport">${china.cityName}</span>
                                                     </button>
@@ -517,7 +531,7 @@
                                 <button type="button" class="minus"><img class="minus_img"
                                                                          src="/images/icons/minus_icon.svg" alt="빼기">
                                 </button>
-                                <span class="passenger_count count_num">2</span>
+                                <span class="passenger_count count_num">${req.adults}</span>
                                 <button type="button" class="plus"><img class="plus_img"
                                                                         src="/images/icons/plus_icon.svg" alt="더하기">
                                 </button>
@@ -531,7 +545,7 @@
                                 <button type="button" class="minus"><img class="minus_img"
                                                                          src="/images/icons/minus_icon.svg" alt="빼기">
                                 </button>
-                                <span class="passenger_count count_num">0</span>
+                                <span class="passenger_count count_num">${req.children}</span>
                                 <button type="button" class="plus"><img class="plus_img"
                                                                         src="/images/icons/plus_icon.svg" alt="더하기">
                                 </button>
@@ -545,7 +559,7 @@
                                 <button type="button" class="minus"><img class="minus_img"
                                                                          src="/images/icons/minus_icon.svg" alt="빼기">
                                 </button>
-                                <span class="passenger_count count_num">0</span>
+                                <span class="passenger_count count_num">${req.infants}</span>
                                 <button type="button" class="plus"><img class="plus_img"
                                                                         src="/images/icons/plus_icon.svg" alt="더하기">
                                 </button>
@@ -589,66 +603,71 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="00~06">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>새벽 00:00 ~ 06:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="06~12">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오전 06:00 ~ 12:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="12~18">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오후 12:00 ~ 18:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayDepOption" value="18~24">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>야간 18:00 ~ 24:00</span>
                             </li>
                         </ul>
-                        <ul class="filter_item">
-                            <li>
-                                <p class="filter_tit">오는 날</p>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>새벽 00:00 ~ 06:00</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>오전 06:00 ~ 12:00</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>오후 12:00 ~ 18:00</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>야간 18:00 ~ 24:00</span>
-                            </li>
-                        </ul>
+                        <c:choose>
+                            <c:when test="${isRound == 2}">
+                                <ul class="filter_item">
+                                    <li>
+                                        <p class="filter_tit">오는 날</p>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="00~06">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>새벽 00:00 ~ 06:00</span>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="06~12">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>오전 06:00 ~ 12:00</span>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="12~18">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>오후 12:00 ~ 18:00</span>
+                                    </li>
+                                    <li>
+                                        <label class="check_box">
+                                            <input type="checkbox" name="roundDepOption" value="18~24">
+                                            <span class="check_box_icon"></span>
+                                        </label>
+                                        <span>야간 18:00 ~ 24:00</span>
+                                    </li>
+                                </ul>
+                            </c:when>
+                        </c:choose>
+
                     </div>
                     <div class="flight_detail_box active departure_time">도착시간
                         <a class="detail_arrow" href="#"><img src="/images/icons/icon_down.svg" alt="내리기"></a>
@@ -660,66 +679,70 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="00~06">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>새벽 00:00 ~ 06:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="06~12">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오전 06:00 ~ 12:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="12~18">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오후 12:00 ~ 18:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="onewayArrOption" value="18~24">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>야간 18:00 ~ 24:00</span>
                             </li>
                         </ul>
+                        <c:choose>
+                        <c:when test="${isRound == 2}">
                         <ul class="filter_item">
                             <li>
                                 <p class="filter_tit">오는 날</p>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption" value="00~06">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>새벽 00:00 ~ 06:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption" value="06~12">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오전 06:00 ~ 12:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption" value="12~18">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>오후 12:00 ~ 18:00</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="roundArrOption" value="18~24">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>야간 18:00 ~ 24:00</span>
                             </li>
                         </ul>
+                        </c:when>
+                        </c:choose>
                     </div>
                     <div class="flight_detail_box active departure_time">항공사
                         <a class="detail_arrow" href="#"><img src="/images/icons/icon_down.svg" alt="내리기"></a>
@@ -731,73 +754,52 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" value="대한항공" name="option">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>대한항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="아시아나">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>네덜란드항공</span>
+                                <span>아시아나</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option"  value="제주 항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>에티하드 항공</span>
+                                <span>제주항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="티웨이항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>핀에어</span>
+                                <span>티웨이항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="중국남방항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>터키항공</span>
+                                <span>중국남방항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="싱가폴항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>폴란드항공</span>
+                                <span>싱가폴항공</span>
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="option" value="말레이시아항공">
                                     <span class="check_box_icon"></span>
                                 </label>
-                                <span>에어프랑스</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flight_detail_box active departure_time">탑승객 조건
-                        <a class="detail_arrow" href="#"><img src="/images/icons/icon_down.svg" alt="내리기"></a>
-                    </div>
-                    <div class="detail_more">
-                        <ul class="filter_item">
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>성인</span>
-                            </li>
-                            <li>
-                                <label class="check_box">
-                                    <input type="checkbox">
-                                    <span class="check_box_icon"></span>
-                                </label>
-                                <span>학생</span>
+                                <span>말레이시아 항공</span>
                             </li>
                         </ul>
                     </div>
@@ -1105,6 +1107,9 @@
     </div>
 </main>
 <script>
+
+
+
     let flgithDetailBox = document.getElementsByClassName("flight_detail_box");
     let i;
 
@@ -1209,7 +1214,10 @@
     });
     // 날짜 라이브러리
 
+
+
 </script>
 <script src="/js/javascript.js"></script>
+<script src="/js/option_search.js"></script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp" %>

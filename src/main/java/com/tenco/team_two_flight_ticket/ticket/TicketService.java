@@ -12,9 +12,19 @@ import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.stream.Collectors;
+
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +44,11 @@ import com.tenco.team_two_flight_ticket.ticket.TicketRequest.SearchCityDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRequest.TicketSearchDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
+
+import javax.xml.crypto.Data;
+
 import jakarta.validation.Valid;
+
 
 @Service
 public class TicketService {
@@ -45,6 +59,7 @@ public class TicketService {
     private AirlineRepository airlineRepository;
     @Autowired
     private AirportRepository airportRepository;
+
     private TicketResponse.FlightSearchDTO responseDTO;
     public List<City> getCities(String region) {
         List<City> cities = ticketRepository.getCities(region);
@@ -137,18 +152,22 @@ public class TicketService {
 
         //목적지, 도착지의 공항을 국가 이름으로 파싱
 
+        //도착지의 공항을 국가 이름으로 파싱한 list
+
         List<String> newDeparture = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
                 .map(e->airportRepository.findCityName(e.getDeparture().getIataCode()))
                 .collect(Collectors.toList());
 
+        //목적지의 공항을 국가 이름으로 파싱한 list
         List<String> newArrival = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
                 .map(e->airportRepository.findCityName(e.getArrival().getIataCode()))
                 .collect(Collectors.toList());
 
+        //
         List<SegmentDTO> newSeg = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
@@ -201,12 +220,129 @@ public class TicketService {
 		return dto;
 	}
 
-    public DataDTO ticketDetail(int ticketId) {
 
-        DataDTO dto = responseDTO.getData().get(ticketId);
-        
+
+    public List<DataDTO> ticketDetail(int ticketId) {
+
+        List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId() == String.valueOf(ticketId)).collect(Collectors.toList());
+
+
 
         return dto;
+
+    }
+
+
+
+    public TicketRequest.TicketSearchDTO parsingReq(TicketRequest.TicketSearchDTO dto) {
+
+        TicketRequest.TicketSearchDTO newDto = dto;
+
+        String originName = ticketRepository.getCity(dto.getOriginLocationCode());
+        String destinationName = ticketRepository.getCity(dto.getDestinationLocationCode());
+        int added = dto.getAdults() + dto.getChildren() + dto.getInfants();
+
+        newDto.setOriginLocationName(originName);
+        newDto.setDestinationLocationName(destinationName);
+        newDto.setAllPassengers(String.valueOf(added));
+
+
+        System.out.println("================" + added);
+        return newDto;
+    }
+
+    public TicketResponse.FlightSearchDTO onewayOptionSearch(TicketRequest.OptionDTO optionDTO) {
+
+        if(optionDTO.getAirlineOption().isEmpty() && optionDTO.getOnewayDepTimeOption().isEmpty() && optionDTO.getOnewayArrTimeOption().isEmpty()){
+            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
+        }
+
+
+        List<DataDTO> respDto = responseDTO.getData().stream()
+                .filter(e -> e.getItineraries().stream()
+                        .anyMatch(itinerary -> itinerary.getSegments().stream()
+                                .anyMatch(segment ->
+                                        optionDTO.getAirlineOption().stream()
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption))
+                                                && optionDTO.getOnewayDepTimeOption().stream()
+                                                .anyMatch(d -> segment.getDeparture().depSearch(d))
+                                                && optionDTO.getOnewayArrTimeOption().stream()
+                                                .anyMatch(a -> segment.getArrival().arrSearch(a))
+
+                                )
+                        )
+                )
+                .collect(Collectors.toList());
+
+
+
+
+        responseDTO.setData(respDto);
+        responseDTO.getMeta().setCount(respDto.size());
+
+        return responseDTO;
+
+    }
+
+    public TicketResponse.FlightSearchDTO optionSearch(TicketRequest.OptionDTO optionDTO) {
+        if(optionDTO.roundOptionsAreEmpty(optionDTO)){
+            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
+        }
+
+        List<DataDTO> dataDTO = responseDTO.getData();
+
+//        List<DataDTO> removedDto = new ArrayList<>();
+//
+//        for (int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+//            for (int j = 0; j < optionDTO.getOnewayDepTimeOption().size(); j++) {
+//                if(!segDto.getDeparture().depSearch(optionDTO.getOnewayDepTimeOption().get(j))){
+//                    removedDto.add(dataDTO.get(i));
+//                }
+//            }
+//        }
+//
+//        for (int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+//            for (int j = 0; j < optionDTO.getOnewayArrTimeOption().size(); j++) {
+//                if(!segDto.getArrival().arrSearch(optionDTO.getOnewayArrTimeOption().get(j))){
+//                    if(!removedDto.contains(dataDTO.get(i))){
+//                        removedDto.add(dataDTO.get(i));
+//                    }
+//                }
+//            }
+//        }
+//
+//        for (int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+//            for (int j = 0; j < optionDTO.getRoundDepTimeOption().size(); j++) {
+//                if(!segDto.getDeparture().depSearch(optionDTO.getRoundDepTimeOption().get(j))){
+//                    if(!removedDto.contains(dataDTO.get(i))){
+//                        removedDto.add(dataDTO.get(i));
+//                    }
+//                }
+//            }
+//        }
+//
+//        for (int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+//            for (int j = 0; j < optionDTO.getRoundArrTimeOption().size(); j++) {
+//                if(!segDto.getArrival().arrSearch(optionDTO.getRoundArrTimeOption().get(j))){
+//                    if(!removedDto.contains(dataDTO.get(i))){
+//                        removedDto.add(dataDTO.get(i));
+//                    }
+//
+//                }
+//            }
+//        }
+//
+//        dataDTO = responseDTO.getData().stream().filter(e->!e.getId().equals(removedDto.stream().map(i->i.getId()))).collect(Collectors.toList());
+//
+//        responseDTO.setData(dataDTO);
+//        responseDTO.getMeta().setCount(dataDTO.size());
+
+        return responseDTO;
+
 
     }
 
@@ -257,5 +393,6 @@ public class TicketService {
  		}
  		return cities;
  	}
+
 
 }
