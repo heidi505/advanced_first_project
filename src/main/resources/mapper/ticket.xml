@@ -57,6 +57,7 @@
     	select * from city_tb
     	where country_name like concat('%',#{keyword},'%')
     	or city_name like concat('%',#{keyword},'%')
+    	or city_code like concat('%',#{keyword},'%')
     </select>
     
 	<select id="getKoreanCity" resultType="com.tenco.team_two_flight_ticket._middle._entity.City">
