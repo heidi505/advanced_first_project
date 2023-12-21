@@ -13,20 +13,30 @@
 				<b>내 쿠폰</b>
 			</h1>
 			<div class="left_profile float-start w-25">
-				<div class="picture text-center mb-4 mx-4 p-5 border">
-					<img src="/images/git_img.png" alt="" name=""
-						class="profile_image mx-auto d-block" />
-					<p class="my-4 fs-5">홍길동</p>
-					<p class="left_profile_text">프로필 관리</p>
-				</div>
-				<div class="coupon_profile col ">
-					<div class="point_amount coupon_count border mx-auto m-2 p-4 w-85 ">
-						<p class="mb-3">내 포인트<a class="color_primary02 float-end me-2" href="/user/point">0원
-							></a></p>
-						<p>내 쿠폰<a class="color_primary02 float-end me-2" href="/user/coupon">0장
-							></a></p>
-					</div>
-				</div>
+			  <div class="picture text-center mb-4 mx-4 border">
+                    <c:choose>
+                        <c:when test="${not empty principal and not empty principal.profileImage}">
+                            <div class="input_profile_image mt-4">
+                                <img class="preview" src="<c:url value='/image/${principal.profileImage}'/>"
+                                     alt="프로필 이미지">
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="input_profile_image mt-4">
+                                <img class="preview" src="<c:url value='/image/basic_img.svg'/>" alt="기본 이미지">
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                    <p class="my-4 principal_username">${principal.username}</p>
+                </div>
+                <div class="coupon_profile col ">
+                    <div class="coupon_count border mx-auto m-2 p-4 w-85 ">
+                        <p class="mb-3">내 포인트<a class="color_primary02 float-end me-2" href="/user/point">0장
+                        ></a></p>
+                        <p>내 쿠폰<a class="color_primary02 float-end me-2" href="/user/coupon">${couponNum}장
+                        ></a></p>
+                    </div>
+                </div>
 				<!-- 쿠폰 창 끝 -->
 			</div>
 			<!-- 여기까지 left-profile -->
@@ -34,8 +44,6 @@
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="#">사용가능한 쿠폰</a></li>
 			</ul>
-
-
 
 			<div class="coupon_box d-flex flex-column border w-60">
 				<div class="bg_primary01 m-4 p-2">
@@ -45,19 +53,21 @@
 				<!-- 쿠폰 넣을 창 -->
 				<p class="mx-4">나의 쿠폰 목록</p>
 				<div class="coupon_list d-flex">
-				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
-					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
+				<c:forEach var="coupon" items="${couponList}">
+				<div class="pt-2 w-28 ms-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">${coupon.discountingPrice}원</div><span class="ps-5 w-10 fs-6">${coupon.remainingDays}일 남음</span>
+					<p class="px-2 pt-3 fs-6">${coupon.couponContent}</p>
+					<div class="m-2 p-3 bg_line text-center">${coupon.expiredAtYear} - ${coupon.expiredAtYear} - ${coupon.expiredAtDays} 까지</div>
+				</div>
+				</c:forEach>
+				<div class="my_coupon pt-2 w-28 ms-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">2,000원</div><span class="ps-5 w-10 fs-6">7일 남음</span>
+					<p class="px-2 pt-3 fs-6"><b>가입 축하 쿠폰 증정</b></p>
 					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
 				</div>
-				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
-					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
-					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
-				</div>
-				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
-					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
+				<div class="my_coupon pt-2 w-28 ms-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">2,000원</div><span class="ps-5 w-10 fs-6">7일 남음</span>
+					<p class="px-2 pt-3 fs-6"><b>가입 축하 쿠폰 증정</b></p>
 					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
 				</div>
 				</div>
@@ -68,6 +78,6 @@
 </div>
 </div>
 
-<script src="js/javascript.js"></script>
+<script src="/js/my_coupon.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp"%>
