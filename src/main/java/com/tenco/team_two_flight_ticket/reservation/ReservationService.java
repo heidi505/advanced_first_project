@@ -138,6 +138,12 @@ public class ReservationService {
         return response;
     }
 
+    /**
+     * 
+     * @param userId
+     * @param dto
+     * @return tripList
+     */
     public List<GetMyTravelDTO> getMyTravel(int userId, UserRequest.GetMyTravelListDTO dto) {
         StatusEnum statusEnum = dto.getStatusEnum();
 
@@ -145,17 +151,10 @@ public class ReservationService {
         String sort = "전체";
 
         switch (stringSort) {
-            case "전체":
-                sort = "all";
-                break;
-            case "결제전":
-                sort = "false";
-                break;
-            case "결제완료":
-                sort = "true";
-                break;
-            default:
-                throw new MyBadRequestException("잘못된 값이 입력되었습니다");
+            case "전체": sort = "all"; break;
+            case "결제전": sort = "false"; break;
+            case "결제완료": sort = "true"; break;
+            default: throw new MyBadRequestException("잘못된 값이 입력되었습니다");
         }
 
         List<GetMyTravelDTO> tripList = null;
