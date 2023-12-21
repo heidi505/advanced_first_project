@@ -18,18 +18,6 @@ async function getMyTravel(tabId, sort){
     }
 }
 
-// 요소 타입과 클래스명을 받아 생성하는 함수
-function makeElement(elementType, classString){
-	let element = document.createElement(elementType);
-	// 클래스명이 없다면 생략
-	if(classString != undefined){
-		classArray = classString.split(' ');
-		classArray.forEach(name=>{
-			element.classList.add(name);
-		})
-	}
-	return element;
-};
 
 // 연도가 입력된 div를 반환하는 함수
 function makeYearTag(year){
@@ -38,8 +26,6 @@ function makeYearTag(year){
     yearDiv.appendChild(text);
     return yearDiv;
 }
-
-
 
 
 // 여행 목록 삽입하기

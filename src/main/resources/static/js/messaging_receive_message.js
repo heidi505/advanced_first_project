@@ -23,7 +23,7 @@ const firebaseConfig = {
   .catch((error) => {
     console.error('Service Worker registration failed:', error);
   });
-  
+  /*
     // 푸시 알림 수신 처리
     onMessage(messaging, (payload) => {
     console.log('Message received:', payload);
@@ -35,3 +35,4 @@ const firebaseConfig = {
 
     self.registration.showNotification(notificationTitle, notificationOptions);
     });
+    */

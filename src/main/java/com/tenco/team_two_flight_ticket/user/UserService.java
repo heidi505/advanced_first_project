@@ -355,8 +355,8 @@ public class UserService {
 
         Message message = Message.builder()
                 .setNotification(Notification.builder()
-                        .setTitle("푸시 알림 제목")
-                        .setBody("푸시 알림 본문")
+                        .setTitle("님부스")
+                        .setBody("님부스에 로그인 하신 것을 환영합니다")
                         .build())
                 .setToken(registrationToken)
                 .build();

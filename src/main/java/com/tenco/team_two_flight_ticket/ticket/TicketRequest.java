@@ -53,6 +53,12 @@ public class TicketRequest {
     	private String keyword;
     }
     
+    @Data
+    public static class SearchCityDTO{
+    	@NotEmpty
+    	private String keyword;
+    }
+    
     
 
 }
