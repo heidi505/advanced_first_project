@@ -52,6 +52,8 @@ public class Coupon {
     }
 
 
+
+//    만료일 - 발급일 => 남은 일자
     public static String dayDate(String start, String end) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
