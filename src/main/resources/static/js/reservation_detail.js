@@ -6,7 +6,7 @@ async function cancelReservation(reservationNum){
     			'Content-Type': 'application/json'
   			},
             body: JSON.stringify({
-				resNum : reservationNum,
+				reservationNum : reservationNum,
             }),
         });
         alert('성공적으로 예약이 취소되었습니다');

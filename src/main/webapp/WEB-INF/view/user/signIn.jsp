@@ -14,6 +14,8 @@
 					<div class="top_bar p-3 border"><h2>로그인</h2></div>
 					<div class="d-flex flex-column w-100">
 						<form action="sign-in" method="post">
+						<input id="installationId" type="hidden" name="installationId" value="">
+						<input id="fcmToken" type="hidden" name="fcmToken" value="">
 							<div class="form-group w-75 mx-auto pt-2 mt-5">
 								<label for="userId">아이디*</label> <input type="text"
 									class="form-control mt-2 me-2 p-2" name="username" id="userId"
@@ -44,6 +46,6 @@
 </div>
 </div>
 
-<script src="js/javascript.js"></script>
+<script type="module" src="js/firebase.js"></script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp"%>

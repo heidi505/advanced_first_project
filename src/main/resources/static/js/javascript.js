@@ -7,11 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let flightSearchBoxNum = flightSearchBox.length;
 
     Array.from(flightSearchClose).forEach((closeButton) => {
-        console.log(closeButton);
-        closeButton.addEventListener("click", () => {
-            if (flightSearchBoxNum > 0) {
-                flightSearchBox[flightSearchBoxNum - 1].style.display = "none";
 
+        closeButton.addEventListener("click", (e) => {
+            
+            
+            if (flightSearchBoxNum > 0) {
+                //flightSearchBox[flightSearchBoxNum - 1].style.display = "none";
+                closeButton.parentElement.style.display = "none";
+                let searchId = closeButton.previousElementSibling.value;
+				deleteSearchLog(searchId);
                 if (flightSearchBoxNum === 1) {
                     flightSearchBg.style.display = "none";
                 }
@@ -21,6 +25,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     // 최근 검색 삭제
+    
+    
+    async function deleteSearchLog(searchId){
+		try{
+			const response = await fetch(`/searched/delete-search-log`, {
+            	method: 'POST',
+            	headers: {
+    			'Content-Type': 'application/json'
+  				},
+            	body: JSON.stringify({
+					searchId : parseInt(searchId)
+            	}),
+            });
+			//const result = await response.json();
+			
+		} catch(e){
+			alert('목록 제거에 실패했습니다');
+		}
+	}  
+		 
+		
+		
+		
+	
 
     let commonModal = document.querySelectorAll(".common_modal");
     let commonModalBtn = document.querySelectorAll(".common_modal_btn");
@@ -272,27 +300,129 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
+	// 검색 결과 창
+	const citySearchResult = document.querySelectorAll('.city_search_result');
+	//검색 결과 출력
+	function inputResult(cities, fromToCheck){
+		let number = ( fromToCheck == 'from_modal' ) ? 0 : 1;
+		citySearchResult[number].innerHTML = '';// 검색창 초기화
+		let tr = '';
+		let td = '';
+		let text = '';
+		// 검색 결과가 없을 때 출력
+		if(cities.length == 0){
+			tr = makeElement('tr');
+			td = makeElement('td','text-center p-5');
+			td.colSpan = '3';
+			text = document.createTextNode('검색 결과에 해당하는 도시가 없습니다');
+			td.appendChild(text);
+			tr.appendChild(td);
+			citySearchResult[number].appendChild(tr);
+		}
+		
+		cities.forEach((city) => {
+			tr = makeElement('tr', 'search_city '+fromToCheck);
+			td = makeElement('td','py-3');
+			text = document.createTextNode(city.cityCode);
+			td.appendChild(text);
+			tr.appendChild(td);
+			td = makeElement('td','py-3');
+			text = document.createTextNode(city.cityName);
+			td.appendChild(text);
+			tr.appendChild(td);
+			td = makeElement('td','py-3');
+			text = document.createTextNode(city.countryName);
+			td.appendChild(text);
+			tr.appendChild(td);
+			citySearchResult[number].appendChild(tr);
+		})
+	}
 
 
     // 출발지 & 도착지 전환
+	
+	
+	// 출발지 & 목적지 검색 
+	async function searchCity(keyword, fromToCheck){
+		keyword = keyword.toUpperCase();
+		try {
+        	const response = await fetch(`/ticket/search-city?keyword=${keyword}`);
+        	const result = await response.json();
+        	//검색 결과 출력
+        	inputResult(result, fromToCheck);
+    	} catch (error) {
+			alert('도시 검색에 실패했습니다');
+    	}
+	}
 
 
-	// 최근 검색한 항공권 검색 연결(미완성)
+
+	
+	// 최근 검색한 항공권 이동 이벤트
 	const recentFlight = document.querySelectorAll('.flight_search_box');
 	recentFlight.forEach((flight)=>{
-		flight.addEventListener('click',(e)=>{
-			if(e.target.className != 'flight_search_close'){
-				console.log('search flight');
-				//location.href='/search?keyword='아직 검색기능이 없음
+		flight.addEventListener('click',(e)=>{			
+			if(e.target.tagName != 'IMG'){
+				flight.children[0].click();
 			}
 		})	
-	});
-	
+	});	
 	// bootstrap을 이용한 popover 
-	const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-	const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+	const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+	const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+	
 
+ 	const searchCityButton = document.querySelectorAll('.search_city_button'); 
+ 	const searchCityInput = document.querySelectorAll('.search_city_input');
+ 	const citySearchBox = document.querySelectorAll('.city_search_box');  	 	
+ 	
+	// 도시 검색 기능
+ 	searchCityButton.forEach((button) => {
+		 button.addEventListener('click', e =>{
+		 const fromToCheck = button.classList.contains('from_modal') ? 'from_modal': 'to_modal';
+		 const number = fromToCheck == 'from_modal' ? 0 : 1;
+		 citySearchBox[number].style.display = 'block';
+		//도시 검색 및 출력
+		searchCity(searchCityInput[number].value, fromToCheck);
+		});
+	 });
+ 	
+ 	// 출발지 및 목적지 선택(검색창)
+	citySearchResult.forEach((result) => {
+		result.addEventListener('click', e => {
+			if(e.target.parentElement.classList.contains('search_city')){
+				let city = e.target.parentElement.childNodes;
+			
+				if(e.target.parentElement.classList.contains('to_modal')){
+					valuesTo(city[0].textContent, city[1].textContent);
+				} else {
+					valuesForm(city[0].textContent, city[1].textContent);
+				}
 
-
+				// 이 함수랑 밑의 함수 필요함(따로 뺄 필요)
+				function valuesForm(airportCode, airportName) {
+            		let fromSelectButtons = document.querySelector("#from_select_btn");
+            		fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
+            		fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
+            		document.getElementById("origin").value = airportCode;
+            		//로딩 페이지 데이터 바인딩
+            		document.getElementById("loadingOrigin1").innerText = airportName;
+            		document.getElementById("loadingOrigin2").innerText = airportCode;
+            		document.getElementById("loadingOrigin3").innerText = airportName;
+        		}
+			
+				function valuesTo(airportCode, airportName) {
+            			let toSelectButtons = document.querySelector("#to_select_btn");
+            			toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
+            			toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
+            			document.getElementById("destination").value = airportCode;
+            			//로딩페이지 데이터 바인딩
+            			document.getElementById("loadingDestination1").innerText = airportName;
+            			document.getElementById("loadingDestination2").innerText = airportCode;
+            			document.getElementById("loadingDestination3").innerText = airportName;
+        		}
+			}
+		}); 
+	}); 
+    
 

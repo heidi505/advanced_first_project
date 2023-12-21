@@ -416,6 +416,7 @@
     padding: 12px;
     position: relative;
     margin-right: 8px;
+    cursor:pointer;
 }
 
 .flight_search_close {
@@ -1138,6 +1139,7 @@
 #admin a.btn-primary {
     display: inline-block;
     line-height: 34px;
+    margin-left: 8px;
 }
 
 #admin .btn-primary {
@@ -1279,6 +1281,8 @@
 .admin_common_btn {
     margin: 16px 0;
     text-align: right;
+    display: flex;
+    justify-content: end;
 }
 
 .admin_form_textfield p {
@@ -1323,7 +1327,6 @@
 
 #admin .btn-outline-primary {
     border: 1px solid var(--admin_01);
-    color: var(--admin_01);
     width: 150px;
     height: 48px;
     display: inline-block;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+        namespace="com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository">
+    <select id="findByUserId" resultType="com.tenco.team_two_flight_ticket._middle._entity.HasCoupon">
+        select * from hascoupon_tb where user_id = #{id}
+    </select>
+
+    <insert id="insert">
+        insert into hascoupon_tb(user_id, coupon_id, is_used, coupon_number, created_at, expired_at)
+        values (#{userId}, #{couponId}, #{isUsed}, #{couponNumber}, #{createdAt}, #{expiredAt})
+    </insert>
+
+</mapper>

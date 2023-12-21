@@ -26,7 +26,7 @@
                            on ub.id = tb.id
         where ub.id = #{userId};
     </select>
-    
+
     <select id="getTicketDate" resultType="com.tenco.team_two_flight_ticket.ticket.TicketResponse$GetTicketDateDTO">
 		select departure_time, dc.city_name as departure_city, ac.city_name as arrival_city, reservation_num
 		from ticket_tb as t
@@ -56,4 +56,18 @@
                 #{departureCity}, #{arrivalCity}, null, null, #{departureAirport}, #{arrivalAirport}, #{seatType}, #{isOneWay}, #{isNonStop},
                 #{baggageAllowance}, now())
     </insert>
+    
+    <select id="getCitiesFromKeyword" resultType="com.tenco.team_two_flight_ticket._middle._entity.City">
+    	select * from city_tb
+    	where country_name like concat('%',#{keyword},'%')
+    	or city_name like concat('%',#{keyword},'%')
+    	or city_code like concat('%',#{keyword},'%')
+    </select>
+    
+	<select id="getKoreanCity" resultType="com.tenco.team_two_flight_ticket._middle._entity.City">
+		select * from city_tb
+		where country_name = '대한민국'
+	</select>
+    
+    
 </mapper>

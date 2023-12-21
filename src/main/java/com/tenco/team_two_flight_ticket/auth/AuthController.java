@@ -19,10 +19,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushFindUserDTO;
+import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushMessageDTO;
+import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushUserDTO;
 import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushTokenResponse;
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushUser;
 import com.tenco.team_two_flight_ticket.auth.authresponse.OAuthToken;
+import com.tenco.team_two_flight_ticket.auth.authresponse.PushAlertFail;
 import com.tenco.team_two_flight_ticket.search.SearchedResponse;
 import com.tenco.team_two_flight_ticket.search.SearchedService;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
@@ -66,9 +73,10 @@ public class AuthController {
         
         //최근 검색한 항공권 목록을 가지고 와야 함(searched DB)
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(1);
-        model.addAttribute("searchedList", searchedList);
-        System.out.println(searchedList);
+        if(principal != null) {
+        	List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(principal.getId());
+        	model.addAttribute("searchedList", searchedList);        	
+        }
         
         return "main";
     }
@@ -103,9 +111,13 @@ public class AuthController {
     public String signInProc(@Valid UserRequest.SignInDTO dto, Model model, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
+        // 로그인 시 푸시 알림 등록
+//        userService.KakaoPushInsertUser(dto);
+//        userService.KakaoPushFindUser(dto);
+//        userService.KakaoPushAlert(dto);
+//        userService.FireBasePushAlert(dto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
-        GetTicketDateDTO ticketDate  = ticketService.getTicketDate(1);
-        System.out.println(ticketDate);
+        GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);
         return "redirect:/main";
     }
@@ -162,6 +174,7 @@ public class AuthController {
 
         userService.kakaoSignUp(dto);
 
+        session.setAttribute("kakaoAccessToken", response.getBody().getAccess_token());
 
         return "redirect:/main";
     }
@@ -211,4 +224,129 @@ public class AuthController {
 
         return ResponseEntity.ok().body(ApiUtils.success(message));
     }
+    
+    // 푸시 대상 등록(uuid, device_id, push_token 필요)
+    @ResponseBody
+    @GetMapping("/kakao/push-insert-user")
+    public void KakaoPushInsertUser(@RequestParam KakaoPushUserDTO dto) {
+    	// 푸시 알림을 받을 대상 등록
+    	RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	params.add("uuid", dto.getUuid());
+    	params.add("device_id", dto.getDeviceId());
+    	params.add("push_type", "fcm");
+    	params.add("push_token", dto.getPushToken());
+    			
+    	// 헤더 + body 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg
+    		= new HttpEntity<>(params, headers);
+    			
+    	// 요청 처리(응답은 토큰의 유효기간)
+    	ResponseEntity<KakaoPushTokenResponse> response = rt.exchange("https://kapi.kakao.com/v2/push/register" , HttpMethod.POST,
+    			requestMsg, KakaoPushTokenResponse.class);
+    }
+    
+    // 푸시 대상 조회(uuid, device_id, push_token 필요)
+    @ResponseBody
+    @GetMapping("/kakao/push-find-user")
+    public void KakaoPushFindUser(@RequestParam KakaoPushFindUserDTO dto) {
+    	RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	if(dto.getUuids().size() == 1) {
+    		params.add("uuid", dto.getUuids().get(0));
+    	} else {
+    		String uuids = "{";
+    		int i = 1;
+    		for (String uuid : dto.getUuids()) {
+    			uuids += uuid;
+    			if(dto.getUuids().size() != i) {
+    				uuids += ",";
+    			}
+    			i++;
+			}
+    		uuids += "}";
+    		params.add("uuids", uuids);
+    	}
+    	
+    			
+    	// 헤더 + body 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg
+    		= new HttpEntity<>(params, headers);
+    			
+    	// 요청 처리
+    	ResponseEntity<KakaoPushUser> response = rt.exchange("https://kapi.kakao.com/v2/push/tokens" , HttpMethod.POST,
+    			requestMsg, KakaoPushUser.class);
+    }
+    
+
+    // 푸시 대상 제거(uuid만 있으면 됨)
+    @ResponseBody
+    @GetMapping("/kakao/push-delete-user")
+    public void KakaoPushDeleteUser(@RequestParam KakaoPushUserDTO dto) {
+    	// 푸시 알림을 받을 대상 제외
+    	RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	params.add("uuid", dto.getUuid());
+    			
+    	// 헤더 + body 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg
+    		= new HttpEntity<>(params, headers);
+    			
+    	// 요청 처리
+    	ResponseEntity<KakaoPushTokenResponse> response = rt.exchange("https://kapi.kakao.com/v2/push/deregister" , HttpMethod.POST,
+    			requestMsg, KakaoPushTokenResponse.class);
+    }
+
+    // 푸시 보내기(uuid목록, 메시지 내용)
+    @ResponseBody
+    @GetMapping("/kakao/push-alert")
+    public void KakaoPushAlert(@RequestParam KakaoPushMessageDTO dto) {
+
+    	RestTemplate rt = new RestTemplate();
+    	// 헤더 구성
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+    	
+    	String pushMsgJson = "{  'for_fcm':{"
+    			+ "    \"collapse\": \"articleId123\","
+    			+ "    \"delay_while_idle\":false,"
+    			+ "    \"custom_field\": {"
+    			+ "      \"article_id\": 111,"
+    			+ "      \"comment_id\": 222,"
+    			+ "      \"comment_preview\": \""+dto.getMessage()+"\" }}}";
+
+    	String uuids = "[ 대상 ]";
+    	// body 구성
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	params.add("uuid", uuids);
+    	params.add("push_message", pushMsgJson);
+    	//params2.add("bypass", ""); 
+    	//서비스 자체 관리 여부. 
+    	//boolean값 기본 false
+    	//사용 시 message에 푸시 토큰 포함
+
+    	// 헤더 바디 결합
+    	HttpEntity<MultiValueMap<String, String>> requestMsg 
+    								= new HttpEntity<>(params, headers);
+    	//요청
+    	ResponseEntity<PushAlertFail> response = rt.exchange("https://kapi.kakao.com/v2/push/send", HttpMethod.POST,
+    			requestMsg, PushAlertFail.class);
+    }
+    
 }

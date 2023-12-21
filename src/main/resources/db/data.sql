@@ -5,6 +5,10 @@ insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) value
 insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(4, 'tom', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'tom@nate.com','01011112222');
 insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(5, 'lisa', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'lisa@nate.com','01011112222');
 
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_admin`) values(6, 'admin1', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'admin1@nate.com','01033334444','true');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_admin`) values(7, 'admin2', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'admin2@nate.com','01033334444','true');
+
+
 
 --예약
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (1,1,153,'예정',1,'2024-08-28 00:13:24',220270,'2023-11-12 06:51:24');
@@ -34,30 +38,36 @@ INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birt
 INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birth_date`,`gender`,`passenger_type`,`created_at`)VALUES (5,3,'hayan','Kim','12/05/1995','여성','성인','2023-11-12 18:34:31');
 
 -- 검색
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(1,1,'시드니',true,'SYD','BKK','2024-09-14 15:20:02','2024-09-15 00:50:39',1,176430,'2024-09-14 15:20:02');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(2,1,'방콕',true,'ICN','BKK','2023-12-24 01:25:56','2023-12-05 19:42:02',2,159400,'2024-02-29 13:24:00');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(3,2,'아시아나',true,'ICN','BUS','2024-11-30 21:27:33','2023-12-06 05:36:46',2,170520,'2024-02-23 11:07:42');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(4,3,'캘리포니아',false,'ICN','BKK','2024-01-21 09:18:11','2023-12-05 11:34:08',1,25470,'2023-02-02 16:26:54');
-INSERT INTO `searched_tb` (`id`,`user_id`,`keyword`,`is_one_way`,`departure_city`,`arrival_city`,`departure_date`,`arrival_date`,`passenger_amount`,`price`,`created_at`)
-VALUES(5,4,'서울',false,'BUS','ICN','2024-01-29 20:32:43','2023-12-05 12:36:31',7,22990,'2023-05-26 04:49:11');
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(1,1,true,'SYD','BKK','2024-09-14','2024-09-15','일반석','2024-09-14 15:20:02',1,0,0);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(2,1,true,'ICN','BKK','2023-12-24','2023-12-05','일반석','2024-02-29 13:24:00',2,0,0);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(3,2,true,'ICN','BUS','2024-11-30','2023-12-06','일반석','2024-02-23 11:07:42',2,1,1);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(4,3,false,'ICN','BKK','2024-01-21','2023-12-05','일반석','2023-02-02 16:26:54',7,0,0);
+INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
+VALUES(5,4,false,'BUS','ICN','2024-01-29','2023-12-05','일반석','2023-05-26 04:49:11',1,1,0);
 
 -- 쿠폰
-INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (1,'가입 축하 쿠폰',30,10000);
-INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (2,'연말 감사 쿠폰',30,20000);
-INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (3,'직원 할인 쿠폰',30,50000);
+-- INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (1,'가입 축하 쿠폰',30,10000);
+-- INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (2,'연말 감사 쿠폰',30,20000);
+-- INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (3,'직원 할인 쿠폰',30,50000);
+--
 
-
+INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`, `coupon_content`,`coupon_number`, `is_used`,`created_at` , `expired_at`)VALUES (1,'가입 축하 쿠폰', 30, 10000, '신규 가입 회원님께 가입 축하 쿠폰을 증정해드리겠습니다', 2134126, 'true', '2023-09-01','2024-01-23');
+INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`, `coupon_content`,`coupon_number`, `is_used`,`created_at` , `expired_at`)VALUES (2,'연말 감사 쿠폰', 30, 20000, '신규 가입 회원님께 가입 축하 쿠폰을 증정해드리겠습니다', 2280777, 'false', '2023-08-01','2024-12-23');
+INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`, `coupon_content`,`coupon_number`, `is_used`,`created_at` , `expired_at`)VALUES (3,'직원 할인 쿠폰', 30, 50000, '신규 가입 회원님께 가입 축하 쿠폰을 증정해드리겠습니다', 5389211, 'true', '2023-11-01','2024-01-23');
 -- hasCoupon
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (1,1,1,true,21341,'2023-09-01 14:44:37','2024-01-23 06:15:22');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (2,1,2,false,22807,'2023-10-07 09:58:22','2024-06-28 21:19:03');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (3,1,3,false,24717,'2023-08-21 00:54:04','2023-12-22 15:25:37');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (4,2,2,true,10901,'2023-08-14 09:49:34','2024-03-22 13:23:33');
-INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (5,3,1,false,15576,'2023-08-01 12:10:14','2024-12-01 23:44:38');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (1,1,1,true,21341,'2023-09-01 14:44:37','2024-01-23 06:15:22');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (2,1,2,false,22807,'2023-10-07 09:58:22','2024-06-28 21:19:03');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (3,1,3,false,24717,'2023-08-21 00:54:04','2023-12-22 15:25:37');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (4,2,2,true,10901,'2023-08-14 09:49:34','2024-03-22 13:23:33');
+-- INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`,`is_used`,`coupon_number`,`created_at`,`expired_at`)VALUES (5,3,1,false,15576,'2023-08-01 12:10:14','2024-12-01 23:44:38');
 
+INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (1,1,1);
+INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (2,2,2);
+INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (3,3,3);
 
 -- 공지
 

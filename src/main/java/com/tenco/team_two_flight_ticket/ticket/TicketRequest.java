@@ -91,5 +91,18 @@ public class TicketRequest {
         private String expiresIn;
         private String state;
     }
+    
+    @Data
+    public static class TicketLightSearchDTO{
+    	@NotEmpty
+    	private String keyword;
+    }
+    
+    @Data
+    public static class SearchCityDTO{
+    	@NotEmpty
+    	private String keyword;
+    }
+    
 
 }
