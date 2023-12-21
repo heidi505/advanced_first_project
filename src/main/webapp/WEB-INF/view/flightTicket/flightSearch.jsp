@@ -796,7 +796,7 @@
                             </li>
                             <li>
                                 <label class="check_box">
-                                    <input type="checkbox" name="option" value="말레이시아항공">
+                                    <input type="checkbox" name="option" value="말레이시아 항공">
                                     <span class="check_box_icon"></span>
                                 </label>
                                 <span>말레이시아 항공</span>
