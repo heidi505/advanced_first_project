@@ -318,7 +318,7 @@ public class TicketService {
         }
 
         System.out.println("가는날 도착:" + removedDto.size());
-ㅃㅃㅃ
+
         for (int i = 0; i < dataDTO.size(); i++) {
             SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
             // 제공해주는 정보 - segDto(dataDTO의 i번지 내용)
