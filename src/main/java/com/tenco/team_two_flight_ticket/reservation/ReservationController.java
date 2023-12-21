@@ -84,11 +84,11 @@ public class ReservationController {
     public String finalResult(HttpSession session, Model model) {
         ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
 
-//        User principal = (User) session.getAttribute(Define.PRINCIPAL);
-//        int couponNum = userService.getProfile(principal);
-//
-//        model.addAttribute("principal", principal);
-//        model.addAttribute("couponNum", couponNum);
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        int couponNum = userService.getProfile(principal);
+
+        model.addAttribute("principal", principal);
+        model.addAttribute("couponNum", couponNum);
 
         model.addAttribute("Result", resultDTO);
         System.out.println("잘 담겼나 안담겼나~~");
