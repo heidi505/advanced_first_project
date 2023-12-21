@@ -321,7 +321,7 @@
 .w-40 {
 	width:40%;
 }
-/* main.jsp */
+/* main */
 .city_search_box{
 	width:100%;
 	border-radius: 5px;
@@ -343,4 +343,3 @@
 .coupon_discount{
 	font-weight: bold;
 }
-

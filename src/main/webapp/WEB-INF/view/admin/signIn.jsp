@@ -16,12 +16,12 @@
 					<form action="/admin/sign-in" method="post">
 						<div class="form-group w-75 mx-auto pt-2 mt-3">
 							<label for="userId">아이디*</label> <input type="text"
-																	class="form-control mt-2 me-2 p-2" name="username" id="userId"
+																	class="form-control mt-2 me-2 p-2" name="username" id="userId" value="admin1"
 																	placeholder="아이디를 입력해주세요" />
 						</div>
 						<div class="form-group w-75 mx-auto pt-2 mt-2">
 							<label for="password">비밀번호*</label> <input type="password"
-																	   class="form-control mt-2 me-2 p-2" name="password"
+																	   class="form-control mt-2 me-2 p-2" name="password" value="1111"
 																	   id="password" placeholder="비밀번호를 입력해주세요" />
 						</div>
 						<div class="form-group w-75 mx-auto d-flex mb-4 mt-3">

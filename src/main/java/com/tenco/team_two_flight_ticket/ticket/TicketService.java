@@ -8,12 +8,23 @@ import org.springframework.stereotype.Service;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.City;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.stream.Collectors;
+
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,11 +40,16 @@ import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
+
 import com.tenco.team_two_flight_ticket.search.SearchedResponse.SearchCityDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRequest.TicketSearchDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
+
+import javax.xml.crypto.Data;
+
 import jakarta.validation.Valid;
+
 
 @Service
 public class TicketService {
@@ -44,6 +60,7 @@ public class TicketService {
     private AirlineRepository airlineRepository;
     @Autowired
     private AirportRepository airportRepository;
+
     private TicketResponse.FlightSearchDTO responseDTO;
     public List<City> getCities(String region) {
         List<City> cities = ticketRepository.getCities(region);
@@ -136,18 +153,22 @@ public class TicketService {
 
         //목적지, 도착지의 공항을 국가 이름으로 파싱
 
+        //도착지의 공항을 국가 이름으로 파싱한 list
+
         List<String> newDeparture = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
                 .map(e->airportRepository.findCityName(e.getDeparture().getIataCode()))
                 .collect(Collectors.toList());
 
+        //목적지의 공항을 국가 이름으로 파싱한 list
         List<String> newArrival = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
                 .map(e->airportRepository.findCityName(e.getArrival().getIataCode()))
                 .collect(Collectors.toList());
 
+        //
         List<SegmentDTO> newSeg = responseDTO.getData().stream()
                 .flatMap(e->e.getItineraries().stream())
                 .flatMap(e->e.getSegments().stream())
@@ -181,7 +202,11 @@ public class TicketService {
         return responseDTO;
     }
     
-    
+    /**
+     * 
+     * @param userId
+     * @return GetTicketDateDTO dto
+     */
 	public GetTicketDateDTO getTicketDate(int userId) {
 		GetTicketDateDTO dto = null;
 		try {
@@ -196,64 +221,196 @@ public class TicketService {
 		return dto;
 	}
 
-    public DataDTO ticketDetail(int ticketId) {
 
-        DataDTO dto = responseDTO.getData().get(ticketId);
-        
+
+    public List<DataDTO> ticketDetail(int ticketId) {
+
+        List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId().equals(String.valueOf(ticketId))).collect(Collectors.toList());
+
+
 
         return dto;
 
     }
 
+
+    public TicketRequest.TicketSearchDTO parsingReq(TicketRequest.TicketSearchDTO dto) {
+
+        TicketRequest.TicketSearchDTO newDto = dto;
+
+        String originName = ticketRepository.getCity(dto.getOriginLocationCode());
+        String destinationName = ticketRepository.getCity(dto.getDestinationLocationCode());
+        int added = dto.getAdults() + dto.getChildren() + dto.getInfants();
+
+        newDto.setOriginLocationName(originName);
+        newDto.setDestinationLocationName(destinationName);
+        newDto.setAllPassengers(String.valueOf(added));
+
+
+        System.out.println("================" + added);
+        return newDto;
+    }
+
+    public TicketResponse.FlightSearchDTO onewayOptionSearch(TicketRequest.OptionDTO optionDTO) {
+
+        if(optionDTO.getAirlineOption().isEmpty() && optionDTO.getOnewayDepTimeOption().isEmpty() && optionDTO.getOnewayArrTimeOption().isEmpty()){
+            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
+        }
+
+
+        List<DataDTO> respDto = responseDTO.getData().stream()
+                .filter(e -> e.getItineraries().stream()
+                        .anyMatch(itinerary -> itinerary.getSegments().stream()
+                                .anyMatch(segment ->
+                                        optionDTO.getAirlineOption().stream()
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption))
+                                                && optionDTO.getOnewayDepTimeOption().stream()
+                                                .anyMatch(d -> segment.getDeparture().depSearch(d))
+                                                && optionDTO.getOnewayArrTimeOption().stream()
+                                                .anyMatch(a -> segment.getArrival().arrSearch(a))
+
+                                )
+                        )
+                )
+                .collect(Collectors.toList());
+
+
+
+
+        responseDTO.setData(respDto);
+        responseDTO.getMeta().setCount(respDto.size());
+
+        return responseDTO;
+
+    }
+
+    public TicketResponse.FlightSearchDTO optionSearch(TicketRequest.OptionDTO optionDTO) {
+        if(optionDTO.roundOptionsAreEmpty(optionDTO)){
+            throw new MyBadRequestException("검색할 옵션을 선택해주세요");
+        }
+
+        List<DataDTO> dataDTO = responseDTO.getData();
+
+        List<DataDTO> removedDto = new ArrayList<>();
+
+        for(int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+            for (int j = 0; j < optionDTO.getOnewayDepTimeOption().size(); j++) {
+                if(segDto.getDeparture().depSearch(optionDTO.getOnewayDepTimeOption().get(j))){
+                    removedDto.add(dataDTO.get(i));
+                    break;
+                }
+            }
+        }
+
+        System.out.println("가는날 출발:" + removedDto.size());
+
+        for(int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+            for (int j = 0; j < optionDTO.getOnewayArrTimeOption().size(); j++) {
+                if(segDto.getArrival().arrSearch(optionDTO.getOnewayArrTimeOption().get(j))){
+                    if(!removedDto.contains(dataDTO.get(i))){
+                        removedDto.add(dataDTO.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+
+        System.out.println("가는날 도착:" + removedDto.size());
+
+        for (int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+            // 제공해주는 정보 - segDto(dataDTO의 i번지 내용)
+            for (int j = 0; j < optionDTO.getRoundDepTimeOption().size(); j++) {
+                // 사용자가 선택한 시간 List - optionDTO
+                if(segDto.getDeparture().depSearch(optionDTO.getRoundDepTimeOption().get(j))){
+                    // segDto에 optionDTO가 있다면
+                    if(!removedDto.contains(dataDTO.get(i))){
+                        // removeDto에 포함되어 있지 않다면
+                        removedDto.add(dataDTO.get(i));
+                        // removeDto에 추가하고 멈춰
+                        break;
+                    }
+                }
+            }
+        }
+
+        System.out.println("오는날 출발:" + removedDto.size());
+
+        for (int i = 0; i < dataDTO.size(); i++) {
+            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+            for (int j = 0; j < optionDTO.getRoundArrTimeOption().size(); j++) {
+                if(segDto.getArrival().arrSearch(optionDTO.getRoundArrTimeOption().get(j))){
+                    if(!removedDto.contains(dataDTO.get(i))){
+                        removedDto.add(dataDTO.get(i));
+                        break;
+                    }
+
+                }
+            }
+        }
+
+        System.out.println("오는날 도착" + removedDto.size());
+
+        dataDTO = dataDTO.stream().filter(e->removedDto.stream().anyMatch(i->i.getId().equals(e.getId()))).collect(Collectors.toList());
+
+        responseDTO.setData(dataDTO);
+        responseDTO.getMeta().setCount(dataDTO.size());
+
+        return responseDTO;
+
+
+    }
+
     // 간편 항공권 검색 조건 채우기
-	public TicketSearchDTO getSearchDTO(@Valid TicketRequest.TicketLightSearchDTO dto) {
-		// 검색 조건 dto
-		TicketSearchDTO searchDto = new TicketSearchDTO();
-				
-		String keyword = dto.getKeyword();
-		List<City> cities = ticketRepository.getCitiesFromKeyword(keyword);
-		Random random = new Random();
-		// 나라 이름이나 유사명으로 검색된 경우 랜덤하게 도시 선택
-		int r = random.nextInt(cities.size() == 0 ? cities.size()-1 : cities.size());
-		if(cities.size() >= 1) {
-			searchDto.setDestinationLocationCode(cities.get(r).getCityCode());
-		}
-		// 출발지는 한국의 랜덤한 공항
-		List<City> koreanCity = ticketRepository.getKoreanCity();
-		int r2 = random.nextInt(koreanCity.size() == 0 ? koreanCity.size()-1 : koreanCity.size());
-		searchDto.setOriginLocationCode(koreanCity.get(r2).getCityCode());
-		
-		// 인원은 어른 1명으로 고정
-		searchDto.setAdults(1);
-		
-		// 현재 날짜 + 30일
-		LocalDate departureDate = LocalDate.now().plusDays(30);
-		String startDate = String.valueOf(departureDate);
-		searchDto.setStartDate(startDate);
+ 	public TicketSearchDTO getSearchDTO(@Valid TicketRequest.TicketLightSearchDTO dto) {
+ 		// 검색 조건 dto
+ 		TicketSearchDTO searchDto = new TicketSearchDTO();
+ 				
+ 		String keyword = dto.getKeyword();
+ 		List<City> cities = ticketRepository.getCitiesFromKeyword(keyword);
+ 		Random random = new Random();
+ 		// 나라 이름이나 유사명으로 검색된 경우 랜덤하게 도시 선택
+ 		int r = random.nextInt(cities.size() == 0 ? cities.size()-1 : cities.size());
+ 		if(cities.size() >= 1) {
+ 			searchDto.setDestinationLocationCode(cities.get(r).getCityCode());
+ 		}
+ 		// 출발지는 한국의 랜덤한 공항
+ 		List<City> koreanCity = ticketRepository.getKoreanCity();
+ 		int r2 = random.nextInt(koreanCity.size() == 0 ? koreanCity.size()-1 : koreanCity.size());
+ 		searchDto.setOriginLocationCode(koreanCity.get(r2).getCityCode());
+ 		
+ 		// 인원은 어른 1명으로 고정
+ 		searchDto.setAdults(1);
+ 		
+ 		// 현재 날짜 + 30일
+ 		LocalDate departureDate = LocalDate.now().plusDays(30);
+ 		String startDate = String.valueOf(departureDate);
+ 		searchDto.setStartDate(startDate);
 
-		// 좌석은 일반석
-		searchDto.setTravelClass("일반석");
-		
-		return searchDto;
-	}
-	
-	/**
-	 * 
-	 * @param dto
-	 * @return cities
-	 */
-	//검색어로 도시 조회
-	public List<City> getCitiesFromKeyword(@Valid TicketRequest.SearchCityDTO dto) {
-		List<City> cities = null;
-		try {
-			cities = ticketRepository.getCitiesFromKeyword(dto.getKeyword());
-		} catch (Exception e) {
-			throw new MyServerError("서버 에러가 발생했습니다");
-		}
-		return cities;
-	}
+ 		// 좌석은 일반석
+ 		searchDto.setTravelClass("일반석");
+ 		
+ 		return searchDto;
+ 	}
 
-	
-	
+ 	/**
+ 	 * 
+ 	 * @param dto
+ 	 * @return cities
+ 	 */
+ 	//검색어로 도시 조회
+ 	public List<City> getCitiesFromKeyword(SearchCityDTO dto) {
+ 		List<City> cities = null;
+ 		try {
+ 			cities = ticketRepository.getCitiesFromKeyword(dto.getKeyword());
+ 		} catch (Exception e) {
+ 			throw new MyServerError("서버 에러가 발생했습니다");
+ 		}
+ 		return cities;
+ 	}
+
+
 
 }

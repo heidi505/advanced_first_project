@@ -10,6 +10,8 @@ import java.util.Date;
 @Data
 public class CouponSaveDTO {
     private Integer id;
+    private Integer userId;
+    private String username;
     private String couponName;
     private Long discountingPrice;
     private String couponContent;

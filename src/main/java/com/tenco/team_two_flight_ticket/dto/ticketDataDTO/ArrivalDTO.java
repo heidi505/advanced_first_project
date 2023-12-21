@@ -46,4 +46,19 @@ public class ArrivalDTO {
 
         return timeArr[0] + ":" + timeArr[1];
     }
+
+    public boolean arrSearch(String value){
+
+        int time = LocalDateTime.parse(this.at).toLocalTime().getHour();
+
+
+        String[] valueArr = value.split("~");
+
+        int startValue = Integer.parseInt(valueArr[0]);
+        int endValue = Integer.parseInt(valueArr[1]);
+
+
+
+        return time >= startValue && time <= endValue;
+    }
 }

@@ -366,7 +366,6 @@ public class UserService {
 			response = FirebaseMessaging.getInstance().send(message);
 			System.out.println("Successfully sent message: " + response);
 		} catch (FirebaseMessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
