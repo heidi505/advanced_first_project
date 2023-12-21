@@ -31,16 +31,16 @@
                         <tbody class="common_list_cont">
                         <c:forEach var="coupons" items="${couponExpiredList}">
                             <tr>
-                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.id}</a></td>
-                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponName}</a></td>
-                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponNumber}</a></td>
-                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
-                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.discountingPrice}</a></td>
+                                <td><a href="/admin/coupon-expired-detail/${coupons.id}">${coupons.id}</a></td>
+                                <td><a href="/admin/coupon-expired-detail/${coupons.id}">${coupons.couponName}</a></td>
+                                <td><a href="/admin/coupon-expired-detail/${coupons.id}">${coupons.couponNumber}</a></td>
+                                <td><a href="/admin/coupon-expired-detail/${coupons.id}">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
+                                <td><a href="/admin/coupon-expired-detail/${coupons.id}">${coupons.discountingPrice}</a></td>
                                 <c:if test="${coupons.isUsed == true}">
-                                    <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.createdValue}</a></td>
+                                    <td><a href="/admin/coupon-expired-detail/${coupons.id}">${coupons.createdValue}</a></td>
                                 </c:if>
                                 <c:if test="${coupons.isUsed == false}">
-                                    <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.expiredValue}</a></td>
+                                    <td><a href="/admin/coupon-expired-detail/${coupons.id}">${coupons.expiredValue}</a></td>
                                 </c:if>
                             </tr>
                         </c:forEach>
@@ -57,21 +57,33 @@
                         <thead>
                         <tr>
                             <th>순번</th>
+                            <th>사용자 이름</th>
                             <th>쿠폰 이름</th>
                             <th>쿠폰 발급 번호</th>
                             <th>쿠폰 발급일 & 만료일</th>
                             <th>쿠폰 금액</th>
+                            <th>문자 발송</th>
                         </tr>
                         </thead>
                         <tbody class="common_list_cont">
                         <c:forEach var="coupons" items="${couponList}">
                             <tr>
                                 <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.id}</a></td>
+                                <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.username}</a></td>
                                 <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponName}</a></td>
                                 <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.couponNumber}</a></td>
                                 <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.createdAt} ~ ${coupons.expiredAt}</a></td>
                                 <td><a href="/admin/coupon-detail/${coupons.id}">${coupons.discountingPrice}</a></td>
+                                <td><button class="btn btn-primary" type="button" id="couponSMSBtn">발송</button></td>
                             </tr>
+
+                            <input type="hidden" name="userId" id="userId">
+                            <input type="hidden" name="username" id="username">
+                            <input type="hidden" name="couponName" id="couponName">
+                            <input type="hidden" name="couponNumber" id="couponNumber">
+                            <input type="hidden" name="username" id="username">
+                            <input type="hidden" name="discountingPrice" id="discountingPrice">
+                            <input type="hidden" name="expiredAt" id="expiredAt">
                         </c:forEach>
                         </tbody>
                     </table>
@@ -94,5 +106,46 @@
 </div>
 </div>
 
+<script>
+
+    const couponData = {
+        couponSMSBtn: document.querySelector("#couponSMSBtn"),
+        couponName: document.querySelector("#couponName"),
+        couponNumber: document.querySelector("#couponNumber"),
+        username: document.querySelector("#username"),
+        discountingPrice: document.querySelector("#discountingPrice"),
+        expiredAt: document.querySelector("#expiredAt"),
+    };
+
+
+    couponData.couponSMSBtn.addEventListener("click",()=> {
+        console.log(couponSMS(couponData));
+
+    })
+    function couponSMS (data){
+
+        fetch(`/api/admin/couponSMS`
+            ,{ method: "POST",
+                headers:{
+                    "Content-Type": "application/json",
+                    "charset": "UTF-8"
+                },
+                body: JSON.stringify({
+                    data:data
+                }),
+            }).then(response => response.json())
+            .then(result => {
+                alert(result);
+                return result;
+            })
+            .catch(error => {
+                alert(error);
+                return error;
+            });
+    }
+
+
+
+</script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp" %>
