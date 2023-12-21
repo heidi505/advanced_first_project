@@ -45,18 +45,18 @@
 				<!-- 쿠폰 넣을 창 -->
 				<p class="mx-4">나의 쿠폰 목록</p>
 				<div class="coupon_list d-flex">
-				<div class="pt-2 w-28 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
+				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
 					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
 					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
 				</div>
-				<div class="pt-2 w-28 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
+				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
 					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
 					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
 				</div>
-				<div class="pt-2 w-28 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
+				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
 					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
 					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
 				</div>
