@@ -66,4 +66,10 @@
         DELETE FROM HASCOUPON_TB WHERE id = #{id}
     </delete>
 
+    <select id="findCouponByUserId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO">
+        SELECT *,
+        FROM coupon_tb
+        where is_used = false
+        and user_id = #{id}
+    </select>
 </mapper>
