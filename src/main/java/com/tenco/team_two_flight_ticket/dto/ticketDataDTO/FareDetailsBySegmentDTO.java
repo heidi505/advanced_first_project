@@ -13,9 +13,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FareDetailsBySegmentDTO {
+    //segment의 id
     private String segmentId;
+    //좌석 등급 이름 - economy, business, first
     @Enumerated(EnumType.STRING)
     private TravelClass cabin;
+    //포함된 수화물 정보
     private IncludedCheckedBagsDTO includedCheckedBags;
 
 }

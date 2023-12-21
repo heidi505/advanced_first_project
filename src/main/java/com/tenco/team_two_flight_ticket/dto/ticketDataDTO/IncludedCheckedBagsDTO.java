@@ -10,8 +10,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IncludedCheckedBagsDTO {
+    //무료 수화물 갯수
     private Integer quantity;
+    //무료 수화물 허용 무게
     private Integer weight;
+    //무료 수화물 무게 단위(kg)
     private String weightUnit;
 
     public String choose(){
