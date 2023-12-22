@@ -881,28 +881,18 @@
             </div>
             <div class="common_table flight_notice">
                 <h4 class="flight_notice_tit">항공권 공지사항</h4>
+                <c:forEach var="notice" items="${noticeList}">
                 <table class="table table-bordered">
                     <tbody>
                     <tr>
                         <td>
-                            <span>[공지] 2023년 12월 1일 부 유류할증료 안내</span>
-                            <span>2023-11-28</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>[공지] 2023년 12월 1일 부 유류할증료 안내</span>
-                            <span>2023-11-28</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>[공지] 2023년 12월 1일 부 유류할증료 안내</span>
-                            <span>2023-11-28</span>
+                            <span>${notice.title}</span>
+                            <span>${notice.time()}</span>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+                </c:forEach>
             </div>
         </div>
     </section>
