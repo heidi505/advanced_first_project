@@ -116,7 +116,6 @@ public class TicketController {
 
         TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(dto);
         model.addAttribute("req", newReqDto);
-
         
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         if(principal != null) {
@@ -148,11 +147,22 @@ public class TicketController {
     	for (int i = 0; i < regions.length; i++) {
     		model.addAttribute(values[i],ticketService.getCities(regions[i]));
     	}
-
+    	 TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(dto);
+         model.addAttribute("req", newReqDto);
+         System.out.println(dto);
     	TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
+    	
+    	
     	model.addAttribute("count", responseBody.getMeta().getCount());
     	List<DataDTO> dataDTOList = responseBody.getData();
-    	model.addAttribute("ticketList", dataDTOList);
+        model.addAttribute("ticketList", dataDTOList);
+
+        if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
+            throw new MyBadRequestException("해당하는 항공권이 없습니다");
+        }
+
+        int isRound = dataDTOList.get(0).getItineraries().size();
+        model.addAttribute("isRound", isRound);
     	
     	
     	return "flightTicket/flightSearch";
@@ -171,10 +181,22 @@ public class TicketController {
     	// 검색어를 도착지로 하고 나머지는 랜덤으로 작성
     	TicketRequest.TicketSearchDTO searchDto = ticketService.getSearchDTO(dto);
     	// 티켓 검색
-    	TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(searchDto);
-    	model.addAttribute("count", responseBody.getMeta().getCount());
-    	List<DataDTO> dataDTOList = responseBody.getData();
-    	model.addAttribute("ticketList", dataDTOList);
+    	 TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(searchDto);
+         model.addAttribute("req", newReqDto);
+
+    	    	
+         TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(searchDto);
+         model.addAttribute("count", responseBody.getMeta().getCount());
+    	
+         List<DataDTO> dataDTOList = responseBody.getData();
+         model.addAttribute("ticketList", dataDTOList);
+
+        if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
+            throw new MyBadRequestException("해당하는 항공권이 없습니다");
+        }
+
+        int isRound = dataDTOList.get(0).getItineraries().size();
+        model.addAttribute("isRound", isRound);
     	
     	
     	return "flightTicket/flightSearch";
