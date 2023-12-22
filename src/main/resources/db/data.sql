@@ -74,6 +74,8 @@ INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (2,2,2);
 INSERT INTO `hascoupon_tb`(`id`,`user_id`,`coupon_id`)VALUES (3,3,3);
 
 -- 공지
+insert into `notice_tb`(`id`,`title`,`content`, `created_at`)VALUES(1,'유류할증료 인상 안내','유류 할증료가 인상됩니다', now());
+insert into `notice_tb`(`id`,`title`,`content`, `created_at`)VALUES(2,'파격 이벤트 안내','이벤트 참여하면 어쩌구', now());
 
 -- 배너
 
