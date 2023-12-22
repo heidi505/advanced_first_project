@@ -322,9 +322,9 @@
                                         </div>
                                     </div>
                                     <div class="preview_price_btn">
-                                        <div class="btn btn-primary preview_price_btnw">
-                                            항공권 예약하기
-                                        </div>
+                                        <form method="GET" action="/detail/${ticket.id}">
+                                            <button type="submit" class="btn btn-primary preview_price_btnw">항공권 예약하기</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
