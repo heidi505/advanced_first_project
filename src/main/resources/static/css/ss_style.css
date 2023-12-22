@@ -321,6 +321,10 @@
 .w-40 {
 	width:40%;
 }
+
+.w-28 {
+	width:28%;
+}
 /* main */
 .city_search_box{
 	width:100%;
@@ -342,4 +346,7 @@
 }
 .coupon_discount{
 	font-weight: bold;
+}
+.my_coupon{
+	cursor: pointer;
 }
