@@ -48,15 +48,15 @@ public class CouponController {
         return "redirect:/admin/coupon-list";
     }
 
-//    @ResponseBody
-//    @PostMapping("/api/admin/couponSMS")
-//    public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(@RequestBody CouponListDTO couponData) {
-//        System.out.println("-------------------- 값 확인 " + couponData.getCouponNumber());
-//        SingleMessageSentResponse messageResponse = couponService.couponSMS(couponData);
-//        String message = messageResponse.toString();
-//        System.out.println(message + "확인");
-//        return ResponseEntity.ok().body(ApiUtils.success(message));
-//    }
+    @ResponseBody
+    @PostMapping("/api/admin/couponSMS")
+    public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(@RequestBody CouponListDTO couponData) {
+        System.out.println("-------------------- 값 확인 " + couponData.getCouponNumber());
+        SingleMessageSentResponse messageResponse = couponService.couponSMS(couponData);
+        String message = messageResponse.toString();
+        System.out.println(message + "확인");
+        return ResponseEntity.ok().body(ApiUtils.success(message));
+    }
 
 
     //    쿠폰 목록 기능
