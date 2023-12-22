@@ -55,8 +55,9 @@
 				<div class="coupon_list d-flex">
 				<c:forEach var="coupon" items="${couponList}">
 				<div class="pt-2 w-28 ms-4 mb-4 mt-2 border rounded">
+					<input type="hidden" class="coupon_number" value="${coupon.id}">
 					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">${coupon.discountingPrice}원</div><span class="ps-5 w-10 fs-6">${coupon.remainingDays}일 남음</span>
-					<p class="px-2 pt-3 fs-6">${coupon.couponContent}</p>
+					<p class="px-2 pt-3 fs-6">${coupon.couponName}</p>
 					<div class="m-2 p-3 bg_line text-center">${coupon.expiredAtYear} - ${coupon.expiredAtYear} - ${coupon.expiredAtDays} 까지</div>
 				</div>
 				</c:forEach>
