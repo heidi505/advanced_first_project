@@ -2,6 +2,8 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -60,6 +62,9 @@ public class AuthController {
     @Autowired
     private SearchedService searchService;
 
+    @Autowired
+    private NoticeService noticeService;
+
     //메인 페이지
     @GetMapping("/main")
     public String mainPage(Model model){
@@ -77,6 +82,9 @@ public class AuthController {
         	List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(principal.getId());
         	model.addAttribute("searchedList", searchedList);        	
         }
+
+        List<NoticeResponseDTO.NoticeListDTO> noticeList = noticeService.findAll();
+        model.addAttribute("noticeList", noticeList);
         
         return "main";
     }
@@ -112,7 +120,7 @@ public class AuthController {
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
         // 로그인 푸시 알림 보내기
-        userService.FireBasePushAlert(dto);
+//        userService.FireBasePushAlert(dto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);
