@@ -1,6 +1,16 @@
 package com.tenco.team_two_flight_ticket.coupon;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponUseDTO;
+
+import org.mybatis.spring.MyBatisSystemException;
+
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.coupon.dto.*;
 import com.tenco.team_two_flight_ticket.user.User;
@@ -10,6 +20,7 @@ import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,6 +98,24 @@ public class CouponService {
         couponRepository.deleteByCouponUserId(id);
     }
 
+	/**
+	 * 
+	 * @param dto
+	 * @return 
+	 */
+	public void useCoupon(CouponUseDTO dto) {
+		try {
+			int resultRowCount = couponRepository.useCoupon(dto.getCouponId());
+			if(resultRowCount != 1) {
+				throw new MyBadRequestException("쿠폰 사용에 실패하였습니다");
+			}
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		
+	}
+
+
     public SingleMessageSentResponse couponSMS(CouponListDTO dto) {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
@@ -114,4 +143,9 @@ public class CouponService {
 
         return response;
     }
+
+	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

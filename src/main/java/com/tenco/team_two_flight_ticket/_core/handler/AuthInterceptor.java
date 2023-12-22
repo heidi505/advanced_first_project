@@ -18,7 +18,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         if(principal == null){
         	//작업용 처리
-            //throw new MyUnAuthorizedException("로그인 먼저 해주세요");
+//            throw new MyUnAuthorizedException("로그인 먼저 해주세요");
         }
         return true;
     }

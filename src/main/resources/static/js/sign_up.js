@@ -99,8 +99,8 @@ window.onload = function(){
 	// 통과후 아이디를 변경하지 못하게 불일치 시 버튼 비활성화
 	//아이디 타이핑 시 유효성 검사
 	idInput.addEventListener('keyup',(e)=>{
-		userId = form.elements["username"].value;
-		if (!userId || userId.trim() == '') {
+		username = form.elements["username"].value;
+		if (!username || username.trim() == '') {
 			doubleCheckBtn.disabled = true;
 		} else {
 			doubleCheckBtn.disabled = false;

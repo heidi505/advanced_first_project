@@ -67,6 +67,11 @@ public class ReservationResponse {
 		private String cuttedPaymentDeadline;
 		private String phoneNumber;
 		
+	    private String koreanArrivalCity;
+	    private String koreanAirline;
+	    private String koreanDepartureCity;
+		
+		
 		void cutDepartureDate() {
 			Date date = new Date(departureTime.getTime());
 	        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd ( E )",Locale.KOREA);

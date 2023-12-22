@@ -2,6 +2,8 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -60,6 +62,9 @@ public class AuthController {
     @Autowired
     private SearchedService searchService;
 
+    @Autowired
+    private NoticeService noticeService;
+
     //메인 페이지
     @GetMapping("/main")
     public String mainPage(Model model){
@@ -77,6 +82,9 @@ public class AuthController {
         	List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(principal.getId());
         	model.addAttribute("searchedList", searchedList);        	
         }
+
+        List<NoticeResponseDTO.NoticeListDTO> noticeList = noticeService.findAll();
+        model.addAttribute("noticeList", noticeList);
         
         return "main";
     }
@@ -111,10 +119,7 @@ public class AuthController {
     public String signInProc(@Valid UserRequest.SignInDTO dto, Model model, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
-        // 로그인 시 푸시 알림 등록
-//        userService.KakaoPushInsertUser(dto);
-//        userService.KakaoPushFindUser(dto);
-//        userService.KakaoPushAlert(dto);
+        // 로그인 푸시 알림 보내기
 //        userService.FireBasePushAlert(dto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
@@ -124,13 +129,14 @@ public class AuthController {
 
     //카카오 로그인
     @GetMapping("/kakao/sign-in")
-    public String kakaoSignIn() {
+    public String kakaoSignIn(KakaoProfile kakaoProfile) {
+//        userService.kakaoSignIn(dto,kakaoProfile);
         return "user/kakaoSignIn";
     }
 
     //카카오 로그인
     @GetMapping("/user/kakao-redirect")
-    public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
+    public String kakaoRedirect(@RequestParam String code) {
         System.out.println("메서드 동작 확인");
 
         RestTemplate r1 = new RestTemplate();
@@ -172,7 +178,7 @@ public class AuthController {
         KakaoProfile kakaoProfile = response2.getBody();
         System.out.println(kakaoProfile);
 
-        userService.kakaoSignUp(dto);
+        userService.kakaoSignUp(kakaoProfile);
 
         session.setAttribute("kakaoAccessToken", response.getBody().getAccess_token());
 

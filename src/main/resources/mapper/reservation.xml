@@ -4,35 +4,48 @@
 
 <mapper namespace="com.tenco.team_two_flight_ticket.reservation.ReservationRepository">
     <select id="getMyTravel" resultType="com.tenco.team_two_flight_ticket.user.UserResponse$GetMyTravelDTO">
-        select r.id as id, is_payed, user_id, r.created_at as created_at, payment_deadline
+        SELECT r.id as id, is_payed, user_id, r.created_at as created_at, payment_deadline
         , reservation_num, status_enum, airline, arrival_city, departure_airport, departure_city
-        , flight_name, departure_time, arrival_time
-        from reservation_tb as r
-        join ticket_tb as t
-        on r.id = t.reservation_id
-        where user_id = #{userId}
-        and status_enum = #{statusEnum}
+        , flight_name, departure_time, arrival_time, icity.name as korean_arrival_city, iairline.name as korean_airline
+        , de_city.name as korean_departure_city
+        , CASE WHEN ar_city.city_name = ar_city.name
+        THEN ar_city.name
+        ELSE concat(ar_city.city_name,'/',ar_city.name) 
+        END as korean_arrival_city
+        FROM reservation_tb as r
+        JOIN ticket_tb as t
+        ON r.id = t.reservation_id
+        LEFT JOIN iata_city_tb as icity
+        ON icity.code = t.arrival_city
+        LEFT JOIN iata_airline_tb as iairline
+        ON iairline.code = t.airline
+        LEFT JOIN iata_airport_tb as de_city
+        ON de_city.code = t.departure_city
+        LEFT JOIN iata_airport_tb as ar_city
+        ON ar_city.code = t.arrival_city
+        WHERE user_id = #{userId}
+        AND status_enum = #{statusEnum}
         <if test="sort == 'true'">
-            and is_payed = true
+            AND is_payed = true
         </if>
         <if test="sort == 'false'">
-            and is_payed = false
+            AND is_payed = false
         </if>
-        order by departure_time
+        ORDER BY departure_time
     </select>
 
     <select id="getMyTripCount" resultType="int">
-        select count(*)
-        from reservation_tb as r
-        join ticket_tb as t
-        on r.id = t.reservation_id
-        where user_id = #{userId}
-        and status_enum = #{statusEnum}
+        SELECT count(*)
+        FROM reservation_tb as r
+        JOIN ticket_tb as t
+        ON r.id = t.reservation_id
+        WHERE user_id = #{userId}
+        AND status_enum = #{statusEnum}
         <if test="sort == 'true'">
-            and is_payed = true
+            AND is_payed = true
         </if>
         <if test="sort == 'false'">
-            and is_payed = false
+            AND is_payed = false
         </if>
     </select>
 
@@ -43,17 +56,26 @@
     </insert>
 
     <select id="getMyTripDetail" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripDetailDTO">
-   		select reservation_num, is_payed, status_enum ,payment_deadline ,res_name, real_name , first_name, last_name , r.phone_num , airline, departure_city, arrival_city
-   		,departure_time, arrival_time, seat_type, is_one_way
-		from reservation_tb as r
-		join ticket_tb as t
-		on r.id = t.reservation_id
-		join passenger_tb p
-		on t.id = p.id
-		join user_tb u
-		on u.id = r.user_id
-		where reservation_num = #{reservationNum}
-		and r.user_id = #{userId}
+   		SELECT reservation_num, is_payed, status_enum ,payment_deadline ,res_name, real_name , first_name, last_name , r.phone_num , airline, departure_city, arrival_city
+   		,departure_time, arrival_time, seat_type, is_one_way, iairline.name as korean_airline
+        , de_city.name as korean_departure_city, ar_city.name as korean_arrival_city
+		FROM reservation_tb as r
+		JOIN ticket_tb as t
+		ON r.id = t.reservation_id
+		JOIN passenger_tb p
+		ON t.id = p.id
+		JOIN user_tb u
+		ON u.id = r.user_id
+		LEFT JOIN iata_city_tb as icity
+        ON icity.code = t.arrival_city
+        LEFT JOIN iata_airline_tb as iairline
+        ON iairline.code = t.airline
+        LEFT JOIN iata_airport_tb as de_city
+        ON de_city.code = t.departure_city
+        LEFT JOIN iata_airport_tb as ar_city
+        ON ar_city.code = t.arrival_city
+		WHERE reservation_num = #{reservationNum}
+		AND r.user_id = #{userId}
    	</select>
 
 
@@ -93,20 +115,20 @@
 
     <select id="getPayedInfo"
     resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetPayedInfoDTO">
-    	select first_name, last_name, passenger_type, gender, birth_date, air_fare
+    	SELECT first_name, last_name, passenger_type, gender, birth_date, air_fare
     		  , fuel_surcharge, taxes, ticketing_fee, total_price, is_payed
-    	from reservation_tb as r
-    	join ticket_tb as t
-    	on r.id = t.reservation_id
-    	join passenger_tb as p
-    	on r.id = p.reservation_id
-    	where reservation_num = #{reservationNum}
+    	FROM reservation_tb as r
+    	JOIN ticket_tb as t
+    	ON r.id = t.reservation_id
+    	JOIN passenger_tb as p
+    	ON r.id = p.reservation_id
+    	WHERE reservation_num = #{reservationNum}
     </select>
 
     <select id="findByReservationNum" resultType="com.tenco.team_two_flight_ticket.reservation.Reservation">
-        select *
-        from reservation_tb
-        where reservation_num = #{reservationNum}
+        SELECT *
+        FROM reservation_tb
+        WHERE reservation_num = #{reservationNum}
     </select>
 
 </mapper>

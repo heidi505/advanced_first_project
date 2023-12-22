@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ResourceLoader;
@@ -75,11 +76,13 @@ public class UserService {
     }
 
     @Transactional
-    public void kakaoSignUp(UserRequest.SignUpDTO dto) {
+    public void kakaoSignUp(KakaoProfile kakaoProfile) {
+        String kakaoNickName = kakaoProfile.getProperties().getNickname();
+
         User user = User.builder()
-                .username("kakao")
+                .username(kakaoNickName)
                 .email("")
-                .password("")
+                .password("1111")
                 .phoneNumber("")
                 .build();
 
@@ -91,9 +94,7 @@ public class UserService {
     }
 
     public User signIn(UserRequest.SignInDTO dto) {
-
         User userEntity = userRepository.findByUsername(dto);
-
         if (userEntity == null) {
             throw new MyBadRequestException("아이디 혹은 비번이 틀렸습니다.");
         }
@@ -103,14 +104,27 @@ public class UserService {
         if (isPwdMatched == false) {
             throw new MyBadRequestException("비번이 틀렸습니다.");
         }
-
-
         return userEntity;
-
     }
+
+//    public User kakaoSignIn(UserRequest.SignInDTO dto, KakaoProfile kakaoProfile) {
+//        User userEntity = userRepository.checkUsername(kakaoProfile.getId());
+//
+//        if (userEntity == null) {
+//            throw new MyBadRequestException("아이디 혹은 비번이 틀렸습니다.");
+//        }
+//
+//        boolean isPwdMatched = passwordEncoder.matches(dto.getPassword(), userEntity.getPassword());
+//
+//        if (isPwdMatched == false) {
+//            throw new MyBadRequestException("비번이 틀렸습니다.");
+//        }
+//        return userEntity;
+//    }
 
     public int getProfile(User principal) {
         List<HasCoupon> couponList = hasCouponRepository.findByUserId(principal.getId());
+
         return couponList.size();
     }
 
@@ -246,105 +260,6 @@ public class UserService {
 
     }
 
-    // 로그인 시 푸시 알림 기기 등록
-	public void KakaoPushInsertUser(UserRequest.SignInDTO dto) {
-		// uuid 가져오기
-		User principal = userRepository.findByUsername(dto);
-		String uuid = String.valueOf(principal.getId());
-		dto.setUuid(uuid);
-		// 푸시 알림을 받을 대상 등록
-    	RestTemplate rt = new RestTemplate();
-    	// 헤더 구성
-    	HttpHeaders headers = new HttpHeaders();
-    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
-    	// body 구성
-    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-    	params.add("uuid", dto.getUuid());
-    	params.add("device_id", dto.getInstallationId());
-    	params.add("push_type", "fcm");
-    	params.add("push_token", dto.getFcmToken());
-    		
-    	// 헤더 + body 결합
-    	HttpEntity<MultiValueMap<String, String>> requestMsg
-    		= new HttpEntity<>(params, headers);
-    			
-    	// 요청 처리(응답은 토큰의 유효기간)
-    	ResponseEntity<KakaoPushTokenResponse> response = rt.exchange("https://kapi.kakao.com/v2/push/register" , HttpMethod.POST,
-    			requestMsg, KakaoPushTokenResponse.class);
-    	KakaoPushTokenResponse result = response.getBody();
-    	System.out.println("----------------");
-    	System.out.println(result.toString());
-    	System.out.println("----------------");
-    	
-	}
-
-	//푸시 알림 대상자 찾기
-	public void KakaoPushFindUser(UserRequest.SignInDTO dto) {
-		System.out.println(dto);
-		RestTemplate rt = new RestTemplate();
-    	// 헤더 구성
-    	HttpHeaders headers = new HttpHeaders();
-    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
-    	// body 구성
-    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>(); 
-    	params.add("uuid", dto.getUuid());
-
-    	// 헤더 + body 결합
-    	HttpEntity<MultiValueMap<String, String>> requestMsg
-    		= new HttpEntity<>(params, headers);
-    			
-    	// 요청 처리
-    	//ResponseEntity<KakaoPushUser> response = rt.exchange("https://kapi.kakao.com/v2/push/tokens" , HttpMethod.POST,
-    	//		requestMsg, KakaoPushUser.class);
-    	ResponseEntity<List<KakaoPushUser>> response = rt.exchange("https://kapi.kakao.com/v2/push/tokens" , HttpMethod.POST,
-    			requestMsg, new ParameterizedTypeReference<List<KakaoPushUser>>() {});
-    	System.out.println("-------------------");
-		List<KakaoPushUser> result = response.getBody();
-		System.out.println(result.toString());
-	}
-
-	//카카오 푸시 보내기
-	public void KakaoPushAlert(@Valid UserRequest.SignInDTO dto) {
-
-    	RestTemplate rt = new RestTemplate();
-    	// 헤더 구성
-    	HttpHeaders headers = new HttpHeaders();
-    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
-    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	
-    	String pushMsgJson = "{  \"for_fcm\":{"
-    			+ "    \"collapse\": \"articleId123\","
-    			+ "    \"delay_while_idle\":false,"
-    			+ "    \"custom_field\": {"
-    			+ "      \"article_id\": 111,"
-    			+ "      \"comment_id\": 222,"
-    			+ "      \"comment_preview\": \""+"테스트"+"\" }}}";
-
-    	String uuids = "[\"" +dto.getUuid() +"\"]";
-    	System.out.println("------------"+uuids);
-    	// body 구성
-    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-    	params.add("uuids", uuids);
-    	params.add("push_message", pushMsgJson);
-    	//params2.add("bypass", ""); 
-    	//서비스 자체 관리 여부. 
-    	//boolean값 기본 false
-    	//사용 시 message에 푸시 토큰 포함
-
-    	// 헤더 바디 결합
-    	HttpEntity<MultiValueMap<String, String>> requestMsg 
-    								= new HttpEntity<>(params, headers);
-    	System.out.println(requestMsg.toString());
-    	//요청
-    	ResponseEntity<PushAlertFail> response = rt.exchange("https://kapi.kakao.com/v2/push/send", HttpMethod.POST,
-    			requestMsg, PushAlertFail.class);
-    	PushAlertFail result = response.getBody();
-		
-	}
-
-	
 	public void FireBasePushAlert(@Valid UserRequest.SignInDTO dto) {
 		//firebase 초기화
 		FCMInitializer fcmInitializer = new FCMInitializer();
@@ -370,6 +285,7 @@ public class UserService {
 		}
 		
 	}
+
 
 }
 

@@ -61,10 +61,27 @@
         where is_used = true
         order by ht.id desc
     </select>
+    
+    <select id="findCouponExpiredAllByUserId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO">
+        SELECT *
+        FROM hascoupon_TB as ht
+                 left join coupon_tb as ct on
+            ht.id = ct.id
+        where is_used = true
+        and user_id = #{userId}
+        order by ht.id desc
+    </select>
 
     <delete id="deleteByCouponUserId">
         DELETE FROM HASCOUPON_TB WHERE id = #{id}
     </delete>
+    
+    <update id="useCoupon">
+    	update coupon_tb
+    	set is_used = true
+    	where coupon_id = #{couponId}
+    </update>
+    
 
     <select id="findCouponByUserId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO">
         SELECT *,
