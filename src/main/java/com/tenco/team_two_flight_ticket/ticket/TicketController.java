@@ -4,6 +4,7 @@ package com.tenco.team_two_flight_ticket.ticket;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+@RequiredArgsConstructor
 @RequestMapping("/ticket")
 @Controller
 public class TicketController {

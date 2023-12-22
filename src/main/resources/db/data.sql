@@ -1,9 +1,9 @@
 --유저
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(1, 'ssar', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'ssar@nate.com', '01030013108');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(2, 'cos', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'cos@nate.com','01044541176');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(3, 'love', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'love@nate.com','01011112222');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(4, 'tom', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'tom@nate.com','01030184609');
-insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`) values(5, 'lisa', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'lisa@nate.com','01011112222');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `real_name`) values(1, 'ssar', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'ssar@nate.com', '01030013108', '김하얀');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `real_name`) values(2, 'cos', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'cos@nate.com','01044541176', '이은지');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `real_name`) values(3, 'love', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'love@nate.com','01011112222', '김승신');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `real_name`) values(4, 'tom', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'tom@nate.com','01030184609', '성민경');
+insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `real_name`) values(5, 'lisa', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'lisa@nate.com','01011112222', '차은우');
 
 insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_admin`) values(6, 'admin1', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'admin1@nate.com','01033334444','true');
 insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_admin`) values(7, 'admin2', '$2a$12$gFkBm3dupjTADJ.zRV.hwOW27XEA8tusg/sVaJtIxI.94Tq8BswSy', 'admin2@nate.com','01033334444','true');
