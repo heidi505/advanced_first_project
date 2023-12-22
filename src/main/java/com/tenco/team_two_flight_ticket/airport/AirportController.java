@@ -36,12 +36,12 @@ public class AirportController {
     private HttpSession session;
 
     @Autowired
-    private AirPortService airPortService;
+    private AirportService airPortService;
 
     public static final String SERVICEKEY = Define.SERVICEKEY;
 
     @Autowired
-    private AirPortService airportService;
+    private AirportService airportService;
 
     // http://localhost:8080/airport/airport-info
     // 인천공항 주차정보 api

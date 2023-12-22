@@ -143,4 +143,9 @@ public class CouponService {
 
         return response;
     }
+
+	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

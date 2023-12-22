@@ -2,6 +2,7 @@ async function getMyTravel(tabId, sort){
 	let statusEnum = ``;
 	let result = ``;
 	let reservedTrip = ``;
+	console.log(tabId + ' ' + sort);
 	switch(tabId){
 		case `planned_trip`: statusEnum = `예정`; break;
 		case `last_trip`: statusEnum = `지난`; break;
@@ -193,7 +194,6 @@ function insertElement(tripList, tripCnt , tabId){
     		li = makeElement(`li`);
     		myTripContentBtm.appendChild(li);
     		p = makeElement(`p`);
-    		// 여기가 어디지
     		text = document.createTextNode(koreanAirline);
     		p.appendChild(text);
     		li.appendChild(p);
@@ -299,5 +299,7 @@ function insertElement(tripList, tripCnt , tabId){
 			kakaoCancel();
 		}
 	});
-
+	
+	// 처음 목록 출력
+	getMyTravel(`planned_trip`, `전체`);
 

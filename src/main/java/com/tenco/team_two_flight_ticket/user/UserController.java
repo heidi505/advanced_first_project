@@ -2,9 +2,7 @@ package com.tenco.team_two_flight_ticket.user;
 
 import java.util.List;
 
-import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import com.tenco.team_two_flight_ticket.coupon.CouponService;
-import com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,6 @@ import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/user")
 @Controller
@@ -91,11 +88,6 @@ public class UserController {
 
 	@GetMapping("/my-travel")
 	public String myPageTravel(@Valid GetMyTravelListDTO dto , Model model ) {
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
-		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
-		model.addAttribute("tripCount", tripCount);
-		model.addAttribute("tripList",tripList);
 		return "user/myTravel";
 	}
 	
