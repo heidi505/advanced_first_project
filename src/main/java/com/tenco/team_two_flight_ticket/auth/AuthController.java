@@ -121,13 +121,14 @@ public class AuthController {
 
     //카카오 로그인
     @GetMapping("/kakao/sign-in")
-    public String kakaoSignIn() {
+    public String kakaoSignIn(KakaoProfile kakaoProfile) {
+//        userService.kakaoSignIn(dto,kakaoProfile);
         return "user/kakaoSignIn";
     }
 
     //카카오 로그인
     @GetMapping("/user/kakao-redirect")
-    public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
+    public String kakaoRedirect(@RequestParam String code) {
         System.out.println("메서드 동작 확인");
 
         RestTemplate r1 = new RestTemplate();
@@ -169,7 +170,7 @@ public class AuthController {
         KakaoProfile kakaoProfile = response2.getBody();
         System.out.println(kakaoProfile);
 
-        userService.kakaoSignUp(dto);
+        userService.kakaoSignUp(kakaoProfile);
 
         session.setAttribute("kakaoAccessToken", response.getBody().getAccess_token());
 

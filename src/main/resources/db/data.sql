@@ -198,7 +198,6 @@ insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VAL
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(28,'KOJ','가고시마공항','가고시마','일본');
 
 
-
 --iata 항공사 코드
 insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(1,'7C','제주항공');
 insert into `iata_airline_tb`(`id`,`code`,`name`) VALUES(2,'H1','한에어');

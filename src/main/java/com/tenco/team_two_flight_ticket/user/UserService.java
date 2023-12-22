@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ResourceLoader;
@@ -75,11 +76,13 @@ public class UserService {
     }
 
     @Transactional
-    public void kakaoSignUp(UserRequest.SignUpDTO dto) {
+    public void kakaoSignUp(KakaoProfile kakaoProfile) {
+        String kakaoNickName = kakaoProfile.getProperties().getNickname();
+
         User user = User.builder()
-                .username("kakao")
+                .username(kakaoNickName)
                 .email("")
-                .password("")
+                .password("1111")
                 .phoneNumber("")
                 .build();
 
@@ -91,9 +94,7 @@ public class UserService {
     }
 
     public User signIn(UserRequest.SignInDTO dto) {
-
         User userEntity = userRepository.findByUsername(dto);
-
         if (userEntity == null) {
             throw new MyBadRequestException("아이디 혹은 비번이 틀렸습니다.");
         }
@@ -103,14 +104,27 @@ public class UserService {
         if (isPwdMatched == false) {
             throw new MyBadRequestException("비번이 틀렸습니다.");
         }
-
-
         return userEntity;
-
     }
+
+//    public User kakaoSignIn(UserRequest.SignInDTO dto, KakaoProfile kakaoProfile) {
+//        User userEntity = userRepository.checkUsername(kakaoProfile.getId());
+//
+//        if (userEntity == null) {
+//            throw new MyBadRequestException("아이디 혹은 비번이 틀렸습니다.");
+//        }
+//
+//        boolean isPwdMatched = passwordEncoder.matches(dto.getPassword(), userEntity.getPassword());
+//
+//        if (isPwdMatched == false) {
+//            throw new MyBadRequestException("비번이 틀렸습니다.");
+//        }
+//        return userEntity;
+//    }
 
     public int getProfile(User principal) {
         List<HasCoupon> couponList = hasCouponRepository.findByUserId(principal.getId());
+
         return couponList.size();
     }
 
@@ -271,6 +285,7 @@ public class UserService {
 		}
 		
 	}
+
 
 }
 

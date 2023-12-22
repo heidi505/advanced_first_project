@@ -44,6 +44,7 @@ public class UserController {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		int couponNum = userService.getProfile(principal);
 
+
 		model.addAttribute("principal", principal);
 		model.addAttribute("couponNum", couponNum);
 
