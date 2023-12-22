@@ -37,8 +37,6 @@
 					aria-current="page" href="#">사용가능한 쿠폰</a></li>
 			</ul>
 
-
-
 			<div class="coupon_box d-flex flex-column border w-60">
 				<div class="bg_primary01 m-4 p-2">
 					<p class="pt-3">· 지급 받으신 쿠폰은 중복 사용이 불가능합니다.</p>
@@ -47,19 +45,22 @@
 				<!-- 쿠폰 넣을 창 -->
 				<p class="mx-4">나의 쿠폰 목록</p>
 				<div class="coupon_list d-flex">
-				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
-					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
+				<c:forEach var="coupon" items="${couponList}">
+				<div class="pt-2 w-28 ms-4 mb-4 mt-2 border rounded">
+					<input type="hidden" class="coupon_number" value="${coupon.id}">
+					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">${coupon.discountingPrice}원</div><span class="ps-5 w-10 fs-6">${coupon.remainingDays}일 남음</span>
+					<p class="px-2 pt-3 fs-6">${coupon.couponName}</p>
+					<div class="m-2 p-3 bg_line text-center">${coupon.expiredAtYear} - ${coupon.expiredAtYear} - ${coupon.expiredAtDays} 까지</div>
+				</div>
+				</c:forEach>
+				<div class="my_coupon pt-2 w-28 ms-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">2,000원</div><span class="ps-5 w-10 fs-6">7일 남음</span>
+					<p class="px-2 pt-3 fs-6"><b>가입 축하 쿠폰 증정</b></p>
 					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
 				</div>
-				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
-					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
-					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
-				</div>
-				<div class="pt-2 w-25 mx-4 mb-4 mt-2 border rounded">
-					<div class="coupon_discount mt-4 p-2 fs-3 w-75 d-inline">2000원</div><span class="ps-3 w-10 fs-6">7일 남음</span>
-					<p class="p-2 fs-6">가입 축하 쿠폰 증정</p>
+				<div class="my_coupon pt-2 w-28 ms-4 mb-4 mt-2 border rounded">
+					<div class="coupon_discount mt-4 p-2 fs-4 w-75 d-inline">2,000원</div><span class="ps-5 w-10 fs-6">7일 남음</span>
+					<p class="px-2 pt-3 fs-6"><b>가입 축하 쿠폰 증정</b></p>
 					<div class="m-2 p-3 bg_line text-center">2023 - 12 - 18 까지</div>
 				</div>
 				</div>
@@ -70,6 +71,6 @@
 </div>
 </div>
 
-<script src="js/javascript.js"></script>
+<script src="/js/my_coupon.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp"%>

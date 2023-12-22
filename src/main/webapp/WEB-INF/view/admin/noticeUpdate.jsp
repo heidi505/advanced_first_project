@@ -16,7 +16,8 @@
                 공지 등록
             </h3>
             <div class="admin_common_form">
-                <form>
+                <form action="/admin/notice-update" method="post">
+                    <input type="hidden" name="noticeId" value="${notice.id}">
                     <div class="admin_form_box">
                         <div class="admin_form_tit">
                             <h5>공지사항</h5>
@@ -24,25 +25,19 @@
                         <ul class="admin_form_area">
                             <li class="admin_form_textfield">
                                 <label for="noticeTitle" class="form-label">제목</label>
-                                <input type="text" id="noticeTitle" class="form-control"
-                                       value="[공지] 2023년 12월 1일 부 유류할증료 안내드립니다."
-                                       name="noticeTitle">
+                                <input type="text" id="noticeTitle" class="form-control" name="noticeTitle">
                             </li>
                             <li class="admin_form_textfield">
                                 <label for="noticeCont" class="form-label">내용</label>
                                 <div><textarea class="form-control" name="noticeCont" id="noticeCont" cols="30"
-                                               rows="10" >유류할증료는 예약 시점 및 결제시한과 별개로 발권일 기
-                                        준으로 변동되기에 여행이 확정되신 여행자분께서는 예약
-                                        하신 항공권을 당월 내 발권까지 완료하는 것을 권장 드립
-                                        니다!
-                                        ※ 당월 내 예약 및 결제를 하셨더라도 여권 정보 미 입력 시
-                                        발권 진행이 불가하며 결제금액이 인상 또는 예약이 취소될
-                                        수 있습니다.</textarea>
+                                               rows="10"></textarea>
                                 </div>
                             </li>
                         </ul>
                         <div class="admin_common_btn">
-                            <a href="#" class="btn btn-outline-primary">삭제</a>
+                            <form>
+                            <a href="/admin/notice-delete/${notice.id}" class="btn btn-outline-primary">삭제</a>
+                            </form>
                             <button type="submit" class="btn btn-primary">수정완료</button>
                         </div>
                     </div>

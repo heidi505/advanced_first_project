@@ -36,12 +36,12 @@ public class AirportController {
     private HttpSession session;
 
     @Autowired
-    private AirPortService airPortService;
+    private AirportService airPortService;
 
     public static final String SERVICEKEY = Define.SERVICEKEY;
 
     @Autowired
-    private AirPortService airportService;
+    private AirportService airportService;
 
     // http://localhost:8080/airport/airport-info
     // 인천공항 주차정보 api
@@ -49,7 +49,8 @@ public class AirportController {
     // 탑승 수속 대기시간 api x
     @GetMapping("/airport-info")
     public String parkingArea(Model model) {
-
+    	
+    	
         // 주차요금 api
         URI uri = null;
         String url = "http://openapi.airport.co.kr/service/rest/AirportParkingFee/parkingfee?serviceKey=rrf%2Bmnq9ofBCLMm6ehZUvWu%2FZljoJtXJZKSVOIkz61hIbsnmpY3s3aeMuC3VfTlt9MVM8aSL1J3M%2Bzm3ad2%2BXg%3D%3D&schAirportCode=GMP&type=json";
@@ -59,7 +60,6 @@ public class AirportController {
             e.printStackTrace();
         }
 
-        System.out.println(uri.toString());
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
