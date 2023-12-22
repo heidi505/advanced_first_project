@@ -166,6 +166,54 @@ insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(16,'HKD','�
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(17,'KMJ','마시키','일본');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(18,'KKJ','기타큐슈','일본');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(19,'KOJ','가고시마','일본');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(20,'BKK','방콕/수완나품','태국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(21,'DAD','다낭','베트남');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(22,'SGN','호치민','베트남');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(23,'MNL','마닐라','필리핀');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(24,'CXR','나트랑','베트남');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(25,'CEB','세부','필리핀');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(26,'SIN','싱가포르','싱가포르');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(27,'CNX','치앙마이','태국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(28,'BKI','코타키나발루','말레이시아');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(29,'HKT','푸켓','태국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(30,'HAN','하노이','베트남');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(31,'DFW','댈러스','미국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(32,'LAS','라스베이거스','미국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(33,'LAX','로스앤젤레스','미국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(34,'YVR','밴쿠버','캐나다');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(35,'SFO','샌프란시스코','미국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(36,'NYC','뉴욕','미국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(37,'YTO','토론토','캐나다');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(38,'HNL','호놀룰루','하와이');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(39,'LON','런던','영국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(40,'ROM','로마','이탈리아');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(41,'BCN','바르셀로나','스페인');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(42,'AMS','암스테르담','네덜란드');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(43,'BUD','부다페스트','헝가리');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(44,'IST','이스탄불','터키');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(45,'PAR','파리','프랑스');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(46,'PGR','프라하','체코');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(47,'GUM','괌','괌');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(48,'MEL','멜버른','호주');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(49,'SYD','시드니','호주');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(50,'SPN','사이판','사이판');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(51,'AUH','아부다비','아랍에미리트');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(52,'TLV','텔아비브','이스라엘');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(53,'DOH','도하','카타르');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(54,'DXB','두바이','아랍에미리트');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(55,'SAO','상파울로','브라질');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(56,'CUN','칸쿤','멕시코');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(57,'SCL','산티아고','칠레');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(58,'HAV','하바나','쿠바');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(59,'NBO','나이로비','케냐');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(60,'CPT','케이프타운','남아프리카 공화국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(61,'CAI','카이로','이집트');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(62,'MRU','모리셔스','모리셔스');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(63,'BJS','북경','중국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(64,'PVG','상해/푸동','중국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(65,'TAO','청도','중국');
+insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(66,'CTU','성도/솽류','중국');
+
 --iata 공항 코드
 
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(1,'ICN','인천','서울','한국');
@@ -196,6 +244,30 @@ insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VAL
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(26,'KMJ','구마모토','구마모토','일본');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(27,'KKJ','키타큐슈','키타큐슈','일본');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(28,'KOJ','가고시마공항','가고시마','일본');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(29,'BKK','수완나품공항','방콕','태국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(30,'DMK','돈므앙공항','방콕','태국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(31,'CNX','치앙마이공항','치앙마이','태국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(32,'HKT','푸켓공항','푸켓','태국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(33,'DAD','다낭공항','다낭','베트남');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(34,'PQX','푸꾸옥공항','푸꾸옥','베트남');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(35,'HAN','노이바이공항','하노이','베트남');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(36,'SIN','창이공항','싱가포르','싱가포르');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(37,'KUL','쿠알라룸푸르공항','쿠알라룸푸르','말레이시아');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(38,'BKI','코타키나발루공항','코타키나발루','말레이시아');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(39,'LGK','랑카위공항','랑카위','말레이시아');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(40,'MNL','니노이이카노 공항','마닐라','필리핀');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(41,'CEB','막탄 세부공항','세부','필리핀');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(42,'MEL','멜버른공항','멜버른','호주');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(43,'BNE','브리즈번공항','브리즈번','호주');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(44,'SYD','시드니공항','시드니','호주');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(45,'PER','퍼스공항','퍼스','호주');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(46,'JFK','존.F 케네디 공항','뉴욕','미국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(47,'EWR','뉴어크 리버티 공항','뉴욕','미국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(48,'LAX','로스앤젤레스 공항','로스앤젤레스','미국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(49,'SFO','샌프란시스코공항','샌프란시스코','미국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'IAD','댈러스 공항','워싱턴','미국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(51,'HNL','호놀룰루 공항','하와이','하와이');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(52,'GUM','안토니오 B. 원 팻 공항','괌','괌');
 
 
 --iata 항공사 코드
