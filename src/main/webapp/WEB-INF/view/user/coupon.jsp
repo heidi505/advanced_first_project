@@ -14,20 +14,22 @@
 			</h1>
 			<div class="left_profile float-start w-25">
 				<div class="picture text-center mb-4 mx-4 p-5 border">
-					<img src="/images/git_img.png" alt="" name=""
-						class="profile_image mx-auto d-block" />
-					<p class="my-4 fs-5">홍길동</p>
-					<p class="left_profile_text">프로필 관리</p>
-				</div>
-				<div class="coupon_profile col ">
-					<div class="point_amount coupon_count border mx-auto m-2 p-4 w-85 ">
-						<p class="mb-3">내 포인트<a class="color_primary02 float-end me-2" href="/user/point">0원
-							></a></p>
-						<p>내 쿠폰<a class="color_primary02 float-end me-2" href="/user/coupon">0장
-							></a></p>
-					</div>
-				</div>
+					<c:choose>
+						<c:when test="${not empty principal and not empty principal.profileImage}">
+							<div class="input_profile_image mt-4">
+								<img class="preview" src="<c:url value='/image/${principal.profileImage}'/>"
+									 alt="프로필 이미지">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="input_profile_image mt-4">
+								<img class="preview" src="<c:url value='/image/basic_img.svg'/>" alt="기본 이미지">
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<p class="my-4 principal_username">${principal.username}</p>
 				<!-- 쿠폰 창 끝 -->
+				</div>
 			</div>
 			<!-- 여기까지 left-profile -->
 			<ul class="nav nav-underline w-60">
