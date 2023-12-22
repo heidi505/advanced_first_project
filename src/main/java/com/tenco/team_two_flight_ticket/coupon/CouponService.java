@@ -82,36 +82,36 @@ public class CouponService {
         return coupons;
     }
 
-//    @Transactional
-//    public void couponDelete(Integer id, Integer userid) {
-//        couponRepository.deleteByCouponUserId(id);
-//    }
-//
-//    public SingleMessageSentResponse couponSMS(CouponListDTO dto) {
-//        User principal = (User) session.getAttribute(Define.PRINCIPAL);
-//
-//        // CouponSMSDTO 가져오기
-//        List<CouponSMSDTO> couponSMSs= couponRepository.findCouponSMS(dto.getUserId());
-//
-//        // CouponListDTO 가져오기
-////        List<Coupon> coupons = couponRepository.findCouponUserId(dto.getId());
-//
-//        DefaultMessageService defaultMessageService = NurigoApp.INSTANCE.initialize(Define.SMSKEY, Define.SMSSECRETKEY, "https://api.coolsms.co.kr");
-//        SingleMessageSentResponse response = null;
-//
-////         coupons와 couponSMSs를 userId로 매칭하여 SMS를 보내기
-//        for (CouponSMSDTO coupon : couponSMSs) {
-//                    Message message = new Message();
-//                    message.setFrom("01030184609");
-//                    message.setTo(coupon.getPhoneNumber());
-//                    message.setText("안녕하세요 " + coupon.getUsername() + "님, " + coupon.getCouponName() + "을 발급해드렸습니다. " + coupon.getExpiredAt() + "까지");
-//
-//                    response = defaultMessageService.sendOne(new SingleMessageSendingRequest(message));
-//                    System.out.println(response + "문자내용");
-//                    // 같은 userId를 가진 경우 SMS를 보내고 나면 break하여 중복 전송을 방지
-//                    break;
-//                }
-//
-//        return response;
-//    }
+    @Transactional
+    public void couponDelete(Integer id, Integer userid) {
+        couponRepository.deleteByCouponUserId(id);
+    }
+
+    public SingleMessageSentResponse couponSMS(CouponListDTO dto) {
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+        // CouponSMSDTO 가져오기
+        List<CouponSMSDTO> couponSMSs= couponRepository.findCouponSMS(dto.getUserId());
+
+        // CouponListDTO 가져오기
+//        List<Coupon> coupons = couponRepository.findCouponUserId(dto.getId());
+
+        DefaultMessageService defaultMessageService = NurigoApp.INSTANCE.initialize(Define.SMSKEY, Define.SMSSECRETKEY, "https://api.coolsms.co.kr");
+        SingleMessageSentResponse response = null;
+
+//         coupons와 couponSMSs를 userId로 매칭하여 SMS를 보내기
+        for (CouponSMSDTO coupon : couponSMSs) {
+                    Message message = new Message();
+                    message.setFrom("01030184609");
+                    message.setTo(coupon.getPhoneNumber());
+                    message.setText("안녕하세요 " + coupon.getUsername() + "님, " + coupon.getCouponName() + "을 발급해드렸습니다. " + coupon.getExpiredAt() + "까지");
+
+                    response = defaultMessageService.sendOne(new SingleMessageSendingRequest(message));
+                    System.out.println(response + "문자내용");
+                    // 같은 userId를 가진 경우 SMS를 보내고 나면 break하여 중복 전송을 방지
+                    break;
+                }
+
+        return response;
+    }
 }
