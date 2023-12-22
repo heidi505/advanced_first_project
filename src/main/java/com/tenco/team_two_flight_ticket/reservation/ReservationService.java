@@ -157,7 +157,7 @@ public class ReservationService {
         StatusEnum statusEnum = dto.getStatusEnum();
 
         String stringSort = dto.getSort();
-        String sort = "전체";
+        String sort = "";
 
         switch (stringSort) {
             case "전체":
