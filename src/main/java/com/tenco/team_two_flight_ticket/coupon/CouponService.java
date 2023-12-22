@@ -1,10 +1,15 @@
 package com.tenco.team_two_flight_ticket.coupon;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO;
-import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
-import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
-import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
+import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.coupon.dto.*;
+import com.tenco.team_two_flight_ticket.user.User;
+import jakarta.servlet.http.HttpSession;
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +21,10 @@ import java.util.UUID;
 public class CouponService {
 
     @Autowired
-    CouponRepository couponRepository;
+    private CouponRepository couponRepository;
+
+    @Autowired
+    private HttpSession session;
 
     @Transactional
     public int couponSave(CouponSaveDTO dto) {
@@ -26,6 +34,7 @@ public class CouponService {
         String couponNumber = uuidString.substring(0, 8);
 
         Coupon coupon = Coupon.builder()
+                .userId(dto.getUserId())
                 .couponName(dto.getCouponName())
                 .discountingPrice(dto.getDiscountingPrice())
                 .couponContent(dto.getCouponContent())
@@ -36,20 +45,28 @@ public class CouponService {
                 .build();
 
         int resultRowCount = couponRepository.insert(coupon);
-        if(resultRowCount != 1) {
+
+        if (resultRowCount == 1) {
+
+        } else {
             throw new MyBadRequestException("쿠폰 등록을 실패하였습니다.");
         }
         return resultRowCount;
     }
 
-    public List<CouponListDTO> couponList() {
+    public List<CouponListDTO> couponListAll() {
         return couponRepository.findCouponAll();
     }
 
-    public List<CouponDetailDTO> couponDetailList(Integer id) {
+    public List<CouponListDTO> couponDetailList(Integer id) {
 
-        List<CouponDetailDTO> coupons = couponRepository.findByCouponUserId(id);
-        for (CouponDetailDTO coupon : coupons) {
+        List<CouponListDTO> coupons = couponRepository.findCouponId(id);
+        return coupons;
+    }
+
+    public List<CouponExpiredListDTO> couponExpiredDetailList(Integer id) {
+        List<CouponExpiredListDTO> coupons = couponRepository.findByExpiredCouponId(id);
+        for (CouponExpiredListDTO coupon : coupons) {
             if (coupon.getIsUsed()) {
                 coupon.setCreatedValue("만료됨");
             } else {
@@ -59,13 +76,42 @@ public class CouponService {
         return coupons;
     }
 
-    public List<CouponExpiredListDTO> couponExpiredLists() {
+
+    public List<CouponExpiredListDTO> couponExpiredListAll() {
         List<CouponExpiredListDTO> coupons = couponRepository.findCouponExpiredAll();
         return coupons;
     }
 
+    @Transactional
     public void couponDelete(Integer id, Integer userid) {
         couponRepository.deleteByCouponUserId(id);
     }
 
+    public SingleMessageSentResponse couponSMS(CouponListDTO dto) {
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+        // CouponSMSDTO 가져오기
+        List<CouponSMSDTO> couponSMSs= couponRepository.findCouponSMS(dto.getUserId());
+
+        // CouponListDTO 가져오기
+//        List<Coupon> coupons = couponRepository.findCouponUserId(dto.getId());
+
+        DefaultMessageService defaultMessageService = NurigoApp.INSTANCE.initialize(Define.SMSKEY, Define.SMSSECRETKEY, "https://api.coolsms.co.kr");
+        SingleMessageSentResponse response = null;
+
+//         coupons와 couponSMSs를 userId로 매칭하여 SMS를 보내기
+        for (CouponSMSDTO coupon : couponSMSs) {
+                    Message message = new Message();
+                    message.setFrom("01030184609");
+                    message.setTo(coupon.getPhoneNumber());
+                    message.setText("안녕하세요 " + coupon.getUsername() + "님, " + coupon.getCouponName() + "을 발급해드렸습니다. " + coupon.getExpiredAt() + "까지");
+
+                    response = defaultMessageService.sendOne(new SingleMessageSendingRequest(message));
+                    System.out.println(response + "문자내용");
+                    // 같은 userId를 가진 경우 SMS를 보내고 나면 break하여 중복 전송을 방지
+                    break;
+                }
+
+        return response;
+    }
 }
