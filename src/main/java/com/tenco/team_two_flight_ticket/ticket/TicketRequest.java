@@ -2,9 +2,8 @@ package com.tenco.team_two_flight_ticket.ticket;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +47,7 @@ public class TicketRequest {
         @NotEmpty(message = "도착지를 입력해주세요")
         private String destinationLocationCode;
         @NotEmpty(message = "출발하실 날짜를 입력해주세요")
+//        @Pattern(regexp = "^(\\d{4}-\\d{2}-\\d{2} | \\d{4}-\\d{2}-\\d{2}~\\d{4}-\\d{2}-\\d{2})$", message = "날짜를 입력해주세요")
         private String startDate;
         private String endDate = null;
         @Min(value = 1, message = "1명 이하일 수 없습니다")

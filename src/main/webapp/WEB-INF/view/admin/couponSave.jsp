@@ -24,14 +24,8 @@
                             <ul class="admin_from_item">
                                 <li class="admin_form_textfield">
                                     <label for="userId" class="form-label">사용자 번호</label>
-                                    <input type="number" id="userId" class="form-control" placeholder="사용자 번호를 입력해주세요" name="userId">
+                                    <input type="number" id="userId" class="form-control" placeholder="쿠폰 이름을 입력해주세요" name="userId" >
                                 </li>
-                                <li class="admin_form_textfield">
-                                    <label for="username" class="form-label">사용자 이름</label>
-                                    <input type="text" id="username" class="form-control" placeholder="사용자 이름을 입력해주세요" name="username">
-                                </li>
-                            </ul>
-                            <ul class="admin_from_item">
                                 <li class="admin_form_textfield">
                                     <label for="couponName" class="form-label">쿠폰 이름</label>
                                     <input type="text" id="couponName" class="form-control" placeholder="쿠폰 이름을 입력해주세요" name="couponName">

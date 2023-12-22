@@ -24,7 +24,7 @@ import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusRespon
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
-public class AirPortService {
+public class AirportService {
     public static final String SERVICEKEY = Define.SERVICEKEY;
 
     public Map<String, String> getParkingFeeAPI() {
@@ -88,6 +88,7 @@ public class AirPortService {
     TicketRepository ticketRepository;
 
     public AirportTravelTimeDTO koAirportTime(Integer userId) {
+
 
         List<Ticket> airportNames = ticketRepository.findByTicketJoinReservation(userId);
         System.out.println(airportNames.get(0).getDepartureAirport() + "airportName");

@@ -269,7 +269,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 승객 좌석 선택
 
+
+
             let transFormBtns = document.querySelectorAll(".transform_btn");
+
+            //목적지 도착지 인풋 값 받아오기
 
             transFormBtns.forEach((button) => {
                 button.addEventListener("click", () => {
@@ -287,13 +291,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     document.querySelector("#to_select_btn .to_code_value").textContent = fromCode;
                     document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
+
+                    //input 태그 값 전환
+                    document.getElementById("origin").value = toCode;
+                    document.getElementById("destination").value = fromCode;
+                    document.getElementById("loadingOrigin1").innerText = toAirport;
+                    document.getElementById("loadingOrigin2").innerText = toCode;
+                    document.getElementById("loadingOrigin3").innerText = toAirport;
+                    document.getElementById("loadingDestination1").innerText = fromAirport;
+                    document.getElementById("loadingDestination2").innerText = fromCode;
+                    document.getElementById("loadingDestination3").innerText = fromAirport;
                 });
             });
-
+            // 출발지 & 도착지 전환
 
             let children = document.querySelector("#childrenNum").textContent;
             document.getElementById("children").value = children;
-
 
         })
     }
@@ -339,7 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 
-    // 출발지 & 도착지 전환
+
 	
 	
 	// 출발지 & 목적지 검색 

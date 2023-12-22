@@ -604,12 +604,13 @@
         </div>
     </section>
     <!-- nav banner -->
+    <c:forEach var="list" items="${searchedList}">
     <section class="flight_search_bg">
         <div class="container">
+
             <div class="flight_search_tit">
                 <h5>최근 검색한 항공권</h5>
                  <!-- 여기부터 -->
-                <c:forEach var="list" items="${searchedList}">
                 <div class="flight_search_box">
                 <a class="flight_search_a" href="/ticket/flight-recent-search?originLocationCode=${list.departureCity}&destinationLocationCode=${list.arrivalCity}&startDate=${list.startDate}&endDate=${list.endDate}&adults=${list.adults}&children=${list.children}&infants=${list.infants}&travelClass=${list.travelClass}"></a>
               	<input type="hidden" value="${list.id}">
@@ -651,11 +652,12 @@
                         </li>
                     </ul>
                 </div>
-                </c:forEach>
+
                 <!-- 여기까지 -->
             </div>
         </div>
     </section>
+    </c:forEach>
     <section class="flight_banner_box">
         <div class="container">
             <div class="flight_banner_item">
@@ -879,28 +881,18 @@
             </div>
             <div class="common_table flight_notice">
                 <h4 class="flight_notice_tit">항공권 공지사항</h4>
+                <c:forEach var="notice" items="${noticeList}">
                 <table class="table table-bordered">
                     <tbody>
                     <tr>
                         <td>
-                            <span>[공지] 2023년 12월 1일 부 유류할증료 안내</span>
-                            <span>2023-11-28</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>[공지] 2023년 12월 1일 부 유류할증료 안내</span>
-                            <span>2023-11-28</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>[공지] 2023년 12월 1일 부 유류할증료 안내</span>
-                            <span>2023-11-28</span>
+                            <span>${notice.title}</span>
+                            <span>${notice.time()}</span>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+                </c:forEach>
             </div>
         </div>
     </section>
@@ -1149,7 +1141,7 @@
 </script>
 <script src="/js/make_element.js"></script>
 <script src="/js/javascript.js"></script>
-<script src="/js/ticket_search.js"></script>
+<%--<script src="/js/ticket_search.js"></script>--%>
 <script type="module" src="js/messaging_receive_message.js"></script>
 <!-- header.jsp -->
 <%@ include file="layout/footer.jsp" %>

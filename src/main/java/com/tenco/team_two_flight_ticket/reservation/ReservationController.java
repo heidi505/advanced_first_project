@@ -1,7 +1,14 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import java.security.Principal;
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
+import com.tenco.team_two_flight_ticket.coupon.Coupon;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.ticket.TicketService;
+import com.tenco.team_two_flight_ticket.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,10 +33,16 @@ public class ReservationController {
     private KakaoPayService kakaoPayService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private HttpSession session;
 
     @Autowired
     private ReservationService reservationService;
+
+    @Autowired
+    private TicketService ticketService;
 
     /* 페이지 별로 분리 된 시나리오 */
     // 선택한 항공권 보기 페이지 (검색 후 나오는 항공권 목록에서 클릭시 나오는 화면)
@@ -39,8 +52,14 @@ public class ReservationController {
     }
 
     // 프리뷰 페이지에서 예약하기 버튼 클릭시 예약하기 입력 폼 화면
-    @GetMapping("/detail")
-    public String test4() {
+    @GetMapping("/detail/{ticketId}")
+    public String test4(@PathVariable int ticketId, Model model) {
+
+        List<DataDTO> dto = ticketService.ticketDetail(ticketId);
+        int isRound = dto.stream().map(e->e.getItineraries()).toList().size();
+
+        model.addAttribute("ticket", dto.get(0));
+        model.addAttribute("isRound", isRound);
         return "reservation/detail";
     }
 
@@ -78,6 +97,21 @@ public class ReservationController {
     @GetMapping("/reservation/final-result")
     public String finalResult(HttpSession session, Model model) {
         ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
+
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+        // 쿠폰 받아오기.
+        List<CouponListDTO> coupons = reservationService.getCouponList(principal);
+        System.out.println("쿠폰체크 쿠폰체크 쿠폰체크으으");
+        for (CouponListDTO coupon : coupons) {
+            System.out.println("쿠폰 ID: " + coupon.getId());
+            System.out.println("쿠폰 이름: " + coupon.getCouponName());
+            System.out.println("쿠폰 이름: " + coupon.getExpiredAt());
+            System.out.println("쿠폰 이름: " + coupon.getDiscountingPrice());
+        }
+        // 3. 쿠폰 정보 모델에 추가.
+
+        model.addAttribute("Coupon", coupons);
         model.addAttribute("Result", resultDTO);
         System.out.println("잘 담겼나 안담겼나~~");
         System.out.println("Reservation Result:");
@@ -154,6 +188,16 @@ public class ReservationController {
     public String checkjsp() {
         return "reservation/bindtest";
     }
+    
+    // 예약 상세 보기
+    @GetMapping("/reservation/detail/{reservationNum}")
+    public String reservationDetail(@PathVariable Long reservationNum, Model model) {
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        ReservationResponse.GetMyTripDetailDTO detailTrip = reservationService.getMyTripDetail(principal.getId(), reservationNum);
+        model.addAttribute("detailTrip", detailTrip);
+        return "reservation/reservationDetail";
+    }
+    
 
     // 취소 시 상세 정보 들고 가야함
     @GetMapping("/reservation/cancel-modal/{reservationNum}")
@@ -168,7 +212,7 @@ public class ReservationController {
 
     @GetMapping("/fix")
     public String fix() {
-        return "reservation/preview2";
+        return "reservation/finalResult2";
     }
 
 }

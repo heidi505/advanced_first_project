@@ -2,6 +2,7 @@ async function getMyTravel(tabId, sort){
 	let statusEnum = ``;
 	let result = ``;
 	let reservedTrip = ``;
+	console.log(tabId + ' ' + sort);
 	switch(tabId){
 		case `planned_trip`: statusEnum = `예정`; break;
 		case `last_trip`: statusEnum = `지난`; break;
@@ -29,6 +30,7 @@ function makeYearTag(year){
 
 // 여행 목록 삽입하기
 function insertElement(tripList, tripCnt , tabId){
+	console.log(tripList);
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = ``;
 	let myTripCountLabel = ``;
@@ -141,25 +143,26 @@ function insertElement(tripList, tripCnt , tabId){
     	let myTripContentTit = makeElement(`li`,`my_trip_content_tit`);
     	let airlineIconImg = makeElement(`div`,`airline_icon_img`);
     	
-		let koreanName = `대한항공`; //DB에서 가져와 넣어줘야 함
+		let koreanAirline = data.koreanAirline; 
     	// 이거 2개는 데이터에 따라 매치시켜야 함
+    	//(img 주소도 DB에 가면 좋을 듯 여기에 case문 돌리는 건 비효율)
     	img = makeElement(`img`);
     	img.src = `/images/icons/airline_icon_02.png`;
-    	img.alt = koreanName;
+    	img.alt = koreanAirline;
     	airlineIconImg.appendChild(img);
     	div = makeElement(`div`);
     	
     	let p = makeElement(`p`);
     	
-    	// 항공사별 IATA 이름을 한국어로 변경. 나머지도 작성 필요
-    	// 이것도 IATA 데이터를 한글 데이터로 바꿔 text안에 넣어줘야 함
-    	text = document.createTextNode(` [${koreanName}] 부산 - 도쿄/나리타`);
+    	
+    	text = document.createTextNode(` [${koreanAirline}] ${data.koreanDepartureCity} - ${data.koreanArrivalCity}`);
     	p.appendChild(text);
     	div.appendChild(p);
     	p = makeElement(`p`);
     	text = document.createTextNode(`예약번호 ${data.reservationNum}`);
     	p.appendChild(text);
     	div.appendChild(p);
+
     	myTripContentTit.appendChild(airlineIconImg);
     	myTripContentTit.appendChild(div);
     	li = makeElement(`li`);
@@ -189,8 +192,7 @@ function insertElement(tripList, tripCnt , tabId){
     		li = makeElement(`li`);
     		myTripContentBtm.appendChild(li);
     		p = makeElement(`p`);
-    	
-    		text = document.createTextNode(koreanName);
+    		text = document.createTextNode(koreanAirline);
     		p.appendChild(text);
     		li.appendChild(p);
     		p = makeElement(`p`);
@@ -216,7 +218,7 @@ function insertElement(tripList, tripCnt , tabId){
 			img.src = `/images/icons/my_trip_arrow.svg`;
 			img.alt = `화살표`;
 			li.appendChild(img);
-		
+			
 			li = makeElement(`li`);
 			myTripContentBtm.appendChild(li);
 			p = makeElement(`p`);
@@ -231,14 +233,30 @@ function insertElement(tripList, tripCnt , tabId){
 		
 			li = makeElement(`li`);
 			myTripContentBtm.appendChild(li);
+			
 			// my_trip_content_btm 끝
 			if(tabId == `planned_trip`){
-				reservationCancle = makeElement(`li`,`reservation_cancle`);
+				    	
+				reservationCancle = makeElement(`li`,`reservation_cancle mb-3`);
+				div = makeElement(`div`,`reservation_cancle_btn mb-3`);
 				a = makeElement(`a`);
-				reservationCancle.appendChild(a);
+				div.appendChild(a);
+				reservationCancle.appendChild(div);
 				a.href = `/reservation/cancel-modal/${data.reservationNum}`;
 				text = document.createTextNode(`예약 취소하기`);
 				a.appendChild(text);
+				div = makeElement(`div`,`reservation_cancle_btn`);
+				form = makeElement(`form`);
+				form.action = `/kakaoPay/cancel`;
+				form.method = `post`;
+				div.appendChild(form);
+				button = makeElement(`button`);
+				button.id = `kakaoPayCancel`;
+				button.type = `button`;
+				text = document.createTextNode(`결제 취소하기`);
+				button.appendChild(text);
+				form.appendChild(button);
+				reservationCancle.appendChild(div);
 			}
 		}
     	myTripContent.appendChild(myTripContentTop);
@@ -259,17 +277,27 @@ function insertElement(tripList, tripCnt , tabId){
     //반복문 끝
 }
 
-// 티켓 모양 이미지 클릭 시 이벤트
-const tabContent = document.querySelectorAll(`.tab-content`);
-tabContent.forEach((content)=>{
-	content.addEventListener(`click`, e =>{
-		if(e.target.className == `my_trip_ticket_bg`||
-		e.target.parentElement.className == `my_trip_ticket_bg`){
-			// 다운로드 로직 구성 필요
-			downloadTicket();
-			console.log(`click ticket`);
-		} 
+	// 티켓 모양 이미지 클릭 시 이벤트(미구현)
+	const tabContent = document.querySelectorAll(`.tab-content`);
+	tabContent.forEach((content)=>{
+		content.addEventListener(`click`, e =>{
+			if(e.target.className == `my_trip_ticket_bg`||
+			e.target.parentElement.className == `my_trip_ticket_bg`){
+				// 다운로드 로직 구성 필요
+				downloadTicket();
+				console.log(`click ticket`);
+			} 
+		});
 	});
-});
 
+	// 결제 취소 이벤트
+	const plannedTrip = document.getElementById(`planned_trip`);
+	plannedTrip.addEventListener(`click`, e => {
+		if(e.target.id == `kakaoPayCancel`){
+			kakaoCancel();
+		}
+	});
+	
+	// 처음 목록 출력
+	getMyTravel(`planned_trip`, `전체`);
 

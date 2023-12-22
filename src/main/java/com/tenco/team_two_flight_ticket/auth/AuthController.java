@@ -2,12 +2,16 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket.user.UserRepository;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -60,6 +64,11 @@ public class AuthController {
     @Autowired
     private SearchedService searchService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    private NoticeService noticeService;
+
     //메인 페이지
     @GetMapping("/main")
     public String mainPage(Model model){
@@ -77,6 +86,9 @@ public class AuthController {
         	List<SearchedResponse.GetRecentSearchDTO> searchedList = searchService.getRecentSearch(principal.getId());
         	model.addAttribute("searchedList", searchedList);        	
         }
+
+        List<NoticeResponseDTO.NoticeListDTO> noticeList = noticeService.findAll();
+        model.addAttribute("noticeList", noticeList);
         
         return "main";
     }
@@ -111,10 +123,7 @@ public class AuthController {
     public String signInProc(@Valid UserRequest.SignInDTO dto, Model model, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
-        // 로그인 시 푸시 알림 등록
-//        userService.KakaoPushInsertUser(dto);
-//        userService.KakaoPushFindUser(dto);
-//        userService.KakaoPushAlert(dto);
+        // 로그인 푸시 알림 보내기
 //        userService.FireBasePushAlert(dto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
@@ -122,14 +131,14 @@ public class AuthController {
         return "redirect:/main";
     }
 
-    //카카오 로그인
     @GetMapping("/kakao/sign-in")
     public String kakaoSignIn() {
         return "user/kakaoSignIn";
     }
 
+
     //카카오 로그인
-    @GetMapping("/user/kakao-redirect")
+    @GetMapping("/kakao-redirect")
     public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
         System.out.println("메서드 동작 확인");
 
@@ -141,7 +150,7 @@ public class AuthController {
         MultiValueMap<String, String> bodies = new LinkedMultiValueMap<>();
         bodies.add("grant_type","authorization_code");
         bodies.add("client_id",Define.KAKAOKEY);
-        bodies.add("redirect_uri","http://localhost:8080/user/kakao-redirect");
+        bodies.add("redirect_uri","http://localhost:8080/kakao-redirect");
         bodies.add("code",code);
 
         HttpEntity<MultiValueMap<String,String>> requestMsg = new HttpEntity<>(bodies,headers);
@@ -172,9 +181,9 @@ public class AuthController {
         KakaoProfile kakaoProfile = response2.getBody();
         System.out.println(kakaoProfile);
 
-        userService.kakaoSignUp(dto);
+        User checkUser = userService.kakaoCheckUsername(kakaoProfile);
 
-        session.setAttribute("kakaoAccessToken", response.getBody().getAccess_token());
+        session.setAttribute(Define.PRINCIPAL, checkUser);
 
         return "redirect:/main";
     }

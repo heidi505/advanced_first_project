@@ -35,6 +35,11 @@ public class UserResponse {
     	private String flightName;
         private Timestamp departureTime;
         private Timestamp arrivalTime;
+        
+        private String koreanDepartureAirport;
+        private String koreanArrivalCity;
+        private String koreanAirline;
+        private String koreanDepartureCity;
     }
     
     @Data

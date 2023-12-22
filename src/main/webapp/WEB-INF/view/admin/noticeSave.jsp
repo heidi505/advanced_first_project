@@ -16,7 +16,7 @@
                 공지 등록
             </h3>
             <div class="admin_common_form">
-                <form>
+                <form action="/admin/notice-save" method="post">
                     <div class="admin_form_box">
                         <div class="admin_form_tit">
                             <h5>공지사항</h5>

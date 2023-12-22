@@ -61,13 +61,20 @@ header .search {
     padding: 0 15px;
     position: relative;
 }
-.header_menu li:first-child a::after {
+.header_menu li > a::after {
     content: "";
-    top: 0px;
+    top: 0;
     width: 1px;
     height: 16px;
     background-color: var(--basic_09);
     position: absolute;
+    right: 0;
+}
+
+.header_menu li:last-child > a::after {
+    content: "";
+    top: 0;
+    width: 0;
     right: 0;
 }
 .nav-link:focus, .nav-link:hover {

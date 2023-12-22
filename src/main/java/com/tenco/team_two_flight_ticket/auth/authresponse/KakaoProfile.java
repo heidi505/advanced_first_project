@@ -15,7 +15,7 @@ import lombok.Setter;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class KakaoProfile {
 	
-	private Long id;
+	private String id;
 	private String connected_at;
 	private Properties properties;
 
@@ -23,9 +23,10 @@ public class KakaoProfile {
 	@Setter
 	public static class Properties {
 		private String nickname;
-//		private String profile_image;
-//		private String thumbnail_image;
-		
+		private String profile_image;
+		private String thumbnail_image;
 	}
+
+
 	
 }

@@ -1,5 +1,9 @@
 package com.tenco.team_two_flight_ticket.coupon.dto;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+
 import lombok.Data;
 
 @Data
@@ -14,8 +18,14 @@ public class CouponDetailDTO {
     private boolean isUsed;
     private String createdValue;
     private String expiredValue;
+    
+    
 
     public boolean getIsUsed() {
         return isUsed;
     }
+    
+   
+    
+    
 }

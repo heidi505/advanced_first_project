@@ -10,13 +10,12 @@
 <main class="airport_info_page">
     <div class="container">
         <div class="section">
-            <div class=" w-85 pt-5 mx-auto">
+            <div class=" w-85 pt-2 mx-auto">
                 <div class="p-5 text-center">
                     <img class="payed_result_mark p-3 rounded-circle" src="/images/check_mark.png">
                     <p class="fs-1 my-2"><b>항공권 예약이 정상적으로 완료되었습니다.</b></p>
                     <p class="mt-3">예약상세/결제하기에서 확인할 수 있습니다.</p>
                 </div>
-                <hr class="w-75 mx-auto">
                 <h3 class="text-center">예약번호 <b>${Result.reservation.reservationNum}</b></h3>
             </div>
             <!-- 상단 페이지 끝-->
@@ -78,7 +77,54 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="w-100 text-center p-5">
+
+
+            <div class="mt-5 fs-4"><b>나의 쿠폰 목록</b>
+            </div>
+            <table class="passenger_info_table w-100" style="margin-top: 30px">
+                <thead>
+                <c:forEach var="coupon" items="${Coupon}">
+                    <tr>
+                        <td style="font-weight: bold;">쿠폰 이름</td>
+                        <td style="border-right: 1px solid var(--line);">${coupon.couponName}</td>
+                        <td style="font-weight: bold">쿠폰 만료일</td>
+                        <td style="border-right: 1px solid var(--line)">${coupon.expiredAt}일까지</td>
+                        <td style="font-weight: bold">쿠폰 금액</td>
+                        <td style="border-right: 1px solid var(--line)">${coupon.discountingPrice}</td>
+                        <td style="display: flex; align-items: center; justify-content: center;">
+                            <button type="button" class="btn btn-primary apply-coupon-btn"
+                                    data-coupon="${coupon.discountingPrice}">
+                                적용하기
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </thead>
+            </table>
+
+            <div class="mx-auto p-3" style="width: 20%;">
+                <table class="passenger_info_table w-100" style="margin-top: 30px; border: 1px solid var(--form);">
+                    <thead>
+                    <tr>
+                        <td style="height: 1em; vertical-align: bottom; font-weight: 700;">결제 금액</td>
+                        <td id="paymentAmount" style="height: 3em; vertical-align: bottom; font-weight: 700;">${currentTicket.totalPrice}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="border-top: hidden; height: 1em; vertical-align: top; font-weight: 700;">할인 금액</td>
+                        <td id="discountAmount" style="border-top: hidden; height: 3em; vertical-align: top; font-weight: 700;"></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr style="background-color: var(--form)">
+                        <td style="height: 3em; vertical-align: middle; font-weight: 900;">최종 결제 금액</td>
+                        <td id="finalAmount" style="height: 3em; vertical-align: middle; font-weight: 900;"></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="w-100 text-center p-4">
                 <form action="/kakaoPay" method="post">
                     <button type="submit" class="payed_check_btn btn btn-primary w-25">결제하기</button>
                 </form>
@@ -202,5 +248,30 @@
 
 
 <script src="/js/final_result.js"></script>
-<!-- header.jsp -->
+<script>
+    var totalPrice = parseFloat("${currentTicket.totalPrice}");
+    if (!isNaN(totalPrice)) {
+        document.getElementById("paymentAmount").innerText = totalPrice.toLocaleString();
+    }
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("apply-coupon-btn")) {
+            applyCoupon(event.target.dataset.coupon);
+        }
+    });
+
+    function applyCoupon(couponDiscount) {
+        // 할인 금액을 화면에 표시하는 부분
+        document.getElementById("discountAmount").innerText = parseFloat(couponDiscount).toLocaleString();
+
+        // 현재 결제 금액 가져오기
+        var paymentAmount = parseFloat(document.getElementById("paymentAmount").innerText.replace(",", ""));
+
+        // 총 결제 금액 계산 (현재 결제 금액 - 할인 금액)
+        var finalAmount = paymentAmount - parseFloat(couponDiscount);
+
+        // 총 결제 금액을 화면에 표시하는 부분
+        document.getElementById("finalAmount").innerText = finalAmount.toLocaleString(); // 콤마 추가
+    }
+</script>
+<!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

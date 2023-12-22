@@ -17,56 +17,20 @@
                 <tr>
                     <th>순번</th>
                     <th>제목</th>
-                    <th>글쓴이</th>
                     <th>날짜</th>
                 </tr>
                 </thead>
+                <c:forEach var="notice" items="${noticeList}">
                 <tbody class="common_list_cont">
-                <tr>
-                    <td>1</td>
-                    <td><a href="/admin/notice-detail">[공지] 2023년 12월 1일 부 유류할증료 안내드립니다</a></td>
-                    <td>관리자</td>
-                    <td>23-02-01</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="/admin/notice-detail">[공지] 2023년 12월 1일 부 유류할증료 안내드립니다</a></td>
-                    <td>관리자</td>
-                    <td>23-02-01</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="/admin/notice-detail">[공지] 2023년 12월 1일 부 유류할증료 안내드립니다</a></td>
-                    <td>관리자</td>
-                    <td>23-02-01</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="/admin/notice-detail">[공지] 2023년 12월 1일 부 유류할증료 안내드립니다</a></td>
-                    <td>관리자</td>
-                    <td>23-02-01</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="/admin/notice-detail">[공지] 2023년 12월 1일 부 유류할증료 안내드립니다</a></td>
-                    <td>관리자</td>
-                    <td>23-02-01</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="/admin/notice-detail">[공지] 2023년 12월 1일 부 유류할증료 안내드립니다</a></td>
-                    <td>관리자</td>
-                    <td>23-02-01</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="/admin/notice-detail">[공지] 2023년 12월 1일 부 유류할증료 안내드립니다</a></td>
-                    <td>관리자</td>
-                    <td>23-02-01</td>
-                </tr>
 
+                <tr>
+                    <td>${notice.id}</td>
+                    <td><a href="/admin/notice-detail/${notice.id}">${notice.title}</a></td>
+                    <td>${notice.time()}</td>
+                </tr>
 
                 </tbody>
+                </c:forEach>
             </table>
             <div class="list_pagination">
                 <ul class="pagination">
