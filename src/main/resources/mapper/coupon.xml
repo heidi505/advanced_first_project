@@ -62,5 +62,12 @@
     <delete id="deleteByCouponUserId">
         DELETE FROM HASCOUPON_TB WHERE id = #{id}
     </delete>
+    
+    <update id="useCoupon">
+    	update coupon_tb
+    	set is_used = true
+    	where coupon_id = #{couponId}
+    </update>
+    
 
 </mapper>

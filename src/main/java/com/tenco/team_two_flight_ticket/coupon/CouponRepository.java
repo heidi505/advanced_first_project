@@ -20,4 +20,6 @@ public interface CouponRepository {
 //    public List<CouponExpiredListDTO> findCouponExpiredUserId(Integer id);
 
 	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id);
+
+	public int useCoupon(Long couponId);
 }

@@ -6,6 +6,7 @@ import com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponUseDTO;
 import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Delete;
@@ -76,5 +77,17 @@ public class CouponController {
         couponService.couponDelete(id, principal.getId());
         return "redirect:/admin/coupon-list";
     }
+    
+    @ResponseBody
+    @PostMapping("/coupon/use-coupon")
+    public String useCoupon(@RequestBody CouponUseDTO dto) {
+    	couponService.useCoupon(dto);
+    	
+    	
+    	// 결과를 반환하면 됨
+    	return null;
+    }
+    
+    
         
 }

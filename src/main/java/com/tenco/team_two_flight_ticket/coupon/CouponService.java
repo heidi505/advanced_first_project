@@ -1,10 +1,14 @@
 package com.tenco.team_two_flight_ticket.coupon;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponUseDTO;
+
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +76,23 @@ public class CouponService {
 	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id) {
 		List<CouponExpiredListDTO> couponList = couponRepository.findCouponExpiredAllByUserId(id);
 		return couponList;
+	}
+
+	/**
+	 * 
+	 * @param dto
+	 * @return 
+	 */
+	public void useCoupon(CouponUseDTO dto) {
+		try {
+			int resultRowCount = couponRepository.useCoupon(dto.getCouponId());
+			if(resultRowCount != 1) {
+				throw new MyBadRequestException("쿠폰 사용에 실패하였습니다");
+			}
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		
 	}
 
 }

@@ -154,6 +154,16 @@ public class ReservationController {
     public String checkjsp() {
         return "reservation/bindtest";
     }
+    
+    // 예약 상세 보기
+    @GetMapping("/reservation/detail/{reservationNum}")
+    public String reservationDetail(@PathVariable Long reservationNum, Model model) {
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        ReservationResponse.GetMyTripDetailDTO detailTrip = reservationService.getMyTripDetail(principal.getId(), reservationNum);
+        model.addAttribute("detailTrip", detailTrip);
+        return "reservation/reservationDetail";
+    }
+    
 
     // 취소 시 상세 정보 들고 가야함
     @GetMapping("/reservation/cancel-modal/{reservationNum}")
