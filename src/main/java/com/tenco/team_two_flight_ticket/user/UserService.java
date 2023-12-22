@@ -75,24 +75,6 @@ public class UserService {
         }
     }
 
-    @Transactional
-    public void kakaoSignUp(KakaoProfile kakaoProfile) {
-        String kakaoNickName = kakaoProfile.getProperties().getNickname();
-
-        User user = User.builder()
-                .username(kakaoNickName)
-                .email("")
-                .password("1111")
-                .phoneNumber("")
-                .build();
-
-        int resultRowCount = userRepository.insert(user);
-
-        if (resultRowCount != 1) {
-            throw new MyBadRequestException("회원 가입 실패");
-        }
-    }
-
     public User signIn(UserRequest.SignInDTO dto) {
         User userEntity = userRepository.findByUsername(dto);
         if (userEntity == null) {
@@ -106,21 +88,6 @@ public class UserService {
         }
         return userEntity;
     }
-
-//    public User kakaoSignIn(UserRequest.SignInDTO dto, KakaoProfile kakaoProfile) {
-//        User userEntity = userRepository.checkUsername(kakaoProfile.getId());
-//
-//        if (userEntity == null) {
-//            throw new MyBadRequestException("아이디 혹은 비번이 틀렸습니다.");
-//        }
-//
-//        boolean isPwdMatched = passwordEncoder.matches(dto.getPassword(), userEntity.getPassword());
-//
-//        if (isPwdMatched == false) {
-//            throw new MyBadRequestException("비번이 틀렸습니다.");
-//        }
-//        return userEntity;
-//    }
 
     public int getProfile(User principal) {
         List<HasCoupon> couponList = hasCouponRepository.findByUserId(principal.getId());
@@ -172,6 +139,27 @@ public class UserService {
         } else {
             return "사용할 수 없는 아이디입니다";
         }
+    }
+
+    public User kakaoCheckUsername(KakaoProfile kakaoProfile) {
+        User checkUser = userRepository.checkUsername(kakaoProfile.getId());
+        System.out.println(checkUser + "ddddddd");
+        if(checkUser == null) {
+            User user = User.builder()
+                    .realName("김하얀")
+                    .username(kakaoProfile.getProperties().getNickname())
+                    .profileImage("profile_05.jpg")
+                    .email("aahh2@naver.com")
+                    .password("")
+                    .phoneNumber("01035842292")
+                    .build();
+
+            userRepository.insert(user);
+            System.out.println(user.getUsername() + "ddddddddddddddd");
+            checkUser = user;
+        }
+        System.out.println(checkUser + "값 확인");
+        return checkUser;
     }
 
     public void makeRandomNumber() {

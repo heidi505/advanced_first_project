@@ -262,12 +262,15 @@ public class TicketService {
                 .filter(e -> e.getItineraries().stream()
                         .anyMatch(itinerary -> itinerary.getSegments().stream()
                                 .anyMatch(segment ->
+                                        (optionDTO.getAirlineOption().isEmpty() ||
                                         optionDTO.getAirlineOption().stream()
-                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption))
-                                                && optionDTO.getOnewayDepTimeOption().stream()
-                                                .anyMatch(d -> segment.getDeparture().depSearch(d))
-                                                && optionDTO.getOnewayArrTimeOption().stream()
-                                                .anyMatch(a -> segment.getArrival().arrSearch(a))
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption)))
+                                                &&
+                                                (optionDTO.getOnewayDepTimeOption().isEmpty() || optionDTO.getOnewayDepTimeOption().stream()
+                                                        .anyMatch(d -> segment.getDeparture().depSearch(d)))
+                                                && (optionDTO.getOnewayArrTimeOption().isEmpty() ||
+                                                        optionDTO.getOnewayArrTimeOption().stream()
+                                                .anyMatch(a -> segment.getArrival().arrSearch(a)))
 
                                 )
                         )

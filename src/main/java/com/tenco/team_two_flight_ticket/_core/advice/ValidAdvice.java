@@ -17,10 +17,8 @@ public class ValidAdvice {
 
     @Pointcut("@annotation(org.springframework.web.bind.annotation.PostMapping)")
     public void postMapping() {}
-    @Pointcut("@annotation(org.springframework.web.bind.annotation.PutMapping)")
-    public void putMapping() {}
 
-    @Before("postMapping() || putMapping()")
+    @Before("postMapping()")
     public void checkValid(JoinPoint jp){
         Object[] args = jp.getArgs();
 

@@ -5,6 +5,8 @@ import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayReadyDTO;
 import com.tenco.team_two_flight_ticket.kakaopay.dto.cancelResponse.KaKaoCancelDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationRepository;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse;
+import com.tenco.team_two_flight_ticket.user.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -31,12 +33,16 @@ public class KakaoPayService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private HttpSession session;
+
 
     //    결제 준비
     public String kakaoPayReady(Integer userId) {
 
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
 //        예약한 상세와 결제내역 정보
-        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(userId);
+        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
         ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
 
         for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
@@ -95,7 +101,8 @@ public class KakaoPayService {
     }
 
     public KakaoPayApprovalDTO kakaoPayInfo(String pg_token, Integer userId) {
-        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(userId);
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
 
         ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
         for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
@@ -143,7 +150,8 @@ public class KakaoPayService {
     }
 
     public ReservationResponse.ReservationPaymentDTO reservationInfo(Integer userId) {
-        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(userId);
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
 
         ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
         for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {

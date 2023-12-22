@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket.user.UserRepository;
 import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
 import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -63,6 +65,8 @@ public class AuthController {
     private SearchedService searchService;
 
     @Autowired
+    private UserRepository userRepository;
+
     private NoticeService noticeService;
 
     //메인 페이지
@@ -127,16 +131,15 @@ public class AuthController {
         return "redirect:/main";
     }
 
-    //카카오 로그인
     @GetMapping("/kakao/sign-in")
-    public String kakaoSignIn(KakaoProfile kakaoProfile) {
-//        userService.kakaoSignIn(dto,kakaoProfile);
+    public String kakaoSignIn() {
         return "user/kakaoSignIn";
     }
 
+
     //카카오 로그인
-    @GetMapping("/user/kakao-redirect")
-    public String kakaoRedirect(@RequestParam String code) {
+    @GetMapping("/kakao-redirect")
+    public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
         System.out.println("메서드 동작 확인");
 
         RestTemplate r1 = new RestTemplate();
@@ -147,7 +150,7 @@ public class AuthController {
         MultiValueMap<String, String> bodies = new LinkedMultiValueMap<>();
         bodies.add("grant_type","authorization_code");
         bodies.add("client_id",Define.KAKAOKEY);
-        bodies.add("redirect_uri","http://localhost:8080/user/kakao-redirect");
+        bodies.add("redirect_uri","http://localhost:8080/kakao-redirect");
         bodies.add("code",code);
 
         HttpEntity<MultiValueMap<String,String>> requestMsg = new HttpEntity<>(bodies,headers);
@@ -178,9 +181,9 @@ public class AuthController {
         KakaoProfile kakaoProfile = response2.getBody();
         System.out.println(kakaoProfile);
 
-        userService.kakaoSignUp(kakaoProfile);
+        User checkUser = userService.kakaoCheckUsername(kakaoProfile);
 
-        session.setAttribute("kakaoAccessToken", response.getBody().getAccess_token());
+        session.setAttribute(Define.PRINCIPAL, checkUser);
 
         return "redirect:/main";
     }

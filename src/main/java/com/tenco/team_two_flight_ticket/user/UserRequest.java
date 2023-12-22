@@ -4,6 +4,7 @@ import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,7 @@ public class UserRequest {
     @Getter
     @Setter
     @ToString
+    @Builder
     public static class SignUpDTO {
         @NotEmpty
         private String realName;

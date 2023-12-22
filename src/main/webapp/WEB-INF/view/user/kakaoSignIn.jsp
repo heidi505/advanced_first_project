@@ -21,7 +21,7 @@
                             시작해보세요</b></h2>
                     <div class="w-100 mx-auto d-flex mb-2 ">
                         <button type="button" class="w-100 mb-2" >
-                            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=bd176db587eb198984842f426ddb64c0&redirect_uri=http://localhost:8080/user/kakao-redirect&prompt=login">
+                            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=bd176db587eb198984842f426ddb64c0&redirect_uri=http://localhost:8080/kakao-redirect&prompt=login">
                                 <img class="kakao_logo" src="/images/kakao_login_medium_wide.png"/></a>
                         </button>
                     </div>
