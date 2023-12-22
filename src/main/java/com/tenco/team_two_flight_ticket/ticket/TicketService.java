@@ -401,7 +401,7 @@ public class TicketService {
  	 * @return cities
  	 */
  	//검색어로 도시 조회
- 	public List<City> getCitiesFromKeyword(SearchCityDTO dto) {
+ 	public List<City> getCitiesFromKeyword(@Valid TicketRequest.SearchCityDTO dto) {
  		List<City> cities = null;
  		try {
  			cities = ticketRepository.getCitiesFromKeyword(dto.getKeyword());

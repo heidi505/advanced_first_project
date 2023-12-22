@@ -8,7 +8,7 @@ import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
 import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
-//import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,14 +47,14 @@ public class CouponController {
         return "redirect:/admin/coupon-list";
     }
 
-//    @ResponseBody
-//    @PostMapping("/api/admin/couponSMS")
-//    public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(Integer id) {
-//        SingleMessageSentResponse messageResponse = couponService.couponSMS(id);
-//        String message = messageResponse.toString();
-//        System.out.println(message + "확인");
-//        return ResponseEntity.ok().body(ApiUtils.success(message));
-//    }
+    @ResponseBody
+    @PostMapping("/api/admin/couponSMS")
+    public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(Integer id) {
+        SingleMessageSentResponse messageResponse = couponService.couponSMS(id);
+        String message = messageResponse.toString();
+        System.out.println(message + "확인");
+        return ResponseEntity.ok().body(ApiUtils.success(message));
+    }
 
 
     //    쿠폰 목록 기능
