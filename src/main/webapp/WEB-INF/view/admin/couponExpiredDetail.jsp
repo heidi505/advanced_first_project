@@ -21,7 +21,7 @@
                         <h5>쿠폰 상세 </h5>
                     </div>
                     <div class="admin_form_area">
-                        <c:forEach var="coupons" items="${couponDetailList}">
+                        <c:forEach var="coupons" items="${couponExpiredList}">
                             <ul class="admin_form_detail">
 
                                 <li class="admin_form_textfield">
