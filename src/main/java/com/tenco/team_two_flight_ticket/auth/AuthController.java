@@ -112,7 +112,7 @@ public class AuthController {
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
         // 로그인 푸시 알림 보내기
-        userService.FireBasePushAlert(dto);
+//        userService.FireBasePushAlert(dto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);
