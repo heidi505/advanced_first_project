@@ -265,16 +265,9 @@ insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VAL
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(47,'EWR','뉴어크 리버티 공항','뉴욕','미국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(48,'LAX','로스앤젤레스 공항','로스앤젤레스','미국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(49,'SFO','샌프란시스코공항','샌프란시스코','미국');
-insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'IAD','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'HNL','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'GUM','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'LAS','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'LAS','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'LAS','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'LAS','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'LAS','라스베이거스 공항','라스베이거스','미국');
--- insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'LAS','라스베이거스 공항','라스베이거스','미국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(50,'IAD','댈러스 공항','워싱턴','미국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(51,'HNL','호놀룰루 공항','하와이','하와이');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(52,'GUM','안토니오 B. 원 팻 공항','괌','괌');
 
 
 
