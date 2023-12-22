@@ -269,6 +269,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 승객 좌석 선택
 
+
+
             let transFormBtns = document.querySelectorAll(".transform_btn");
 
             transFormBtns.forEach((button) => {
@@ -289,11 +291,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.querySelector("#to_select_btn .to_airport_value").textContent = fromAirport;
                 });
             });
-
+            // 출발지 & 도착지 전환
 
             let children = document.querySelector("#childrenNum").textContent;
             document.getElementById("children").value = children;
-
 
         })
     }
@@ -339,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 
-    // 출발지 & 도착지 전환
+
 	
 	
 	// 출발지 & 목적지 검색 

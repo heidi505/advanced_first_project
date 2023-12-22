@@ -89,6 +89,7 @@ public class AirportService {
 
     public AirportTravelTimeDTO koAirportTime(Integer userId) {
 
+
         List<Ticket> airportNames = ticketRepository.findByTicketJoinReservation(userId);
         System.out.println(airportNames.get(0).getDepartureAirport() + "airportName");
 

@@ -43,7 +43,7 @@
                 <c:choose>
                     <c:when test="${principal == null}">
                 <ul class="header_menu">
-                    <li class="me-2">
+                    <li>
                         <a class="nav-link" href="/user/profile">마이페이지</a>
                     </li>                    
                     <li><a class="nav-link" href="/kakao/sign-in">로그인</a></li>

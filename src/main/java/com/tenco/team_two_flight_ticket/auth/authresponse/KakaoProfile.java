@@ -23,8 +23,8 @@ public class KakaoProfile {
 	@Setter
 	public static class Properties {
 		private String nickname;
-//		private String profile_image;
-//		private String thumbnail_image;
+		private String profile_image;
+		private String thumbnail_image;
 	}
 
 
