@@ -83,22 +83,28 @@
             </div>
             <table class="passenger_info_table w-100" style="margin-top: 30px">
                 <thead>
-                <c:forEach var="coupon" items="${Coupon}">
-                    <tr>
-                        <td style="font-weight: bold;">쿠폰 이름</td>
-                        <td style="border-right: 1px solid var(--line);">${coupon.couponName}</td>
-                        <td style="font-weight: bold">쿠폰 만료일</td>
-                        <td style="border-right: 1px solid var(--line)">${coupon.expiredAt}일까지</td>
-                        <td style="font-weight: bold">쿠폰 금액</td>
-                        <td style="border-right: 1px solid var(--line)">${coupon.discountingPrice}</td>
-                        <td style="display: flex; align-items: center; justify-content: center;">
-                            <button type="button" class="btn btn-primary apply-coupon-btn"
-                                    data-coupon="${coupon.discountingPrice}">
-                                적용하기
-                            </button>
-                        </td>
-                    </tr>
-                </c:forEach>
+                <tr>
+                    <td style="font-weight: bold;">쿠폰이름</td>
+                    <td style="border-right: 1px solid var(--line);">가입 쿠폰</td>
+                    <td style="font-weight: bold">쿠폰 만료일</td>
+                    <td style="border-right: 1px solid var(--line)">2023-12-20일까지</td>
+                    <td style="font-weight: bold">쿠폰 금액</td>
+                    <td style="border-right: 1px solid var(--line)">12000</td>
+                    <td style="display: flex; align-items: center; justify-content: center;">
+                        <button type="button" class="btn btn-primary" style="height: 100%; width: 100%;" onclick="applyCoupon()">적용하기</button>
+                    </td>
+                <tr>
+                    <td style="font-weight: bold;">쿠폰이름</td>
+                    <td style="border-right: 1px solid var(--line);">가입 쿠폰</td>
+                    <td style="font-weight: bold">쿠폰 만료일</td>
+                    <td style="border-right: 1px solid var(--line)">2023-12-20일까지</td>
+                    <td style="font-weight: bold">쿠폰 금액</td>
+                    <td style="border-right: 1px solid var(--line)">13000</td>
+                    <td style="display: flex; align-items: center; justify-content: center;">
+                        <button type="button" class="btn btn-primary" style="height: 100%; width: 100%;" onclick="applyCoupon()">적용하기</button>
+                    </td>
+                </tr>
+                </tr>
                 </thead>
             </table>
 
@@ -107,13 +113,13 @@
                     <thead>
                     <tr>
                         <td style="height: 1em; vertical-align: bottom; font-weight: 700;">결제 금액</td>
-                        <td id="paymentAmount" style="height: 3em; vertical-align: bottom; font-weight: 700;">${currentTicket.totalPrice}</td>
+                        <td id="paymentAmount" style="height: 3em; vertical-align: bottom; font-weight: 700;">301,600</td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td style="border-top: hidden; height: 1em; vertical-align: top; font-weight: 700;">할인 금액</td>
-                        <td id="discountAmount" style="border-top: hidden; height: 3em; vertical-align: top; font-weight: 700;"></td>
+                        <td id="discountAmount" style="border-top: hidden; height: 3em; vertical-align: top; font-weight: 700;">12,000</td>
                     </tr>
                     </tbody>
                     <tfoot>
@@ -249,29 +255,19 @@
 
 <script src="/js/final_result.js"></script>
 <script>
-    var totalPrice = parseFloat("${currentTicket.totalPrice}");
-    if (!isNaN(totalPrice)) {
-        document.getElementById("paymentAmount").innerText = totalPrice.toLocaleString();
-    }
-    document.addEventListener("click", function (event) {
-        if (event.target.classList.contains("apply-coupon-btn")) {
-            applyCoupon(event.target.dataset.coupon);
-        }
-    });
+    function applyCoupon() {
+        // 결제 금액 가져오기
+        var paymentAmount = parseFloat(document.getElementById('paymentAmount').innerText.replace(',', ''));
 
-    function applyCoupon(couponDiscount) {
-        // 할인 금액을 화면에 표시하는 부분
-        document.getElementById("discountAmount").innerText = parseFloat(couponDiscount).toLocaleString();
+        // 할인 금액 가져오기
+        var discountAmount = parseFloat(document.getElementById('discountAmount').innerText.replace(',', ''));
 
-        // 현재 결제 금액 가져오기
-        var paymentAmount = parseFloat(document.getElementById("paymentAmount").innerText.replace(",", ""));
+        // 최종 결제 금액 계산
+        var finalAmount = paymentAmount - discountAmount;
 
-        // 총 결제 금액 계산 (현재 결제 금액 - 할인 금액)
-        var finalAmount = paymentAmount - parseFloat(couponDiscount);
-
-        // 총 결제 금액을 화면에 표시하는 부분
-        document.getElementById("finalAmount").innerText = finalAmount.toLocaleString(); // 콤마 추가
+        // 최종 결제 금액 표시
+        document.getElementById('finalAmount').innerText = finalAmount.toLocaleString(); // 쉼표 추가
     }
 </script>
-<!-- footer.jsp -->
+<!-- header.jsp -->
 <%@ include file="../layout/footer.jsp" %>

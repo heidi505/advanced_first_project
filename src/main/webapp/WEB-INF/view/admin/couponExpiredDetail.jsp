@@ -21,31 +21,14 @@
                         <h5>쿠폰 상세 </h5>
                     </div>
                     <div class="admin_form_area">
-                        <c:forEach var="coupons" items="${couponList}">
+                        <c:forEach var="coupons" items="${couponExpiredList}">
                             <ul class="admin_form_detail">
-                                <li class="admin_form_textfield">
-                                    <label for="userId" class="form-label">사용자 번호</label>
-                                    <input type="number" id="userId" class="form-control"
-                                           value="${coupons.userId}" name="userId" disabled>
-                                </li>
 
-                                <li class="admin_form_textfield">
-                                    <label for="username" class="form-label">사용자 이름</label>
-                                    <input type="text" id="username" class="form-control"
-                                           value="${coupons.username}" name="username" disabled>
-                                </li>
                                 <li class="admin_form_textfield">
                                     <label for="couponName" class="form-label">쿠폰 이름</label>
                                     <input type="text" id="couponName" class="form-control"
                                            value="${coupons.couponName}" name="couponName" disabled>
                                 </li>
-
-                                <li class="admin_form_textfield">
-                                    <label for="couponNumber" class="form-label">쿠폰 번호</label>
-                                    <input type="text" id="couponNumber" class="form-control"
-                                           value="${coupons.couponNumber}" name="couponNumber" disabled>
-                                </li>
-
                                 <li class="admin_form_textfield">
                                     <label for="couponPrice" class="form-label">쿠폰 금액</label>
                                     <input type="number" id="couponPrice" class="form-control"
@@ -62,6 +45,12 @@
                                            value="${coupons.expiredAt}" name="expiredAt" disabled>
                                 </li>
                                 <li class="admin_form_textfield">
+                                    <label for="expires" class="form-label">쿠폰 만료 여부</label>
+                                    <input type="text" id="expires" class="form-control"
+                                           value="${coupons.isUsed ? coupons.createdValue : coupons.expiredValue}"
+                                           name="isUsed" disabled>
+                                </li>
+                                <li class="admin_form_textfield">
                                     <label for="couponCont" class="form-label">쿠폰 내용</label>
                                     <textarea cols="30" rows="5" id="couponCont" class="form-control"
                                               name="couponContent" disabled>${coupons.couponContent}</textarea>
@@ -70,6 +59,14 @@
                             </ul>
 
                             <div class="admin_common_btn">
+                                <c:if test="${coupons.isUsed == true}">
+                                    <form action="/admin/${coupons.id}/delete" method="post">
+                                        <button type="submit" id="couponDelete" class="btn btn-outline-primary">삭제</button>
+                                    </form>
+                                </c:if>
+                                <c:if test="${coupons.isUsed == false}">
+                                    <div></div>
+                                </c:if>
                                 <a href="/admin/coupon-list" class="btn btn-primary">확인</a>
                             </div>
                         </c:forEach>
@@ -111,6 +108,7 @@
     //         console.error('Error:', error);
     //     }
     // }
+
 
 
 </script>

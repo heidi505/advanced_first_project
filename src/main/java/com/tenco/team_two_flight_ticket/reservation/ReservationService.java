@@ -5,8 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
+import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
 import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
+import com.tenco.team_two_flight_ticket.coupon.Coupon;
+import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
+import com.tenco.team_two_flight_ticket.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -40,6 +46,10 @@ public class ReservationService {
     private TicketRepository ticketRepository;
     @Autowired
     private PassengerRepository passengerRepository;
+    @Autowired
+    private HasCouponRepository hasCouponRepository;
+    @Autowired
+    private CouponRepository couponRepository;
 
     @Transactional
     public ReservationResponse.SaveResultDTO save(ReservationRequest.SaveFormDto dto) {
@@ -139,7 +149,6 @@ public class ReservationService {
     }
 
     /**
-     * 
      * @param userId
      * @param dto
      * @return tripList
@@ -151,10 +160,17 @@ public class ReservationService {
         String sort = "";
 
         switch (stringSort) {
-            case "전체": sort = "all"; break;
-            case "결제전": sort = "false"; break;
-            case "결제완료": sort = "true"; break;
-            default: throw new MyBadRequestException("잘못된 값이 입력되었습니다");
+            case "전체":
+                sort = "all";
+                break;
+            case "결제전":
+                sort = "false";
+                break;
+            case "결제완료":
+                sort = "true";
+                break;
+            default:
+                throw new MyBadRequestException("잘못된 값이 입력되었습니다");
         }
 
         List<GetMyTravelDTO> tripList = null;
@@ -291,4 +307,10 @@ public class ReservationService {
     }
 
 
+    public List<CouponListDTO> getCouponList(User principal) {
+        // 2. 보유 쿠폰 번호를 통해 쿠폰 검색 (coupon)
+        List<CouponListDTO> coupons = couponRepository.findCouponByUserId(principal.getId());
+
+        return coupons;
+    }
 }

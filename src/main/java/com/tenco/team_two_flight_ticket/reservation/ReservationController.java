@@ -1,7 +1,12 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import java.security.Principal;
 import java.util.List;
 
+import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
+import com.tenco.team_two_flight_ticket.coupon.Coupon;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
+import com.tenco.team_two_flight_ticket.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +29,9 @@ import jakarta.servlet.http.HttpSession;
 public class ReservationController {
     @Autowired
     private KakaoPayService kakaoPayService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private HttpSession session;
@@ -78,6 +86,21 @@ public class ReservationController {
     @GetMapping("/reservation/final-result")
     public String finalResult(HttpSession session, Model model) {
         ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
+
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+        // 쿠폰 받아오기.
+        List<CouponListDTO> coupons = reservationService.getCouponList(principal);
+        System.out.println("쿠폰체크 쿠폰체크 쿠폰체크으으");
+        for (CouponListDTO coupon : coupons) {
+            System.out.println("쿠폰 ID: " + coupon.getId());
+            System.out.println("쿠폰 이름: " + coupon.getCouponName());
+            System.out.println("쿠폰 이름: " + coupon.getExpiredAt());
+            System.out.println("쿠폰 이름: " + coupon.getDiscountingPrice());
+        }
+        // 3. 쿠폰 정보 모델에 추가.
+
+        model.addAttribute("Coupon", coupons);
         model.addAttribute("Result", resultDTO);
         System.out.println("잘 담겼나 안담겼나~~");
         System.out.println("Reservation Result:");
@@ -178,7 +201,7 @@ public class ReservationController {
 
     @GetMapping("/fix")
     public String fix() {
-        return "reservation/preview2";
+        return "reservation/finalResult2";
     }
 
 }

@@ -9,6 +9,7 @@ import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponUseDTO;
 import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static io.lettuce.core.pubsub.PubSubOutput.Type.message;
+
 @Controller
 public class CouponController {
 
@@ -29,14 +32,43 @@ public class CouponController {
     @Autowired
     private CouponService couponService;
 
+
+    //    쿠폰 등록 기능
+    @GetMapping("/admin/coupon-save")
+    public String adminCouponSaveForm(Model model) {
+
+        return "admin/couponSave";
+    }
+
+    @PostMapping("/admin/coupon-save")
+    public String adminCouponSave(CouponSaveDTO dto, Integer id, Model model) {
+        List<CouponListDTO> couponList = couponService.couponDetailList(id);
+        model.addAttribute("couponList", couponList);
+        couponService.couponSave(dto);
+        return "redirect:/admin/coupon-list";
+    }
+
+    @ResponseBody
+    @PostMapping("/api/admin/couponSMS")
+    public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(@RequestBody CouponListDTO couponData) {
+        System.out.println("-------------------- 값 확인 " + couponData.getCouponNumber());
+        SingleMessageSentResponse messageResponse = couponService.couponSMS(couponData);
+        String message = messageResponse.toString();
+        System.out.println(message + "확인");
+        return ResponseEntity.ok().body(ApiUtils.success(message));
+    }
+
+
+    //    쿠폰 목록 기능
     @GetMapping("/admin/coupon-list")
     public String adminCouponList(Model model) {
-        List<CouponListDTO> couponList = couponService.couponList();
-        List<CouponExpiredListDTO> couponExpiredList = couponService.couponExpiredLists();
+//        현재 쿠폰 목록
+        List<CouponListDTO> couponList = couponService.couponListAll();
+//        만료된 쿠폰 목록
+        List<CouponExpiredListDTO> couponExpiredList = couponService.couponExpiredListAll();
         model.addAttribute("couponList", couponList);
-        model.addAttribute("couponExpiredList",couponExpiredList);
+        model.addAttribute("couponExpiredList", couponExpiredList);
         for (CouponExpiredListDTO coupon : couponExpiredList) {
-            System.out.println(coupon.getIsUsed());
             if (coupon.getIsUsed()) {
                 coupon.setCreatedValue("만료됨");
             } else {
@@ -49,27 +81,31 @@ public class CouponController {
         return "admin/couponList";
     }
 
-    @GetMapping("/admin/coupon-save")
-    public String adminCouponSaveForm() {
-        return "admin/couponSave";
+
+    //     만료된 쿠폰 상세 기능
+    @GetMapping("/admin/coupon-expired-detail/{id}")
+    public String adminCouponExpiredDetail(@PathVariable Integer id, Model model) {
+
+        List<CouponExpiredListDTO> couponExpiredList = couponService.couponExpiredDetailList(id);
+        model.addAttribute("couponExpiredList", couponExpiredList);
+        return "admin/couponExpiredDetail";
     }
 
-    @PostMapping("/admin/coupon-save")
-    public String adminCouponSave(CouponSaveDTO dto) {
-        couponService.couponSave(dto);
-        return "redirect:/admin/coupon-list";
-    }
 
+    //    현재 쿠폰 상세 기능
     @GetMapping("/admin/coupon-detail/{id}")
     public String adminCouponDetail(@PathVariable Integer id, Model model) {
-        List<CouponDetailDTO> couponDetailList = couponService.couponDetailList(id);
-        model.addAttribute("couponDetailList", couponDetailList);
+
+        List<CouponListDTO> couponList = couponService.couponDetailList(id);
+        model.addAttribute("couponList", couponList);
         return "admin/couponDetail";
     }
 
+
+    //    만료된 쿠폰 삭제 기능
     @PostMapping("/admin/{id}/delete")
     public String delete(@PathVariable Integer id) {
-        System.out.println("========================"+id);
+        System.out.println("========================" + id);
         User principal = (User) session.getAttribute("principal");
         if (principal == null) {
             throw new MyBadRequestException("인증되지 않았습니다");
@@ -77,17 +113,16 @@ public class CouponController {
         couponService.couponDelete(id, principal.getId());
         return "redirect:/admin/coupon-list";
     }
+
     
-    @ResponseBody
-    @PostMapping("/coupon/use-coupon")
-    public String useCoupon(@RequestBody CouponUseDTO dto) {
-    	couponService.useCoupon(dto);
+//    @ResponseBody
+//    @PostMapping("/coupon/use-coupon")
+//    public String useCoupon(@RequestBody CouponUseDTO dto) {
+//    	couponService.useCoupon(dto);
     	
     	
     	// 결과를 반환하면 됨
-    	return null;
-    }
-    
-    
-        
+//    	return null;
+//    }
+
 }
