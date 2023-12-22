@@ -6,6 +6,8 @@ import java.util.List;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket.coupon.Coupon;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,9 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
+    @Autowired
+    private TicketService ticketService;
+
     /* 페이지 별로 분리 된 시나리오 */
     // 선택한 항공권 보기 페이지 (검색 후 나오는 항공권 목록에서 클릭시 나오는 화면)
     @GetMapping("/preview")
@@ -47,8 +52,14 @@ public class ReservationController {
     }
 
     // 프리뷰 페이지에서 예약하기 버튼 클릭시 예약하기 입력 폼 화면
-    @GetMapping("/detail")
-    public String test4() {
+    @GetMapping("/detail/{ticketId}")
+    public String test4(@PathVariable int ticketId, Model model) {
+
+        List<DataDTO> dto = ticketService.ticketDetail(ticketId);
+        int isRound = dto.stream().map(e->e.getItineraries()).toList().size();
+
+        model.addAttribute("ticket", dto.get(0));
+        model.addAttribute("isRound", isRound);
         return "reservation/detail";
     }
 

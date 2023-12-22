@@ -29,7 +29,7 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <p class="my-4 principal_username">${principal.username}</p>
+                    <p class="my-4 principal_username">${principal.realName}</p>
                 </div>
                 <div class="coupon_profile col ">
                     <div class="coupon_count border mx-auto m-2 p-4 w-85 ">
@@ -67,7 +67,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                        <p class="principal_username form-label my-4">${principal.username}</p>
+                        <p class="principal_username form-label my-4">${principal.realName}</p>
                     </div>
                     <!-- 프로필 사진 창 끝 -->
                     <div class="profile_info row row-cols-2 w-100 mx-auto">
@@ -75,7 +75,7 @@
                             <p class="realName">이름</p>
                         </div>
                         <div class="form-group col w-75 mb-3 p-3 ms-2">
-                            <span class="realName">${principal.username}</span>
+                            <span class="realName">${principal.realName}</span>
                         </div>
                         <div class="type_name form-group col p-3">
                             <p class="userName">아이디</p>
