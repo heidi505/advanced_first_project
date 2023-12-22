@@ -97,7 +97,8 @@ public class TicketController {
 
         model.addAttribute("ticket", dto.get(0));
         model.addAttribute("isRound", isRound);
-
+        System.out.println("뭐 담겼징");
+        System.out.println(dto.get(0));
         return "/reservation/preview";
     }
 

@@ -17,36 +17,38 @@
                                     <thead class="detail_info_thead">
                                     <tr>
                                         <th class="detail_info_th">
-                                            <span class="detail_info_span">부산</span>
-                                            <span class="detail_info_span2">PUS</span>
-                                            <input type="hidden" name="departureCity" id="departureCity" value="부산">
+                                            <span class="detail_info_span">${ticket.itineraries[0].segments[0].departure.cityName}</span>
+                                            <span class="detail_info_span2">${ticket.itineraries[0].segments[0].departure.iataCode}</span>
+                                            <input type="hidden" name="departureCity" id="departureCity"
+                                                   value="${ticket.itineraries[0].segments[0].departure.cityName}">
                                             <input type="hidden" name="departureAirport" id="departureAirport"
-                                                   value="PUS">
+                                                   value="${ticket.itineraries[0].segments[0].departure.iataCode}">
                                         </th>
                                         <th class="detail_info_th">
                                     <span class="detail_info_span3">
                                         <img src="../images/ico_from_to_02.png" class="detail_info_img">
                                     </span>
                                             <span class="detail_info_span2">
-                                        1월 9일 - 01월 11일
+                                                <span>${ticket.itineraries[0].segments[0].departure.date()}</span>
+<%--                                                <span>- 01월 11일</span>--%>
                                     </span>
                                         </th>
                                         <th class="detail_info_th">
-                                            <span class="detail_info_span">도쿄</span>
-                                            <span>NRT</span>
-                                            <input type="hidden" name="arrivalCity" id="arrivalCity" value="도쿄">
-                                            <input type="hidden" name="arrivalAirport" id="arrivalAirport" value="NRT">
+                                            <span class="detail_info_span">${ticket.itineraries[0].segments[0].arrival.cityName}</span>
+                                            <span>${ticket.itineraries[0].segments[0].arrival.iataCode}</span>
+                                            <input type="hidden" name="arrivalCity" id="arrivalCity" value="${ticket.itineraries[0].segments[0].arrival.cityName}">
+                                            <input type="hidden" name="arrivalAirport" id="arrivalAirport" value="${ticket.itineraries[0].segments[0].arrival.iataCode}">
                                         </th>
                                         <th class="detail_info_th">
                                     <span class="detail_info_span4">
-                                        <img src="../images/RS.png" class="detail_info_img">
+                                        <img src="/images/airline_images/${ticket.itineraries[0].segments[0].carrierCode}.png" class="detail_info_img">
                                     </span>
-                                            <span class="detail_info_span2">진에어</span>
-                                            <input type="hidden" name="airline" id="airline" value="진에어">
+                                            <span class="detail_info_span2">${ticket.itineraries[0].segments[0].airlineName}</span>
+                                            <input type="hidden" name="airline" id="airline" value="${ticket.itineraries[0].segments[0].airlineName}">
                                         </th>
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">운항종류</span>
-                                            <span class="detail_info_span2">왕복</span>
+                                            <span class="detail_info_span2">직항</span>
                                         </th>
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">좌석등급</span>
@@ -66,8 +68,8 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>항공편</td>
                                         <td></td>
+                                        <td>항공편</td>
                                         <td>여정</td>
                                         <td>출발</td>
                                         <td>도착</td>
@@ -76,24 +78,24 @@
                                     </tr>
                                     <tr>
                                         <td>가는날</td>
-                                        <td>LJ 227편 <a class="btn">상세</a></td>
-                                        <input type="hidden" name="flight_name" id="flight_name" value="LJ227">
-                                        <td>부산 - 도쿄(나리타)</td>
-                                        <td>01월 09일 (화) 09:30</td>
-                                        <td>01월 09일 (화) 11:30</td>
+                                        <td>${ticket.itineraries[0].segments[0].carrierCode}${ticket.itineraries[0].segments[0].number} <a class="btn">상세</a></td>
+                                        <input type="hidden" name="flight_name" id="flight_name" value="${ticket.itineraries[0].segments[0].carrierCode}${ticket.itineraries[0].segments[0].number}">
+                                        <td>${ticket.itineraries[0].segments[0].departure.cityName} - ??${ticket.itineraries[0].segments[0].arrival.cityName}</td>
+                                        <td>${ticket.itineraries[0].segments[0].departure.date()}${ticket.itineraries[0].segments[0].departure.date()}</td>
+                                        <td>${ticket.itineraries[0].segments[0].arrival.date()}</td>
                                         <td>일반석 1석</td>
                                         <td>15kg</td>
                                         <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="15">
                                     </tr>
-                                    <tr>
-                                        <td>오는날</td>
-                                        <td>LJ 228편 <a class="btn">상세</a></td>
-                                        <td>도쿄(나리타) - 부산</td>
-                                        <td>01월 11일 (목) 10:30</td>
-                                        <td>01월 11일 (목) 13:10</td>
-                                        <td>일반석 1석</td>
-                                        <td>15kg</td>
-                                    </tr>
+<%--                                    <tr>--%>
+<%--                                        <td>오는날</td>--%>
+<%--                                        <td>LJ 228편 <a class="btn">상세</a></td>--%>
+<%--                                        <td>도쿄(나리타) - 부산</td>--%>
+<%--                                        <td>01월 11일 (목) 10:30</td>--%>
+<%--                                        <td>01월 11일 (목) 13:10</td>--%>
+<%--                                        <td>일반석 1석</td>--%>
+<%--                                        <td>15kg</td>--%>
+<%--                                    </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
@@ -2050,13 +2052,16 @@
                                                         <p>항공권 결제 완료 후 카카오톡 메세지로 예약 링크를 보내드립니다</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <input type="hidden" name="OptionMessage" id="OptionMessage" value="Y">
-                                                        <button type="submit" id="confirmYn" class="btn btn-secondary res_kko_btn"
+                                                        <input type="hidden" name="OptionMessage" id="OptionMessage"
+                                                               value="Y">
+                                                        <button type="submit" id="confirmYn"
+                                                                class="btn btn-secondary res_kko_btn"
 
                                                                 onclick="sendKOption('N')">괜찮아요
                                                         </button>
 
-                                                        <button type="submit" id="confirmYn"  class="btn btn-primary res_kko_btn"
+                                                        <button type="submit" id="confirmYn"
+                                                                class="btn btn-primary res_kko_btn"
                                                                 onclick="sendKOption('Y')">보내주세요
 
                                                         </button>
@@ -2117,6 +2122,7 @@
     function sendMessage(option) {
         document.getElementById("OptionMessage").value = option;
     }
+
     function sendKOption(option) {
         if (option === 'N') {
             // '괜찮아요' 버튼 클릭 시 모달 창 닫기
