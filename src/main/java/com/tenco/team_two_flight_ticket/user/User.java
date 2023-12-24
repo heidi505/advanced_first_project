@@ -34,6 +34,7 @@ public class User {
     private boolean isAdmin;
     @CreationTimestamp
     private Timestamp createdAt;
+    private String fcmToken;
 
     @Builder
     public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean isAdmin, Timestamp createdAt) {

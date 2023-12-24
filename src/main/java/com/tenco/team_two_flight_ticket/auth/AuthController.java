@@ -2,30 +2,28 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
-import com.tenco.team_two_flight_ticket.user.UserRepository;
-import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
-import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushFindUserDTO;
 import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushMessageDTO;
 import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushUserDTO;
@@ -39,7 +37,9 @@ import com.tenco.team_two_flight_ticket.search.SearchedService;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.User;
+import com.tenco.team_two_flight_ticket.user.UserRepository;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
+import com.tenco.team_two_flight_ticket.user.UserRequest.PushAlarmDTO;
 import com.tenco.team_two_flight_ticket.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -124,8 +124,14 @@ public class AuthController {
     public String signInProc(@Valid UserRequest.SignInDTO dto, Model model, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
+        // 푸시 알림을 위한 fcm 토큰 update
+        userService.saveFcmToken(dto.getUsername() ,dto.getFcmToken());
         // 로그인 푸시 알림 보내기
-        userService.FireBasePushAlert(dto);
+        PushAlarmDTO pushDto = new PushAlarmDTO();
+        pushDto.setFcmToken(dto.getFcmToken());
+        pushDto.setTitle("님부스");
+        pushDto.setMessage("님부스에 로그인 하신 것을 환영합니다");
+        userService.FireBasePushAlert(pushDto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);
@@ -142,7 +148,6 @@ public class AuthController {
     @GetMapping("/kakao-redirect")
     public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
         System.out.println("메서드 동작 확인");
-
         RestTemplate r1 = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
 

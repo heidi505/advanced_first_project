@@ -180,6 +180,5 @@
 </div>
 
 <script src="/js/reservation_detail.js"></script>
-<script src="/js/cancel_reservation.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>
