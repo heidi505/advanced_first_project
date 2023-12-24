@@ -1,20 +1,48 @@
+const statusEnum = {
+	PLANNED  :`예정`,
+	LAST     :`지난`,
+	CANCELED :`취소`
+};
+Object.freeze(statusEnum);
+const tripEnum = {
+	PLANNED  :`planned_trip`,
+	LAST     :`last_trip`,
+	CANCELED :`canceled_trip`
+}
+Object.freeze(tripEnum);
+const isPayedEnum = {
+	ALL      : `전체`,
+	NOTPAYED : `결제전`,
+	PAYED    : `결제완료`
+}
+Object.freeze(isPayedEnum);
+const weekEnum = {
+	SUN : `일`,
+	MON : `월`,
+	TUE : `화`,
+	WED : `수`,
+	THU : `목`,
+	FRI : `금`,
+	SAT : `토`
+}
+Object.freeze(weekEnum);
+
 async function getMyTravel(tabId, sort){
-	let statusEnum = ``;
-	let result = ``;
-	let reservedTrip = ``;
-	console.log(tabId + ' ' + sort);
+	//statusEnum 파라미터
+	let status = ``;
 	switch(tabId){
-		case `planned_trip`: statusEnum = `예정`; break;
-		case `last_trip`: statusEnum = `지난`; break;
-		case `canceled_trip`: statusEnum = `취소`; break;
+		case tripEnum.PLANNED  : status = statusEnum.PLANNED;  break;
+		case tripEnum.LAST     : status = statusEnum.LAST;     break;
+		case tripEnum.CANCELED : status = statusEnum.CANCELED; break;
 	}
-	
+
+	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}`; 
 	 try {
-        const response = await fetch(`/user/get-my-travel?statusEnum=${statusEnum}&sort=${sort}`);
-        data = await response.json(); 
+        const response = await fetch(href);
+        const data = await response.json(); 
         insertElement(data.tripList, data.tripCount, tabId );
     } catch (error) {
-		alert(`목록을 불러오는데 실패했습니다`);
+		alert(error+`목록을 불러오는데 실패했습니다`);
     }
 }
 
@@ -22,44 +50,41 @@ async function getMyTravel(tabId, sort){
 // 연도가 입력된 div를 반환하는 함수
 function makeYearTag(year){
 	let yearDiv = makeElement(`div`,`trip_year`);
-    text = document.createTextNode(`${year}년`);
+    let text = document.createTextNode(`${year}년`);
     yearDiv.appendChild(text);
     return yearDiv;
 }
 
 
-// 여행 목록 삽입하기
+// 여행 목록 삽입하기(목록, 목록 수, 목록의 종류)
 function insertElement(tripList, tripCnt , tabId){
-	console.log(tripList);
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = ``;
 	let myTripCountLabel = ``;
-	let text = ``;
 	let isPayed = ``;
-	let aTag = ``;
-	let span = ``;
+	let span, div, form, button = ``;
 	let lastYear = ``; // 지난 여행 연도와 비교하여 변동 시 연도 표기
 	let tripCount = 0;
-	let num = tabId == `last_trip` ? 1 : 3 ;
+	let num = tabId == tripEnum.LAST ? 1 : 3 ;
+	let text = ``;
 	for(let i=0; i<num; i++){
 		// 결제여부 버튼 삽입
 		myTripCountLabel = makeElement(`div`,`my_trip_count_label me-2`);
 
     	switch(i){
-			case 0: isPayed = `전체`; 
+			case 0: isPayed = isPayedEnum.ALL; 
 					tripCount = tripCnt.allTripCount; 
 					myTripCountLabel.classList.add(`all_payment`);
 			        break;
-			case 1: isPayed = `결제전`; 
+			case 1: isPayed = isPayedEnum.NOTPAYED; 
 					tripCount = tripCnt.notPayedTripCount;
 					myTripCountLabel.classList.add(`before_payment`);   
 					break;
-			case 2: isPayed = `결제완료`;
+			case 2: isPayed = isPayedEnum.PAYED;
 					tripCount = tripCnt.payedTripCount;
 					myTripCountLabel.classList.add(`payed_complete`);     
-					 break;
-		}	
-		
+					break;
+		}
     	text = document.createTextNode(isPayed); 
     	myTripCountLabel.appendChild(text);
     	span = makeElement(`span`,`my_trip_num`);
@@ -78,9 +103,9 @@ function insertElement(tripList, tripCnt , tabId){
     	let num = 0;
     	date.forEach((splitDate) => {
 			switch(num){
-				case 0: year = splitDate; break;
+				case 0: year  = splitDate; break;
 				case 1: month = splitDate; break;
-				case 2: day = splitDate; break;
+				case 2: day   = splitDate; break;
 			}
 			num++;
 		});
@@ -94,13 +119,13 @@ function insertElement(tripList, tripCnt , tabId){
 		let createdAtDate = new Date(year,month,day);
 		let weekNumber = createdAtDate.getDay();
 		switch(weekNumber){
-			case 0: week=`일`; break;
-			case 1: week=`월`; break;
-			case 2: week=`화`; break;
-			case 3: week=`수`; break;
-			case 4: week=`목`; break;
-			case 5: week=`금`; break;
-			case 6: week=`토`; break;
+			case 0: week= weekEnum.SUN ; break;
+			case 1: week= weekEnum.MON ; break;
+			case 2: week= weekEnum.TUE ; break;
+			case 3: week= weekEnum.WED ; break;
+			case 4: week= weekEnum.THU ; break;
+			case 5: week= weekEnum.FRI ; break;
+			case 6: week= weekEnum.SAT ; break;
 		}
 		
     	let myTripList = makeElement(`div`, `my_trip_list`);
@@ -118,10 +143,10 @@ function insertElement(tripList, tripCnt , tabId){
     	let beforePaymentLabel = ``;
     	if(data.isPayed){
     		beforePaymentLabel = makeElement(`span`,`complete_label`);
-    		text = document.createTextNode(`결제완료`);	
+    		text = document.createTextNode(isPayedEnum.PAYED);	
 		} else {
 			beforePaymentLabel = makeElement(`span`,`before_payment_label`);
-    		text = document.createTextNode(`결제전`);	
+    		text = document.createTextNode(isPayedEnum.NOTPAYED);	
 		}
     	beforePaymentLabel.appendChild(text);
     	li.appendChild(beforePaymentLabel);
@@ -143,7 +168,7 @@ function insertElement(tripList, tripCnt , tabId){
     	let myTripContentTit = makeElement(`li`,`my_trip_content_tit`);
     	let airlineIconImg = makeElement(`div`,`airline_icon_img`);
     	
-		let koreanAirline = data.koreanAirline; 
+		const koreanAirline = data.koreanAirline; 
     	// 이거 2개는 데이터에 따라 매치시켜야 함
     	//(img 주소도 DB에 가면 좋을 듯 여기에 case문 돌리는 건 비효율)
     	img = makeElement(`img`);
@@ -169,7 +194,7 @@ function insertElement(tripList, tripCnt , tabId){
 		myTripContentMid.appendChild(myTripContentTit);
     	myTripContentMid.appendChild(li);
 		
-		if(tabId != `last_trip`){
+		if(tabId != tripEnum.LAST){
     		let myTripTicketImg = makeElement(`div`,`my_trip_ticket_img`);
     		li.appendChild(myTripTicketImg);
     		let myTripTicketBg = makeElement(`div`,`my_trip_ticket_bg`);
@@ -187,7 +212,7 @@ function insertElement(tripList, tripCnt , tabId){
     	// my_trip_content_btm 시작
     	let myTripContentBtm = ``;
     	let reservationCancle =``;
-    	if(tabId != `last_trip`){
+    	if(tabId != tripEnum.LAST){
     		myTripContentBtm = makeElement(`ul`,`my_trip_content_btm`);
     		li = makeElement(`li`);
     		myTripContentBtm.appendChild(li);
@@ -235,8 +260,7 @@ function insertElement(tripList, tripCnt , tabId){
 			myTripContentBtm.appendChild(li);
 			
 			// my_trip_content_btm 끝
-			if(tabId == `planned_trip`){
-				    	
+			if(tabId == tripEnum.PLANNED){
 				reservationCancle = makeElement(`li`,`reservation_cancle mb-3`);
 				div = makeElement(`div`,`reservation_cancle_btn mb-3`);
 				a = makeElement(`a`);
@@ -261,9 +285,9 @@ function insertElement(tripList, tripCnt , tabId){
 		}
     	myTripContent.appendChild(myTripContentTop);
 		myTripContent.appendChild(myTripContentMid);
-		if(tabId != `last_trip`) myTripContent.appendChild(myTripContentBtm);
+		if(tabId != tripEnum.LAST) myTripContent.appendChild(myTripContentBtm);
     	myTripItem.appendChild(myTripContent);
-    	if(tabId == `planned_trip`) myTripItem.appendChild(reservationCancle);
+    	if(tabId == tripEnum.PLANNED) myTripItem.appendChild(reservationCancle);
     	myTripBox.appendChild(myTripItem);
     	myTripList.appendChild(myTripBox);
     	myTrip.appendChild(myTripList);
@@ -284,20 +308,10 @@ function insertElement(tripList, tripCnt , tabId){
 			if(e.target.className == `my_trip_ticket_bg`||
 			e.target.parentElement.className == `my_trip_ticket_bg`){
 				// 다운로드 로직 구성 필요
-				downloadTicket();
+				//downloadTicket();
 				console.log(`click ticket`);
 			} 
 		});
 	});
 
-	// 결제 취소 이벤트
-	const plannedTrip = document.getElementById(`planned_trip`);
-	plannedTrip.addEventListener(`click`, e => {
-		if(e.target.id == `kakaoPayCancel`){
-			kakaoCancel();
-		}
-	});
 	
-	// 처음 목록 출력
-	getMyTravel(`planned_trip`, `전체`);
-

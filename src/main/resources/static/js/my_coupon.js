@@ -21,9 +21,10 @@ window.onload = function(){
 	myCoupon.forEach((coupon) => {
 		coupon.addEventListener(`click`, e => {
 			// 쿠폰 아이디를 가져와야 함
+			
 			let couponId = e.target.parentElement.firstChild.value;
 			console.log(couponId);
-			useMyCoupon(couponId);
+			//useMyCoupon(couponId);
 		});
 	});
 

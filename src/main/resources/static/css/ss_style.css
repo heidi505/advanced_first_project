@@ -356,6 +356,7 @@
 }
 .coupon_discount{
 	font-weight: bold;
+	display:inline;
 }
 .my_coupon{
 	cursor: pointer;
