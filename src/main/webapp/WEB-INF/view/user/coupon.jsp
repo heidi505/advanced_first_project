@@ -61,6 +61,6 @@
 </div>
 </div>
 
-<script src="/js/my_coupon.js"></script>
+
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp"%>

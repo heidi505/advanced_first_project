@@ -81,7 +81,6 @@ public class UserController {
 		List<CouponListDTO> couponList = couponService.findCouponByUserId(principal.getId());
 		// coupon 수 조회
 		int couponNum = userService.getProfile(principal);
-		System.out.println(couponList);
 		model.addAttribute("couponList",couponList);
 		model.addAttribute("couponNum",couponNum);
 		model.addAttribute("principal",principal);		

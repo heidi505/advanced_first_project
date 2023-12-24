@@ -4,7 +4,12 @@
 
 <!-- header.jsp -->
 <%@ include file="../layout/header.jsp" %>
-
+<style>
+.airline_image{
+	background:url('/images/airline_images/${detailTrip.airline}.png');
+	background-size: cover;
+}
+</style>
 
 <!-- TODO 여기서부터 main영역 -->
 <main class="reservation_detail_page">
@@ -40,7 +45,7 @@
                     <div class="float-end me-5"><b class="lh-lg">${detailTrip.koreanArrivalCity}<br><span class="color_basic09">${detailTrip.arrivalCity}</span></b></div>
                 </div>
                 <div class="col py-3 border-end text-center align-middle">
-                    <div class="airline_image w-10 p-4 mx-auto mb-2"></div>
+                    <div class="airline_image p-4 w-10 mx-auto"></div>
                     <p><b>${detailTrip.koreanAirline}</b></p></div>
                 <div class="col py-3 border-end text-center align-middle">
                     <p class="mt-3 mb-4 color_basic09">운향종류</p>
@@ -75,6 +80,46 @@
                 <p>여권 만료일이 출발일로부터 6개월 미만인 경우 탑승이 불가합니다.</p>
 
             </div>
+            
+            
+            <div class="mt-5 mb-4 fs-4"><b>탑승객 정보 및 결제 정보</b></div>
+			<table class="passenger_info_table w-100 mb-5">
+			<thead>
+			<tr>
+			<td colspan="3">탑승객</td>
+			<td>생년월일</td>
+			<td>항공요금</td>
+			<td>유류할증료</td>
+			<td>제세공과금</td>
+			<td>발권수수료</td>
+			<td>총액운임</td>
+			<td>결제상태</td>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="payedInfo" items="${payedInfoList}">
+			<tr>
+			<td class="w-10">${payedInfo.lastName}${payedInfo.firstName}</td>
+			<td class="w-10">${payedInfo.passengerType}</td>
+			<td>${payedInfo.gender}</td>
+			<td>${payedInfo.birthdate}</td>
+			<td>${payedInfo.SAirFare}</td>
+			<td>${payedInfo.SFuelSurcharge}</td>
+			<td>${payedInfo.STaxes}</td>
+			<td>${payedInfo.STicketingFee}</td>
+			<td>${payedInfo.STotalPrice}</td>
+			<c:choose>
+			<c:when test="${payedInfo.isPayed eq true}">
+			<td>결제완료됨</td>
+			</c:when>
+			<c:otherwise>
+			<td>결제요청전</td>
+			</c:otherwise>
+			</c:choose>
+			</tr>
+			</c:forEach>
+			</tbody>
+			</table>
 
 			
             <!-- 모달창 부분 -->
@@ -123,8 +168,8 @@
                             <button class="btn w-35 btn-primary float-end" id="cancel_request_btn">탑승객 취소요청</button>
                         </div>
                     </div>
-                    <!-- 모달창 내용 끝 -->
                 </div>
+              <!-- 모달창 내용 끝 -->
             </div>
         </div>
         <!-- section end -->
@@ -135,5 +180,6 @@
 </div>
 
 <script src="/js/reservation_detail.js"></script>
+<script src="/js/cancel_reservation.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

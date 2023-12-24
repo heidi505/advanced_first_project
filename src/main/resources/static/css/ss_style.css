@@ -225,9 +225,6 @@
 	padding-right:2rem!important;
 	display: inline-block;
 }
-.airline_image{
-	background:url('/images/airline_image.png');
-}
 
 /* 제작중인 요소의 색상 넣기에 사용 중*/
 .color_primary01 {
