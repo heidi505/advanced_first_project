@@ -88,7 +88,7 @@ public class UserController {
 	}
 
 	@GetMapping("/my-travel")
-	public String myPageTravel(@Valid GetMyTravelListDTO dto , Model model ) {
+	public String myPageTravel() {
 		return "user/myTravel";
 	}
 	
@@ -96,11 +96,9 @@ public class UserController {
 	@GetMapping("/get-my-travel")
 	public GetMyTripCntAndListDTO myPageTravelProc(@Valid GetMyTravelListDTO dto, Errors errors) {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		System.out.println(dto);
 		List<GetMyTravelDTO> tripList = reservationService.getMyTravel(principal.getId(), dto);
 		GetMyTripCountDTO tripCount = reservationService.getMyTripCount(principal.getId(),dto);
 		GetMyTripCntAndListDTO myTrip = new GetMyTripCntAndListDTO();
-		System.out.println(tripList);
 		myTrip.setTripCount(tripCount);
 		myTrip.setTripList(tripList);	
 		return myTrip;

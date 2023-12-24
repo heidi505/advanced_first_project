@@ -37,6 +37,7 @@
 							<span class="fs-6">아직 회원이 아니신가요?</span><a href="/sign-up"
 								class="insert_user ms-4">회원가입</a>
 						</div>
+						<input type="hidden" id="sign_up_check" value="${message}"/>
 					</div>
 				</div>
 			</div>
@@ -45,7 +46,15 @@
 
 </div>
 </div>
+<script>
+  // 회원 가입으로 왔을 때 alert
+  const check = document.getElementById('sign_up_check');
+  if(check.value!=''){
+	  alert(check.value);
+  }
 
+
+</script>
 <script type="module" src="js/firebase.js"></script>
 <!-- header.jsp -->
 <%@ include file="../layout/footer.jsp"%>

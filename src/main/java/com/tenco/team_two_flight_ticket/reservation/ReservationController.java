@@ -208,8 +208,8 @@ public class ReservationController {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         ReservationResponse.GetMyTripDetailDTO detailTrip = reservationService.getMyTripDetail(principal.getId(), reservationNum);
         List<ReservationResponse.GetPayedInfoDTO> payedInfoList = reservationService.getPayedInfo(reservationNum);
-        model.addAttribute("payedInfoList", payedInfoList);
         model.addAttribute("detailTrip", detailTrip);
+        model.addAttribute("payedInfoList", payedInfoList);
         return "reservation/reservationDetail";
     }
 

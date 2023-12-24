@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
@@ -102,7 +103,7 @@ public class AuthController {
 
     //회원 가입
     @PostMapping("/sign-up")
-    public String signUpProc(@Valid UserRequest.SignUpDTO dto, Errors errors){
+    public String signUpProc(@Valid UserRequest.SignUpDTO dto,RedirectAttributes redirectAttributes , Errors errors){
         System.out.println("1: 실명" + dto.getRealName());
         System.out.println("2: 유저아이디" + dto.getUsername());
         System.out.println("3: 이메일" + dto.getEmail());
@@ -110,12 +111,18 @@ public class AuthController {
         System.out.println("5: 비번체크" + dto.getPasswordCheck());
         
         userService.signUp(dto);
+        redirectAttributes.addAttribute("check" , true);
         return "redirect:/sign-in";
     }
 
     //로그인
     @GetMapping("/sign-in")
-    public String signIn() {
+    public String signIn(@RequestParam(defaultValue = "false") Boolean check, Model model) {
+    	// 회원 가입시 메시지
+    	if(check) {
+    		model.addAttribute(check);
+    		model.addAttribute("message","회원가입에 성공했습니다");
+    	}
         return "user/signIn";
     }
 
