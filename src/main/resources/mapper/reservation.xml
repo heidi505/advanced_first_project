@@ -132,5 +132,16 @@
         FROM reservation_tb
         WHERE reservation_num = #{reservationNum}
     </select>
+    
+    <update id="setLastTrip">
+    	UPDATE reservation_tb
+		SET status_enum = '지난'
+		WHERE status_enum = '예정'
+    	AND id IN (
+    	SELECT reservation_id 
+    	FROM ticket_tb 
+    	WHERE departure_time &lt; NOW());
+    </update>
+    
 
 </mapper>

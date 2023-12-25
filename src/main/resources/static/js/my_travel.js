@@ -169,10 +169,8 @@ function insertElement(tripList, tripCnt , tabId){
     	let airlineIconImg = makeElement(`div`,`airline_icon_img`);
     	
 		const koreanAirline = data.koreanAirline; 
-    	// 이거 2개는 데이터에 따라 매치시켜야 함
-    	//(img 주소도 DB에 가면 좋을 듯 여기에 case문 돌리는 건 비효율)
     	img = makeElement(`img`);
-    	img.src = `/images/icons/airline_icon_02.png`;
+    	img.src = `/images/airline_images/${data.airline}.png`;
     	img.alt = koreanAirline;
     	airlineIconImg.appendChild(img);
     	div = makeElement(`div`);
