@@ -8,6 +8,8 @@ import java.util.Map;
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
+import com.tenco.team_two_flight_ticket.airport.parkingFee.ParkingFeeResponseDTO;
+import com.tenco.team_two_flight_ticket.airport.parkingFee.ParkingFeeResponseDTO.Response.Body.Items.Item;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse2;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
@@ -58,9 +60,10 @@ public class AirportController {
     	String departureAirportCode = ticketService.findDepartureAirport(principal.getId());
     	
     	// 주차 요금 api
-    	Map<String,String> list = airportService.getParkingFeeAPI(departureAirportCode);
-        model.addAttribute("list", list);
-
+    	ParkingFeeResponseDTO list = airportService.getParkingFeeAPI(departureAirportCode);
+        List<Item> parkingList = list.getResponse().getBody().getItems().getItem();
+        model.addAttribute("list", parkingList);
+        
         // 인청공항 주차정보 api
         ParkingStatusResponse parkingStatusResponse = airportService.getParkingAreaInfoAPI();
         // Model에 DTO를 추가하여 JSP로 전달

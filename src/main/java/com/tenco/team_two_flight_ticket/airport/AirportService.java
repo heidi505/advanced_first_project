@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
+import com.tenco.team_two_flight_ticket.airport.parkingFee.ParkingFeeResponseDTO;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse2;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
@@ -27,14 +28,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class AirportService {
     public static final String SERVICEKEY = Define.SERVICEKEY;
 
-    public Map<String, String> getParkingFeeAPI(String airportCode) {
+    public ParkingFeeResponseDTO getParkingFeeAPI(String airportCode) {
         // 주차요금 api
         URI uri = null;
-        String url = "http://openapi.airport.co.kr/service/rest/AirportParkingFee/parkingfee?serviceKey="+ Define.SERVICEKEY +"&schAirportCode=GMP&type=json";
-        try {
-            //uri = new URI(url);
-            
-            
+        try {        
             uri = new URI(UriComponentsBuilder
                     .fromUriString("http://openapi.airport.co.kr/service/rest/AirportParkingFee/parkingfee")
                     .queryParam("serviceKey", Define.SERVICEKEY)
@@ -54,9 +51,9 @@ public class AirportService {
         HttpEntity<MultiValueMap<String, String>> request
                 = new HttpEntity<>(headers);
 
-        ResponseEntity<Map> response = restTemplate.exchange(uri, HttpMethod.GET, request, Map.class);
-
-        return response.getBody();
+        ResponseEntity<ParkingFeeResponseDTO> response = restTemplate.exchange(uri, HttpMethod.GET, request, ParkingFeeResponseDTO.class);
+        ParkingFeeResponseDTO list = response.getBody();
+        return list;
     }
 
     public ParkingStatusResponse getParkingAreaInfoAPI() {

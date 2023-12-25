@@ -99,9 +99,7 @@ tabContents.forEach((button)=>{
 	})
 });
 
-
-//let kakaoPayCancelBtn = document.querySelector("#kakaoPayCancel");
-// body가 필요하지
+// 결제 취소하기
 function kakaoCancel(){
     fetch(`/kakaoPay/cancel`
         ,{ method: "POST",
@@ -117,7 +115,7 @@ function kakaoCancel(){
             alert(result.data);
         })
 }
-//kakaoPayCancelBtn.addEventListener("click",kakaoCancel);
+
 
 
 
