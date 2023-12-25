@@ -414,6 +414,12 @@ public class TicketService {
  		return cities;
  	}
 
+ 	// 가장 빠른 출발지 공항 조회
+	public String findDepartureAirport(int id) {
+		String airport = ticketRepository.findDepartureAirport(id);
+		return airport;
+	}
+
 
 
 }

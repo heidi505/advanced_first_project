@@ -24,6 +24,8 @@ public interface TicketRepository {
 	public List<City> getCitiesFromKeyword(String keyword);
 
 	public List<City> getKoreanCity();
+	// 출발지 공항 조회
+	public String findDepartureAirport(int id);
 
 
 }

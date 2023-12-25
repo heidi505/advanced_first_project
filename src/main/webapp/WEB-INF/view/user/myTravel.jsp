@@ -50,7 +50,7 @@
 const plannedTrip = document.getElementById(`planned_trip`);
 plannedTrip.addEventListener(`click`, e => {
 	if(e.target.id == `kakaoPayCancel`){
-		kakaoCancel();
+		if(confirm(`결제를 취소하시겠습니까?`)) kakaoCancel();
 	}
 });
 

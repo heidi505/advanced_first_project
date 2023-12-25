@@ -269,18 +269,21 @@ function insertElement(tripList, tripCnt , tabId){
 				a.href = `/reservation/cancel-modal/${data.reservationNum}`;
 				text = document.createTextNode(`예약 취소하기`);
 				a.appendChild(text);
-				div = makeElement(`div`,`reservation_cancle_btn`);
-				form = makeElement(`form`);
-				form.action = `/kakaoPay/cancel`;
-				form.method = `post`;
-				div.appendChild(form);
-				button = makeElement(`button`);
-				button.id = `kakaoPayCancel`;
-				button.type = `button`;
-				text = document.createTextNode(`결제 취소하기`);
-				button.appendChild(text);
-				form.appendChild(button);
-				reservationCancle.appendChild(div);
+				// 결제 취소 부분
+				if(data.isPayed){
+					div = makeElement(`div`,`reservation_cancle_btn`);
+					form = makeElement(`form`);
+					form.action = `/kakaoPay/cancel`;
+					form.method = `post`;
+					div.appendChild(form);
+					button = makeElement(`button`);
+					button.id = `kakaoPayCancel`;
+					button.type = `button`;
+					text = document.createTextNode(`결제 취소하기`);
+					button.appendChild(text);
+					form.appendChild(button);
+					reservationCancle.appendChild(div);
+				}
 			}
 		}
     	myTripContent.appendChild(myTripContentTop);
