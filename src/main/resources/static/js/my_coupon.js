@@ -7,9 +7,6 @@ async function useMyCoupon(couponId){
 	}catch(error){
 		alert('쿠폰 사용에 실패하였습니다');
 	}
-	
-	
-	
 }
 
 window.onload = function(){

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
+import com.tenco.team_two_flight_ticket.airport.parkingFee.ParkingFeeResponseDTO;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse2;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
@@ -29,12 +30,18 @@ public class AirportService {
     @Autowired
     TicketRepository ticketRepository;
 
-    public Map<String, String> getParkingFeeAPI() {
+    public ParkingFeeResponseDTO getParkingFeeAPI(String airportCode) {
         // 주차요금 api
         URI uri = null;
-        String url = "http://openapi.airport.co.kr/service/rest/AirportParkingFee/parkingfee?serviceKey=rrf%2Bmnq9ofBCLMm6ehZUvWu%2FZljoJtXJZKSVOIkz61hIbsnmpY3s3aeMuC3VfTlt9MVM8aSL1J3M%2Bzm3ad2%2BXg%3D%3D&schAirportCode=GMP&type=json";
-        try {
-            uri = new URI(url);
+        try {        
+            uri = new URI(UriComponentsBuilder
+                    .fromUriString("http://openapi.airport.co.kr/service/rest/AirportParkingFee/parkingfee")
+                    .queryParam("serviceKey", Define.SERVICEKEY)
+                    .queryParam("schAirportCode",airportCode)
+                    .queryParam("type", "json")
+                    .build()
+                    .toUriString());
+            
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -46,9 +53,9 @@ public class AirportService {
         HttpEntity<MultiValueMap<String, String>> request
                 = new HttpEntity<>(headers);
 
-        ResponseEntity<Map> response = restTemplate.exchange(uri, HttpMethod.GET, request, Map.class);
-
-        return response.getBody();
+        ResponseEntity<ParkingFeeResponseDTO> response = restTemplate.exchange(uri, HttpMethod.GET, request, ParkingFeeResponseDTO.class);
+        ParkingFeeResponseDTO list = response.getBody();
+        return list;
     }
 
     public ParkingStatusResponse getParkingAreaInfoAPI() {
@@ -85,9 +92,6 @@ public class AirportService {
 
         return parkingStatusResponse;
     }
-
-;
-
     public AirportTravelTimeDTO koAirportTime(Integer userId) {
 
 
@@ -105,7 +109,7 @@ public class AirportService {
         String myServiceKey = Define.SERVICEKEY;
         String nowDay = DateFormat.formatYear();
         String nowTime = DateFormat.formatTime();
-        System.out.println(nowTime + "테스트 중");
+        System.out.println(nowTime);
 
         // URI 클래스를 사용하여 URL 생성
         URI uri = null;
@@ -113,7 +117,7 @@ public class AirportService {
             uri = new URI(UriComponentsBuilder
                     .fromUriString("http://openapi.airport.co.kr/service/rest/dailyExpectPassenger/dailyExpectPassenger")
                     .queryParam("ServiceKey", myServiceKey)
-                    .queryParam("schAirport",airport)
+                    .queryParam("schAirport", airport)
                     .queryParam("schDate", nowDay)
                     .queryParam("schHH", nowTime)
                     .build()
@@ -121,31 +125,24 @@ public class AirportService {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(uri);
 
         RestTemplate restTemplate = new RestTemplate();
 
-        System.out.println(restTemplate + "restTemplate");
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", "application/json; charset=UTF-8");
 
-        System.out.println(headers + "header");
-        HttpEntity<MultiValueMap<String, String>> requestMessage
+        HttpEntity<Map<String, String>> requestMessage
                 = new HttpEntity<>(headers);
 
-        System.out.println(requestMessage + " 테스트 중");
         ResponseEntity<AirportTravelTimeDTO> response
-                = restTemplate.exchange(uri, HttpMethod.GET, requestMessage, AirportTravelTimeDTO.class);
-        System.out.println(response.getBody() + "테스트 바디");
+                = restTemplate.exchange(uri, HttpMethod.GET, requestMessage,
+                AirportTravelTimeDTO.class);
 
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            System.out.println(response.getBody());
-            return response.getBody();
-        } else {
-            System.out.println("HTTP 요청 실패: " + response.getStatusCodeValue());
-            return null;
-        }
+        AirportTravelTimeDTO airportTravelTimes = response.getBody();
+
+
+        return airportTravelTimes;
     }
 
     public ParkingStatusResponse2 getParkingAreaInfoAPI2(String airportCode) {

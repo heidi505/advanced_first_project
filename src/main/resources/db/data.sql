@@ -15,12 +15,12 @@ insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_a
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (2,1,104,'지난',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28');
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (3,1,364,'취소',1,'2024-03-14 11:02:06',290400,'2023-12-01 18:50:06');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (1,1,'ssar','ssar@nate.com','01011112222','153','예정',1,'2024-08-28 00:13:24',220270,'2023-11-12 06:51:24');
-INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (2,1,'cos','cos@nate.com','01011112222','104','지난',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28');
+INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (2,1,'cos','cos@nate.com','01011112222','104','예정',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (3,1,'love','love@nate.com','01011112222','364','취소',1,'2024-03-14 11:02:06',290400,'2023-12-01 18:50:06');
 
 --티켓
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
-VALUES(1,1,36050,20430,10000,18305,926560,'KE','KE112','BUS','NKM','2024-03-21 21:34:06','2023-10-10 08:17:01','PUS','NKM','일반석',false,true,37,'2023-09-18 10:38:26');
+VALUES(1,1,36050,20430,10000,18305,926560,'KE','KE112','PUS','NKM','2024-03-21 21:34:06','2023-10-10 08:17:01','PUS','NKM','일반석',false,true,37,'2023-09-18 10:38:26');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
 VALUES(2,2,38080,22370,10000,11830,123980,'KE','KE112','GMP','SYD','2023-03-09 03:07:54','2024-02-06 14:31:15','GMP','SYD','일반석',false,true,29,'2023-03-01 18:48:37');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
@@ -43,11 +43,11 @@ VALUES(1,1,true,'SYD','BKK','2024-09-14','2024-09-15','일반석','2024-09-14 15
 INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
 VALUES(2,1,true,'ICN','BKK','2023-12-24','2023-12-05','일반석','2024-02-29 13:24:00',2,0,0);
 INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
-VALUES(3,2,true,'ICN','BUS','2024-11-30','2023-12-06','일반석','2024-02-23 11:07:42',2,1,1);
+VALUES(3,2,true,'ICN','PUS','2024-11-30','2023-12-06','일반석','2024-02-23 11:07:42',2,1,1);
 INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
 VALUES(4,3,false,'ICN','BKK','2024-01-21','2023-12-05','일반석','2023-02-02 16:26:54',7,0,0);
 INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
-VALUES(5,4,false,'BUS','ICN','2024-01-29','2023-12-05','일반석','2023-05-26 04:49:11',1,1,0);
+VALUES(5,4,false,'PUS','ICN','2024-01-29','2023-12-05','일반석','2023-05-26 04:49:11',1,1,0);
 
 -- 쿠폰
 -- INSERT INTO `coupon_tb`(`id`,`coupon_name`,`coupon_period`,`discounting_price`)VALUES (1,'가입 축하 쿠폰',30,10000);
@@ -95,7 +95,7 @@ insert into `notice_tb`(`id`,`title`,`content`, `created_at`)VALUES(2,'파격 �
 -- 도시 서울, 김포, 제주, 광주, 대구, 청주, 여수
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(1,'SEL','서울','대한민국');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(2,'GMP','김포','대한민국');
-insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(3,'BUS','부산','대한민국');
+insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(3,'PUS','부산','대한민국');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(4,'CJU','제주','대한민국');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(5,'KWJ','광주','대한민국');
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(6,'TAE','대구','대한민국');
@@ -160,7 +160,7 @@ insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(63,'CT
 
 -- iata 도시 코드
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(1,'SEL','서울','한국');
-insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(2,'BUS','부산','한국');
+insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(2,'PUS','부산','한국');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(3,'CJU','제주','한국');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(4,'TAE','대구','한국');
 insert into `iata_city_tb`(`id`,`code`,`name`,`country_name`) VALUES(5,'CJJ','청주','한국');
@@ -230,7 +230,7 @@ insert into `iata_city_tb`(`id`,`code`,`name`, `country_name`)VALUES(66,'CTU','�
 
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(1,'ICN','인천','서울','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(2,'GMP','김포','서울','한국');
-insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(3,'BUS','김해','부산','한국');
+insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(3,'PUS','김해','부산','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(4,'CJU','제주','제주','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(5,'CJJ','청주','청주','한국');
 insert into `iata_airport_tb`(`id`,`code`,`name`,`city_name`,`country_name`) VALUES(6,'KWJ','광주','광주','한국');

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 public class SearchedResponse {
@@ -43,5 +44,13 @@ public class SearchedResponse {
 	    }
 	    
 	}
+	
+	@Data
+    public static class SearchCityDTO{
+    	@NotEmpty
+    	private String keyword;
+    }
+	
+	
 	
 }

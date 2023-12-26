@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.ticket;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -101,6 +102,5 @@ public class TicketRequest {
     	@NotEmpty
     	private String keyword;
     }
-    
 
 }

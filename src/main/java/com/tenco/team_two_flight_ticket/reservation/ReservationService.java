@@ -183,7 +183,7 @@ public class ReservationService {
         }
 
         try {
-            tripList = reservationRepository.getMyTravel(userId, statusEnum, sort);
+        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort);
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }

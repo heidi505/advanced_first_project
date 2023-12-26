@@ -604,13 +604,13 @@
         </div>
     </section>
     <!-- nav banner -->
-    <c:forEach var="list" items="${searchedList}">
     <section class="flight_search_bg">
         <div class="container">
 
             <div class="flight_search_tit">
                 <h5>최근 검색한 항공권</h5>
                  <!-- 여기부터 -->
+    			<c:forEach var="list" items="${searchedList}">
                 <div class="flight_search_box">
                 <a class="flight_search_a" href="/ticket/flight-recent-search?originLocationCode=${list.departureCity}&destinationLocationCode=${list.arrivalCity}&startDate=${list.startDate}&endDate=${list.endDate}&adults=${list.adults}&children=${list.children}&infants=${list.infants}&travelClass=${list.travelClass}"></a>
               	<input type="hidden" value="${list.id}">
@@ -652,12 +652,11 @@
                         </li>
                     </ul>
                 </div>
-
+    			</c:forEach>
                 <!-- 여기까지 -->
             </div>
         </div>
     </section>
-    </c:forEach>
     <section class="flight_banner_box">
         <div class="container">
             <div class="flight_banner_item">
@@ -1144,7 +1143,5 @@
 </script>
 <script src="/js/make_element.js"></script>
 <script src="/js/javascript.js"></script>
-<%--<script src="/js/ticket_search.js"></script>--%>
-<script type="module" src="js/messaging_receive_message.js"></script>
 <!-- header.jsp -->
 <%@ include file="layout/footer.jsp" %>

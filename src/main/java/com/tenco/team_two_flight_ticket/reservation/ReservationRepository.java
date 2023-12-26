@@ -39,4 +39,7 @@ public interface ReservationRepository {
 
 	List<GetPayedInfoDTO> getPayedInfo(Long reservationNum);
 
+	// 지난 여행 전환
+	void setLastTrip();
+
 }

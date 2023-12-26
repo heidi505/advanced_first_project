@@ -85,6 +85,16 @@ public class UserRequest {
         private int userId;
         private String sort;
     }
+    
+    @Getter
+    @Setter
+    @ToString
+    public static class PushAlarmDTO {
+        private int userId;
+        private String fcmToken;
+        private String title;
+        private String message;
+    }
 
 
 }
