@@ -20,7 +20,9 @@ INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `res
 
 --티켓
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
-VALUES(1,1,36050,20430,10000,18305,926560,'KE','KE112','PUS','NGO','2024-03-21 21:34:06','2023-10-10 08:17:01','PUS','NGO','일반석',false,true,37,'2023-09-18 10:38:26');
+
+VALUES(1,1,36050,20430,10000,18305,926560,'KE','KE112','GMP','TYO','2024-03-21 21:34:06','2023-10-10 08:17:01','GMP','NRT','일반석',false,true,37,'2023-09-18 10:38:26');
+
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
 VALUES(2,2,38080,22370,10000,11830,123980,'KE','KE112','GMP','SYD','2023-03-09 03:07:54','2024-02-06 14:31:15','GMP','SYD','일반석',false,true,29,'2023-03-01 18:48:37');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)

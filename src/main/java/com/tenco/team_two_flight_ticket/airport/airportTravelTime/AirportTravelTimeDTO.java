@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.airport.airportTravelTime;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Data;
 
 import java.util.List;
