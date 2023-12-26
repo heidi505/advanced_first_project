@@ -8,7 +8,6 @@ function openMenu(event, ruleNumber) {
   }
   ruleBtn = document.getElementsByClassName('rule_btn');
   for (i = 0; i < x.length; i++) {
-	  console.log();
     ruleBtn[i].className = ruleBtn[i].className.replace(' active', '');
   }
   document.getElementById(ruleNumber).style.display='block';
@@ -37,7 +36,6 @@ window.onload = function(){
 	
 	//메뉴 버튼 이벤트 등록
 	const ruleBtn = document.getElementsByClassName('rule_btn');
-	console.log(ruleBtn);
 	for(let i=0; i<ruleBtn.length;i++){
 		ruleBtn[i].addEventListener('click', e=>{
 			let ruleNumber = e.target.id.replace('button_','');

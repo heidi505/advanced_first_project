@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     let flightSearchBg = document.querySelector(".flight_search_bg");
-
     let flightSearchClose = document.querySelectorAll(".flight_search_close");
     let flightSearchBox = document.querySelectorAll(".flight_search_box");
     let flightSearchBoxNum = flightSearchBox.length;
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
             
             
             if (flightSearchBoxNum > 0) {
-                //flightSearchBox[flightSearchBoxNum - 1].style.display = "none";
                 closeButton.parentElement.style.display = "none";
                 let searchId = closeButton.previousElementSibling.value;
 				deleteSearchLog(searchId);
@@ -24,9 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+    
     // 최근 검색 삭제
-    
-    
     async function deleteSearchLog(searchId){
 		try{
 			const response = await fetch(`/searched/delete-search-log`, {
@@ -38,18 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
 					searchId : parseInt(searchId)
             	}),
             });
-			//const result = await response.json();
-			
 		} catch(e){
 			alert('목록 제거에 실패했습니다');
 		}
 	}  
 		 
-		
-		
-		
-	
-
     let commonModal = document.querySelectorAll(".common_modal");
     let commonModalBtn = document.querySelectorAll(".common_modal_btn");
     let closeBtn = document.querySelectorAll(".modal_close");
@@ -158,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function valuesTo(airportCode, airportName) {
             let toSelectButtons = document.querySelector("#to_select_btn");
-            console.log("to" + toSelectButtons + " 호");
+           
             toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
             toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
             document.getElementById("destination").value = airportCode;
@@ -311,7 +301,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     }
 
-});
 
 	// 검색 결과 창
 	const citySearchResult = document.querySelectorAll('.city_search_result');
@@ -411,31 +400,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				} else {
 					valuesForm(city[0].textContent, city[1].textContent);
 				}
-
-				// 이 함수랑 밑의 함수 필요함(따로 뺄 필요)
-				function valuesForm(airportCode, airportName) {
-            		let fromSelectButtons = document.querySelector("#from_select_btn");
-            		fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
-            		fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
-            		document.getElementById("origin").value = airportCode;
-            		//로딩 페이지 데이터 바인딩
-            		document.getElementById("loadingOrigin1").innerText = airportName;
-            		document.getElementById("loadingOrigin2").innerText = airportCode;
-            		document.getElementById("loadingOrigin3").innerText = airportName;
-        		}
-			
-				function valuesTo(airportCode, airportName) {
-            			let toSelectButtons = document.querySelector("#to_select_btn");
-            			toSelectButtons.querySelector(".to_code_value").innerText = airportCode;
-            			toSelectButtons.querySelector(".to_airport_value").innerText = airportName;
-            			document.getElementById("destination").value = airportCode;
-            			//로딩페이지 데이터 바인딩
-            			document.getElementById("loadingDestination1").innerText = airportName;
-            			document.getElementById("loadingDestination2").innerText = airportCode;
-            			document.getElementById("loadingDestination3").innerText = airportName;
-        		}
 			}
 		}); 
 	}); 
     
 
+});

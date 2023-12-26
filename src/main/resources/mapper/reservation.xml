@@ -13,7 +13,7 @@
         ELSE concat(ar_city.city_name,'/',ar_city.name) 
         END as korean_arrival_city
         FROM reservation_tb as r
-        JOIN ticket_tb as t
+        LEFT JOIN ticket_tb as t
         ON r.id = t.reservation_id
         LEFT JOIN iata_city_tb as icity
         ON icity.code = t.arrival_city
@@ -31,6 +31,7 @@
         <if test="sort == 'false'">
             AND is_payed = false
         </if>
+		GROUP BY reservation_num
         ORDER BY departure_time
     </select>
 

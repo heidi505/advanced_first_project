@@ -72,6 +72,9 @@ public class AuthController {
 
     @Autowired
     private NoticeService noticeService;
+    
+    public static final String KAKAOPUSHKEY = "22999c9c34f480718a810c84766265f6";
+    
 
     //메인 페이지
 
@@ -107,11 +110,6 @@ public class AuthController {
     //회원 가입
     @PostMapping("/sign-up")
     public String signUpProc(@Valid UserRequest.SignUpDTO dto,RedirectAttributes redirectAttributes , Errors errors){
-        System.out.println("1: 실명" + dto.getRealName());
-        System.out.println("2: 유저아이디" + dto.getUsername());
-        System.out.println("3: 이메일" + dto.getEmail());
-        System.out.println("4: 비번" + dto.getPassword());
-        System.out.println("5: 비번체크" + dto.getPasswordCheck());
         
         userService.signUp(dto);
         redirectAttributes.addAttribute("check" , true);
@@ -157,7 +155,7 @@ public class AuthController {
     //카카오 로그인
     @GetMapping("/kakao-redirect")
     public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
-        System.out.println("메서드 동작 확인");
+
         RestTemplate r1 = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
 
@@ -171,11 +169,6 @@ public class AuthController {
 
         HttpEntity<MultiValueMap<String,String>> requestMsg = new HttpEntity<>(bodies,headers);
         ResponseEntity<OAuthToken> response = r1.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, requestMsg,OAuthToken.class);
-        System.out.println("-----------------");
-        System.out.println(response.getHeaders());
-        System.out.println(response.getBody());
-        System.out.println(response.getBody().getAccess_token());
-        System.out.println("-----------------");
         // 여기까지 토큰 받기 위함 //
 
 
@@ -189,13 +182,8 @@ public class AuthController {
 
         // 요청
         ResponseEntity<KakaoProfile> response2 = r2.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, requestMsg2, KakaoProfile.class);
-        System.out.println("---------------------");
-        System.out.println(response2.getBody());
-        System.out.println(response2.getBody().getProperties().getNickname());
-        System.out.println("-----카카오 서버 정보 받기 완료------");
 
         KakaoProfile kakaoProfile = response2.getBody();
-        System.out.println(kakaoProfile);
 
         User checkUser = userService.kakaoCheckUsername(kakaoProfile);
 
@@ -208,7 +196,7 @@ public class AuthController {
     //유저 아이디 중복체크
     @GetMapping("/check/username")
     public ResponseEntity<ApiUtils.ApiResult<String>> nameCheck(@RequestParam String username){
-        System.out.println("+++++++++++++++" + username);
+        
         String message = userService.checkUsername(username);
 
         return ResponseEntity.ok().body(ApiUtils.success(message));
@@ -259,7 +247,7 @@ public class AuthController {
     	// 헤더 구성
     	HttpHeaders headers = new HttpHeaders();
     	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	headers.add("Authorization", "KakaoAK "+KAKAOPUSHKEY);
     	// body 구성
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     	params.add("uuid", dto.getUuid());
@@ -284,7 +272,7 @@ public class AuthController {
     	// 헤더 구성
     	HttpHeaders headers = new HttpHeaders();
     	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	headers.add("Authorization", "KakaoAK "+KAKAOPUSHKEY);
     	// body 구성
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     	if(dto.getUuids().size() == 1) {
@@ -323,7 +311,7 @@ public class AuthController {
     	// 헤더 구성
     	HttpHeaders headers = new HttpHeaders();
     	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	headers.add("Authorization", "KakaoAK "+KAKAOPUSHKEY);
     	// body 구성
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     	params.add("uuid", dto.getUuid());
@@ -345,7 +333,7 @@ public class AuthController {
     	RestTemplate rt = new RestTemplate();
     	// 헤더 구성
     	HttpHeaders headers = new HttpHeaders();
-    	headers.add("Authorization", "KakaoAK 22999c9c34f480718a810c84766265f6");
+    	headers.add("Authorization", "KakaoAK "+ KAKAOPUSHKEY);
     	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
     	
     	String pushMsgJson = "{  'for_fcm':{"
@@ -356,7 +344,17 @@ public class AuthController {
     			+ "      \"comment_id\": 222,"
     			+ "      \"comment_preview\": \""+dto.getMessage()+"\" }}}";
 
-    	String uuids = "[ 대상 ]";
+    	String uuids = "[ ";
+    	List<String> uuidList = dto.getUuids();
+    	int i = 1;
+    	for (String uuid : uuidList) {
+			uuids += uuid;
+			if(uuidList.size() != i) {
+				uuids +=",";
+			}
+			i++;
+		}
+    	uuids +=" ]";
     	// body 구성
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     	params.add("uuid", uuids);

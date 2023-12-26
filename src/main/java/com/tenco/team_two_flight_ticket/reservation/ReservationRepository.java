@@ -5,13 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
-import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 import org.apache.ibatis.annotations.ResultMap;
 
 @Mapper

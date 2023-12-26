@@ -31,7 +31,7 @@ public class QuartzConfig {
 		try {
             // 크론형식 지정 후 스케줄 시작
 			scheduler.scheduleJob(tripTypeChange, runJobTrigger("0/10 * * * * ?")); // 10초 마다 한번
-			//scheduler.scheduleJob(tripTypeChange, runJobTrigger("0 0 * * 1 ?")); // 매주 월요일 0시마다
+			//scheduler.scheduleJob(tripTypeChange, runJobTrigger("0 0 12 * * ?")); // 매일 12시마다
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 		}

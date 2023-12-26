@@ -432,7 +432,7 @@
 </main>
 </div>
 </div>
-<script src="/js/airport_info_javascript.js"></script>
+<script src="/js/airport_info.js"></script>
 <script>
     // airPortName 값을 여기에서 설정하거나 동적으로 가져와서 사용할 수 있습니다.
     var airPortName = "${airPortName}";
