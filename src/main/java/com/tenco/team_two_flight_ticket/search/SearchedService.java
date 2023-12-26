@@ -72,6 +72,7 @@ public class SearchedService {
 	}
 
 	//검색 기록 삭제
+	@Transactional
 	public void deleteSearchLog(DeleteSearchLogDTO dto) {
 		searchedRepository.deleteSearchLog(dto.getSearchId());
 	}

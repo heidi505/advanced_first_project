@@ -8,8 +8,11 @@ import java.util.Map;
 import com.tenco.team_two_flight_ticket._core.utils.DateFormat;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.airport.airportTravelTime.AirportTravelTimeDTO;
+import com.tenco.team_two_flight_ticket.airport.parkingFee.ParkingFeeResponseDTO;
+import com.tenco.team_two_flight_ticket.airport.parkingFee.ParkingFeeResponseDTO.Response.Body.Items.Item;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse;
 import com.tenco.team_two_flight_ticket.airport.parkingspace.ParkingStatusResponse2;
+import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.User;
 import com.tenco.team_two_flight_ticket.user.UserRepository;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
@@ -36,53 +39,41 @@ public class AirportController {
     private HttpSession session;
 
     @Autowired
-    private AirportService airPortService;
-
-    public static final String SERVICEKEY = Define.SERVICEKEY;
+    private AirportService airportService;
 
     @Autowired
-    private AirportService airportService;
+    private TicketService ticketService;
+    
+    public static final String SERVICEKEY = Define.SERVICEKEY;
+
+
 
     // http://localhost:8080/airport/airport-info
     // 인천공항 주차정보 api
     // 주차요금 api
     // 탑승 수속 대기시간 api x
     @GetMapping("/airport-info")
-    public String parkingArea(Model model) {
+    public String parkingAPI(Model model) {
     	
+    	User principal = (User) session.getAttribute(Define.PRINCIPAL);
+    	// 출발지 공항 코드 조회
+    	String departureAirportCode = ticketService.findDepartureAirport(principal.getId());
     	
-        // 주차요금 api
-        URI uri = null;
-        String url = "http://openapi.airport.co.kr/service/rest/AirportParkingFee/parkingfee?serviceKey=rrf%2Bmnq9ofBCLMm6ehZUvWu%2FZljoJtXJZKSVOIkz61hIbsnmpY3s3aeMuC3VfTlt9MVM8aSL1J3M%2Bzm3ad2%2BXg%3D%3D&schAirportCode=GMP&type=json";
-        try {
-            uri = new URI(url);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-
-        HttpEntity<MultiValueMap<String, String>> request
-                = new HttpEntity<>(headers);
-
-        ResponseEntity<Map> response = restTemplate.exchange(uri, HttpMethod.GET, request, Map.class);
-        model.addAttribute("list", response.getBody());
-        System.out.println(response.getBody());
-
+    	// 주차 요금 api
+    	ParkingFeeResponseDTO list = airportService.getParkingFeeAPI(departureAirportCode);
+        List<Item> parkingList = list.getResponse().getBody().getItems().getItem();
+        model.addAttribute("list", parkingList);
+        
         // 인청공항 주차정보 api
         ParkingStatusResponse parkingStatusResponse = airportService.getParkingAreaInfoAPI();
         // Model에 DTO를 추가하여 JSP로 전달
         model.addAttribute("parkingStatusResponse", parkingStatusResponse);
-
 //        ------------- 한국 공항
 
         //		한국 공항
-        User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
-        AirportTravelTimeDTO airportTravelTimes = airPortService.koAirportTime(1);
-
+        AirportTravelTimeDTO airportTravelTimes = airportService.koAirportTime(1);
+        
         List<AirportTravelTimeDTO.Item> airportItems = airportTravelTimes.getItems();
 
         String airPortName = "";
@@ -142,6 +133,11 @@ public class AirportController {
         return "airport/airportInfo";
     }
 
+    
+    
+    
+    
+    
     @GetMapping("/asdtest")
     public String asdtese(Model model) {
 
@@ -150,7 +146,7 @@ public class AirportController {
         //		한국 공항
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
-        AirportTravelTimeDTO airportTravelTimes = airPortService.koAirportTime(1);
+        AirportTravelTimeDTO airportTravelTimes = airportService.koAirportTime(1);
 
         List<AirportTravelTimeDTO.Item> airportItems = airportTravelTimes.getItems();
 
