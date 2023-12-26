@@ -939,7 +939,6 @@
     const datepicker2 = document.getElementById("datepicker2");
     const startDateInput = document.getElementById("startDate");
     const endDateInput = document.getElementById("endDate");
-    console.log(datepicker.value);
 
     function handleDateChange(selectedDates, dateStr, instance) {
         //로딩페이지 데이터 바인딩
@@ -1057,7 +1056,6 @@
             flightLink.addEventListener('click', function(event) {
                 // 클릭 이벤트가 발생했을 때 실행될 코드
                 event.preventDefault(); // 기본 동작 방지
-                console.log("이벤트 리스너가 추가되었습니다.");
 
                 // 가져올 값들을 클릭된 a 태그에서 찾아옴
                 var origin = 'ICN';
@@ -1139,6 +1137,6 @@
     
 </script>
 <script src="/js/make_element.js"></script>
-<script src="/js/javascript.js"></script>
+<script src="/js/main.js"></script>
 <!-- header.jsp -->
 <%@ include file="layout/footer.jsp" %>

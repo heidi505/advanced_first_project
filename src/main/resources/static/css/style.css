@@ -92,11 +92,11 @@ main {
     padding: 113px 0px 167px 0px;
 }
 .custom-popover {
-  --bs-popover-max-width: 400px;
+  --bs-popover-max-width: 600px;
   --bs-popover-border-color: var(--line);
   --bs-popover-header-bg: var(--bd-violet-bg);
   --bs-popover-header-color: var(--basic_09);
-  --bs-popover-body-padding-x: 2rem;
+  --bs-popover-body-padding-x: 8rem;
   --bs-popover-body-padding-y: 10rem;
 }
 /*header*/

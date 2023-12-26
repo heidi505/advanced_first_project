@@ -13,10 +13,8 @@ import java.util.UUID;
 public class PicUrl {
     public static String save(MultipartFile pic, String originalFilename) {
         UUID uuid = UUID.randomUUID();
-        System.out.println(uuid + "사진ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ");
 
         String picName = uuid + "_" + originalFilename;
-        System.out.println(picName);
 
         Path filePath = Paths.get(MyPath.IMG_PATH + picName);
 

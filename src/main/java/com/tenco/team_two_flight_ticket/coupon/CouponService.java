@@ -98,24 +98,6 @@ public class CouponService {
         couponRepository.deleteByCouponUserId(id);
     }
 
-	/**
-	 * 
-	 * @param dto
-	 * @return 
-	 */
-	public void useCoupon(CouponUseDTO dto) {
-		try {
-			int resultRowCount = couponRepository.useCoupon(dto.getCouponId());
-			if(resultRowCount != 1) {
-				throw new MyBadRequestException("쿠폰 사용에 실패하였습니다");
-			}
-		} catch (Exception e) {
-			throw new MyServerError("서버 에러가 발생했습니다");
-		}
-		
-	}
-
-
     public SingleMessageSentResponse couponSMS(CouponListDTO dto) {
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 

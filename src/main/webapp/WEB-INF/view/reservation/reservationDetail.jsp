@@ -181,6 +181,6 @@
 </div>
 </div>
 
-<script src="/js/reservation_detail.js"></script>
+<script src="/js/reservation_detail_info.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>
