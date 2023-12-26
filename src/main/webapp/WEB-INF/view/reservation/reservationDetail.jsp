@@ -17,7 +17,9 @@
         <div class="section">
             <hr class="my-5">
             <div><b class="mt-5">${detailTrip.realName}님의 예약번호는 ${detailTrip.reservationNum} 입니다</b>
+                <c:if test="${ detailTrip.statusEnum eq '예정'}">
                 <b class="float-end color_primary02">결제마감시한 ${detailTrip.cuttedPaymentDeadline}</b>
+                </c:if>
                 <hr class="border-2 border-primary">
             </div>
             <p class="text-end me-5">예약상태<span class="color_basic09 mx-2">|</span>
@@ -179,6 +181,6 @@
 </div>
 </div>
 
-<script src="/js/reservation_detail.js"></script>
+<script src="/js/reservation_detail_info.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

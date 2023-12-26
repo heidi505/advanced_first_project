@@ -1,10 +1,7 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
-import java.security.Principal;
 import java.util.List;
 
-import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
-import com.tenco.team_two_flight_ticket.coupon.Coupon;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
@@ -32,16 +29,10 @@ import jakarta.servlet.http.HttpSession;
 public class ReservationController {
     @Autowired
     private KakaoPayService kakaoPayService;
-
-    @Autowired
-    private UserService userService;
-
     @Autowired
     private HttpSession session;
-
     @Autowired
     private ReservationService reservationService;
-
     @Autowired
     private TicketService ticketService;
 
@@ -74,8 +65,6 @@ public class ReservationController {
         ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto);
         // 카카오 메시지 보내기
         String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");
-        System.out.println("옵션 체크체크 : ");
-        System.out.println(dto.getOptionMessage());
         if ("Y".equals(dto.getOptionMessage())) {
 
             String message = reservationService.kakaoMessage(1, kakaoAccessToken, saveResultDTO);
@@ -103,7 +92,6 @@ public class ReservationController {
 
         // 쿠폰 받아오기.
         List<CouponListDTO> coupons = reservationService.getCouponList(principal);
-        System.out.println("쿠폰체크 쿠폰체크 쿠폰체크으으");
         for (CouponListDTO coupon : coupons) {
             System.out.println("쿠폰 ID: " + coupon.getId());
             System.out.println("쿠폰 이름: " + coupon.getCouponName());
@@ -114,7 +102,6 @@ public class ReservationController {
 
         model.addAttribute("Coupon", coupons);
         model.addAttribute("Result", resultDTO);
-        System.out.println("잘 담겼나 안담겼나~~");
         System.out.println("Reservation Result:");
         System.out.println("Reservation: " + resultDTO.getReservation());
         System.out.println("Passenger: " + resultDTO.getPassenger());
@@ -125,8 +112,8 @@ public class ReservationController {
 
     @ResponseBody
     @PostMapping("/reservation/cancel")
-    public void cancelProc(@RequestBody Long reservationNum) {
-        reservationService.cancelReservation(reservationNum);
+    public void cancelProc(@RequestBody ReservationRequest.ReservationCancelDTO dto) {
+        reservationService.cancelReservation(dto.getReservationNum());
     }
 
 
@@ -137,7 +124,7 @@ public class ReservationController {
         model.addAttribute("cancelTrip", cancelTrip);
         List<ReservationResponse.GetPayedInfoDTO> payedInfoList = reservationService.getPayedInfo(reservationNum);
         model.addAttribute("payedInfoList", payedInfoList);
-        return "reservation/cancelReservation";
+        return "reservation/reservationCancelInfo";
     }
 
     @GetMapping("/payed")

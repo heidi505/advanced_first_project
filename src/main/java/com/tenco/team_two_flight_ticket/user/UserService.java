@@ -151,7 +151,6 @@ public class UserService {
 
     public User kakaoCheckUsername(KakaoProfile kakaoProfile) {
         User checkUser = userRepository.checkUsername(kakaoProfile.getId());
-        System.out.println(checkUser + "ddddddd");
         if(checkUser == null) {
             User user = User.builder()
                     .realName(kakaoProfile.getProperties().getNickname())
@@ -163,10 +162,8 @@ public class UserService {
                     .build();
 
             userRepository.insert(user);
-            System.out.println(user.getUsername() + "ddddddddddddddd");
             checkUser = user;
         }
-        System.out.println(checkUser + "값 확인");
         return checkUser;
     }
 
@@ -286,8 +283,8 @@ public class UserService {
 
 	// fcm 토큰 저장
 	public void saveFcmToken(String userName, String fcmToken) {
-		userRepository.saveFcmToken(userName, fcmToken);
 		try {
+			userRepository.saveFcmToken(userName, fcmToken);
 		} catch (Exception e) {
 			throw new MyServerError("서버 에러가 발생했습니다");
 		}
