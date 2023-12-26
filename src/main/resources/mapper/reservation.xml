@@ -36,7 +36,7 @@
     </select>
 
     <select id="getMyTripCount" resultType="int">
-        SELECT count(*)
+        SELECT count(distinct reservation_id)
         FROM reservation_tb as r
         JOIN ticket_tb as t
         ON r.id = t.reservation_id
