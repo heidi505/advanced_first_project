@@ -67,6 +67,7 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     private NoticeService noticeService;
 
     //메인 페이지
