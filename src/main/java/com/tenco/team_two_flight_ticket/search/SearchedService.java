@@ -74,7 +74,11 @@ public class SearchedService {
 	//검색 기록 삭제
 	@Transactional
 	public void deleteSearchLog(DeleteSearchLogDTO dto) {
-		searchedRepository.deleteSearchLog(dto.getSearchId());
+		try {
+			searchedRepository.deleteSearchLog(dto.getSearchId());
+		} catch (Exception e) {
+			throw new MyServerError("검색 기록 삭제에 실패했습니다");
+		}
 	}
 	
 	

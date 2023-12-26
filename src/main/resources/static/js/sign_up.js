@@ -47,7 +47,6 @@ function validationForm(form) {
 	let email = form.elements["email"].value;
 	let password = form.elements["password"].value;
 	let passwordCheck = document.getElementById('passwordCheck').value;
-	console.log(`name:${name}`);
 	// 이름dp 공백과 null값 검사
 	if (!name || name.trim() == '') {
 		alert("이름을 입력하세요.");

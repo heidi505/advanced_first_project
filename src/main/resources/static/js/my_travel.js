@@ -302,17 +302,6 @@ function insertElement(tripList, tripCnt , tabId){
     //반복문 끝
 }
 
-	// 티켓 모양 이미지 클릭 시 이벤트(미구현)
-	const tabContent = document.querySelectorAll(`.tab-content`);
-	tabContent.forEach((content)=>{
-		content.addEventListener(`click`, e =>{
-			if(e.target.className == `my_trip_ticket_bg`||
-			e.target.parentElement.className == `my_trip_ticket_bg`){
-				// 다운로드 로직 구성 필요
-				//downloadTicket();
-				console.log(`click ticket`);
-			} 
-		});
-	});
+	
 
 	

@@ -106,8 +106,5 @@ window.onload = function(){
 	const startMenu = document.getElementById('1_button');
 	startMenu.click();
 
-	//api로 받은 데이터 기반으로 색상및 글 변환(미구현)
-	const congestionStatus = document.getElementsByClassName('congestion_status')[0];
-	congestionStatus.style.color = 'var(--cancle)';
-	congestionStatus.innerHTML = '혼잡';
+	
 }
