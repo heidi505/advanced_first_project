@@ -103,7 +103,7 @@ public class ReservationResponse {
 		private String lastName;
 		private PassengerTypeEnum passengerType;
 		private String gender;
-		private DateFormat birthdate;
+		private String birthdate;
 		private Long airFare;
 		private Long fuelSurcharge;
 		private Long taxes;
