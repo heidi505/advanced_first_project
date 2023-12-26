@@ -1,4 +1,3 @@
-
 /*flight_ticket_page 항공권 예매 페이지*/
 
 #flight_ticket_page .nav_bg .nav_container {
@@ -42,16 +41,19 @@
 .round_trip_one_way {
     display: flex;
 }
+
 .round_trip_one_way > li {
-    padding-right: 5px;
+    padding-right: 12px;
     font-weight: bold;
 }
+
 /*.round_trip_one_way .distance_form_btn {*/
 /*    color: var(--primary_02);*/
 /*}*/
 .distance_active {
     color: var(--primary_02);
 }
+
 .trip_one_way {
     display: none;
 }
@@ -61,6 +63,7 @@
     align-items: end;
     padding: 15px 0;
 }
+
 .from_to_form {
     position: relative;
 }
@@ -157,7 +160,7 @@
     border-bottom: 0;
 }
 
-.regions ul:first-child>li:first-child {
+.regions ul:first-child > li:first-child {
     padding: 0;
 }
 
@@ -272,6 +275,7 @@
     padding: 0 15px;
     background-color: var(--basic_wh);
 }
+
 .passenger_seat_btn span {
     font-size: 15px;
 }
@@ -344,16 +348,21 @@
     border-radius: 10px 10px 0 0;
 }
 
-.flight_banner_list a{
+.flight_banner_list a {
     margin-right: 16px;
     border: 1px solid var(--form);
     border-radius: 15px;
     display: inline-block;
 }
 
-.flight_banner_list ul{
+.flight_banner_list a:last-child {
+    margin-right: 0;
+}
+
+.flight_banner_list ul {
     border-radius: 15px;
 }
+
 .flight_banner_list ul:last-child {
     margin-right: 0;
 }
@@ -375,7 +384,7 @@
     align-items: end;
 }
 
-.price_transfer>span {
+.price_transfer > span {
     font-size: 14px;
     color: var(--basic_09);
 }
@@ -384,8 +393,7 @@
 
 .flight_notice {
     margin: 30px 0;
-    border-top: 1px solid var(--line);
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 .flight_notice_tit {
@@ -395,6 +403,8 @@
 .flight_notice td {
     display: flex;
     justify-content: space-between;
+    padding: 0;
+    margin-top: 12px;
 }
 
 .flight_notice td span:nth-child(2) {
@@ -416,7 +426,7 @@
     padding: 12px;
     position: relative;
     margin-right: 8px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .flight_search_close {
@@ -428,7 +438,7 @@
     cursor: pointer;
 }
 
-.flight_search_tit>h5 {
+.flight_search_tit > h5 {
     font-weight: bold;
     margin-bottom: 12px;
 }
@@ -459,12 +469,12 @@
     color: var(--basic_07);
 }
 
-.flight_search_sub_txt>span:nth-child(1) {
+.flight_search_sub_txt > span:nth-child(1) {
     position: relative;
     padding-right: 16px;
 }
 
-.flight_search_sub_txt>span:nth-child(1)::after {
+.flight_search_sub_txt > span:nth-child(1)::after {
     content: "";
     position: absolute;
     width: 1px;
@@ -479,18 +489,25 @@
     height: 30px;
 }
 
-.flight_search_icon>img {
+.flight_search_icon > img {
     width: 30px;
     height: 30px;
 }
 
 /*내 여행 페이지*/
+#my_travel_page {
+    height: 100%;
+    position: relative;
+}
+
 .my_travel_box {
     display: flex;
 }
+
 .my_travel h2 {
     margin-bottom: 12px;
 }
+
 .my_travel_menu {
     border: 1px solid var(--line);
     border-radius: 5px;
@@ -498,11 +515,13 @@
     height: 170px;
     margin-right: 20px;
 }
+
 #my_travel_page .tab_menu li a {
     color: var(--basic_03);
     width: 100%;
     padding: 20px;
 }
+
 #my_travel_page .tab_menu li a.tab_active {
     background-color: var(--box_bg);
     color: var(--primary_02);
@@ -511,15 +530,19 @@
     font-weight: bold;
     border-radius: 0;
 }
+
 .my_travel_tab_content {
     width: 100%;
 }
+
 #my_travel_page .tab_menu li {
     padding: 0 0;
 }
+
 .regions_list_item {
     display: none;
 }
+
 .my_trip_item {
     background-color: var(--basic_wh);
     box-shadow: 0px 2px 5px 3px var(--line);
@@ -529,7 +552,7 @@
     display: flex;
 }
 
-.my_trip_item .airline_icon_img{
+.my_trip_item .airline_icon_img {
     padding: 7px;
     width: 45px;
     height: 45px;
@@ -537,38 +560,46 @@
     border-radius: 5px;
     margin-right: 8px;
 }
-.my_trip_item .trip_icon_img img{
+
+.my_trip_item .trip_icon_img img {
     width: 45px;
     height: 45px;
     border: 1px solid var(--line);
     border-radius: 5px;
     margin-right: 8px;
 }
+
 .my_trip_item .my_trip_content {
     width: 80%;
     padding-right: 30px;
 }
+
 #canceled_trip .my_trip_item .my_trip_content, #last_trip .my_trip_item .my_trip_content {
     width: 100%;
     padding-right: 0;
 }
+
 .trip_year, .trip_day {
     margin-bottom: 12px;
 }
+
 .trip_year {
     font-weight: bold;
 }
+
 .trip_day {
     display: inline-block;
     font-size: 14px;
     color: var(--basic_05);
 }
+
 .my_trip_list {
     padding-left: 20px;
     position: relative;
     height: 100%;
     border-left: 1px solid var(--form);
 }
+
 .my_trip_list::before {
     content: "";
     position: absolute;
@@ -579,6 +610,7 @@
     top: 0;
     left: -5px;
 }
+
 .my_trip_list::after {
     content: "";
     position: absolute;
@@ -589,11 +621,13 @@
     bottom: -5px;
     left: -5px;
 }
+
 .my_trip_content_top {
     display: flex;
     justify-content: space-between;
 }
-.my_trip_content_top li:nth-child(2) > a{
+
+.my_trip_content_top li:nth-child(2) > a {
     font-size: 14px;
     color: var(--primary_02);
     font-weight: bold;
@@ -601,23 +635,28 @@
     justify-content: center;
     align-items: center;
 }
+
 .my_trip_content_mid {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .my_trip_content_tit {
     line-height: 1.4;
     display: flex;
 }
-.my_trip_content_tit > div> p:nth-child(1){
+
+.my_trip_content_tit > div > p:nth-child(1) {
     font-size: 18px;
     font-weight: bold;
 }
-.my_trip_content_tit > div > p:nth-child(2){
+
+.my_trip_content_tit > div > p:nth-child(2) {
     font-size: 16px;
     color: var(--basic_05);
 }
+
 .my_trip_content_btm {
     display: flex;
     justify-content: space-between;
@@ -628,9 +667,11 @@
     align-items: center;
     text-align: center;
 }
+
 .my_trip_content_btm li {
     line-height: 1.2;
 }
+
 .reservation_cancle {
     flex-direction: column;
     display: flex;
@@ -640,9 +681,11 @@
     border-left: 1px solid var(--line);
     margin-bottom: 8px;
 }
+
 .reservation_cancle > a {
     display: block;
 }
+
 .reservation_cancle .reservation_cancle_btn {
     padding: 12px;
     background-color: var(--box_bg);
@@ -652,6 +695,7 @@
     white-space: nowrap;
     border: 1px solid var(--form);
 }
+
 .my_trip_ticket_bg {
     background: url("../images/ticket.svg") no-repeat;
     background-size: cover;
@@ -664,6 +708,7 @@
     border: 1px solid var(--line);
     border-radius: 15px;
 }
+
 .trip_left {
     position: absolute;
     top: 36px;
@@ -673,6 +718,7 @@
     color: var(--primary_02);
     letter-spacing: -3px;
 }
+
 .trip_right {
     position: absolute;
     top: 36px;
@@ -682,11 +728,13 @@
     color: var(--primary_02);
     letter-spacing: -3px;
 }
-#last_trip .my_trip_content_tit div p:nth-child(2){
+
+#last_trip .my_trip_content_tit div p:nth-child(2) {
     font-size: 16px;
     color: var(--basic_09);
     text-align: right;
 }
+
 /*라벨 종류*/
 
 .before_payment_label {
@@ -700,6 +748,7 @@
     font-weight: bold;
     border: 1px solid var(--before_pay);
 }
+
 .my_trip_count_label {
     margin-bottom: 16px;
     display: inline-block;
@@ -708,8 +757,9 @@
     padding: 5px 10px;
     border-radius: 15px;
     font-size: 14px;
-    cursor:pointer;
+    cursor: pointer;
 }
+
 .cancle_payment_label {
     margin-bottom: 16px;
     display: inline-block;
@@ -721,6 +771,7 @@
     font-weight: bold;
     border: 1px solid var(--cancle);
 }
+
 .cancle_payment_label {
     margin-bottom: 16px;
     display: inline-block;
@@ -732,6 +783,7 @@
     font-weight: bold;
     border: 1px solid var(--cancle);
 }
+
 .complete_label {
     margin-bottom: 16px;
     display: inline-block;
@@ -744,12 +796,169 @@
     border: 1px solid var(--form);
 }
 
+/*여행 모달 */
+.my_trip_modal_area {
+    position: absolute;
+    bottom: 200px;
+    right: 0;
+    z-index: 111;
+}
+
+#trip_modal_btn, #modal_close_btn {
+    cursor: pointer;
+}
+
+#trip_modal_btn > img {
+    width: 65px;
+    height: 65px;
+}
+
+#trip_modal_area {
+    /*width: 500px;*/
+    /*height: 500px;*/
+    /*position: fixed;*/
+    /*bottom: 7%;*/
+    /*right: 0;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+.trip_modal_content {
+    position: absolute;
+    background-color: #ffffff;
+    width: 350px;
+    padding-bottom: 16px;
+    box-shadow: 2px 2px 5px var(--basic_09);
+    border-radius: 30px;
+    bottom: 80px;
+    right: 0;
+    z-index: 2;
+}
+
+#modal_close_btn {
+    display: inline-block;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+#trip_modal_area.hidden {
+    display: none;
+}
+
+.trip_answer_box {
+    display: flex;
+}
+
+.trip_modal_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 1px solid var(--line);
+}
+
+.trip_modal_logo > img {
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+}
+
+.trip_modal_icon {
+    max-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background-color: var(--basic_wh);
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    width: 100%;
+    margin-right: 12px;
+}
+
+.trip_modal_icon > img {
+    max-width: 30px;
+}
+
+.trip_question_icon {
+    background-color: var(--basic_wh);
+    padding: 10px;
+    border-radius: 15px;
+    color: var(--primary_02);
+    border: 1px solid var(--primary_02);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+}
+
+/*.trip_question_icon:active {*/
+/*    background-color:var(--primary_02);*/
+/*    color: var(--basic_wh);*/
+/*}*/
+.trip_questions {
+    display: flex;
+    justify-content: end;
+    margin: 24px 0 16px 0;
+}
+.trip_schedule {
+    margin-top: 20px;
+    padding: 0 16px;
+}
+.trip_schedule_main {
+    text-align: center;
+}
+.trip_schedule_main > p {
+    padding: 4px 0;
+    color: var(--basic_07);
+}
+.trip_schedule_main > p > span {
+    color: var(--basic_bl);
+    font-weight: bold;
+}
+.trip_answer {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-in-out; /* 여기서 0.5s는 애니메이션 지속 시간을 나타냅니다. 필요에 따라 조절하세요. */
+}
+
+.trip_question_icon > img {
+    width: 20px;
+    height: 20px;
+    padding-right: 5px;
+}
+
+.trip_answer_tit {
+    font-size: 14px;
+    color: var(--basic_07);
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.trip_answer_txt {
+    background-color: var(--box_bg);
+    border-radius: 15px;
+    padding: 16px;
+    line-height: 1.2;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.trip_answer_sub_tit {
+    display: block;
+    font-weight: bold;
+    padding: 12px 0 8px 0;
+}
+
 /*내 여행 페이지*/
 
 /* 항공권 검색 페이지 */
 .my_travel {
     margin-top: 24px;
 }
+
 #flight_search_page .search_from_to_box {
     background-color: var(--box_bg);
     box-shadow: 0px 1px 6px 5px var(--form);
@@ -765,12 +974,14 @@
     top: 25%;
     right: 12%;
 }
+
 .flight_search_cont .count_and_filter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
 }
+
 .flight_search_cont {
     display: flex;
     justify-content: space-evenly;
@@ -905,8 +1116,8 @@
     padding-bottom: 16px;
 }
 
-.flight_result_top>li,
-.flight_result_btm>li {
+.flight_result_top > li,
+.flight_result_btm > li {
     text-align: center;
     padding: 0 5px;
 }
@@ -944,7 +1155,7 @@
     font-weight: 500;
 }
 
-.airline_time>span {
+.airline_time > span {
     font-weight: 400;
     font-size: 14px;
 }
@@ -992,7 +1203,7 @@
     padding: 8px 0;
 }
 
-.detail_more_btn>span {
+.detail_more_btn > span {
     color: var(--primary_02);
     font-size: 14px;
     font-weight: 500;
@@ -1023,6 +1234,7 @@
     display: inline-block;
     margin-right: 8px;
 }
+
 .from_label {
     color: var(--primary_02);
     padding: 4px;
@@ -1035,7 +1247,7 @@
 }
 
 .detail_distance,
-.detail_distance>ul {
+.detail_distance > ul {
     display: flex;
 }
 
@@ -1043,7 +1255,7 @@
     padding-right: 50px;
 }
 
-.detail_country_name>span {
+.detail_country_name > span {
     display: inline-block;
     white-space: nowrap;
 }
@@ -1063,12 +1275,12 @@
     line-height: 1.5;
 }
 
-.detail_trip_cont>p:nth-child(2) {
+.detail_trip_cont > p:nth-child(2) {
     font-size: 14px;
     color: var(--basic_09);
 }
 
-.detail_trip_cont>p:nth-child(3) {
+.detail_trip_cont > p:nth-child(3) {
     font-size: 14px;
     color: var(--basic_07);
     font-weight: 500;
@@ -1121,7 +1333,7 @@
     justify-content: space-between;
 }
 
-.detail_total_fee>li:nth-child(2) {
+.detail_total_fee > li:nth-child(2) {
     font-size: 24px;
     font-weight: bold;
 }
@@ -1172,7 +1384,7 @@
     top: 0;
 }
 
-.admin_header .header_menu li a,.admin_header .header_menu li {
+.admin_header .header_menu li a, .admin_header .header_menu li {
     color: var(--basic_wh);
 }
 
@@ -1200,13 +1412,12 @@
 /*배너 목록*/
 
 
-
-
 /*공통*/
 #admin .nav-link:focus, #admin .nav-link:hover {
     color: var(--admin_02);
     font-weight: bold;
 }
+
 .admin_common_tit {
     font-weight: bold;
     margin: 16px 0;
@@ -1215,11 +1426,13 @@
     display: flex;
     align-items: center;
 }
+
 .admin_common_tit img {
     width: 20px;
     height: 20px;
     display: inline-block;
 }
+
 .common_table {
     width: 100%;
 }
@@ -1331,21 +1544,26 @@
     height: 48px;
     display: inline-block;
 }
+
 .admin_form_detail {
     margin: 0 auto;
     width: 50%;
 }
+
 .admin_img {
     width: 250px;
 }
-#admin .form-control{
+
+#admin .form-control {
     line-height: 2;
 }
+
 #admin .list_pagination {
     display: flex;
     justify-content: center;
     margin-top: 32px;
 }
+
 #admin .page-link {
     position: relative;
     display: block;
@@ -1354,15 +1572,17 @@
     text-decoration: none;
     background-color: var(--basic_wh);
     border: 1px solid var(--admin_02);
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     height: 33px;
 }
+
 #admin .page-link:hover {
     z-index: 2;
     color: var(--basic_wh);
     background-color: var(--admin_01);
     border-color: var(--line);
 }
+
 #admin .page-link:focus {
     z-index: 3;
     color: var(--basic_wh);
@@ -1370,6 +1590,7 @@
     outline: 0;
     box-shadow: var(--admin_02);
 }
+
 #admin .admin_arrow_icon {
     display: inline-block;
     padding: 0 10px;
@@ -1381,10 +1602,12 @@
     border-radius: 5px;
     border: 1px solid var(--line);
 }
+
 .coupon_list_area {
     margin-bottom: 32px;
 }
-.coupon_list_tit h5{
+
+.coupon_list_tit h5 {
     font-weight: bold;
     margin-bottom: 12px;
 

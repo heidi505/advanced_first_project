@@ -74,11 +74,11 @@ public class AirportController {
 
         //		한국 공항
 
-        AirportTravelTimeDTO airportTravelTimes = airportService.koAirportTime(1);
+        AirportTravelTimeDTO airportTravelTimes = airportService.koAirportTime(principal.getId());
         
         List<AirportTravelTimeDTO.Item> airportItems = airportTravelTimes.getItems();
 
-        String airPortName = "";
+        String airPortName = " ";
         for (AirportTravelTimeDTO.Item airportItem : airportItems) {
             airPortName = airportItem.getArp();
             if (airportItem.getArp().equals("GMP")) {
@@ -130,16 +130,13 @@ public class AirportController {
             System.out.println(airportCode + "도착지 공항코드");
         }
         System.out.println(airportCode);
+
         ParkingStatusResponse2 parkingStatusResponse2 = airportService.getParkingAreaInfoAPI2(airportCode);
         model.addAttribute("parkingStatusResponse2", parkingStatusResponse2);
         return "airport/airportInfo";
     }
 
-    
-    
-    
-    
-    
+
     @GetMapping("/asdtest")
     public String asdtese(Model model) {
 
