@@ -37,6 +37,6 @@
 </div>
 </div>
 
-<script type="module" src="js/firebase.js"></script>
+
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

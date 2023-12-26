@@ -32,4 +32,12 @@
     <select id="findUserByEmail" resultType="com.tenco.team_two_flight_ticket.user.User">
         select * from user_tb where email = #{email}
     </select>
+    
+    <update id="saveFcmToken">
+        UPDATE user_tb
+        SET    fcm_token = #{fcmToken}
+        WHERE username = #{userName}
+    </update>
+    
+    
 </mapper>

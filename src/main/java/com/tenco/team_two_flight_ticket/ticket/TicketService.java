@@ -40,7 +40,8 @@ import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
-import com.tenco.team_two_flight_ticket.ticket.TicketRequest.SearchCityDTO;
+
+import com.tenco.team_two_flight_ticket.search.SearchedResponse.SearchCityDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRequest.TicketSearchDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
@@ -233,7 +234,6 @@ public class TicketService {
     }
 
 
-
     public TicketRequest.TicketSearchDTO parsingReq(TicketRequest.TicketSearchDTO dto) {
 
         TicketRequest.TicketSearchDTO newDto = dto;
@@ -404,7 +404,7 @@ public class TicketService {
  	 * @return cities
  	 */
  	//검색어로 도시 조회
- 	public List<City> getCitiesFromKeyword(SearchCityDTO dto) {
+ 	public List<City> getCitiesFromKeyword(@Valid TicketRequest.SearchCityDTO dto) {
  		List<City> cities = null;
  		try {
  			cities = ticketRepository.getCitiesFromKeyword(dto.getKeyword());
@@ -413,6 +413,13 @@ public class TicketService {
  		}
  		return cities;
  	}
+
+ 	// 가장 빠른 출발지 공항 조회
+	public String findDepartureAirport(int id) {
+		String airport = ticketRepository.findDepartureAirport(id);
+		return airport;
+	}
+
 
 
 }

@@ -293,9 +293,8 @@
             <!-- parking_fee 시작 -->
             <div class="parking_menu w-85 mx-auto mt-5" id="3">
                 <h1 class="mb-4"><b>주차요금 체계</b></h1>
-                <c:set var="parkingFeeData" value="${list}"/>
-                <c:forEach var="item" items="${parkingFeeData.response.body.items}">
-                    <c:forEach var="fList" items="${item.value}">
+                <%-- parkingFee 반복문 부분 --%>
+                <c:forEach var="fList" items="${list}">
                         <h3><b class="color_primary02">${fList.parkingParkingName} </b></h3>
                         <table class="parking_fee_table table w-100 mt-3">
                             <thead>
@@ -334,7 +333,7 @@
                                     · 기본 ${fList.parkingHoliBasicM}분 무료주차
                                 </td>
                                 <td class="lh-lg py-5 pe-5 text-start">
-                                    · 기본${fList.parkingHoliBasicMd}분 : ${fList.parkingHoliBasicAccoutd}원<br>
+                                    · 기본${fList.parkingHoliBasicMd}분 : ${fList.parkingHoliBasicAccountd}원<br>
                                     · 매 ${fList.parkingHoliMinuteMd}분 : ${fList.parkingHoliMinuteAccountd}원 추가<br>
                                     · 24시간 : ${fList.parkingHoliMaxAccountd}원<br>
                                     · 기본 ${fList.parkingHoliBasicMd}분 무료주차<br>
@@ -350,8 +349,8 @@
                             </tr>
                             </tbody>
                         </table>
-                    </c:forEach>
-                </c:forEach>
+                </c:forEach>  
+                <%-- parkingFee 반복문 부분 끝 --%>
                 <!-- 주차장 요금 정보 테이블2 시작 -->
                 <!-- 주차장 요금 정보 div 끝 -->
                 <div class="lh-base">

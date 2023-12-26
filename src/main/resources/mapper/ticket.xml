@@ -68,6 +68,17 @@
 		select * from city_tb
 		where country_name = '대한민국'
 	</select>
+	
+	<select id="findDepartureAirport" resultType="String">
+		SELECT departure_city
+		FROM ticket_tb t
+		JOIN reservation_tb r
+		ON t.reservation_id = r.id
+		WHERE user_id = #{id}
+		AND status_enum = '예정'
+		ORDER BY departure_time LIMIT 1;
+	</select>
+	
     
     
 </mapper>
