@@ -12,8 +12,6 @@ async function useMyCoupon(couponId){
 	
 }
 
-
-
 window.onload = function(){
 	
 	// 내 쿠폰에 이벤트 연결

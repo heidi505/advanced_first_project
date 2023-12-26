@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.coupon;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
+import com.tenco.team_two_flight_ticket._core.vo.PageVO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponDetailDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
@@ -59,15 +60,29 @@ public class CouponController {
     }
 
 
+
     //    쿠폰 목록 기능
     @GetMapping("/admin/coupon-list")
-    public String adminCouponList(Model model) {
+    public String adminCouponList(Model model,@RequestParam(defaultValue = "1") int page) {
 //        현재 쿠폰 목록
-        List<CouponListDTO> couponList = couponService.couponListAll();
-//        만료된 쿠폰 목록
-        List<CouponExpiredListDTO> couponExpiredList = couponService.couponExpiredListAll();
+        List<CouponListDTO> couponList = couponService.couponListAll(page, 3);
+
+        int totalCount = couponService.couponCount(); // 총 개수
+
+        PageVO pagevo = new PageVO();
+        pagevo.setCurrentPage(page);
+        pagevo.setCountPerPage(3);
+        pagevo.setLastPage((int) Math.ceil((double)totalCount / 3));
+        pagevo.setCountSize(5);
+        pagevo.setFirstPage(1);
+
+
+        //        만료된 쿠폰 목록
+        List<CouponExpiredListDTO> couponExpiredList = couponService.couponExpiredListAll(page, 3);
         model.addAttribute("couponList", couponList);
         model.addAttribute("couponExpiredList", couponExpiredList);
+        model.addAttribute("pagevo", pagevo);
+
         for (CouponExpiredListDTO coupon : couponExpiredList) {
             if (coupon.getIsUsed()) {
                 coupon.setCreatedValue("만료됨");
@@ -80,6 +95,65 @@ public class CouponController {
 //        System.out.println(timeDate);
         return "admin/couponList";
     }
+
+    @ResponseBody
+    @GetMapping("/api/admin/coupon-expired-list")
+    public ResponseEntity<ApiUtils.ApiResult<?>> apiAdminCouponExpiredList(Model model,@RequestParam(name="page", defaultValue = "1") int page) {
+
+        int totalCount = couponService.couponCount(); // 총 개수
+
+        PageVO pagevo = new PageVO();
+        pagevo.setCurrentPage(page);
+        pagevo.setCountPerPage(3);
+        pagevo.setLastPage((int) Math.ceil((double)totalCount / 3));
+        pagevo.setCountSize(3);
+        pagevo.setFirstPage(1);
+
+        List<CouponExpiredListDTO> couponExpiredList = couponService.couponExpiredListAll(page, 3);
+        model.addAttribute("couponExpiredList", couponExpiredList);
+        model.addAttribute("pagevo", pagevo);
+
+        for (CouponExpiredListDTO coupon : couponExpiredList) {
+            if (coupon.getIsUsed()) {
+                coupon.setCreatedValue("만료됨");
+            } else {
+                coupon.setExpiredValue("만료안됨");
+            }
+        }
+
+        return ResponseEntity.ok().body(ApiUtils.success(couponExpiredList));
+    }
+
+    @ResponseBody
+    @GetMapping("/api/admin/coupon-list")
+    public ResponseEntity<ApiUtils.ApiResult<?>> apiAdminCouponList(Model model,@RequestParam(name="page", defaultValue = "1") int page) {
+
+        int totalCount = couponService.couponCount(); // 총 개수
+
+        PageVO pagevo = new PageVO();
+        pagevo.setCurrentPage(page);
+        pagevo.setCountPerPage(3);
+        pagevo.setLastPage((int) Math.ceil((double)totalCount / 3));
+        pagevo.setCountSize(3);
+        pagevo.setFirstPage(1);
+
+        List<CouponListDTO> couponList = couponService.couponListAll(page, 3);
+        model.addAttribute("couponList", couponList);
+        model.addAttribute("pagevo", pagevo);
+
+        for (CouponListDTO coupon : couponList) {
+            if (coupon.getIsUsed()) {
+                coupon.setCreatedValue("만료됨");
+            } else {
+                coupon.setExpiredValue("만료안됨");
+            }
+        }
+
+        return ResponseEntity.ok().body(ApiUtils.success(couponList));
+    }
+
+
+
 
 
     //     만료된 쿠폰 상세 기능

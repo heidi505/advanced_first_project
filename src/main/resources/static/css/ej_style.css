@@ -43,7 +43,7 @@
     display: flex;
 }
 .round_trip_one_way > li {
-    padding-right: 5px;
+    padding-right: 12px;
     font-weight: bold;
 }
 /*.round_trip_one_way .distance_form_btn {*/
@@ -350,6 +350,9 @@
     border-radius: 15px;
     display: inline-block;
 }
+.flight_banner_list a:last-child {
+    margin-right: 0;
+}
 
 .flight_banner_list ul{
     border-radius: 15px;
@@ -384,8 +387,7 @@
 
 .flight_notice {
     margin: 30px 0;
-    border-top: 1px solid var(--line);
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 .flight_notice_tit {
@@ -395,6 +397,8 @@
 .flight_notice td {
     display: flex;
     justify-content: space-between;
+    padding: 0;
+    margin-top: 12px;
 }
 
 .flight_notice td span:nth-child(2) {
