@@ -72,4 +72,5 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations:
     - classpath:mapper/**.xml
-
+chatgpt:
+  api-key: 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

@@ -11,6 +11,7 @@ import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Log
+@Slf4j
 @Controller
 public class KaKaoController {
 

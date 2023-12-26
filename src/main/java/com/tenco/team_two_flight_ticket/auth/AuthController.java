@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -46,6 +47,7 @@ import com.tenco.team_two_flight_ticket.user.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+@Slf4j
 @Controller
 public class AuthController {
 
@@ -72,6 +74,7 @@ public class AuthController {
     private NoticeService noticeService;
 
     //메인 페이지
+
     @GetMapping("/main")
     public String mainPage(Model model){
 
@@ -138,7 +141,7 @@ public class AuthController {
         pushDto.setFcmToken(dto.getFcmToken());
         pushDto.setTitle("님부스");
         pushDto.setMessage("님부스에 로그인 하신 것을 환영합니다");
-        userService.FireBasePushAlert(pushDto);
+//        userService.FireBasePushAlert(pushDto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);
