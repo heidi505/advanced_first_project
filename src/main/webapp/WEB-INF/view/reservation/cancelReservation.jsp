@@ -13,7 +13,7 @@
 		<div class="section">
 			<h1 class="text-center my-5 color_cancle"><b>X 취소된 예약입니다.</b></h1>
 			<hr class="my-5">
-			<div><b class="mt-5 fs-5">${cancelTrip.realName}님의 예약번호는 ${detailTrip.reservationNum}입니다. 해당 예약은 <span class="color_cancle">취소</span>되었습니다.</b>
+			<div><b class="mt-5 fs-5">${cancelTrip.realName}님의 예약번호는 ${cancelTrip.reservationNum}입니다. 해당 예약은 <span class="color_cancle">취소</span>되었습니다.</b>
 			<hr class="border-2 border-primary">
 			</div>
 			<p class="text-end me-5">예약상태<span class="color_basic09 mx-2">|</span><span class="color_cancle">예약취소</span></p>

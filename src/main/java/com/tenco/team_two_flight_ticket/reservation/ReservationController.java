@@ -124,8 +124,8 @@ public class ReservationController {
 
     @ResponseBody
     @PostMapping("/reservation/cancel")
-    public void cancelProc(@RequestBody Long reservationNum) {
-        reservationService.cancelReservation(reservationNum);
+    public void cancelProc(@RequestBody ReservationRequest.ReservationCancelDTO dto) {
+        reservationService.cancelReservation(dto.getReservationNum());
     }
 
 
