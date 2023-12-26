@@ -16,14 +16,16 @@
                            on ct.user_id = ut.id
         where is_used = false
         order by ct.id desc
+            LIMIT #{limit} OFFSET #{offset}
     </select>
+
 
     <select id="findCouponId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO">
         SELECT *
         FROM coupon_tb as ct
                  left join user_tb as ut
                            on ct.user_id = ut.id
-        where is_used = false and ut.id = #{id}
+        where is_used = false and ct.id = #{id}
         order by ct.id desc
     </select>
 
@@ -53,13 +55,19 @@
         order by ct.id desc
     </select>
 
+    <select id="couponCountAll" resultType="int">
+        select count(*) from coupon_tb
+    </select>
+
     <select id="findCouponExpiredAll" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO">
         SELECT *,
-        FROM hascoupon_TB as ht
-                 left join coupon_tb as ct on
+        FROM coupon_tb as ct
+                 left join hascoupon_tb as ht on
             ht.id = ct.id
         where is_used = true
-        order by ht.id desc
+        order by ct.id desc
+            LIMIT #{limit}
+        OFFSET #{offset}
     </select>
     
     <select id="findCouponExpiredAllByUserId" resultType="com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO">

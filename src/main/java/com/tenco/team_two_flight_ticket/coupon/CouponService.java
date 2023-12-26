@@ -65,13 +65,16 @@ public class CouponService {
         return resultRowCount;
     }
 
-    public List<CouponListDTO> couponListAll() {
-        return couponRepository.findCouponAll();
-    }
-
     public List<CouponListDTO> couponDetailList(Integer id) {
 
         List<CouponListDTO> coupons = couponRepository.findCouponId(id);
+        for (CouponListDTO coupon : coupons) {
+            if (coupon.getIsUsed()) {
+                coupon.setCreatedValue("만료됨");
+            } else {
+                coupon.setExpiredValue("만료안됨");
+            }
+        }
         return coupons;
     }
 
@@ -88,11 +91,25 @@ public class CouponService {
     }
 
 
-    public List<CouponExpiredListDTO> couponExpiredListAll() {
-        List<CouponExpiredListDTO> coupons = couponRepository.findCouponExpiredAll();
+    public List<CouponListDTO> couponListAll(int page, int size) {
+
+        int offset = page * size - size;
+        int limit = size;
+        return couponRepository.findCouponAll(offset, limit);
+    }
+
+    public List<CouponExpiredListDTO> couponExpiredListAll(int page, int size) {
+        int offset = page * size - size;
+        int limit = size;
+
+        List<CouponExpiredListDTO> coupons = couponRepository.findCouponExpiredAll(offset, limit);
         return coupons;
     }
 
+    public int couponCount() {
+        int count = couponRepository.couponCountAll();
+        return count;
+    }
     @Transactional
     public void couponDelete(Integer id, Integer userid) {
         couponRepository.deleteByCouponUserId(id);
@@ -115,7 +132,7 @@ public class CouponService {
                     Message message = new Message();
                     message.setFrom("01030184609");
                     message.setTo(coupon.getPhoneNumber());
-                    message.setText("안녕하세요 " + coupon.getUsername() + "님, " + coupon.getCouponName() + "을 발급해드렸습니다. " + coupon.getExpiredAt() + "까지");
+                    message.setText("안녕하세요 " + coupon.getUsername() + "님, \\n" + coupon.getCouponName() + "을 발급해드렸습니다. \\n" + coupon.getExpiredAt() + "까지");
 
                     response = defaultMessageService.sendOne(new SingleMessageSendingRequest(message));
                     System.out.println(response + "문자내용");

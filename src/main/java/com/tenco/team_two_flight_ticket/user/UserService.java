@@ -147,8 +147,8 @@ public class UserService {
         User checkUser = userRepository.checkUsername(kakaoProfile.getId());
         if(checkUser == null) {
             User user = User.builder()
-                    .realName("김하얀")
-                    .username(kakaoProfile.getProperties().getNickname())
+                    .realName(kakaoProfile.getProperties().getNickname())
+                    .username("aahhee")
                     .profileImage("profile_05.jpg")
                     .email("aahh2@naver.com")
                     .password("")
