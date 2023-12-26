@@ -39,7 +39,7 @@
                                         <button type="button" id="from_select_btn"
                                                 class="common_modal_btn from_to_modal_btn"
                                                 data-target="from_modal">
-                                            <span class="from_code_value">GMP</span>
+                                            <span class="from_code_value">SEL</span>
                                             <span class="from_airport_value">서울</span>
                                         </button>
                                     </div>
@@ -107,7 +107,7 @@
                         	<tbody class="city_search_result">
                         	<!-- 검색 결과 창 -->
                         	</tbody>
-                        </table>	
+                        </table>
                         </div>
                         <form action="">
                             <div class="regions_cities_box">
@@ -332,7 +332,7 @@
                         	<tbody class="city_search_result">
                         	<!-- 검색 결과 창 -->
                         	</tbody>
-                        </table>	
+                        </table>
                         </div>
                         <form action="">
                             <div class="regions_cities_box">
@@ -585,7 +585,7 @@
                         </div>
                         <ul class="radio_btn seat_radio">
                             <li class="seat_group">
-                                <input type="radio" id="economy_class" name="3" value="일반석">
+                                <input type="radio" id="economy_class" name="3" value="일반석" checked>
                                 <label for="economy_class">일반석</label>
                             </li>
                             <li class="seat_group">
@@ -779,7 +779,7 @@
                                 <div class="from_to_txt">서울 → 제주</div>
                                 <div class="flight_data_txt"><span class="startDate">1월 23일
                                     ~
-                                    1월 23일</div>
+                                    1월 23일</span></div>
                                 <div class="price_transfer">
                                     <p class="flight_price">23,720원~</p>
                                     <span>직항,경유 포함</span>
@@ -880,8 +880,9 @@
             </div>
             <div class="common_table flight_notice">
                 <h4 class="flight_notice_tit">항공권 공지사항</h4>
-                <c:forEach var="notice" items="${noticeList}">
+
                 <table class="table table-bordered">
+                    <c:forEach var="notice" items="${noticeList}">
                     <tbody>
                     <tr>
                         <td>
@@ -889,9 +890,11 @@
                             <span>${notice.time()}</span>
                         </td>
                     </tr>
+                    </c:forEach>
                     </tbody>
+
                 </table>
-                </c:forEach>
+
             </div>
         </div>
     </section>
@@ -1133,10 +1136,10 @@
             });
         });
     });
-    
-   
-    
-    
+
+
+
+
 </script>
 <script src="/js/make_element.js"></script>
 <script src="/js/javascript.js"></script>

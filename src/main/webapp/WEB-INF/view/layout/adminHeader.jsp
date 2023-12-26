@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +40,16 @@
                     <li class="nav-item"><a class="nav-link" href="/admin/notice-list">커뮤니티</a></li>
                 </ul>
                 <ul class="header_menu">
-                    <li>관리자님</li>
-                    <li><a class="nav-link" href="/admin/sign-in">로그인</a></li>
-                    <li><a class="nav-link" href="/admin/logout">로그아웃</a></li>
+                    <c:choose>
+                        <c:when test="${principal == null}">
+                            <li><a class="nav-link" href="/admin/sign-in">로그인</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li>관리자님</li>
+                            <li><a class="nav-link" href="/admin/logout">로그아웃</a></li>
+                        </c:otherwise>
+                    </c:choose>
+
                 </ul>
             </div>
         </div>

@@ -27,6 +27,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class AirportService {
     public static final String SERVICEKEY = Define.SERVICEKEY;
+    @Autowired
+    TicketRepository ticketRepository;
 
     public ParkingFeeResponseDTO getParkingFeeAPI(String airportCode) {
         // 주차요금 api
@@ -90,10 +92,6 @@ public class AirportService {
 
         return parkingStatusResponse;
     }
-
-    @Autowired
-    private TicketRepository ticketRepository;
-
     public AirportTravelTimeDTO koAirportTime(Integer userId) {
 
 
@@ -107,7 +105,7 @@ public class AirportService {
         System.out.println(departureAirport + "내 도착지 공항은 어디");
 
         String airport = departureAirport;
-        System.out.println(airport);
+
         String myServiceKey = Define.SERVICEKEY;
         String nowDay = DateFormat.formatYear();
         String nowTime = DateFormat.formatTime();
@@ -127,7 +125,7 @@ public class AirportService {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        
+
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -139,6 +137,7 @@ public class AirportService {
         ResponseEntity<AirportTravelTimeDTO> response
                 = restTemplate.exchange(uri, HttpMethod.GET, requestMessage,
                 AirportTravelTimeDTO.class);
+
 
         AirportTravelTimeDTO airportTravelTimes = response.getBody();
 
