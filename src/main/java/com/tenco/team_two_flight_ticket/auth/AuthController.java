@@ -2,8 +2,6 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
-import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
-import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,14 +14,17 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeResponseDTO;
+import com.tenco.team_two_flight_ticket.admin.notice.NoticeService;
 import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushFindUserDTO;
 import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushMessageDTO;
 import com.tenco.team_two_flight_ticket.auth.authrequest.KakaoPushUserDTO;
@@ -37,7 +38,9 @@ import com.tenco.team_two_flight_ticket.search.SearchedService;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.User;
+import com.tenco.team_two_flight_ticket.user.UserRepository;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
+import com.tenco.team_two_flight_ticket.user.UserRequest.PushAlarmDTO;
 import com.tenco.team_two_flight_ticket.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -61,6 +64,9 @@ public class AuthController {
 
     @Autowired
     private SearchedService searchService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private NoticeService noticeService;
@@ -97,7 +103,7 @@ public class AuthController {
 
     //회원 가입
     @PostMapping("/sign-up")
-    public String signUpProc(@Valid UserRequest.SignUpDTO dto, Errors errors){
+    public String signUpProc(@Valid UserRequest.SignUpDTO dto,RedirectAttributes redirectAttributes , Errors errors){
         System.out.println("1: 실명" + dto.getRealName());
         System.out.println("2: 유저아이디" + dto.getUsername());
         System.out.println("3: 이메일" + dto.getEmail());
@@ -105,12 +111,18 @@ public class AuthController {
         System.out.println("5: 비번체크" + dto.getPasswordCheck());
         
         userService.signUp(dto);
+        redirectAttributes.addAttribute("check" , true);
         return "redirect:/sign-in";
     }
 
     //로그인
     @GetMapping("/sign-in")
-    public String signIn() {
+    public String signIn(@RequestParam(defaultValue = "false") Boolean check, Model model) {
+    	// 회원 가입시 메시지
+    	if(check) {
+    		model.addAttribute(check);
+    		model.addAttribute("message","회원가입에 성공했습니다");
+    	}
         return "user/signIn";
     }
 
@@ -119,26 +131,30 @@ public class AuthController {
     public String signInProc(@Valid UserRequest.SignInDTO dto, Model model, Errors errors){
         User principal = userService.signIn(dto);
         session.setAttribute(Define.PRINCIPAL, principal);
+        // 푸시 알림을 위한 fcm 토큰 update
+        userService.saveFcmToken(dto.getUsername() ,dto.getFcmToken());
         // 로그인 푸시 알림 보내기
-//        userService.FireBasePushAlert(dto);
+        PushAlarmDTO pushDto = new PushAlarmDTO();
+        pushDto.setFcmToken(dto.getFcmToken());
+        pushDto.setTitle("님부스");
+        pushDto.setMessage("님부스에 로그인 하신 것을 환영합니다");
+        userService.FireBasePushAlert(pushDto);
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);
         return "redirect:/main";
     }
 
-    //카카오 로그인
     @GetMapping("/kakao/sign-in")
-    public String kakaoSignIn(KakaoProfile kakaoProfile) {
-//        userService.kakaoSignIn(dto,kakaoProfile);
+    public String kakaoSignIn() {
         return "user/kakaoSignIn";
     }
 
-    //카카오 로그인
-    @GetMapping("/user/kakao-redirect")
-    public String kakaoRedirect(@RequestParam String code) {
-        System.out.println("메서드 동작 확인");
 
+    //카카오 로그인
+    @GetMapping("/kakao-redirect")
+    public String kakaoRedirect(@RequestParam String code, UserRequest.SignUpDTO dto) {
+        System.out.println("메서드 동작 확인");
         RestTemplate r1 = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
 
@@ -147,7 +163,7 @@ public class AuthController {
         MultiValueMap<String, String> bodies = new LinkedMultiValueMap<>();
         bodies.add("grant_type","authorization_code");
         bodies.add("client_id",Define.KAKAOKEY);
-        bodies.add("redirect_uri","http://localhost:8080/user/kakao-redirect");
+        bodies.add("redirect_uri","http://localhost:8080/kakao-redirect");
         bodies.add("code",code);
 
         HttpEntity<MultiValueMap<String,String>> requestMsg = new HttpEntity<>(bodies,headers);
@@ -178,10 +194,10 @@ public class AuthController {
         KakaoProfile kakaoProfile = response2.getBody();
         System.out.println(kakaoProfile);
 
-        userService.kakaoSignUp(kakaoProfile);
+        User checkUser = userService.kakaoCheckUsername(kakaoProfile);
 
-        session.setAttribute("kakaoAccessToken", response.getBody().getAccess_token());
-
+        session.setAttribute(Define.PRINCIPAL, checkUser);
+        
         return "redirect:/main";
     }
 

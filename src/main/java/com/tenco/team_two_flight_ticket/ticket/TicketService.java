@@ -40,7 +40,8 @@ import com.tenco.team_two_flight_ticket._middle._repository.AirportRepository;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.ItinerariesDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.SegmentDTO;
-import com.tenco.team_two_flight_ticket.ticket.TicketRequest.SearchCityDTO;
+
+import com.tenco.team_two_flight_ticket.search.SearchedResponse.SearchCityDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRequest.TicketSearchDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 
@@ -233,7 +234,6 @@ public class TicketService {
     }
 
 
-
     public TicketRequest.TicketSearchDTO parsingReq(TicketRequest.TicketSearchDTO dto) {
 
         TicketRequest.TicketSearchDTO newDto = dto;
@@ -262,12 +262,15 @@ public class TicketService {
                 .filter(e -> e.getItineraries().stream()
                         .anyMatch(itinerary -> itinerary.getSegments().stream()
                                 .anyMatch(segment ->
+                                        (optionDTO.getAirlineOption().isEmpty() ||
                                         optionDTO.getAirlineOption().stream()
-                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption))
-                                                && optionDTO.getOnewayDepTimeOption().stream()
-                                                .anyMatch(d -> segment.getDeparture().depSearch(d))
-                                                && optionDTO.getOnewayArrTimeOption().stream()
-                                                .anyMatch(a -> segment.getArrival().arrSearch(a))
+                                                .anyMatch(airlineOption -> segment.getAirlineName().equals(airlineOption)))
+                                                &&
+                                                (optionDTO.getOnewayDepTimeOption().isEmpty() || optionDTO.getOnewayDepTimeOption().stream()
+                                                        .anyMatch(d -> segment.getDeparture().depSearch(d)))
+                                                && (optionDTO.getOnewayArrTimeOption().isEmpty() ||
+                                                        optionDTO.getOnewayArrTimeOption().stream()
+                                                .anyMatch(a -> segment.getArrival().arrSearch(a)))
 
                                 )
                         )
@@ -401,7 +404,7 @@ public class TicketService {
  	 * @return cities
  	 */
  	//검색어로 도시 조회
- 	public List<City> getCitiesFromKeyword(SearchCityDTO dto) {
+ 	public List<City> getCitiesFromKeyword(@Valid TicketRequest.SearchCityDTO dto) {
  		List<City> cities = null;
  		try {
  			cities = ticketRepository.getCitiesFromKeyword(dto.getKeyword());
@@ -410,6 +413,13 @@ public class TicketService {
  		}
  		return cities;
  	}
+
+ 	// 가장 빠른 출발지 공항 조회
+	public String findDepartureAirport(int id) {
+		String airport = ticketRepository.findDepartureAirport(id);
+		return airport;
+	}
+
 
 
 }

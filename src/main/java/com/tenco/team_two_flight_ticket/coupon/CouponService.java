@@ -144,8 +144,20 @@ public class CouponService {
         return response;
     }
 
-	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+    // 내 쿠폰 목록(유효) 조회
+	public List<CouponListDTO> findCouponByUserId(int id) {
+		List<CouponListDTO> couponList = null;
+		try {
+			couponList = couponRepository.findCouponByUserId(id);
+			for (CouponListDTO couponListDTO : couponList) {
+				couponListDTO.calculateRemaingingDays();
+				couponListDTO.changePrice();
+			}
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+		return couponList;
 	}
+
+
 }

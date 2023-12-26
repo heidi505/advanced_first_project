@@ -78,6 +78,7 @@
         ON ar_city.code = t.arrival_city
 		WHERE reservation_num = #{reservationNum}
 		AND r.user_id = #{userId}
+		LIMIT 1
    	</select>
 
 
@@ -125,6 +126,7 @@
     	JOIN passenger_tb as p
     	ON r.id = p.reservation_id
     	WHERE reservation_num = #{reservationNum}
+    	and p.id = t.id
     </select>
 
     <select id="findByReservationNum" resultType="com.tenco.team_two_flight_ticket.reservation.Reservation">
@@ -132,5 +134,16 @@
         FROM reservation_tb
         WHERE reservation_num = #{reservationNum}
     </select>
+    
+    <update id="setLastTrip">
+    	UPDATE reservation_tb
+		SET status_enum = '지난'
+		WHERE status_enum = '예정'
+    	AND id IN (
+    	SELECT reservation_id 
+    	FROM ticket_tb 
+    	WHERE departure_time &lt; NOW());
+    </update>
+    
 
 </mapper>

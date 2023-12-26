@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tenco.team_two_flight_ticket.coupon.CouponService;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,10 +78,9 @@ public class UserController {
 	public String coupon(Model model) {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		// coupon 목록 조회
-		List<CouponExpiredListDTO> couponList = couponService.findCouponExpiredAllByUserId(principal.getId());
+		List<CouponListDTO> couponList = couponService.findCouponByUserId(principal.getId());
 		// coupon 수 조회
 		int couponNum = userService.getProfile(principal);
-		
 		model.addAttribute("couponList",couponList);
 		model.addAttribute("couponNum",couponNum);
 		model.addAttribute("principal",principal);		
@@ -88,7 +88,7 @@ public class UserController {
 	}
 
 	@GetMapping("/my-travel")
-	public String myPageTravel(@Valid GetMyTravelListDTO dto , Model model ) {
+	public String myPageTravel() {
 		return "user/myTravel";
 	}
 	

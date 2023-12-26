@@ -35,6 +35,8 @@ import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushTokenResponse
 import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushUser;
 import com.tenco.team_two_flight_ticket.auth.authresponse.PushAlertFail;
 import com.tenco.team_two_flight_ticket.firebase.FCMInitializer;
+import com.tenco.team_two_flight_ticket.user.UserRequest.PushAlarmDTO;
+import com.tenco.team_two_flight_ticket.user.UserRequest.SignInDTO;
 
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
@@ -75,24 +77,6 @@ public class UserService {
         }
     }
 
-    @Transactional
-    public void kakaoSignUp(KakaoProfile kakaoProfile) {
-        String kakaoNickName = kakaoProfile.getProperties().getNickname();
-
-        User user = User.builder()
-                .username(kakaoNickName)
-                .email("")
-                .password("1111")
-                .phoneNumber("")
-                .build();
-
-        int resultRowCount = userRepository.insert(user);
-
-        if (resultRowCount != 1) {
-            throw new MyBadRequestException("회원 가입 실패");
-        }
-    }
-
     public User signIn(UserRequest.SignInDTO dto) {
         User userEntity = userRepository.findByUsername(dto);
         if (userEntity == null) {
@@ -106,21 +90,6 @@ public class UserService {
         }
         return userEntity;
     }
-
-//    public User kakaoSignIn(UserRequest.SignInDTO dto, KakaoProfile kakaoProfile) {
-//        User userEntity = userRepository.checkUsername(kakaoProfile.getId());
-//
-//        if (userEntity == null) {
-//            throw new MyBadRequestException("아이디 혹은 비번이 틀렸습니다.");
-//        }
-//
-//        boolean isPwdMatched = passwordEncoder.matches(dto.getPassword(), userEntity.getPassword());
-//
-//        if (isPwdMatched == false) {
-//            throw new MyBadRequestException("비번이 틀렸습니다.");
-//        }
-//        return userEntity;
-//    }
 
     public int getProfile(User principal) {
         List<HasCoupon> couponList = hasCouponRepository.findByUserId(principal.getId());
@@ -172,6 +141,27 @@ public class UserService {
         } else {
             return "사용할 수 없는 아이디입니다";
         }
+    }
+
+    public User kakaoCheckUsername(KakaoProfile kakaoProfile) {
+        User checkUser = userRepository.checkUsername(kakaoProfile.getId());
+        System.out.println(checkUser + "ddddddd");
+        if(checkUser == null) {
+            User user = User.builder()
+                    .realName("김하얀")
+                    .username(kakaoProfile.getProperties().getNickname())
+                    .profileImage("profile_05.jpg")
+                    .email("aahh2@naver.com")
+                    .password("")
+                    .phoneNumber("01035842292")
+                    .build();
+
+            userRepository.insert(user);
+            System.out.println(user.getUsername() + "ddddddddddddddd");
+            checkUser = user;
+        }
+        System.out.println(checkUser + "값 확인");
+        return checkUser;
     }
 
     public void makeRandomNumber() {
@@ -259,19 +249,21 @@ public class UserService {
         }
 
     }
-
-	public void FireBasePushAlert(@Valid UserRequest.SignInDTO dto) {
+    
+    // 푸시 알림 전송
+	public void FireBasePushAlert(PushAlarmDTO pushDto) {
+		
 		//firebase 초기화
 		FCMInitializer fcmInitializer = new FCMInitializer();
 		fcmInitializer.initialize();
         		
         // 클라이언트에게 푸시 알림 보내기
-        String registrationToken = dto.getFcmToken();
+        String registrationToken = pushDto.getFcmToken();
 
         Message message = Message.builder()
                 .setNotification(Notification.builder()
-                        .setTitle("님부스")
-                        .setBody("님부스에 로그인 하신 것을 환영합니다")
+                        .setTitle(pushDto.getTitle())
+                        .setBody(pushDto.getMessage())
                         .build())
                 .setToken(registrationToken)
                 .build();
@@ -282,6 +274,16 @@ public class UserService {
 			System.out.println("Successfully sent message: " + response);
 		} catch (FirebaseMessagingException e) {
 			e.printStackTrace();
+		}
+		
+	}
+
+	// fcm 토큰 저장
+	public void saveFcmToken(String userName, String fcmToken) {
+		userRepository.saveFcmToken(userName, fcmToken);
+		try {
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
 		}
 		
 	}
