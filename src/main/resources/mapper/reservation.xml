@@ -86,11 +86,11 @@
 		SELECT ub.username, rb.reservation_num, rb.passenger_amount, tb.taxes, cb.discounting_price, pb.first_name, pb.last_name, tb.total_price, tb.departure_time
 		FROM ticket_tb as tb
 				 left join reservation_tb as rb
-						   on tb.id = rb.id
+						   on tb.reservation_id = rb.id
 				 left join passenger_tb as pb
-						   on rb.id = pb.id
+						   on rb.id = pb.reservation_id
 				 left join user_tb as ub
-						   on ub.id = rb.id
+						   on ub.id = rb.user_id
 				 left join hascoupon_tb as hb
 						   on hb.user_id = ub.id
 				 left join coupon_tb as cb
