@@ -60,8 +60,7 @@ spring:
   h2:
     console:
       enabled: true
-  profiles:
-    include: api-key
+
 
 logging:
   level:
