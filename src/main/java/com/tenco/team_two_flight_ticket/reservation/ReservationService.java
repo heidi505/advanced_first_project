@@ -297,4 +297,26 @@ public class ReservationService {
 		GetMyTripYearDTO tripYear = reservationRepository.getMyTripDepartureYear(id, dto.getStatusEnum());
 		return tripYear;
 	}
+
+	// 출발일이 지난 여행 상태 변경
+	@Transactional
+	public void setLastTrip() {
+		try {
+			reservationRepository.setLastTrip();			
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+	}
+	// 결제기간이 지난 여행 상태 변경
+	@Transactional
+	public void setCancelTrip() {
+		try {
+			reservationRepository.setCancelTrip();
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+	}
+	
+	
+	
 }
