@@ -26,7 +26,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 **/src/main/java/com/tenco/team_two_flight_ticket/_core/utils/Define.java
-
+**/src/main/resources/application-api-key.properties
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
