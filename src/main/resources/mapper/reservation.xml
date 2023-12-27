@@ -157,7 +157,7 @@
     </update>
     
     <select id="getMyTripDepartureYear" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripYearDTO">
-    	SELECT left(min(departure_time),4) as min_yaer, left(max(departure_time),4)as max_year 
+    	SELECT ifnull(left(min(departure_time),4),year(now())) as min_yaer, ifnull(left(max(departure_time),4),year(now()))as max_year 
     	FROM reservation_tb as r
 		JOIN ticket_tb as t
 		ON r.id = t.reservation_id
