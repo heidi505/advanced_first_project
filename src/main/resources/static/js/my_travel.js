@@ -27,7 +27,35 @@ const weekEnum = {
 }
 Object.freeze(weekEnum);
 
-async function getMyTravel(tabId, sort){
+// 페이징 용 변수
+let currentTabId = ``;
+let currentSort = ``;
+let currentPeriod = ``;
+let minDepartureYear = ``;
+let maxDepartureYear = ``;
+const pages = document.querySelectorAll(`.pagination li`); // 페이지버튼들
+
+
+// 선택한 버튼 활성화
+function activeButton(page) {
+	pages.forEach( (button) => {
+		button.classList.remove(`active`);
+	})
+	page.classList.add(`active`);
+}
+
+
+async function getMyTravel(tabId, sort, year){
+	currentTabId = tabId;
+	if(currentPeriod != year&& currentPeriod != ``){
+		let myTripCountLabel = document.getElementsByClassName(`my_trip_count_label`);
+		console.log(myTripCountLabel);
+		currentPeriod = year;
+		myTripCountLabel[0].style.background = `var(--primary02)`;
+		sort = isPayedEnum.ALL;
+	}
+	currentSort = sort;
+	
 	//statusEnum 파라미터
 	let status = ``;
 	switch(tabId){
@@ -35,8 +63,8 @@ async function getMyTravel(tabId, sort){
 		case tripEnum.LAST     : status = statusEnum.LAST;     break;
 		case tripEnum.CANCELED : status = statusEnum.CANCELED; break;
 	}
-
-	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}`; 
+	
+	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}&year=${year}`; 
 	 try {
         const response = await fetch(href);
         const data = await response.json(); 
@@ -307,5 +335,28 @@ function insertElement(tripList, tripCnt , tabId, sort){
 }
 
 	
+const pagination = document.getElementsByClassName(`pagination`)[0];
 
-	
+pages.forEach((page) => {
+	page.addEventListener(`click`, e => {
+		const activeBtn = document.querySelectorAll(`.active`)[0];
+		// paging
+		if(e.target.ariaLabel == `Previous`||e.target.parentElement.ariaLabel == `Previous`){
+			activeButton(activeBtn.previousElementSibling);
+			currentPeriod = activeBtn.previousElementSibling.textContent;
+			getMyTravel(currentTabId, currentSort, currentPeriod);
+			return false;
+		}
+		if(e.target.ariaLabel == `Next`||e.target.parentElement.ariaLabel == `Next`){
+			activeButton(activeBtn.nextElementSibling);
+			currentPeriod = activeBtn.nextElementSibling.textContent;
+			getMyTravel(currentTabId, currentSort, currentPeriod);			
+			return false;
+		}
+		activeButton(page);
+		currentPeriod = page.textContent;
+		console.log(currentPeriod);
+		getMyTravel(currentTabId, currentSort, currentPeriod);
+		
+	})
+})

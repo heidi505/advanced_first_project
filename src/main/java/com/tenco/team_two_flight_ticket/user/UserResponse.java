@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse;
 
 import lombok.Data;
 
@@ -53,7 +54,10 @@ public class UserResponse {
     public static class GetMyTripCntAndListDTO {
     	private List<GetMyTravelDTO> tripList;
     	private GetMyTripCountDTO tripCount;
+    	private String minYear;
+    	private String maxYear;
     }
+    
     	
 
 }

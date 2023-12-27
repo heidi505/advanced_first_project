@@ -7,8 +7,11 @@ import org.apache.ibatis.annotations.Param;
 
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
+
+
 import org.apache.ibatis.annotations.ResultMap;
 
 @Mapper
@@ -18,10 +21,10 @@ public interface ReservationRepository {
     List<ReservationResponse.ReservationPaymentDTO> reservationPayment(@Param("userId") int userId);
 
     // 내 여행 목록 가져오기
-    List<GetMyTravelDTO> getMyTravel(@Param("userId") int userId, @Param("statusEnum") StatusEnum statusEnum, @Param("sort") String sort);
+    List<GetMyTravelDTO> getMyTravel(@Param("userId") int userId, @Param("statusEnum") StatusEnum statusEnum, @Param("sort") String sort,@Param("year") String year);
 
     // 내 여행 목록 개수 가져오기
-    int getMyTripCount(@Param("userId") int userId, @Param("statusEnum") StatusEnum statusEnum, @Param("sort") String sort);
+    int getMyTripCount(@Param("userId") int userId, @Param("statusEnum") StatusEnum statusEnum, @Param("sort") String sort,@Param("year") String year);
     // 예약하기
 
     public int insertR(Reservation reservationR);
@@ -40,5 +43,8 @@ public interface ReservationRepository {
 	void setLastTrip();
 	// 만료 기간이 지난 여행을 취소된 여행으로 전환
 	void setCancelTrip();
+	
+	//처음 여행일과 마지막 여행일 조회
+	GetMyTripYearDTO getMyTripDepartureYear(@Param("userId") int userId, @Param("statusEnum") StatusEnum statusEnum);
 
 }

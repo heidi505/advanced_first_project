@@ -34,6 +34,7 @@
                     </div>
                     <div class="tab-content regions_list_item" id="canceled_trip">
                     </div>
+                    <%@ include file="../layout/myTravelPaging.jsp" %>
                 </div>
             </div>
 
@@ -119,8 +120,15 @@
     });
 
     // 처음 목록 출력
-    getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL);
-
+    const maxYear = '${maxYear}';
+    if(maxYear != ''){
+    	getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL, maxYear);
+    } else {
+    	// 자료 없음
+    	getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL, '0');
+    }
+    pages[1].classList.add('active');
+    
     const tabButtons = document.querySelectorAll(".tab_menu li a");
     const tabContents = document.querySelectorAll(".tab-content");
 
@@ -140,7 +148,7 @@
             document.getElementById(tabId).style.display = "block";
 
             //데이터를 가져와 출력하는 함수
-            getMyTravel(tabId, isPayedEnum.ALL);
+            getMyTravel(tabId, isPayedEnum.ALL, currentPeriod);
             button.classList.add("tab_active");
         });
     });
@@ -160,7 +168,7 @@
                     sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
                     e.target.style.background = `var(--primary02)`;
                 }
-                getMyTravel(tabId, sort);
+                getMyTravel(tabId, sort, currentPeriod);
             }
         })
     });

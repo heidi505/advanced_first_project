@@ -21,11 +21,16 @@ import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
+import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
+
+
+import jakarta.validation.Valid;
 
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -137,6 +142,7 @@ public class ReservationService {
 
         String stringSort = dto.getSort();
         String sort = null;
+        String year = dto.getYear();
 
         switch (stringSort) {
             case "전체": sort = "all"; break;
@@ -155,7 +161,7 @@ public class ReservationService {
         }
 
         try {
-        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort);
+        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort, year);
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }
@@ -164,12 +170,13 @@ public class ReservationService {
 
     public GetMyTripCountDTO getMyTripCount(int userId, UserRequest.GetMyTravelListDTO dto) {
         StatusEnum statusEnum = dto.getStatusEnum();
+        String year = dto.getYear();
         // 개수를 담을 객체
         GetMyTripCountDTO tripCnt = new GetMyTripCountDTO();
         try {
-            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all");
-            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true");
-            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false");
+            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all", year);
+            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true", year);
+            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false", year);
             tripCnt.setAllTripCount(allTripCnt);
             tripCnt.setPayedTripCount(payedTripCnt);
             tripCnt.setNotPayedTripCount(notPayedTripCnt);
@@ -284,4 +291,10 @@ public class ReservationService {
 
         return coupons;
     }
+
+    // 처음 여행 연도 와 마지막 여행 연도 조회
+	public GetMyTripYearDTO getMyTripDepartureYear(int id, @Valid GetMyTravelListDTO dto) {
+		GetMyTripYearDTO tripYear = reservationRepository.getMyTripDepartureYear(id, dto.getStatusEnum());
+		return tripYear;
+	}
 }
