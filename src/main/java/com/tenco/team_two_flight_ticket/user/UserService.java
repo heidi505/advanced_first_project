@@ -166,6 +166,8 @@ public class UserService {
             checkUser = user;
         }
         checkUser.setKaKao(true);
+        checkUser.setProfileImage(kakaoProfile.getProperties().getProfile_image());
+        checkUser.setUsername(kakaoProfile.getProperties().getNickname());
         return checkUser;
     }
 
