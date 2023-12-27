@@ -154,9 +154,11 @@
                 let sort = '';
                 if (e.target.classList.contains('my_trip_num')) {
                     let myTripCountLabel = e.target.parentElement;
+                    myTripCountLabel.style.background = `var(--primary02)`;
                     sort = myTripCountLabel.innerText.split(e.target.innerText)[0];
                 } else {
                     sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
+                    e.target.style.background = `var(--primary02)`;
                 }
                 getMyTravel(tabId, sort);
             }
