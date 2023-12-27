@@ -159,11 +159,13 @@ public class UserService {
                     .email("aahh2@naver.com")
                     .password("")
                     .phoneNumber("01035842292")
+                    .isKaKao(true)
                     .build();
 
             userRepository.insert(user);
             checkUser = user;
         }
+        checkUser.setKaKao(true);
         return checkUser;
     }
 

@@ -60,6 +60,8 @@ spring:
   h2:
     console:
       enabled: true
+  profiles:
+    include: api-key
 
 logging:
   level:
@@ -72,5 +74,3 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations:
     - classpath:mapper/**.xml
-chatgpt:
-  api-key: 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

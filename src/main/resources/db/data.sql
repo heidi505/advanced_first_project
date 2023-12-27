@@ -96,7 +96,7 @@ insert into `notice_tb`(`id`,`title`,`content`, `created_at`)VALUES(1,'유류할
 insert into `notice_tb`(`id`,`title`,`content`, `created_at`)VALUES(2,'파격 이벤트 안내','이벤트 참여하면 어쩌구', now());
 
 -- 배너
-
+-- insert into `banner_tb`(`id`, `banner_type`,)
 
 -- 도시 서울, 김포, 제주, 광주, 대구, 청주, 여수
 insert into `city_tb`(`id`,`city_code`,`city_name`, `country_name`)VALUES(1,'SEL','서울','대한민국');

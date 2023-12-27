@@ -11,7 +11,7 @@
     <div class="section">
         <div class="container">
             <h3 class="admin_common_tit">
-                <button type="button" onclick="history.back()"><img src="/images/icons/admin_arrow.svg" alt="뒤로가기">
+                <button type="button" onclick="history.back()"><img src="/imageicons/admin_arrow.svg" alt="뒤로가기">
                 </button>
                 배너상세</h3>
             <div class="admin_common_form">
