@@ -86,6 +86,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
 					break;
 		}
 		if(isPayed == sort){
+			// 현재 선택한 버튼에 색상 변경
 			myTripCountLabel.style.background = `var(--primary_02)`;
 		}
     	text = document.createTextNode(isPayed); 
