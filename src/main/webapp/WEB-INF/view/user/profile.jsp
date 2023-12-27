@@ -126,11 +126,14 @@
 </div>
 
 <script>
-    let kakao = document.getElementById("kakaoLink");
-
-    kakao.addEventListener("click", async function(){
-
-    });
+    // let kakao = document.getElementById("kakaoLink");
+    //
+    // kakao.addEventListener("click", async function(){
+    //     await fetch("/kakao/sign-in", {
+    //         method:"get"
+    //     });
+    //
+    // });
 
 </script>
 <script src="/js/profile.js"></script>

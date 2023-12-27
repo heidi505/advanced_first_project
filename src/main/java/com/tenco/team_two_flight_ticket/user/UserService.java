@@ -166,8 +166,6 @@ public class UserService {
             checkUser = user;
         }
         checkUser.setKaKao(true);
-        checkUser.setProfileImage(kakaoProfile.getProperties().getProfile_image());
-        checkUser.setUsername(kakaoProfile.getProperties().getNickname());
         return checkUser;
     }
 
@@ -298,6 +296,10 @@ public class UserService {
     public String getChatResponse(String condition){
         User user = (User) session.getAttribute(Define.PRINCIPAL);
         List<String> cityName = ticketRepository.findUserDestination(user.getId());
+
+        if(cityName.isEmpty()){
+            return "예약을 먼저 해주세요!";
+        }
 
         if (condition.equals("plan")){
             return chatgptService.sendMessage(cityName.get(0) + "에 유명한 관광지 한국어로 알려줘");
