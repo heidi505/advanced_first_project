@@ -139,7 +139,10 @@ public class AuthController {
         pushDto.setFcmToken(dto.getFcmToken());
         pushDto.setTitle("님부스");
         pushDto.setMessage("님부스에 로그인 하신 것을 환영합니다");
-        userService.FireBasePushAlert(pushDto);
+        // 푸시 알림을 거부한 경우 로그인 알림 생략
+        if(dto.getFcmToken() != null) {
+        	userService.FireBasePushAlert(pushDto);
+        }
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
         model.addAttribute("ticketDate", ticketDate);

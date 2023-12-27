@@ -27,7 +27,35 @@ const weekEnum = {
 }
 Object.freeze(weekEnum);
 
-async function getMyTravel(tabId, sort){
+// 페이징 용 변수
+let currentTabId = ``;
+let currentSort = ``;
+let currentPeriod = ``;
+let minDepartureYear = ``;
+let maxDepartureYear = ``;
+const pages = document.querySelectorAll(`.pagination li`); // 페이지버튼들
+
+
+// 선택한 버튼 활성화
+function activeButton(page) {
+	pages.forEach( (button) => {
+		button.classList.remove(`active`);
+	})
+	page.classList.add(`active`);
+}
+
+
+async function getMyTravel(tabId, sort, year){
+	currentTabId = tabId;
+	if(currentPeriod != year&& currentPeriod != ``){
+		let myTripCountLabel = document.getElementsByClassName(`my_trip_count_label`);
+		console.log(myTripCountLabel);
+		currentPeriod = year;
+		myTripCountLabel[0].style.background = `var(--primary02)`;
+		sort = isPayedEnum.ALL;
+	}
+	currentSort = sort;
+	
 	//statusEnum 파라미터
 	let status = ``;
 	switch(tabId){
@@ -35,12 +63,12 @@ async function getMyTravel(tabId, sort){
 		case tripEnum.LAST     : status = statusEnum.LAST;     break;
 		case tripEnum.CANCELED : status = statusEnum.CANCELED; break;
 	}
-
-	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}`; 
+	
+	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}&year=${year}`; 
 	 try {
         const response = await fetch(href);
         const data = await response.json(); 
-        insertElement(data.tripList, data.tripCount, tabId );
+        insertElement(data.tripList, data.tripCount, tabId , sort);
     } catch (error) {
 		alert(error+`목록을 불러오는데 실패했습니다`);
     }
@@ -57,7 +85,7 @@ function makeYearTag(year){
 
 
 // 여행 목록 삽입하기(목록, 목록 수, 목록의 종류)
-function insertElement(tripList, tripCnt , tabId){
+function insertElement(tripList, tripCnt , tabId, sort){
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = ``;
 	let myTripCountLabel = ``;
@@ -73,7 +101,7 @@ function insertElement(tripList, tripCnt , tabId){
 
     	switch(i){
 			case 0: isPayed = isPayedEnum.ALL; 
-					tripCount = tripCnt.allTripCount; 
+					tripCount = tripCnt.allTripCount;
 					myTripCountLabel.classList.add(`all_payment`);
 			        break;
 			case 1: isPayed = isPayedEnum.NOTPAYED; 
@@ -85,10 +113,14 @@ function insertElement(tripList, tripCnt , tabId){
 					myTripCountLabel.classList.add(`payed_complete`);     
 					break;
 		}
+		if(isPayed == sort){
+			// 현재 선택한 버튼에 색상 변경
+			myTripCountLabel.style.background = `var(--primary_02)`;
+		}
     	text = document.createTextNode(isPayed); 
     	myTripCountLabel.appendChild(text);
     	span = makeElement(`span`,`my_trip_num`);
-    	text = document.createTextNode(tripCount); 
+    	text = document.createTextNode(` `+tripCount); 
     	span.appendChild(text);
     	myTripCountLabel.appendChild(span);
     	myTrip.appendChild(myTripCountLabel);
@@ -294,7 +326,7 @@ function insertElement(tripList, tripCnt , tabId){
     	myTrip.appendChild(myTripList);
     });	
     if(tripList.length == 0){
-		let noResult = makeElement(`p`,`no_result_page text-center mt-5 pt-5 fs-3`);
+		let noResult = makeElement(`p`,`no_result_page`);
 		text = document.createTextNode(`조회된 목록이 없습니다`);
 		noResult.appendChild(text);
 		myTrip.appendChild(noResult);
@@ -303,5 +335,28 @@ function insertElement(tripList, tripCnt , tabId){
 }
 
 	
+const pagination = document.getElementsByClassName(`pagination`)[0];
 
-	
+pages.forEach((page) => {
+	page.addEventListener(`click`, e => {
+		const activeBtn = document.querySelectorAll(`.active`)[0];
+		// paging
+		if(e.target.ariaLabel == `Previous`||e.target.parentElement.ariaLabel == `Previous`){
+			activeButton(activeBtn.previousElementSibling);
+			currentPeriod = activeBtn.previousElementSibling.textContent;
+			getMyTravel(currentTabId, currentSort, currentPeriod);
+			return false;
+		}
+		if(e.target.ariaLabel == `Next`||e.target.parentElement.ariaLabel == `Next`){
+			activeButton(activeBtn.nextElementSibling);
+			currentPeriod = activeBtn.nextElementSibling.textContent;
+			getMyTravel(currentTabId, currentSort, currentPeriod);			
+			return false;
+		}
+		activeButton(page);
+		currentPeriod = page.textContent;
+		console.log(currentPeriod);
+		getMyTravel(currentTabId, currentSort, currentPeriod);
+		
+	})
+})

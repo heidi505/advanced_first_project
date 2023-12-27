@@ -25,6 +25,7 @@
         ON ar_city.code = t.arrival_city
         WHERE user_id = #{userId}
         AND status_enum = #{statusEnum}
+        AND departure_time like concat('%',#{year},'%')
         <if test="sort == 'true'">
             AND is_payed = true
         </if>
@@ -36,12 +37,13 @@
     </select>
 
     <select id="getMyTripCount" resultType="int">
-        SELECT count(*)
+        SELECT count(distinct reservation_id)
         FROM reservation_tb as r
         JOIN ticket_tb as t
         ON r.id = t.reservation_id
         WHERE user_id = #{userId}
         AND status_enum = #{statusEnum}
+        AND departure_time like concat('%',#{year},'%')
         <if test="sort == 'true'">
             AND is_payed = true
         </if>
@@ -143,6 +145,26 @@
     	FROM ticket_tb 
     	WHERE departure_time &lt; NOW());
     </update>
+    
+    <update id="setCancelTrip">
+    	UPDATE reservation_tb
+		SET status_enum = '취소'
+		WHERE status_enum = '예정'
+    	AND id IN (
+    	SELECT reservation_id 
+    	FROM ticket_tb 
+    	WHERE payment_deadline &lt; NOW());
+    </update>
+    
+    <select id="getMyTripDepartureYear" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripYearDTO">
+    	SELECT left(min(departure_time),4) as min_yaer, left(max(departure_time),4)as max_year 
+    	FROM reservation_tb as r
+		JOIN ticket_tb as t
+		ON r.id = t.reservation_id
+		WHERE user_id = #{userId}
+		AND status_enum = #{statusEnum}
+    </select>
+    
     
 
 </mapper>

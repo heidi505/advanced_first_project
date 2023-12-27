@@ -340,10 +340,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		})
 	}
 
-
-
-	
-	
 	// 출발지 & 목적지 검색 
 	async function searchCity(keyword, fromToCheck){
 		keyword = keyword.toUpperCase();
@@ -357,9 +353,6 @@ document.addEventListener("DOMContentLoaded", function () {
     	}
 	}
 
-
-
-	
 	// 최근 검색한 항공권 이동 이벤트
 	const recentFlight = document.querySelectorAll('.flight_search_box');
 	recentFlight.forEach((flight)=>{
@@ -369,11 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		})	
 	});	
-	// bootstrap을 이용한 popover 
-	const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-	const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 	
-
  	const searchCityButton = document.querySelectorAll('.search_city_button'); 
  	const searchCityInput = document.querySelectorAll('.search_city_input');
  	const citySearchBox = document.querySelectorAll('.city_search_box');  	 	

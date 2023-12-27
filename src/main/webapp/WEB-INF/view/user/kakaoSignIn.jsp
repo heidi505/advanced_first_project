@@ -25,6 +25,9 @@
                                 <img class="kakao_logo" src="/images/kakao_login_medium_wide.png"/></a>
                         </button>
                     </div>
+                    <!-- fcm 토큰과 클라이언트 식별자 input -->
+					<input id="installationId" type="hidden" name="installationId" value="">
+					<input id="fcmToken" type="hidden" name="fcmToken" value="">
                     <div class="w-75 mx-auto d-flex mb-5 ">
                         <a href="/sign-in" class="mx-auto" href="/user/sign-in"><b>로그인</b></a>
                     </div>
@@ -36,7 +39,6 @@
 
 </div>
 </div>
-
-
+<script type="module" src="/js/firebase.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

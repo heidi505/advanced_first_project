@@ -664,16 +664,18 @@
                             <li class="flight_search_sub_txt">
                                 <span class="flight_search_date">${list.departureTime} ~ ${list.arrivalTime}</span>
                                 <span class="flight_search_item">
+                            <c:set value="0" var="count"></c:set>    
                             <c:if test="${list.adults > 0 }">
-                                어른 ${list.adults}명
+                                어른 
+                                <c:set value="${list.adults}" var="count"></c:set>
                             </c:if>
                             <c:if test="${list.children > 0 }">
-                                소아 ${list.children}명
+                                <c:set value="${count + list.children}" var="count"></c:set>
                             </c:if>
                             <c:if test="${list.infants > 0 }">
-                                유아 ${list.infants}명
+                            	<c:set value="${count + list.infants}" var="count"></c:set>
                             </c:if>
-							 - ${list.travelClass}</span>
+							<c:if test="${list.children > 0 or list.infants > 0}"> 외 </c:if><c:out value="${count}"></c:out>명 - ${list.travelClass}</span>
                             </li>
                         </ul>
                     </div>
