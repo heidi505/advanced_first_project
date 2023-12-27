@@ -362,9 +362,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		})	
 	});	
-	// bootstrap을 이용한 popover 
-	const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-	const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 	
  	const searchCityButton = document.querySelectorAll('.search_city_button'); 
  	const searchCityInput = document.querySelectorAll('.search_city_input');

@@ -92,7 +92,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
     	text = document.createTextNode(isPayed); 
     	myTripCountLabel.appendChild(text);
     	span = makeElement(`span`,`my_trip_num`);
-    	text = document.createTextNode(tripCount); 
+    	text = document.createTextNode(` `+tripCount); 
     	span.appendChild(text);
     	myTripCountLabel.appendChild(span);
     	myTrip.appendChild(myTripCountLabel);
