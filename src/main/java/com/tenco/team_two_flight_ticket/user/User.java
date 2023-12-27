@@ -37,7 +37,7 @@ public class User {
     private String fcmToken;
 
     @Builder
-    public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean isAdmin, Timestamp createdAt) {
+    public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean isAdmin, Timestamp createdAt, String fcmToken) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -47,5 +47,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.isAdmin = isAdmin;
         this.createdAt = createdAt;
+        this.fcmToken = fcmToken;
     }
 }

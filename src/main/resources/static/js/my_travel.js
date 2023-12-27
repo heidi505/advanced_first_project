@@ -40,7 +40,7 @@ async function getMyTravel(tabId, sort){
 	 try {
         const response = await fetch(href);
         const data = await response.json(); 
-        insertElement(data.tripList, data.tripCount, tabId );
+        insertElement(data.tripList, data.tripCount, tabId , sort);
     } catch (error) {
 		alert(error+`목록을 불러오는데 실패했습니다`);
     }
@@ -57,7 +57,7 @@ function makeYearTag(year){
 
 
 // 여행 목록 삽입하기(목록, 목록 수, 목록의 종류)
-function insertElement(tripList, tripCnt , tabId){
+function insertElement(tripList, tripCnt , tabId, sort){
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = ``;
 	let myTripCountLabel = ``;
@@ -73,7 +73,7 @@ function insertElement(tripList, tripCnt , tabId){
 
     	switch(i){
 			case 0: isPayed = isPayedEnum.ALL; 
-					tripCount = tripCnt.allTripCount; 
+					tripCount = tripCnt.allTripCount;
 					myTripCountLabel.classList.add(`all_payment`);
 			        break;
 			case 1: isPayed = isPayedEnum.NOTPAYED; 
@@ -84,6 +84,9 @@ function insertElement(tripList, tripCnt , tabId){
 					tripCount = tripCnt.payedTripCount;
 					myTripCountLabel.classList.add(`payed_complete`);     
 					break;
+		}
+		if(isPayed == sort){
+			myTripCountLabel.style.background = `var(--primary_02)`;
 		}
     	text = document.createTextNode(isPayed); 
     	myTripCountLabel.appendChild(text);
@@ -294,7 +297,7 @@ function insertElement(tripList, tripCnt , tabId){
     	myTrip.appendChild(myTripList);
     });	
     if(tripList.length == 0){
-		let noResult = makeElement(`p`,`no_result_page text-center mt-5 pt-5 fs-3`);
+		let noResult = makeElement(`p`,`no_result_page`);
 		text = document.createTextNode(`조회된 목록이 없습니다`);
 		noResult.appendChild(text);
 		myTrip.appendChild(noResult);

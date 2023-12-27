@@ -36,7 +36,9 @@ public interface ReservationRepository {
 
 	List<GetPayedInfoDTO> getPayedInfo(Long reservationNum);
 
-	// 지난 여행 전환
+	// 출발일이 지난 여행 상태를 지난 여행로 전환
 	void setLastTrip();
+	// 만료 기간이 지난 여행을 취소된 여행으로 전환
+	void setCancelTrip();
 
 }

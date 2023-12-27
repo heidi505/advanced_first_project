@@ -144,5 +144,15 @@
     	WHERE departure_time &lt; NOW());
     </update>
     
+    <update id="setCancelTrip">
+    	UPDATE reservation_tb
+		SET status_enum = '취소'
+		WHERE status_enum = '예정'
+    	AND id IN (
+    	SELECT reservation_id 
+    	FROM ticket_tb 
+    	WHERE payment_deadline &lt; NOW());
+    </update>
+    
 
 </mapper>
