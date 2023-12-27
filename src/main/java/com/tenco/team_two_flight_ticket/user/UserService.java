@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
+import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
+import io.github.flashvayne.chatgpt.service.ChatgptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ResourceLoader;
@@ -59,7 +61,11 @@ public class UserService {
     private int authNumber;
     @Autowired
     private ResourceLoader resourceLoader;
+    @Autowired
+    private ChatgptService chatgptService;
 
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @Transactional
     public void signUp(UserRequest.SignUpDTO dto) {
@@ -153,11 +159,13 @@ public class UserService {
                     .email("aahh2@naver.com")
                     .password("")
                     .phoneNumber("01035842292")
+                    .isKaKao(true)
                     .build();
 
             userRepository.insert(user);
             checkUser = user;
         }
+        checkUser.setKaKao(true);
         return checkUser;
     }
 
@@ -285,6 +293,20 @@ public class UserService {
 		
 	}
 
+    public String getChatResponse(String condition){
+        User user = (User) session.getAttribute(Define.PRINCIPAL);
+        List<String> cityName = ticketRepository.findUserDestination(user.getId());
+
+        if(cityName.isEmpty()){
+            return "예약을 먼저 해주세요!";
+        }
+
+        if (condition.equals("plan")){
+            return chatgptService.sendMessage(cityName.get(0) + "에 유명한 관광지 한국어로 알려줘");
+        }else{
+            return chatgptService.sendMessage(cityName.get(0) + " 가는데 챙겨야할 준비물 뭐 있을까?");
+        }
+    }
 
 }
 

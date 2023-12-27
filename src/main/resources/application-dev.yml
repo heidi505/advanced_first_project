@@ -1,39 +1,54 @@
 server:
   servlet:
+    multipart:
+      max-file-size: 10GB
+      max-request-size: 10GB
     encoding:
       charset: utf-8
       force: true
   port: 8080
 spring:
-  mustache:
-    servlet:
-      expose-session-attributes: true
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
   datasource:
-    url: jdbc:h2:mem:test;MODE=MySQL
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-    servlet:
-      expose-session-attributes: true
-      expose-request-attributes: true
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://nimbus-db.c2yvmygbxfmn.ap-northeast-2.rds.amazonaws.com:3306/nimbusdb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: metacoding
+    password: nimbus111!
   sql:
     init:
       encoding: utf-8
-#      data-locations:
-#        - classpath:db/data.sql
+      username:
+      password:
+      mode: always
+      data-locations:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: xxwhite19@gmail.com
+    password: bwmd uxof njqv vtiy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
       default_batch_fetch_size: 100
     open-in-view: true
+    database-platform:
   output:
     ansi:
       enabled: always
@@ -41,13 +56,21 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
-mybatis:
-  mapper-locations:
-    - classpath:mapper/**.xml
-  configuration:
-    map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  h2:
+    console:
+      enabled: true
 
 logging:
   level:
     org.mybatis: DEBUG
+    '[org.hibernate.type]': TRACE
+    '[com.tenco.team_two_flight_ticket]' : INFO
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations:
+    - classpath:mapper/**.xml
+chatgpt:
+  api-key: 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

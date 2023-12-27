@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/ticket")
 @Controller

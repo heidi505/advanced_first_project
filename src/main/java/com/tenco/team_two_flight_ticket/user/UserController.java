@@ -6,14 +6,12 @@ import com.tenco.team_two_flight_ticket.coupon.CouponService;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
@@ -27,6 +25,7 @@ import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+@Slf4j
 @RequestMapping("/user")
 @Controller
 public class UserController {
@@ -41,6 +40,7 @@ public class UserController {
 	
 	@Autowired
 	private CouponService couponService;
+
 
 	@GetMapping("/profile")
 	public String profile(Model model) {
@@ -112,7 +112,12 @@ public class UserController {
 		myTrip.setMaxYear(tripYear.getMaxYear());
 		return myTrip;
 	}
-	
+
+	@ResponseBody
+	@GetMapping("/gpt/{condition}")
+	public String gptTest(@PathVariable String condition){
+		return userService.getChatResponse(condition);
+	}
 
 	
 	

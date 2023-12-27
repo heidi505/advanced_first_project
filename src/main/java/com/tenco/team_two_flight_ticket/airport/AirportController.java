@@ -17,6 +17,7 @@ import com.tenco.team_two_flight_ticket.user.User;
 import com.tenco.team_two_flight_ticket.user.UserRepository;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @RequestMapping("/airport")
 @Controller
 public class AirportController {

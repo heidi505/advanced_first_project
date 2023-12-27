@@ -61,6 +61,7 @@ spring:
     console:
       enabled: true
 
+
 logging:
   level:
     org.mybatis: DEBUG
@@ -72,4 +73,3 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations:
     - classpath:mapper/**.xml
-

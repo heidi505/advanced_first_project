@@ -122,6 +122,11 @@
 			</c:forEach>
 			</tbody>
 			</table>
+            <div class="w-100 text-center p-4">
+                <form action="/kakaoPay" method="post">
+                    <button type="submit" class="payed_check_btn btn btn-primary w-25">결제하기</button>
+                </form>
+            </div>
 
 			
             <!-- 모달창 부분 -->

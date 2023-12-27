@@ -2,6 +2,7 @@ package com.tenco.team_two_flight_ticket.auth;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -46,6 +47,7 @@ import com.tenco.team_two_flight_ticket.user.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+@Slf4j
 @Controller
 public class AuthController {
 
@@ -75,6 +77,7 @@ public class AuthController {
     
 
     //메인 페이지
+
     @GetMapping("/main")
     public String mainPage(Model model){
 
@@ -186,6 +189,9 @@ public class AuthController {
         KakaoProfile kakaoProfile = response2.getBody();
 
         User checkUser = userService.kakaoCheckUsername(kakaoProfile);
+        System.out.println("=====================");
+        System.out.println(checkUser.isKaKao());
+        System.out.println("====================");
 
         session.setAttribute(Define.PRINCIPAL, checkUser);
         

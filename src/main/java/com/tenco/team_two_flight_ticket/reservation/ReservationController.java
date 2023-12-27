@@ -5,6 +5,10 @@ import java.util.List;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
+
+import com.tenco.team_two_flight_ticket.user.UserService;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +26,7 @@ import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTri
 import com.tenco.team_two_flight_ticket.user.User;
 
 import jakarta.servlet.http.HttpSession;
-
+@Slf4j
 @Controller
 public class ReservationController {
     @Autowired

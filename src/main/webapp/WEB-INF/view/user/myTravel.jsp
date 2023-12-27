@@ -53,16 +53,22 @@
                         <img src="/images/icons/close.png" alt="닫기"/>
                      </span>
                     <p class="trip_modal_logo"><img src="/images/logo.svg" alt="님부스">
-                        나의 여행 일정</p>
+                        나의 여행 준비</p>
                     <div class="trip_schedule">
                         <div class="trip_schedule_main">
                             <div class="trip_schedule_main_img"><img src="/images/logo.svg" alt="님부스"></div>
                             <p>Travel EveryDay, <span>님부스</span>입니다</p>
                         </div>
                         <div class="trip_questions">
-                            <button type="button" class="trip_question_icon">
+                            <button type="button" class="trip_question_icon" id="plan">
                                 <img class="trip_question_img" src="/images/icons/airplane_icon.svg" alt="비행기 아이콘">
-                                항공권 문의
+                                내 여행 계획 세워줘!
+                            </button>
+                        </div>
+                        <div class="trip_questions">
+                            <button type="button" class="trip_question_icon" id="supplies">
+                                <img class="trip_question_img" src="/images/icons/airplane_icon.svg" alt="비행기 아이콘">
+                                준비물 뭐 챙겨야할까?
                             </button>
                         </div>
                         <div class="trip_answer">
@@ -73,25 +79,6 @@
                                 <div class="trip_answer_cont">
                                 <span class="trip_answer_tit">님부스</span>
                                 <div class="trip_answer_txt scroll">
-                                    <p>
-                                        여행자님, 가는편 결항으로 오는편도 환불 신청이 필요하신가요?
-                                    </p>
-                                    <p>
-                                        <span class="trip_answer_sub_tit">* 신청방법</span>
-                                        flights@myrealtrip.com 메일로 서류와 함께 아래 3가지 모두 작성하여 제출해주세요.
-                                    </p>
-                                    <p>
-                                        <span  class="trip_answer_sub_tit">* 필요서류</span>
-                                        1. 결항 확인서(탑승객명/일정/결항사유 : 기상악화 기재 必)
-                                        2. 탑승객 신분증 사본 (에어서울/RS)
-                                        ※민감 정보는 마스킹 처리 후 제출
-                                    </p>
-                                    <p>
-                                        <span  class="trip_answer_sub_tit">* 내용 (3가지 모두 기재)</span>
-                                        1. 예약번호(출발편/복편 모두)
-                                        2. 환불요청 탑승객 성함
-                                        3. 출발 편 결항으로 인한 복편 전액 환불 요청
-                                    </p>
                                 </div>
                             </div>
                             </div>
@@ -207,24 +194,95 @@
 
     const tripQuestionIcon = document.querySelector(".trip_question_icon");
     const tripAnswer = document.querySelector(".trip_answer");
-    const tripQuestionImg = document.querySelector(".trip_question_img");
+        const tripQuestionImg = document.querySelector(".trip_question_img");
 
-    const defaultImagePath = "/images/icons/airplane_icon.svg";
-    const clickedImagePath = "/images/icons/airplane_icon_wh.svg";
-    let isClicked = false;
+        const defaultImagePath = "/images/icons/airplane_icon.svg";
+        const clickedImagePath = "/images/icons/airplane_icon_wh.svg";
+        let isClicked = false;
 
-    tripQuestionIcon.addEventListener("click", () => {
+
+
+    //     tripQuestionIcon.addEventListener("click", () => {
+    //         tripAnswer.style.transition = "max-height 0.7s";
+    //         tripAnswer.style.maxHeight = isClicked ? "0" : "1000px"; // 토글된 상태에 따라 최대 높이 변경
+    //         tripQuestionIcon.style.backgroundColor = isClicked ? "initial" : "var(--primary_02)"; // 토글된 상태에 따라 배경색 변경
+    //         tripQuestionIcon.style.color = isClicked ? "var(--primary_02)" : "var(--basic_wh)"; // 토글된 상태에 따라 텍스트 색상 변경
+    //
+    //         // 클릭 상태에 따라 이미지 변경
+    //     tripQuestionImg.src = isClicked ? defaultImagePath : clickedImagePath;
+    //
+    //     // 클릭 상태 업데이트
+    //     isClicked = !isClicked;
+    // });
+
+    let plan = document.getElementById("plan");
+    let supplies = document.getElementById("supplies");
+
+
+    let gptAnswer = document.querySelector(".trip_answer_txt");
+
+    plan.addEventListener("click", async function (){
+
         tripAnswer.style.transition = "max-height 0.7s";
         tripAnswer.style.maxHeight = isClicked ? "0" : "1000px"; // 토글된 상태에 따라 최대 높이 변경
-        tripQuestionIcon.style.backgroundColor = isClicked ? "initial" : "var(--primary_02)"; // 토글된 상태에 따라 배경색 변경
-        tripQuestionIcon.style.color = isClicked ? "var(--primary_02)" : "var(--basic_wh)"; // 토글된 상태에 따라 텍스트 색상 변경
+        plan.style.backgroundColor = isClicked ? "initial" : "var(--primary_02)"; // 토글된 상태에 따라 배경색 변경
+        plan.style.color = isClicked ? "var(--primary_02)" : "var(--basic_wh)"; // 토글된 상태에 따라 텍스트 색상 변경
 
         // 클릭 상태에 따라 이미지 변경
         tripQuestionImg.src = isClicked ? defaultImagePath : clickedImagePath;
 
         // 클릭 상태 업데이트
         isClicked = !isClicked;
+
+        setTimeout(loading(), 2000);
+
+        let response = await fetch("/user/gpt/plan", {
+            method:"get",
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+        let responseBody = await response.text();
+
+        console.log('응답'+responseBody);
+
+        let htmlData = "";
+        gptAnswer.innerHTML = responseBody;
+
     });
+
+    function loading() {
+        let data = "";
+        gptAnswer.innerHTML = "<p>Loading...</p>"
+    }
+
+    supplies.addEventListener("click", async function (){
+        tripAnswer.style.transition = "max-height 0.7s";
+        tripAnswer.style.maxHeight = isClicked ? "0" : "1000px"; // 토글된 상태에 따라 최대 높이 변경
+        supplies.style.backgroundColor = isClicked ? "initial" : "var(--primary_02)"; // 토글된 상태에 따라 배경색 변경
+        supplies.style.color = isClicked ? "var(--primary_02)" : "var(--basic_wh)"; // 토글된 상태에 따라 텍스트 색상 변경
+
+        // 클릭 상태에 따라 이미지 변경
+        tripQuestionImg.src = isClicked ? defaultImagePath : clickedImagePath;
+
+        // 클릭 상태 업데이트
+        isClicked = !isClicked;
+
+        setTimeout(loading(), 2000);
+
+        let response = await fetch("/user/gpt/supplies", {
+            method:"get",
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+        let responseBody = await response.text();
+
+        console.log('응답'+responseBody);
+
+        let htmlData = "";
+        gptAnswer.innerHTML = responseBody;
+    })
 
 
 </script>

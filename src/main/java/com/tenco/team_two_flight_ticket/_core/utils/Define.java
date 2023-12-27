@@ -20,8 +20,8 @@ public class Define {
 
 
     public static final String TENCOKEY = "49BA83AC312E418F75C3FDC25844174E9BE305278D5860AFB423FCA2AF760FAA";
-    
+
     //파이어베이스 키
     public static final String FIREBASEKEY = "two-flight-ticket-82cd2-firebase-adminsdk-ygapj-adba0ac22a.json";
-    
+
 }

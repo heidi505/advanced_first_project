@@ -9,6 +9,7 @@ import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
 import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 import static io.lettuce.core.pubsub.PubSubOutput.Type.message;
 
+@Slf4j
 @Controller
 public class CouponController {
 
