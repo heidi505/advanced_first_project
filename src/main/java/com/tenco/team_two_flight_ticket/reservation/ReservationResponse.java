@@ -25,6 +25,38 @@ import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import lombok.Data;
 
 public class ReservationResponse {
+	
+	 @Data
+	 public static class GetMyTravelDTO {
+		private int id;
+	    private Boolean isPayed;
+	    private Timestamp createdAt;
+	    private Timestamp paymentDeadline;
+	    private int reservationNum;
+	    private StatusEnum statusEnum;
+	    private String airline;
+	    private String arrivalCity;
+	    private String departureAirport;
+	    private String departureCity;
+	    private String flightName;
+	    private Timestamp departureTime;
+	    private Timestamp arrivalTime;
+	        
+	    private String koreanDepartureAirport;
+	    private String koreanArrivalAirport;
+	    private String koreanAirline;
+	    private String koreanDepartureCity;
+	 }
+	 
+	 
+	 @Data
+	 public static class GetMyTripCountDTO {
+		private int allTripCount;
+	    private int payedTripCount;
+	    private int notPayedTripCount;
+	 }
+	
+	
 
 	@Data
 	public static class ReservationPaymentDTO {

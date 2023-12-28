@@ -20,16 +20,14 @@ import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestExce
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTravelDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripCountDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
 import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
-
-
 import jakarta.validation.Valid;
 
 import org.springframework.util.LinkedMultiValueMap;
