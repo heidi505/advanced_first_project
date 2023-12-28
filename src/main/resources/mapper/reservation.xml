@@ -95,7 +95,7 @@
 						   on hb.user_id = ub.id
 				 left join coupon_tb as cb
 						   on cb.id = hb.coupon_id
-		where ub.id = #{userId}
+		where tb.id = #{userId}
     </select>
 
 	<resultMap id="reservationPaymentResultMap" type="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$ReservationPaymentDTO">

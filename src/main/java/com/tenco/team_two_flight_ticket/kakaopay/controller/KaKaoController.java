@@ -58,6 +58,12 @@ public class KaKaoController {
         return ResponseEntity.ok().body(ApiUtils.success(message));
     }
 
+    @GetMapping("/kakaoPay/cancel")
+    public String kakaoCancelGet(){
+        return "redirect:/main";
+    }
+
+
     @ResponseBody
     @PostMapping("/kakaoPay/fail")
     public String kakaoFail() {
