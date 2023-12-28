@@ -4,6 +4,7 @@ package com.tenco.team_two_flight_ticket.ticket;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -87,6 +88,24 @@ public class TicketController {
 
     }
 
+    @ResponseBody
+    @GetMapping("/flight-search/select/{lowerPrice}")
+    public ResponseEntity<ApiUtils.ApiResult<List<DataDTO>>> lowerPrice(@PathVariable int lowerPrice, Model model) {
+        List<DataDTO> lowestPrice= ticketService.ticketLowestPrice();
+        model.addAttribute("lowerPrice", lowerPrice);
+        return ResponseEntity.ok().body(ApiUtils.success(lowestPrice));
+    }
+
+    @ResponseBody
+    @GetMapping("/flight-search/select/{shortFlight}")
+    public ResponseEntity<ApiUtils.ApiResult<List<DataDTO>>> shortFlight(@PathVariable int shortFlight, Model model) {
+        List<DataDTO> shortFlightTime = ticketService.ticketShortFlight();
+        model.addAttribute("shortFlight", shortFlight);
+        return ResponseEntity.ok().body(ApiUtils.success(shortFlightTime));
+
+    }
+
+
     @GetMapping("/preview/{ticketId}")
     public String preview(@PathVariable int ticketId, Model model){
 
@@ -137,7 +156,7 @@ public class TicketController {
 
         return "flightTicket/flightSearch";
     }
-    
+
     @GetMapping("/flight-recent-search")
     public String flightRecentSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
     	String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
@@ -199,7 +218,7 @@ public class TicketController {
 
         return "flightTicket/flightSearch";
     }
-    
+
     @GetMapping("/test-search")
     public String testSearch(@Valid TicketRequest.TicketLightSearchDTO dto, Model model) throws URISyntaxException  {
     	// 검색어에 해당하는 도시나 나라 이름을 DB에서 검색해 해당하는 곳을 도착지로 선정하고 나머지는 랜덤으로 작성

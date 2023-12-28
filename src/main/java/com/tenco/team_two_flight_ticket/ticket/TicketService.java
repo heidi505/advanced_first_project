@@ -1,8 +1,9 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
 
-import java.util.List;
+import java.util.*;
 
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.PriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,7 @@ import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
@@ -227,8 +226,6 @@ public class TicketService {
 
         List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId().equals(String.valueOf(ticketId))).collect(Collectors.toList());
 
-
-
         return dto;
 
     }
@@ -421,5 +418,29 @@ public class TicketService {
 	}
 
 
+    public List<DataDTO> ticketLowestPrice() {
+        System.out.println(responseDTO.getData() + "getData");
 
+        List<DataDTO> sortedDataList = responseDTO.getData().stream()
+                .sorted(Comparator.comparingDouble(e -> Double.parseDouble(e.getPrice().getGrandTotal().replaceAll(",", ""))))
+                .collect(Collectors.toList());
+
+//        가격 낮은 순
+
+        System.out.println(sortedDataList + "sortedDataList확인");
+
+        return sortedDataList;
+    }
+
+    public List<DataDTO> ticketShortFlight() {
+
+        List<DataDTO> sortedList = responseDTO.getData().stream()
+                .sorted(Comparator.comparingInt(e -> e.getItineraries()
+                        .stream()
+                        .mapToInt(ItinerariesDTO::totalMinute)
+                        .sum()))
+                .collect(Collectors.toList());
+
+        return sortedList;
+    }
 }

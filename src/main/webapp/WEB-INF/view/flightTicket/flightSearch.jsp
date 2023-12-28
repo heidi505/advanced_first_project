@@ -813,17 +813,10 @@
                         검색결과 총 <span>${count}</span>개
                     </li>
                     <li>
-                        <form action="#">
-                            <select name="">
-                                <option value='1'>가격 낮은 순</option>
-                                <option value='1'>비행시간 짧은 순</option>
-                                <option value='2'>가는 날 출발시간 빠른 순</option>
-                                <option value='3'>오는 날 출발시간 빠른 순</option>
-                                <option value='4'>가는 날 도착시간 빠른 순</option>
-                                <option value='5'>오는 날 도착시간 빠른 순</option>
-                            </select>
-                            <input type="hidden" value="Submit"/>
-                        </form>
+                        <select id="sortType">
+                            <option name="sortType" value="lowerPrice">가격 낮은 순</option>
+                            <option name="sortType" value="shortFlight">비행시간 짧은 순</option>
+                        </select>
                     </li>
                 </ul>
                 <c:forEach var="ticket" items="${ticketList}" varStatus="status">

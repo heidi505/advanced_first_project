@@ -49,4 +49,30 @@ public class ItinerariesDTO {
 
         return segment;
     }
+
+
+    public Integer totalMinute() {
+        String time = this.duration;
+        System.out.println(time + " test!!!!!!!");
+        int indexOfH = time.indexOf("간");
+        System.out.println(indexOfH + " test222222");
+
+        if (time.contains("시간") && time.contains("분")) {
+            int indexOfM = time.indexOf("분");
+
+            String hour = time.substring(0, indexOfH - 1);
+            String minute = time.substring(indexOfH + 2, indexOfM);
+            System.out.println("test:" + hour + minute);
+            Integer answer = Integer.parseInt(hour) * 60 + Integer.parseInt(minute);
+            System.out.println("===============================");
+            System.out.println(answer);
+            System.out.println("===============================");
+            return answer;
+        } else if (time.contains("간")) {
+            String hour = time.substring(0, 1);
+            return Integer.parseInt(hour) * 60;
+        } else {
+            return 0;
+        }
+    }
 }

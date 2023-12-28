@@ -14,5 +14,4 @@ public class StopDTO {
     private String duration;
     private String arrivalAt;
     private String departureAt;
-
 }
