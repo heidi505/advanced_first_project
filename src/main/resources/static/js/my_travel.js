@@ -363,3 +363,29 @@ pages.forEach((page) => {
 		
 	})
 })
+
+  	const tabButtons = document.querySelectorAll(".tab_menu li a");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach((button) => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            tabContents.forEach((content) => {
+                content.style.display = "none";
+            });
+
+            tabButtons.forEach((btn) => {
+                btn.classList.remove("tab_active");
+            });
+
+            const tabId = button.getAttribute("data-tab");
+            document.getElementById(tabId).style.display = "block";
+
+            //데이터를 가져와 출력하는 함수
+            getMyTravel(tabId, isPayedEnum.ALL, currentPeriod);
+            button.classList.add("tab_active");
+        });
+    });
+
+
