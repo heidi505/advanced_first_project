@@ -122,7 +122,7 @@
 			</c:forEach>
 			</tbody>
 			</table>
-			<c:if test="${detailTrip.isPayed eq false}">
+			<c:if test="${detailTrip.isPayed eq false&& detailTrip.statusEnum ne '취소'}">
             <div class="w-100 text-center p-4">
                 <form action="/kakaoPay" method="post">
                     <button type="submit" class="payed_check_btn btn btn-primary w-25">결제하기</button>
