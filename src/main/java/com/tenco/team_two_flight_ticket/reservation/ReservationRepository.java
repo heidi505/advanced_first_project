@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -45,4 +46,7 @@ public interface ReservationRepository {
 	//처음 여행일과 마지막 여행일 조회
 	GetMyTripYearDTO getMyTripDepartureYear(@Param("userId") int userId, @Param("statusEnum") StatusEnum statusEnum);
 
+    List<String> getDepartureTimeByResId(int reservationId);
+
+    int updateReservationToTrue(int reservationId);
 }

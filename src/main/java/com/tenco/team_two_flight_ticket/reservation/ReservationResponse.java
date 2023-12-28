@@ -70,12 +70,13 @@ public class ReservationResponse {
 		private Long totalPrice;
 		@CreationTimestamp
 		private Timestamp departureTime;
+		private int originalPrice;
 
-		public String departureTime() {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String formattedDate = sdf.format(new Date(this.departureTime.getTime()));
-			return formattedDate;
-		};
+//		public String departureTime() {
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//			String formattedDate = sdf.format(new Date(this.departureTime.getTime()));
+//			return formattedDate;
+//		};
 	}
 	@Data
 	public static class GetMyTripDetailDTO{
