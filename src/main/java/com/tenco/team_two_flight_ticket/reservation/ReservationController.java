@@ -148,14 +148,6 @@ public class ReservationController {
         return "reservation/finalResult";
     }
 
-    /* 테스트용 + 예비 */
-
-    @GetMapping("/sample")
-    public String test2() {
-        return "reservation/sample2";
-    }
-
-
     // 운임규정 모달 버튼 (위치 잡고 추가만 해주면 됨!)
     // 예약규정, 운임규정, 결제규정, 환불/변경
     @GetMapping("/regulation")

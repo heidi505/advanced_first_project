@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(flightSearchClose).forEach((closeButton) => {
 
         closeButton.addEventListener("click", (e) => {
-            
-            
+
             if (flightSearchBoxNum > 0) {
                 closeButton.parentElement.style.display = "none";
                 let searchId = closeButton.previousElementSibling.value;
@@ -134,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (fromButtonIcon) {
         function valuesForm(airportCode, airportName) {
             let fromSelectButtons = document.querySelector("#from_select_btn");
-            console.log("fromselectButton" + fromSelectButtons + " 야");
+            
             fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
             fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
             document.getElementById("origin").value = airportCode;

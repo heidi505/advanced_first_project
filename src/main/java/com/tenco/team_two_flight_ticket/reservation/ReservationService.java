@@ -20,16 +20,14 @@ import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestExce
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTravelDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripCountDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
 import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
-
-
 import jakarta.validation.Valid;
 
 import org.springframework.util.LinkedMultiValueMap;
@@ -150,7 +148,7 @@ public class ReservationService {
             case "결제완료": sort = "true"; break;
             default: throw new MyBadRequestException("잘못된 값이 입력되었습니다");
         }
-
+        
         List<GetMyTravelDTO> tripList = null;
 
         // 여행 목록 종류 유효성 검사
@@ -160,8 +158,8 @@ public class ReservationService {
             }
         }
 
+        tripList = reservationRepository.getMyTravel(userId, statusEnum, sort, year);
         try {
-        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort, year);
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }
@@ -297,4 +295,26 @@ public class ReservationService {
 		GetMyTripYearDTO tripYear = reservationRepository.getMyTripDepartureYear(id, dto.getStatusEnum());
 		return tripYear;
 	}
+
+	// 출발일이 지난 여행 상태 변경
+	@Transactional
+	public void setLastTrip() {
+		try {
+			reservationRepository.setLastTrip();			
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+	}
+	// 결제기간이 지난 여행 상태 변경
+	@Transactional
+	public void setCancelTrip() {
+		try {
+			reservationRepository.setCancelTrip();
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+	}
+	
+	
+	
 }
