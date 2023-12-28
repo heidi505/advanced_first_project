@@ -5,13 +5,13 @@
 <mapper namespace="com.tenco.team_two_flight_ticket.reservation.ReservationRepository">
     <select id="getMyTravel" resultType="com.tenco.team_two_flight_ticket.user.UserResponse$GetMyTravelDTO">
         SELECT r.id as id, is_payed, user_id, r.created_at as created_at, payment_deadline
-        , reservation_num, status_enum, airline, arrival_city, departure_airport, departure_city
+        , reservation_num, status_enum, airline, arrival_city, departure_airport, arrival_airport , departure_city
         , flight_name, departure_time, arrival_time, icity.name as korean_arrival_city, iairline.name as korean_airline
-        , de_city.name as korean_departure_city
-        , CASE WHEN ar_city.city_name = ar_city.name
-        THEN ar_city.name
-        ELSE concat(ar_city.city_name,'/',ar_city.name) 
-        END as korean_arrival_city
+        , de_airport.name as korean_departure_airport
+        , CASE WHEN ar_airport.city_name = ar_airport.name
+        THEN ar_airport.name
+        ELSE concat(ar_airport.city_name,'/',ar_airport.name) 
+        END as korean_arrival_airport
         FROM reservation_tb as r
         LEFT JOIN ticket_tb as t
         ON r.id = t.reservation_id
@@ -19,10 +19,10 @@
         ON icity.code = t.arrival_city
         LEFT JOIN iata_airline_tb as iairline
         ON iairline.code = t.airline
-        LEFT JOIN iata_airport_tb as de_city
-        ON de_city.code = t.departure_city
-        LEFT JOIN iata_airport_tb as ar_city
-        ON ar_city.code = t.arrival_city
+        LEFT JOIN iata_airport_tb as de_airport
+        ON de_airport.code = t.departure_airport
+        LEFT JOIN iata_airport_tb as ar_airport
+        ON ar_airport.code = t.arrival_airport
         WHERE user_id = #{userId}
         AND status_enum = #{statusEnum}
         AND departure_time like concat('%',#{year},'%')
@@ -61,7 +61,7 @@
     <select id="getMyTripDetail" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripDetailDTO">
    		SELECT reservation_num, is_payed, status_enum ,payment_deadline ,res_name, real_name , first_name, last_name , r.phone_num , airline, departure_city, arrival_city
    		,departure_time, arrival_time, seat_type, is_one_way, iairline.name as korean_airline
-        , de_city.name as korean_departure_city, ar_city.name as korean_arrival_city
+        , de_airport.name as korean_departure_airport, ar_airport.name as korean_arrival_airport
 		FROM reservation_tb as r
 		JOIN ticket_tb as t
 		ON r.id = t.reservation_id
@@ -73,10 +73,10 @@
         ON icity.code = t.arrival_city
         LEFT JOIN iata_airline_tb as iairline
         ON iairline.code = t.airline
-        LEFT JOIN iata_airport_tb as de_city
-        ON de_city.code = t.departure_city
-        LEFT JOIN iata_airport_tb as ar_city
-        ON ar_city.code = t.arrival_city
+        LEFT JOIN iata_airport_tb as de_airport
+        ON de_airport.code = t.departure_airport
+        LEFT JOIN iata_airport_tb as ar_airport
+        ON ar_airport.code = t.arrival_airport
 		WHERE reservation_num = #{reservationNum}
 		AND r.user_id = #{userId}
 		LIMIT 1

@@ -38,7 +38,7 @@ public class UserResponse {
         private Timestamp arrivalTime;
         
         private String koreanDepartureAirport;
-        private String koreanArrivalCity;
+        private String koreanArrivalAirport;
         private String koreanAirline;
         private String koreanDepartureCity;
     }

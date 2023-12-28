@@ -41,10 +41,10 @@
             </p>
             <div class="detail_cont_box row mx-auto align-middle mt-3">
                 <div class="col-3 air_info border-end text-center pt-4">
-                    <div class="float-start ms-5"><b class="lh-lg">${detailTrip.koreanDepartureCity}<br><span class="color_basic09">${detailTrip.departureCity}</span></b>
+                    <div class="float-start ms-5"><b class="lh-lg">${detailTrip.koreanDepartureAirport}<br><span class="color_basic09">${detailTrip.departureCity}</span></b>
                     </div>
                     <div class="trip_image p-4 my-2 mx-auto"></div>
-                    <div class="float-end me-5"><b class="lh-lg">${detailTrip.koreanArrivalCity}<br><span class="color_basic09">${detailTrip.arrivalCity}</span></b></div>
+                    <div class="float-end me-5"><b class="lh-lg">${detailTrip.koreanArrivalAirport}<br><span class="color_basic09">${detailTrip.arrivalCity}</span></b></div>
                 </div>
                 <div class="col py-3 border-end text-center align-middle">
                     <div class="airline_image p-4 w-10 mx-auto"></div>

@@ -63,15 +63,15 @@ public class ReservationResponse {
 		private SeatTypeEnum seatType;
 		private Boolean isOneWay;
 		private String realName;
-		// 편집한 값들
+		
 		private String departureDate;
 		private String arrivalDate;
 		private String cuttedPaymentDeadline;
 		private String phoneNumber;
 		
-	    private String koreanArrivalCity;
+	    private String koreanArrivalAirport;
 	    private String koreanAirline;
-	    private String koreanDepartureCity;
+	    private String koreanDepartureAirport;
 		
 		
 		void cutDepartureDate() {

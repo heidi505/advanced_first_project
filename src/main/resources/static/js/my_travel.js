@@ -210,7 +210,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
     	let p = makeElement(`p`);
     	
     	
-    	text = document.createTextNode(` [${koreanAirline}] ${data.koreanDepartureCity} - ${data.koreanArrivalCity}`);
+    	text = document.createTextNode(` [${koreanAirline}] ${data.koreanDepartureAirport} - ${data.koreanArrivalAirport}`);
     	p.appendChild(text);
     	div.appendChild(p);
     	p = makeElement(`p`);
@@ -230,7 +230,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
     		let myTripTicketBg = makeElement(`div`,`my_trip_ticket_bg`);
     		myTripTicketImg.appendChild(myTripTicketBg);
     		let tripLeft = makeElement(`span`,`trip_left`);
-    		text = document.createTextNode(data.departureAirport);
+    		text = document.createTextNode(data.departureCity);
     		tripLeft.appendChild(text);
     		myTripTicketBg.appendChild(tripLeft);
     		let tripRight = makeElement(`span`,`trip_right`);
