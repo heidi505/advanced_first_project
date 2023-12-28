@@ -3,6 +3,7 @@ package com.tenco.team_two_flight_ticket.ticket;
 
 import java.util.*;
 
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.PriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -225,8 +226,6 @@ public class TicketService {
 
         List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId().equals(String.valueOf(ticketId))).collect(Collectors.toList());
 
-
-
         return dto;
 
     }
@@ -416,7 +415,5 @@ public class TicketService {
 		}
 		return airport;
 	}
-
-
 
 }

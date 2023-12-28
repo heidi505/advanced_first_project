@@ -92,8 +92,8 @@ window.onload = function(){
 
 	//공항 주차장 버튼 이벤트 등록
 	const aButton = document.querySelectorAll('.parking_btn');
-	aButton.forEach(button=>{
-		button.addEventListener('click', e=>{
+	aButton.forEach(button => {
+		button.addEventListener('click', e => {
 			let menuNumber = e.target.id.replace('_button','');
 			if( menuNumber == 2){
 				updateStatus();

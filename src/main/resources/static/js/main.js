@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(flightSearchClose).forEach((closeButton) => {
 
         closeButton.addEventListener("click", (e) => {
-            
-            
+
             if (flightSearchBoxNum > 0) {
                 closeButton.parentElement.style.display = "none";
                 let searchId = closeButton.previousElementSibling.value;
@@ -134,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (fromButtonIcon) {
         function valuesForm(airportCode, airportName) {
             let fromSelectButtons = document.querySelector("#from_select_btn");
-            console.log("fromselectButton" + fromSelectButtons + " 야");
+            
             fromSelectButtons.querySelector(".from_code_value").innerText = airportCode;
             fromSelectButtons.querySelector(".from_airport_value").innerText = airportName;
             document.getElementById("origin").value = airportCode;
@@ -340,10 +339,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		})
 	}
 
-
-
-	
-	
 	// 출발지 & 목적지 검색 
 	async function searchCity(keyword, fromToCheck){
 		keyword = keyword.toUpperCase();
@@ -357,9 +352,6 @@ document.addEventListener("DOMContentLoaded", function () {
     	}
 	}
 
-
-
-	
 	// 최근 검색한 항공권 이동 이벤트
 	const recentFlight = document.querySelectorAll('.flight_search_box');
 	recentFlight.forEach((flight)=>{
@@ -369,11 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		})	
 	});	
-	// bootstrap을 이용한 popover 
-	const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-	const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 	
-
  	const searchCityButton = document.querySelectorAll('.search_city_button'); 
  	const searchCityInput = document.querySelectorAll('.search_city_input');
  	const citySearchBox = document.querySelectorAll('.city_search_box');  	 	

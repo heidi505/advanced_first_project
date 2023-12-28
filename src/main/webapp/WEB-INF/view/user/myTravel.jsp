@@ -34,6 +34,27 @@
                     </div>
                     <div class="tab-content regions_list_item" id="canceled_trip">
                     </div>
+                    <div>
+						<nav aria-label="Page navigation example">
+  							<ul class="pagination justify-content-center">
+    							<li class="page-item">
+      								<a class="page-link" href="#" aria-label="Previous">
+        								<span aria-hidden="true">&lt;</span>
+      								</a>
+    							</li>
+    							<li class="page-item active"><a class="page-link" href="#">${maxYear}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-1}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-2}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-3}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-4}</a></li>
+    							<li class="page-item">
+      							<a class="page-link" href="#" aria-label="Next">
+        						<span aria-hidden="true">&gt;</span>
+      							</a>
+    							</li>
+  							</ul>
+						</nav>
+					</div>
                 </div>
             </div>
 
@@ -106,8 +127,15 @@
     });
 
     // 처음 목록 출력
-    getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL);
-
+    const maxYear = '${maxYear}';
+    if(maxYear != ''){
+    	getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL, maxYear);
+    } else {
+    	// 자료 없음
+    	getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL, '0');
+    }
+    pages[1].classList.add('active');
+    
     const tabButtons = document.querySelectorAll(".tab_menu li a");
     const tabContents = document.querySelectorAll(".tab-content");
 
@@ -127,7 +155,7 @@
             document.getElementById(tabId).style.display = "block";
 
             //데이터를 가져와 출력하는 함수
-            getMyTravel(tabId, isPayedEnum.ALL);
+            getMyTravel(tabId, isPayedEnum.ALL, currentPeriod);
             button.classList.add("tab_active");
         });
     });
@@ -141,11 +169,13 @@
                 let sort = '';
                 if (e.target.classList.contains('my_trip_num')) {
                     let myTripCountLabel = e.target.parentElement;
+                    myTripCountLabel.style.background = `var(--primary02)`;
                     sort = myTripCountLabel.innerText.split(e.target.innerText)[0];
                 } else {
                     sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
+                    e.target.style.background = `var(--primary02)`;
                 }
-                getMyTravel(tabId, sort);
+                getMyTravel(tabId, sort, currentPeriod);
             }
         })
     });

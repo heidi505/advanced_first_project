@@ -26,12 +26,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class AirportService {
-    public static final String SERVICEKEY = Define.SERVICEKEY;
+
     @Autowired
     TicketRepository ticketRepository;
 
-    public ParkingFeeResponseDTO getParkingFeeAPI(String airportCode) {
-        // 주차요금 api
+    /**
+     * 
+     * @param airportCode
+     * @return parkingFeeResponse
+     */
+    // 주차요금 api
+    public ParkingFeeResponseDTO getParkingFeeAPI(String airportCode) {     
         URI uri = null;
         try {        
             uri = new URI(UriComponentsBuilder
@@ -40,29 +45,28 @@ public class AirportService {
                     .queryParam("schAirportCode",airportCode)
                     .queryParam("type", "json")
                     .build()
-                    .toUriString());
-            
+                    .toUriString());           
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
         RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
-
         HttpEntity<MultiValueMap<String, String>> request
                 = new HttpEntity<>(headers);
-
         ResponseEntity<ParkingFeeResponseDTO> response = restTemplate.exchange(uri, HttpMethod.GET, request, ParkingFeeResponseDTO.class);
-        ParkingFeeResponseDTO list = response.getBody();
-        return list;
+        ParkingFeeResponseDTO parkingFeeResponse = response.getBody();
+        return parkingFeeResponse;
     }
 
+    /**
+     * 
+     * @return parkingStatusResponse
+     */   
+    // 인천공항 주차정보 api
     public ParkingStatusResponse getParkingAreaInfoAPI() {
-        // 인청공항 주차정보 api
         URI uri2 = null;
         String baseUrl = "https://apis.data.go.kr/B551177/StatusOfParking/getTrackingParking?";
-        String serviceKey = SERVICEKEY;
+        String serviceKey = Define.SERVICEKEY;
         int numOfRows = 10;
         int pageNo = 1;
         String type = "json";
@@ -74,9 +78,6 @@ public class AirportService {
             e.printStackTrace();
         }
 
-        System.out.println("uri 주소 : ");
-        System.out.println(uri2.toString());
-
         RestTemplate restTemplate2 = new RestTemplate();
 
         HttpHeaders headers2 = new HttpHeaders();
@@ -85,31 +86,29 @@ public class AirportService {
 
         ResponseEntity<ParkingStatusResponse> responseEntity = restTemplate2.exchange(uri2, HttpMethod.GET, request2, ParkingStatusResponse.class);
         ParkingStatusResponse parkingStatusResponse = responseEntity.getBody();
-        // 응답 데이터를 콘솔에 출력
-        System.out.println("응답 데이터 : ");
-        System.out.println(parkingStatusResponse);
-
 
         return parkingStatusResponse;
     }
+    
+    /**
+     * 
+     * @param userId
+     * @return airportTravelTimes
+     */
     public AirportTravelTimeDTO koAirportTime(Integer userId) {
 
-
         List<Ticket> airportNames = ticketRepository.findByTicketJoinReservation(userId);
-        System.out.println(airportNames.get(0).getDepartureAirport() + "airportName");
 
         String departureAirport = "";
         for (Ticket airportName : airportNames) {
             departureAirport = airportName.getDepartureAirport();
         }
-        System.out.println(departureAirport + "내 도착지 공항은 어디");
 
         String airport = departureAirport;
 
         String myServiceKey = Define.SERVICEKEY;
         String nowDay = DateFormat.formatYear();
         String nowTime = DateFormat.formatTime();
-        System.out.println(nowTime);
 
         // URI 클래스를 사용하여 URL 생성
         URI uri = null;
@@ -153,7 +152,6 @@ public class AirportService {
         } else {
             String baseUrl = "http://openapi.airport.co.kr/service/rest/AirportParkingCongestion/airportParkingCongestionRT";
             String serviceKey = Define.SERVICEKEY;
-            System.out.println("어디겡 : " + airportCode);
             int numOfRows = 10;
             int pageNo = 1;
 
@@ -162,7 +160,6 @@ public class AirportService {
                 uri3 = new URI(UriComponentsBuilder
                         .fromUriString("http://openapi.airport.co.kr/service/rest/AirportParkingCongestion/airportParkingCongestionRT")
                         .queryParam("schAirportCode", airportCode)
-//                    .queryParam("schAirportCode", "PUS") // 테스트용
                         .queryParam("serviceKey", serviceKey)
                         .queryParam("numOfRows", numOfRows)
                         .queryParam("pageNo", pageNo)
@@ -189,7 +186,6 @@ public class AirportService {
             ParkingStatusResponse2 parkingStatusResponse2 = responseEntity.getBody();
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                System.out.println(responseEntity.getBody());
                 return parkingStatusResponse2;
             } else {
                 System.out.println("HTTP 요청 실패: " + responseEntity.getStatusCodeValue());

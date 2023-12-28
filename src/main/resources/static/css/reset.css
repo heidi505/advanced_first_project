@@ -232,14 +232,12 @@ select::-ms-expand {
     display: none;
 }
 
-.select {
-    -o-appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+select {
+    padding: 5px;
+    border: 1px solid var(--form);
     border-radius: 5px;
     text-transform: none;
-    padding: 5px;
+    outline: none;
 }
 
 ::marker {

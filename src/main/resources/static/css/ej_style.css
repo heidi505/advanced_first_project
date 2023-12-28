@@ -752,7 +752,7 @@
 .my_trip_count_label {
     margin-bottom: 16px;
     display: inline-block;
-    background-color: var(--primary_02);
+    background-color: var(--basic_05);
     color: var(--basic_wh);
     padding: 5px 10px;
     border-radius: 15px;

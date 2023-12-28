@@ -40,6 +40,7 @@ public class User {
 
     @Builder
     public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean isAdmin, Timestamp createdAt, boolean isKaKao, String fcmToken) {
+
         this.id = id;
         this.username = username;
         this.password = password;

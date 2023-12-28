@@ -5,8 +5,10 @@ import java.util.List;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
+
 import com.tenco.team_two_flight_ticket.user.UserService;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -145,14 +147,6 @@ public class ReservationController {
     public String reserved() {
         return "reservation/finalResult";
     }
-
-    /* 테스트용 + 예비 */
-
-    @GetMapping("/sample")
-    public String test2() {
-        return "reservation/sample2";
-    }
-
 
     // 운임규정 모달 버튼 (위치 잡고 추가만 해주면 됨!)
     // 예약규정, 운임규정, 결제규정, 환불/변경
