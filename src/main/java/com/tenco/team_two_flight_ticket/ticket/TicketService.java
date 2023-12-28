@@ -417,30 +417,4 @@ public class TicketService {
 		return airport;
 	}
 
-
-    public List<DataDTO> ticketLowestPrice() {
-        System.out.println(responseDTO.getData() + "getData");
-
-        List<DataDTO> sortedDataList = responseDTO.getData().stream()
-                .sorted(Comparator.comparingDouble(e -> Double.parseDouble(e.getPrice().getGrandTotal().replaceAll(",", ""))))
-                .collect(Collectors.toList());
-
-//        가격 낮은 순
-
-        System.out.println(sortedDataList + "sortedDataList확인");
-
-        return sortedDataList;
-    }
-
-    public List<DataDTO> ticketShortFlight() {
-
-        List<DataDTO> sortedList = responseDTO.getData().stream()
-                .sorted(Comparator.comparingInt(e -> e.getItineraries()
-                        .stream()
-                        .mapToInt(ItinerariesDTO::totalMinute)
-                        .sum()))
-                .collect(Collectors.toList());
-
-        return sortedList;
-    }
 }

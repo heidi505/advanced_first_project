@@ -812,12 +812,6 @@
                     <li>
                         검색결과 총 <span>${count}</span>개
                     </li>
-                    <li>
-                        <select id="sortType">
-                            <option name="sortType" value="lowerPrice">가격 낮은 순</option>
-                            <option name="sortType" value="shortFlight">비행시간 짧은 순</option>
-                        </select>
-                    </li>
                 </ul>
                 <c:forEach var="ticket" items="${ticketList}" varStatus="status">
                     <c:choose>

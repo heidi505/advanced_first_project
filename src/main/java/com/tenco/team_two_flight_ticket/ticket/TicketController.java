@@ -89,25 +89,6 @@ public class TicketController {
         return "flightTicket/flightSearch";
 
     }
-
-    @ResponseBody
-    @GetMapping("/flight-search/select/{lowerPrice}")
-    public ResponseEntity<ApiUtils.ApiResult<List<DataDTO>>> lowerPrice(@PathVariable int lowerPrice, Model model) {
-        List<DataDTO> lowestPrice= ticketService.ticketLowestPrice();
-        model.addAttribute("lowerPrice", lowerPrice);
-        return ResponseEntity.ok().body(ApiUtils.success(lowestPrice));
-    }
-
-    @ResponseBody
-    @GetMapping("/flight-search/select/{shortFlight}")
-    public ResponseEntity<ApiUtils.ApiResult<List<DataDTO>>> shortFlight(@PathVariable int shortFlight, Model model) {
-        List<DataDTO> shortFlightTime = ticketService.ticketShortFlight();
-        model.addAttribute("shortFlight", shortFlight);
-        return ResponseEntity.ok().body(ApiUtils.success(shortFlightTime));
-
-    }
-
-
     @GetMapping("/preview/{ticketId}")
     public String preview(@PathVariable int ticketId, Model model){
 
