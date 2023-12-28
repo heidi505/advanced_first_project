@@ -38,7 +38,6 @@ public class SearchedResponse {
 	    	this.arrivalTime =  formatter.format(date2);
 		}
 	    
-	    // 임시 조치
 	    void stringIsOneWay() {
 	    	this.oneWayBoolean = String.valueOf(this.isOneWay);
 	    }

@@ -5,10 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
-import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
 import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
-import com.tenco.team_two_flight_ticket.coupon.Coupon;
 import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
@@ -24,19 +21,22 @@ import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
+import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
 import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
 
-import lombok.extern.slf4j.Slf4j;
+
+import jakarta.validation.Valid;
+
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 
-@Slf4j
 @Service
 public class ReservationService {
 
@@ -47,15 +47,10 @@ public class ReservationService {
     @Autowired
     private PassengerRepository passengerRepository;
     @Autowired
-    private HasCouponRepository hasCouponRepository;
-    @Autowired
     private CouponRepository couponRepository;
 
     @Transactional
     public ReservationResponse.SaveResultDTO save(ReservationRequest.SaveFormDto dto) {
-
-        /*  (추후 api에 따라 수정 필요) */
-
         // reservation_tb
         String datePrefix = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
         String randomSuffix = String.format("%03d", ThreadLocalRandom.current().nextInt(1000));
@@ -75,17 +70,13 @@ public class ReservationService {
 
 
         int resultRowReservation = reservationRepository.insertR(reservationR);
-        System.out.println("예약!");
+        
         if (resultRowReservation != 1) {
             throw new MyBadRequestException("실패");
         }
 
         // 예약 결제상태
         Reservation reservationDTO = reservationRepository.findByReservationNum(reservationNum);
-        System.out.println("테스트 00 : ");
-        System.out.println(reservationDTO.getReservationNum());
-        System.out.println(reservationDTO.getId());
-        System.out.println("제에에발");
 
         //`birth_date`,`gender`,`passenger_type`,`created_at`)
         // passenger_tb
@@ -98,7 +89,7 @@ public class ReservationService {
                 .passengerType(dto.getPassengerType())
                 .build();
         int resultRowPassenger = passengerRepository.insertP(passenger);
-        System.out.println("승객!");
+        
         if (resultRowPassenger != 1) {
             throw new MyBadRequestException("실패");
         }
@@ -123,7 +114,7 @@ public class ReservationService {
                 .baggageAllowance(dto.getBaggageAllowance())
                 .build();
         int resultRowTicket = ticketRepository.insertT(ticket);
-        System.out.println("티켓!");
+        
         if (resultRowTicket != 1) {
             throw new MyBadRequestException("실패");
         }
@@ -131,20 +122,13 @@ public class ReservationService {
         // 방금 저장된 값 찾아서 담는 쿼리.
         // 승객 영문이름 타입 성별 생년월일
         Passenger passengerDTO = passengerRepository.findByReservationId(reservationDTO.getId());
-        System.out.println("테스트 01 : ");
-        System.out.println(passengerDTO.getId());
-        System.out.println(passengerDTO.getReservationId());
-        System.out.println("살려줘");
+        
         // 티켓 항공요금 유류할증료 제세공과금 발권수수료 총액운임
         List<Ticket> ticketDTO = ticketRepository.findByReservationId(reservationDTO.getId());
 
         ReservationResponse.SaveResultDTO response =
                 new ReservationResponse.SaveResultDTO(reservationDTO, passengerDTO, ticketDTO);
 
-        System.out.println("----안담김?----");
-        System.out.println(response.getReservation().getReservationNum());
-        System.out.println(response.getPassenger().getReservationId());
-        System.out.println("--------");
         return response;
     }
 
@@ -157,20 +141,14 @@ public class ReservationService {
         StatusEnum statusEnum = dto.getStatusEnum();
 
         String stringSort = dto.getSort();
-        String sort = "";
+        String sort = null;
+        String year = dto.getYear();
 
         switch (stringSort) {
-            case "전체":
-                sort = "all";
-                break;
-            case "결제전":
-                sort = "false";
-                break;
-            case "결제완료":
-                sort = "true";
-                break;
-            default:
-                throw new MyBadRequestException("잘못된 값이 입력되었습니다");
+            case "전체": sort = "all"; break;
+            case "결제전": sort = "false"; break;
+            case "결제완료": sort = "true"; break;
+            default: throw new MyBadRequestException("잘못된 값이 입력되었습니다");
         }
 
         List<GetMyTravelDTO> tripList = null;
@@ -183,7 +161,7 @@ public class ReservationService {
         }
 
         try {
-        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort);
+        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort, year);
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }
@@ -192,12 +170,13 @@ public class ReservationService {
 
     public GetMyTripCountDTO getMyTripCount(int userId, UserRequest.GetMyTravelListDTO dto) {
         StatusEnum statusEnum = dto.getStatusEnum();
+        String year = dto.getYear();
         // 개수를 담을 객체
         GetMyTripCountDTO tripCnt = new GetMyTripCountDTO();
         try {
-            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all");
-            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true");
-            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false");
+            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all", year);
+            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true", year);
+            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false", year);
             tripCnt.setAllTripCount(allTripCnt);
             tripCnt.setPayedTripCount(payedTripCnt);
             tripCnt.setNotPayedTripCount(notPayedTripCnt);
@@ -208,7 +187,7 @@ public class ReservationService {
         return tripCnt;
     }
 
-
+    
     public GetMyTripDetailDTO getMyTripDetail(int userId, Long reservationNum) {
         GetMyTripDetailDTO dto = null;
         if (reservationNum == null) {
@@ -302,7 +281,6 @@ public class ReservationService {
 
         // 응답 확인
         System.out.println("Response: " + responseEntity.getBody());
-        System.out.println("카카오톡 메세지 보내기 성공");
         return null;
     }
 
@@ -313,4 +291,10 @@ public class ReservationService {
 
         return coupons;
     }
+
+    // 처음 여행 연도 와 마지막 여행 연도 조회
+	public GetMyTripYearDTO getMyTripDepartureYear(int id, @Valid GetMyTravelListDTO dto) {
+		GetMyTripYearDTO tripYear = reservationRepository.getMyTripDepartureYear(id, dto.getStatusEnum());
+		return tripYear;
+	}
 }

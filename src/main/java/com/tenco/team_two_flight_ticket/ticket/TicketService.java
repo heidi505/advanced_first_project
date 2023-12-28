@@ -366,8 +366,7 @@ public class TicketService {
     // 간편 항공권 검색 조건 채우기
  	public TicketSearchDTO getSearchDTO(@Valid TicketRequest.TicketLightSearchDTO dto) {
  		// 검색 조건 dto
- 		TicketSearchDTO searchDto = new TicketSearchDTO();
- 				
+ 		TicketSearchDTO searchDto = new TicketSearchDTO(); 				
  		String keyword = dto.getKeyword();
  		List<City> cities = ticketRepository.getCitiesFromKeyword(keyword);
  		Random random = new Random();
@@ -380,18 +379,14 @@ public class TicketService {
  		List<City> koreanCity = ticketRepository.getKoreanCity();
  		int r2 = random.nextInt(koreanCity.size() == 0 ? koreanCity.size()-1 : koreanCity.size());
  		searchDto.setOriginLocationCode(koreanCity.get(r2).getCityCode());
- 		
  		// 인원은 어른 1명으로 고정
  		searchDto.setAdults(1);
- 		
  		// 현재 날짜 + 30일
  		LocalDate departureDate = LocalDate.now().plusDays(30);
  		String startDate = String.valueOf(departureDate);
  		searchDto.setStartDate(startDate);
-
  		// 좌석은 일반석
  		searchDto.setTravelClass("일반석");
- 		System.out.println(searchDto);
  		return searchDto;
  	}
 
@@ -413,7 +408,12 @@ public class TicketService {
 
  	// 가장 빠른 출발지 공항 조회
 	public String findDepartureAirport(int id) {
-		String airport = ticketRepository.findDepartureAirport(id);
+		String airport = null;
+		try {
+			airport = ticketRepository.findDepartureAirport(id);
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
 		return airport;
 	}
 

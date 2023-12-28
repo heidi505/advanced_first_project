@@ -15,6 +15,8 @@ public interface TicketRepository {
 
     public List<Ticket> findByTicketJoinReservation(Integer userId);
 
+    public List<String> findUserDestination(Integer userId);
+
     public GetTicketDateDTO getTicketDate(int userId);
 
     List<Ticket> findByReservationId(int id);

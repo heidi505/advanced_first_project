@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import com.tenco.team_two_flight_ticket.reservation.Reservation;
 import jakarta.persistence.*;
@@ -10,6 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+
 
 @Setter
 @Getter

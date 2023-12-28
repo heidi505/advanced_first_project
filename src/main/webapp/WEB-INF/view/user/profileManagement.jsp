@@ -104,9 +104,19 @@
                                 class="form-group col form-check form-switch w-75 mb-3 p-3 ms-2">
                             <label for="kakaoLink" class=""><img
                                     src="https://dffoxz5he03rp.cloudfront.net/icons/kakaotalk-logo.svg"/>
-                                카카오 연동</label> <input type="checkbox" id="kakaoLink"
+                                카카오 연동</label>
+                            <c:choose>
+                            <c:when test="${principal.isKaKao() == true}">
+                            <input type="checkbox" id="kakaoLink"
                                                       class="form-check-input sns_link float-end" role="switch"
-                                                      name="snsLink"/>
+                                                      name="snsLink" checked readonly/>
+                            </c:when>
+                                <c:otherwise>
+                                    <input type="checkbox" id="kakaoLink"
+                                           class="form-check-input sns_link float-end" role="switch"
+                                           name="snsLink"/>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="type_name form-group col p-3">
                             <label for="password" class="me-5">비밀번호</label>

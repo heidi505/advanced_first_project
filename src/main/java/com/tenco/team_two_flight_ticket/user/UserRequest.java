@@ -84,6 +84,7 @@ public class UserRequest {
         private StatusEnum statusEnum;
         private int userId;
         private String sort;
+        private String year;
     }
     
     @Getter

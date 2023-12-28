@@ -13,7 +13,7 @@
         ELSE concat(ar_city.city_name,'/',ar_city.name) 
         END as korean_arrival_city
         FROM reservation_tb as r
-        JOIN ticket_tb as t
+        LEFT JOIN ticket_tb as t
         ON r.id = t.reservation_id
         LEFT JOIN iata_city_tb as icity
         ON icity.code = t.arrival_city
@@ -25,22 +25,25 @@
         ON ar_city.code = t.arrival_city
         WHERE user_id = #{userId}
         AND status_enum = #{statusEnum}
+        AND departure_time like concat('%',#{year},'%')
         <if test="sort == 'true'">
             AND is_payed = true
         </if>
         <if test="sort == 'false'">
             AND is_payed = false
         </if>
+		GROUP BY reservation_num
         ORDER BY departure_time
     </select>
 
     <select id="getMyTripCount" resultType="int">
-        SELECT count(*)
+        SELECT count(distinct reservation_id)
         FROM reservation_tb as r
         JOIN ticket_tb as t
         ON r.id = t.reservation_id
         WHERE user_id = #{userId}
         AND status_enum = #{statusEnum}
+        AND departure_time like concat('%',#{year},'%')
         <if test="sort == 'true'">
             AND is_payed = true
         </if>
@@ -85,11 +88,11 @@
 		SELECT ub.username, rb.reservation_num, rb.passenger_amount, tb.taxes, cb.discounting_price, pb.first_name, pb.last_name, tb.total_price, tb.departure_time
 		FROM ticket_tb as tb
 				 left join reservation_tb as rb
-						   on tb.id = rb.id
+						   on tb.reservation_id = rb.id
 				 left join passenger_tb as pb
-						   on rb.id = pb.id
+						   on rb.id = pb.reservation_id
 				 left join user_tb as ub
-						   on ub.id = rb.id
+						   on ub.id = rb.user_id
 				 left join hascoupon_tb as hb
 						   on hb.user_id = ub.id
 				 left join coupon_tb as cb
@@ -142,6 +145,26 @@
     	FROM ticket_tb 
     	WHERE departure_time &lt; NOW());
     </update>
+    
+    <update id="setCancelTrip">
+    	UPDATE reservation_tb
+		SET status_enum = '취소'
+		WHERE status_enum = '예정'
+    	AND id IN (
+    	SELECT reservation_id 
+    	FROM ticket_tb 
+    	WHERE payment_deadline &lt; NOW());
+    </update>
+    
+    <select id="getMyTripDepartureYear" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripYearDTO">
+    	SELECT left(min(departure_time),4) as min_yaer, left(max(departure_time),4)as max_year 
+    	FROM reservation_tb as r
+		JOIN ticket_tb as t
+		ON r.id = t.reservation_id
+		WHERE user_id = #{userId}
+		AND status_enum = #{statusEnum}
+    </select>
+    
     
 
 </mapper>

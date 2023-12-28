@@ -2,6 +2,8 @@ package com.tenco.team_two_flight_ticket.reservation;
 
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
+import com.tenco.team_two_flight_ticket.user.UserResponse;
+
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -103,7 +105,7 @@ public class ReservationResponse {
 		private String lastName;
 		private PassengerTypeEnum passengerType;
 		private String gender;
-		private DateFormat birthdate;
+		private String birthdate;
 		private Long airFare;
 		private Long fuelSurcharge;
 		private Long taxes;
@@ -193,4 +195,9 @@ public class ReservationResponse {
 			}
 		}
 	}
+	 @Data
+	    public static class GetMyTripYearDTO{
+	    	private String minYear;
+	    	private String maxYear;
+	    }
 }

@@ -15,9 +15,10 @@ public class TripTypeChange implements Job {
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		// 현재 날짜 보다 전의 모든 예약(예정 상태를)을 지난으로 변경
+		// 현재 날짜에서 출발일이 지난 모든 예약('예정' 상태를)을 '지난'으로 변경
 		try {
 			reservationRepository.setLastTrip();
+			reservationRepository.setCancelTrip();
 			System.out.println("여행 상태 변경 완료");
 		} catch (Exception e) {
 			throw new MyServerError("서버 에러가 발생했습니다");

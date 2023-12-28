@@ -35,9 +35,12 @@ public class User {
     @CreationTimestamp
     private Timestamp createdAt;
     private String fcmToken;
+    @ColumnDefault("false")
+    private boolean isKaKao;
 
     @Builder
-    public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean isAdmin, Timestamp createdAt) {
+    public User(int id, String username, String password, String email, String profileImage, String realName, String phoneNumber, boolean isAdmin, Timestamp createdAt, boolean isKaKao, String fcmToken) {
+
         this.id = id;
         this.username = username;
         this.password = password;
@@ -47,5 +50,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.isAdmin = isAdmin;
         this.createdAt = createdAt;
+        this.isKaKao = isKaKao;
+        this.fcmToken = fcmToken;
     }
 }
