@@ -192,11 +192,11 @@ public class ReservationService {
             throw new MyBadRequestException("잘못된 예약번호입니다");
         }
         try {
-            dto = reservationRepository.getMyTripDetail(userId, reservationNum);
-            dto.makePhoneNumber();
-            dto.cutDepartureDate();
-            dto.cutArrivalDate();
-            dto.cutPaymentDeadline();
+        	dto = reservationRepository.getMyTripDetail(userId, reservationNum);
+        	dto.makePhoneNumber();
+        	dto.cutDepartureDate();
+        	dto.cutArrivalDate();
+        	dto.cutPaymentDeadline();
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }

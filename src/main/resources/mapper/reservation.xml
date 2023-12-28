@@ -122,9 +122,9 @@
     	SELECT first_name, last_name, passenger_type, gender, birth_date, air_fare
     		  , fuel_surcharge, taxes, ticketing_fee, total_price, is_payed
     	FROM reservation_tb as r
-    	JOIN ticket_tb as t
+    	LEFT JOIN ticket_tb as t
     	ON r.id = t.reservation_id
-    	JOIN passenger_tb as p
+    	LEFT JOIN passenger_tb as p
     	ON r.id = p.reservation_id
     	WHERE reservation_num = #{reservationNum}
     	and p.id = t.id
