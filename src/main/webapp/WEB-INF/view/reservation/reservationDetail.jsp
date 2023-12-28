@@ -111,7 +111,7 @@
 			<td>${payedInfo.STicketingFee}</td>
 			<td>${payedInfo.STotalPrice}</td>
 			<c:choose>
-			<c:when test="${payedInfo.isPayed eq TRUE}">
+			<c:when test="${payedInfo.isPayed eq true}">
 			<td>결제완료됨</td>
 			</c:when>
 			<c:otherwise>
@@ -122,7 +122,7 @@
 			</c:forEach>
 			</tbody>
 			</table>
-			<c:if test="${detailTrip.isPayed eq FALSE}">
+			<c:if test="${detailTrip.isPayed eq false}">
             <div class="w-100 text-center p-4">
                 <form action="/kakaoPay" method="post">
                     <button type="submit" class="payed_check_btn btn btn-primary w-25">결제하기</button>

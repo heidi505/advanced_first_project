@@ -148,7 +148,7 @@ public class ReservationService {
             case "결제완료": sort = "true"; break;
             default: throw new MyBadRequestException("잘못된 값이 입력되었습니다");
         }
-
+        
         List<GetMyTravelDTO> tripList = null;
 
         // 여행 목록 종류 유효성 검사
@@ -158,8 +158,8 @@ public class ReservationService {
             }
         }
 
+        tripList = reservationRepository.getMyTravel(userId, statusEnum, sort, year);
         try {
-        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort, year);
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }

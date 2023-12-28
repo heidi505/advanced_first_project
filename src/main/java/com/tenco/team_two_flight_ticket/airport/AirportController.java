@@ -49,9 +49,8 @@ public class AirportController {
         
         // 인청공항 주차정보 api
         ParkingStatusResponse parkingStatusResponse = airportService.getParkingAreaInfoAPI();
-        // Model에 DTO를 추가하여 JSP로 전달
         model.addAttribute("parkingStatusResponse", parkingStatusResponse);
-//        ------------- 한국 공항
+        //  ------------- 한국 공항
 
         //	한국 공항 혼잡도 api
         AirportTravelTimeDTO airportTravelTimes = airportService.koAirportTime(principal.getId());

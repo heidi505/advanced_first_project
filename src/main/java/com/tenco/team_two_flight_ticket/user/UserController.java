@@ -3,7 +3,6 @@ package com.tenco.team_two_flight_ticket.user;
 import java.util.List;
 
 import com.tenco.team_two_flight_ticket.coupon.CouponService;
-import com.tenco.team_two_flight_ticket.coupon.dto.CouponExpiredListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 
 import lombok.extern.slf4j.Slf4j;

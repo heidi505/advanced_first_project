@@ -34,8 +34,10 @@ public class SearchedResponse {
 	    	LocalDate date = LocalDate.parse(startDate);
 	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM월 dd일", Locale.KOREA);
 	    	this.departureTime =  formatter.format(date);
-	    	LocalDate date2 = LocalDate.parse(endDate);
-	    	this.arrivalTime =  formatter.format(date2);
+	    	if(endDate != null) {
+	    		LocalDate date2 = LocalDate.parse(endDate);
+	    		this.arrivalTime =  formatter.format(date2);
+	    	}
 		}
 	    
 	    void stringIsOneWay() {

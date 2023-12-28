@@ -26,10 +26,10 @@
         WHERE user_id = #{userId}
         AND status_enum = #{statusEnum}
         AND departure_time like concat('%',#{year},'%')
-        <if test="sort == 'true'">
+        <if test="sort == 'TRUE'">
             AND is_payed = true
         </if>
-        <if test="sort == 'false'">
+        <if test="sort == 'FALSE'">
             AND is_payed = false
         </if>
 		GROUP BY reservation_num
