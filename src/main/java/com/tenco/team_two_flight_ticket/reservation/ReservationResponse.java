@@ -170,12 +170,14 @@ public class ReservationResponse {
 	@Data
 	public static class SaveResultDTO {
 		private Reservation reservation;
-		private Passenger passenger;
+		private List<PassengerDTO> passenger;
 		private List<TicketDTO> ticket;
 
-		public SaveResultDTO(Reservation reservations, Passenger passenger, List<Ticket> ticket) {
+		public SaveResultDTO(Reservation reservations, List<Passenger> passenger, List<Ticket> ticket) {
 			this.reservation = reservations;
-			this.passenger = passenger;
+			this.passenger = passenger.stream()
+					.map(PassengerDTO::new)
+					.collect(Collectors.toList());
 			this.ticket = ticket.stream()
 					.map(TicketDTO::new)
 					.collect(Collectors.toList());

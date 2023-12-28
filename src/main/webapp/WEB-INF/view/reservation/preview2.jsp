@@ -8,13 +8,13 @@
 <main id="reservation_preview_page">
     <section class="reservation_preview_box">
         <div class="container">
-            <!-- 기본 메세지 -->
-            <section>
-                <div class="p-1 border">
-                    <span><a class="back_button" href="">👈검색 결과로 돌아가기</a></span>
-                    <h3 class="preview_header"></h3>
-                </div>
-                <div class="p-3 text-white preview_title">
+        <!-- 기본 메세지 -->
+        <section>
+            <div class="p-1 border">
+                <span><a class="back_button" href="">👈검색 결과로 돌아가기</a></span>
+                <h3 class="preview_header"></h3>
+            </div>
+            <div class="p-3 text-white preview_title">
                 <span>
                     <h2>훌륭한 선택을 하셨습니다! 지금 이 가격을 놓치지 마세요!</h2>
                 </span>
@@ -45,7 +45,7 @@
                                                 <ul>
                                                     <li>
                                                         <div class="preview_li_box">
-                                                            <div class="preview_li_box_top">
+                                                            <div class=" preview_li_box_top">
                                                                 <div class="preview_li_box_form">
                                                                     <span>
                                                                         <img src="/images/airline_images/${ticket.itineraries[0].segments[0].carrierCode}.png"
@@ -220,6 +220,7 @@
                                             </c:forEach>
                                         </c:forEach>
                                     </c:otherwise>
+
                                 </c:choose>
                             </div>
                         </div>
@@ -244,6 +245,7 @@
                                 </div>
                                 <div>
                                     <!-- 요금표 -->
+
                                     <div>
                                         <h2 class="preview_price_line">
                                             <a>
@@ -339,12 +341,12 @@
 </div>
 </div>
 <script>
-    const backButton = document.getElementsByClassName('back_button')[0];
-    backButton.addEventListener('click',(e)=>{
-        e.preventDefault();
-        console.log('back');
-        history.go(-1);
-    });
+const backButton = document.getElementsByClassName('back_button')[0];
+backButton.addEventListener('click',(e)=>{
+	e.preventDefault();
+	console.log('back');
+	history.go(-1);
+});
 
 
 </script>

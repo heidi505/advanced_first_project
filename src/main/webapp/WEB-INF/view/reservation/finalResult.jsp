@@ -16,9 +16,10 @@
                     <p class="fs-1 my-2"><b>항공권 예약이 정상적으로 완료되었습니다.</b></p>
                     <p class="mt-3">예약상세/결제하기에서 확인할 수 있습니다.</p>
                 </div>
-                <h3 class="text-center">예약번호 <b>${Result.reservation.reservationNum}</b></h3>
+                <%--                <h3 class="text-center">예약번호 <b>${Result.reservation.reservationNum}</b></h3>--%>
             </div>
             <!-- 상단 페이지 끝-->
+            <%--            <div>--%>
             <div style="display: none">
                 <h2>예약 결과화면을 보여주기 위해 필요한 것들 예.</h2>
                 <!-- Reservation 정보 출력 -->
@@ -31,8 +32,13 @@
 
                 <!-- Passenger 정보 출력 -->
                 <h2>승객 정보</h2>
-                <p>ID: ${Result.passenger.id}</p>
-                <p>예약 ID: ${Result.passenger.reservationId}</p>
+                <%--                <c:forEach var="passenger" items="${Result.passenger}">--%>
+                <%--                    <c:set var="currentPassenger" value="${passenger}"/>--%>
+                <%--                    <p>ID: ${passenger.id}</p>--%>
+                <%--                    <p>예약 ID: ${passenger.reservationId}</p>--%>
+                <%--                </c:forEach>--%>
+                <%--                <p>ID: ${Result.passenger.id}</p>--%>
+                <%--                <p>예약 ID: ${Result.passenger.reservationId}</p>--%>
 
                 <!-- Tickets 정보 출력 -->
                 <h2>티켓 정보</h2>
@@ -63,22 +69,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="w-10">${Result.passenger.lastName}/${Result.passenger.firstName}</td>
-                    <td class="w-10">${Result.passenger.passengerType}</td>
-                    <td>${Result.passenger.gender}</td>
-                    <td>${Result.passenger.birthDate}</td>
-                    <td>${currentTicket.airFare}</td>
-                    <td>${currentTicket.fuelSurcharge}</td>
-                    <td>${currentTicket.taxes}</td>
-                    <td>${currentTicket.ticketingFee}</td>
-                    <td>${currentTicket.totalPrice}</td>
-                    <td>${Result.reservation.statusEnum}</td>
-                </tr>
+                <c:forEach var="ticket" items="${Result.ticket}">
+                    <tr>
+                        <td>성민경</td>
+                        <td>ANA 272</td>
+                        <td>1991-02-22</td>
+                        <td>${ticket.airFare}</td>
+                        <td>${ticket.fuelSurcharge}</td>
+                        <td>${ticket.taxes}</td>
+                        <td>${ticket.ticketingFee}</td>
+                        <td>${ticket.totalPrice}</td>
+                        <td>${ticket.totalPrice}</td>
+                        <td>결제 전</td>
+                    </tr>
+                    <c:set var="totalPriceSum" value="${totalPriceSum + ticket.totalPrice}" />
+                </c:forEach>
                 </tbody>
             </table>
-
-
             <div class="mt-5 fs-4"><b>나의 쿠폰 목록</b>
             </div>
             <table class="passenger_info_table w-100" style="margin-top: 30px">
@@ -101,13 +108,48 @@
                 </c:forEach>
                 </thead>
             </table>
+            <table class="passenger_info_table w-100" style="margin-top: 30px">
+                <thead>
+                    <tr>
+                        <td style="font-weight: bold;">쿠폰 이름</td>
+                        <td style="border-right: 1px solid var(--line);">가입 쿠폰</td>
+                        <td style="font-weight: bold">쿠폰 만료일</td>
+                        <td style="border-right: 1px solid var(--line)">2023-12-20일까지</td>
+                        <td style="font-weight: bold">쿠폰 금액</td>
+                        <td style="border-right: 1px solid var(--line)">12000</td>
+                        <td style="display: flex; align-items: center; justify-content: center;">
+                            <button type="button" class="btn btn-primary apply-coupon-btn"
+                                    data-coupon="12000">
+                                적용하기
+                            </button>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="font-weight: bold;">쿠폰 이름</td>
+                        <td style="border-right: 1px solid var(--line);">가입 쿠폰</td>
+                        <td style="font-weight: bold">쿠폰 만료일</td>
+                        <td style="border-right: 1px solid var(--line)">2023-12-20일까지</td>
+                        <td style="font-weight: bold">쿠폰 금액</td>
+                        <td style="border-right: 1px solid var(--line)">13000</td>
+                        <td style="display: flex; align-items: center; justify-content: center;">
+                            <button type="button" class="btn btn-primary apply-coupon-btn"
+                                    data-coupon="13000">
+                                적용하기
+                            </button>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
 
             <div class="mx-auto p-3" style="width: 20%;">
                 <table class="passenger_info_table w-100" style="margin-top: 30px; border: 1px solid var(--form);">
                     <thead>
                     <tr>
                         <td style="height: 1em; vertical-align: bottom; font-weight: 700;">결제 금액</td>
-                        <td id="paymentAmount" style="height: 3em; vertical-align: bottom; font-weight: 700;">${currentTicket.totalPrice}</td>
+<%--                        <td id="paymentAmount" style="height: 3em; vertical-align: bottom; font-weight: 700;">${currentTicket.totalPrice}</td>--%>
+                        <td id="paymentAmount" style="height: 3em; vertical-align: bottom; font-weight: 700;">${totalPriceSum}</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -126,12 +168,6 @@
             </div>
             <div class="w-100 text-center p-4">
                 <form action="/kakaoPay" method="post">
-                    <input type="hidden" name="reservationNum" value="${Result.reservation.reservationNum}">
-                    <input type="hidden" name="reservationId" value="${Result.reservation.id}">
-                    <input type="hidden" name="resName" value="${Result.reservation.resName}">
-                    <input type="hidden" name="couponPrice" id="couponPrice">
-                    <input type="hidden" name="finalPrice" id="finalPrice">
-                    <input type="hidden" name="originalPrice" value="${currentTicket.totalPrice}">
                     <button type="submit" class="payed_check_btn btn btn-primary w-25">결제하기</button>
                 </form>
             </div>
@@ -255,7 +291,7 @@
 
 <script src="/js/final_result.js"></script>
 <script>
-    var totalPrice = parseFloat("${currentTicket.totalPrice}");
+    var totalPrice = parseFloat("${totalPriceSum}");
     if (!isNaN(totalPrice)) {
         document.getElementById("paymentAmount").innerText = totalPrice.toLocaleString();
     }
@@ -277,10 +313,6 @@
 
         // 총 결제 금액을 화면에 표시하는 부분
         document.getElementById("finalAmount").innerText = finalAmount.toLocaleString(); // 콤마 추가
-
-        //쿠폰 금액 + 결제 금액 postmapping
-        document.getElementById("couponPrice").value = couponDiscount;
-        document.getElementById("finalPrice").value = finalAmount;
     }
 </script>
 <!-- footer.jsp -->
