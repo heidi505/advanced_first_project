@@ -35,7 +35,6 @@
 ## SiteMap
 ![Group 92](https://github.com/heidi505/advanced_first_project/assets/98313279/e366cb62-81ea-4ec9-b4c2-bcf920e24f6c)
 
-
 ## 📓 주요 기능 설명
 #### 항공권 검색 (스케줄 선택)
 - 왕복 & 편도 선택
@@ -53,6 +52,36 @@
 - 예약 확인 한 후 카카오톡 문자 알림
 - 유저에게 쿠폰 등록이 완료되면 문자 발송, 쿠폰으로 차감 시 카카오 페이로 결제
 #### 항공권 환불  
+
+## 🔖 의존성
+```
+dependencies {
+    implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    implementation 'jakarta.servlet:jakarta.servlet-api' //스프링부트 3.0 이상
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api' //스프링부트 3.0 이상
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl' //스프링부트 3.0 이상
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation 'org.springframework.security:spring-security-crypto'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'net.nurigo:sdk:4.2.7'
+//    coolsms라이브러리
+    implementation 'javax.xml.bind:jaxb-api:2.3.1' // 현재(2022년 1월)의 최신 버전
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-quartz'
+}
+```
 
 ## 📋 FlowChart
 ![플로우차트 (1)](https://github.com/heidi505/advanced_first_project/assets/98313279/0fdb67aa-5b92-4290-9c03-760a3bd5f79f)  
