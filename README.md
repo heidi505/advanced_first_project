@@ -1,4 +1,5 @@
-![image](https://github.com/heidi505/advanced_first_project/assets/98313279/977a5409-067c-4dbe-b505-975089a251e8)
+![image](https://github.com/heidi505/advanced_first_project/assets/98313279/b471349b-7f5e-4601-82a5-922300a9ebff)
+
 # 항공사 사이트 [NIMBUS]
 ## 프로젝트 개요
 공공데이터와 항공권 검색 외부 API를 활용하여 항공권 정보를 제공하고 항공권 검색 및 예약, 결제 등 핵심 기능이 많은 항공권 사이트를 주제로 선정하였습니다.
@@ -31,7 +32,7 @@
 * Quartz 스케줄러 API
 * 구글 메일 API
 * chat Gpt API
-
+  
 ## SiteMap
 ![Group 92](https://github.com/heidi505/advanced_first_project/assets/98313279/e366cb62-81ea-4ec9-b4c2-bcf920e24f6c)
 
@@ -53,6 +54,7 @@
 - 유저에게 쿠폰 등록이 완료되면 문자 발송, 쿠폰으로 차감 시 카카오 페이로 결제
 #### 항공권 환불  
 
+  
 ## 🔖 의존성
 ```
 dependencies {
@@ -83,9 +85,10 @@ dependencies {
 }
 ```
 
+  
 ## 📋 FlowChart
 ![플로우차트 (1)](https://github.com/heidi505/advanced_first_project/assets/98313279/0fdb67aa-5b92-4290-9c03-760a3bd5f79f)  
 
-
+  
 ## 📒모델링 연관관계
 ![DB스키마 1](https://github.com/heidi505/advanced_first_project/assets/98313279/11f6d5e1-99ab-4866-9bcf-079fdf32f81e)
