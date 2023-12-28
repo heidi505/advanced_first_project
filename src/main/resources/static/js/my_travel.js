@@ -342,20 +342,23 @@ pages.forEach((page) => {
 		const activeBtn = document.querySelectorAll(`.active`)[0];
 		// paging
 		if(e.target.ariaLabel == `Previous`||e.target.parentElement.ariaLabel == `Previous`){
-			activeButton(activeBtn.previousElementSibling);
-			currentPeriod = activeBtn.previousElementSibling.textContent;
-			getMyTravel(currentTabId, currentSort, currentPeriod);
+			if(activeBtn.previousElementSibling != page){
+				activeButton(activeBtn.previousElementSibling);
+				currentPeriod = activeBtn.previousElementSibling.textContent;
+				getMyTravel(currentTabId, currentSort, currentPeriod);
+			} 
 			return false;
 		}
 		if(e.target.ariaLabel == `Next`||e.target.parentElement.ariaLabel == `Next`){
-			activeButton(activeBtn.nextElementSibling);
-			currentPeriod = activeBtn.nextElementSibling.textContent;
-			getMyTravel(currentTabId, currentSort, currentPeriod);			
+			if(activeBtn.nextElementSibling != page){
+				activeButton(activeBtn.nextElementSibling);
+				currentPeriod = activeBtn.nextElementSibling.textContent;
+				getMyTravel(currentTabId, currentSort, currentPeriod);			
+			}
 			return false;
 		}
 		activeButton(page);
 		currentPeriod = page.textContent;
-		console.log(currentPeriod);
 		getMyTravel(currentTabId, currentSort, currentPeriod);
 		
 	})
