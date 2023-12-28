@@ -151,4 +151,6 @@ public class DataDTO{
         }
         return this.getItineraries().get(1);
     }
+
+
 }

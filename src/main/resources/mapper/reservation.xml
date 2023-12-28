@@ -97,7 +97,7 @@
 						   on hb.user_id = ub.id
 				 left join coupon_tb as cb
 						   on cb.id = hb.coupon_id
-		where ub.id = #{userId}
+		where tb.id = #{userId}
     </select>
 
 	<resultMap id="reservationPaymentResultMap" type="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$ReservationPaymentDTO">
@@ -164,6 +164,18 @@
 		WHERE user_id = #{userId}
 		AND status_enum = #{statusEnum}
     </select>
+    <select id="getDepartureTimeByResId" resultType="string">
+        select tt.departure_time
+        from reservation_tb rt
+                 left join ticket_tb tt
+                           on rt.id = tt.reservation_id
+        where rt.id=#{reservationId}
+    </select>
+    <update id="updateReservationToTrue">
+        update reservation_tb
+        set is_payed = true
+        where id = #{reservationId}
+    </update>
     
     
 

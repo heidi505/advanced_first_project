@@ -289,74 +289,73 @@ public class TicketService {
             throw new MyBadRequestException("검색할 옵션을 선택해주세요");
         }
 
-        List<DataDTO> dataDTO = responseDTO.getData();
 
         List<DataDTO> removedDto = new ArrayList<>();
 
-        for(int i = 0; i < dataDTO.size(); i++) {
-            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
-            for (int j = 0; j < optionDTO.getOnewayDepTimeOption().size(); j++) {
-                if(segDto.getDeparture().depSearch(optionDTO.getOnewayDepTimeOption().get(j))){
-                    removedDto.add(dataDTO.get(i));
-                    break;
-                }
-            }
-        }
-
-        System.out.println("가는날 출발:" + removedDto.size());
-
-        for(int i = 0; i < dataDTO.size(); i++) {
-            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
-            for (int j = 0; j < optionDTO.getOnewayArrTimeOption().size(); j++) {
-                if(segDto.getArrival().arrSearch(optionDTO.getOnewayArrTimeOption().get(j))){
-                    if(!removedDto.contains(dataDTO.get(i))){
-                        removedDto.add(dataDTO.get(i));
-                        break;
-                    }
-                }
-            }
-        }
-
-        System.out.println("가는날 도착:" + removedDto.size());
-
-        for (int i = 0; i < dataDTO.size(); i++) {
-            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
-            // 제공해주는 정보 - segDto(dataDTO의 i번지 내용)
-            for (int j = 0; j < optionDTO.getRoundDepTimeOption().size(); j++) {
-                // 사용자가 선택한 시간 List - optionDTO
-                if(segDto.getDeparture().depSearch(optionDTO.getRoundDepTimeOption().get(j))){
-                    // segDto에 optionDTO가 있다면
-                    if(!removedDto.contains(dataDTO.get(i))){
-                        // removeDto에 포함되어 있지 않다면
-                        removedDto.add(dataDTO.get(i));
-                        // removeDto에 추가하고 멈춰
-                        break;
-                    }
-                }
-            }
-        }
-
-        System.out.println("오는날 출발:" + removedDto.size());
-
-        for (int i = 0; i < dataDTO.size(); i++) {
-            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
-            for (int j = 0; j < optionDTO.getRoundArrTimeOption().size(); j++) {
-                if(segDto.getArrival().arrSearch(optionDTO.getRoundArrTimeOption().get(j))){
-                    if(!removedDto.contains(dataDTO.get(i))){
-                        removedDto.add(dataDTO.get(i));
-                        break;
-                    }
-
-                }
-            }
-        }
-
-        System.out.println("오는날 도착" + removedDto.size());
-
-        dataDTO = dataDTO.stream().filter(e->removedDto.stream().anyMatch(i->i.getId().equals(e.getId()))).collect(Collectors.toList());
-
-        responseDTO.setData(dataDTO);
-        responseDTO.getMeta().setCount(dataDTO.size());
+//        for(int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+//            for (int j = 0; j < optionDTO.getOnewayDepTimeOption().size(); j++) {
+//                if(segDto.getDeparture().depSearch(optionDTO.getOnewayDepTimeOption().get(j))){
+//                    removedDto.add(dataDTO.get(i));
+//                    break;
+//                }
+//            }
+//        }
+//
+//        System.out.println("가는날 출발:" + removedDto.size());
+//
+//        for(int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(0).getSegments().get(0);
+//            for (int j = 0; j < optionDTO.getOnewayArrTimeOption().size(); j++) {
+//                if(segDto.getArrival().arrSearch(optionDTO.getOnewayArrTimeOption().get(j))){
+//                    if(!removedDto.contains(dataDTO.get(i))){
+//                        removedDto.add(dataDTO.get(i));
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        System.out.println("가는날 도착:" + removedDto.size());
+//
+//        for (int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+//            // 제공해주는 정보 - segDto(dataDTO의 i번지 내용)
+//            for (int j = 0; j < optionDTO.getRoundDepTimeOption().size(); j++) {
+//                // 사용자가 선택한 시간 List - optionDTO
+//                if(segDto.getDeparture().depSearch(optionDTO.getRoundDepTimeOption().get(j))){
+//                    // segDto에 optionDTO가 있다면
+//                    if(!removedDto.contains(dataDTO.get(i))){
+//                        // removeDto에 포함되어 있지 않다면
+//                        removedDto.add(dataDTO.get(i));
+//                        // removeDto에 추가하고 멈춰
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        System.out.println("오는날 출발:" + removedDto.size());
+//
+//        for (int i = 0; i < dataDTO.size(); i++) {
+//            SegmentDTO segDto = dataDTO.get(i).getItineraries().get(1).getSegments().get(0);
+//            for (int j = 0; j < optionDTO.getRoundArrTimeOption().size(); j++) {
+//                if(segDto.getArrival().arrSearch(optionDTO.getRoundArrTimeOption().get(j))){
+//                    if(!removedDto.contains(dataDTO.get(i))){
+//                        removedDto.add(dataDTO.get(i));
+//                        break;
+//                    }
+//
+//                }
+//            }
+//        }
+//
+//        System.out.println("오는날 도착" + removedDto.size());
+//
+//        dataDTO = dataDTO.stream().filter(e->removedDto.stream().anyMatch(i->i.getId().equals(e.getId()))).collect(Collectors.toList());
+//
+//        responseDTO.setData(dataDTO);
+//        responseDTO.getMeta().setCount(dataDTO.size());
 
         return responseDTO;
 
