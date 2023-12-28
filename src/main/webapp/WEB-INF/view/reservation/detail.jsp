@@ -139,7 +139,7 @@
                                                     <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weightUnit eq null}">
                                                         kg
                                                     </c:if>
-                                                    <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight}">
+                                                    <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.choose()}">
                                                 </td>
                                                 </tr>
                                                 </c:forEach>
