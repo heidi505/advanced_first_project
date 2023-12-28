@@ -1,8 +1,9 @@
 package com.tenco.team_two_flight_ticket.ticket;
 
 
-import java.util.List;
+import java.util.*;
 
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.PriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,7 @@ import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
@@ -227,8 +226,6 @@ public class TicketService {
 
         List<DataDTO> dto = responseDTO.getData().stream().filter(e->e.getId().equals(String.valueOf(ticketId))).collect(Collectors.toList());
 
-
-
         return dto;
 
     }
@@ -419,7 +416,5 @@ public class TicketService {
 		}
 		return airport;
 	}
-
-
 
 }
