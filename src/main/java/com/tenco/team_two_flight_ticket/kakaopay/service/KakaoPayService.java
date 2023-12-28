@@ -1,8 +1,10 @@
 package com.tenco.team_two_flight_ticket.kakaopay.service;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayApprovalDTO;
+import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayNewDTO;
 import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayReadyDTO;
 import com.tenco.team_two_flight_ticket.kakaopay.dto.cancelResponse.KaKaoCancelDTO;
+import com.tenco.team_two_flight_ticket.reservation.Reservation;
 import com.tenco.team_two_flight_ticket.reservation.ReservationRepository;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse;
 import com.tenco.team_two_flight_ticket.user.User;
@@ -35,19 +37,19 @@ public class KakaoPayService {
 
     @Autowired
     private HttpSession session;
-
+    private KakaoPayNewDTO newDTO;
 
     //    결제 준비
-    public String kakaoPayReady(Integer userId) {
+    public String kakaoPayReady(KakaoPayNewDTO dto) {
 
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 //        예약한 상세와 결제내역 정보
-        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
-        ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
+//        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
+//        ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
 
-        for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
-            reservationPaymentLists = reservationPayment;
-        }
+//        for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
+//            reservationPaymentLists = reservationPayment;
+//        }
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -56,33 +58,23 @@ public class KakaoPayService {
         headers.add("Authorization", "KakaoAK " + Define.ADMINKEY);
         headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-        String reservationNum = Long.toString(reservationPaymentLists.getReservationNum());
-        String passengerAmount = Integer.toString(reservationPaymentLists.getPassengerAmount() - 1);
-
-        Long couponPriceLong = reservationPaymentLists.getCouponDiscountingPrice();
-
-        Long totalPrice = reservationPaymentLists.getTotalPrice();
-        Long finalPriceLong = totalPrice - couponPriceLong;
-        String couponPrice = Long.toString(couponPriceLong);
-        String finalPrice = Long.toString(finalPriceLong);
-        System.out.println(finalPrice + "할인 된 금액 ");
-
-        String fullname = reservationPaymentLists.getPassengerLastName() + reservationPaymentLists.getPassengerFirstName();
+//        String fullname = reservationPaymentLists.getPassengerLastName() + reservationPaymentLists.getPassengerFirstName();
         // 서버로 요청할 Body
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", "TC0ONETIME");
-        params.add("partner_order_id", reservationNum);
-        params.add("partner_user_id", reservationPaymentLists.getUsername());
-        params.add("item_name", fullname + " 외 " + passengerAmount + " 명");
+        params.add("partner_order_id", String.valueOf(dto.getReservationNum()));
+        params.add("partner_user_id", dto.getResName());
+        params.add("item_name", "성민경 외 " + " 명 - 미완성");
         params.add("quantity", "1");
-        params.add("tax_free_amount", couponPrice);
-        params.add("total_amount", finalPrice);
+        params.add("tax_free_amount", String.valueOf(dto.getCouponPrice()));
+        params.add("total_amount", String.valueOf(dto.getFinalPrice()));
         params.add("approval_url", "http://localhost:8080/payed");
         params.add("cancel_url", "http://localhost:8080/kakaoPay/cancel");
         params.add("fail_url", "http://localhost:8080/kakaoPay/fail");
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
+        newDTO = dto;
         try {
             kakaoPayReadyDTO = restTemplate.postForObject(new URI("https://kapi.kakao.com/v1/payment/ready"), body, KakaoPayReadyDTO.class);
 
@@ -101,23 +93,23 @@ public class KakaoPayService {
     }
 
     public KakaoPayApprovalDTO kakaoPayInfo(String pg_token, Integer userId) {
-        User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
+//        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+//        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
 
-        ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
-        for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
-            reservationPaymentLists = reservationPayment;
-        }
-
+//        ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
+//        for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
+//            reservationPaymentLists = reservationPayment;
+//        }
+//
         RestTemplate restTemplate = new RestTemplate();
 
-        String reservationNum = Long.toString(reservationPaymentLists.getReservationNum());
-        Long couponPrice = reservationPaymentLists.getCouponDiscountingPrice();
-        Long totalPrice = reservationPaymentLists.getTotalPrice();
-
-        Long finalPriceLong = totalPrice - couponPrice;
-        String finalPrice = Long.toString(finalPriceLong);
-        System.out.println(finalPrice + "할인 된 금액 ");
+//        String reservationNum = Long.toString(reservationPaymentLists.getReservationNum());
+//        Long couponPrice = reservationPaymentLists.getCouponDiscountingPrice();
+//        Long totalPrice = reservationPaymentLists.getTotalPrice();
+//
+//        Long finalPriceLong = totalPrice - couponPrice;
+//        String finalPrice = Long.toString(finalPriceLong);
+//        System.out.println(finalPrice + "할인 된 금액 ");
 
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
@@ -128,10 +120,11 @@ public class KakaoPayService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", "TC0ONETIME");
         params.add("tid", kakaoPayReadyDTO.getTid());
-        params.add("partner_order_id", reservationNum);
-        params.add("partner_user_id", reservationPaymentLists.getUsername());
+        params.add("partner_order_id", String.valueOf(newDTO.getReservationNum()));
+        params.add("partner_user_id", newDTO.getResName());
         params.add("pg_token", pg_token);
-        params.add("total_amount", finalPrice);
+        params.add("total_amount", String.valueOf(newDTO.getFinalPrice()));
+
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity(params, headers);
 
@@ -139,6 +132,9 @@ public class KakaoPayService {
             kakaoPayApprovalDTO = restTemplate.postForObject(new URI("https://kapi.kakao.com/v1/payment/approve"), body, KakaoPayApprovalDTO.class);
 
             System.out.println("카카오승인 결제 tid" + kakaoPayApprovalDTO.getTid());
+            int result = reservationRepository.updateReservationToTrue(newDTO.getReservationId());
+
+
 
             return kakaoPayApprovalDTO;
 
@@ -150,15 +146,17 @@ public class KakaoPayService {
     }
 
     public ReservationResponse.ReservationPaymentDTO reservationInfo(Integer userId) {
-        User principal = (User) session.getAttribute(Define.PRINCIPAL);
-        List<ReservationResponse.ReservationPaymentDTO> reservationPaymentDTO = reservationRepository.reservationPayment(principal.getId());
+//        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+//        List<String> departureTime = reservationRepository.getDepartureTimeByResId(newDTO.getReservationId());
 
-        ReservationResponse.ReservationPaymentDTO reservationPaymentLists = null;
-        for (ReservationResponse.ReservationPaymentDTO reservationPayment : reservationPaymentDTO) {
-            reservationPaymentLists = reservationPayment;
-        }
+        ReservationResponse.ReservationPaymentDTO dto = new ReservationResponse.ReservationPaymentDTO();
 
-        return reservationPaymentLists;
+        dto.setTotalPrice(Long.valueOf(newDTO.getOriginalPrice()));
+        dto.setReservationNum(Long.valueOf(newDTO.getReservationNum()));
+//        dto.setDepartureTime(Timestamp.valueOf(departureTime.get(0)));
+        dto.setCouponDiscountingPrice(Long.valueOf(newDTO.getCouponPrice()));
+
+        return dto;
     }
 
 

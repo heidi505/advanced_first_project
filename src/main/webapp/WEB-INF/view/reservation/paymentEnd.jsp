@@ -27,7 +27,7 @@
 			<th class="align-middle">여행번호</th>
 			<td class="text-start ps-3">${reservationInfo.reservationNum}</td>
 			<th>여행일</th>
-			<td class="text-start ps-3">${reservationInfo.departureTime()}</td>
+			<td class="text-start ps-3"></td>
 			</tr>
 			<tr>
 			  <th class="py-3">여행자</th>
@@ -40,7 +40,7 @@
 			<h2 class="my-4"><b>결제금액</b></h2>
 			<div class="w-100  d-flex mx-auto">
 			<div class="w-50 border p-5 lh-lg bg_line">
-			<span class="me-5">결제일</span><span class="float-end">${paymentInfo.date()}</span>
+			<span class="me-5">결제일</span><span class="float-end"></span>
 				<br><span class="me-5">결제수단</span><span class="float-end"><b>카카오페이</b></span>
 			</div>
 				<div class="w-50 border p-5 lh-lg">

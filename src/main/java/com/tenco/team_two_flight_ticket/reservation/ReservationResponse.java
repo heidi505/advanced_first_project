@@ -25,6 +25,38 @@ import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
 import lombok.Data;
 
 public class ReservationResponse {
+	
+	 @Data
+	 public static class GetMyTravelDTO {
+		private int id;
+	    private Boolean isPayed;
+	    private Timestamp createdAt;
+	    private Timestamp paymentDeadline;
+	    private int reservationNum;
+	    private StatusEnum statusEnum;
+	    private String airline;
+	    private String arrivalCity;
+	    private String departureAirport;
+	    private String departureCity;
+	    private String flightName;
+	    private Timestamp departureTime;
+	    private Timestamp arrivalTime;
+	        
+	    private String koreanDepartureAirport;
+	    private String koreanArrivalAirport;
+	    private String koreanAirline;
+	    private String koreanDepartureCity;
+	 }
+	 
+	 
+	 @Data
+	 public static class GetMyTripCountDTO {
+		private int allTripCount;
+	    private int payedTripCount;
+	    private int notPayedTripCount;
+	 }
+	
+	
 
 	@Data
 	public static class ReservationPaymentDTO {
@@ -38,12 +70,13 @@ public class ReservationResponse {
 		private Long totalPrice;
 		@CreationTimestamp
 		private Timestamp departureTime;
+		private int originalPrice;
 
-		public String departureTime() {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String formattedDate = sdf.format(new Date(this.departureTime.getTime()));
-			return formattedDate;
-		};
+//		public String departureTime() {
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//			String formattedDate = sdf.format(new Date(this.departureTime.getTime()));
+//			return formattedDate;
+//		};
 	}
 	@Data
 	public static class GetMyTripDetailDTO{
@@ -63,15 +96,15 @@ public class ReservationResponse {
 		private SeatTypeEnum seatType;
 		private Boolean isOneWay;
 		private String realName;
-		// 편집한 값들
+		
 		private String departureDate;
 		private String arrivalDate;
 		private String cuttedPaymentDeadline;
 		private String phoneNumber;
 		
-	    private String koreanArrivalCity;
+	    private String koreanArrivalAirport;
 	    private String koreanAirline;
-	    private String koreanDepartureCity;
+	    private String koreanDepartureAirport;
 		
 		
 		void cutDepartureDate() {
@@ -137,12 +170,14 @@ public class ReservationResponse {
 	@Data
 	public static class SaveResultDTO {
 		private Reservation reservation;
-		private Passenger passenger;
+		private List<PassengerDTO> passenger;
 		private List<TicketDTO> ticket;
 
-		public SaveResultDTO(Reservation reservations, Passenger passenger, List<Ticket> ticket) {
+		public SaveResultDTO(Reservation reservations, List<Passenger> passenger, List<Ticket> ticket) {
 			this.reservation = reservations;
-			this.passenger = passenger;
+			this.passenger = passenger.stream()
+					.map(PassengerDTO::new)
+					.collect(Collectors.toList());
 			this.ticket = ticket.stream()
 					.map(TicketDTO::new)
 					.collect(Collectors.toList());

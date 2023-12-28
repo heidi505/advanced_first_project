@@ -49,7 +49,6 @@ async function getMyTravel(tabId, sort, year){
 	currentTabId = tabId;
 	if(currentPeriod != year&& currentPeriod != ``){
 		let myTripCountLabel = document.getElementsByClassName(`my_trip_count_label`);
-		console.log(myTripCountLabel);
 		currentPeriod = year;
 		myTripCountLabel[0].style.background = `var(--primary02)`;
 		sort = isPayedEnum.ALL;
@@ -63,7 +62,7 @@ async function getMyTravel(tabId, sort, year){
 		case tripEnum.LAST     : status = statusEnum.LAST;     break;
 		case tripEnum.CANCELED : status = statusEnum.CANCELED; break;
 	}
-	
+
 	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}&year=${year}`; 
 	 try {
         const response = await fetch(href);
@@ -120,7 +119,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
     	text = document.createTextNode(isPayed); 
     	myTripCountLabel.appendChild(text);
     	span = makeElement(`span`,`my_trip_num`);
-    	text = document.createTextNode(` `+tripCount); 
+    	text = document.createTextNode(tripCount); 
     	span.appendChild(text);
     	myTripCountLabel.appendChild(span);
     	myTrip.appendChild(myTripCountLabel);
@@ -210,7 +209,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
     	let p = makeElement(`p`);
     	
     	
-    	text = document.createTextNode(` [${koreanAirline}] ${data.koreanDepartureCity} - ${data.koreanArrivalCity}`);
+    	text = document.createTextNode(` [${koreanAirline}] ${data.koreanDepartureAirport} - ${data.koreanArrivalAirport}`);
     	p.appendChild(text);
     	div.appendChild(p);
     	p = makeElement(`p`);
@@ -230,7 +229,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
     		let myTripTicketBg = makeElement(`div`,`my_trip_ticket_bg`);
     		myTripTicketImg.appendChild(myTripTicketBg);
     		let tripLeft = makeElement(`span`,`trip_left`);
-    		text = document.createTextNode(data.departureAirport);
+    		text = document.createTextNode(data.departureCity);
     		tripLeft.appendChild(text);
     		myTripTicketBg.appendChild(tripLeft);
     		let tripRight = makeElement(`span`,`trip_right`);
@@ -342,21 +341,50 @@ pages.forEach((page) => {
 		const activeBtn = document.querySelectorAll(`.active`)[0];
 		// paging
 		if(e.target.ariaLabel == `Previous`||e.target.parentElement.ariaLabel == `Previous`){
-			activeButton(activeBtn.previousElementSibling);
-			currentPeriod = activeBtn.previousElementSibling.textContent;
-			getMyTravel(currentTabId, currentSort, currentPeriod);
+			if(activeBtn.previousElementSibling != page){
+				activeButton(activeBtn.previousElementSibling);
+				currentPeriod = activeBtn.previousElementSibling.textContent;
+				getMyTravel(currentTabId, currentSort, currentPeriod);
+			} 
 			return false;
 		}
 		if(e.target.ariaLabel == `Next`||e.target.parentElement.ariaLabel == `Next`){
-			activeButton(activeBtn.nextElementSibling);
-			currentPeriod = activeBtn.nextElementSibling.textContent;
-			getMyTravel(currentTabId, currentSort, currentPeriod);			
+			if(activeBtn.nextElementSibling != page){
+				activeButton(activeBtn.nextElementSibling);
+				currentPeriod = activeBtn.nextElementSibling.textContent;
+				getMyTravel(currentTabId, currentSort, currentPeriod);			
+			}
 			return false;
 		}
 		activeButton(page);
 		currentPeriod = page.textContent;
-		console.log(currentPeriod);
 		getMyTravel(currentTabId, currentSort, currentPeriod);
 		
 	})
 })
+
+  	const tabButtons = document.querySelectorAll(".tab_menu li a");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach((button) => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            tabContents.forEach((content) => {
+                content.style.display = "none";
+            });
+
+            tabButtons.forEach((btn) => {
+                btn.classList.remove("tab_active");
+            });
+
+            const tabId = button.getAttribute("data-tab");
+            document.getElementById(tabId).style.display = "block";
+
+            //데이터를 가져와 출력하는 함수
+            getMyTravel(tabId, isPayedEnum.ALL, currentPeriod);
+            button.classList.add("tab_active");
+        });
+    });
+
+

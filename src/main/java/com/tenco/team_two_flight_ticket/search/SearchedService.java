@@ -22,14 +22,12 @@ public class SearchedService {
 	// 최근 검색 목록 조회
 	public List<GetRecentSearchDTO> getRecentSearch(int id) {
 		List<GetRecentSearchDTO> searchedList = null;
-		try {
+
 			searchedList = searchedRepository.getRecentSearch(id);
 			for (GetRecentSearchDTO dto : searchedList) {
 				dto.cutDate();
 				dto.stringIsOneWay();
-			}
-		} catch (Exception e) {
-			throw new MyServerError("서버 에러가 발생했습니다");
+
 		}
 		return searchedList;
 	}

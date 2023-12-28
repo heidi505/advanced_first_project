@@ -24,10 +24,10 @@
 			<p class="text-end me-5">예약상태<span class="color_basic09 mx-2">|</span><span class="color_cancle">예약취소</span></p>
 			<div class="detail_cont_box row mx-auto align-middle mt-3">
 			<div class="col-3 air_info border-end text-center pt-4">
-			<div class="float-start ms-5"><b class="lh-lg">${cancelTrip.koreanDepartureCity}<br><span class="color_basic09">${cancelTrip.departureCity}</span></b></div>
+			<div class="float-start ms-5"><b class="lh-lg">${cancelTrip.koreanDepartureAirport}<br><span class="color_basic09">${cancelTrip.departureCity}</span></b></div>
 			
 			 <div class="trip_image p-4 my-2 mx-auto"></div>
-			 <div class="float-end me-5"><b class="lh-lg">${cancelTrip.koreanArrivalCity}<br><span class="color_basic09">${cancelTrip.arrivalCity}</span></b></div>
+			 <div class="float-end me-5"><b class="lh-lg">${cancelTrip.koreanArrivalAirport}<br><span class="color_basic09">${cancelTrip.arrivalCity}</span></b></div>
 			</div>
 			<div class="col py-3 border-end text-center align-middle">
 			<div class="airline_image w-10 p-4 mx-auto mb-2"> </div>

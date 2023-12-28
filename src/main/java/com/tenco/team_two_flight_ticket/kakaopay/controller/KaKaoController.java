@@ -4,6 +4,7 @@ import com.tenco.team_two_flight_ticket._core.utils.ApiUtils;
 import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._middle._entity.City;
 import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayApprovalDTO;
+import com.tenco.team_two_flight_ticket.kakaopay.dto.KakaoPayNewDTO;
 import com.tenco.team_two_flight_ticket.kakaopay.dto.cancelResponse.KaKaoCancelDTO;
 import com.tenco.team_two_flight_ticket.kakaopay.service.KakaoPayService;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
@@ -42,11 +43,13 @@ public class KaKaoController {
     }
 
     @PostMapping("/kakaoPay")
-    public String kakaoPay() {
-        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+    public String kakaoPay(KakaoPayNewDTO dto) {
+        System.out.println("=======================");
+        System.out.println(dto);
+        System.out.println("========================");
         log.info("kakaoPay post............................................");
 
-        return "redirect:" + kakaoPayService.kakaoPayReady(principal.getId());
+        return "redirect:" + kakaoPayService.kakaoPayReady(dto);
 
     }
 
@@ -57,6 +60,12 @@ public class KaKaoController {
 
         return ResponseEntity.ok().body(ApiUtils.success(message));
     }
+
+    @GetMapping("/kakaoPay/cancel")
+    public String kakaoCancelGet(){
+        return "redirect:/main";
+    }
+
 
     @ResponseBody
     @PostMapping("/kakaoPay/fail")

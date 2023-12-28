@@ -50,21 +50,43 @@ public class ReservationController {
     public String test4(@PathVariable int ticketId, Model model) {
 
         List<DataDTO> dto = ticketService.ticketDetail(ticketId);
-        int isRound = dto.stream().map(e->e.getItineraries()).toList().size();
+        int isRound = dto.get(0).getItineraries().size();
 
         model.addAttribute("ticket", dto.get(0));
+        session.setAttribute("ticketData", dto.get(0));
+        for (DataDTO dataDTO : dto) {
+            System.out.println("디티오아디");
+            System.out.println("Ticket: " + dataDTO.getId());
+            System.out.println("이티너리스");
+            System.out.println("Ticket: " + dataDTO.getItineraries());
+            System.out.println("타입");
+            System.out.println("Ticket: " + dataDTO.getType());
+            System.out.println("프라이스카운트");
+            System.out.println("Ticket: " + dataDTO.getPrice().getPeopleCount());
+            System.out.println("트레벌프라이싱");
+            System.out.println("Ticket: " + dataDTO.getTravelerPricings());
+            System.out.println("북에이블싯");
+            System.out.println("Ticket: " + dataDTO.getNumberOfBookableSeats());
+        }
         model.addAttribute("isRound", isRound);
         return "reservation/detail";
     }
 
     // 디테일 페이지에서 예약하기 버튼 클릭시 수행
     @PostMapping("reservation/save")
-    public String save(ReservationRequest.SaveFormDto dto, HttpSession session) {
+    public String save(ReservationRequest.SaveFormDto dto) {
         // 1. 인증검사
-        // User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        System.out.println("터지는 라인 체크 1");
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
         // 2. 유효성 검사
         // 로직
-        ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto);
+        DataDTO dataDTO = (DataDTO) session.getAttribute("ticketData");
+
+        System.out.println("티켓데이터");
+        System.out.println(dataDTO);
+        System.out.println("dto 체크체크");
+        System.out.println(dto);
+        ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto, principal, dataDTO);
         // 카카오 메시지 보내기
         String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");
         if ("Y".equals(dto.getOptionMessage())) {
@@ -88,12 +110,13 @@ public class ReservationController {
     // 수행 후 나오는 결과 화면
     @GetMapping("/reservation/final-result")
     public String finalResult(HttpSession session, Model model) {
-        ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
 
+        ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
         // 쿠폰 받아오기.
         List<CouponListDTO> coupons = reservationService.getCouponList(principal);
+        System.out.println("쿠폰체크 쿠폰체크 쿠폰체크으으");
         for (CouponListDTO coupon : coupons) {
             System.out.println("쿠폰 ID: " + coupon.getId());
             System.out.println("쿠폰 이름: " + coupon.getCouponName());
@@ -104,10 +127,13 @@ public class ReservationController {
 
         model.addAttribute("Coupon", coupons);
         model.addAttribute("Result", resultDTO);
+        model.addAttribute("Ticket", resultDTO.getTicket());
+        model.addAttribute("Passenger", resultDTO.getPassenger());
+        System.out.println("잘 담겼나 안담겼나~~");
         System.out.println("Reservation Result:");
-        System.out.println("Reservation: " + resultDTO.getReservation());
-        System.out.println("Passenger: " + resultDTO.getPassenger());
-        System.out.println("Tickets: " + resultDTO.getTicket());
+        System.out.println("Reservation: " + resultDTO.getReservation().getId());
+        System.out.println("Reservation: " + resultDTO.getReservation().getId());
+        System.out.println("Reservation: " + resultDTO.getTicket().get(0).getAirFare());
         return "/reservation/finalResult";
     }
     // 예약 시나리오 끝!!
@@ -147,14 +173,6 @@ public class ReservationController {
     public String reserved() {
         return "reservation/finalResult";
     }
-
-    /* 테스트용 + 예비 */
-
-    @GetMapping("/sample")
-    public String test2() {
-        return "reservation/sample2";
-    }
-
 
     // 운임규정 모달 버튼 (위치 잡고 추가만 해주면 됨!)
     // 예약규정, 운임규정, 결제규정, 환불/변경

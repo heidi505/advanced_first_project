@@ -34,7 +34,27 @@
                     </div>
                     <div class="tab-content regions_list_item" id="canceled_trip">
                     </div>
-                    <%@ include file="../layout/myTravelPaging.jsp" %>
+                    <div>
+						<nav aria-label="Page navigation example">
+  							<ul class="pagination justify-content-center">
+    							<li class="page-item">
+      								<a class="page-link" href="#" aria-label="Previous">
+        								<span aria-hidden="true">&lt;</span>
+      								</a>
+    							</li>
+    							<li class="page-item active"><a class="page-link" href="#">${maxYear}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-1}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-2}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-3}</a></li>
+    							<li class="page-item"><a class="page-link" href="#">${maxYear-4}</a></li>
+    							<li class="page-item">
+      							<a class="page-link" href="#" aria-label="Next">
+        						<span aria-hidden="true">&gt;</span>
+      							</a>
+    							</li>
+  							</ul>
+						</nav>
+					</div>
                 </div>
             </div>
 
@@ -110,35 +130,14 @@
     const maxYear = '${maxYear}';
     if(maxYear != ''){
     	getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL, maxYear);
+    	currentPeriod = maxYear;
     } else {
     	// 자료 없음
     	getMyTravel(tripEnum.PLANNED, isPayedEnum.ALL, '0');
+    	currentPeriod = '0';
     }
     pages[1].classList.add('active');
     
-    const tabButtons = document.querySelectorAll(".tab_menu li a");
-    const tabContents = document.querySelectorAll(".tab-content");
-
-    tabButtons.forEach((button) => {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            tabContents.forEach((content) => {
-                content.style.display = "none";
-            });
-
-            tabButtons.forEach((btn) => {
-                btn.classList.remove("tab_active");
-            });
-
-            const tabId = button.getAttribute("data-tab");
-            document.getElementById(tabId).style.display = "block";
-
-            //데이터를 가져와 출력하는 함수
-            getMyTravel(tabId, isPayedEnum.ALL, currentPeriod);
-            button.classList.add("tab_active");
-        });
-    });
 
     // 결제여부에 따른 목록 보기
     tabContents.forEach((button) => {
@@ -155,6 +154,7 @@
                     sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
                     e.target.style.background = `var(--primary02)`;
                 }
+                
                 getMyTravel(tabId, sort, currentPeriod);
             }
         })

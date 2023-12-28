@@ -6,12 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTravelDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
-
-
 import org.apache.ibatis.annotations.ResultMap;
 
 @Mapper
@@ -47,4 +45,7 @@ public interface ReservationRepository {
 	//처음 여행일과 마지막 여행일 조회
 	GetMyTripYearDTO getMyTripDepartureYear(@Param("userId") int userId, @Param("statusEnum") StatusEnum statusEnum);
 
+    List<String> getDepartureTimeByResId(int reservationId);
+
+    int updateReservationToTrue(int reservationId);
 }
