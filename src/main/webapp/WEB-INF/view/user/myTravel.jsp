@@ -154,6 +154,7 @@
                     sort = e.target.innerText.split(e.target.childNodes[1].innerText)[0];
                     e.target.style.background = `var(--primary02)`;
                 }
+                
                 getMyTravel(tabId, sort, currentPeriod);
             }
         })
