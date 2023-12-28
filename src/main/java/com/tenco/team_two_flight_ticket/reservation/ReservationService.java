@@ -1,13 +1,18 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
 import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
 import com.tenco.team_two_flight_ticket.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,85 +53,158 @@ public class ReservationService {
     private CouponRepository couponRepository;
 
     @Transactional
-    public ReservationResponse.SaveResultDTO save(ReservationRequest.SaveFormDto dto) {
+    public ReservationResponse.SaveResultDTO save(ReservationRequest.SaveFormDto dto, User principal, DataDTO dataDTO) {
+
+        /*  (추후 api에 따라 수정 필요) */
+
         // reservation_tb
         String datePrefix = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
         String randomSuffix = String.format("%03d", ThreadLocalRandom.current().nextInt(1000));
         String reservationNum = datePrefix + randomSuffix;
 
         Reservation reservationR = Reservation.builder()
-                .userId(1)
+                .userId(principal.getId())
                 .resName(dto.getResName())
                 .email(dto.getEmail())
                 .phoneNum(dto.getPhoneNum())
                 .reservationNum(reservationNum)
                 .statusEnum(StatusEnum.valueOf("예정"))
                 .passengerAmount(dto.getPassengerAmount())
-                .paymentDeadline(null)
+                .paymentDeadline(dto.getPaymentDeadline())
                 .reservationPrice(dto.getReservationPrice())
                 .build();
 
 
         int resultRowReservation = reservationRepository.insertR(reservationR);
-        
+        System.out.println("예약!");
         if (resultRowReservation != 1) {
             throw new MyBadRequestException("실패");
         }
 
         // 예약 결제상태
         Reservation reservationDTO = reservationRepository.findByReservationNum(reservationNum);
+//        List<ReservationRequest.SaveFormDto.PassengerDTO> passengerDTOS = dto.getPassengerDTOS();
+        System.out.println("패신져 테스트");
+//        System.out.println(dto.getPassengerDTOS());
+        for (ReservationRequest.SaveFormDto.PassengerDTO passengers : dto.getPassengerDTOS()) {
+            // 각 PassengerDTO에 대한 Passenger 객체 생성
+            Passenger passenger = Passenger.builder()
+                    .reservationId(reservationDTO.getId())
+                    .firstName(passengers.getFirstName())
+                    .lastName(passengers.getLastName())
+                    .birthDate(passengers.getBirthDate())
+                    .gender(passengers.getGender())
+                    .passengerType(passengers.getPassengerType())
+                    .build();
 
-        //`birth_date`,`gender`,`passenger_type`,`created_at`)
-        // passenger_tb
-        Passenger passenger = Passenger.builder()
-                .reservationId(reservationDTO.getId())
-                .firstName(dto.getFirstName())
-                .lastName(dto.getLastName())
-                .birthDate(dto.getBirthDate())
-                .gender(dto.getGender())
-                .passengerType(dto.getPassengerType())
-                .build();
-        int resultRowPassenger = passengerRepository.insertP(passenger);
-        
-        if (resultRowPassenger != 1) {
-            throw new MyBadRequestException("실패");
+            // 데이터베이스에 Passenger 저장
+            int resultRowPassenger = passengerRepository.insertP(passenger);
+            System.out.println("승객!");
+            if (resultRowPassenger != 1) {
+                throw new MyBadRequestException("실패");
+            }
+        }
+//        // passenger_tb
+//        Passenger passenger = Passenger.builder()
+//                .reservationId(reservationDTO.getId())
+//                .firstName(dto.getFirstName())
+//                .lastName(dto.getLastName())
+//                .birthDate(dto.getBirthDate())
+//                .gender(dto.getGender())
+//                .passengerType(dto.getPassengerType())
+//                .build();
+//        int resultRowPassenger = passengerRepository.insertP(passenger);
+//        System.out.println("승객!");
+//        if (resultRowPassenger != 1) {
+//            throw new MyBadRequestException("실패");
+//        }
+
+        List<TravelerPricingDTO> ticketData = dataDTO.getTravelerPricings();
+
+        for (TravelerPricingDTO travelerPricing : dataDTO.getTravelerPricings()) {
+            SeatTypeEnum seatType;
+
+            if ("STANDARD".equals(travelerPricing.getFareOption())) {
+                seatType = SeatTypeEnum.일반석;
+            } else if ("BUSINESS".equals(travelerPricing.getFareOption())) {
+                seatType = SeatTypeEnum.비즈니스;
+            } else if ("FIRST".equals(travelerPricing.getFareOption())) {
+                seatType = SeatTypeEnum.퍼스트;
+            } else {
+                throw new IllegalArgumentException("Invalid SeatType value: " + travelerPricing.getFareOption());
+            }
+            System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+            System.out.println(dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getAt());
+            // 현재 문자열 형식
+            String dateString = dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getAt();
+            String dateString2 = dataDTO.getItineraries().get(0).getSegments().get(0).getArrival().getAt();
+            // 현재 문자열을 Timestamp로 변환
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+            LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+            LocalDateTime dateTime2 = LocalDateTime.parse(dateString2, formatter);
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+            Timestamp timestamp2 = Timestamp.valueOf(dateTime2);
+
+            // "yyyy-MM-dd hh:mm:ss" 형식의 문자열로 변환
+            String formattedTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp);
+            String formattedTimestamp2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp2);
+
+            int baggageWeight = (dataDTO.getTravelerPricings().get(0).getFareDetailsBySegment() != null
+                    && dataDTO.getTravelerPricings().get(0).getFareDetailsBySegment().get(0).getIncludedCheckedBags() != null
+                    && dataDTO.getTravelerPricings().get(0).getFareDetailsBySegment().get(0).getIncludedCheckedBags().getWeight() != null)
+                    ? dataDTO.getTravelerPricings().get(0).getFareDetailsBySegment().get(0).getIncludedCheckedBags().getWeight()
+                    : 0;
+
+            Ticket ticket = Ticket.builder()
+                    .reservationId(reservationDTO.getId())
+                    .airFare(Long.parseLong(travelerPricing.getPrice().getBase().replace(",", "")))
+                    .fuelSurcharge(Long.parseLong(travelerPricing.getPrice().getOilPrice().replace(",", "")))
+                    .taxes(Long.parseLong(travelerPricing.getPrice().getTax().replace(",", "")))
+                    .ticketingFee(Long.parseLong(travelerPricing.getPrice().getFee().replace(",", "")))
+                    .totalPrice(Long.parseLong(travelerPricing.getPrice().getTotal().replace(",", "")))
+                    .airline(dataDTO.getItineraries().get(0).getSegments().get(0).getAirlineName())
+                    .flightName(dataDTO.getItineraries().get(0).getSegments().get(0).getAircraft().getCode())
+                    .departureCity(dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getCityName())
+                    .arrivalCity(dataDTO.getItineraries().get(0).getSegments().get(0).getArrival().getCityName())
+                    .departureAirport(dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getIataCode())
+                    .arrivalAirport(dataDTO.getItineraries().get(0).getSegments().get(0).getArrival().getIataCode())
+                    .departureTime(Timestamp.valueOf(formattedTimestamp))
+                    .arrivalTime(Timestamp.valueOf(formattedTimestamp2))
+                    .seatType(seatType)
+                    .isOneWay(dataDTO.isOneWay())
+                    .isNonStop(!dataDTO.isOneWay())
+                    .baggageAllowance(baggageWeight)
+                    .build();
+
+            int resultTicket = ticketRepository.insertT(ticket);
+            System.out.println("티켓!");
+            if (resultTicket != 1) {
+                throw new MyBadRequestException("실패");
+            }
         }
 
-        // ticket_tb
-        Ticket ticket = Ticket.builder()
-                .reservationId(reservationDTO.getId())
-                .airFare(dto.getAirFare())
-                .fuelSurcharge(dto.getFuelSurcharge())
-                .taxes(dto.getTaxes())
-                .ticketingFee(dto.getTicketingFee())
-                .totalPrice(dto.getTotalPrice())
-                .airline(dto.getAirline())
-                .flightName(dto.getFlightName())
-                .departureCity(dto.getDepartureCity())
-                .arrivalCity(dto.getArrivalCity())
-                .departureAirport(dto.getDepartureAirport())
-                .arrivalAirport(dto.getArrivalAirport())
-                .seatType(dto.getSeatType())
-                .isOneWay(dto.isOneWay())
-                .isNonStop(dto.isNonStop())
-                .baggageAllowance(dto.getBaggageAllowance())
-                .build();
-        int resultRowTicket = ticketRepository.insertT(ticket);
-        
-        if (resultRowTicket != 1) {
-            throw new MyBadRequestException("실패");
-        }
+
+
 
         // 방금 저장된 값 찾아서 담는 쿼리.
         // 승객 영문이름 타입 성별 생년월일
-        Passenger passengerDTO = passengerRepository.findByReservationId(reservationDTO.getId());
-        
+        List<Passenger> passengerDTO = passengerRepository.findByReservationId(reservationDTO.getId());
+        System.out.println("테스트 01 : ");
+        System.out.println(passengerDTO.get(0).getId());
+        System.out.println(passengerDTO.get(0).getReservationId());
+        System.out.println("살려줘");
         // 티켓 항공요금 유류할증료 제세공과금 발권수수료 총액운임
         List<Ticket> ticketDTO = ticketRepository.findByReservationId(reservationDTO.getId());
+        System.out.println("체크체크");
+        System.out.println(ticketDTO.get(0).getArrivalCity());
 
         ReservationResponse.SaveResultDTO response =
                 new ReservationResponse.SaveResultDTO(reservationDTO, passengerDTO, ticketDTO);
 
+        System.out.println("----안담김?----");
+        System.out.println(response.getReservation().getReservationNum());
+        System.out.println(response.getPassenger().get(0).getFirstName());
+        System.out.println("--------");
         return response;
     }
 

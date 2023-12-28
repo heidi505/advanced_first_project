@@ -93,7 +93,7 @@ public class TicketController {
     public String preview(@PathVariable int ticketId, Model model){
 
         List<DataDTO> dto = ticketService.ticketDetail(ticketId);
-        int isRound = dto.stream().map(e->e.getItineraries()).toList().size();
+        int isRound = dto.get(0).getItineraries().size();
 
         model.addAttribute("ticket", dto.get(0));
         model.addAttribute("isRound", isRound);
