@@ -1,6 +1,5 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
