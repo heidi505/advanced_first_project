@@ -62,8 +62,8 @@
                                             <%--                                            <span class="detail_info_span2">${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin}</span>--%>
                                         </th>
                                         <th class="detail_info_th">
-                                            <span class="detail_info_span">기타</span>
-
+                                            <span class="detail_info_span">승객</span>
+                                            <span class="detail_info_span2">1명</span>
                                         </th>
                                         <div style="display: none">
                                             <%-- 직항, 경유체크부분 화면에 없네용! --%>

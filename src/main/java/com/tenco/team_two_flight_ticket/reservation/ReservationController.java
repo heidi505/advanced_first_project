@@ -67,6 +67,10 @@ public class ReservationController {
         // 로직
         DataDTO dataDTO = (DataDTO) session.getAttribute("ticketData");
 
+        System.out.println("================");
+        System.out.println(dto.getPassengerDTOS().get(0).getFirstName());
+        System.out.println("==================");
+
         ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto, principal, dataDTO);
         // 카카오 메시지 보내기
         String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");
