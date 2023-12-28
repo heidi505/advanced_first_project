@@ -49,7 +49,6 @@ async function getMyTravel(tabId, sort, year){
 	currentTabId = tabId;
 	if(currentPeriod != year&& currentPeriod != ``){
 		let myTripCountLabel = document.getElementsByClassName(`my_trip_count_label`);
-		console.log(myTripCountLabel);
 		currentPeriod = year;
 		myTripCountLabel[0].style.background = `var(--primary02)`;
 		sort = isPayedEnum.ALL;
@@ -63,7 +62,7 @@ async function getMyTravel(tabId, sort, year){
 		case tripEnum.LAST     : status = statusEnum.LAST;     break;
 		case tripEnum.CANCELED : status = statusEnum.CANCELED; break;
 	}
-	
+
 	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}&year=${year}`; 
 	 try {
         const response = await fetch(href);
@@ -120,7 +119,7 @@ function insertElement(tripList, tripCnt , tabId, sort){
     	text = document.createTextNode(isPayed); 
     	myTripCountLabel.appendChild(text);
     	span = makeElement(`span`,`my_trip_num`);
-    	text = document.createTextNode(` `+tripCount); 
+    	text = document.createTextNode(tripCount); 
     	span.appendChild(text);
     	myTripCountLabel.appendChild(span);
     	myTrip.appendChild(myTripCountLabel);
