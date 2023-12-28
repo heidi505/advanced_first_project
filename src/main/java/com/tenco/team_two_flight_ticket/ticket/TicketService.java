@@ -78,6 +78,9 @@ public class TicketService {
             String startDate = parsedDate[0];
             String endDate = parsedDate[1];
 
+            System.out.println("============");
+            System.out.println(endDate);
+            System.out.println("==============");
             dto.setStartDate(startDate);
             dto.setEndDate(endDate);
         }

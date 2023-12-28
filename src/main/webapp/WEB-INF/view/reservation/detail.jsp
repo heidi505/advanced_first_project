@@ -82,7 +82,9 @@
                                         <td>좌석</td>
                                         <td>수하물</td>
                                     </tr>
-                                    <c:forEach var="round" items="${ticket.roundTrip()}" varStatus="status">
+                                    <c:choose>
+                                        <c:when test="${isRound == 2}">
+                                        <c:forEach var="round" items="${ticket.roundTrip()}" varStatus="status">
                                         <c:forEach var="segment" items="${round.value.segments()}">
                                             <tr>
                                                 <td>${round.key}</td>
@@ -110,7 +112,40 @@
                                                 </td>
                                             </tr>
                                         </c:forEach>
-                                    </c:forEach>
+                                        </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach var="itinerary" items="${ticket.itineraries}" varStatus="status">
+                                                <c:forEach var="segment" items="${itinerary.segments}">
+                                            <tr>
+                                                <td>가는 편</td>
+                                                <td>${segment.airlineName} ${segment.number} <a class="btn">상세</a></td>
+                                                <td>${segment.departure.cityName} - ${segment.arrival.cityName}</td>
+                                                <td>${segment.departure.date()} ${segment.departure.time()}</td>
+                                                <td>${segment.arrival.date()} ${segment.arrival.time()}</td>
+                                                <td><%--                                            ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST--%>
+                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'ECONOMY'}">
+                                                        일반
+                                                    </c:if>
+                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'BUSINESS'}">
+                                                        비즈니스
+                                                    </c:if>
+                                                    <input type="hidden" name="seatType" id="seatType" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin}">
+                                                </td>
+                                                <td>
+                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight eq null}">
+                                                        0
+                                                    </c:if>
+                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weightUnit eq null}">
+                                                        kg
+                                                    </c:if>
+                                                    <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight}">
+                                                </td>
+                                                </tr>
+                                                </c:forEach>
+                                                </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
                                     </tbody>
                                 </table>
                             </div>
