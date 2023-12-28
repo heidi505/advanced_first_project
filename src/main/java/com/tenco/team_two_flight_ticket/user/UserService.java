@@ -8,19 +8,11 @@ import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -33,17 +25,11 @@ import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
-import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushTokenResponse;
-import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushUser;
-import com.tenco.team_two_flight_ticket.auth.authresponse.PushAlertFail;
 import com.tenco.team_two_flight_ticket.firebase.FCMInitializer;
 import com.tenco.team_two_flight_ticket.user.UserRequest.PushAlarmDTO;
-import com.tenco.team_two_flight_ticket.user.UserRequest.SignInDTO;
-
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 
 @Service
 public class UserService {

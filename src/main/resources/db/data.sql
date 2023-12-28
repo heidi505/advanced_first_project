@@ -15,7 +15,7 @@ insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_a
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (2,1,104,'지난',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28');
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (3,1,364,'취소',1,'2024-03-14 11:02:06',290400,'2023-12-01 18:50:06');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (1,1,'ssar','ssar@nate.com','01011112222','153','예정',1,'2024-08-28 00:13:24',220270,'2023-11-12 06:51:24','true');
-INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (2,1,'cos','cos@nate.com','01011112222','104','예정',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28','true');
+INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (2,1,'cos','cos@nate.com','01011112222','104','지난',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28','true');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (3,1,'love','love@nate.com','01011112222','364','취소',1,'2024-03-14 11:02:06',290400,'2023-12-01 18:50:06','false');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`       , `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`    
 ,`reservation_price`,`created_at`        ,`is_payed`)
@@ -28,8 +28,8 @@ INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`       , `phone_num
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`, `reservation_price`, `created_at`, `is_payed`)
 VALUES
 (6, 1, 'ssar', 'ssar@example.com', '01012341234', '183', '예정', 2, '2024-12-01 08:30:45', 320000, '2024-10-25 10:11:35', 'false'),
-(7, 1, 'love', 'love@example.com', '01012341234', '193', '지난', 1, '2020-09-05 12:37:48', 420000, '2020-09-06 12:37:48 10:20:35', 'false');
--- (8, 4, 'cos', 'cos@example.com', '01023452345', '184', '지난', 1, '2024-12-15 15:45:20', 120000, '2023-12-25 12:45:18', 'true'),
+(7, 1, 'love', 'love@example.com', '01012341234', '193', '지난', 1, '2020-09-05 12:37:48', 420000, '2020-09-06 12:37:48 10:20:35', 'false'),
+(8, 4, 'cos', 'cos@example.com', '01023452345', '184', '지난', 1, '2024-12-15 15:45:20', 120000, '2023-12-25 12:45:18', 'true');
 --  (9, 3, 'love', 'love@example.com', '01034563456', '185', '취소', 4, '2025-01-05 18:10:55', 600000, '2023-12-26 09:55:42', 'false'),
 -- (10, 2, 'tom', 'tom@example.com', '01045674567', '186', '완료', 2, '2025-01-20 22:30:10', 250000, '2023-12-26 15:30:27', 'true'),
 -- (11, 5, 'lisa', 'lisa@example.com', '01056785678', '187', '취소', 3, '2025-02-10 04:55:50', 420000, '2023-12-27 07:40:15', 'false'),
@@ -81,8 +81,30 @@ INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxe
                   (9   ,5               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
 ,'SEL'           ,'CJU'         ,'2024-01-28 04:24:11','2024-01-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
 ,false       ,false        ,42                 ,'2023-12-21 06:53:04');
-
-
+INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
+,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+                  (10   ,6               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
+,'SEL'           ,'CJU'         ,'2024-02-28 04:24:11','2024-02-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
+,false       ,false        ,42                 ,'2023-12-21 06:53:04');
+INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
+,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+                  (11   ,6               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
+,'SEL'           ,'CJU'         ,'2024-02-28 04:24:11','2024-02-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
+,false       ,false        ,42                 ,'2023-01-21 06:53:04');
+INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
+,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+                  (12   ,7               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
+,'SEL'           ,'CJU'         ,'2022-01-28 04:24:11','2022-01-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
+,false       ,false        ,42                 ,'2021-01-21 06:53:04');
+INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
+,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+                  (13   ,8               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
+,'SEL'           ,'CJU'         ,'2021-12-28 04:24:11','2021-12-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
+,false       ,false        ,42                 ,'2021-12-21 06:53:04');
 
 
 -- 승객
@@ -97,7 +119,8 @@ INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birt
 INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birth_date`,`gender`,`passenger_type`,`created_at`)VALUES (8,4,'seungshin','Kim','12/09/1991','남성','성인','2023-09-30 23:03:00');
 
 INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birth_date`,`gender`,`passenger_type`,`created_at`)VALUES (9,5,'hayan','Kim','12/05/1995','여성','성인','2023-11-12 18:34:31');
-
+INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birth_date`,`gender`,`passenger_type`,`created_at`)VALUES (10,5,'hayan','Kim','12/05/1995','여성','성인','2023-11-12 18:34:31');
+INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birth_date`,`gender`,`passenger_type`,`created_at`)VALUES (11,2,'minkyoung','Sung','05/28/1996','남성','성인','2021-09-05 16:42:07');
 -- 검색
 INSERT INTO `searched_tb` (`id`,`user_id`,`is_one_way`,`departure_city`,`arrival_city`,`start_date`,`end_date`,`travel_class`,`created_at`,`adults`,`children`,`infants`)
 VALUES(1,1,true,'SYD','BKK','2024-09-14','2024-09-15','일반석','2024-09-14 15:20:02',1,0,0);
