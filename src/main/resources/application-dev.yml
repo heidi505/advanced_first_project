@@ -36,8 +36,6 @@ spring:
           starttls:
             enable: true
 
-
-
   jpa:
     defer-datasource-initialization: true
     hibernate:

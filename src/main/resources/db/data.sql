@@ -15,28 +15,28 @@ insert into user_tb(`id`, `username`, `password`, `email`, `phone_number`, `is_a
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (2,1,104,'지난',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28');
 -- INSERT INTO reservation_tb(`id`,`user_id`,`reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`)VALUES (3,1,364,'취소',1,'2024-03-14 11:02:06',290400,'2023-12-01 18:50:06');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (1,1,'ssar','ssar@nate.com','01011112222','153','예정',1,'2024-08-28 00:13:24',220270,'2023-11-12 06:51:24','true');
-INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (2,1,'cos','cos@nate.com','01011112222','104','지난',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28','true');
+INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (2,1,'이은지','cos@nate.com','01011112222','104','지난',3,'2024-03-26 00:35:28',426820,'2023-11-24 04:02:28','true');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES (3,1,'love','love@nate.com','01011112222','364','취소',1,'2024-03-14 11:02:06',290400,'2023-12-01 18:50:06','false');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`       , `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)VALUES(4,1,'cos','cos@nate.com','01011112222','162','지난',3,'2021-12-28 00:13:23',450540,'2021-12-15 05:48:23','true');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`,`reservation_price`,`created_at`,`is_payed`)
 VALUES(5,1,'ssar','ssar@nate.com','01011112222','163','예정',1,'2024-09-23 00:13:23',450540,'2023-12-15 05:48:23','false');
 INSERT INTO reservation_tb(`id`,`user_id`,`res_name`, `email`, `phone_num`, `reservation_num`,`status_enum`,`passenger_amount`,`payment_deadline`, `reservation_price`, `created_at`, `is_payed`)
 VALUES
-(6, 1, 'ssar', 'ssar@example.com', '01012341234', '182', '예정', 2, '2024-12-01 08:30:45', 320000, '2024-10-25 10:11:35', 'false'),
-(7, 1, 'love', 'love@example.com', '01012341234', '183', '지난', 1, '2020-09-05 12:37:48', 420000, '2020-09-06 12:37:48 10:20:35', 'true'),
-(8, 1, 'cos', 'cos@example.com', '01023452345', '184', '지난', 1, '2023-12-15 15:45:20', 120000, '2023-12-25 12:45:18', 'true'),
-(9, 1, 'love', 'love@example.com', '01034563456', '185', '취소', 1, '2023-01-05 18:10:55', 600000, '2023-12-26 09:55:42', 'false'),
-(10, 1, 'tom', 'tom@example.com', '01045674567', '186', '지난', 1, '2022-01-20 22:30:10', 250000, '2022-12-26 15:30:27', 'true'),
-(11, 1, 'tom', 'tom@example.com', '01045674567', '187', '지난', 1, '2022-02-20 22:30:10', 250000, '2022-11-23 15:30:27', 'true'),
-(12, 1, 'tom', 'tom@example.com', '01045674567', '188', '지난', 2, '2021-03-20 22:30:10', 250000, '2021-05-26 15:30:27', 'true'),
-(13, 1, 'lisa', 'lisa@example.com', '01056785678', '189', '취소', 1, '2025-02-10 04:55:50', 420000, '2023-12-27 07:40:15', 'false'),
-(14, 1, 'ssar', 'ssar@example.com', '01067896789', '190', '취소', 1, '2021-02-25 12:20:05', 750000, '2021-12-27 11:10:33', 'false'),
-(15, 1, 'ssar', 'ssar@example.com', '01067896789', '191', '취소', 1, '2022-02-25 12:20:05', 750000, '2022-12-27 11:10:33', 'false'),
-(16, 1, 'ssar', 'ssar@example.com', '01067896789', '192', '취소', 1, '2022-02-25 12:20:05', 750000, '2022-12-27 11:10:33', 'false'),
-(17, 1, 'ssar', 'ssar@example.com', '01067896789', '193', '취소', 1, '2023-02-25 12:20:05', 750000, '2023-12-27 11:10:33', 'false');                    
+    (6, 1, 'ssar', 'ssar@example.com', '01012341234', '182', '예정', 2, '2024-12-01 08:30:45', 320000, '2024-10-25 10:11:35', 'false'),
+    (7, 1, 'love', 'love@example.com', '01012341234', '183', '지난', 1, '2020-09-05 12:37:48', 420000, '2020-09-06 12:37:48 10:20:35', 'true'),
+    (8, 1, '이은지', 'cos@example.com', '01023452345', '184', '지난', 1, '2023-12-15 15:45:20', 120000, '2023-12-25 12:45:18', 'true'),
+    (9, 1, 'love', 'love@example.com', '01034563456', '185', '취소', 1, '2023-01-05 18:10:55', 600000, '2023-12-26 09:55:42', 'false'),
+    (10, 1, 'tom', 'tom@example.com', '01045674567', '186', '지난', 1, '2022-01-20 22:30:10', 250000, '2022-12-26 15:30:27', 'true'),
+    (11, 1, 'tom', 'tom@example.com', '01045674567', '187', '지난', 1, '2022-02-20 22:30:10', 250000, '2022-11-23 15:30:27', 'true'),
+    (12, 1, 'tom', 'tom@example.com', '01045674567', '188', '지난', 2, '2021-03-20 22:30:10', 250000, '2021-05-26 15:30:27', 'true'),
+    (13, 1, 'lisa', 'lisa@example.com', '01056785678', '189', '취소', 1, '2025-02-10 04:55:50', 420000, '2023-12-27 07:40:15', 'false'),
+    (14, 1, 'ssar', 'ssar@example.com', '01067896789', '190', '취소', 1, '2021-02-25 12:20:05', 750000, '2021-12-27 11:10:33', 'false'),
+    (15, 1, 'ssar', 'ssar@example.com', '01067896789', '191', '취소', 1, '2022-02-25 12:20:05', 750000, '2022-12-27 11:10:33', 'false'),
+    (16, 1, 'ssar', 'ssar@example.com', '01067896789', '192', '취소', 1, '2022-02-25 12:20:05', 750000, '2022-12-27 11:10:33', 'false'),
+    (17, 1, 'ssar', 'ssar@example.com', '01067896789', '193', '취소', 1, '2023-02-25 12:20:05', 750000, '2023-12-27 11:10:33', 'false');
 -- 티켓
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
-VALUES(1,1,36050,20430,10000,18305,926560,'KE','KE112','GMP','TYO','2024-03-21 21:34:06','2023-10-10 08:17:01','GMP','NRT','일반석',false,true,37,'2023-09-18 10:38:26');
+VALUES(1,1,36050,20430,10000,18305,926560,'KE','KE112','GMP','TYO','2023-12-30 21:34:06','2023-12-31 08:17:01','GMP','NRT','일반석',false,true,37,'2023-09-18 10:38:26');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
 VALUES(2,2,38080,22370,10000,11830,123980,'KE','KE112','GMP','SYD','2023-03-09 03:07:54','2024-02-06 14:31:15','GMP','SYD','일반석',false,true,29,'2023-03-01 18:48:37');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
@@ -50,110 +50,110 @@ VALUES(4,2,38080,22370,10000,11830,123980,'KE','KE112','GMP','SYD','2023-03-09 0
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
 VALUES(5,3,47190,15820,10000,8010,962670,'KE','KE112','ICN','SYD','2023-04-17 20:07:24','2023-12-15 16:18:18','ICN','SYD','일반석',false,false,31,'2022-12-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
+                        ,`departure_city`,`arrival_city`,`departure_time`,`arrival_time`,`departure_airport`,`arrival_airport`,`seat_type`,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
 VALUES  (6,4,57190,25820,30000,7022,962270,'OZ','OZ112','SEL','CJU','2021-12-28 04:24:11','2021-12-29 16:18:18','GMP','CJU','비즈니스',true,false,32,'2021-12-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
-VALUES                  (7   ,4               ,57190     ,25820           ,30000   ,7022          ,962270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2021-12-28 04:24:11','2021-12-29 16:18:18','GMP'              ,'CJU'            ,'비즈니스'     
-,true       ,false        ,32                 ,'2021-12-21 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
+VALUES                  (7   ,4               ,57190     ,25820           ,30000   ,7022          ,962270       ,'OZ'     ,'OZ112'
+                        ,'SEL'           ,'CJU'         ,'2021-12-28 04:24:11','2021-12-29 16:18:18','GMP'              ,'CJU'            ,'비즈니스'
+                        ,true       ,false        ,32                 ,'2021-12-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
-VALUES                  (8   ,4               ,57190     ,25820           ,30000   ,7022          ,962270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2021-12-28 04:24:11','2021-12-29 16:18:18','GMP'              ,'CJU'            ,'비즈니스'     
-,true       ,false        ,32                 ,'2021-12-21 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`)
+VALUES                  (8   ,4               ,57190     ,25820           ,30000   ,7022          ,962270       ,'OZ'     ,'OZ112'
+                        ,'SEL'           ,'CJU'         ,'2021-12-28 04:24:11','2021-12-29 16:18:18','GMP'              ,'CJU'            ,'비즈니스'
+                        ,true       ,false        ,32                 ,'2021-12-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (9   ,5               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2024-01-28 04:24:11','2024-01-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2023-12-21 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (9   ,5               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2024-01-28 04:24:11','2024-01-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2023-12-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (10   ,6               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2024-02-28 04:24:11','2024-02-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2023-12-21 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (10   ,6               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2024-02-28 04:24:11','2024-02-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2023-12-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (11   ,6               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2024-02-28 04:24:11','2024-02-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2023-01-21 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (11   ,6               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2024-02-28 04:24:11','2024-02-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2023-01-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (12   ,7               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2022-01-28 04:24:11','2022-01-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2021-01-21 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (12   ,7               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2022-01-28 04:24:11','2022-01-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2021-01-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (13   ,8               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2021-12-28 04:24:11','2021-12-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2021-12-21 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (13   ,8               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2021-12-28 04:24:11','2021-12-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2021-12-21 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (14   ,9               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2021-11-28 04:24:11','2021-11-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2021-11-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (14   ,9               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2021-11-28 04:24:11','2021-11-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2021-11-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (15   ,10               ,50200     ,27900           ,50000   ,77200          ,873270       ,'JL'     ,'JL112'      
-,'SEL'           ,'OSA'         ,'2023-09-28 04:24:11','2023-09-29 16:18:18','GMP'              ,'KIX'            ,'일반석'     
-,false       ,false        ,42                 ,'2023-09-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (15   ,10               ,50200     ,27900           ,50000   ,77200          ,873270       ,'JL'     ,'JL112'
+    ,'SEL'           ,'OSA'         ,'2023-09-28 04:24:11','2023-09-29 16:18:18','GMP'              ,'KIX'            ,'일반석'
+    ,false       ,false        ,42                 ,'2023-09-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (16   ,11               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2023-08-28 04:24:11','2023-08-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2023-08-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (16   ,11               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2023-08-28 04:24:11','2023-08-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2023-08-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (17   ,12               ,50200     ,27900           ,50000   ,77200          ,873270       ,'7C'     ,'7C112'      
-,'SEL'           ,'CJU'         ,'2022-07-28 04:24:11','2022-07-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2022-11-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (17   ,12               ,50200     ,27900           ,50000   ,77200          ,873270       ,'7C'     ,'7C112'
+    ,'SEL'           ,'CJU'         ,'2022-07-28 04:24:11','2022-07-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2022-11-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (18   ,12               ,50200     ,27900           ,50000   ,77200          ,873270       ,'7C'     ,'7C112'      
-,'SEL'           ,'CJU'         ,'2022-07-28 04:24:11','2022-07-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2022-11-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (18   ,12               ,50200     ,27900           ,50000   ,77200          ,873270       ,'7C'     ,'7C112'
+    ,'SEL'           ,'CJU'         ,'2022-07-28 04:24:11','2022-07-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2022-11-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (19   ,13               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2022-06-28 04:24:11','2022-06-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2022-10-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (19   ,13               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2022-06-28 04:24:11','2022-06-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2022-10-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (20   ,14               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2022-06-28 04:24:11','2022-06-29 16:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2022-10-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (20   ,14               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2022-06-28 04:24:11','2022-06-29 16:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2022-10-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (21   ,15               ,50200     ,27900           ,50000   ,77200          ,873270       ,'7C'     ,'7C112'      
-,'SEL'           ,'CJU'         ,'2023-06-28 05:38:11','2023-06-29 07:20:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2023-5-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (21   ,15               ,50200     ,27900           ,50000   ,77200          ,873270       ,'7C'     ,'7C112'
+    ,'SEL'           ,'CJU'         ,'2023-06-28 05:38:11','2023-06-29 07:20:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2023-5-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (22   ,16               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2023-07-28 11:24:11','2023-07-29 13:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2022-6-20 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (22   ,16               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2023-07-28 11:24:11','2023-07-29 13:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2022-6-20 06:53:04');
 INSERT INTO `ticket_tb` (`id`,`reservation_id`,`air_fare`,`fuel_surcharge`,`taxes`,`ticketing_fee`,`total_price`,`airline`,`flight_name`
-,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
-,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
-                  (23   ,17               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'      
-,'SEL'           ,'CJU'         ,'2024-01-28 11:24:11','2024-01-29 13:18:18','GMP'              ,'CJU'            ,'일반석'     
-,false       ,false        ,42                 ,'2024-1-11 06:53:04');
+                        ,`departure_city`,`arrival_city`,`departure_time`     ,`arrival_time`       ,`departure_airport`,`arrival_airport`,`seat_type`
+                        ,`is_one_way`,`is_non_stop`,`baggage_allowance`,`created_at`) values
+    (23   ,17               ,50200     ,27900           ,50000   ,77200          ,873270       ,'OZ'     ,'OZ112'
+    ,'SEL'           ,'CJU'         ,'2024-01-28 11:24:11','2024-01-29 13:18:18','GMP'              ,'CJU'            ,'일반석'
+    ,false       ,false        ,42                 ,'2024-1-11 06:53:04');
 
 -- 승객
 INSERT INTO `passenger_tb` (`id`,`reservation_id`,`first_name`,`last_name`,`birth_date`,`gender`,`passenger_type`,`created_at`)VALUES (1,1,'hayan','Kim','12/15/1995','여성','성인','2023-11-04 17:59:57');

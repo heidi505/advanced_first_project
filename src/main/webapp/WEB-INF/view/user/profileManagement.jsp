@@ -33,7 +33,7 @@
                 </div>
                 <div class="coupon_profile col ">
                     <div class="coupon_count border mx-auto m-2 p-4 w-85 ">
-                        내 쿠폰<a class="color_primary02 float-end me-2" href="/user/coupon">${couponNum}
+                        내 쿠폰<a class="color_primary02 float-end me-2" href="/user/coupon">9
                         ></a>
                     </div>
                 </div>

@@ -34,7 +34,7 @@
             from reservation_tb rt
                      join user_tb ut on ut.id = rt.user_id
                      join ticket_tb tt on tt.reservation_id = rt.id
-            where status_enum = '예정' and ut.id = #{userId})
+            where status_enum = '예정' and ut.id = #{userId} limit 1)
     </select>
 
     <select id="getTicketDate" resultType="com.tenco.team_two_flight_ticket.ticket.TicketResponse$GetTicketDateDTO">

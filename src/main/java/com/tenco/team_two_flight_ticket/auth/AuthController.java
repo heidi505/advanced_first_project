@@ -145,7 +145,7 @@ public class AuthController {
         }
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
-        model.addAttribute("ticketDate", ticketDate);
+        session.setAttribute("ticketDate", ticketDate);
         return "redirect:/main";
     }
 
