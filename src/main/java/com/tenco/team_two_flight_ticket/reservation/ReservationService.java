@@ -162,7 +162,7 @@ public class ReservationService {
                     .taxes(Long.parseLong(travelerPricing.getPrice().getTax().replace(",", "")))
                     .ticketingFee(Long.parseLong(travelerPricing.getPrice().getFee().replace(",", "")))
                     .totalPrice(Long.parseLong(travelerPricing.getPrice().getTotal().replace(",", "")))
-                    .airline(dataDTO.getItineraries().get(0).getSegments().get(0).getAirlineName())
+                    .airline(dataDTO.getItineraries().get(0).getSegments().get(0).getCarrierCode())
                     .flightName(dataDTO.getItineraries().get(0).getSegments().get(0).getAircraft().getCode())
                     .departureCity(dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getCityName())
                     .arrivalCity(dataDTO.getItineraries().get(0).getSegments().get(0).getArrival().getCityName())

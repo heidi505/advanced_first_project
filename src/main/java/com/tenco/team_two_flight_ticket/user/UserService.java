@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,6 +53,8 @@ public class UserService {
 
     @Autowired
     private TicketRepository ticketRepository;
+
+
 
     @Transactional
     public void signUp(UserRequest.SignUpDTO dto) {
@@ -112,9 +115,10 @@ public class UserService {
 
         try {
             dto.setOriginalPicName(picUrl);
+            dto.setPassword(passwordEncoder.encode(dto.getPassword()));
             int update = userRepository.updateByUserId(dto);
             principal.setEmail(dto.getEmail());
-            principal.setPassword(dto.getPassword());
+            principal.setPassword(passwordEncoder.encode(dto.getPassword()));
             principal.setPhoneNumber(dto.getPhoneNumber());
             principal.setProfileImage(picUrl);
 
