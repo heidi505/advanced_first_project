@@ -168,6 +168,12 @@
             </div>
             <div class="w-100 text-center p-4">
                 <form action="/kakaoPay" method="post">
+                    <input type="hidden" name="reservationNum" value="${Result.reservation.reservationNum}">
+                    <input type="hidden" name="reservationId" value="${Result.reservation.id}">
+                    <input type="hidden" name="resName" value="${Result.reservation.resName}">
+                    <input type="hidden" name="couponPrice" id="couponPrice">
+                    <input type="hidden" name="finalPrice" id="finalPrice">
+                    <input type="hidden" name="originalPrice" value="${currentTicket.totalPrice}">
                     <button type="submit" class="payed_check_btn btn btn-primary w-25">결제하기</button>
                 </form>
             </div>
@@ -313,6 +319,10 @@
 
         // 총 결제 금액을 화면에 표시하는 부분
         document.getElementById("finalAmount").innerText = finalAmount.toLocaleString(); // 콤마 추가
+
+        document.getElementById("couponPrice").value = couponDiscount;
+        document.getElementById("finalPrice").value = finalAmount;
+
     }
 </script>
 <!-- footer.jsp -->
