@@ -15,7 +15,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,7 +38,6 @@ import com.tenco.team_two_flight_ticket.search.SearchedService;
 import com.tenco.team_two_flight_ticket.ticket.TicketResponse.GetTicketDateDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.User;
-import com.tenco.team_two_flight_ticket.user.UserRepository;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
 import com.tenco.team_two_flight_ticket.user.UserRequest.PushAlarmDTO;
 import com.tenco.team_two_flight_ticket.user.UserService;
@@ -66,9 +64,6 @@ public class AuthController {
 
     @Autowired
     private SearchedService searchService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private NoticeService noticeService;
@@ -145,7 +140,7 @@ public class AuthController {
         }
         // 로그인 시 예약한 티켓 날짜를 가져와 보냄
         GetTicketDateDTO ticketDate  = ticketService.getTicketDate(principal.getId());
-        model.addAttribute("ticketDate", ticketDate);
+        session.setAttribute("ticketDate", ticketDate);
         return "redirect:/main";
     }
 

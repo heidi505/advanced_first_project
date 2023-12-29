@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+
 import com.tenco.team_two_flight_ticket._middle._entity.enums.PassengerTypeEnum;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
@@ -20,29 +21,44 @@ import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
 import com.tenco.team_two_flight_ticket.user.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
 import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
 import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
+import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTravelDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripCountDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
 import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
 import com.tenco.team_two_flight_ticket.ticket.Ticket;
+import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
+import com.tenco.team_two_flight_ticket.user.User;
 import com.tenco.team_two_flight_ticket.user.UserRequest;
 import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
+
 import jakarta.validation.Valid;
 
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;@Service
+import org.springframework.web.client.RestTemplate;
+@Service
 public class ReservationService {
 
     @Autowired
@@ -82,7 +98,6 @@ public class ReservationService {
 //                .paymentDeadline(dto.getPaymentDeadline())
                 .reservationPrice(dto.getReservationPrice())
                 .build();
-
 
         int resultRowReservation = reservationRepository.insertR(reservationR);
         System.out.println("예약!");
@@ -290,7 +305,12 @@ public class ReservationService {
         return tripCnt;
     }
 
-    
+    /**
+     * 여행 상세 정보 조회
+     * @param userId
+     * @param reservationNum
+     * @return dto 
+     */
     public GetMyTripDetailDTO getMyTripDetail(int userId, Long reservationNum) {
         GetMyTripDetailDTO dto = null;
         if (reservationNum == null) {

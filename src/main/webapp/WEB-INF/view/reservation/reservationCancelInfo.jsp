@@ -54,9 +54,9 @@
 			<p>도착일 ${cancelTrip.arrivalDate}</p>
 			</div>
 			<div class="col py-3  w-25">
-			  <p class="mt-3 mb-4">예약자명 : ${cancelTrip.realName}</p>
+			  <p class="mt-3 mb-4">예약자명 : ${cancelTrip.resName}</p>
               <p>연락처 : ${cancelTrip.phoneNumber}</p>
-              <p class="mt-4">아이디 : ${cancelTrip.resName}</p>
+              <p class="mt-4">아이디 : ${sessionScope.principal.username}</p>
 			</div>
 			</div>
 			<div class="reservation_notice w-100 border p-3 mt-5 lh-lg" >

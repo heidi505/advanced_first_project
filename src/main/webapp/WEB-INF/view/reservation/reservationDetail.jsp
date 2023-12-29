@@ -71,9 +71,9 @@
                     <p>도착일 ${detailTrip.arrivalDate}</p>
                 </div>
                 <div class="col py-3  w-25">
-                    <p class="mt-3 mb-4">예약자명 : ${detailTrip.realName}</p>
+                    <p class="mt-3 mb-4">예약자명 : ${detailTrip.resName}</p>
                     <p>연락처 : ${detailTrip.phoneNumber}</p>
-                    <p class="mt-4">아이디 : ${detailTrip.resName}</p>
+                    <p class="mt-4">아이디 :${sessionScope.principal.username}</p>
                 </div>
             </div>
             <div class="reservation_notice w-100 border p-3 mt-5 lh-lg">
@@ -143,13 +143,13 @@
                         <b class="fs-5">예약 취소 요청</b><span class="close" id="close_btn">&times;</span>
                         <div class="border-top p-1 mt-4 d-flex">
                             <div class="p-2"><input type="checkbox" class="all_checkbox p-5 float-start"></div>
-                            <div class="w-10 text-center p-2">번호</div>
-                            <div class="p-2 ms-2 w-75">이름</div>
+                            <div class="w-25 text-center p-2">번호</div>
+                            <div class="p-2 ms-2 w-50">이름</div>
                         </div>
                         <div class="border-top border-bottom p-1 d-flex mb-4">
                             <div class="p-2 "><input type="checkbox" class="cancel_checkbox checkbox p-5 float-start"></div>
-                            <div class="w-10 text-center py-2 ">${reservationNum}</div>
-                            <div class="p-2 ms-2 w-75">${detailTrip.firstName}/${detailTrip.lastName} (MS)</div>
+                            <div class="w-25 text-center py-2 ">${reservationNum}</div>
+                            <div class="p-2 ms-2 w-50">${detailTrip.firstName}/${detailTrip.lastName} (MS)</div>
                         </div>
 
                         <div class="p-3 bg_line">

@@ -7,7 +7,6 @@ import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
 
-import com.tenco.team_two_flight_ticket.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;

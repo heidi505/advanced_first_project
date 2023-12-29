@@ -56,9 +56,9 @@
                             </li>
                             <li>
                             <c:choose>
-                            <c:when test="${ticketDate.alertCheck eq false}">
+                            <c:when test="${ticketDate.alertCheck eq true}">
                             	<a class="nav-link color_cancle" href="#" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
-                                       title="알림"  data-bs-custom-class="custom-popover" data-bs-content="당신이 예약한 ${ticketDate.departureCity}발 ${ticketDate.arrivalCity}행 비행기가 ${ticketDate.cuttedDepartureTime}에 출발합니다.">
+                                       title="알림"  data-bs-custom-class="custom-popover" data-bs-content="당신이 예약한 ${ticketDate.arrivalCity}행 비행기가 ${ticketDate.cuttedDepartureTime}에 출발합니다.">
                                     알림
                                 </a>
                             </c:when>
