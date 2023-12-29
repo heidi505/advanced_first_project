@@ -985,7 +985,7 @@
                                                         <c:choose>
                                                             <c:when test="${segment.stops == null}">
                                                                 <li>
-                                                                    <div>직항</div>
+                                                                    <div style="width: 75px;">직항</div>
                                                                     <div class="airline_txt">${itinerary.value.duration}</div>
                                                                 </li>
                                                             </c:when>

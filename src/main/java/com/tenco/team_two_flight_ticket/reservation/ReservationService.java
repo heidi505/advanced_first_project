@@ -226,7 +226,7 @@ public class ReservationService {
         if ("ADULT".equals(passengerType)) {
             return "성인";
         } else if ("CHILD".equals(passengerType)){
-            return "소아";// 다른 경우에 대한 레이블 설정
+            return "어린이";// 다른 경우에 대한 레이블 설정
         } else if ("HELD_INFANT".equals(passengerType)){
             return "유아";
         } else {

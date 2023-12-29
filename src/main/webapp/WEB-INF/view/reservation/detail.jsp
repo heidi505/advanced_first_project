@@ -30,7 +30,7 @@
                                     </span>
                                             <span class="detail_info_span2">
                                                 <span>${ticket.itineraries[0].segments[0].departure.date()}</span>
-<%--                                                <span>- 01월 11일</span>--%>
+                                                <span>- ${ticket.itineraries[1].segments[0].arrival.date()}</span>
                                     </span>
                                         </th>
                                         <th class="detail_info_th">
@@ -82,7 +82,6 @@
                                         <td>좌석</td>
                                         <td>수하물</td>
                                     </tr>
-<<<<<<< HEAD
                                     <c:choose>
                                         <c:when test="${isRound == 2}">
                                             <c:forEach var="round" items="${ticket.roundTrip()}" varStatus="status">
@@ -339,7 +338,7 @@
                             <div class="w3-container" id="menu">
                                 <div class="" style="max-width:1000px">
                                     <h2 class="detail_res_title">
-                                        <span class="detail_agree_title">예약 유의사항 동의</span>
+                                        <span class="detail_agree_title">예약 유의사항</span>
                                     </h2>
 
                                     <div class="w3-row w3-card w3-padding">
@@ -358,10 +357,10 @@
                                                 <div class="agreeTablink detail_agree_box">환불/변경</div>
                                             </a>
                                             <a href="javascript:void(0)" onclick="openMenu(event, 'rule5');">
-                                                <div class="agreeTablink detail_agree_box">개인정보 수집 및 이용동의</div>
+                                                <div class="agreeTablink detail_agree_box">개인정보 수집 및 이용</div>
                                             </a>
                                             <a href="javascript:void(0)" onclick="openMenu(event, 'rule6');">
-                                                <div class="agreeTablink detail_agree_box">개인정보 제3자 제공동의</div>
+                                                <div class="agreeTablink detail_agree_box">개인정보 제3자 제공</div>
                                             </a>
                                             <a href="javascript:void(0)" onclick="openMenu(event, 'rule7');">
                                                 <div class="agreeTablink detail_agree_box">수하물정보</div>
@@ -1850,7 +1849,7 @@
                                     </div>
 
                                     <div id="rule5" class="w3-container agreeMenu w3-padding-48 w3-card">
-                                        <legend><span id="privateruletit2">개인정보 수집 및 이용 동의</span>약관</legend>
+                                        <legend><span id="privateruletit2">개인정보 수집 및 이용</span>약관</legend>
                                         <div id="privaterule" class="k1_agreebox" style="word-wrap:break-word;">
                                             <span class="detail_boldb"><b>▶개인정보 수집 및 이용 목적</b></span><br>
                                             <b><u>항공권 구매 결제 및 발권, 계약 관련 동의 또는 철회 본인 의사 확인, 대금환불, 상품배송,
@@ -1879,7 +1878,7 @@
                                     </div>
 
                                     <div id="rule6" class="w3-container agreeMenu w3-padding-48 w3-card">
-                                        <legend><span id="thirdpartyruletit2">개인정보 제3자 제공동의</span>약관</legend>
+                                        <legend><span id="thirdpartyruletit2">개인정보 제3자 제공</span>약관</legend>
                                         <div id="thirdpartyrule" class="k1_agreebox" style="word-wrap:break-word;">
                                             <span class="detail_boldb"><b>▶개인정보를 제공받는 자</b></span><br>
                                             <b><u>토파스 여행정보</u></b><br><br>
@@ -2087,16 +2086,16 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 <tr>
-                                                                    <td>12월 12일</td>
-                                                                    <td>인천 T1</td>
-                                                                    <td>도쿄(나리타) T2</td>
-                                                                    <td>티웨이항공</td>
+                                                                    <td>${ticket.itineraries[0].segments[0].departure.date()}</td>
+                                                                    <td>${ticket.itineraries[0].segments[0].departure.cityName}</td>
+                                                                    <td>${ticket.itineraries[0].segments[0].arrival.cityName}</td>
+                                                                    <td>${ticket.itineraries[0].segments[0].airlineName}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>12월 15일</td>
-                                                                    <td>도쿄(나리타) T2</td>
-                                                                    <td>인천 T1</td>
-                                                                    <td>티웨이항공</td>
+                                                                    <td>${ticket.itineraries[1].segments[0].arrival.date()}</td>
+                                                                    <td>${ticket.itineraries[1].segments[0].departure.cityName}</td>
+                                                                    <td>${ticket.itineraries[1].segments[0].arrival.cityName}</td>
+                                                                    <td>${ticket.itineraries[1].segments[0].airlineName}</td>
                                                                 </tr>
                                                                 </tbody>
                                                             </table>

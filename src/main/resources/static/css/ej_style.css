@@ -331,6 +331,24 @@
 
 /* flight_banner - 항공권 배너 */
 
+.flight_banner_list {
+    display: flex;
+}
+.flight_banner_list li {
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.flight_banner_list img {
+    border-radius: 10px 10px 0 0;
+    opacity: 0.8;
+}
+.banner_list_img:hover > img {
+    transform: scale3d(1.5, 1.5, 1.5);
+    transition: all 0.3s;
+    opacity: 1;
+}
+
 .flight_banner_item {
     margin: 32px 0;
 }

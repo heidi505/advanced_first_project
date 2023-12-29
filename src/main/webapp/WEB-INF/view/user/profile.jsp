@@ -27,11 +27,11 @@
                             </div>
                         </c:otherwise>
                     </c:choose>
-                    <p class="my-4 principal_username">${principal.realName}</p>
+                    <p class="my-4 principal_username">ssar</p>
                 </div>
                 <div class="coupon_profile col ">
                     <div class="coupon_count border mx-auto m-2 p-4 w-85 ">
-                        내 쿠폰<a class="color_primary02 float-end me-2" href="/user/coupon">${couponNum}장
+                        내 쿠폰<a class="color_primary02 float-end me-2" href="/user/coupon">9장
                         ></a>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <div class="my-4 principal_username">${principal.realName}</div>
+                    <div class="my-4 principal_username">ssar</div>
                 </div>
                 <!-- 프로필 사진 창 끝 -->
                 <div class="profile_info row row-cols-2 w-100 mx-auto">
