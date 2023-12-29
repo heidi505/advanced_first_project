@@ -55,7 +55,7 @@
     <insert id="insertR">
         insert into reservation_tb(user_id, res_name, email, phone_num, reservation_num, status_enum, passenger_amount,
                                    payment_deadline, reservation_price, created_at)
-        values (1, #{resName}, #{email}, #{phoneNum}, #{reservationNum}, '예정', #{passengerAmount}, null, null, now())
+        values (#{userId}, #{resName}, #{email}, #{phoneNum}, #{reservationNum}, '예정', #{passengerAmount}, #{paymentDeadline}, 1000000, now())
     </insert>
 
     <select id="getMyTripDetail" resultType="com.tenco.team_two_flight_ticket.reservation.ReservationResponse$GetMyTripDetailDTO">

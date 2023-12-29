@@ -1,5 +1,6 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.PassengerTypeEnum;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import lombok.Data;
