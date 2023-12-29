@@ -4,7 +4,6 @@ package com.tenco.team_two_flight_ticket.ticket;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,13 +213,7 @@ public class TicketController {
         return "flightTicket/flightSearch";
     }
 
-    @GetMapping("/test-search")
-    public String testSearch(@Valid TicketRequest.TicketLightSearchDTO dto, Model model) throws URISyntaxException  {
-    	// 검색어에 해당하는 도시나 나라 이름을 DB에서 검색해 해당하는 곳을 도착지로 선정하고 나머지는 랜덤으로 작성
-    	TicketRequest.TicketSearchDTO searchDto = ticketService.getSearchDTO(dto);
-    	
-    	return "flightTicket/flightSearch";
-    }
+
     @GetMapping("/cities-list")
     public ResponseEntity<ApiUtils.ApiResult<List<City>>> citiesList(@RequestParam(defaultValue = "대한민국") String region){
         List<City> cities = ticketService.getCities(region);
@@ -256,7 +249,7 @@ public class TicketController {
     }
 
     /**
-     * 
+     * 항공권 도시 검색
      * @param dto
      * @return cities
      */
