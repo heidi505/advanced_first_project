@@ -27,5 +27,7 @@ public interface CouponRepository {
 	public List<CouponExpiredListDTO> findCouponExpiredAllByUserId(int id);
 
     public List<CouponListDTO> findCouponByUserId(Integer id);
+    // 소지 쿠폰 수 조회 (만료 제외) 
+	public int getCouponCount(int id);
 
 }

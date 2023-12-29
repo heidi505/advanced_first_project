@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
+import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
 import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,8 @@ public class UserService {
     private ResourceLoader resourceLoader;
     @Autowired
     private ChatgptService chatgptService;
+    @Autowired
+    private CouponRepository couponRepository;
 
     @Autowired
     private TicketRepository ticketRepository;
@@ -83,10 +86,21 @@ public class UserService {
         return userEntity;
     }
 
+    /**
+     * 유저 아이디로 쿠폰 수 조회
+     * @param principal
+     * @return counponCount
+     */
     public int getProfile(User principal) {
-        List<HasCoupon> couponList = hasCouponRepository.findByUserId(principal.getId());
+        //List<HasCoupon> couponList = hasCouponRepository.findByUserId(principal.getId());
+        int couponCount = 0; 
+        try {
+        	couponCount = couponRepository.getCouponCount(principal.getId());
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
 
-        return couponList.size();
+        return couponCount;
     }
 
     @Transactional
@@ -110,20 +124,22 @@ public class UserService {
             picUrl = "basic_img.svg";
         }
 
+        
+        
         try {
-            dto.setOriginalPicName(picUrl);
-            int update = userRepository.updateByUserId(dto);
-            principal.setEmail(dto.getEmail());
-            principal.setPassword(dto.getPassword());
-            principal.setPhoneNumber(dto.getPhoneNumber());
-            principal.setProfileImage(picUrl);
-
-            session.setAttribute(Define.PRINCIPAL, principal);
-
-            return update;
+        	dto.setOriginalPicName(picUrl);
+        	int update = userRepository.updateByUserId(dto);
+        	principal.setEmail(dto.getEmail());
+        	principal.setPassword(dto.getPassword());
+        	principal.setPhoneNumber(dto.getPhoneNumber());
+        	principal.setProfileImage(picUrl);
+        	
+        	session.setAttribute(Define.PRINCIPAL, principal);
+        	return update;
         } catch (Exception e) {
             throw new MyServerError("서버 에러");
         }
+        
     }
 
     public String checkUsername(String username) {

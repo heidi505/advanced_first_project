@@ -93,4 +93,12 @@
         where is_used = false
         and user_id = #{id}
     </select>
+    
+    <select id="getCouponCount" resultType="int">
+        SELECT COUNT(*)
+        FROM coupon_tb
+        WHERE user_id = #{id}
+        AND is_used = false
+    </select>
+    
 </mapper>
