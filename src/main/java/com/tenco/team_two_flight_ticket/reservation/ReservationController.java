@@ -7,6 +7,7 @@ import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket.coupon.Coupon;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
 import com.tenco.team_two_flight_ticket.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,21 +57,48 @@ public class ReservationController {
     public String test4(@PathVariable int ticketId, Model model) {
 
         List<DataDTO> dto = ticketService.ticketDetail(ticketId);
-        int isRound = dto.stream().map(e->e.getItineraries()).toList().size();
+        int isRound = dto.get(0).getItineraries().size();
 
         model.addAttribute("ticket", dto.get(0));
+        session.setAttribute("ticketData", dto.get(0));
+        for (DataDTO dataDTO : dto) {
+            System.out.println("디티오아디");
+            System.out.println("Ticket: " + dataDTO.getId());
+            System.out.println("이티너리스");
+            System.out.println("Ticket: " + dataDTO.getItineraries());
+            System.out.println("타입");
+            System.out.println("Ticket: " + dataDTO.getType());
+            System.out.println("프라이스카운트");
+            System.out.println("Ticket: " + dataDTO.getPrice().getPeopleCount());
+            System.out.println("트레벌프라이싱");
+            System.out.println("Ticket: " + dataDTO.getTravelerPricings());
+            System.out.println("북에이블싯");
+            System.out.println("Ticket: " + dataDTO.getNumberOfBookableSeats());
+        }
         model.addAttribute("isRound", isRound);
         return "reservation/detail";
     }
 
     // 디테일 페이지에서 예약하기 버튼 클릭시 수행
     @PostMapping("reservation/save")
-    public String save(ReservationRequest.SaveFormDto dto, HttpSession session) {
+    public String save(ReservationRequest.SaveFormDto dto) {
         // 1. 인증검사
-        // User principal = (User) session.getAttribute(Define.PRINCIPAL);
+        System.out.println("터지는 라인 체크 1");
+         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         // 2. 유효성 검사
         // 로직
-        ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto);
+        DataDTO dataDTO = (DataDTO) session.getAttribute("ticketData");
+
+//        List<PassengerDTO> savedto = flightDTO.getPassengerDTOList();
+        ReservationRequest.SaveFormDto savedto = dto;
+
+        System.out.println("티켓데이터");
+        System.out.println(dataDTO);
+        System.out.println("dto 체크체크");
+        System.out.println(dto);
+        System.out.println(savedto);
+        System.out.println(savedto.getPassengerDTOS().get(0).getLastName());
+        ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto, principal, dataDTO);
         // 카카오 메시지 보내기
         String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");
         System.out.println("옵션 체크체크 : ");
@@ -96,6 +124,7 @@ public class ReservationController {
     // 수행 후 나오는 결과 화면
     @GetMapping("/reservation/final-result")
     public String finalResult(HttpSession session, Model model) {
+
         ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
 
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
@@ -115,9 +144,10 @@ public class ReservationController {
         model.addAttribute("Result", resultDTO);
         System.out.println("잘 담겼나 안담겼나~~");
         System.out.println("Reservation Result:");
-        System.out.println("Reservation: " + resultDTO.getReservation());
-        System.out.println("Passenger: " + resultDTO.getPassenger());
-        System.out.println("Tickets: " + resultDTO.getTicket());
+//        System.out.println("Reservation: " + resultDTO.getReservation());
+        System.out.println("Reservation: " + resultDTO.getReservation().getId());
+//        System.out.println("Passenger: " + resultDTO.getPassenger());
+//        System.out.println("Tickets: " + resultDTO.getTicket());
         return "/reservation/finalResult";
     }
     // 예약 시나리오 끝!!
