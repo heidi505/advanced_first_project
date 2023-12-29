@@ -25,11 +25,6 @@ public class ReservationRequest {
 
         @Data
         public static class TicketDto {
-//            private Long airFare;
-//            private Long fuelSurcharge;
-//            private Long taxes;
-//            private Long ticketingFee;
-//            private Long totalPrice;
             private String airFare;
             private String fuelSurcharge;
             private String taxes;

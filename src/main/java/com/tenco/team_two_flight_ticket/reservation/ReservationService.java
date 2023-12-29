@@ -274,7 +274,7 @@ public class ReservationService {
         	dto.makePhoneNumber();
         	dto.cutDepartureDate();
         	dto.cutArrivalDate();
-        	dto.cutPaymentDeadline();
+        	//dto.cutPaymentDeadline();
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }
