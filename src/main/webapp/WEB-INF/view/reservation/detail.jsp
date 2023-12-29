@@ -44,7 +44,7 @@
                                         <img src="/images/airline_images/${ticket.itineraries[0].segments[0].carrierCode}.png" class="detail_info_img">
                                     </span>
                                             <span class="detail_info_span2">${ticket.itineraries[0].segments[0].airlineName}</span>
-                                            <input type="hidden" name="airline" id="airline" value="${ticket.itineraries[0].segments[0].airlineName}">
+                                            <input type="hidden" name="airline" id="airline" value="${ticket.itineraries[0].segments[0].carrierCode}">
                                         </th>
                                         <th class="detail_info_th">
                                             <span class="detail_info_span">운항종류</span>
@@ -82,35 +82,71 @@
                                         <td>좌석</td>
                                         <td>수하물</td>
                                     </tr>
-                                    <c:forEach var="round" items="${ticket.roundTrip()}" varStatus="status">
-                                        <c:forEach var="segment" items="${round.value.segments()}">
-                                            <tr>
-                                                <td>${round.key}</td>
-                                                <td>${segment.airlineName} ${segment.number} <a class="btn">상세</a></td>
-                                                <td>${segment.departure.cityName} - ${segment.arrival.cityName}</td>
-                                                <td>${segment.departure.date()} ${segment.departure.time()}</td>
-                                                <td>${segment.arrival.date()} ${segment.arrival.time()}</td>
-                                                <td><%--                                            ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST--%>
-                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'ECONOMY'}">
-                                                        일반
-                                                    </c:if>
-                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'BUSINESS'}">
-                                                        비즈니스
-                                                    </c:if>
-                                                    <input type="hidden" name="seatType" id="seatType" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin}">
-                                                </td>
-                                                <td>
-                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight eq null}">
-                                                        0
-                                                    </c:if>
-                                                    <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weightUnit eq null}">
-                                                        kg
-                                                    </c:if>
-                                                    <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight}">
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </c:forEach>
+<<<<<<< HEAD
+                                    <c:choose>
+                                        <c:when test="${isRound == 2}">
+                                            <c:forEach var="round" items="${ticket.roundTrip()}" varStatus="status">
+                                                <c:forEach var="segment" items="${round.value.segments()}">
+                                                    <tr>
+                                                        <td>${round.key}</td>
+                                                        <td>${segment.airlineName} ${segment.number} <a class="btn">상세</a></td>
+                                                        <td>${segment.departure.cityName} - ${segment.arrival.cityName}</td>
+                                                        <td>${segment.departure.date()} ${segment.departure.time()}</td>
+                                                        <td>${segment.arrival.date()} ${segment.arrival.time()}</td>
+                                                        <td><%--                                            ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST--%>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'ECONOMY'}">
+                                                                일반
+                                                            </c:if>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'BUSINESS'}">
+                                                                비즈니스
+                                                            </c:if>
+                                                            <input type="hidden" name="seatType" id="seatType" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin}">
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight eq null}">
+                                                                0
+                                                            </c:if>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weightUnit eq null}">
+                                                                kg
+                                                            </c:if>
+                                                            <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight}">
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach var="itinerary" items="${ticket.itineraries}" varStatus="status">
+                                                <c:forEach var="segment" items="${itinerary.segments}">
+                                                    <tr>
+                                                        <td>가는 편</td>
+                                                        <td>${segment.airlineName} ${segment.number} <a class="btn">상세</a></td>
+                                                        <td>${segment.departure.cityName} - ${segment.arrival.cityName}</td>
+                                                        <td>${segment.departure.date()} ${segment.departure.time()}</td>
+                                                        <td>${segment.arrival.date()} ${segment.arrival.time()}</td>
+                                                        <td><%--                                            ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST--%>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'ECONOMY'}">
+                                                                일반
+                                                            </c:if>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin eq 'BUSINESS'}">
+                                                                비즈니스
+                                                            </c:if>
+                                                            <input type="hidden" name="seatType" id="seatType" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].cabin}">
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight eq null}">
+                                                                0
+                                                            </c:if>
+                                                            <c:if test="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weightUnit eq null}">
+                                                                kg
+                                                            </c:if>
+                                                            <input type="hidden" name="baggageAllowance" id="baggageAllowance" value="${ticket.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.choose()}">
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
                                     </tbody>
                                 </table>
                             </div>
@@ -183,68 +219,121 @@
                             <p>· 보호자 없이 혼자 여행하는 만 12세~18세 미만 청소년의 경우 운송항공사 규정에 따라 탑승이 제한될 수 있습니다.</p>
                         </span>
                             </div>
-                            <c:forEach var="travelerPricing" items="${ticket.travelerPricings}" varStatus="loop">
-                                <input type="hidden" name="passengerDTOS[${loop.index}].firstName" value="${requestScope.firstName}">
-                                <input type="hidden" name="passengerDTOS[${loop.index}].lastName" value="${requestScope.lastName}">
-                                <input type="hidden" name="passengerDTOS[${loop.index}].birthDate" value="${requestScope.birthDate}">
-                                <input type="hidden" name="passengerDTOS[${loop.index}].gender" value="${requestScope.gender}">
-                                <%--                                <input type="hidden" name="passengerDTOS[${loop.index}].passengerType" value="${travelerPricing.travelerType}">--%>
-                                <input type="hidden" name="passengerDTOS[${loop.index}].passengerType" value="${travelerPricing.travelerType}">
-                                <div class="detail_res_form">
-                                    <div class="detail_group_padding">
-                                        탑승객 ${loop.index + 1}:
-                                        <c:choose>
-                                            <c:when test="${travelerPricing.travelerType eq 'ADULT'}">
-                                                성인
-                                            </c:when>
-                                            <c:when test="${travelerPricing.travelerType eq 'CHILD'}">
-                                                소아
-                                            </c:when>
-                                            <c:when test="${travelerPricing.travelerType eq 'HELD_INFANT'}">
-                                                유아
-                                            </c:when>
-                                            <c:otherwise>
-                                                기타
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                    <div class="form-group detail_group_padding2">
-                                        <div class="detail_name">
-                                            <p><label for="lastName" class="detail_group_maginb">영문 성</label></p>
-                                            <input type="text" class="detail_name_input" id="lastName"
-                                                   placeholder="예: ) HONG" name="lastName" value="SUNG" required>
+
+<%--                            <c:forEach var="travelerPricing" items="${ticket.travelerPricings}" varStatus="loop">--%>
+<%--                                <input type="hidden" name="passengerDTOS[${loop.index}].firstName" value="${requestScope.firstName}">--%>
+<%--                                <input type="hidden" name="passengerDTOS[${loop.index}].lastName" value="${requestScope.lastName}">--%>
+<%--                                <input type="hidden" name="passengerDTOS[${loop.index}].birthDate" value="${requestScope.birthDate}">--%>
+<%--                                <input type="hidden" name="passengerDTOS[${loop.index}].gender" value="${requestScope.gender}">--%>
+<%--                                &lt;%&ndash;                                <input type="hidden" name="passengerDTOS[${loop.index}].passengerType" value="${travelerPricing.travelerType}">&ndash;%&gt;--%>
+<%--                                <input type="hidden" name="passengerDTOS[${loop.index}].passengerType" value="${travelerPricing.travelerType}">--%>
+<%--                                <div class="detail_res_form">--%>
+<%--                                    <div class="detail_group_padding">--%>
+<%--                                        탑승객 ${loop.index + 1}:--%>
+<%--                                        <c:choose>--%>
+<%--                                            <c:when test="${travelerPricing.travelerType eq 'ADULT'}">--%>
+<%--                                                성인--%>
+<%--                                            </c:when>--%>
+<%--                                            <c:when test="${travelerPricing.travelerType eq 'CHILD'}">--%>
+<%--                                                소아--%>
+<%--                                            </c:when>--%>
+<%--                                            <c:when test="${travelerPricing.travelerType eq 'HELD_INFANT'}">--%>
+<%--                                                유아--%>
+<%--                                            </c:when>--%>
+<%--                                            <c:otherwise>--%>
+<%--                                                기타--%>
+<%--                                            </c:otherwise>--%>
+<%--                                        </c:choose>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-group detail_group_padding2">--%>
+<%--                                        <div class="detail_name">--%>
+<%--                                            <p><label for="lastName" class="detail_group_maginb">영문 성</label></p>--%>
+<%--                                            <input type="text" class="detail_name_input" id="lastName"--%>
+<%--                                                   placeholder="예: ) HONG" name="lastName" value="SUNG" required>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="detail_name">--%>
+<%--                                            <p><label for="firstName" class="detail_group_maginb">영문 이름</label></p>--%>
+<%--                                            <input type="text" class="detail_name_input" id="firstName"--%>
+<%--                                                   placeholder="예: ) GILDONG" name="firstName" value="MINKYEONG" required>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-group detail_group_padding">--%>
+<%--                                        <p class="detail_group_maginb">성별</p>--%>
+<%--                                        <div class="gender_select detail_gender_form">--%>
+<%--                                            <input type="radio" class="form-control" id="select" name="gender" value="male"><label--%>
+<%--                                                for="select">남자</label>--%>
+<%--                                            <input type="radio" class="form-control" id="select2" name="gender"--%>
+<%--                                                   value="female"><label for="select2">여자</label>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-group detail_group_padding">--%>
+<%--                                        <p class="detail_group_maginb">생년월일</p>--%>
+<%--                                        <input type="text" class="detail_input" id="year" placeholder="" name="year"--%>
+<%--                                               value="1991"--%>
+<%--                                               required>--%>
+<%--                                        <input type="text" class="detail_input" id="month" placeholder="" name="month"--%>
+<%--                                               value="05"--%>
+<%--                                               required>--%>
+<%--                                        <input type="text" class="detail_input" id="day" placeholder="" name="day"--%>
+<%--                                               value="22" required>--%>
+<%--                                        <input type="hidden" name="birthDate" id="birthDate" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </c:forEach>--%>
+                                <c:forEach var="travelerPricing" items="${ticket.travelerPricings}" varStatus="loop">
+                                    <div class="detail_res_form">
+                                        <div class="detail_group_padding">
+                                            탑승객 ${loop.index + 1}:
+                                            <c:choose>
+                                                <c:when test="${travelerPricing.travelerType eq 'ADULT'}">
+                                                    성인
+                                                </c:when>
+                                                <c:when test="${travelerPricing.travelerType eq 'CHILD'}">
+                                                    소아
+                                                </c:when>
+                                                <c:when test="${travelerPricing.travelerType eq 'HELD_INFANT'}">
+                                                    유아
+                                                </c:when>
+                                                <c:otherwise>
+                                                    기타
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
-                                        <div class="detail_name">
-                                            <p><label for="firstName" class="detail_group_maginb">영문 이름</label></p>
-                                            <input type="text" class="detail_name_input" id="firstName"
-                                                   placeholder="예: ) GILDONG" name="firstName" value="MINKYEONG" required>
+                                        <div class="form-group detail_group_padding2">
+                                            <div class="detail_name">
+                                                <p><label for="lastName" class="detail_group_maginb">영문 성</label></p>
+                                                <input type="text" class="detail_name_input" id="lastName${loop.index}"
+                                                       placeholder="예: ) HONG" name="passengerDTOS[${loop.index}].lastName" required>
+                                            </div>
+                                            <div class="detail_name">
+                                                <p><label for="firstName" class="detail_group_maginb">영문 이름</label></p>
+                                                <input type="text" class="detail_name_input" id="firstName${loop.index}"
+                                                       placeholder="예: ) GILDONG" name="passengerDTOS[${loop.index}].firstName" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group detail_group_padding">
-                                        <p class="detail_group_maginb">성별</p>
-                                        <div class="gender_select detail_gender_form">
-                                            <input type="radio" class="form-control" id="select" name="gender" value="male"><label
-                                                for="select">남자</label>
-                                            <input type="radio" class="form-control" id="select2" name="gender"
-                                                   value="female"><label for="select2">여자</label>
+                                        <div class="form-group detail_group_padding">
+                                            <p class="detail_group_maginb">성별</p>
+                                            <div class="gender_select detail_gender_form">
+                                                    <input type="radio" class="form-control" id="select${loop.index}" name="gender${loop.index}"
+                                                           value="male" onclick="combineGender(${loop.index})">
+                                                    <label for="select${loop.index}">남자</label>
+                                                    <input type="radio" class="form-control" id="select2${loop.index}" name="gender${loop.index}"
+                                                           value="female" onclick="combineGender(${loop.index})">
+                                                    <label for="select2${loop.index}">여자</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group detail_group_padding">
-                                        <p class="detail_group_maginb">생년월일</p>
-                                        <input type="text" class="detail_input" id="year" placeholder="" name="year"
-                                               value="1991"
-                                               required>
-                                        <input type="text" class="detail_input" id="month" placeholder="" name="month"
-                                               value="05"
-                                               required>
-                                        <input type="text" class="detail_input" id="day" placeholder="" name="day"
-                                               value="22" required>
-                                        <input type="hidden" name="birthDate" id="birthDate" value="">
-                                    </div>
-                                </div>
-                            </c:forEach>
+                                        <div class="form-group detail_group_padding">
+                                            <p class="detail_group_maginb">생년월일</p>
+<%--                                            <input type="text" class="detail_input" id="year${loop.index}" placeholder="" name="year" value="" required>--%>
+<%--                                            <input type="text" class="detail_input" id="month${loop.index}" placeholder="" name="month" value="" required>--%>
+<%--                                            <input type="text" class="detail_input" id="day${loop.index}" placeholder="" name="day" value="" required>--%>
+                                            <input type="text" name="passengerDTOS[${loop.index}].birthDate" id="birthDate${loop.index}" placeholder="예: 2000/01/01" value="">
+                                            <input type="hidden" name="passengerDTOS[${loop.index}].passengerType" id="passengerType${loop.index}" placeholder="예: 2000/01/01" value="${travelerPricing.travelerType}">
 
 
+                                        </div>
+                                    </div>
+                                </c:forEach>
                         </section>
                         <section>
                             <div class="w3-container" id="menu">
@@ -2198,22 +2287,34 @@
         document.getElementById("combinedPhoneNum").value = combinedPhoneNum;
     }
 
-    // 생년월일 조합
-    function combineBirthDate() {
-        var year = document.getElementById("year").value;
-        var month = document.getElementById("month").value;
-        var day = document.getElementById("day").value;
-        var birthDate = day + "/" + month + "/" + year;
-
-        document.getElementById("birthDate").value = birthDate;
-    }
-
+    // // 생년월일 조합
+    // function combineBirthDate() {
+    //     var year = document.getElementById("year").value;
+    //     var month = document.getElementById("month").value;
+    //     var day = document.getElementById("day").value;
+    //     var birthDate = day + "/" + month + "/" + year;
+    //
+    //     document.getElementById("birthDate").value = birthDate;
+    // }
     // 성별 조합
     function combineGender() {
         var selectedGender = document.querySelector('input[name="gender"]:checked').value;
 
         // hidden 필드에 값 설정
         document.getElementById("combinedGender").value = selectedGender;
+    }
+
+    function getPassengerTypeLabel(type) {
+        switch (type) {
+            case 'ADULT':
+                return '성인';
+            case 'CHILD':
+                return '소아';
+            case 'HELD_INFANT':
+                return '유아';
+            default:
+                return type; // 기본값은 그대로 반환
+        }
     }
 
     // 좌석 타입

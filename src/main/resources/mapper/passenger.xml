@@ -12,6 +12,6 @@
 
     <insert id="insertP">
         insert into passenger_tb(reservation_id, first_name, last_name, birth_date, gender, passenger_type, created_at)
-        values (#{reservationId}, #{firstName}, #{lastName}, #{birthDate}, #{gender}, #{passengerType}, now())
+        values (#{reservationId}, #{firstName}, #{lastName}, #{birthDate}, #{gender}, #{passengerType}, FORMATDATETIME(NOW(), 'yyyy-MM-dd HH:mm:ss'))
     </insert>
 </mapper>

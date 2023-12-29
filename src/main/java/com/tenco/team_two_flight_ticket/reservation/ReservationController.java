@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -76,15 +77,24 @@ public class ReservationController {
     public String save(ReservationRequest.SaveFormDto dto) {
         // 1. 인증검사
         System.out.println("터지는 라인 체크 1");
+
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
         // 2. 유효성 검사
         // 로직
         DataDTO dataDTO = (DataDTO) session.getAttribute("ticketData");
+
+
+//        List<PassengerDTO> savedto = flightDTO.getPassengerDTOList();
+        ReservationRequest.SaveFormDto savedto = dto;
 
         System.out.println("티켓데이터");
         System.out.println(dataDTO);
         System.out.println("dto 체크체크");
         System.out.println(dto);
+
+        System.out.println(savedto);
+        System.out.println(savedto.getPassengerDTOS().get(0).getLastName());
         ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto, principal, dataDTO);
         // 카카오 메시지 보내기
         String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");

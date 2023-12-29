@@ -97,7 +97,9 @@ public class TicketController {
         model.addAttribute("ticket", dto.get(0));
         model.addAttribute("isRound", isRound);
         System.out.println("뭐 담겼징");
-        System.out.println(dto.get(0));
+        System.out.println(isRound);
+        System.out.println(dto.get(0).roundTrip());
+        System.out.println("여긴가12");
         return "/reservation/preview";
     }
 
@@ -126,6 +128,22 @@ public class TicketController {
 
         List<DataDTO> dataDTOList = responseBody.getData();
         model.addAttribute("ticketList", dataDTOList);
+        for (DataDTO dataDTO : dataDTOList) {
+            System.out.println("디티오아디");
+            System.out.println("Ticket: " + dataDTO.getId());
+            System.out.println("이티너리스");
+            System.out.println("Ticket: " + dataDTO.getItineraries());
+            System.out.println("타입");
+            System.out.println("Ticket: " + dataDTO.getType());
+            System.out.println("프라이스카운트");
+            System.out.println("Ticket: " + dataDTO.getPrice().getPeopleCount());
+            System.out.println("트레벌프라이싱");
+            System.out.println("Ticket: " + dataDTO.getTravelerPricings());
+            System.out.println("북에이블싯");
+            System.out.println("Ticket: " + dataDTO.getNumberOfBookableSeats());
+
+            // 추가 필드가 있다면 이와 같이 계속 출력합니다.
+        }
 
         if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
             throw new MyBadRequestException("해당하는 항공권이 없습니다");
@@ -133,7 +151,7 @@ public class TicketController {
 
         int isRound = dataDTOList.get(0).getItineraries().size();
         model.addAttribute("isRound", isRound);
-
+        System.out.println("여긴가123");
         return "flightTicket/flightSearch";
     }
     /**
@@ -157,6 +175,7 @@ public class TicketController {
     	
     	model.addAttribute("count", responseBody.getMeta().getCount());
     	List<DataDTO> dataDTOList = responseBody.getData();
+
         model.addAttribute("ticketList", dataDTOList);
 
         if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
@@ -165,7 +184,7 @@ public class TicketController {
 
         int isRound = dataDTOList.get(0).getItineraries().size();
         model.addAttribute("isRound", isRound);
-    	
+
     	return "flightTicket/flightSearch";
     }
     
