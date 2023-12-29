@@ -1,12 +1,17 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
+
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.tenco.team_two_flight_ticket._middle._entity.enums.PassengerTypeEnum;
 import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
 import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
 import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
@@ -37,10 +42,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
-
-
-@Service
+import org.springframework.web.client.RestTemplate;@Service
 public class ReservationService {
 
     @Autowired
@@ -62,6 +64,12 @@ public class ReservationService {
         String randomSuffix = String.format("%03d", ThreadLocalRandom.current().nextInt(1000));
         String reservationNum = datePrefix + randomSuffix;
 
+        Instant instant = Instant.now().plus(3, ChronoUnit.DAYS);
+        Timestamp paymentDeadline = Timestamp.from(instant);
+        System.out.println(instant);
+        System.out.println(paymentDeadline);
+
+
         Reservation reservationR = Reservation.builder()
                 .userId(principal.getId())
                 .resName(dto.getResName())
@@ -70,7 +78,8 @@ public class ReservationService {
                 .reservationNum(reservationNum)
                 .statusEnum(StatusEnum.valueOf("예정"))
                 .passengerAmount(dto.getPassengerAmount())
-                .paymentDeadline(dto.getPaymentDeadline())
+                .paymentDeadline(paymentDeadline)
+//                .paymentDeadline(dto.getPaymentDeadline())
                 .reservationPrice(dto.getReservationPrice())
                 .build();
 
@@ -83,18 +92,22 @@ public class ReservationService {
 
         // 예약 결제상태
         Reservation reservationDTO = reservationRepository.findByReservationNum(reservationNum);
-//        List<ReservationRequest.SaveFormDto.PassengerDTO> passengerDTOS = dto.getPassengerDTOS();
+
+        List<ReservationRequest.SaveFormDto.PassengerDTO> passengerDTOS = dto.getPassengerDTOS();
         System.out.println("패신져 테스트");
-//        System.out.println(dto.getPassengerDTOS());
-        for (ReservationRequest.SaveFormDto.PassengerDTO passengers : dto.getPassengerDTOS()) {
+        System.out.println(dto.getPassengerDTOS());
+        for (ReservationRequest.SaveFormDto.PassengerDTO passengers : passengerDTOS) {
+
             // 각 PassengerDTO에 대한 Passenger 객체 생성
             Passenger passenger = Passenger.builder()
                     .reservationId(reservationDTO.getId())
                     .firstName(passengers.getFirstName())
                     .lastName(passengers.getLastName())
                     .birthDate(passengers.getBirthDate())
-                    .gender(passengers.getGender())
-                    .passengerType(passengers.getPassengerType())
+                    .gender("남성")
+//                    .passengerType(passengers.getPassengerType())
+                    .passengerType(PassengerTypeEnum.valueOf(getPassengerTypeLabel(String.valueOf(passengers.getPassengerType()))))
+
                     .build();
 
             // 데이터베이스에 Passenger 저장
@@ -164,8 +177,8 @@ public class ReservationService {
                     .totalPrice(Long.parseLong(travelerPricing.getPrice().getTotal().replace(",", "")))
                     .airline(dataDTO.getItineraries().get(0).getSegments().get(0).getCarrierCode())
                     .flightName(dataDTO.getItineraries().get(0).getSegments().get(0).getAircraft().getCode())
-                    .departureCity(dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getCityName())
-                    .arrivalCity(dataDTO.getItineraries().get(0).getSegments().get(0).getArrival().getCityName())
+                    .departureCity(dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getIataCode())
+                    .arrivalCity(dataDTO.getItineraries().get(0).getSegments().get(0).getArrival().getIataCode())
                     .departureAirport(dataDTO.getItineraries().get(0).getSegments().get(0).getDeparture().getIataCode())
                     .arrivalAirport(dataDTO.getItineraries().get(0).getSegments().get(0).getArrival().getIataCode())
                     .departureTime(Timestamp.valueOf(formattedTimestamp))
@@ -207,6 +220,20 @@ public class ReservationService {
         System.out.println("--------");
         return response;
     }
+
+    private String getPassengerTypeLabel(String passengerType) {
+        // 여기서 원하는 조건에 따라 레이블을 설정할 수 있습니다.
+        if ("ADULT".equals(passengerType)) {
+            return "성인";
+        } else if ("CHILD".equals(passengerType)){
+            return "소아";// 다른 경우에 대한 레이블 설정
+        } else if ("HELD_INFANT".equals(passengerType)){
+            return "유아";
+        } else {
+            return "기타";
+        }
+    }
+
 
     /**
      * @param userId
