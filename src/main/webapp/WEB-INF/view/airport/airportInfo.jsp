@@ -133,12 +133,12 @@
 							<b class="color_primary02 duration_of_time">${onePersonTime}<span
                                     class="ms-2 fs-2 airline_minute">분 ㅡ </span> </b>
 						</span>
-                        <c:set var="congestion" value="원활"></c:set>
+                        <c:set var="congestion"></c:set>
                         <c:if test="${airportItems[0].congestYn eq 'N'}">
-                            <span class="smooth_status">${congestion}</span>
+                            <span class="smooth_status">원활</span>
                         </c:if>
                         <c:if test="${airportItems[0].congestYn eq 'Y'}">
-                            <span class="confusion_status">${congestion}</span>
+                            <span class="confusion_status">혼잡</span>
                         </c:if>
                     </div>
                 </div>
@@ -432,7 +432,7 @@
 </main>
 </div>
 </div>
-<script src="/js/airport_info_javascript.js"></script>
+<script src="/js/airport_info.js"></script>
 <script>
     // airPortName 값을 여기에서 설정하거나 동적으로 가져와서 사용할 수 있습니다.
     var airPortName = "${airPortName}";

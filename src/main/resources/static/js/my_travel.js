@@ -27,7 +27,34 @@ const weekEnum = {
 }
 Object.freeze(weekEnum);
 
-async function getMyTravel(tabId, sort){
+// 페이징 용 변수
+let currentTabId = ``;
+let currentSort = ``;
+let currentPeriod = ``;
+let minDepartureYear = ``;
+let maxDepartureYear = ``;
+const pages = document.querySelectorAll(`.pagination li`); // 페이지버튼들
+
+
+// 선택한 버튼 활성화
+function activeButton(page) {
+	pages.forEach( (button) => {
+		button.classList.remove(`active`);
+	})
+	page.classList.add(`active`);
+}
+
+
+async function getMyTravel(tabId, sort, year){
+	currentTabId = tabId;
+	if(currentPeriod != year&& currentPeriod != ``){
+		let myTripCountLabel = document.getElementsByClassName(`my_trip_count_label`);
+		currentPeriod = year;
+		myTripCountLabel[0].style.background = `var(--primary02)`;
+		sort = isPayedEnum.ALL;
+	}
+	currentSort = sort;
+	
 	//statusEnum 파라미터
 	let status = ``;
 	switch(tabId){
@@ -36,11 +63,11 @@ async function getMyTravel(tabId, sort){
 		case tripEnum.CANCELED : status = statusEnum.CANCELED; break;
 	}
 
-	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}`; 
+	const href=`/user/get-my-travel?statusEnum=${status}&sort=${sort}&year=${year}`; 
 	 try {
         const response = await fetch(href);
         const data = await response.json(); 
-        insertElement(data.tripList, data.tripCount, tabId );
+        insertElement(data.tripList, data.tripCount, tabId , sort);
     } catch (error) {
 		alert(error+`목록을 불러오는데 실패했습니다`);
     }
@@ -57,7 +84,7 @@ function makeYearTag(year){
 
 
 // 여행 목록 삽입하기(목록, 목록 수, 목록의 종류)
-function insertElement(tripList, tripCnt , tabId){
+function insertElement(tripList, tripCnt , tabId, sort){
 	const myTrip =  document.getElementById(tabId);
     myTrip.innerHTML = ``;
 	let myTripCountLabel = ``;
@@ -73,7 +100,7 @@ function insertElement(tripList, tripCnt , tabId){
 
     	switch(i){
 			case 0: isPayed = isPayedEnum.ALL; 
-					tripCount = tripCnt.allTripCount; 
+					tripCount = tripCnt.allTripCount;
 					myTripCountLabel.classList.add(`all_payment`);
 			        break;
 			case 1: isPayed = isPayedEnum.NOTPAYED; 
@@ -84,6 +111,10 @@ function insertElement(tripList, tripCnt , tabId){
 					tripCount = tripCnt.payedTripCount;
 					myTripCountLabel.classList.add(`payed_complete`);     
 					break;
+		}
+		if(isPayed == sort){
+			// 현재 선택한 버튼에 색상 변경
+			myTripCountLabel.style.background = `var(--primary_02)`;
 		}
     	text = document.createTextNode(isPayed); 
     	myTripCountLabel.appendChild(text);
@@ -178,7 +209,7 @@ function insertElement(tripList, tripCnt , tabId){
     	let p = makeElement(`p`);
     	
     	
-    	text = document.createTextNode(` [${koreanAirline}] ${data.koreanDepartureCity} - ${data.koreanArrivalCity}`);
+    	text = document.createTextNode(` [${koreanAirline}] ${data.koreanDepartureAirport} - ${data.koreanArrivalAirport}`);
     	p.appendChild(text);
     	div.appendChild(p);
     	p = makeElement(`p`);
@@ -198,7 +229,7 @@ function insertElement(tripList, tripCnt , tabId){
     		let myTripTicketBg = makeElement(`div`,`my_trip_ticket_bg`);
     		myTripTicketImg.appendChild(myTripTicketBg);
     		let tripLeft = makeElement(`span`,`trip_left`);
-    		text = document.createTextNode(data.departureAirport);
+    		text = document.createTextNode(data.departureCity);
     		tripLeft.appendChild(text);
     		myTripTicketBg.appendChild(tripLeft);
     		let tripRight = makeElement(`span`,`trip_right`);
@@ -294,7 +325,7 @@ function insertElement(tripList, tripCnt , tabId){
     	myTrip.appendChild(myTripList);
     });	
     if(tripList.length == 0){
-		let noResult = makeElement(`p`,`no_result_page text-center mt-5 pt-5 fs-3`);
+		let noResult = makeElement(`p`,`no_result_page`);
 		text = document.createTextNode(`조회된 목록이 없습니다`);
 		noResult.appendChild(text);
 		myTrip.appendChild(noResult);
@@ -302,17 +333,58 @@ function insertElement(tripList, tripCnt , tabId){
     //반복문 끝
 }
 
-	// 티켓 모양 이미지 클릭 시 이벤트(미구현)
-	const tabContent = document.querySelectorAll(`.tab-content`);
-	tabContent.forEach((content)=>{
-		content.addEventListener(`click`, e =>{
-			if(e.target.className == `my_trip_ticket_bg`||
-			e.target.parentElement.className == `my_trip_ticket_bg`){
-				// 다운로드 로직 구성 필요
-				//downloadTicket();
-				console.log(`click ticket`);
-			} 
-		});
-	});
-
 	
+const pagination = document.getElementsByClassName(`pagination`)[0];
+
+pages.forEach((page) => {
+	page.addEventListener(`click`, e => {
+		const activeBtn = document.querySelectorAll(`.active`)[0];
+		// paging
+		if(e.target.ariaLabel == `Previous`||e.target.parentElement.ariaLabel == `Previous`){
+			if(activeBtn.previousElementSibling != page){
+				activeButton(activeBtn.previousElementSibling);
+				currentPeriod = activeBtn.previousElementSibling.textContent;
+				getMyTravel(currentTabId, currentSort, currentPeriod);
+			} 
+			return false;
+		}
+		if(e.target.ariaLabel == `Next`||e.target.parentElement.ariaLabel == `Next`){
+			if(activeBtn.nextElementSibling != page){
+				activeButton(activeBtn.nextElementSibling);
+				currentPeriod = activeBtn.nextElementSibling.textContent;
+				getMyTravel(currentTabId, currentSort, currentPeriod);			
+			}
+			return false;
+		}
+		activeButton(page);
+		currentPeriod = page.textContent;
+		getMyTravel(currentTabId, currentSort, currentPeriod);
+		
+	})
+})
+
+  	const tabButtons = document.querySelectorAll(".tab_menu li a");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach((button) => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            tabContents.forEach((content) => {
+                content.style.display = "none";
+            });
+
+            tabButtons.forEach((btn) => {
+                btn.classList.remove("tab_active");
+            });
+
+            const tabId = button.getAttribute("data-tab");
+            document.getElementById(tabId).style.display = "block";
+
+            //데이터를 가져와 출력하는 함수
+            getMyTravel(tabId, isPayedEnum.ALL, currentPeriod);
+            button.classList.add("tab_active");
+        });
+    });
+
+

@@ -9,6 +9,7 @@ import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponSaveDTO;
 import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 import static io.lettuce.core.pubsub.PubSubOutput.Type.message;
 
+@Slf4j
 @Controller
 public class CouponController {
 
@@ -51,10 +53,8 @@ public class CouponController {
     @ResponseBody
     @PostMapping("/api/admin/couponSMS")
     public ResponseEntity<ApiUtils.ApiResult<String>> adminCouponSMS(@RequestBody CouponListDTO couponData) {
-        System.out.println("-------------------- 값 확인 " + couponData.getCouponNumber());
         SingleMessageSentResponse messageResponse = couponService.couponSMS(couponData);
         String message = messageResponse.toString();
-        System.out.println(message + "확인");
         return ResponseEntity.ok().body(ApiUtils.success(message));
     }
 
@@ -178,7 +178,6 @@ public class CouponController {
     //    만료된 쿠폰 삭제 기능
     @PostMapping("/admin/{id}/delete")
     public String delete(@PathVariable Integer id) {
-        System.out.println("========================" + id);
         User principal = (User) session.getAttribute("principal");
         if (principal == null) {
             throw new MyBadRequestException("인증되지 않았습니다");
@@ -187,15 +186,5 @@ public class CouponController {
         return "redirect:/admin/coupon-list";
     }
 
-    
-//    @ResponseBody
-//    @PostMapping("/coupon/use-coupon")
-//    public String useCoupon(@RequestBody CouponUseDTO dto) {
-//    	couponService.useCoupon(dto);
-    	
-    	
-    	// 결과를 반환하면 됨
-//    	return null;
-//    }
 
 }

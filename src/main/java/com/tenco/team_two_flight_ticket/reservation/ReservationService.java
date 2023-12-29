@@ -1,35 +1,6 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
-import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
-import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
-import com.tenco.team_two_flight_ticket._middle._entity.enums.PassengerTypeEnum;
-import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
-import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
-import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
-import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
-import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
-import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
-import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
-import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
-import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
-import com.tenco.team_two_flight_ticket.ticket.Ticket;
-import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
-import com.tenco.team_two_flight_ticket.user.User;
-import com.tenco.team_two_flight_ticket.user.UserRequest;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTravelDTO;
-import com.tenco.team_two_flight_ticket.user.UserResponse.GetMyTripCountDTO;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -40,9 +11,38 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.tenco.team_two_flight_ticket._middle._entity.enums.PassengerTypeEnum;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.SeatTypeEnum;
+import com.tenco.team_two_flight_ticket._middle._repository.PassengerRepository;
+import com.tenco.team_two_flight_ticket.coupon.CouponRepository;
+import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
+import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
+import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
+import com.tenco.team_two_flight_ticket.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyBadRequestException;
+import com.tenco.team_two_flight_ticket._core.handler.exception.MyServerError;
+import com.tenco.team_two_flight_ticket._middle._entity.Passenger;
+import com.tenco.team_two_flight_ticket._middle._entity.enums.StatusEnum;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTravelDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripCountDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripDetailDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTripYearDTO;
+import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetPayedInfoDTO;
+import com.tenco.team_two_flight_ticket.ticket.Ticket;
+import com.tenco.team_two_flight_ticket.user.UserRequest;
+import com.tenco.team_two_flight_ticket.user.UserRequest.GetMyTravelListDTO;
+import jakarta.validation.Valid;
 
-@Slf4j
-@Service
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;@Service
 public class ReservationService {
 
     @Autowired
@@ -51,8 +51,6 @@ public class ReservationService {
     private TicketRepository ticketRepository;
     @Autowired
     private PassengerRepository passengerRepository;
-    @Autowired
-    private HasCouponRepository hasCouponRepository;
     @Autowired
     private CouponRepository couponRepository;
 
@@ -81,6 +79,7 @@ public class ReservationService {
                 .statusEnum(StatusEnum.valueOf("예정"))
                 .passengerAmount(dto.getPassengerAmount())
                 .paymentDeadline(paymentDeadline)
+//                .paymentDeadline(dto.getPaymentDeadline())
                 .reservationPrice(dto.getReservationPrice())
                 .build();
 
@@ -93,10 +92,12 @@ public class ReservationService {
 
         // 예약 결제상태
         Reservation reservationDTO = reservationRepository.findByReservationNum(reservationNum);
+
         List<ReservationRequest.SaveFormDto.PassengerDTO> passengerDTOS = dto.getPassengerDTOS();
         System.out.println("패신져 테스트");
         System.out.println(dto.getPassengerDTOS());
         for (ReservationRequest.SaveFormDto.PassengerDTO passengers : passengerDTOS) {
+
             // 각 PassengerDTO에 대한 Passenger 객체 생성
             Passenger passenger = Passenger.builder()
                     .reservationId(reservationDTO.getId())
@@ -243,22 +244,16 @@ public class ReservationService {
         StatusEnum statusEnum = dto.getStatusEnum();
 
         String stringSort = dto.getSort();
-        String sort = "";
+        String sort = null;
+        String year = dto.getYear();
 
         switch (stringSort) {
-            case "전체":
-                sort = "all";
-                break;
-            case "결제전":
-                sort = "false";
-                break;
-            case "결제완료":
-                sort = "true";
-                break;
-            default:
-                throw new MyBadRequestException("잘못된 값이 입력되었습니다");
+            case "전체": sort = "all"; break;
+            case "결제전": sort = "false"; break;
+            case "결제완료": sort = "true"; break;
+            default: throw new MyBadRequestException("잘못된 값이 입력되었습니다");
         }
-
+        
         List<GetMyTravelDTO> tripList = null;
 
         // 여행 목록 종류 유효성 검사
@@ -268,8 +263,8 @@ public class ReservationService {
             }
         }
 
+        tripList = reservationRepository.getMyTravel(userId, statusEnum, sort, year);
         try {
-        	tripList = reservationRepository.getMyTravel(userId, statusEnum, sort);
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }
@@ -278,12 +273,13 @@ public class ReservationService {
 
     public GetMyTripCountDTO getMyTripCount(int userId, UserRequest.GetMyTravelListDTO dto) {
         StatusEnum statusEnum = dto.getStatusEnum();
+        String year = dto.getYear();
         // 개수를 담을 객체
         GetMyTripCountDTO tripCnt = new GetMyTripCountDTO();
         try {
-            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all");
-            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true");
-            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false");
+            int allTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "all", year);
+            int payedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "true", year);
+            int notPayedTripCnt = reservationRepository.getMyTripCount(userId, statusEnum, "false", year);
             tripCnt.setAllTripCount(allTripCnt);
             tripCnt.setPayedTripCount(payedTripCnt);
             tripCnt.setNotPayedTripCount(notPayedTripCnt);
@@ -294,18 +290,18 @@ public class ReservationService {
         return tripCnt;
     }
 
-
+    
     public GetMyTripDetailDTO getMyTripDetail(int userId, Long reservationNum) {
         GetMyTripDetailDTO dto = null;
         if (reservationNum == null) {
             throw new MyBadRequestException("잘못된 예약번호입니다");
         }
         try {
-            dto = reservationRepository.getMyTripDetail(userId, reservationNum);
-            dto.makePhoneNumber();
-            dto.cutDepartureDate();
-            dto.cutArrivalDate();
-            dto.cutPaymentDeadline();
+        	dto = reservationRepository.getMyTripDetail(userId, reservationNum);
+        	dto.makePhoneNumber();
+        	dto.cutDepartureDate();
+        	dto.cutArrivalDate();
+        	dto.cutPaymentDeadline();
         } catch (Exception e) {
             throw new MyServerError("서버 에러가 발생했습니다");
         }
@@ -388,7 +384,6 @@ public class ReservationService {
 
         // 응답 확인
         System.out.println("Response: " + responseEntity.getBody());
-        System.out.println("카카오톡 메세지 보내기 성공");
         return null;
     }
 
@@ -399,4 +394,32 @@ public class ReservationService {
 
         return coupons;
     }
+
+    // 처음 여행 연도 와 마지막 여행 연도 조회
+	public GetMyTripYearDTO getMyTripDepartureYear(int id, @Valid GetMyTravelListDTO dto) {
+		GetMyTripYearDTO tripYear = reservationRepository.getMyTripDepartureYear(id, dto.getStatusEnum());
+		return tripYear;
+	}
+
+	// 출발일이 지난 여행 상태 변경
+	@Transactional
+	public void setLastTrip() {
+		try {
+			reservationRepository.setLastTrip();			
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+	}
+	// 결제기간이 지난 여행 상태 변경
+	@Transactional
+	public void setCancelTrip() {
+		try {
+			reservationRepository.setCancelTrip();
+		} catch (Exception e) {
+			throw new MyServerError("서버 에러가 발생했습니다");
+		}
+	}
+	
+	
+	
 }

@@ -4,7 +4,9 @@ package com.tenco.team_two_flight_ticket.ticket;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import com.tenco.team_two_flight_ticket.user.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/ticket")
 @Controller
@@ -86,7 +89,6 @@ public class TicketController {
         return "flightTicket/flightSearch";
 
     }
-
     @GetMapping("/preview/{ticketId}")
     public String preview(@PathVariable int ticketId, Model model){
 
@@ -113,10 +115,8 @@ public class TicketController {
             model.addAttribute(values[i],ticketService.getCities(regions[i]));
         }
 
-
         TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(dto);
         model.addAttribute("req", newReqDto);
-
         
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
         if(principal != null) {
@@ -155,7 +155,13 @@ public class TicketController {
         System.out.println("여긴가123");
         return "flightTicket/flightSearch";
     }
-    
+    /**
+     * 
+     * @param dto
+     * @param model
+     * @return
+     * @throws URISyntaxException
+     */    
     @GetMapping("/flight-recent-search")
     public String flightRecentSearchProc(@Valid TicketRequest.TicketSearchDTO dto, Model model) throws URISyntaxException {
     	String[] regions = {"대한민국","일본", "아시아", "미주", "유럽", "대양주/괌", "중동", "중남미", "아프리카", "중국"};
@@ -164,17 +170,26 @@ public class TicketController {
     	for (int i = 0; i < regions.length; i++) {
     		model.addAttribute(values[i],ticketService.getCities(regions[i]));
     	}
-
+    	TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(dto);
+        model.addAttribute("req", newReqDto);
     	TicketResponse.FlightSearchDTO responseBody = ticketService.getTickets(dto);
+    	
     	model.addAttribute("count", responseBody.getMeta().getCount());
     	List<DataDTO> dataDTOList = responseBody.getData();
-    	model.addAttribute("ticketList", dataDTOList);
 
+        model.addAttribute("ticketList", dataDTOList);
+
+        if (dataDTOList.isEmpty() || dataDTOList.size() == 0){
+            throw new MyBadRequestException("해당하는 항공권이 없습니다");
+        }
+
+        int isRound = dataDTOList.get(0).getItineraries().size();
+        model.addAttribute("isRound", isRound);
 
     	return "flightTicket/flightSearch";
     }
     
-    // 간편 항공권 검색(도시나 나라 이름만으로 검색 가능. 다른 값은 랜덤으로 채워짐)
+    // 간편 항공권 검색
     /**
      * 
      * @param dto
@@ -193,6 +208,7 @@ public class TicketController {
     	
     	// 검색어를 도착지로 하고 나머지는 랜덤으로 작성
     	TicketRequest.TicketSearchDTO searchDto = ticketService.getSearchDTO(dto);
+
         TicketRequest.TicketSearchDTO newReqDto = ticketService.parsingReq(searchDto);
         model.addAttribute("req", newReqDto);
 
@@ -214,10 +230,9 @@ public class TicketController {
         model.addAttribute("isRound", isRound);
 
 
-
         return "flightTicket/flightSearch";
     }
-    
+
     @GetMapping("/test-search")
     public String testSearch(@Valid TicketRequest.TicketLightSearchDTO dto, Model model) throws URISyntaxException  {
     	// 검색어에 해당하는 도시나 나라 이름을 DB에서 검색해 해당하는 곳을 도착지로 선정하고 나머지는 랜덤으로 작성
@@ -225,10 +240,6 @@ public class TicketController {
 
     	return "flightTicket/flightSearch";
     }
-    
-
-
-
     @GetMapping("/cities-list")
     public ResponseEntity<ApiUtils.ApiResult<List<City>>> citiesList(@RequestParam(defaultValue = "대한민국") String region){
         List<City> cities = ticketService.getCities(region);

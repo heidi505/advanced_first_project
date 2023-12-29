@@ -94,8 +94,18 @@
                     <div class="form-group col  form-check form-switch w-75 mb-3 p-3 ms-2">
                         <label for="kakaoLink" class="me-5"><img
                                 src="https://dffoxz5he03rp.cloudfront.net/icons/kakaotalk-logo.svg"/> 카카오 연동</label>
-                        <input type="checkbox" id="kakaoLink" class=" form-check-input sns_link float-end"
-                               role="switch"/>
+                        <c:choose>
+                            <c:when test="${principal.isKaKao() == true}">
+                                <input type="checkbox" id="kakaoLink" class=" form-check-input sns_link float-end"
+                                       role="switch" checked disabled/>
+                            </c:when>
+                            <c:otherwise>
+                                <input type="checkbox" id="kakaoLink" class=" form-check-input sns_link float-end"
+                                       role="switch"/>
+                            </c:otherwise>
+                        </c:choose>
+
+
                     </div>
                     <div class="type_name form-group col p-3">
                         <p for="password" class="me-5">비밀번호</p>
@@ -115,6 +125,17 @@
 </div>
 </div>
 
+<script>
+    // let kakao = document.getElementById("kakaoLink");
+    //
+    // kakao.addEventListener("click", async function(){
+    //     await fetch("/kakao/sign-in", {
+    //         method:"get"
+    //     });
+    //
+    // });
+
+</script>
 <script src="/js/profile.js"></script>
 <!-- footer.jsp -->
 <%@ include file="../layout/footer.jsp" %>

@@ -1,15 +1,15 @@
 package com.tenco.team_two_flight_ticket.reservation;
 
-import java.security.Principal;
 import java.util.List;
 
-import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
-import com.tenco.team_two_flight_ticket.coupon.Coupon;
 import com.tenco.team_two_flight_ticket.coupon.dto.CouponListDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.DataDTO;
 import com.tenco.team_two_flight_ticket.dto.ticketDataDTO.TravelerPricingDTO;
 import com.tenco.team_two_flight_ticket.ticket.TicketService;
+
 import com.tenco.team_two_flight_ticket.user.UserService;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,21 +27,15 @@ import com.tenco.team_two_flight_ticket.reservation.ReservationResponse.GetMyTri
 import com.tenco.team_two_flight_ticket.user.User;
 
 import jakarta.servlet.http.HttpSession;
-
+@Slf4j
 @Controller
 public class ReservationController {
     @Autowired
     private KakaoPayService kakaoPayService;
-
-    @Autowired
-    private UserService userService;
-
     @Autowired
     private HttpSession session;
-
     @Autowired
     private ReservationService reservationService;
-
     @Autowired
     private TicketService ticketService;
 
@@ -84,10 +78,13 @@ public class ReservationController {
     public String save(ReservationRequest.SaveFormDto dto) {
         // 1. 인증검사
         System.out.println("터지는 라인 체크 1");
-         User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+        User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
         // 2. 유효성 검사
         // 로직
         DataDTO dataDTO = (DataDTO) session.getAttribute("ticketData");
+
 
 //        List<PassengerDTO> savedto = flightDTO.getPassengerDTOList();
         ReservationRequest.SaveFormDto savedto = dto;
@@ -96,13 +93,12 @@ public class ReservationController {
         System.out.println(dataDTO);
         System.out.println("dto 체크체크");
         System.out.println(dto);
+
         System.out.println(savedto);
         System.out.println(savedto.getPassengerDTOS().get(0).getLastName());
         ReservationResponse.SaveResultDTO saveResultDTO = reservationService.save(dto, principal, dataDTO);
         // 카카오 메시지 보내기
         String kakaoAccessToken = (String) session.getAttribute("kakaoAccessToken");
-        System.out.println("옵션 체크체크 : ");
-        System.out.println(dto.getOptionMessage());
         if ("Y".equals(dto.getOptionMessage())) {
 
             String message = reservationService.kakaoMessage(1, kakaoAccessToken, saveResultDTO);
@@ -126,7 +122,6 @@ public class ReservationController {
     public String finalResult(HttpSession session, Model model) {
 
         ReservationResponse.SaveResultDTO resultDTO = (ReservationResponse.SaveResultDTO) session.getAttribute("reservationResult");
-
         User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
         // 쿠폰 받아오기.
@@ -142,20 +137,21 @@ public class ReservationController {
 
         model.addAttribute("Coupon", coupons);
         model.addAttribute("Result", resultDTO);
+        model.addAttribute("Ticket", resultDTO.getTicket());
+        model.addAttribute("Passenger", resultDTO.getPassenger());
         System.out.println("잘 담겼나 안담겼나~~");
         System.out.println("Reservation Result:");
-//        System.out.println("Reservation: " + resultDTO.getReservation());
         System.out.println("Reservation: " + resultDTO.getReservation().getId());
-//        System.out.println("Passenger: " + resultDTO.getPassenger());
-//        System.out.println("Tickets: " + resultDTO.getTicket());
+        System.out.println("Reservation: " + resultDTO.getReservation().getId());
+        System.out.println("Reservation: " + resultDTO.getTicket().get(0).getAirFare());
         return "/reservation/finalResult";
     }
     // 예약 시나리오 끝!!
 
     @ResponseBody
     @PostMapping("/reservation/cancel")
-    public void cancelProc(@RequestBody Long reservationNum) {
-        reservationService.cancelReservation(reservationNum);
+    public void cancelProc(@RequestBody ReservationRequest.ReservationCancelDTO dto) {
+        reservationService.cancelReservation(dto.getReservationNum());
     }
 
 
@@ -166,7 +162,7 @@ public class ReservationController {
         model.addAttribute("cancelTrip", cancelTrip);
         List<ReservationResponse.GetPayedInfoDTO> payedInfoList = reservationService.getPayedInfo(reservationNum);
         model.addAttribute("payedInfoList", payedInfoList);
-        return "reservation/cancelReservation";
+        return "reservation/reservationCancelInfo";
     }
 
     @GetMapping("/payed")
@@ -187,14 +183,6 @@ public class ReservationController {
     public String reserved() {
         return "reservation/finalResult";
     }
-
-    /* 테스트용 + 예비 */
-
-    @GetMapping("/sample")
-    public String test2() {
-        return "reservation/sample2";
-    }
-
 
     // 운임규정 모달 버튼 (위치 잡고 추가만 해주면 됨!)
     // 예약규정, 운임규정, 결제규정, 환불/변경

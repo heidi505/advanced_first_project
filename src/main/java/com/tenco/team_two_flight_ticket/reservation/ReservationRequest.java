@@ -55,4 +55,10 @@ public class ReservationRequest {
         //kakaomessage
         private String optionMessage;
     }
+    
+    @Data
+    public static class ReservationCancelDTO{
+    	private Long reservationNum;
+    }
+    
 }

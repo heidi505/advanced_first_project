@@ -5,20 +5,15 @@ import java.util.Random;
 import java.util.UUID;
 
 import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoProfile;
+import com.tenco.team_two_flight_ticket.ticket.TicketRepository;
+import io.github.flashvayne.chatgpt.service.ChatgptService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -31,17 +26,11 @@ import com.tenco.team_two_flight_ticket._core.utils.Define;
 import com.tenco.team_two_flight_ticket._core.utils.PicUrl;
 import com.tenco.team_two_flight_ticket._middle._entity.HasCoupon;
 import com.tenco.team_two_flight_ticket._middle._repository.HasCouponRepository;
-import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushTokenResponse;
-import com.tenco.team_two_flight_ticket.auth.authresponse.KakaoPushUser;
-import com.tenco.team_two_flight_ticket.auth.authresponse.PushAlertFail;
 import com.tenco.team_two_flight_ticket.firebase.FCMInitializer;
 import com.tenco.team_two_flight_ticket.user.UserRequest.PushAlarmDTO;
-import com.tenco.team_two_flight_ticket.user.UserRequest.SignInDTO;
-
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 
 @Service
 public class UserService {
@@ -59,6 +48,12 @@ public class UserService {
     private int authNumber;
     @Autowired
     private ResourceLoader resourceLoader;
+    @Autowired
+    private ChatgptService chatgptService;
+
+    @Autowired
+    private TicketRepository ticketRepository;
+
 
 
     @Transactional
@@ -120,9 +115,10 @@ public class UserService {
 
         try {
             dto.setOriginalPicName(picUrl);
+            dto.setPassword(passwordEncoder.encode(dto.getPassword()));
             int update = userRepository.updateByUserId(dto);
             principal.setEmail(dto.getEmail());
-            principal.setPassword(dto.getPassword());
+            principal.setPassword(passwordEncoder.encode(dto.getPassword()));
             principal.setPhoneNumber(dto.getPhoneNumber());
             principal.setProfileImage(picUrl);
 
@@ -145,7 +141,6 @@ public class UserService {
 
     public User kakaoCheckUsername(KakaoProfile kakaoProfile) {
         User checkUser = userRepository.checkUsername(kakaoProfile.getId());
-        System.out.println(checkUser + "ddddddd");
         if(checkUser == null) {
             User user = User.builder()
                     .realName(kakaoProfile.getProperties().getNickname())
@@ -154,13 +149,13 @@ public class UserService {
                     .email("aahh2@naver.com")
                     .password("")
                     .phoneNumber("01035842292")
+                    .isKaKao(true)
                     .build();
 
             userRepository.insert(user);
-            System.out.println(user.getUsername() + "ddddddddddddddd");
             checkUser = user;
         }
-        System.out.println(checkUser + "값 확인");
+        checkUser.setKaKao(true);
         return checkUser;
     }
 
@@ -280,14 +275,28 @@ public class UserService {
 
 	// fcm 토큰 저장
 	public void saveFcmToken(String userName, String fcmToken) {
-		userRepository.saveFcmToken(userName, fcmToken);
 		try {
+			userRepository.saveFcmToken(userName, fcmToken);
 		} catch (Exception e) {
 			throw new MyServerError("서버 에러가 발생했습니다");
 		}
 		
 	}
 
+    public String getChatResponse(String condition){
+        User user = (User) session.getAttribute(Define.PRINCIPAL);
+        List<String> cityName = ticketRepository.findUserDestination(user.getId());
+
+        if(cityName.isEmpty()){
+            return "예약을 먼저 해주세요!";
+        }
+
+        if (condition.equals("plan")){
+            return chatgptService.sendMessage(cityName.get(0) + "에 유명한 관광지 한국어로 알려줘");
+        }else{
+            return chatgptService.sendMessage(cityName.get(0) + " 가는데 챙겨야할 준비물 뭐 있을까?");
+        }
+    }
 
 }
 

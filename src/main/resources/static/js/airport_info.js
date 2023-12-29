@@ -92,8 +92,8 @@ window.onload = function(){
 
 	//공항 주차장 버튼 이벤트 등록
 	const aButton = document.querySelectorAll('.parking_btn');
-	aButton.forEach(button=>{
-		button.addEventListener('click', e=>{
+	aButton.forEach(button => {
+		button.addEventListener('click', e => {
 			let menuNumber = e.target.id.replace('_button','');
 			if( menuNumber == 2){
 				updateStatus();
@@ -106,8 +106,5 @@ window.onload = function(){
 	const startMenu = document.getElementById('1_button');
 	startMenu.click();
 
-	//api로 받은 데이터 기반으로 색상및 글 변환(미구현)
-	const congestionStatus = document.getElementsByClassName('congestion_status')[0];
-	congestionStatus.style.color = 'var(--cancle)';
-	congestionStatus.innerHTML = '혼잡';
+	
 }
