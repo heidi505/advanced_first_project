@@ -1,19 +1,10 @@
 ![image](https://github.com/heidi505/advanced_first_project/assets/98313279/b471349b-7f5e-4601-82a5-922300a9ebff)
 
 # 항공사 사이트 [NIMBUS]
-
-##목차
-
-1. 프로젝트 개요
-2. 사용한 기술 및 API
-3. 사이트맵
-4. 주요 기능 설명
-5. 의존성
-6. 플로우 차트
-7. ERD
-
    
 ## 프로젝트 개요
+- 개발 기간 : 2023-11-28 ~ 2023-12-26
+  
 공공데이터와 항공권 검색 외부 API를 활용하여 항공권 정보를 제공하고 항공권 검색 및 예약, 결제 등 핵심 기능이 많은 항공권 사이트를 주제로 선정하였습니다.
 
 ## 💻 프로젝트 2조
@@ -96,7 +87,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
 }
 ```
+## 시연 영상
 
+[![a](http://img.youtube.com/vi/Mh5M3GhKv04/0.jpg)](https://youtu.be/Mh5M3GhKv04&t)
+
+https://www.youtube.com/watch?v=U6SiR_z5pNo
   
 ## 📋 FlowChart
 ![플로우차트 (1)](https://github.com/heidi505/advanced_first_project/assets/98313279/0fdb67aa-5b92-4290-9c03-760a3bd5f79f)  
