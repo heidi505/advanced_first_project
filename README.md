@@ -13,7 +13,7 @@
 + 성민경
 + 이은지
 
-## 📚 Stacks
+## 📚 기술스택  
 
 ### Back
 <img src="https://img.shields.io/badge/Java-EF2D5E.svg?&style=for-the-badge&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/JPA-FFCA28?style=for-the-badge&logo=JPA&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/myBatis-003545?style=for-the-badge&logo=myBatis&logoColor=white"> <img src="https://img.shields.io/badge/Jsp-FE5F50?style=for-the-badge&logo=Jsp&logoColor=white"> 
